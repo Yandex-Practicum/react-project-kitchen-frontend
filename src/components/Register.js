@@ -8,6 +8,7 @@ import {
   REGISTER,
   REGISTER_PAGE_UNLOADED
 } from '../constants/actionTypes';
+import Button from "./Button/Button";
 
 const mapStateToProps = state => ({ ...state.auth });
 
@@ -92,12 +93,12 @@ class Register extends React.Component {
                       onChange={this.changePassword} />
                   </fieldset>
 
-                  <button
-                    className="btn btn-lg btn-primary pull-xs-right"
+                  <Button
                     type="submit"
-                    disabled={this.props.inProgress}>
-                    Подтвердить
-                  </button>
+                    disabled={this.props.inProgress}
+                  >
+                    Зарегистрироваться
+                  </Button>
 
                 </fieldset>
               </form>

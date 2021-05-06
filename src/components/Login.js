@@ -8,6 +8,7 @@ import {
   LOGIN,
   LOGIN_PAGE_UNLOADED
 } from '../constants/actionTypes';
+import Button from "./Button/Button";
 
 const mapStateToProps = state => ({ ...state.auth });
 
@@ -76,12 +77,12 @@ class Login extends React.Component {
                       onChange={this.changePassword} />
                   </fieldset>
 
-                  <button
-                    className="btn btn-lg btn-primary pull-xs-right"
+                  <Button
                     type="submit"
-                    disabled={this.props.inProgress}>
+                    disabled={this.props.inProgress}
+                  >
                     Войти
-                  </button>
+                  </Button>
 
                 </fieldset>
               </form>
