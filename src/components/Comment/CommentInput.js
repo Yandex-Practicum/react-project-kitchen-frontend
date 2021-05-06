@@ -2,6 +2,7 @@ import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import { ADD_COMMENT } from '../../constants/actionTypes';
+import styles from './comment.module.css';
 
 const mapDispatchToProps = dispatch => ({
   onSubmit: payload =>
@@ -30,26 +31,22 @@ class CommentInput extends React.Component {
 
   render() {
     return (
-      <form className="card comment-form" onSubmit={this.createComment}>
-        <div className="card-block">
-          <textarea className="form-control"
+      <form className={styles.create__form} onSubmit={this.createComment}>
+        <section className={`${styles.create__header}`}>
+          <textarea className={styles.create__textarea}
             placeholder="Написать комментарий"
             value={this.state.body}
             onChange={this.setBody}
             rows="3">
           </textarea>
-        </div>
-        <div className="card-footer">
-          <img
-            src={this.props.currentUser.image}
-            className="comment-author-img"
-            alt={this.props.currentUser.username} />
+        </section>
+        <section className={styles.create__footer}>
           <button
-            className="btn btn-sm btn-primary"
+            className={styles.create__button}
             type="submit">
             Отправить комментарий
           </button>
-        </div>
+        </section>
       </form>
     );
   }
