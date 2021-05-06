@@ -107,7 +107,7 @@ class Editor extends React.Component {
                     <input
                       className="form-control form-control-lg"
                       type="text"
-                      placeholder="Article Title"
+                      placeholder="Название записи"
                       value={this.props.title}
                       onChange={this.changeTitle} />
                   </fieldset>
@@ -116,16 +116,25 @@ class Editor extends React.Component {
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="What's this article about?"
+                      placeholder="О чём запись?"
                       value={this.props.description}
                       onChange={this.changeDescription} />
+                  </fieldset>
+
+                  <fieldset className="form-group">
+                    <input
+                      className="form-control"
+                      type="image"
+                      placeholder="Изображение (опционально)"
+                      value={this.props.image}
+                      onChange={this.changeImage} />
                   </fieldset>
 
                   <fieldset className="form-group">
                     <textarea
                       className="form-control"
                       rows="8"
-                      placeholder="Write your article (in markdown)"
+                      placeholder="Текст записи"
                       value={this.props.body}
                       onChange={this.changeBody}>
                     </textarea>
@@ -135,7 +144,7 @@ class Editor extends React.Component {
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="Enter tags"
+                      placeholder="Тэги (через запятую)"
                       value={this.props.tagInput}
                       onChange={this.changeTagInput}
                       onKeyUp={this.watchForEnter} />
