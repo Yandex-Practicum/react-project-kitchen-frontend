@@ -18,7 +18,7 @@ import {
 } from '../constants/actionTypes';
 
 const defaultState = {
-  appName: 'Practicum Project Kitchen',
+  appName: 'Sum42',
   token: null,
   viewChangeCounter: 0
 };
