@@ -66,8 +66,9 @@ const ArticlePreview = props => {
           <h1>{article.title}</h1>
         </Link>
           <p className ={s.article__descr}>{article.description}</p>
-          <Link to = {`/article/${article.slug}`} className = {s.article__more}>Развернуть...</Link>
-          <ul className="tag-list">
+        <div className={s.article__footer}>
+        <Link to = {`/article/${article.slug}`} className = {s.article__more}>Развернуть...</Link>
+          <ul className={`tag-list ${s.article__tags}`}>
             {
               article.tagList.map(tag => {
                 return (
@@ -78,6 +79,7 @@ const ArticlePreview = props => {
               })
             }
           </ul>
+        </div>
         </div>
     </div>
   );
