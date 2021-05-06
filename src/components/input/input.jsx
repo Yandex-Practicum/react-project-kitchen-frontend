@@ -16,7 +16,6 @@ function CustomInput({className, type, placeholder, inputRef, onKeyUp, ...props}
           const FR = new FileReader();
           FR.addEventListener("load", function(e) {
             setImg(e.target.result);
-            debugger;
             if (inputRef.current) {
               inputRef.current.files = inputRef.files;
             }

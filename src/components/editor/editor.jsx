@@ -82,11 +82,11 @@ function Editor(props) {
         description,
         body,
         tagList,
-        image: {
+        image: imageFileName ? {
           name: imageFileName,
           data: imageFileData,
           contentType: 'image/png'
-        }
+        } : null
       };
   
       const slug = { slug: articleSlug };
