@@ -24,7 +24,7 @@ const Comment = props => {
           {comment.author.username}
         </Link>
         <span className="date-posted">
-          {new Date(comment.createdAt).toDateString()}
+          {new Date(comment.createdAt).toLocaleString()}
         </span>
         <DeleteButton show={show} slug={props.slug} commentId={comment.id} />
       </div>

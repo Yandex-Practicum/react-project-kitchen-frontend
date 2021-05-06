@@ -8,6 +8,7 @@ import {
   REGISTER,
   REGISTER_PAGE_UNLOADED
 } from '../constants/actionTypes';
+import Button from "./Button/Button";
 
 const mapStateToProps = state => ({ ...state.auth });
 
@@ -53,10 +54,10 @@ class Register extends React.Component {
           <div className="row">
 
             <div className="col-md-6 offset-md-3 col-xs-12">
-              <h1 className="text-xs-center">Sign Up</h1>
+              <h1 className="text-xs-center">Зарегистрироваться</h1>
               <p className="text-xs-center">
                 <Link to="/login">
-                  Have an account?
+                  Уже есть аккаунт?
                 </Link>
               </p>
 
@@ -69,7 +70,7 @@ class Register extends React.Component {
                     <input
                       className="form-control form-control-lg"
                       type="text"
-                      placeholder="Username"
+                      placeholder="Имя"
                       value={this.props.username}
                       onChange={this.changeUsername} />
                   </fieldset>
@@ -78,7 +79,7 @@ class Register extends React.Component {
                     <input
                       className="form-control form-control-lg"
                       type="email"
-                      placeholder="Email"
+                      placeholder="default@gmail.com"
                       value={this.props.email}
                       onChange={this.changeEmail} />
                   </fieldset>
@@ -87,17 +88,17 @@ class Register extends React.Component {
                     <input
                       className="form-control form-control-lg"
                       type="password"
-                      placeholder="Password"
+                      placeholder="Пароль"
                       value={this.props.password}
                       onChange={this.changePassword} />
                   </fieldset>
 
-                  <button
-                    className="btn btn-lg btn-primary pull-xs-right"
+                  <Button
                     type="submit"
-                    disabled={this.props.inProgress}>
-                    Sign up
-                  </button>
+                    disabled={this.props.inProgress}
+                  >
+                    Зарегистрироваться
+                  </Button>
 
                 </fieldset>
               </form>

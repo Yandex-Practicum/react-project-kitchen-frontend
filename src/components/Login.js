@@ -8,6 +8,7 @@ import {
   LOGIN,
   LOGIN_PAGE_UNLOADED
 } from '../constants/actionTypes';
+import Button from "./Button/Button";
 
 const mapStateToProps = state => ({ ...state.auth });
 
@@ -46,10 +47,10 @@ class Login extends React.Component {
           <div className="row">
 
             <div className="col-md-6 offset-md-3 col-xs-12">
-              <h1 className="text-xs-center">Sign In</h1>
+              <h1 className="text-xs-center">Войти</h1>
               <p className="text-xs-center">
                 <Link to="/register">
-                  Need an account?
+                  Хотите создать аккаунт?
                 </Link>
               </p>
 
@@ -62,7 +63,7 @@ class Login extends React.Component {
                     <input
                       className="form-control form-control-lg"
                       type="email"
-                      placeholder="Email"
+                      placeholder="default@gmail.com"
                       value={email}
                       onChange={this.changeEmail} />
                   </fieldset>
@@ -71,17 +72,17 @@ class Login extends React.Component {
                     <input
                       className="form-control form-control-lg"
                       type="password"
-                      placeholder="Password"
+                      placeholder="Пароль"
                       value={password}
                       onChange={this.changePassword} />
                   </fieldset>
 
-                  <button
-                    className="btn btn-lg btn-primary pull-xs-right"
+                  <Button
                     type="submit"
-                    disabled={this.props.inProgress}>
-                    Sign in
-                  </button>
+                    disabled={this.props.inProgress}
+                  >
+                    Войти
+                  </Button>
 
                 </fieldset>
               </form>
