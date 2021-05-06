@@ -1,0 +1,20 @@
+.navbar {
+	position: relative;
+	padding: .5rem 1rem;
+	position: fixed;
+	right: 0;
+	left: 0;
+	z-index: 1030;
+}
+
+.navbar::after {
+	content: "";
+	display: table;
+	clear: both
+}
+
+@media(min-width:544px) {
+	.navbar {
+		border-radius: .25rem
+	}
+}
