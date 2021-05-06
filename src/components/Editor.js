@@ -147,7 +147,7 @@ class Editor extends React.Component {
                       placeholder="Тэги (через запятую)"
                       value={this.props.tagInput}
                       onChange={this.changeTagInput}
-                      onKeyUp={this.watchForEnter} />
+                      onKeyDown={this.watchForEnter} />
 
                     <div className="tag-list">
                       {

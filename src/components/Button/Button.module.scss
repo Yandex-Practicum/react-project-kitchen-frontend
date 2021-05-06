@@ -1,9 +1,7 @@
-@import '../../varibalse.scss';
-
 .button {
   width: 193px;
   height: 40px;
-  background: $primary;
+  background: var(--primary);
   border: none;
-  color: $white;
+  color: var(--white);
 }
