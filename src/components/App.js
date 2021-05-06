@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { APP_LOAD, REDIRECT } from '../constants/actionTypes';
 import { Route, Switch } from 'react-router-dom';
 import Article from '../components/Article';
-import Editor from '../components/Editor';
+import Editor from '../components/editor';
 import Home from '../components/Home';
 import Login from '../components/Login';
 import Profile from '../components/Profile';
@@ -14,6 +14,7 @@ import Register from '../components/Register';
 import Settings from '../components/Settings';
 import { store } from '../store';
 import { push } from 'react-router-redux';
+import './App.css';
 
 const mapStateToProps = state => {
   return {
