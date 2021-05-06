@@ -12,7 +12,9 @@
       url('./assets/fonts/Lucida-Sans-Unicode.woff2') format('woff2');
   font-weight: 400;
 }
-
+*,*:after,*:before{
+  box-sizing: border-box;
+}
 body{
   font-family: 'LucidaSans', sans-serif;
 }
