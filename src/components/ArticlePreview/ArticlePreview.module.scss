@@ -54,6 +54,7 @@
   }
   &__btn{
     display: flex;
+    justify-content: flex-end;
     align-items: center;
     border:none;
     outline: none;
@@ -62,6 +63,8 @@
     background:transparent;
     color:var(--dark-text);
     svg{
+      flex-shrink: 0;
+      flex-grow: 0;
       margin-left: 8px;
       transition:all .5s linear;
     }

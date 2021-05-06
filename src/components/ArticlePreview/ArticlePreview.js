@@ -58,7 +58,7 @@ const ArticlePreview = props => {
         </div>
           <div>
             <button className={`${s.article__btn} ${favoriteButtonClass}`} onClick={handleClick}>
-              {article.favoritesCount} <Heart />
+              {article.favoritesCount > 0 ? article.favoritesCount : null} <Heart />
             </button>
           </div>
         </div>
