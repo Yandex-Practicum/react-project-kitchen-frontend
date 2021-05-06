@@ -16,7 +16,7 @@ const EditProfileSettings = props => {
       <Link
         to="/settings"
         className="btn btn-sm btn-outline-secondary action-btn">
-        <i className="ion-gear-a"></i> Edit Profile Settings
+        <i className="ion-gear-a"></i> Редактировать профиль
       </Link>
     );
   }
@@ -50,7 +50,7 @@ const FollowUserButton = props => {
       onClick={handleClick}>
       <i className="ion-plus-round"></i>
       &nbsp;
-      {props.user.following ? 'Unfollow' : 'Follow'} {props.user.username}
+      {props.user.following ? 'Отписаться от' : 'Подписаться'} {props.user.username}
     </button>
   );
 };
@@ -93,7 +93,7 @@ class Profile extends React.Component {
           <Link
             className="nav-link active"
             to={`/@${this.props.profile.username}`}>
-            My Articles
+            Ваши записи
           </Link>
         </li>
 
@@ -101,7 +101,7 @@ class Profile extends React.Component {
           <Link
             className="nav-link"
             to={`/@${this.props.profile.username}/favorites`}>
-            Favorited Articles
+            Любимые записи
           </Link>
         </li>
       </ul>
