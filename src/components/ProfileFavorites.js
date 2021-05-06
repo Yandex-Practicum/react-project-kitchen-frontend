@@ -34,7 +34,7 @@ class ProfileFavorites extends Profile {
           <Link
             className="nav-link"
             to={`/@${this.props.profile.username}`}>
-            My Articles
+            Мои записи
           </Link>
         </li>
 
@@ -42,7 +42,7 @@ class ProfileFavorites extends Profile {
           <Link
             className="nav-link active"
             to={`/@${this.props.profile.username}/favorites`}>
-            Favorited Articles
+            Любимые записи
           </Link>
         </li>
       </ul>
