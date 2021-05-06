@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import style from "./Header.module.scss"
+
 const LoggedOutView = props => {
   if (!props.currentUser) {
     return (
@@ -70,7 +72,8 @@ const LoggedInView = props => {
 
 const Header = (props) => {
   return (
-    <nav className="navbar navbar-light">
+    <nav className="navbar">
+    {/* <nav className={style.navbar}> */}
       <div className="container">
 
         <Link to="/" className="navbar-brand">
