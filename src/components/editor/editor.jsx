@@ -86,7 +86,7 @@ function Editor(props) {
           name: imageFileName,
           data: imageFileData,
           contentType: 'image/png'
-        } : null
+        } : undefined
       };
   
       const slug = { slug: articleSlug };
