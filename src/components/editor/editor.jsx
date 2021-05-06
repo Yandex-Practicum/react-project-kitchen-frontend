@@ -182,7 +182,7 @@ function Editor(props) {
             onChange={changeTagInput}
             onKeyUp={watchForEnter} />
 
-          <div style={{display: 'flex', justifyContent: 'flex-start'}}              
+          {tagList.length > 0 && <div style={{display: 'flex', justifyContent: 'flex-start'}}              
             className="mb-6">
             {
               (tagList || []).map(tag => {
@@ -191,7 +191,7 @@ function Editor(props) {
                 );
               })
             }
-          </div>
+          </div>}
           
           <div style={{display: 'flex', justifyContent: 'flex-end'}}              
             className="mb-6">

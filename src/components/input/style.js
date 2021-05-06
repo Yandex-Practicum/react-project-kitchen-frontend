@@ -28,6 +28,7 @@ export const InputElement = styled.input`
     outline: none !important;
   }
   &::-webkit-file-upload-button {
+    display: none;
     position: absolute;
     color: #F2F2F3;
     font-family: 'Jet Brains Mono';
@@ -68,4 +69,5 @@ export const InputWrapper = styled.div`
 export const ImgPreview = styled.img`  
   height: 20px;
   cursor: pointer;
+  padding-left: 15px;
 `;

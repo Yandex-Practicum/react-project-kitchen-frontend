@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {InputWrapper, InputElement, InputLabel, ImgPreview} from './style.js';
 import ImageView from '../image-view';
+import clipImage from '../../images/clip.svg';
 
 function CustomInput({className, type, placeholder, inputRef, onKeyUp, ...props}) {
   const isFileUpload = type === "file";
@@ -51,7 +52,10 @@ function CustomInput({className, type, placeholder, inputRef, onKeyUp, ...props}
             setFocus(true);
           };
         }}/>
-        {isFileUpload && img && <ImgPreview src={img} onClick={() => setShowImage(true)} />}
+        {isFileUpload && <React.Fragment>
+          {img && <ImgPreview src={img} onClick={() => setShowImage(true)} />}
+          <ImgPreview src={clipImage} onClick={() => inputRef.current.click()} />
+        </React.Fragment>}
       </InputWrapper>
       {showImage && <ImageView
         onClose={() => setShowImage(false)}

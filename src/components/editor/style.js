@@ -9,13 +9,18 @@ export const Container = styled.div`
   max-width: 540px;
   margin: 0 auto;
   padding: 0;
+  padding-top: 32px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; 
+  justify-content: flex-start;
+  @media (max-width: 425px) {
+    padding: 0 8px;
+  } 
 `;
 
 export const Caption = styled.h2`
   text-align: center;
+  padding-bottom: 24px;
 `;
 
 export const Form = styled.form`
