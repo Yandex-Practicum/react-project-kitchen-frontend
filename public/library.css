@@ -59,9 +59,6 @@ template {
 	display: none
 }
 
-a {
-	background-color: transparent
-}
 
 a:active {
 	outline: 0
@@ -382,13 +379,12 @@ blockquote {
 }
 
 a {
-	color: #5cb85c;
 	text-decoration: none
 }
 
 a:focus,
 a:hover {
-	color: #3d8b3d;
+	color: black;
 	text-decoration: underline
 }
 
