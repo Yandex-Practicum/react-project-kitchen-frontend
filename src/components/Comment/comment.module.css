@@ -1,0 +1,113 @@
+.create__form {
+  width: 728px;
+  border: 1px solid #CCCCCC;
+  border-radius: 0;
+  margin-bottom: 24px;
+}
+
+.create__header {
+  background-color: #F4F4F6;
+  height: 120px;
+}
+
+.create__textarea {
+  background-color: #F4F4F6;
+  height: 100%;
+  width: 100%;
+  border: none;
+  padding: 24px;
+  padding-bottom: 0;
+}
+
+.create__footer {
+  height: 88px;
+  background-color: #FFFFFF;
+  padding: 24px;
+}
+
+.create__button {
+  width: 229px;
+  height: 40px;
+  display: block;
+  margin-left: auto;
+  border: none;
+
+  background-color: #0000FF;
+  box-shadow: 4px 4px 0px rgba(0, 0, 255, 0.25);
+  
+  color: #FFFFFF;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.create__button:hover {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), #0000FF;
+  box-shadow: 2px 2px 0px rgba(0, 0, 255, 0.25);
+}
+
+.published__section {
+  min-height: 208px;
+  width: 728px;
+  border: 1px solid #CCCCCC;
+  margin-bottom: 24px;
+}
+
+.published__header {
+  display: flex;
+  justify-content: space-between;
+  height: 88px;
+  padding:  24px;
+}
+
+.published__user {
+  display: flex;
+  height: 40px;
+}
+
+.published__user img {
+  width: 40px;
+  height: 40px;
+  margin-right: 8px;
+}
+
+.published__userdata {
+  display: flex;
+  flex-direction: column;
+}
+
+.published__username {
+  color: #0A0A0B;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.published__date {
+  color: #62626A;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.published__button{
+  width: 24px; 
+  height: 40px;
+  cursor: pointer;
+}
+
+.delete__button:hover path {
+  stroke: #F53D5C;
+}
+
+.published__textbox {
+  padding: 24px;
+  padding-top: 0;
+}
+
+.published__text {
+  word-wrap: break-word;
+  font-size: 16px;
+  line-height: 24px;
+  color: #62626A;
+}
