@@ -152,7 +152,7 @@ class Profile extends React.Component {
 
                 <img src={profile.image} className="user-img" alt={profile.username} />
                 <h2>{profile.username}</h2>
-                <p>{profile.bio}</p>
+                
 
                 <EditProfileSettings isUser={isUser} />
                 <FollowUserButton
