@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import style from "./Header.module.scss"
+import style from './Header.module.scss';
+import clsx from 'clsx';
+
 
 const LoggedOutView = props => {
   if (!props.currentUser) {
