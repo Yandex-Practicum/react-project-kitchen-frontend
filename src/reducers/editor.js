@@ -8,15 +8,33 @@ import {
   UPDATE_FIELD_EDITOR
 } from '../constants/actionTypes';
 
-export default (state = {}, action) => {
+
+
+function convertBufferToBase64(buffer) {
+  let binaryStr = '';
+  const byteArray = new Uint8Array(buffer);
+  for (let i = 0; i < byteArray.byteLength; i++) {
+    binaryStr += String.fromCharCode(byteArray[i]);
+  }
+  return btoa(binaryStr);
+}
+
+export default (state = {
+  image: {}
+}, action) => {
   switch (action.type) {
-    case EDITOR_PAGE_LOADED:
-      return {
+    case EDITOR_PAGE_LOADED: 
+    return {
         ...state,
         articleSlug: action.payload ? action.payload.article.slug : '',
         title: action.payload ? action.payload.article.title : '',
         description: action.payload ? action.payload.article.description : '',
         body: action.payload ? action.payload.article.body : '',
+        image: action.payload && action.payload.article.image ? {
+          img: action.payload.article.image.data ?
+          convertBufferToBase64(action.payload.article.image.data.data) : null,
+          name: action.payload.article.image.name
+        } : null,
         tagInput: '',
         tagList: action.payload ? action.payload.article.tagList : []
       };

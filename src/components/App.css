@@ -1,0 +1,8 @@
+/*TODO - удалить когда хедер доделаем*/
+:root {
+  --background: transparent;
+  --background-alt: transparent;
+}
+html {
+  padding: 0;
+}
