@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import PropTypes from 'prop-types';
 import {InputWrapper, InputElement, InputLabel, ImgPreview} from './style.js';
 import ImageView from '../image-view';
 import clipImage from '../../images/clip.svg';
@@ -34,27 +35,45 @@ function CustomInput({className, type, placeholder, inputRef, onKeyUp, ...props}
   }, [props.value, inputRef]);
   return (
     <div className={className} onBlur={() => setFocus(false)}>
-      <InputWrapper isFocus={focus} className="pr-6 pl-6 pt-2 pb-2" onClick={(e) => {
-        if (e.target === e.currentTarget) {
-          e.target.children[1].focus();
-          setFocus(true);
-        };
-      }}>
-        <InputLabel type={type} isFocus={focus} notEmpty={Boolean(props.value)} className="text text_type_main-default" onClick={(e) => {
+      <InputWrapper
+        isFocus={focus}
+        className="pr-6 pl-6 pt-2 pb-2"
+        onClick={(e) => {
+          if (e.target === e.currentTarget) {
+            e.target.children[1].focus();
+            setFocus(true);
+          }
+        }}>
+        <InputLabel
+          type={type}
+          isFocus={focus}
+          notEmpty={Boolean(props.value)}
+          className="text text_type_main-default"
+          onClick={(e) => {
             if (e.target === e.currentTarget) {
               e.target.parentNode.children[1].focus();
               setFocus(true);
-            };
+            }
           }}>{placeholder}</InputLabel>
-        <InputElement  onKeyUp={onKeyUp} ref={inputRef} type={type} className="text text_type_main-default" {...props} onClick={(e) => {
-          if (e.target === e.currentTarget) {
-            e.target.focus();
-            setFocus(true);
-          };
-        }}/>
+        <InputElement
+          onKeyUp={onKeyUp}
+          ref={inputRef}
+          type={type}
+          className="text text_type_main-default"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              e.target.focus();
+              setFocus(true);
+            }
+          }}
+          {...props}/>
         {isFileUpload && <React.Fragment>
-          {img && <ImgPreview src={img} onClick={() => setShowImage(true)} />}
-          <ImgPreview src={clipImage} onClick={() => inputRef.current.click()} />
+          {img && <ImgPreview
+                    src={img}
+                    onClick={() => setShowImage(true)} />}
+          <ImgPreview
+            src={clipImage}
+            onClick={() => inputRef.current.click()} />
         </React.Fragment>}
       </InputWrapper>
       {showImage && <ImageView
@@ -64,5 +83,17 @@ function CustomInput({className, type, placeholder, inputRef, onKeyUp, ...props}
     </div>
   );
 }
+
+CustomInput.propTypes = {
+  className: PropTypes.string,
+  type: PropTypes.string,
+  placeholder: PropTypes.string,
+  inputRef: PropTypes.oneOfType([
+    PropTypes.func,    
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) })
+  ]),
+  onKeyUp: PropTypes.func,
+  value: PropTypes.string.isRequired
+};
 
 export default CustomInput;

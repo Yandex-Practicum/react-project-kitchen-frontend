@@ -1,0 +1,20 @@
+{
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "plugins": [
+    "react"
+  ],
+  "parser": "babel-eslint",
+  "globals": {
+    "window": "readonly",
+    "document": "readonly",
+    "Element": "readonly",
+    "FileReader": "readonly",    
+    "ArrayBuffer": "readonly",
+    "Uint8Array": "readonly",
+    "btoa": "readonly",
+    "atob": "readonly",
+    "Blob": "readonly",
+    "File": "readonly",
+    "DataTransfer": "readonly"
+  }
+}

@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
+import PropTypes from 'prop-types';
 import ListErrors from '../ListErrors';
 import agent from '../../agent';
 import { connect } from 'react-redux';
@@ -22,7 +23,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: EDITOR_PAGE_LOADED, payload }),
   onSubmit: payload =>
     dispatch({ type: ARTICLE_SUBMITTED, payload }),
-  onUnload: payload =>
+  onUnload: () =>
     dispatch({ type: EDITOR_PAGE_UNLOADED })
 });
 
@@ -135,7 +136,6 @@ function Editor(props) {
       const file_list = dt.files;
       setImageRef({...imageRef, files: file_list});
     }
-    // setImageFileName(props.image ? props.image.name : '');
   }, [props]);
 
   return (
@@ -205,6 +205,24 @@ function Editor(props) {
       </Container>
     </EditorPage>
   );
+}
+
+Editor.propTypes = {
+  onSubmit: PropTypes.func,
+  onLoad: PropTypes.func,
+  onUnload: PropTypes.func,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      slug: PropTypes.string.isRequired
+    })
+  }),
+  articleSlug: PropTypes.string,
+  errors: PropTypes.object,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  body: PropTypes.string,
+  tagList: PropTypes.arrayOf(PropTypes.string),
+  image: PropTypes.string,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Editor);
