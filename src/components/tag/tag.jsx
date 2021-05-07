@@ -17,7 +17,7 @@ function Tag({caption, onClick, remove = false, active = false}) {
   );
 }
 
-Tag.prototype = {
+Tag.propTypes = {
   caption: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   remove: PropTypes.boolean,
