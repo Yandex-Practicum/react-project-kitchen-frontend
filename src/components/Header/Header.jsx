@@ -79,7 +79,7 @@ const Header = (props) => {
       <div className="container">
 
         <Link to="/" className="navbar-brand">
-          {props.appName.toLowerCase()}
+          {props.appName.toLowerCase()} + Test
         </Link>
 
         <LoggedOutView currentUser={props.currentUser} />
