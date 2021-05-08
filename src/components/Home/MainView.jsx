@@ -3,8 +3,8 @@ import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import { CHANGE_TAB } from '../../constants/actionTypes';
-import TabsNavigation from './Tabs/TabsNavigation/TabsNavigation';
-import TabsItem from './Tabs/TabItem/TabsItem';
+import TabsNavigation from '../Tabs/TabsNavigation/TabsNavigation';
+import TabsItem from '../Tabs/TabItem/TabsItem';
 
 const mapStateToProps = (state) => ({
   ...state.articleList,
