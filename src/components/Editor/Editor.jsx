@@ -126,7 +126,9 @@ class Editor extends React.Component {
                       type="text"
                       placeholder="Изображение (опционально)"
                       value={this.props.image}
-                      onChange={this.changeImage} />
+                      onChange={this.changeImage} 
+                      className = {s.pr}
+                      />
                       <button className = {s.form__clip}>
                         <img src={clipImg} alt="Clip" />
                       </button>
