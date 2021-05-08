@@ -2,6 +2,9 @@ import ListErrors from '../ListErrors/ListErrors';
 import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
+import styles from './settings.module.css'
+import Button from '../Button/Button'
+import ClipIcon from './ClipIcon'
 import {
   SETTINGS_SAVED,
   SETTINGS_PAGE_UNLOADED,
@@ -62,62 +65,59 @@ class SettingsForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.submitForm}>
+      <form className={styles.form__container} onSubmit={this.submitForm}>
         <fieldset>
 
-          <fieldset className="form-group">
+          <fieldset className={[styles.form__group, styles.url__group].join(' ')}>
             <input
-              className="form-control"
+              className={styles.url__input}
               type="text"
               placeholder="URL изображения профиля"
               value={this.state.image}
               onChange={this.updateState('image')} />
+            <ClipIcon />
           </fieldset>
 
-          <fieldset className="form-group">
+          <fieldset className={styles.form__group}>
             <input
-              className="form-control form-control-lg"
               type="text"
               placeholder="Имя пользователя"
               value={this.state.username}
               onChange={this.updateState('username')} />
           </fieldset>
 
-          <fieldset className="form-group">
+          <fieldset className={styles.form__group}>
             <textarea
-              className="form-control form-control-lg"
               rows="8"
-              placeholder="Краткая информация о Вас"
+              placeholder="Информация о Вас"
               value={this.state.bio}
               onChange={this.updateState('bio')}>
             </textarea>
           </fieldset>
 
-          <fieldset className="form-group">
+          <fieldset className={styles.form__group}>
             <input
-              className="form-control form-control-lg"
               type="email"
-              placeholder="deafault@gmail.com"
+              placeholder="mail@ya.ru"
               value={this.state.email}
               onChange={this.updateState('email')} />
           </fieldset>
 
-          <fieldset className="form-group">
+          <fieldset className={styles.form__group}>
             <input
-              className="form-control form-control-lg"
               type="password"
               placeholder="Новый пароль"
               value={this.state.password}
               onChange={this.updateState('password')} />
           </fieldset>
 
-          <button
-            className="btn btn-lg btn-primary pull-xs-right"
+          <Button 
+            className={styles.form__button}
             type="submit"
-            disabled={this.state.inProgress}>
-            Обновить настройки
-          </button>
-
+            //проверить отправку формы через универсальную кнопку
+            disabled={this.state.inProgress}
+            children="Обновить настройки"
+          />
         </fieldset>
       </form>
     );
@@ -139,31 +139,25 @@ const mapDispatchToProps = dispatch => ({
 class Settings extends React.Component {
   render() {
     return (
-      <div className="settings-page">
-        <div className="container page">
-          <div className="row">
-            <div className="col-md-6 offset-md-3 col-xs-12">
+      <section className={styles.page}>
+        <div className={styles.page__container}>
+          <h1>Ваши настройки</h1>
 
-              <h1 className="text-xs-center">Ваши настройки</h1>
+          <ListErrors errors={this.props.errors}></ListErrors>
 
-              <ListErrors errors={this.props.errors}></ListErrors>
+          <SettingsForm
+            currentUser={this.props.currentUser}
+            onSubmitForm={this.props.onSubmitForm} />
 
-              <SettingsForm
-                currentUser={this.props.currentUser}
-                onSubmitForm={this.props.onSubmitForm} />
+          <hr />
 
-              <hr />
-
-              <button
-                className="btn btn-outline-danger"
-                onClick={this.props.onClickLogout}>
-                Выйти из аккаунта
-              </button>
-
-            </div>
-          </div>
+          <button
+            className={styles.logout__button}
+            onClick={this.props.onClickLogout}>
+            Выйти из аккаунта
+          </button>
         </div>
-      </div>
+      </section>
     );
   }
 }
