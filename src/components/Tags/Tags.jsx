@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import agent from '../../agent';
 
-import s from './Tags.module.scss';
+import style from './Tags.module.scss';
 import clsx from 'clsx';
 
 const Tags = props => {
@@ -9,6 +9,7 @@ const Tags = props => {
   if (tags) {
     return (
       <div className="tag-list">
+      {/* <div className={style.tag_list}> */}
         {
           tags.map(tag => {
             const handleClick = ev => {
@@ -20,6 +21,7 @@ const Tags = props => {
               <a
                 href=""
                 className="tag-default tag-pill"
+                // className={clsx(style.tag_default, style.tag_pill)}
                 key={tag}
                 onClick={handleClick}>
                 {tag}
