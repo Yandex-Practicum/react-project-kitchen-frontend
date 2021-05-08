@@ -9,18 +9,15 @@ ul.tag_list li {
 	display: inline-block!important
 }
 
-.tag_default {
-	background-color: #0591fd
-}
 
 .tag_default[href]:focus,
 .tag_default[href]:hover {
-	background-color: var(--primary);
-	color: rgb(241, 241, 241)!important;
+	background-color: #0591fd;
 }
 
 .tag_default {
-	color: rgb(0, 0, 0)!important;
+	background-color: var(--primary);
+	color: rgb(241, 241, 241)!important;
 	font-size: .8rem;
 	padding-top: .1rem;
 	padding-bottom: .1rem;
@@ -44,4 +41,9 @@ ul.tag_list li {
 	padding-right: .6em;
 	padding-left: .6em;
 	border-radius: 10rem
+}
+.tag_default.tag_outline {
+	border: 1px solid #ddd;
+	color: #aaa!important;
+	background: 0 0!important
 }

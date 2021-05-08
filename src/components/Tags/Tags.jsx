@@ -6,6 +6,7 @@ import clsx from 'clsx';
 
 const Tags = props => {
   const tags = props.tags;
+  const clazz = props.style ? style.tag_outline : ""
   if (tags) {
     return (
       // <div className="tag-list">
@@ -21,7 +22,7 @@ const Tags = props => {
               <a
                 href=""
                 // className="tag-default tag-pill"
-                className={clsx(style.tag_default, style.tag_pill)}
+                className={clsx(style.tag_default, style.tag_pill, clazz)}
                 key={tag}
                 onClick={handleClick}>
                 {tag}
