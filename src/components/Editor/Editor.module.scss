@@ -1,0 +1,51 @@
+.title {
+  text-align: center;
+  font-size: 36px;
+  color: var(--dark-text);
+}
+.form {
+  max-width: 540px;
+  margin: 0 auto;
+  margin-top: 24px;
+  input,
+  textarea {
+    padding: 8px 16px 8px 16px;
+    background: #f4f4f6;
+    border: 1px solid #cccccc;
+    width: 100%;
+    height: 100%;
+    resize: none;
+    &:focus{
+      outline:none;
+      border-color:#cccccc;
+    }
+  }
+  
+  &__item {
+    height: 40px;
+    text-align: right;
+    position: relative;
+    &:not(:last-child) {
+      margin-bottom: 24px;
+    }
+    &:nth-child(3){
+      input{
+        padding-right: 50px;
+      }
+    }
+  }
+  &__clip{
+      border:none;
+      outline:none;
+      background-color:transparent;
+      position:absolute;
+
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+  }
+  &__textarea {
+    height: 256px;
+    margin-bottom: 24px;
+  }
+}

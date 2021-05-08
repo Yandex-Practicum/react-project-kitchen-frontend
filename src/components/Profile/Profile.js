@@ -105,18 +105,18 @@ class Profile extends React.Component {
 
   renderTabs() {
     return (
-      <ul className="nav nav-pills outline-active">
-        <li className="nav-item">
+      <ul className={styles.tabs}>
+        <li className={styles.item}>
           <Link
-            className="nav-link active"
+            className={`${styles.link} ${styles.link_active}`}
             to={`/@${this.props.profile.username}`}>
             Ваши записи
           </Link>
         </li>
 
-        <li className="nav-item">
+        <li lassName={styles.item}>
           <Link
-            className="nav-link"
+            className={styles.link}
             to={`/@${this.props.profile.username}/favorites`}>
             Любимые записи
           </Link>
@@ -164,7 +164,7 @@ class Profile extends React.Component {
 
             <div className="col-xs-12 col-md-10 offset-md-1">
 
-              <div className="articles-toggle">
+              <div>
                 {this.renderTabs()}
               </div>
 

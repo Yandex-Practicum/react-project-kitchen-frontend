@@ -1,6 +1,7 @@
 import ListErrors from '../ListErrors/ListErrors';
 import React from 'react';
 import agent from '../../agent';
+import Button from '../Button/Button';
 import { connect } from 'react-redux';
 import {
   ADD_TAG,
@@ -10,7 +11,8 @@ import {
   EDITOR_PAGE_UNLOADED,
   UPDATE_FIELD_EDITOR
 } from '../../constants/actionTypes';
-
+import clipImg from '../../assets/ico/Clip.svg'
+import s from './Editor.module.scss'
 const mapStateToProps = state => ({
   ...state.editor
 });
@@ -38,9 +40,9 @@ class Editor extends React.Component {
       key => ev => this.props.onUpdateField(key, ev.target.value);
     this.changeTitle = updateFieldEvent('title');
     this.changeDescription = updateFieldEvent('description');
+    this.changeImage = updateFieldEvent('image');
     this.changeBody = updateFieldEvent('body');
     this.changeTagInput = updateFieldEvent('tagInput');
-
     this.watchForEnter = ev => {
       if (ev.keyCode === 13) {
         ev.preventDefault();
@@ -57,6 +59,7 @@ class Editor extends React.Component {
       const article = {
         title: this.props.title,
         description: this.props.description,
+        image:this.props.image,
         body: this.props.body,
         tagList: this.props.tagList
       };
@@ -99,38 +102,39 @@ class Editor extends React.Component {
             <div className="col-md-10 offset-md-1 col-xs-12">
 
               <ListErrors errors={this.props.errors}></ListErrors>
-
-              <form>
+              <h2 className = {s.title}>Новая запись</h2>
+              <form className = {s.form}>
                 <fieldset>
 
-                  <fieldset className="form-group">
+                  <fieldset className={s.form__item}>
                     <input
-                      className="form-control form-control-lg"
                       type="text"
                       placeholder="Название записи"
                       value={this.props.title}
                       onChange={this.changeTitle} />
                   </fieldset>
 
-                  <fieldset className="form-group">
+                  <fieldset className={s.form__item}>
                     <input
-                      className="form-control"
                       type="text"
-                      placeholder="О чём запись?"
+                      placeholder="О чём статья?"
                       value={this.props.description}
                       onChange={this.changeDescription} />
                   </fieldset>
 
-                  <fieldset className="form-group">
+                  <fieldset className={s.form__item}>
                     <input
-                      className="form-control"
-                      type="image"
+                      type="text"
                       placeholder="Изображение (опционально)"
                       value={this.props.image}
-                      onChange={this.changeImage} />
+                      onChange={this.changeImage}
+                      />
+                      <button className = {s.form__clip}>
+                        <img src={clipImg} alt="Clip" />
+                      </button>
                   </fieldset>
 
-                  <fieldset className="form-group">
+                  <fieldset className={s.form__textarea}>
                     <textarea
                       className="form-control"
                       rows="8"
@@ -140,9 +144,8 @@ class Editor extends React.Component {
                     </textarea>
                   </fieldset>
 
-                  <fieldset className="form-group">
+                  <fieldset className={s.form__item}>
                     <input
-                      className="form-control"
                       type="text"
                       placeholder="Тэги (через запятую)"
                       value={this.props.tagInput}
@@ -164,14 +167,14 @@ class Editor extends React.Component {
                       }
                     </div>
                   </fieldset>
-
-                  <button
-                    className="btn btn-lg pull-xs-right btn-primary"
-                    type="button"
-                    disabled={this.props.inProgress}
-                    onClick={this.submitForm}>
-                    Опубликовать запись
-                  </button>
+                  <fieldset className = {s.form__item}>
+                    <Button
+                      className = {s.form__button}
+                      onClick = {this.submitForm}
+                    >
+                      Опубликовать запись
+                    </Button>
+                  </fieldset>
 
                 </fieldset>
               </form>
