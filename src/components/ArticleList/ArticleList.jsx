@@ -7,7 +7,7 @@ import s from './ArticleList.module.scss'
 const ArticleList = props => {
   if (!props.articles) {
     return (
-      <div className="article-preview">Loading...</div>
+      <div className="article-preview">Данные загружаются..</div>
     );
   }
 
