@@ -40,9 +40,9 @@ class Editor extends React.Component {
       key => ev => this.props.onUpdateField(key, ev.target.value);
     this.changeTitle = updateFieldEvent('title');
     this.changeDescription = updateFieldEvent('description');
+    this.changeImage = updateFieldEvent('image');
     this.changeBody = updateFieldEvent('body');
     this.changeTagInput = updateFieldEvent('tagInput');
-
     this.watchForEnter = ev => {
       if (ev.keyCode === 13) {
         ev.preventDefault();
@@ -59,6 +59,7 @@ class Editor extends React.Component {
       const article = {
         title: this.props.title,
         description: this.props.description,
+        image:this.props.image,
         body: this.props.body,
         tagList: this.props.tagList
       };
@@ -126,8 +127,7 @@ class Editor extends React.Component {
                       type="text"
                       placeholder="Изображение (опционально)"
                       value={this.props.image}
-                      onChange={this.changeImage} 
-                      className = {s.pr}
+                      onChange={this.changeImage}
                       />
                       <button className = {s.form__clip}>
                         <img src={clipImg} alt="Clip" />
