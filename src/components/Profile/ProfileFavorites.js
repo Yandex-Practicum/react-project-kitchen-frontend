@@ -7,6 +7,7 @@ import {
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED
 } from '../../constants/actionTypes';
+import s from './profile.module.css'
 
 const mapDispatchToProps = dispatch => ({
   onLoad: (pager, payload) =>
@@ -29,18 +30,18 @@ class ProfileFavorites extends Profile {
 
   renderTabs() {
     return (
-      <ul className="nav nav-pills outline-active">
-        <li className="nav-item">
+      <ul className={s.tabs}>
+        <li className={s.tab}>
           <Link
-            className="nav-link"
+            className={s.link}
             to={`/@${this.props.profile.username}`}>
             Мои записи
           </Link>
         </li>
 
-        <li className="nav-item">
+        <li className={s.tab}>
           <Link
-            className="nav-link active"
+            className={`${s.link} ${s.link_active}`}
             to={`/@${this.props.profile.username}/favorites`}>
             Любимые записи
           </Link>

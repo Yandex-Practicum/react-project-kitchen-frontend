@@ -47,3 +47,29 @@
   width: 220px;
   float: right;
 }
+.tabs{
+  margin-top: 32px;
+  padding: 0;
+
+  width: 100%;
+  display: flex;
+  list-style-type: none;
+  box-shadow: inset 0px -1px 0px #E0E0E0;
+}
+.tab{
+  display: block;
+}
+.link{
+  display: block;
+  padding: 16px 24px;
+
+  color: var(--gray-text);
+}
+.link:hover{
+  border-bottom:2px solid var(--primary);
+  text-decoration: none;
+}
+.link_active{
+  border-bottom:2px solid var(--primary);
+  color:var(--dark-text);
+}
