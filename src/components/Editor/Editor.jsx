@@ -1,6 +1,6 @@
-import ListErrors from './ListErrors';
+import ListErrors from '../ListErrors/ListErrors';
 import React from 'react';
-import agent from '../agent';
+import agent from '../../agent';
 import { connect } from 'react-redux';
 import {
   ADD_TAG,
@@ -9,7 +9,7 @@ import {
   ARTICLE_SUBMITTED,
   EDITOR_PAGE_UNLOADED,
   UPDATE_FIELD_EDITOR
-} from '../constants/actionTypes';
+} from '../../constants/actionTypes';
 
 const mapStateToProps = state => ({
   ...state.editor

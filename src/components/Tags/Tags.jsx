@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import agent from '../../agent';
+
+import s from './Tags.module.scss';
+import clsx from 'clsx';
 
 const Tags = props => {
   const tags = props.tags;

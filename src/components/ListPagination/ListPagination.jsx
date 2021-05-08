@@ -1,7 +1,10 @@
-import React from 'react';
-import agent from '../agent';
+import React, { FC } from 'react';
+import agent from '../../agent';
 import { connect } from 'react-redux';
-import { SET_PAGE } from '../constants/actionTypes';
+import { SET_PAGE } from '../../constants/actionTypes';
+
+import s from './ListPagination.module.scss';
+import clsx from 'clsx';
 
 const mapDispatchToProps = dispatch => ({
   onSetPage: (page, payload) =>
