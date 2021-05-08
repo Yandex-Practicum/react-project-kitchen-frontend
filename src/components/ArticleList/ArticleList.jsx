@@ -1,5 +1,5 @@
 import ArticlePreview from '../ArticlePreview/ArticlePreview';
-import ListPagination from '../ListPagination';
+import ListPagination from '../ListPagination/ListPagination';
 import React from 'react';
 
 import s from './ArticleList.module.scss'
