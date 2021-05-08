@@ -69,14 +69,6 @@ const FollowUserButton = props => {
         </>
       }
     </Button>
-    
-      /*<button
-      className={classes}
-      onClick={handleClick}>
-      <i className="ion-plus-round"></i>
-      &nbsp;
-      {props.user.following ? 'Отписаться от' : 'Подписаться'} {props.user.username}
-    </button>*/
   );
 };
 
@@ -141,7 +133,7 @@ class Profile extends React.Component {
 
     const isUser = this.props.currentUser &&
       this.props.profile.username === this.props.currentUser.username;
-//col-xs-12 col-md-10 offset-md-1
+
     return (
       <div className="profile-page">
 
