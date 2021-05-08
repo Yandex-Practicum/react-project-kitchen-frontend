@@ -35,7 +35,7 @@ class Article extends React.Component {
     if (!this.props.article) {
       return null;
     }
-
+    
     const markup = { __html: marked(this.props.article.body, { sanitize: true }) };
     const canModify = this.props.currentUser &&
       this.props.currentUser.username === this.props.article.author.username;
@@ -51,19 +51,18 @@ class Article extends React.Component {
         </div>
         
 
-        <div className="container page">
-
-          <div className="row article-content">
-            <div className="col-xs-12">
+        <div className={styles.page__container}>
+          <div className={styles.page__content}>
+            <div>
               <h1>{this.props.article.title}</h1>
-              <div dangerouslySetInnerHTML={markup}></div>
+              <div className={styles.page__text} dangerouslySetInnerHTML={markup}></div>
 
-              <ul className="tag-list">
+              <ul className={styles.page__taglist}>
                 {
                   this.props.article.tagList.map(tag => {
                     return (
                       <li
-                        className="tag-default tag-pill tag-outline"
+                        className={styles.page__tag}
                         key={tag}>
                         {tag}
                       </li>
@@ -74,8 +73,6 @@ class Article extends React.Component {
 
             </div>
           </div>
-
-          <hr />
 
           <div className="article-actions">
           </div>
