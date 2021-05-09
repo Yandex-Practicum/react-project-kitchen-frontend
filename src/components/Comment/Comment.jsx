@@ -2,6 +2,7 @@ import DeleteButton from './DeleteButton';
 import { Link } from 'react-router-dom';
 import React from 'react';
 import styles from './comment.module.css';
+import UserMeta from '../UserMeta/UserMeta'
 
 const Comment = props => {
   const comment = props.comment;
@@ -10,7 +11,11 @@ const Comment = props => {
   return (
     <section className={styles.published__section}>
       <div className={styles.published__header}>
-        <div className={styles.published__user}>
+        <UserMeta 
+          comment={props.comment}
+          section='comment'
+        />
+        {/*<div className={styles.published__user}>
           <Link
             to={`/@${comment.author.username}`}>
             <img src={comment.author.image} alt={comment.author.username} />
@@ -25,7 +30,7 @@ const Comment = props => {
               {new Date(comment.createdAt).toLocaleString()}
             </span>
           </div>
-        </div>
+        </div>*/}
         <div className={styles.published__button}>
           <DeleteButton show={show} slug={props.slug} commentId={comment.id} />
         </div>

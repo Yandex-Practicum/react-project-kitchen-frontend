@@ -1,4 +1,4 @@
-import ArticleMeta from './ArticleMeta';
+import ArticleActions from './ArticleActions';
 import CommentContainer from '../Comment/CommentContainer';
 import React from 'react';
 import agent from '../../agent';
@@ -7,6 +7,7 @@ import marked from 'marked';
 import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../constants/actionTypes';
 import styles from './article.module.css';
 import Tags from '../Tags/Tags';
+import UserMeta from '../UserMeta/UserMeta'
 
 const mapStateToProps = state => ({
   ...state.article,
@@ -45,9 +46,11 @@ class Article extends React.Component {
 
         <div className={styles.banner}>
           <div className={styles.banner__container}>
-            <ArticleMeta
+            <UserMeta 
               article={this.props.article}
-              canModify={canModify} />
+              section='article'
+            />
+            <ArticleActions canModify={canModify} article={this.props.article} />
           </div>
         </div>
         
