@@ -17,6 +17,7 @@
   border: none;
   padding: 24px;
   padding-bottom: 0;
+  resize: none;
 }
 
 .create__footer {
