@@ -22,7 +22,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Article extends React.Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.props.onLoad(Promise.all([
       agent.Articles.get(this.props.match.params.id),
       agent.Comments.forArticle(this.props.match.params.id)
