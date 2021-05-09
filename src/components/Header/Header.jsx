@@ -10,7 +10,7 @@ const LoggedOutView = props => {
     return (
       <ul className={clsx(style.nav, style.navbar_nav, style.pull_xs_right)}>
 
-<       li className={style.nav_item}>
+        <li className={style.nav_item}>
           <Link to="/" className={style.nav_link}>
             Главная
           </Link>
@@ -61,7 +61,7 @@ const LoggedInView = props => {
             to={`/@${props.currentUser.username}`}
             className={style.nav_link}>
             <span>
-              <img src={props.currentUser.image} alt="ava" className={style.ava_image}/>
+              <img src={props.currentUser.image ? props.currentUser.image : 'https://static.productionready.io/images/smiley-cyrus.jpg'} alt="ava" className={style.ava_image}/>
               &nbsp;{props.currentUser.username}
             </span>
           </Link>
