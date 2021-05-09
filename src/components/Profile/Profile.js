@@ -114,7 +114,7 @@ class Profile extends React.Component {
           </Link>
         </li>
 
-        <li lassName={styles.item}>
+        <li className={styles.item}>
           <Link
             className={styles.link}
             to={`/@${this.props.profile.username}/favorites`}>
