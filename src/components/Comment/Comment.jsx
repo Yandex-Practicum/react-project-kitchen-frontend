@@ -15,22 +15,6 @@ const Comment = props => {
           comment={props.comment}
           section='comment'
         />
-        {/*<div className={styles.published__user}>
-          <Link
-            to={`/@${comment.author.username}`}>
-            <img src={comment.author.image} alt={comment.author.username} />
-          </Link>
-          <div className={styles.published__userdata}>
-            <Link
-              to={`/@${comment.author.username}`}
-              className={styles.published__username}>
-              {comment.author.username}
-            </Link>
-            <span className={styles.published__date}>
-              {new Date(comment.createdAt).toLocaleString()}
-            </span>
-          </div>
-        </div>*/}
         <div className={styles.published__button}>
           <DeleteButton show={show} slug={props.slug} commentId={comment.id} />
         </div>
