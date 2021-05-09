@@ -13,6 +13,7 @@ ul.tag_list li {
 .tag_default[href]:focus,
 .tag_default[href]:hover {
 	background-color: #0591fd;
+	text-decoration: none; 
 }
 
 .tag_default {
@@ -24,17 +25,19 @@ ul.tag_list li {
 	white-space: nowrap;
 	margin-right: 3px;
 	margin-bottom: .2rem;
-	display: inline-block
+	display: inline-block;
+	text-decoration: none; 
 }
 
 .tag_default:hover {
-	text-decoration: none
+	text-decoration: none;
 }
 
-.tag_default.tag-outline {
+.tag-outline {
 	border: 1px solid rgb(230, 245, 15);
 	color: rgb(247, 3, 226)!important;
-	background: 0 0!important
+	background: 0 0!important;
+	text-decoration: none; 
 }
 
 .tag_pill {

@@ -9,7 +9,7 @@
 .navbar::after {
 	content: "";
 	display: table;
-	clear: both
+	clear: both;
 }
 
 @media(min-width:544px) {
@@ -61,6 +61,7 @@
 	padding-top: 0!important;
 	margin-right: 2rem!important;
 	color: var(--dark);
+	text-decoration: none; 
 	
 }
 
@@ -77,12 +78,13 @@
 .nav {
 	padding-left: 0;
 	margin-bottom: 0;
-	list-style: none
+	list-style: none;
 }
 
 .nav_link {
 	display: inline-block;
 	color: var(--dark);
+	text-decoration: none; 
 }
 
 .nav_link:focus{
