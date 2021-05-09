@@ -7,6 +7,7 @@ import Heart from '../Heart/Heart'
 import s from './ArticlePreview.module.scss'
 const FAVORITED_CLASS = s.article__btn_unfavorite;
 const NOT_FAVORITED_CLASS = s.article__btn_favorite;
+import Tags from '../Tags/Tags';
 
 const mapDispatchToProps = dispatch => ({
   favorite: slug => dispatch({
@@ -68,17 +69,9 @@ const ArticlePreview = props => {
           <p className ={s.article__descr}>{article.description}</p>
         <div className={s.article__footer}>
         <Link to = {`/article/${article.slug}`} className = {s.article__more}>Развернуть...</Link>
-          <ul className={`tag-list ${s.article__tags}`}>
-            {
-              article.tagList.map(tag => {
-                return (
-                  <li className="tag-default tag-pill tag-outline" key={tag}>
-                    {tag}
-                  </li>
-                )
-              })
-            }
-          </ul>
+        <Tags tags={article.tagList}
+          onClickTag={() => {}} 
+          style="outline"/>
         </div>
         </div>
     </li>

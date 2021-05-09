@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import marked from 'marked';
 import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../constants/actionTypes';
 import styles from './article.module.css';
+import Tags from '../Tags/Tags';
 
 const mapStateToProps = state => ({
   ...state.article,
@@ -57,19 +58,11 @@ class Article extends React.Component {
               <h1>{this.props.article.title}</h1>
               <div className={styles.page__text} dangerouslySetInnerHTML={markup}></div>
 
-              <ul className={styles.page__taglist}>
-                {
-                  this.props.article.tagList.map(tag => {
-                    return (
-                      <li
-                        className={styles.page__tag}
-                        key={tag}>
-                        {tag}
-                      </li>
-                    );
-                  })
-                }
-              </ul>
+              <div className={styles.page__taglist}>
+                <Tags tags={this.props.article.tagList}
+                  onClickTag={() => {}} 
+                  style="outline"/>
+              </div>
 
             </div>
           </div>
