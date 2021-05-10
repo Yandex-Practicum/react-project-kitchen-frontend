@@ -19,6 +19,5 @@ ReactDOM.render(
       </ConnectedRouter>
     </BrowserRouter>
   </Provider>,
-
   document.getElementById("root")
 );
