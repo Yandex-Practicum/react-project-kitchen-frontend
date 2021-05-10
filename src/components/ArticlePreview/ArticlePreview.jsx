@@ -83,7 +83,7 @@ const ArticlePreview = props => {
         <Link to = {`/article/${article.slug}`} className = {s.article__more}>Развернуть...</Link>
         <Tags tags={article.tagList}
           onClickTag={() => {}} 
-          style="outline"/>
+          style="grey"/>
         </div>
         </div>
     </li>

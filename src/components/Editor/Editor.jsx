@@ -13,6 +13,8 @@ import {
 } from '../../constants/actionTypes';
 import clipImg from '../../assets/ico/Clip.svg'
 import s from './Editor.module.scss'
+import Tags from '../Tags/Tags';
+
 const mapStateToProps = state => ({
   ...state.editor
 });
@@ -150,22 +152,13 @@ class Editor extends React.Component {
                       placeholder="Тэги (через запятую)"
                       value={this.props.tagInput}
                       onChange={this.changeTagInput}
-                      onKeyDown={this.watchForEnter} />
+                      onKeyDown={this.watchForEnter} 
+                    />
 
-                    <div className="tag-list">
-                      {
-                        (this.props.tagList || []).map(tag => {
-                          return (
-                            <span className="tag-default tag-pill" key={tag}>
-                              <i  className="ion-close-round"
-                                  onClick={this.removeTagHandler(tag)}>
-                              </i>
-                              {tag}
-                            </span>
-                          );
-                        })
-                      }
-                    </div>
+                    <Tags tags={this.props.tagList}
+                      onClickTag={() => {}} 
+                      style="dark"/>
+                      
                   </fieldset>
                   <fieldset className = {s.form__item}>
                     <Button
