@@ -6,11 +6,11 @@ import {
   HeaderContainer,
   HeaderLink,
   HeaderLinks,
-  HeaderLinkActive,
+  // HeaderLinkActive,
 } from "./style";
 
-import { useLocation, useHistory } from "react-router-dom";
-import { locationsAreEqual } from "history";
+import { useLocation} from "react-router-dom";
+// import { locationsAreEqual } from "history";
 
 import homeIcon from "../../images/header/home.png";
 import homeIconActive from "../../images/header/home_active.png";
@@ -102,7 +102,7 @@ const LoggedInView = (props) => {
   return null;
 };
 
-function Header2(props) {
+function Header(props) {
   let location = useLocation().pathname;
   return (
     <HeaderNavbar>
@@ -118,4 +118,4 @@ function Header2(props) {
   );
 }
 
-export default Header2;
+export default Header;
