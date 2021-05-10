@@ -30,12 +30,23 @@ const mapDispatchToProps = dispatch => ({
 class Login extends React.Component {
   constructor() {
     super();
-    this.changeEmail = ev => this.props.onChangeEmail(ev.target.value);
-    this.changePassword = ev => this.props.onChangePassword(ev.target.value);
+    this.state ={
+      email: '',
+      password: ''
+    };
+    
     this.submitForm = (email, password) => ev => {
       ev.preventDefault();
       this.props.onSubmit(email, password);
     };
+  }
+
+  handleChangeEmail = (event) => {
+    this.setState({...this.state, email: event.target.value});
+  }
+
+  handleChangePassword = (event) => {
+    this.setState({...this.state, password: event.target.value});
   }
 
   componentWillUnmount() {
@@ -43,8 +54,6 @@ class Login extends React.Component {
   }
 
   render() {
-    const email = this.props.email;
-    const password = this.props.password;
     return (
       <div className="auth-page">
         <div className="container page">
@@ -60,7 +69,7 @@ class Login extends React.Component {
 
               <ListErrors errors={this.props.errors} />
 
-              <form onSubmit={this.submitForm(email, password)}>
+              <form onSubmit={this.submitForm(this.state.email, this.state.password)}>
                 <fieldset>
 
                   <fieldset className="form-group">
@@ -68,8 +77,8 @@ class Login extends React.Component {
                       className="form-control form-control-lg"
                       type="email"
                       placeholder="default@gmail.com"
-                      value={email}
-                      onChange={this.changeEmail} />
+                      value={this.state.email}
+                      onChange={this.handleChangeEmail} />
                   </fieldset>
 
                   <fieldset className="form-group">
@@ -77,8 +86,8 @@ class Login extends React.Component {
                       className="form-control form-control-lg"
                       type="password"
                       placeholder="Пароль"
-                      value={password}
-                      onChange={this.changePassword} />
+                      value={this.state.password}
+                      onChange={this.handleChangePassword} />
                   </fieldset>
 
                   <Button
