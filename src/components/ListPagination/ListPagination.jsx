@@ -30,8 +30,8 @@ const ListPagination = props => {
   };
 
   return (
-    <nav>
-      <ul className="pagination">
+    <nav className={s.container}>
+      <ul className={s.list}>
 
         {
           range.map(v => {
@@ -42,11 +42,11 @@ const ListPagination = props => {
             };
             return (
               <li
-                className={ isCurrent ? 'page-item active' : 'page-item' }
+                className={ isCurrent ? [s.element, s.active__element].join(' ') : s.element }
                 onClick={onClick}
                 key={v.toString()}>
 
-                <a className="page-link" href="">{v + 1}</a>
+                <a className={s.link} href="">{v + 1}</a>
 
               </li>
             );

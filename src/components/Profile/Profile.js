@@ -54,7 +54,9 @@ const FollowUserButton = props => {
     }
   };
 
+
   return (
+    props.currentUser && (
     <Button 
       className={styles.followbutton}
       onClick={handleClick}>
@@ -68,7 +70,7 @@ const FollowUserButton = props => {
           <span>Подписаться</span>
         </>
       }
-    </Button>
+    </Button>)
   );
 };
 
@@ -114,7 +116,7 @@ class Profile extends React.Component {
           </Link>
         </li>
 
-        <li lassName={styles.item}>
+        <li className={styles.item}>
           <Link
             className={styles.link}
             to={`/@${this.props.profile.username}/favorites`}>
@@ -152,6 +154,7 @@ class Profile extends React.Component {
                   user={profile}
                   follow={this.props.onFollow}
                   unfollow={this.props.onUnfollow}
+                  currentUser={this.props.currentUser}
                   />
 
               </div>

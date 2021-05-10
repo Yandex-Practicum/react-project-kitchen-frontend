@@ -20,6 +20,10 @@ const mapDispatchToProps = dispatch => ({
   })
 });
 
+
+
+
+
 const ArticlePreview = props => {
   const article = props.article;
   const favoriteButtonClass = article.favorited ?
@@ -34,7 +38,14 @@ const ArticlePreview = props => {
       props.favorite(article.slug);
     }
   };
-  
+  const [disabled, setDisabled] = React.useState(true);
+  React.useEffect(() => {
+    if(props.token !== null) {
+      setDisabled(false);
+    }
+  })
+
+
   return (
     <li className={s.article}>
     {article.photo && <div className = {s.article__photo}></div>}
@@ -58,7 +69,8 @@ const ArticlePreview = props => {
             </div>
         </div>
           <div>
-            <button className={`${s.article__btn} ${favoriteButtonClass}`} onClick={handleClick}>
+
+            <button className={`${s.article__btn} ${favoriteButtonClass}`} onClick={handleClick} disabled={disabled}> 
               {article.favoritesCount > 0 ? article.favoritesCount : null} <Heart />
             </button>
           </div>

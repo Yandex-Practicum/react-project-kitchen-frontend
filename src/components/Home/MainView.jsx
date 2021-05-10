@@ -54,6 +54,7 @@ const MainView = (props) => {
         loading={props.loading}
         articlesCount={props.articlesCount}
         currentPage={props.currentPage}
+        token={props.token}
       />
     </div>
   );

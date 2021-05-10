@@ -87,6 +87,13 @@
 	text-decoration: none; 
 }
 
+.nav_link img {
+	width: 24px;
+	height: 24px;
+	border: 1px solid #0A0A0B;
+	border-radius: 0%;
+}
+
 .nav_link:focus{
 	text-decoration: none;
 	color: var(--primary);
