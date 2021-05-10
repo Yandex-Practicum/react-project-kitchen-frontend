@@ -15,6 +15,7 @@ import Settings from '../components/Settings';
 import { store } from '../store';
 import { push } from 'react-router-redux';
 import './App.css';
+import Header2 from '../components/header2';
 
 const mapStateToProps = state => {
   return {
@@ -53,10 +54,13 @@ class App extends React.Component {
     if (this.props.appLoaded) {
       return (
         <div>
-          <Header
+          {/* <Header
             appName={this.props.appName}
-            currentUser={this.props.currentUser} />
+            currentUser={this.props.currentUser} /> */}
+            <Header2 appName={this.props.appName}
+            currentUser={this.props.currentUser} /> 
             <Switch>
+
             <Route exact path="/" component={Home}/>
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
@@ -72,9 +76,11 @@ class App extends React.Component {
     }
     return (
       <div>
-        <Header
+        {/* <Header
           appName={this.props.appName}
-          currentUser={this.props.currentUser} />
+          currentUser={this.props.currentUser} /> */}
+         <Header2 appName={this.props.appName}
+            currentUser={this.props.currentUser} /> 
       </div>
     );
   }
