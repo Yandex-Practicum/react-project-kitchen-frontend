@@ -2,23 +2,24 @@
 ul.tag_list {
 	padding-left: 0!important;
 	display: inline-block;
-	list-style: none!important
+	list-style: none!important;
 }
 
 ul.tag_list li {
-	display: inline-block!important
+	display: inline-block!important;
 }
 
 
 .tag_default[href]:focus,
 .tag_default[href]:hover {
-	background-color: #0591fd;
+	background-color: var(--primary);
+	color: rgb(241, 241, 241);
 	text-decoration: none; 
 }
 
 .tag_default {
-	background-color: var(--primary);
-	color: rgb(241, 241, 241)!important;
+	background-color: rgb(241, 241, 241);
+	border:solid 1px rgb(194, 194, 194);
 	font-size: .8rem;
 	padding-top: .1rem;
 	padding-bottom: .1rem;
@@ -29,24 +30,23 @@ ul.tag_list li {
 	text-decoration: none; 
 }
 
-.tag_default:hover {
-	text-decoration: none;
-}
-
-.tag-outline {
-	border: 1px solid rgb(230, 245, 15);
-	color: rgb(247, 3, 226)!important;
-	background: 0 0!important;
-	text-decoration: none; 
-}
 
 .tag_pill {
 	padding-right: .6em;
 	padding-left: .6em;
-	border-radius: 10rem
+	// border-radius: 10rem
 }
-.tag_default.tag_outline {
+
+.tag_default.tag_dark {
 	border: 1px solid #ddd;
-	color: #aaa!important;
-	background: 0 0!important
+	color: rgb(255, 255, 255)!important;
+	background: rgb(97, 97, 97)!important;
+	text-decoration: none; 
+}
+
+.tag_default.tag_grey {
+	border: 1px solid #ddd;
+	color: rgb(0, 0, 0)!important;
+	background: rgb(241, 241, 241)!important;
+	text-decoration: none; 
 }
