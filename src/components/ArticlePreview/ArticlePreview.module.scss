@@ -1,0 +1,138 @@
+.article{
+  display: flex;
+  margin-top: 32px;
+  box-shadow: inset 0px -1px 0px #E0E0E0;
+  padding-bottom: 32px;
+  max-width: 100%;
+  &__photo{
+    flex:0 0 20%;
+    height: 228px;
+    margin-right: 16px;
+    img{
+      max-width: 100%;
+      height: auto;
+    }
+  }
+  &__post{
+    flex:0 1 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  &__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__user{
+    display: flex;
+    align-items: center;
+  }
+  &__text{
+    display: flex;
+    flex-direction: column;
+    margin-left: 14px;
+    &_user{
+      font-size: 16px;
+      color: var(--dark-text);
+      font-weight: bold;
+      transition:color .5s linear;
+      &:hover{
+        color:var(--primary);
+        text-decoration: none;
+      }
+    }
+    &_date{
+      font-size: 12px;
+      color: var(--gray-text);
+    }
+  }
+  &__avatar{
+    width: 40px;
+    height: 40px;
+    border:2px solid var(--dark-text);
+    img{
+      max-width:100%;
+      height: auto;
+    }
+  }
+  &__btn{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border:none;
+    outline: none;
+    width: 50px;
+    height: 40px;
+    background:transparent;
+    color:var(--dark-text);
+    svg{
+      flex-shrink: 0;
+      flex-grow: 0;
+      margin-left: 8px;
+      transition:all .5s linear;
+    }
+    &:focus{
+      outline: none;
+    }
+    &:hover{
+      svg{
+        fill:var(--red-text);
+        stroke:var(--red-text);
+      }
+    }
+    &_favorite{
+      color:var(--dark-text);
+      svg{
+        fill:none;
+        stroke:var(--dark-text);
+      }
+    }
+    &_unfavorite{
+        color:var(--red-text);
+        svg{
+          fill:var(--red-text);
+          stroke:var(--red-text);
+        }
+    }
+  }
+  &__title{
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--dark-text);
+    margin-top: 16px;
+    transition: color .5s linear;
+    &:visited{
+      color:var(--dark-text);
+    }
+    &:hover{
+      text-decoration: none;
+      color:var(--primary);
+    }
+    h2{
+      font-size: 24px;
+      color: inherit;
+      margin: 0;
+      word-wrap: break-word;
+    }
+  }
+  &__descr{
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--gray-text);
+    margin-top: 8px;
+  }
+  &__more{
+    color:var(--primary);
+    transition:color .5s linear;
+    &:hover{
+      color:var(--dark-text);
+      text-decoration: none;
+    }
+  }
+  &__footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

@@ -1,0 +1,96 @@
+.banner {
+  width: 100%;
+  height: 104px;
+  background-color: #F4F4F6;
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+.banner__container {
+  width: 1108px;
+  height: 40px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.controls {
+  width: 380px;
+  display: flex;
+  justify-content: right;
+}
+
+.controls__delete {
+  background-color: #F4F4F6;
+  width: 188px;
+  height: 40px;
+  margin-left: 5px;
+
+  padding: 8px 0px;
+  color: black;
+  border: none;
+}
+
+.controls__delete span {
+  vertical-align: top;
+  
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.controls__delete:hover {
+  color: #F53D5C;
+}
+
+.controls__delete:hover path {
+  stroke: #F53D5C;
+}
+
+.page__container {
+  width: 1140px;
+  padding: 0 16px;
+  margin: auto;
+}
+
+.page__content {
+  margin-top: 16px;
+}
+
+.page__content h1 {
+  font-size: 36px;
+  line-height: 40px;
+  font-weight: 400;
+  color: #0A0A0B;
+
+  margin-bottom: 16px;
+}
+
+.page__text {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.page__text p {
+  margin-bottom: 32px;
+}
+
+
+.page__taglist {
+  padding: 0;
+  display: flex;
+  width: 1108px;
+  margin-bottom: 64px;
+}
+
+.page__tag {
+  display: inline-flex;
+  margin-right: 4px;
+  border: solid 1px #0000FF;
+  padding: 4px 8px;
+  background-color: #0000FF;
+  color: #FFFFFF;
+
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+}

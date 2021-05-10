@@ -59,9 +59,6 @@ template {
 	display: none
 }
 
-a {
-	background-color: transparent
-}
 
 a:active {
 	outline: 0
@@ -382,7 +379,6 @@ blockquote {
 }
 
 a {
-	color: #5cb85c;
 	text-decoration: none
 }
 

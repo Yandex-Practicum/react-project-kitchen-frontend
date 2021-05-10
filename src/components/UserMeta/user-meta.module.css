@@ -1,0 +1,29 @@
+.container {
+  height: 40px;
+  display: flex;
+}
+
+.container img {
+  height: 40px;
+  width: 40px;
+  margin-right: 8px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  height: 40px; 
+}
+
+.info__name {
+  color: #0A0A0B;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.info__date {
+  color: #62626A;
+  font-size: 12px;
+  line-height: 16px;
+}

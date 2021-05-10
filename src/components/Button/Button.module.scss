@@ -1,9 +1,13 @@
-@import '../../varibalse.scss';
-
 .button {
   width: 193px;
   height: 40px;
-  background: $primary;
+  background: var(--primary);
   border: none;
-  color: $white;
+  color: var(--white);
+  box-shadow: 4px 4px 0px rgba(0, 0, 255, 0.25);
+}
+
+.button:hover {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), #0000FF;
+  box-shadow: 2px 2px 0px rgba(0, 0, 255, 0.25);
 }

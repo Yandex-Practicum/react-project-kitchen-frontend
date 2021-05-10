@@ -1,0 +1,42 @@
+.container {
+  width: 825px;
+  height: 112px;
+  padding: 32px 0;
+}
+
+.list {
+  list-style: none;
+  height: 100%;
+  width: 320px;
+  padding: 0;
+  margin:auto;
+  display: flex;
+  justify-content: center;
+}
+
+.element {
+  height: 100%;
+  width: 64px;
+  margin: 0;
+  padding: 12px;
+  border: 1px solid #CCCCCC;
+
+  text-align: center;
+}
+
+.link {
+  display: block;
+  width: 40px;
+  font-size: 16px;
+  line-height: 24px;
+  color: #0A0A0B;
+}
+
+.active__element {
+  background-color: #0000FF;
+  border: 1px solid #0000FF;
+}
+
+.active__element a {
+  color: #FFFFFF;
+}
