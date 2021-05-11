@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CommentInput from './CommentInput';
-import CommentList from './CommentList';
+import CommentInput from '../comment-input';
+import CommentList from '../comment-list';
 import { Link } from 'react-router-dom';
 
 const CommentContainer = props => {

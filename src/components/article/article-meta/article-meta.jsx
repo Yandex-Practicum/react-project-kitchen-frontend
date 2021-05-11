@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ArticleActions from './ArticleActions';
+import ArticleActions from '../article-actions';
 import { Link } from 'react-router-dom';
 
 const ArticleMeta = ({article, canModify}) => {

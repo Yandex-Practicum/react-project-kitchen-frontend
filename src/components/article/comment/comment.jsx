@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import DeleteButton from './DeleteButton';
+import DeleteButton from '../delete-button';
 import { Link } from 'react-router-dom';
 
 const Comment = ({comment, currentUser, slug}) => {

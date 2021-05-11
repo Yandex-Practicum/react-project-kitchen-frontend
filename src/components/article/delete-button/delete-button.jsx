@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import agent from '../../agent';
+import agent from '../../../agent';
 import { connect } from 'react-redux';
-import { DELETE_COMMENT } from '../../constants/actionTypes';
+import { DELETE_COMMENT } from '../../../constants/actionTypes';
 
 const mapDispatchToProps = dispatch => ({
   onClick: (payload, commentId) =>
