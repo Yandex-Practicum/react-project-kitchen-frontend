@@ -6,21 +6,19 @@ import {
   HeaderContainer,
   HeaderLink,
   HeaderLinks,
-  // HeaderLinkActive,
 } from "./style";
 
-import { useLocation} from "react-router-dom";
-// import { locationsAreEqual } from "history";
-
-import homeIcon from "../../images/header/home.png";
-import homeIconActive from "../../images/header/home_active.png";
-import loginIcon from "../../images/header/login.png";
-import loginIconActive from "../../images/header/login_active.png";
-import postIcon from "../../images/header/post.png";
-import postIconActive from "../../images/header/post_active.png";
-import settingsIcon from "../../images/header/settings.png";
-import settingsIconActive from "../../images/header/settings_active.png";
-import avatar from "../../images/header/avatar.png";
+import { useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
+import homeIcon from "../../images/header/home.svg";
+import homeIconActive from "../../images/header/home_active.svg";
+import loginIcon from "../../images/header/login.svg";
+import loginIconActive from "../../images/header/login_active.svg";
+import postIcon from "../../images/header/post.svg";
+import postIconActive from "../../images/header/post_active.svg";
+import settingsIcon from "../../images/header/settings.svg";
+import settingsIconActive from "../../images/header/settings_active.svg";
+import avatar from "../../images/header/avatar.svg";
 
 const LoggedOutView = (props) => {
   if (!props.currentUser) {
@@ -53,6 +51,11 @@ const LoggedOutView = (props) => {
     );
   }
   return null;
+};
+
+LoggedOutView.propTypes = {
+  location: PropTypes.string,
+  currentUser: PropTypes.object,
 };
 
 const LoggedInView = (props) => {
@@ -102,6 +105,11 @@ const LoggedInView = (props) => {
   return null;
 };
 
+LoggedInView.propTypes = {
+  location: PropTypes.string,
+  currentUser: PropTypes.object,
+};
+
 function Header(props) {
   let location = useLocation().pathname;
   return (
@@ -117,5 +125,9 @@ function Header(props) {
     </HeaderNavbar>
   );
 }
+
+Header.propTypes = {
+  currentUser: PropTypes.object,
+};
 
 export default Header;
