@@ -1,22 +1,29 @@
-import Comment from './Comment';
 import React from 'react';
+import PropTypes from 'prop-types';
+import Comment from './Comment';
 
-const CommentList = props => {
+const CommentList = ({comments, currentUser, slug}) => {
   return (
     <div>
       {
-        props.comments.map(comment => {
+        comments.map(comment => {
           return (
             <Comment
               comment={comment}
-              currentUser={props.currentUser}
-              slug={props.slug}
+              currentUser={currentUser}
+              slug={slug}
               key={comment.id} />
           );
         })
       }
     </div>
   );
+};
+
+CommentList.propTypes = {
+  comments: PropTypes.arrayOf(Comment.propTypes.comment),
+  currentUser: PropTypes.object,
+  slug: PropTypes.string
 };
 
 export default CommentList;

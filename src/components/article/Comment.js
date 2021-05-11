@@ -1,11 +1,11 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import DeleteButton from './DeleteButton';
 import { Link } from 'react-router-dom';
-import React from 'react';
 
-const Comment = props => {
-  const comment = props.comment;
-  const show = props.currentUser &&
-    props.currentUser.username === comment.author.username;
+const Comment = ({comment, currentUser, slug}) => {
+  const show = currentUser &&
+    currentUser.username === comment.author.username;
   return (
     <div className="card">
       <div className="card-block">
@@ -26,10 +26,25 @@ const Comment = props => {
         <span className="date-posted">
           {new Date(comment.createdAt).toDateString()}
         </span>
-        <DeleteButton show={show} slug={props.slug} commentId={comment.id} />
+        <DeleteButton show={show} slug={slug} commentId={comment.id} />
       </div>
     </div>
   );
+};
+
+Comment.propTypes = {
+  currentUser: PropTypes.object,
+  slug: PropTypes.string,
+  comment: PropTypes.shape({
+    author: PropTypes.shape({
+      username: PropTypes.string,
+      image: PropTypes.string,
+      following: PropTypes.bool
+    }),
+    body: PropTypes.string,
+    createdAt: PropTypes.string,
+    id: PropTypes.string
+  })
 };
 
 export default Comment;

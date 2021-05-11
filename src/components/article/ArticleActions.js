@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
 import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import { DELETE_ARTICLE } from '../../constants/actionTypes';
@@ -9,12 +10,11 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: DELETE_ARTICLE, payload })
 });
 
-const ArticleActions = props => {
-  const article = props.article;
+const ArticleActions = ({article, canModify, onClickDelete}) => {
   const del = () => {
-    props.onClickDelete(agent.Articles.del(article.slug))
+    onClickDelete(agent.Articles.del(article.slug))
   };
-  if (props.canModify) {
+  if (canModify) {
     return (
       <span>
 
@@ -36,6 +36,14 @@ const ArticleActions = props => {
     <span>
     </span>
   );
+};
+
+ArticleActions.propTypes = {
+  onClickDelete: PropTypes.func,
+  canModify: PropTypes.bool,
+  article: PropTypes.shape({
+    slug: PropTypes.string
+  })
 };
 
 export default connect(() => ({}), mapDispatchToProps)(ArticleActions);

@@ -1,7 +1,8 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import CommentInput from './CommentInput';
 import CommentList from './CommentList';
 import { Link } from 'react-router-dom';
-import React from 'react';
 
 const CommentContainer = props => {
   if (props.currentUser) {
@@ -35,6 +36,22 @@ const CommentContainer = props => {
       </div>
     );
   }
+};
+
+CommentContainer.propTypes = {
+  currentUser: PropTypes.object,
+  errors: PropTypes.object,
+  slug: PropTypes.string,
+  comments: PropTypes.arrayOf(PropTypes.shape({
+    author: PropTypes.shape({
+      username: PropTypes.string,
+      image: PropTypes.string,
+      following: PropTypes.bool
+    }),
+    body: PropTypes.string,
+    createdAt: PropTypes.string,
+    id: PropTypes.string
+  }))
 };
 
 export default CommentContainer;
