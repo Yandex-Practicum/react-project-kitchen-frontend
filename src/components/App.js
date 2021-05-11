@@ -13,7 +13,6 @@ import Register from '../components/register';
 import Settings from '../components/Settings';
 import { store } from '../store';
 import { push } from 'react-router-redux';
-import './App.css';
 import Header from '../components/header';
 
 const mapStateToProps = state => {
