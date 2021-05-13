@@ -1,34 +1,43 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import agent from '../../../agent';
 import { connect } from 'react-redux';
-import { DELETE_ARTICLE } from '../../../constants/actionTypes';
+import { DELETE_ARTICLE, EDIT_ARTICLE } from '../../../constants/actionTypes';
+import Button from '../../button';
+import editIcon from '../../../images/edit.svg';
+import trashIcon from '../../../images/trash.svg';
 
 const mapDispatchToProps = dispatch => ({
   onClickDelete: payload =>
-    dispatch({ type: DELETE_ARTICLE, payload })
+    dispatch({ type: DELETE_ARTICLE, payload }),
+  onClickEdit: payload =>
+    dispatch({ type: EDIT_ARTICLE, payload })
 });
 
-const ArticleActions = ({article, canModify, onClickDelete}) => {
+const ArticleActions = ({article, canModify, onClickDelete, onClickEdit}) => {
   const del = () => {
     onClickDelete(agent.Articles.del(article.slug))
   };
+  const edit = () => {
+    onClickEdit(({slug: article.slug}))
+  };
   if (canModify) {
     return (
-      <span>
+      <div>
+        <Button
+          icon={editIcon}
+          caption="Редактировать запись"
+          onClick={edit}
+        />
 
-        <Link
-          to={`/editor/${article.slug}`}
-          className="btn btn-outline-secondary btn-sm">
-          <i className="ion-edit"></i> Edit Article
-        </Link>
-
-        <button className="btn btn-outline-danger btn-sm" onClick={del}>
-          <i className="ion-trash-a"></i> Delete Article
-        </button>
-
-      </span>
+        <Button
+          icon={trashIcon}
+          danger
+          className="ml-5"
+          caption="Удалить запись"
+          onClick={del}
+        />
+      </div>
     );
   }
 
@@ -40,6 +49,7 @@ const ArticleActions = ({article, canModify, onClickDelete}) => {
 
 ArticleActions.propTypes = {
   onClickDelete: PropTypes.func,
+  onClickEdit: PropTypes.func,
   canModify: PropTypes.bool,
   article: PropTypes.shape({
     slug: PropTypes.string

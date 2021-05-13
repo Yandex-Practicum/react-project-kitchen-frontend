@@ -1,26 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ArticleActions from '../article-actions';
-import { Link } from 'react-router-dom';
+import {ArticleMetaWrapper} from './style';
+import UserInfo from '../../user-info';
 
 const ArticleMeta = ({article, canModify}) => {
+  const {author, createdAt} = article;
+  const {image, username} = author;
   return (
-    <div className="article-meta">
-      <Link to={`/@${article.author.username}`}>
-        <img src={article.author.image} alt={article.author.username} />
-      </Link>
-
-      <div className="info">
-        <Link to={`/@${article.author.username}`} className="author">
-          {article.author.username}
-        </Link>
-        <span className="date">
-          {new Date(article.createdAt).toDateString()}
-        </span>
-      </div>
-
+    <ArticleMetaWrapper className="pt-8 pb-8">
+      <UserInfo username={username} image={image} createdAt={createdAt}/>
       <ArticleActions canModify={canModify} article={article} />
-    </div>
+    </ArticleMetaWrapper>
   );
 };
 
@@ -37,11 +28,7 @@ ArticleMeta.propTypes = {
     description: PropTypes.string,
     favorited: PropTypes.bool,
     favoritesCount: PropTypes.number,
-    image: PropTypes.shape({
-      contentType: PropTypes.string,
-      data: PropTypes.object,
-      name: PropTypes.string
-    }),
+    image: PropTypes.any,
     slug: PropTypes.string,
     tagList: PropTypes.arrayOf(PropTypes.string),
     title: PropTypes.string,

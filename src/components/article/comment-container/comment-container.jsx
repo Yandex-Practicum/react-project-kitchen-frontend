@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CommentInput from '../comment-input';
 import CommentList from '../comment-list';
-import { Link } from 'react-router-dom';
+import Link from "../../link";
+import {Container, Caption} from './style';
 
 const CommentContainer = props => {
   if (props.currentUser) {
     return (
-      <div className="col-xs-12 col-md-8 offset-md-2">
+      <Container className="mb-8">
+        <Caption>Комментарии</Caption>
         <div>
           <list-errors errors={props.errors}></list-errors>
           <CommentInput slug={props.slug} currentUser={props.currentUser} />
@@ -17,23 +19,21 @@ const CommentContainer = props => {
           comments={props.comments}
           slug={props.slug}
           currentUser={props.currentUser} />
-      </div>
+      </Container>
     );
   } else {
     return (
-      <div className="col-xs-12 col-md-8 offset-md-2">
-        <p>
-          <Link to="/login">Sign in</Link>
-          &nbsp;or&nbsp;
-          <Link to="/register">sign up</Link>
-          &nbsp;to add comments on this article.
-        </p>
+      <Container>
+        <div className="text text_type_main-default" style={{display: 'flex'}}>
+          <Link to="/login">Войдите</Link>&nbsp;или&nbsp;
+          <Link to="/register">зарегистрируйтесь</Link>&nbsp;чтобы прокомментировать статью.
+        </div>
 
         <CommentList
           comments={props.comments}
           slug={props.slug}
           currentUser={props.currentUser} />
-      </div>
+      </Container>
     );
   }
 };

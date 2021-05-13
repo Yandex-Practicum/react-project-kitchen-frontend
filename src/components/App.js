@@ -14,6 +14,7 @@ import Settings from '../components/Settings';
 import { store } from '../store';
 import { push } from 'react-router-redux';
 import Header from '../components/header';
+import GlobalFonts from '../fonts';
 
 const mapStateToProps = state => {
   return {
@@ -52,6 +53,7 @@ class App extends React.Component {
     if (this.props.appLoaded) {
       return (
         <div>
+            <GlobalFonts />
             <Header appName={this.props.appName}
             currentUser={this.props.currentUser} /> 
             <Switch>

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import agent from '../../../agent';
 import { connect } from 'react-redux';
 import { DELETE_COMMENT } from '../../../constants/actionTypes';
+import trashIcon from '../../../images/trash.svg';
 
 const mapDispatchToProps = dispatch => ({
   onClick: (payload, commentId) =>
@@ -18,7 +19,7 @@ const DeleteButton = ({slug, commentId, onClick, show}) => {
   if (show) {
     return (
       <span className="mod-options">
-        <i className="ion-trash-a" onClick={del}></i>
+        <img style={{cursor: 'pointer'}} src={trashIcon} alt="del" onClick={del} />
       </span>
     );
   }

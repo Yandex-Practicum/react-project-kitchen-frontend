@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import agent from '../../../agent';
 import { connect } from 'react-redux';
 import { ADD_COMMENT } from '../../../constants/actionTypes';
+import TextArea from '../../text-area';
+import Button from '../../button';
+import UserInfo from '../..//user-info';
+import {CardBlock, UserBlock} from './style';
 
 const mapDispatchToProps = dispatch => ({
   onSubmit: payload =>
@@ -25,25 +29,20 @@ function CommentInput({currentUser, slug, onSubmit}) {
 
   return (
     <form className="card comment-form" onSubmit={createComment}>
-      <div className="card-block">
-        <textarea className="form-control"
-          placeholder="Write a comment..."
+      <CardBlock>
+        <TextArea
+          placeholder="Написать комментарий"
+          size="default"
           value={body}
-          onChange={changeBody}
-          rows="3">
-        </textarea>
-      </div>
-      <div className="card-footer">
-        <img
-          src={currentUser.image}
-          className="comment-author-img"
-          alt={currentUser.username} />
-        <button
-          className="btn btn-sm btn-primary"
-          type="submit">
-          Post Comment
-        </button>
-      </div>
+          onChange={changeBody} />          
+      </CardBlock>
+      <UserBlock>
+        <UserInfo username={currentUser.username} createdAt={new Date()}/>
+        <Button
+          caption="Отправить комментарий"
+          type="submit"
+        />
+      </UserBlock>
     </form>
   );
 }

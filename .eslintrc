@@ -11,6 +11,7 @@
     "FileReader": "readonly",    
     "ArrayBuffer": "readonly",
     "Uint8Array": "readonly",
+    "Promise": "readonly",
     "btoa": "readonly",
     "atob": "readonly",
     "Blob": "readonly",

@@ -1,11 +1,14 @@
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
-import ArticleMeta from './ArticleMeta';
-import CommentContainer from './CommentContainer';
+import ArticleMeta from './article-meta';
+import CommentContainer from './comment-container';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import marked from 'marked';
 import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../constants/actionTypes';
+import {ArticlePage, Container, Title, ArticleBody} from './style';
+import Image from '../image';
+import Tag from '../tag';
 
 const mapStateToProps = state => ({
   ...state.article,
@@ -30,7 +33,8 @@ function Article({
 }) {
   
   useEffect(() => {
-    onLoad(Promise.all([
+    
+    !article && onLoad(Promise.all([
       agent.Articles.get(match.params.id),
       agent.Comments.forArticle(match.params.id)
     ]));
@@ -48,58 +52,40 @@ function Article({
   const canModify = currentUser &&
     currentUser.username === article.author.username;
   return (
-    <div className="article-page">
-
-      <div className="banner">
-        <div className="container">
-
-          <h1>{article.title}</h1>
-          <ArticleMeta
-            article={article}
-            canModify={canModify} />
-
-        </div>
-      </div>
+    <ArticlePage>
+      
+      <Container>
+        <ArticleMeta
+          article={article}
+          canModify={canModify} />
+        <Title className="text text_type_main-large mt-4 mb-4">{article.title}</Title>
+      </Container>
+      
       
 
-      <div className="container page">
+      <Container>
+        {article.image && <Image img={article.image} />}
+        <ArticleBody className="text text_type_main-default" dangerouslySetInnerHTML={markup}></ArticleBody>
+        {article.tagList.length > 0 && <div style={{display: 'flex', justifyContent: 'flex-start'}}              
+          className="mb-6">
+          {
+            (article.tagList || []).map(tag => {
+              return (
+                <Tag active={true} key={tag} caption={tag} clickable={false} />
+            );
+            })
+          }
+        </div>}
 
-        <div className="row article-content">
-          <div className="col-xs-12">
-
-            <div dangerouslySetInnerHTML={markup}></div>
-
-            <ul className="tag-list">
-              {
-                article.tagList.map(tag => {
-                  return (
-                    <li
-                      className="tag-default tag-pill tag-outline"
-                      key={tag}>
-                      {tag}
-                    </li>
-                  );
-                })
-              }
-            </ul>
-
-          </div>
-        </div>
-
-        <hr />
-
-        <div className="article-actions">
-        </div>
-
-        <div className="row">
+        <div className="row mb-8">
           <CommentContainer
             comments={comments || []}
             errors={commentErrors}
             slug={match.params.id}
             currentUser={currentUser} />
         </div>
-      </div>
-    </div>
+      </Container>
+    </ArticlePage>
   );
 }
 
