@@ -187,7 +187,7 @@ function Editor(props) {
             {
               (tagList || []).map(tag => {
                 return (
-                  <Tag active={true} remove={true} key={tag} caption={tag} onClick={removeTagHandler(tag)}/>
+                  <Tag active={true} remove={true} key={tag} caption={tag} onDelete={removeTagHandler(tag)}/>
                 );
               })
             }

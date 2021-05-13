@@ -5,6 +5,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   position: absolute;
+  height: 100vh;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
