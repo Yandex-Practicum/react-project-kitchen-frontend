@@ -8,7 +8,7 @@ export const HeaderNavbar = styled.nav`
 `;
 
 export const HeaderContainer = styled.div`
-  width: 60%;
+  width: 1108px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -42,5 +42,22 @@ export const HeaderLink = styled.li`
     ${({ isActive }) => {
       return isActive && ` color: #F2F2F3;`;
     }}
+  }
+`;
+
+export const Logo = styled.span`
+  & > a {
+    font-family: 'Exo 2', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+    text-decoration: none;
+    background: linear-gradient(90deg, #801AB2, #4C4CFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    &:hover {
+      text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25), 0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5);
+    }
   }
 `;

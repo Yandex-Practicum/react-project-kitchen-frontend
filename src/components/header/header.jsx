@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../images/header/logo.png";
+import logo from "../../images/header/logo.svg";
 import {
   HeaderNavbar,
   HeaderContainer,
   HeaderLink,
   HeaderLinks,
+  Logo,
 } from "./style";
 
 import { useLocation } from "react-router-dom";
@@ -93,7 +94,7 @@ const LoggedInView = (props) => {
         >
           {/* TODO: сюда помещать аватарку, которую выбрал пользователь из списка, когда добавим эту функцию в личный кабинет*/}
           <img src={avatar} alt="аватар" />
-          <Link to={`/@${props.currentUser.username}`}>
+          <Link to={`/@${props.currentUser.username}`} style={{textTransform: 'capitalize'}}>
             {" "}
             {props.currentUser.username}{" "}
           </Link>
@@ -113,11 +114,13 @@ LoggedInView.propTypes = {
 function Header(props) {
   let location = useLocation().pathname;
   return (
-    <HeaderNavbar>
-      <HeaderContainer>
-        <Link to="/" className="navbar-brand">
-          <img src={logo} />
-        </Link>
+    <HeaderNavbar className="text text_type_main-default">
+      <HeaderContainer>        
+        <Logo>
+          <a href="/">
+            Алкостопом по галактике
+          </a>
+        </Logo>        
 
         <LoggedOutView location={location} currentUser={props.currentUser} />
         <LoggedInView location={location} currentUser={props.currentUser} />
