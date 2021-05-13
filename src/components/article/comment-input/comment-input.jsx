@@ -28,7 +28,7 @@ function CommentInput({currentUser, slug, onSubmit}) {
   }
 
   return (
-    <form className="card comment-form" onSubmit={createComment}>
+    <form onSubmit={createComment}>
       <CardBlock>
         <TextArea
           placeholder="Написать комментарий"
