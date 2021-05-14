@@ -77,7 +77,7 @@ function Article({
           }
         </div>}
 
-        <div className="row mb-8">
+        <div className="row mb-8" style={{width: '100%'}}>
           <CommentContainer
             comments={comments || []}
             errors={commentErrors}

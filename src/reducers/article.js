@@ -10,8 +10,9 @@ import {convertBufferToBase64} from '../services';
 export default (state = {}, action) => {
   switch (action.type) {
     case ARTICLE_PAGE_LOADED:
-      if (action.payload[0].article.image && action.payload[0].article.image.data) {        
-        action.payload[0].article.image = convertBufferToBase64(action.payload[0].article.image.data.data)
+      if (action.payload[0].article.image) {        
+        action.payload[0].article.image = action.payload[0].article.image.data ?
+        convertBufferToBase64(action.payload[0].article.image.data.data) : null
       }
       return {
         ...state,
