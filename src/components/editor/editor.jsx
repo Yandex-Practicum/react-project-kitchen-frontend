@@ -62,14 +62,7 @@ function Editor(props) {
       });
       FR.readAsDataURL(ev.target.files[0]);
     }
-  };
-  const watchForEnter = ev => {
-    ev.preventDefault();
-    if (ev.keyCode === 13) {     
-      setTagList([...tagList, ...tagInput.split(',')]);
-      setTagInput('');
-    }
-  };
+  };  
 
   const removeTagHandler = tag => () => {
     setTagList([...tagList.filter((item) => item !== tag)]);
@@ -77,12 +70,13 @@ function Editor(props) {
 
   const submitForm = ev => {    
     ev.preventDefault();
-    if (ev.target.tagName === "SPAN") {
+    if (ev.target.tagName === "SPAN") {      
+      const tags = tagInput.split(',').filter(tag => tag != "");
       const article = {
         title,
         description,
         body,
-        tagList,
+        tagList: tags,
         image: imageFileName ? {
           name: imageFileName,
           data: imageFileData,
@@ -179,15 +173,14 @@ function Editor(props) {
             placeholder="Тэги (через запятую)"
             size="default"
             value={tagInput}
-            onChange={changeTagInput}
-            onKeyUp={watchForEnter} />
+            onChange={changeTagInput} />
 
           {tagList.length > 0 && <div style={{display: 'flex', justifyContent: 'flex-start'}}              
             className="mb-6">
             {
               (tagList || []).map(tag => {
                 return (
-                  <Tag active={true} remove={true} key={tag} caption={tag} onClick={removeTagHandler(tag)}/>
+                  <Tag active={true} remove={true} key={tag} caption={tag} onDelete={removeTagHandler(tag)}/>
                 );
               })
             }

@@ -7,6 +7,7 @@ import {
   LOGIN,
   REGISTER,
   DELETE_ARTICLE,
+  EDIT_ARTICLE,
   ARTICLE_PAGE_UNLOADED,
   EDITOR_PAGE_UNLOADED,
   HOME_PAGE_UNLOADED,
@@ -55,6 +56,8 @@ export default (state = defaultState, action) => {
       };
     case DELETE_ARTICLE:
       return { ...state, redirectTo: '/' };
+    case EDIT_ARTICLE:
+      return { ...state, redirectTo: `/editor/${action.payload.slug}` };
     case ARTICLE_PAGE_UNLOADED:
     case EDITOR_PAGE_UNLOADED:
     case HOME_PAGE_UNLOADED:

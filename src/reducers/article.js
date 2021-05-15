@@ -5,9 +5,15 @@ import {
   DELETE_COMMENT
 } from '../constants/actionTypes';
 
+import {convertBufferToBase64} from '../services';
+
 export default (state = {}, action) => {
   switch (action.type) {
     case ARTICLE_PAGE_LOADED:
+      if (action.payload[0].article.image) {        
+        action.payload[0].article.image = action.payload[0].article.image.data ?
+        convertBufferToBase64(action.payload[0].article.image.data.data) : null
+      }
       return {
         ...state,
         article: action.payload[0].article,

@@ -8,16 +8,7 @@ import {
   UPDATE_FIELD_EDITOR
 } from '../constants/actionTypes';
 
-
-
-function convertBufferToBase64(buffer) {
-  let binaryStr = '';
-  const byteArray = new Uint8Array(buffer);
-  for (let i = 0; i < byteArray.byteLength; i++) {
-    binaryStr += String.fromCharCode(byteArray[i]);
-  }
-  return btoa(binaryStr);
-}
+import {convertBufferToBase64} from '../services';
 
 export default (state = {
   image: {}
