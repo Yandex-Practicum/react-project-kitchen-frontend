@@ -48,8 +48,11 @@
 
 ## Разрабы
 
-Команда PCDevs: Егор, Ася, Михаил и Илья 
-`https://github.com/PCDevs`
+Команда PCDevs: https://github.com/PCDevs
++ Егор 
++ Ася
++ Михаил
++ Илья 
 
 ---
 
