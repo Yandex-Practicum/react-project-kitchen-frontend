@@ -19,8 +19,7 @@ const Tags = props => {
 
   if (tags) {
     return (
-      // <div className="tag-list">
-      <div className={style.tag_list}>
+      <section className={style.tag_list}>
         {
           tags.map(tag => {
             const handleClick = ev => {
@@ -31,7 +30,6 @@ const Tags = props => {
             return (
               <a
                 href=""
-                // className="tag-default tag-pill"
                 className={clsx(style.tag_default, style.tag_pill, clazz)}
                 key={tag}
                 onClick={handleClick}>
@@ -40,7 +38,7 @@ const Tags = props => {
             );
           })
         }
-      </div>
+      </section>
     );
   } else {
     return (

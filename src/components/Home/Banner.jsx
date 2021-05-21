@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './banner.module.scss'
+import styles from './home.module.scss'
 
 const Banner = ({ appName }) => {
   return (
