@@ -11,7 +11,7 @@ import {
 } from '../../../constants/actionTypes';
 import Button from "../../Button/Button";
 
-import s from './Login.module.scss';
+import styles from '../Auth.module.scss';
 import clsx from 'clsx';
 
 const mapStateToProps = state => ({ ...state.auth });
@@ -55,55 +55,51 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="auth-page">
-        <div className="container page">
-          <div className="row">
+      // <div className="auth-page">
+      //   <div className="container page">
+      //     <div className="row">
 
-            <div className="col-md-6 offset-md-3 col-xs-12">
-              <h1 className="text-xs-center">Войти</h1>
-              <p className="text-xs-center">
-                <Link to="/register">
-                  Хотите создать аккаунт?
-                </Link>
-              </p>
+      <section className={styles.container}>
+        <h1 className={styles.title}>Войти</h1>
+        <p className={styles.option}>
+          <Link to="/register">
+            Хотите создать аккаунт?
+          </Link>
+        </p>
 
-              <ListErrors errors={this.props.errors} />
+        <ListErrors errors={this.props.errors} />
 
-              <form onSubmit={this.submitForm(this.state.email, this.state.password)}>
-                <fieldset>
+        <form className={styles.form} onSubmit={this.submitForm(this.state.email, this.state.password)}>
+          <fieldset>
 
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="email"
-                      placeholder="default@gmail.com"
-                      value={this.state.email}
-                      onChange={this.handleChangeEmail} />
-                  </fieldset>
+              <input
+                className={styles.input}
+                type="email"
+                placeholder="default@gmail.com"
+                value={this.state.email}
+                onChange={this.handleChangeEmail} />
 
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="password"
-                      placeholder="Пароль"
-                      value={this.state.password}
-                      onChange={this.handleChangePassword} />
-                  </fieldset>
+              <input
+                className={styles.input}
+                type="password"
+                placeholder="Пароль"
+                value={this.state.password}
+                onChange={this.handleChangePassword} />
 
-                  <Button
-                    type="submit"
-                    disabled={this.props.inProgress}
-                  >
-                    Войти
-                  </Button>
+            <Button
+              type="submit"
+              disabled={this.props.inProgress}
+            >
+              Войти
+            </Button>
 
-                </fieldset>
-              </form>
-            </div>
+          </fieldset>
+        </form>
+      </section>
 
-          </div>
-        </div>
-      </div>
+      //     </div>
+      //   </div>
+      // </div>
     );
   }
 }

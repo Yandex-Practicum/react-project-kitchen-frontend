@@ -11,7 +11,7 @@ import {
 } from '../../../constants/actionTypes';
 import Button from "../../Button/Button";
 
-import s from './Register.module.scss';
+import styles from '../Auth.module.scss';
 import clsx from 'clsx';
 
 const mapStateToProps = state => ({ ...state.auth });
@@ -53,13 +53,13 @@ class Register extends React.Component {
     const username = this.props.username;
 
     return (
-      <div className="auth-page">
-        <div className="container page">
-          <div className="row">
+      // <div className="auth-page">
+      //   <div className="container page">
+      //     <div className="row">
 
-            <div className="col-md-6 offset-md-3 col-xs-12">
-              <h1 className="text-xs-center">Зарегистрироваться</h1>
-              <p className="text-xs-center">
+            <section className={styles.container}>
+              <h1 className={styles.title}>Зарегистрироваться</h1>
+              <p className={styles.option}>
                 <Link to="/login">
                   Уже есть аккаунт?
                 </Link>
@@ -67,35 +67,29 @@ class Register extends React.Component {
 
               <ListErrors errors={this.props.errors} />
 
-              <form onSubmit={this.submitForm(username, email, password)}>
+              <form className={styles.form} onSubmit={this.submitForm(username, email, password)}>
                 <fieldset>
 
-                  <fieldset className="form-group">
                     <input
-                      className="form-control form-control-lg"
+                      className={styles.input}
                       type="text"
                       placeholder="Имя"
                       value={this.props.username}
                       onChange={this.changeUsername} />
-                  </fieldset>
 
-                  <fieldset className="form-group">
                     <input
-                      className="form-control form-control-lg"
+                      className={styles.input}
                       type="email"
                       placeholder="default@gmail.com"
                       value={this.props.email}
                       onChange={this.changeEmail} />
-                  </fieldset>
 
-                  <fieldset className="form-group">
                     <input
-                      className="form-control form-control-lg"
+                      className={styles.input}
                       type="password"
                       placeholder="Пароль"
                       value={this.props.password}
                       onChange={this.changePassword} />
-                  </fieldset>
 
                   <Button
                     type="submit"
@@ -106,11 +100,11 @@ class Register extends React.Component {
 
                 </fieldset>
               </form>
-            </div>
+            </section>
 
-          </div>
-        </div>
-      </div>
+      //     </div>
+      //   </div>
+      // </div>
     );
   }
 }
