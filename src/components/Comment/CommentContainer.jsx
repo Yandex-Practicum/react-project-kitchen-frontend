@@ -2,11 +2,13 @@ import CommentInput from './CommentInput';
 import CommentList from './CommentList';
 import { Link } from 'react-router-dom';
 import React from 'react';
+import styles from './comment.module.scss';
 
 const CommentContainer = props => {
   if (props.currentUser) {
     return (
-      <div className="col-xs-12 col-md-8 offset-md-2">
+      <div className={styles.container}>
+        <h2>Комментарии</h2>
         <div>
           <list-errors errors={props.errors}></list-errors>
           <CommentInput slug={props.slug} currentUser={props.currentUser} />
@@ -20,7 +22,8 @@ const CommentContainer = props => {
     );
   } else {
     return (
-      <div className="col-xs-12 col-md-8 offset-md-2">
+      <div className={styles.container}>
+        <h2>Комментарии</h2>
         <p>
           <Link to="/login">Войдите в аккаунт</Link>
           &nbsp;или&nbsp;

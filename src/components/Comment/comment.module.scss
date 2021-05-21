@@ -1,7 +1,18 @@
+.container h2 {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+  text-align: left;
+  margin-left: 190px;
+  margin-bottom: 32px;
+}
+
 .create__form {
   width: 728px;
   border: 1px solid #CCCCCC;
   border-radius: 0;
+  margin: auto;
   margin-bottom: 24px;
 }
 
@@ -52,6 +63,7 @@
   min-height: 208px;
   width: 728px;
   border: 1px solid #CCCCCC;
+  margin: auto;
   margin-bottom: 24px;
 }
 

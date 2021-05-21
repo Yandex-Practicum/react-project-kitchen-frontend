@@ -49,8 +49,6 @@ class Home extends React.Component {
       <>
         <Banner token={this.props.token} appName={this.props.appName} />
         <main className={content__container}>
-          {/* <div className="container page"> */}
-            {/* <div className="row"> */}
           <MainView />
           <div className={wrapper}>
             <section className={content__tags}>
@@ -61,11 +59,6 @@ class Home extends React.Component {
                 onClickTag={this.props.onClickTag} />
             </section>
           </div>
-
-          {/* <section className="col-md-3"> */}
-          {/* </section> */}
-            {/* </div> */}
-          {/* </div> */}
         </main>
       </>
     );

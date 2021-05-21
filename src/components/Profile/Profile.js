@@ -16,6 +16,7 @@ import {
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED
 } from '../../constants/actionTypes';
+import Tags from '../Tags/Tags';
 
 const EditProfileSettings = props => {
   if (props.isUser) {
@@ -162,10 +163,7 @@ class Profile extends React.Component {
           </div>
         </div>
 
-        <div className="container">
-          <div className="row">
-
-            <div className="col-xs-12 col-md-10 offset-md-1">
+        <div className={styles.content__container}>
 
               <div>
                 {this.renderTabs()}
@@ -176,9 +174,6 @@ class Profile extends React.Component {
                 articles={this.props.articles}
                 articlesCount={this.props.articlesCount}
                 state={this.props.currentPage} />
-            </div>
-
-          </div>
         </div>
 
       </div>
