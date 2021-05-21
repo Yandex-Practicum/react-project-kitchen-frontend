@@ -5,7 +5,7 @@ import agent from '../../agent';
 import { connect } from 'react-redux';
 import marked from 'marked';
 import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../constants/actionTypes';
-import styles from './article.module.css';
+import styles from './article.module.scss';
 import Tags from '../Tags/Tags';
 import UserMeta from '../UserMeta/UserMeta'
 

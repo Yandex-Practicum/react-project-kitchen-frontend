@@ -8,7 +8,7 @@ import Button from '../Button/Button';
 import MinusIcon from './MinusIcon';
 import PlusIcon from './PlusIcon';
 
-import styles from './profile.module.css'
+import styles from './profile.module.scss'
 
 import {
   FOLLOW_USER,

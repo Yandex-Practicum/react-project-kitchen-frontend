@@ -2,7 +2,7 @@ import ListErrors from '../ListErrors/ListErrors';
 import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
-import styles from './settings.module.css'
+import styles from './settings.module.scss'
 import Button from '../Button/Button'
 import ClipIcon from './ClipIcon'
 import {

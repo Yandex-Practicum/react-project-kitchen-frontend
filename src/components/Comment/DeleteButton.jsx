@@ -3,7 +3,7 @@ import agent from '../../agent';
 import DeleteIcon from './DeleteIcon';
 import { connect } from 'react-redux';
 import { DELETE_COMMENT } from '../../constants/actionTypes';
-import styles from './comment.module.css';
+import styles from './comment.module.scss';
 
 const mapDispatchToProps = dispatch => ({
   onClick: (payload, commentId) =>
