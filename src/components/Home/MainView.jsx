@@ -24,7 +24,7 @@ const MainView = (props) => {
   };
 
   return (
-    <section className="col-md-9">
+    <section className={styles.content__main}>
       <div className="feed-toggle">
         <TabsNavigation>
           <TabsItem

@@ -2,8 +2,13 @@
   display: flex;
   width: 1140px;
   justify-content: center;
+  margin: auto;
   margin-top: 32px;
   margin-bottom: 56px;
+}
+
+.content__main {
+  margin-right: 32px;
 }
 
 .content__tags {
