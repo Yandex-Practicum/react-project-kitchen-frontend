@@ -12,18 +12,21 @@
   color: #0000FF;
 
   padding-top: 32px;
-  padding-bottom: 43px;
+  padding-bottom: 32px;
 
   text-align: center;
 }
 
 .banner__name {
+  margin: 0;
+  margin-bottom: 8px;
   font-size: 64px;
   line-height: 64px;
   font-weight: 400;
 }
 
 .banner__text {
+  margin: 0;
   font-size: 24px;
   line-height: 28px;
   font-weight: 400;
