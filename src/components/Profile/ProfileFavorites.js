@@ -7,7 +7,7 @@ import {
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED
 } from '../../constants/actionTypes';
-import s from './profile.module.css'
+import s from './profile.module.scss'
 
 const mapDispatchToProps = dispatch => ({
   onLoad: (pager, payload) =>

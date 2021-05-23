@@ -1,7 +1,7 @@
 import DeleteButton from './DeleteButton';
 import { Link } from 'react-router-dom';
 import React from 'react';
-import styles from './comment.module.css';
+import styles from './comment.module.scss';
 import UserMeta from '../UserMeta/UserMeta'
 
 const Comment = props => {

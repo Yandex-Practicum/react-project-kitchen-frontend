@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { CHANGE_TAB } from '../../constants/actionTypes';
 import TabsNavigation from '../Tabs/TabsNavigation/TabsNavigation';
 import TabsItem from '../Tabs/TabItem/TabsItem';
+import styles from './home.module.scss'
+
 
 const mapStateToProps = (state) => ({
   ...state.articleList,
@@ -22,7 +24,7 @@ const MainView = (props) => {
   };
 
   return (
-    <div className="col-md-9">
+    <section className={styles.content__main}>
       <div className="feed-toggle">
         <TabsNavigation>
           <TabsItem
@@ -56,7 +58,7 @@ const MainView = (props) => {
         currentPage={props.currentPage}
         token={props.token}
       />
-    </div>
+    </section>
   );
 };
 

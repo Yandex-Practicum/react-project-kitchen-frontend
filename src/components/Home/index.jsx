@@ -9,7 +9,9 @@ import {
   HOME_PAGE_UNLOADED,
   APPLY_TAG_FILTER
 } from '../../constants/actionTypes';
+import styles from './home.module.scss'
 
+const {content__container, content__tags, wrapper, tags__title} = styles;
 
 const Promise = global.Promise;
 
@@ -44,30 +46,21 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="home-page">
-
+      <>
         <Banner token={this.props.token} appName={this.props.appName} />
-        <div className="container page">
-          
+        <main className={content__container}>
+          <MainView />
+          <div className={wrapper}>
+            <section className={content__tags}>
+              <p className={tags__title}>Популярные теги</p>
 
-          <div className="row">
-            <MainView />
-
-            <div className="col-md-3">
-              <div className="sidebar">
-
-                <p>Популярные тэги</p>
-
-                <Tags
-                  tags={this.props.tags}
-                  onClickTag={this.props.onClickTag} />
-
-              </div>
-            </div>
+              <Tags
+                tags={this.props.tags}
+                onClickTag={this.props.onClickTag} />
+            </section>
           </div>
-        </div>
-
-      </div>
+        </main>
+      </>
     );
   }
 }

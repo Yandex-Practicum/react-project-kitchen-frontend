@@ -1,3 +1,8 @@
+fieldset {
+  border: none;
+  padding: 0;
+}
+
 .page {
   width: 100%;
 }
@@ -28,7 +33,7 @@
   width: 574px;
   padding: 24px 16px;
   padding-bottom: 32px;
-  margin-bottom: 32px;
+  margin-bottom: 0px;
 }
 
 .form__group {
