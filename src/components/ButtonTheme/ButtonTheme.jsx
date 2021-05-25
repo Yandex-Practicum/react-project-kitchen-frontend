@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import cn from 'classnames';
 import s from './ButtonTheme.module.scss';
 
@@ -11,7 +11,6 @@ const ButtonTheme = () => {
     grayText: '#ffffff',
     bannerColor:'#251D1D',
     primary:'#ffffff',
-
   };
   const colorsDefault = {
     white: '#ffffff',
@@ -45,9 +44,6 @@ const ButtonTheme = () => {
   };
   return (
     <div className={cn(s.wrapper)}>
-      <label htmlFor="theme" className={cn(s.text)}>
-        {isPress ? 'Тёмная тема' : 'Светлая тема'}
-      </label>
       <input
         type="checkbox"
         name="theme"

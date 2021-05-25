@@ -22,27 +22,30 @@
     position: absolute;
   }
   &:before{
-    width: 35px;
-    height: 15px;
+    width: 40px;
+    height: 20px;
+    background:#a2a393 url(../../assets//ico/moon.svg) no-repeat 80% 50% / 30%;
     border-radius: 10px;
-    background:#f2f2f2;
     top: 0;
     left: -50%;
+    
   }
   &:after{
     transition:.3s left linear;
     width: 20px;
     height: 20px;
+    border: 1px solid #a2a393;
     border-radius: 100%;
-    background:#0000FF;
+    background:#000;
     left: -50%;
-    bottom: 50%;
-    transform: translateY(50%);
   }
   
 }
 .active{
   &:after{
     left: 100%;
+  }
+  &:before{
+    background:#a2a393 url(../../assets//ico/sun.svg) no-repeat 20% 50% / 30%;
   }
 }
