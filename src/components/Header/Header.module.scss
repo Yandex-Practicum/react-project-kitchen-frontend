@@ -1,9 +1,11 @@
 .header {
 	width: 100%;
 	box-shadow: 0px -1px 0px 0px #E0E0E0 inset;
+	background-color:var(--white);
 }
 
 .navbar {
+	display: flex;
 	max-width: 1140px;
 	height: 60px;
 	margin: auto;

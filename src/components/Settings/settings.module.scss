@@ -17,10 +17,12 @@ fieldset {
   height: 72px;
   padding: 16px 0;
   margin: auto;
-
+  
   font-size: 36px;
   line-height: 40px;
   text-align: center;
+
+  color:var(--dark-text);
 }
 
 .page__container hr {

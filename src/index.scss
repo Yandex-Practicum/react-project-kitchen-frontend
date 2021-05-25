@@ -1,10 +1,13 @@
+@import '~bootstrap-reboot';
 :root{
   --primary:#0000FF;
-  --white:#f2f2f2;
+  --gray-backgrpund:#f2f2f2;
+  --white:#fff;
   --dark:#212121;
   --dark-text:#0A0A0B;
   --gray-text:#62626A;
   --red-text:#F53D5C;
+  --banner-color:#f4f4f6;
 }
 @font-face {
   font-family: 'LucidaSans';
@@ -17,5 +20,15 @@
 }
 body{
   font-family: 'LucidaSans', sans-serif;
+  background-color:var(--white);
   margin: 0;
+}
+#root{
+  background-color:var(--white);
+  transition-property: background-color, background, color;
+  transition:.3s linear;
+  height: 100vh;
+}
+#root .profile-page{
+  background-color:var(--white);
 }
