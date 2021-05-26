@@ -18,7 +18,8 @@ const Promise = global.Promise;
 const mapStateToProps = state => ({
   ...state.home,
   appName: state.common.appName,
-  token: state.common.token
+  token: state.common.token,
+  currentUser: state.common.currentUser,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -49,7 +50,7 @@ class Home extends React.Component {
       <>
         <Banner token={this.props.token} appName={this.props.appName} />
         <main className={content__container}>
-          <MainView />
+          <MainView currentUser={this.props.currentUser}/>
           <div className={wrapper}>
             <section className={content__tags}>
               <p className={tags__title}>Популярные теги</p>
