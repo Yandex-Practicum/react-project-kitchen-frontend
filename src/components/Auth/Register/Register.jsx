@@ -13,6 +13,7 @@ import Button from "../../Button/Button";
 
 import styles from '../Auth.module.scss';
 import clsx from 'clsx';
+import Form from '../../Form/Form';
 
 const mapStateToProps = state => ({ ...state.auth });
 
@@ -53,58 +54,50 @@ class Register extends React.Component {
     const username = this.props.username;
 
     return (
-      // <div className="auth-page">
-      //   <div className="container page">
-      //     <div className="row">
+      <section className={styles.container}>
+        <h1 className={styles.title}>Зарегистрироваться</h1>
+        <p className={styles.option}>
+          <Link to="/login">
+            Уже есть аккаунт?
+          </Link>
+        </p>
 
-            <section className={styles.container}>
-              <h1 className={styles.title}>Зарегистрироваться</h1>
-              <p className={styles.option}>
-                <Link to="/login">
-                  Уже есть аккаунт?
-                </Link>
-              </p>
+        <ListErrors errors={this.props.errors} />
 
-              <ListErrors errors={this.props.errors} />
+        <Form onSubmit={this.submitForm(username, email, password)}>
+          <input
+            type="text"
+            placeholder="Никнейм"
+            value={this.props.username}
+            onChange={this.changeUsername} 
+            required
+            maxLength={15}
+          />
 
-              <form className={styles.form} onSubmit={this.submitForm(username, email, password)}>
-                <fieldset>
+          <input
+            type="email"
+            placeholder="default@gmail.com"
+            value={this.props.email}
+            onChange={this.changeEmail} 
+            required
+          />
 
-                    <input
-                      className={styles.input}
-                      type="text"
-                      placeholder="Имя"
-                      value={this.props.username}
-                      onChange={this.changeUsername} />
+          <input
+            type="password"
+            placeholder="Пароль"
+            value={this.props.password}
+            onChange={this.changePassword} 
+            required
+          />
 
-                    <input
-                      className={styles.input}
-                      type="email"
-                      placeholder="default@gmail.com"
-                      value={this.props.email}
-                      onChange={this.changeEmail} />
-
-                    <input
-                      className={styles.input}
-                      type="password"
-                      placeholder="Пароль"
-                      value={this.props.password}
-                      onChange={this.changePassword} />
-
-                  <Button
-                    type="submit"
-                    disabled={this.props.inProgress}
-                  >
-                    Зарегистрироваться
-                  </Button>
-
-                </fieldset>
-              </form>
-            </section>
-
-      //     </div>
-      //   </div>
-      // </div>
+          <Button
+            type="submit"
+            disabled={this.props.inProgress}
+          >
+            Зарегистрироваться
+          </Button>
+        </Form>
+      </section>
     );
   }
 }

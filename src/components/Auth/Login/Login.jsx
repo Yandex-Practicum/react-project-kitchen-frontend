@@ -13,6 +13,7 @@ import Button from "../../Button/Button";
 
 import styles from '../Auth.module.scss';
 import clsx from 'clsx';
+import Form from '../../Form/Form';
 
 const mapStateToProps = state => ({ ...state.auth });
 
@@ -55,10 +56,6 @@ class Login extends React.Component {
 
   render() {
     return (
-      // <div className="auth-page">
-      //   <div className="container page">
-      //     <div className="row">
-
       <section className={styles.container}>
         <h1 className={styles.title}>Войти</h1>
         <p className={styles.option}>
@@ -69,37 +66,28 @@ class Login extends React.Component {
 
         <ListErrors errors={this.props.errors} />
 
-        <form className={styles.form} onSubmit={this.submitForm(this.state.email, this.state.password)}>
-          <fieldset>
+        <Form onSubmit={this.submitForm(this.state.email, this.state.password)}>
+          <input
+            type="email"
+            placeholder="default@gmail.com"
+            value={this.state.email}
+            onChange={this.handleChangeEmail} 
+          />
 
-              <input
-                className={styles.input}
-                type="email"
-                placeholder="default@gmail.com"
-                value={this.state.email}
-                onChange={this.handleChangeEmail} />
-
-              <input
-                className={styles.input}
-                type="password"
-                placeholder="Пароль"
-                value={this.state.password}
-                onChange={this.handleChangePassword} />
-
-            <Button
-              type="submit"
-              disabled={this.props.inProgress}
-            >
-              Войти
-            </Button>
-
-          </fieldset>
-        </form>
+          <input
+            type="password"
+            placeholder="Пароль"
+            value={this.state.password}
+            onChange={this.handleChangePassword} 
+          />
+          <Button
+            type="submit"
+            disabled={this.props.inProgress}
+          >
+          Войти
+          </Button>
+        </Form>
       </section>
-
-      //     </div>
-      //   </div>
-      // </div>
     );
   }
 }

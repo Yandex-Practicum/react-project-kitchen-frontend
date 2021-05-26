@@ -107,19 +107,23 @@ class Editor extends React.Component {
                     <input
                       type="text"
                       placeholder="Название записи"
-                      value={this.props.title}
-                      onChange={this.changeTitle} />
+                      value={this.props.title || ''}
+                      onChange={this.changeTitle} 
+                      required
+                    />
+
                     <input
                       type="text"
                       placeholder="О чём статья?"
-                      value={this.props.description}
-                      onChange={this.changeDescription} />
+                      value={this.props.description || ''}
+                      onChange={this.changeDescription} 
+                    />
 
                     <div className = {s.image_input}>
                     <input
                       type="text"
                       placeholder="Изображение (опционально)"
-                      value={this.props.image}
+                      value={this.props.image || ''}
                       onChange={this.changeImage}
                     />
                     <button className = {s.form__clip}>
@@ -131,15 +135,17 @@ class Editor extends React.Component {
                       className="form-control"
                       rows="8"
                       placeholder="Текст записи"
-                      value={this.props.body}
-                      onChange={this.changeBody}>
+                      value={this.props.body || ''}
+                      onChange={this.changeBody}
+                      required>
                     </textarea>
 
                     <div className={s.tags_generator}>
                     <input
                       type="text"
-                      placeholder="Тэги (через запятую)"
-                      value={this.props.tagInput}
+                      placeholder="Тэги (введите тег и нажмите enter)"
+                      maxLength={10}
+                      value={this.props.tagInput || ''}
                       onChange={this.changeTagInput}
                       onKeyDown={this.watchForEnter} 
                     />

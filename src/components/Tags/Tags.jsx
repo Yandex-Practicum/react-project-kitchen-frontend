@@ -31,7 +31,7 @@ const Tags = props => {
               <a
                 href=""
                 className={clsx(style.tag_default, style.tag_pill, clazz)}
-                key={tag}
+                key={tag + Math.random(10, 100) * 10}
                 onClick={handleClick}>
                 #{tag}
               </a>

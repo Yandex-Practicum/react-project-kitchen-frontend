@@ -4,7 +4,7 @@ import ButtonTheme from '../ButtonTheme/ButtonTheme'
 import styles from './Header.module.scss';
 import clsx from 'clsx';
 
-const {header, navbar, navbar_brand, nav, navbar_nav, pull_xs_right, nav_item, nav_link, user_item, ava_image} = styles;
+const {header, navbar, navbar_brand, nav, navbar_nav, pull_xs_right, nav_item, nav_link, ava_image} = styles;
 
 const LoggedOutView = props => {
   if (!props.currentUser) {
@@ -16,11 +16,11 @@ const LoggedOutView = props => {
           </Link>
         </li>
 
-        <li className={nav_item}>
+        {/* <li className={nav_item}>
           <Link to="/register" className={nav_link}>
-            Зарегестрироваться
+            Зарегистрироваться
           </Link>
-        </li>
+        </li> */}
       </>
     );
   }
@@ -37,11 +37,11 @@ const LoggedInView = props => {
           </Link>
         </li>
 
-        <li className={nav_item}>
+        {/* <li className={nav_item}>
           <Link to="/settings" className={nav_link}>
             <i className="ion-gear-a"></i>&nbsp;Настройки
           </Link>
-        </li>
+        </li> */}
 
         <li className={nav_item}>
           <Link
@@ -58,12 +58,7 @@ const LoggedInView = props => {
   return null;
 };
 
-interface IHeader {
-  currentUser?: () => void;
-  appName?: string;
-}
-
-const Header: FC<IHeader> = (props) => {
+const Header = (props) => {
   
   return (
     <header className={header}>
