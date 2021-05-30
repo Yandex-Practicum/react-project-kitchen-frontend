@@ -28,7 +28,7 @@ export const articleListSlice = createSlice({
       state.tag = action.tag;
       state.currentPage = 0;
     },
-    HOME_PAGE_LOADED: (state, action) => {
+    HOME_ARTICLE_LOADED: (state, action) => {
       state.pager = action.pager
       state.tags = action.payload[0].tags
       state.articles = action.payload[1].articles
@@ -36,7 +36,7 @@ export const articleListSlice = createSlice({
       state.currentPage = 0
       state.tab = action.tab
     },
-    HOME_PAGE_UNLOADED: (state, action) => {
+    HOME_ARTICLE_UNLOADED: (state, action) => {
       return {};
     },
     CHANGE_TAB: (state, action) => {
@@ -47,17 +47,23 @@ export const articleListSlice = createSlice({
       state.currentPage = 0;
       state.tag = null;
     },
-    PROFILE_PAGE_LOADED: (state, action) => {
+    PROFILE_ARTICLE_LOADED: (state, action) => {
       state.pager = action.pager;
       state.articles = action.payload[1].articles;
       state.articlesCount = action.payload[1].articlesCount;
       state.currentPage = 0;
     },
-    PROFILE_FAVORITES_PAGE_LOADED: (state, action) => {
+    PROFILE_FAVORITES_ARTICLE_LOADED: (state, action) => {
       state.pager = action.pager;
       state.articles = action.payload[1].articles;
       state.articlesCount = action.payload[1].articlesCount;
       state.currentPage = 0;
+    },
+    PROFILE_ARTICLE_UNLOADED: (state, action) => {
+      return {}
+    },
+    PROFILE_FAVORITES_ARTICLE_UNLOADED: (state, action) => {
+      return {}
     },
     ARTICLE_FAVORITED: (state, action) => {
       state.articles = state.articles.map(article => {
@@ -77,23 +83,6 @@ export const articleListSlice = createSlice({
         return article;
       })
     },
-    ARTICLE_PAGE_LOADED: (state, action) => {
-      state.currentArticle = action.payload[0].article;
-      state.articleComments = action.payload[1].comments;
-    },
-    ARTICLE_PAGE_UNLOADED: (state, action) => {
-      return {};
-    },
-    ADD_COMMENT: (state, action) => {
-      state.articleCommentErrors = action.error ? action.payload.errors : null;
-      state.articleComments = action.error ?
-        null :
-        (state.articleComments || []).concat([action.payload.comment])
-    },
-    DELETE_COMMENT: (state, action) => {
-      const commentId = action.commentId;
-      state.articleComments = state.articleComments.filter(comment => comment.id !== commentId);
-    },
   },
 })
 
@@ -102,14 +91,10 @@ export const {  ARTICLE_FAVORITED,
                 ARTICLE_UNFAVORITED,
                 SET_PAGE,
                 APPLY_TAG_FILTER,
-                HOME_PAGE_LOADED,
-                HOME_PAGE_UNLOADED,
+                HOME_ARTICLE_LOADED,
+                HOME_ARTICLE_UNLOADED,
                 CHANGE_TAB,
-                PROFILE_PAGE_LOADED,
-                PROFILE_PAGE_UNLOADED,
-                PROFILE_FAVORITES_PAGE_LOADED,
-                PROFILE_FAVORITES_PAGE_UNLOADED,
-                ARTICLE_PAGE_LOADED,
-                ARTICLE_PAGE_UNLOADED,
-                ADD_COMMENT,
-                DELETE_COMMENT } = articleListSlice.actions
+                PROFILE_ARTICLE_LOADED,
+                PROFILE_ARTICLE_UNLOADED,
+                PROFILE_FAVORITES_ARTICLE_LOADED,
+                PROFILE_FAVORITES_ARTICLE_UNLOADED} = articleListSlice.actions

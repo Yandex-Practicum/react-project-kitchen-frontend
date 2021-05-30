@@ -26,24 +26,6 @@ export const articleSlice = createSlice({
       const commentId = action.commentId;
       state.comments = state.comments.filter(comment => comment.id !== commentId);
     },
-    // ARTICLE_FAVORITED: (state, action) => {
-    //   state.articles = state.articles.map(article => {
-    //     if (state.article.slug === action.payload.article.slug) {
-    //       state.favorited = action.payload.article.favorited;
-    //       state.favoritesCount = action.payload.article.favoritesCount;
-    //     };
-    //     return article;
-    //   })
-    // },
-    // ARTICLE_UNFAVORITED: (state, action) => {
-    //   state.articles = state.articles.map(article => {
-    //     if (state.article.slug === action.payload.article.slug) {
-    //       state.favorited = action.payload.article.favorited;
-    //       state.favoritesCount = action.payload.article.favoritesCount;
-    //     };
-    //     return article;
-    //   })
-    // },
   }
 })
 

@@ -4,6 +4,8 @@ const initialState = {
   appName: 'Sum42',
   token: null,
   viewChangeCounter: 0,
+  inProgress: null,
+  errors: null,
 }
 
 export const commonSlice = createSlice({
@@ -22,6 +24,32 @@ export const commonSlice = createSlice({
       state.redirectTo = '/';
       state.token = null;
       state.currentUser = null;
+    },
+    ASYNC_START: (state, action) => {
+      if (action.subtype === REGISTER) {
+        state.inProgress = true;
+      }
+      if (action.subtype === ARTICLE_SUBMITTED) {
+        state.inProgress = true;
+      }
+      state.inProgress = true;
+    },
+    LOGIN: (state, action) => {
+      state.inProgress = false;
+      state.errors = action.error ? action.payload.errors : null;
+    },
+    REGISTER: (state, action) => {
+      state.inProgress = false;
+      state.errors = action.error ? action.payload.errors : null;
+    },
+    // REGISTER_PAGE_UNLOADED: (state, action) => {
+    //   return {};
+    // },
+    // LOGIN_PAGE_UNLOADED: (state, action) => {
+    //   return {};
+    // },
+    UPDATE_FIELD_AUTH: (state, action) => {
+      return { ...state, [action.key]: action.value }
     },
     ARTICLE_SUBMITTED: (state, action) => {
       state.redirectTo = `/article/${action.payload.article.slug}`;
@@ -42,6 +70,17 @@ export const commonSlice = createSlice({
     },
     DELETE_ARTICLE: (state, action) => {
       state.redirectTo = '/';
+    },
+    SETTINGS_SAVED: (state, action) => {
+      state.inProgress = false;
+      state.errors = action.error ? action.payload.errors : null;
+    },
+    // SETTINGS_PAGE_UNLOADED: (state, action) => {
+    //   return {}
+    // },
+    ARTICLE_SUBMITTED: (state, action) => {
+      state.inProgress = null;
+      state.errors = action.error ? action.payload.errors : null;
     },
     ARTICLE_PAGE_UNLOADED: (state, action) => {
       state.viewChangeCounter = state.viewChangeCounter + 1 

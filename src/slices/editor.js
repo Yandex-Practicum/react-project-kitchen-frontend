@@ -39,23 +39,12 @@ export const editorSlice = createSlice({
       console.log({...state, [action.key] : action.value})
       state = {...state, [action.key] : action.value}
     },
-    // ARTICLE_SUBMITTED: (state, action) => {
-    //   state.settings.inProgress = null;
-    //   state.errors = action.error ? action.payload.errors : null;
-    // },
-    // ASYNC_START: (state, action) => {
-    //   if (action.subtype === ARTICLE_SUBMITTED) {
-    //     state.settings.inProgress = true;
-    //   }
-    // },
   }
 })
 
 export default editorSlice.reducer
 export const { EDITOR_PAGE_LOADED, 
                EDITOR_PAGE_UNLOADED, 
-               ARTICLE_SUBMITTED, 
-               ASYNC_START, 
                ADD_TAG, 
                REMOVE_TAG,
                UPDATE_FIELD_EDITOR } = editorSlice.actions
