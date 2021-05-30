@@ -16,6 +16,16 @@ import {
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED
 } from '../../constants/actionTypes';
+// import {
+//   FOLLOW_USER,
+//   UNFOLLOW_USER,
+//   PROFILE_PAGE_LOADED,
+//   PROFILE_PAGE_UNLOADED
+// } from '../../slices/profile';
+// import {
+//   PROFILE_PAGE_LOADED as PROFILE_ARTICLE_LOADED,
+//   PROFILE_PAGE_UNLOADED as PROFILE_ARTICLE_UNLOADED
+// } from '../../slices/articleList';
 import Tags from '../Tags/Tags';
 
 const EditProfileSettings = props => {
@@ -86,16 +96,23 @@ const mapDispatchToProps = dispatch => ({
     type: FOLLOW_USER,
     payload: agent.Profile.follow(username)
   }),
-  onLoad: payload => dispatch({ type: PROFILE_PAGE_LOADED, payload }),
+  onLoad: payload => {
+    // dispatch({ type: PROFILE_ARTICLE_LOADED, payload })
+    dispatch({ type: PROFILE_PAGE_LOADED, payload }) 
+    
+  },
   onUnfollow: username => dispatch({
     type: UNFOLLOW_USER,
     payload: agent.Profile.unfollow(username)
   }),
-  onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED })
+  onUnload: () => {
+    // dispatch({ type: PROFILE_ARTICLE_UNLOADED })
+    dispatch({ type: PROFILE_PAGE_UNLOADED })
+  }
 });
 
 class Profile extends React.Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.props.onLoad(Promise.all([
       agent.Profile.get(this.props.match.params.username),
       agent.Articles.byAuthor(this.props.match.params.username)

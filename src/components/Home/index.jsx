@@ -9,6 +9,15 @@ import {
   HOME_PAGE_UNLOADED,
   APPLY_TAG_FILTER
 } from '../../constants/actionTypes';
+// import {
+//   HOME_PAGE_LOADED,
+//   HOME_PAGE_UNLOADED,
+// } from '../../slices/home';
+// import {
+//   HOME_PAGE_LOADED as HOME_ARTICLE_LOADED,
+//   HOME_PAGE_UNLOADED as HOME_ARTICLE_UNLOADED,
+//   APPLY_TAG_FILTER,
+// } from '../../slices/articleList';
 import styles from './home.module.scss'
 
 const {content__container, content__tags, wrapper, tags__title} = styles;
@@ -25,10 +34,14 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onClickTag: (tag, pager, payload) =>
     dispatch({ type: APPLY_TAG_FILTER, tag, pager, payload }),
-  onLoad: (tab, pager, payload) =>
-    dispatch({ type: HOME_PAGE_LOADED, tab, pager, payload }),
-  onUnload: () =>
-    dispatch({  type: HOME_PAGE_UNLOADED })
+  onLoad: (tab, pager, payload) => {
+    dispatch({ type: HOME_PAGE_LOADED, tab, pager, payload });
+    // dispatch({ type: HOME_ARTICLE_LOADED, tab, pager, payload });
+  },
+  onUnload: () => {
+    dispatch({  type: HOME_PAGE_UNLOADED });
+    // dispatch({  type: HOME_ARTICLE_UNLOADED });
+  }
 });
 
 class Home extends React.Component {

@@ -10,6 +10,13 @@ import {
   SETTINGS_PAGE_UNLOADED,
   LOGOUT
 } from '../../constants/actionTypes';
+// import {
+//   SETTINGS_SAVED,
+//   SETTINGS_PAGE_UNLOADED
+// } from '../../slices/settings';
+// import {
+//   LOGOUT
+// } from '../../constants/actionTypes';
 import Form from '../Form/Form';
 
 class SettingsForm extends React.Component {

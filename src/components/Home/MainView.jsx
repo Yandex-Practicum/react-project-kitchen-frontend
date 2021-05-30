@@ -6,7 +6,9 @@ import { CHANGE_TAB } from '../../constants/actionTypes';
 import TabsNavigation from '../Tabs/TabsNavigation/TabsNavigation';
 import TabsItem from '../Tabs/TabItem/TabsItem';
 import styles from './home.module.scss'
-
+// import {
+//   CHANGE_TAB,
+// } from '../../slices/articleList';
 
 const mapStateToProps = (state) => ({
   ...state.articleList,

@@ -7,32 +7,37 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    AUTHORIZATION: (state, action) => {
-      // state.inProgress = false,
-      // state.errors = action.error ? action.payload.errors : null;
+    REGISTER_PAGE_UNLOADED: (state, action) => {
+      return {};
     },
-    PAGE_UNLOADED: (state, action) => {
-      // state = initialState;
-    },
-    ASYNC_START: (state, action) => {
-      // if (action.subtype === AUTHORIZATION) {
-      //   state.inProgress = true;
-      // }
+    LOGIN_PAGE_UNLOADED: (state, action) => {
+      return {};
     },
     UPDATE_FIELD_AUTH: (state, action) => {
-      // state, [action.key]: action.value }
+      [action.key] = action.value;
+    }
+  },
+  extraReducers: {
+    ASYNC_START: (state, action) => {
+      if (action.subtype === AUTHORIZATION) {
+        state.settings.inProgress = true;
+      }
+    },
+    LOGIN: (state, action) => {
+      state.settings.inProgress = false;
+      state.settings.errors = action.error ? action.payload.errors : null;
+    },
+    REGISTER: (state, action) => {
+      state.settings.inProgress = false;
+      state.settings.errors = action.error ? action.payload.errors : null;
     }
   }
 })
 
 export default authSlice.reducer
-export const {  AUTHORIZATION,
-                PAGE_UNLOADED,
+export const {  LOGIN,
+                REGISTER,
+                REGISTER_PAGE_UNLOADED,
+                LOGIN_PAGE_UNLOADED,
                 ASYNC_START,
                 UPDATE_FIELD_AUTH } = authSlice.actions
-
-  // продумать работу с другими слайсами
-  // LOGIN,
-  // REGISTER,
-  // LOGIN_PAGE_UNLOADED,
-  // REGISTER_PAGE_UNLOADED,

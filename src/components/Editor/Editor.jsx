@@ -11,6 +11,18 @@ import {
   EDITOR_PAGE_UNLOADED,
   UPDATE_FIELD_EDITOR
 } from '../../constants/actionTypes';
+// import {
+//   ADD_TAG,
+//   EDITOR_PAGE_LOADED,
+//   REMOVE_TAG,
+//   EDITOR_PAGE_UNLOADED,
+//   UPDATE_FIELD_EDITOR
+//   // ARTICLE_SUBMITTED,
+
+// } from '../../slices/editor';
+// import {
+//   ARTICLE_SUBMITTED
+// } from '../../slices/settings';
 import clipImg from '../../assets/ico/Clip.svg'
 import s from './Editor.module.scss'
 import Tags from '../Tags/Tags';

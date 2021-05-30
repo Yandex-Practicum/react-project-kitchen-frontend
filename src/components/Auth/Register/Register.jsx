@@ -68,7 +68,7 @@ class Register extends React.Component {
           <input
             type="text"
             placeholder="Никнейм"
-            value={this.props.username}
+            value={this.props.username || ''}
             onChange={this.changeUsername} 
             required
             maxLength={15}
@@ -77,7 +77,7 @@ class Register extends React.Component {
           <input
             type="email"
             placeholder="default@gmail.com"
-            value={this.props.email}
+            value={this.props.email || ''}
             onChange={this.changeEmail} 
             required
           />
@@ -85,7 +85,7 @@ class Register extends React.Component {
           <input
             type="password"
             placeholder="Пароль"
-            value={this.props.password}
+            value={this.props.password || ''}
             onChange={this.changePassword} 
             required
           />

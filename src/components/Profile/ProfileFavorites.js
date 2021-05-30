@@ -7,13 +7,27 @@ import {
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED
 } from '../../constants/actionTypes';
+// import {
+//   PROFILE_PAGE_LOADED,
+//   PROFILE_PAGE_UNLOADED
+// } from '../../slices/profile';
+// import {
+//   PROFILE_PAGE_LOADED as PROFILE_ARTICLE_LOADED,
+//   PROFILE_PAGE_UNLOADED as PROFILE_ARTICLE_UNLOADED
+// } from '../../slices/articleList';
 import s from './profile.module.scss'
 
 const mapDispatchToProps = dispatch => ({
-  onLoad: (pager, payload) =>
-    dispatch({ type: PROFILE_PAGE_LOADED, pager, payload }),
-  onUnload: () =>
-    dispatch({ type: PROFILE_PAGE_UNLOADED })
+  onLoad: (pager, payload) => {
+    dispatch({ type: PROFILE_PAGE_LOADED, pager, payload });
+    // dispatch({ type: PROFILE_ARTICLE_LOADED, pager, payload });
+  },
+    
+  onUnload: () => {
+    dispatch({ type: PROFILE_PAGE_UNLOADED });
+    // dispatch({ type: PROFILE_ARTICLE_UNLOADED });
+  }
+    
 });
 
 class ProfileFavorites extends Profile {

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAction, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   username: '',
@@ -10,14 +10,15 @@ export const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
+
+    PROFILE_PAGE_UNLOADED: (state, action) => {
+      return {};
+    },
     PROFILE_PAGE_LOADED: (state, action) => {
-      const { username, image, following } = action.payload.profile[0]
+      const { username, image, following } = action.payload[0].profile
       state.username = username;
       state.image = image;
       state.following = following;
-    },
-    PROFILE_PAGE_UNLOADED: (state, action) => {
-      state = initialState;
     },
     FOLLOW_USER: (state, action) => {
       const { username, image, following } = action.payload.profile

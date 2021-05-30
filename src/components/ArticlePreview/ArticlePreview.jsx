@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../../constants/actionTypes';
+// import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../../slices/articleList';
 import Heart from '../Heart/Heart'
 import s from './ArticlePreview.module.scss'
 const FAVORITED_CLASS = s.article__btn_unfavorite;
@@ -10,7 +11,7 @@ const NOT_FAVORITED_CLASS = s.article__btn_favorite;
 import Tags from '../Tags/Tags';
 
 const mapDispatchToProps = dispatch => ({
-  favorite: slug => dispatch({
+    favorite: slug => dispatch({
     type: ARTICLE_FAVORITED,
     payload: agent.Articles.favorite(slug)
   }),

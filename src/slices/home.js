@@ -9,10 +9,13 @@ export const homeSlice = createSlice({
   initialState,
   reducers: {
     HOME_PAGE_LOADED: (state, action) => {
+      if (action.payload[0] === null) {
+        return {}
+      }
       state.tags = action.payload[0].tags;
     },
     HOME_PAGE_UNLOADED: (state, action) => {
-      state = initialState;
+      return {};
     },
   }
 })

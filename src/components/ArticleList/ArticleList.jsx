@@ -6,14 +6,14 @@ import styles from './ArticleList.module.scss'
 const ArticleList = props => {
   if (!props.articles) {
     return (
-      <div className="article-preview">Данные загружаются..</div>
+      <div className={[styles.article__container, styles.empty__content].join(' ')}>Данные загружаются..</div>
     );
   }
 
   if (props.articles.length === 0) {
     return (
-      <div className="article-preview">
-        Здесь пусто...пока что.
+      <div className={[styles.article__container, styles.empty__content].join(' ')}>
+        Здесь пусто... пока что.
       </div>
     );
   }
