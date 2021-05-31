@@ -24,7 +24,7 @@ const CommentContainer = props => {
     return (
       <div className={styles.container}>
         <h2>Комментарии</h2>
-        <p>
+        <p className={styles.logaut__text}>
           <Link to="/login">Войдите в аккаунт</Link>
           &nbsp;или&nbsp;
           <Link to="/register">зарегистрируйтесь</Link>

@@ -11,6 +11,18 @@ import {
   EDITOR_PAGE_UNLOADED,
   UPDATE_FIELD_EDITOR
 } from '../../constants/actionTypes';
+// import {
+//   ADD_TAG,
+//   EDITOR_PAGE_LOADED,
+//   REMOVE_TAG,
+//   EDITOR_PAGE_UNLOADED,
+//   UPDATE_FIELD_EDITOR
+//   // ARTICLE_SUBMITTED,
+
+// } from '../../slices/editor';
+// import {
+//   ARTICLE_SUBMITTED
+// } from '../../slices/settings';
 import clipImg from '../../assets/ico/Clip.svg'
 import s from './Editor.module.scss'
 import Tags from '../Tags/Tags';
@@ -126,7 +138,7 @@ class Editor extends React.Component {
                       value={this.props.image || ''}
                       onChange={this.changeImage}
                     />
-                    <button className = {s.form__clip}>
+                    <button className = {s.form__clip} disabled>
                       <img src={clipImg} alt="Clip" />
                     </button>
                     </div>

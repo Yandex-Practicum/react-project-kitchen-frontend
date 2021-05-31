@@ -1,7 +1,7 @@
 .wrapper{
   display: flex;
   align-items: center;
-  width: 200px;
+  width: 100px;
   margin-right: auto;
 }
 .text{
@@ -26,7 +26,7 @@
     height: 20px;
     background:#a2a393 url(../../assets//ico/moon.svg) no-repeat 80% 50% / 30%;
     border-radius: 10px;
-    top: 0;
+    top: -3px;
     left: -50%;
     
   }
@@ -34,10 +34,11 @@
     transition:.3s left linear;
     width: 20px;
     height: 20px;
-    border: 1px solid #a2a393;
+    border: 2px solid #a2a393;
     border-radius: 100%;
     background:#000;
     left: -50%;
+    top: -3px;
   }
   
 }

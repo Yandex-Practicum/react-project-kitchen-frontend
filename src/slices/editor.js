@@ -22,23 +22,11 @@ export const editorSlice = createSlice({
       state.description = description;
       state.image = image;
       state.body = body;
-      //state.tagInput = '';  
+      state.tagInput = '';  
       state.tagList = tagList;
     },
     EDITOR_PAGE_UNLOADED: (state, action) => {
-      state = initialState;
-    },
-    ARTICLE_SUBMITTED: (state, action) => {
-      // Оставить в Settings или дублировать?
-      // ...state,
-      // inProgress: null,
-      // errors: action.error ? action.payload.errors : null
-    },
-    ASYNC_START: (state, action) => {
-      // Оставить в Settings или дублировать?
-      // if (action.subtype === ARTICLE_SUBMITTED) {
-      //   return { ...state, inProgress: true };
-      // }
+      return {};
     },
     ADD_TAG: (state, action) => {
       state.tagList = state.tagList.concat([state.tagInput]);
@@ -48,8 +36,8 @@ export const editorSlice = createSlice({
       state.tagList = state.tagList.filter(tag => tag !== action.tag);
     },
     UPDATE_FIELD_EDITOR: (state, action) => {
-      // Продумать
-      //{ ...state, [action.key]: action.value };
+      console.log({...state, [action.key] : action.value})
+      state = {...state, [action.key] : action.value}
     },
   }
 })
@@ -57,8 +45,6 @@ export const editorSlice = createSlice({
 export default editorSlice.reducer
 export const { EDITOR_PAGE_LOADED, 
                EDITOR_PAGE_UNLOADED, 
-               ARTICLE_SUBMITTED, 
-               ASYNC_START, 
                ADD_TAG, 
                REMOVE_TAG,
                UPDATE_FIELD_EDITOR } = editorSlice.actions

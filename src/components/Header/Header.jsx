@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import ButtonTheme from '../ButtonTheme/ButtonTheme'
 import styles from './Header.module.scss';
 import clsx from 'clsx';
+import HomeIcon from './HomeIcon';
+import LoginIcon from './LoginIcon';
+import EditIcon from './EditIcon';
 
 const {header, navbar, navbar_brand, nav, navbar_nav, pull_xs_right, nav_item, nav_link, ava_image} = styles;
 
@@ -11,8 +14,9 @@ const LoggedOutView = props => {
     return (
       <>
         <li className={nav_item}>
+          
           <Link to="/login" className={nav_link}>
-            Войти
+          <LoginIcon/> <span>Войти</span>
           </Link>
         </li>
 
@@ -33,7 +37,7 @@ const LoggedInView = props => {
       <>
         <li className={nav_item}>
           <Link to="/editor" className={nav_link}>
-            <i className="ion-compose"></i>&nbsp;Новая запись
+            <EditIcon/><span>Новая запись</span>
           </Link>
         </li>
 
@@ -70,9 +74,10 @@ const Header = (props) => {
           <ul className={clsx(nav, navbar_nav, pull_xs_right)}>
             <li className={nav_item}>
               <Link to="/" className={nav_link}>
-              <i className="ion-home"></i>&nbsp;Главная
+              <HomeIcon/><span>Главная</span>
               </Link>
             </li>
+            
             <LoggedOutView currentUser={props.currentUser} />
 
             <LoggedInView currentUser={props.currentUser} />
