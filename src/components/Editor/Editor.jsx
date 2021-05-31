@@ -138,7 +138,7 @@ class Editor extends React.Component {
                       value={this.props.image || ''}
                       onChange={this.changeImage}
                     />
-                    <button className = {s.form__clip}>
+                    <button className = {s.form__clip} disabled>
                       <img src={clipImg} alt="Clip" />
                     </button>
                     </div>
