@@ -10,8 +10,7 @@ import {
   APPLY_TAG_FILTER
 } from '../../constants/actionTypes';
 
-// YOU WILL DELETE NEXT LINE SOON
-import ToDelete from './ToDelete';
+
 
 const Promise = global.Promise;
 
@@ -50,11 +49,10 @@ class Home extends React.Component {
 
         <Banner token={this.props.token} appName={this.props.appName} />
         <div className="container page">
-          
-          {/* THIS COMPONENT WILL BE DELETED THIS IS WELCOME */}
-          <ToDelete />
 
-          {/* <div className="row">
+
+
+          <div className="row">
             <MainView />
 
             <div className="col-md-3">
@@ -68,7 +66,7 @@ class Home extends React.Component {
 
               </div>
             </div>
-          </div> */}
+          </div>
         </div>
 
       </div>
