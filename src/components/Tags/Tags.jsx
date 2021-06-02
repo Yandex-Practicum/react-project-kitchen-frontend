@@ -42,7 +42,7 @@ const Tags = props => {
     );
   } else {
     return (
-      <div>Теги подгружаются...</div>
+      <div className={style.loading}>Теги подгружаются...</div>
     );
   }
 };

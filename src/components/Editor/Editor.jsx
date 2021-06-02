@@ -87,7 +87,9 @@ class Editor extends React.Component {
     };
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  
+
+  componentWillReceiveProps(nextProps) {
     if (this.props.match.params.slug !== nextProps.match.params.slug) {
       if (nextProps.match.params.slug) {
         this.props.onUnload();
@@ -97,7 +99,7 @@ class Editor extends React.Component {
     }
   }
 
-  UNSAFE_componentWillMount() {
+  componentWillMount() {
     if (this.props.match.params.slug) {
       return this.props.onLoad(agent.Articles.get(this.props.match.params.slug));
     }
@@ -107,7 +109,7 @@ class Editor extends React.Component {
   componentWillUnmount() {
     this.props.onUnload();
   }
-
+  
   render() {
     return (
             <div className={s.container}>
@@ -155,11 +157,12 @@ class Editor extends React.Component {
                     <div className={s.tags_generator}>
                     <input
                       type="text"
-                      placeholder="Тэги (введите тег и нажмите enter)"
+                      placeholder= {[].concat(this.props.tagList).length > 2 ? "Пасхалка, больше 3х нельзя" : "Теги (введите тег и нажмите enter)"}
                       maxLength={10}
                       value={this.props.tagInput || ''}
                       onChange={this.changeTagInput}
                       onKeyDown={this.watchForEnter} 
+                      disabled={[].concat(this.props.tagList).length > 2 ? true : false}
                     />
 
                     <Tags tags={this.props.tagList}
