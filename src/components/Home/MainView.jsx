@@ -24,7 +24,7 @@ const MainView = (props) => {
   const clickHandler = (type) => {
     props.onTabClick(type, agent.Articles[type], agent.Articles[type]());
   };
-  console.log(props.currentUser)
+  
   return (
     <section className={styles.content__main}>
       <div className="feed-toggle">

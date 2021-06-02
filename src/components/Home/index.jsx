@@ -67,10 +67,15 @@ class Home extends React.Component {
           <div className={wrapper}>
             <section className={content__tags}>
               <p className={tags__title}>Популярные теги</p>
-
-              <Tags
+              {!this.props.tags &&           
+                  <div className={styles.loading}>Теги подгружаются...</div>
+              }
+              {this.props.tags && <Tags
                 tags={this.props.tags}
-                onClickTag={this.props.onClickTag} />
+                onClickTag={this.props.onClickTag} />}
+
+
+              
             </section>
           </div>
         </main>

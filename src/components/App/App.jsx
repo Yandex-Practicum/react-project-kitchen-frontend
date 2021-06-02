@@ -47,6 +47,9 @@ class App extends React.Component {
       tagsBorder: '#0B0C0D',
       buttonShadow: 'rgba(255, 144, 14, 0.35)',
       redHeart:'#F53D5C',
+      deleteBtn: '',
+      commentContainer: '#27292D',
+      commentInput: '#2D2F34'
     }
     this.whiteTheme = {
       back: '#ffffff',
@@ -60,8 +63,10 @@ class App extends React.Component {
       tagsBorder: '#CCCCCC',
       buttonShadow: 'rgba(0, 0, 255, 0.25)',
       redHeart:'#F53D5C',
+      deleteBtn: '',
+      commentContainer: '#ffffff',
+      commentInput: '#f4f4f6'
     };
-    //'#0000FF'
   }
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.redirectTo) {
@@ -92,6 +97,9 @@ componentDidMount() {
       --tags-border:${this.whiteTheme.tagsBorder};
       --button-shadow:${this.whiteTheme.buttonShadow};
       --red-heart:${this.whiteTheme.redHeart};
+      --delete-btn:${this.whiteTheme.deleteBtn};
+      --comment-container:${this.whiteTheme.commentContainer};
+      --comment-input:${this.whiteTheme.commentInput};
       `
   }
 shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -107,7 +115,10 @@ shouldComponentUpdate(nextProps, nextState, nextContext) {
       --tags:${this.darkTheme.tags};
       --tags-border:${this.darkTheme.tagsBorder};
       --button-shadow:${this.darkTheme.buttonShadow};
-      --red-heart:${this.whiteTheme.redHeart};
+      --red-heart:${this.darkTheme.redHeart};
+      --delete-btn:${this.darkTheme.deleteBtn};
+      --comment-container:${this.darkTheme.commentContainer};
+      --comment-input:${this.darkTheme.commentInput};
       `
     : this.root.style = `--white:${this.whiteTheme.back};
       --dark:${this.whiteTheme.dark};
@@ -120,6 +131,9 @@ shouldComponentUpdate(nextProps, nextState, nextContext) {
       --tags-border:${this.whiteTheme.tagsBorder};
       --button-shadow:${this.whiteTheme.buttonShadow};
       --red-heart:${this.whiteTheme.redHeart};
+      --delete-btn:${this.whiteTheme.deleteBtn};
+      --comment-container:${this.whiteTheme.commentContainer};
+      --comment-input:${this.whiteTheme.commentInput};
       `;
   return true
 }

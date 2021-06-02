@@ -9,6 +9,7 @@ import s from './ArticlePreview.module.scss';
 const FAVORITED_CLASS = s.article__btn_unfavorite;
 const NOT_FAVORITED_CLASS = s.article__btn_favorite;
 import Tags from '../Tags/Tags';
+import UserMeta from '../UserMeta/UserMeta';
 
 const mapDispatchToProps = (dispatch) => ({
   favorite: (slug) =>
@@ -47,26 +48,7 @@ const ArticlePreview = (props) => {
       {article.photo && <div className={s.article__photo}></div>}
       <div className={s.article__post}>
         <div className={s.article__header}>
-          <div className={s.article__user}>
-            <Link className={s.article__avatar} to={`/@${article.author.username}`}>
-              <img src={article.author.image} alt={article.author.username} />
-            </Link>
-            <div>
-              <div className={s.article__text}>
-                <Link className={s.article__text_user} to={`/@${article.author.username}`}>
-                  {article.author.username}
-                </Link>
-                <span className={s.article__text_date}>
-                  {new Date(article.createdAt).toLocaleString([], {
-                    weekday: 'short',
-                    day: '2-digit',
-                    month: 'long',
-                    year: 'numeric',
-                  })}
-                </span>
-              </div>
-            </div>
-          </div>
+          <UserMeta section='article' article={props.article} />
           <div>
             <button className={`${s.article__btn} ${favoriteButtonClass}`} onClick={handleClick} disabled={disabled}>
               {article.favoritesCount > 0 ? article.favoritesCount : null} <Heart />

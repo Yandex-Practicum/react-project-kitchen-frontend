@@ -21,15 +21,19 @@
 }
 
 .controls__delete {
-  background-color: #F4F4F6;
+  background-color: inherit;
   width: 188px;
   height: 40px;
   margin-left: 5px;
 
   padding: 8px 0px;
-  color: black;
+  color: var(--dark);
   border: none;
   cursor: pointer;
+}
+
+.controls__delete path {
+  stroke: var(--dark);
 }
 
 .controls__delete span {

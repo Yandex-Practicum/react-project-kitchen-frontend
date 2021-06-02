@@ -14,7 +14,7 @@
   position: relative;
   cursor:pointer;
   &:focus{
-    border:none;
+    border: none;
     outline:none;
   }
   &:before, &:after {
@@ -24,19 +24,24 @@
   &:before{
     width: 40px;
     height: 20px;
-    background:#a2a393 url(../../assets//ico/moon.svg) no-repeat 80% 50% / 30%;
+    background:#6290FF url(../../assets//ico/moon.svg) no-repeat 80% 50% / 30%;
     border-radius: 10px;
     top: -3px;
     left: -50%;
-    
+    //#FCEEC9
   }
+  
+  // &:focus:before {
+  // border: 2px solid var(--primary);
+  // }
+  
   &:after{
     transition:.3s left linear;
     width: 20px;
     height: 20px;
-    border: 2px solid #a2a393;
+    border: 2px solid #6290FF;
     border-radius: 100%;
-    background:#000;
+    background: var(--white);
     left: -50%;
     top: -3px;
   }
@@ -47,6 +52,6 @@
     left: 100%;
   }
   &:before{
-    background:#a2a393 url(../../assets//ico/sun.svg) no-repeat 20% 50% / 30%;
+    background:#6290FF url(../../assets//ico/sun.svg) no-repeat 20% 50% / 30%;
   }
 }

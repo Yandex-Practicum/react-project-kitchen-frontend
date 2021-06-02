@@ -13,21 +13,6 @@
   max-width: 540px;
   margin: 0 auto;
   margin-top: 24px;
-  // input,
-  // textarea {
-  //   padding: 8px 16px 8px 16px;
-  //   background: #f4f4f6;
-  //   border: 1px solid #cccccc;
-  //   width: 100%;
-  //   height: 40px;
-  //   resize: none;
-  //   &:focus{
-  //     outline:none;
-  //     border-color:#cccccc;
-  //   }
-  // }
-
-
   
   &__item {
     border: none;
@@ -68,9 +53,9 @@
 
   font-size: 16px;
   line-height: 24px;
-  color: #62626A;
+  color: var(--gray-text);
 
-  background-color: #F4F4F6;
+  background-color: var(--comment-input);
   border: 1px solid #CCCCCC;
 }
 
@@ -82,11 +67,11 @@
 
   font-size: 16px;
   line-height: 24px;
-  color: #62626A;
+  color: var(--gray-text);
 
   resize: none;
 
-  background-color: #F4F4F6;
+  background-color: var(--comment-input);
   border: 1px solid #CCCCCC;
 }
 
@@ -99,6 +84,7 @@
   right: 0;
   top: 20px;
 }
+
 
 .tags_generator {
   position: relative;
