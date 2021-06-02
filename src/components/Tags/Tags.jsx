@@ -5,7 +5,7 @@ import style from './Tags.module.scss';
 import clsx from 'clsx';
 
 const Tags = props => {
-  const tags = props.tags;
+  const tags = [].concat(props.tags);
   var clazz = ""
   switch (props.style) {
     case 'dark':
@@ -17,7 +17,6 @@ const Tags = props => {
       break;
   }
 
-  if (tags) {
     return (
       <section className={style.tag_list}>
         {
@@ -40,11 +39,6 @@ const Tags = props => {
         }
       </section>
     );
-  } else {
-    return (
-      <div className={style.loading}>Теги подгружаются...</div>
-    );
-  }
 };
 
 export default Tags;
