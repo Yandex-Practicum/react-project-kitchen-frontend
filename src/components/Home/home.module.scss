@@ -16,12 +16,13 @@
   margin-right: 16px;
   width: 268px;
   min-height: 124px;
-  background: #F4F4F6;
+  background: var(--tags-block);
 }
 
 .tags__title {
   margin: 0;
   margin-bottom: 16px;
+  color: var(--dark-text)
 }
 
 .banner {

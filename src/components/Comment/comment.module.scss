@@ -1,3 +1,7 @@
+.container {
+  padding-bottom: 30px;
+}
+
 .container h2 {
   font-size: 24px;
   font-style: normal;
@@ -15,7 +19,7 @@
 
 .create__form {
   width: 728px;
-  border: 1px solid #CCCCCC;
+  border: 1px solid var(--tags-border);
   border-radius: 0;
   margin: auto;
   margin-bottom: 24px;
@@ -27,7 +31,7 @@
 }
 
 .create__textarea {
-  background-color: #F4F4F6;
+  background-color: var(--banner-color);
   height: 100%;
   width: 100%;
   border: none;
@@ -38,30 +42,11 @@
 
 .create__footer {
   height: 88px;
-  background-color: #FFFFFF;
+  background-color: var(--back);
   padding: 24px;
 }
-
-.create__button {
-  width: 229px;
-  height: 40px;
-  display: block;
-  margin-left: auto;
-  border: none;
-
-  background-color: #0000FF;
-  box-shadow: 4px 4px 0px rgba(0, 0, 255, 0.25);
-  
-  color: #FFFFFF;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 24px;
-}
-
-.create__button:hover {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), #0000FF;
-  box-shadow: 2px 2px 0px rgba(0, 0, 255, 0.25);
+.create__footer button {
+  float: right;
 }
 
 .published__section {

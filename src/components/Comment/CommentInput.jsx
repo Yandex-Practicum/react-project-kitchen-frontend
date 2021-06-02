@@ -3,6 +3,7 @@ import agent from '../../agent';
 import { connect } from 'react-redux';
 import { ADD_COMMENT } from '../../constants/actionTypes';
 import styles from './comment.module.scss';
+import Button from '../Button/Button';
 // import { ADD_COMMENT } from '../../slices/articleList';
 
 const mapDispatchToProps = dispatch => ({
@@ -36,11 +37,7 @@ const CommentInput = (props) => {
         </textarea>
       </section>
       <section className={styles.create__footer}>
-        <button
-          className={styles.create__button}
-          type="submit">
-          Отправить комментарий
-        </button>
+        <Button type="submit">Отправить комментарий</Button>
       </section>
     </form>
   );

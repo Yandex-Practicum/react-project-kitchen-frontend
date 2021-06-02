@@ -36,21 +36,30 @@ class App extends React.Component {
     super(props);
     this.root = document.querySelector(':root')
     this.darkTheme = {
-      white: '#251D1D',
-      dark: '#ffffff',
+      back: '#1F2023',
+      dark: '#5299ff',
       darkText: '#ffffff',
       grayText: '#ffffff',
-      bannerColor:'#251D1D',
-      primary:'#ffffff',
+      bannerColor:'#27292D',
+      primary:'#FFB852',
+      tagsBlock: '#27292D',
+      tags: '#27292D',
+      tagsBorder: '#0B0C0D',
+      buttonShadow: 'rgba(255, 144, 14, 0.35)',
     }
     this.whiteTheme = {
-      white: '#ffffff',
+      back: '#ffffff',
       dark: '#212121',
       darkText: '#0A0A0B',
       grayText: '#62626A',
       bannerColor:'#f4f4f6',
       primary:'#0000FF',
+      tagsBlock: '#f4f4f6',
+      tags: 'rgb(241, 241, 241)',
+      tagsBorder: '#CCCCCC',
+      buttonShadow: 'rgba(0, 0, 255, 0.25)',
     };
+    //'#0000FF'
   }
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.redirectTo) {
@@ -70,30 +79,42 @@ componentDidMount() {
  if(localStorage.getItem('isDarkTheme') === 'true'){
     this.props.onChangeTheme()
  }
-   this.root.style = `--white:${this.whiteTheme.white};
+   this.root.style = `--white:${this.whiteTheme.back};
       --dark:${this.whiteTheme.dark};
       --dark-text:${this.whiteTheme.darkText};
       --gray-text:${this.whiteTheme.grayText};
       --banner-color:${this.whiteTheme.bannerColor};
       --primary:${this.whiteTheme.primary};
+      --tags-block:${this.whiteTheme.tagsBlock};
+      --tags:${this.whiteTheme.tags};
+      --tags-border:${this.whiteTheme.tagsBorder};
+      --button-shadow:${this.whiteTheme.buttonShadow};
       `
   }
 shouldComponentUpdate(nextProps, nextState, nextContext) {
     localStorage.setItem('isDarkTheme', nextProps.isDarkTheme)
   nextProps.isDarkTheme ?
-    this.root.style = `--white:${this.darkTheme.white};
+    this.root.style = `--white:${this.darkTheme.back};
       --dark:${this.darkTheme.dark};
       --dark-text:${this.darkTheme.darkText};
       --gray-text:${this.darkTheme.grayText};
       --banner-color:${this.darkTheme.bannerColor};
+      --tags-block:${this.darkTheme.tagsBlock};
       --primary:${this.darkTheme.primary};
+      --tags:${this.darkTheme.tags};
+      --tags-border:${this.darkTheme.tagsBorder};
+      --button-shadow:${this.darkTheme.buttonShadow};
       `
-    : this.root.style = `--white:${this.whiteTheme.white};
+    : this.root.style = `--white:${this.whiteTheme.back};
       --dark:${this.whiteTheme.dark};
       --dark-text:${this.whiteTheme.darkText};
       --gray-text:${this.whiteTheme.grayText};
       --banner-color:${this.whiteTheme.bannerColor};
       --primary:${this.whiteTheme.primary};
+      --tags-block:${this.whiteTheme.tagsBlock};
+      --tags:${this.whiteTheme.tags};
+      --tags-border:${this.whiteTheme.tagsBorder};
+      --button-shadow:${this.whiteTheme.buttonShadow};
       `;
   return true
 }

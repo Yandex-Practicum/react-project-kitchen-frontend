@@ -18,8 +18,9 @@ ul.tag_list li {
 }
 
 .tag_default {
-	background-color: rgb(241, 241, 241);
-	border:solid 1px rgb(194, 194, 194);
+	background-color: var(--tags);
+	border:solid 1px var(--tags-border);
+	color: var(--dark-text);
 	font-size: .8rem;
 	padding-top: .1rem;
 	padding-bottom: .1rem;
@@ -38,15 +39,17 @@ ul.tag_list li {
 }
 
 .tag_default.tag_dark {
-	border: 1px solid #ddd;
-	color: rgb(255, 255, 255)!important;
-	background: rgb(97, 97, 97)!important;
+	border: 1px solid var(--tags-border);
+	color: var(--dark-text)!important;
+	background: var(--tags)!important;
 	text-decoration: none; 
+	cursor: default;
 }
 
 .tag_default.tag_grey {
-	border: 1px solid #ddd;
-	color: rgb(0, 0, 0)!important;
-	background: rgb(241, 241, 241)!important;
+	border: 1px solid var(--tags-border);
+	color: var(--dark-text)!important;
+	background: var(--tags)!important;
 	text-decoration: none; 
+	cursor: default;
 }

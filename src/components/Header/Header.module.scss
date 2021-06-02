@@ -1,7 +1,7 @@
 .header {
 	width: 100%;
 	box-shadow: 0px -1px 0px 0px #E0E0E0 inset;
-	background-color:var(--white);
+	background-color:var(--back);
 }
 
 .navbar {
@@ -28,7 +28,7 @@
 	padding-bottom: .25rem;
 	margin-right: 1rem;
 	font-size: 1.25rem;
-	color: rgba(0, 0, 0, .8);
+	color: var(--dark);
 	font-family: titillium web, sans-serif;
 	font-size: 1.5rem!important;
 	padding-top: 0!important;
@@ -40,7 +40,8 @@
 
 .navbar_brand:focus,
 .navbar_brand:hover {
-	text-decoration: none
+	text-decoration: none;
+	color: var(--primary);
 }
 
 .navbar_brand>img {
@@ -63,7 +64,7 @@
 .nav_link img {
 	width: 24px;
 	height: 24px;
-	border: 1px solid #0A0A0B;
+	border: 1px solid var(--dark);
 	border-radius: 0%;
 }
 
@@ -83,16 +84,20 @@ svg {
 }
 .nav_link:hover {
 	text-decoration: none;
-	color: rgba(44, 34, 194, 0.8);	
+	color: var(--primary);
 }
+
+.nav_link:active {
+	stroke: var(--primary);
+}		
 
 .nav_link:hover path {
-	stroke: rgba(44, 34, 194, 0.8);	
+	stroke: var(--primary);
 }
 
-// .nav_link:active path{
-// 	stroke: #0000FF;
-// }		
+.nav_link:active path{
+	stroke: var(--primary);
+}		
 
 .nav_link.disabled {
 	color: #818a91;

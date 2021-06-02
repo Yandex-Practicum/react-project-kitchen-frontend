@@ -1,14 +1,15 @@
 .button {
-  width: 193px;
+  min-width: 193px;
   height: 40px;
   background: var(--primary);
   border: none;
+  padding: 8px 16px;
   color: var(--white);
-  box-shadow: 4px 4px 0px rgba(0, 0, 255, 0.25);
-  cursor:pointer;
+  box-shadow: 4px 4px 0px var(--button-shadow);
+  cursor: pointer;
 }
 
 .button:hover {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), #0000FF;
-  box-shadow: 2px 2px 0px rgba(0, 0, 255, 0.25);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), var(--primary);
+  box-shadow: 2px 2px 0px var(--button-shadow);
 }
