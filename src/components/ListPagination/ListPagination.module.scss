@@ -19,7 +19,8 @@
   width: 64px;
   margin: 0;
   padding: 12px;
-  border: 1px solid #CCCCCC;
+  border: 1px solid var(--tags-border);
+  background-color: var(--comment-container);
 
   text-align: center;
 }
@@ -29,12 +30,12 @@
   width: 40px;
   font-size: 16px;
   line-height: 24px;
-  color: #0A0A0B;
+  color: var(--dark-text);;
 }
 
 .active__element {
-  background-color: #0000FF;
-  border: 1px solid #0000FF;
+  background-color: var(--primary);
+  border: 1px solid var(--primary);
 }
 
 .active__element a {
