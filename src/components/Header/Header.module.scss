@@ -24,16 +24,12 @@
 
 .navbar_brand {
 	float: left;
-	padding-top: .25rem;
 	padding-bottom: .25rem;
-	margin-right: 1rem;
-	font-size: 1.25rem;
 	color: var(--dark);
 	font-family: titillium web, sans-serif;
 	font-size: 1.5rem!important;
 	padding-top: 0!important;
 	margin-right: 2rem!important;
-	color: var(--dark);
 	text-decoration: none; 
 	
 }
@@ -56,7 +52,8 @@
 }
 
 .nav_link {
-	display: inline-block;
+	display: flex;
+	align-items: center;
 	color: var(--dark);
 	text-decoration: none; 
 }
@@ -65,13 +62,12 @@
 	width: 24px;
 	height: 24px;
 	border: 1px solid var(--dark);
-	border-radius: 0%;
+	border-radius: 0;
 }
 
 .nav_link span {
 	vertical-align: middle; 
 }
-
 svg {
 	width: 24px;
 	height: 24px;
@@ -81,6 +77,9 @@ svg {
 .nav_link:focus{
 	text-decoration: none;
 	color: var(--primary);
+}
+.nav_link:focus svg path{
+	stroke: var(--primary);
 }
 .nav_link:hover {
 	text-decoration: none;
@@ -99,7 +98,7 @@ svg {
 	stroke: var(--primary);
 }		
 
-.nav_link.disabled {
+.nav_link.disabled{
 	color: #818a91;
 	stroke: #818a91;
 }
@@ -109,7 +108,8 @@ svg {
 }
 
 .navbar_nav .nav_link {
-	display: block;
+	display: flex;
+	align-items: center;
 	padding-top: .425rem;
 	padding-bottom: .425rem;
 }

@@ -14,12 +14,10 @@ const LoggedOutView = props => {
     return (
       <>
         <li className={nav_item}>
-          
           <Link to="/login" className={nav_link}>
           <LoginIcon/> <span>Войти</span>
           </Link>
         </li>
-
         {/* <li className={nav_item}>
           <Link to="/register" className={nav_link}>
             Зарегистрироваться
@@ -77,10 +75,8 @@ const Header = (props) => {
               <HomeIcon/><span>Главная</span>
               </Link>
             </li>
-            
-            <LoggedOutView currentUser={props.currentUser} />
-
-            <LoggedInView currentUser={props.currentUser} />
+              <LoggedOutView currentUser={props.currentUser} />
+              <LoggedInView currentUser={props.currentUser} />
           </ul>
       </nav>
     </header>
