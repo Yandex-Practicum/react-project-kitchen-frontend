@@ -5,6 +5,10 @@ import { connect } from 'react-redux';
 import { CHANGE_TAB } from '../../constants/actionTypes';
 import TabsNavigation from '../Tabs/TabsNavigation/TabsNavigation';
 import TabsItem from '../Tabs/TabItem/TabsItem';
+import styles from './home.module.scss'
+// import {
+//   CHANGE_TAB,
+// } from '../../slices/articleList';
 
 const mapStateToProps = (state) => ({
   ...state.articleList,
@@ -20,23 +24,23 @@ const MainView = (props) => {
   const clickHandler = (type) => {
     props.onTabClick(type, agent.Articles[type], agent.Articles[type]());
   };
-
+  console.log(props.currentUser)
   return (
-    <div className="col-md-9">
+    <section className={styles.content__main}>
       <div className="feed-toggle">
         <TabsNavigation>
-          <TabsItem
-            name="Ваша лента"
-            onTabClick={clickHandler}
-            type="feed" 
-            active={props.tab === 'feed' ? true : false}
-          />
           <TabsItem
             name="Лента"
             onTabClick={clickHandler}
             type="all" 
             active={props.tab === 'all' ? true : false} 
           />
+          {props.currentUser && <TabsItem
+            name="Ваша лента"
+            onTabClick={clickHandler}
+            type="feed" 
+            active={props.tab === 'feed' ? true : false}
+          />}
           <TabsItem 
             name={`#${props.tag}`}
             onTabClick={clickHandler}
@@ -56,7 +60,7 @@ const MainView = (props) => {
         currentPage={props.currentPage}
         token={props.token}
       />
-    </div>
+    </section>
   );
 };
 

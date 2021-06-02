@@ -2,7 +2,7 @@ import ListErrors from '../ListErrors/ListErrors';
 import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
-import styles from './settings.module.css'
+import styles from './settings.module.scss'
 import Button from '../Button/Button'
 import ClipIcon from './ClipIcon'
 import {
@@ -10,6 +10,14 @@ import {
   SETTINGS_PAGE_UNLOADED,
   LOGOUT
 } from '../../constants/actionTypes';
+// import {
+//   SETTINGS_SAVED,
+//   SETTINGS_PAGE_UNLOADED
+// } from '../../slices/settings';
+// import {
+//   LOGOUT
+// } from '../../constants/actionTypes';
+import Form from '../Form/Form';
 
 class SettingsForm extends React.Component {
   constructor() {
@@ -65,61 +73,48 @@ class SettingsForm extends React.Component {
 
   render() {
     return (
-      <form className={styles.form__container} onSubmit={this.submitForm}>
-        <fieldset>
+      <Form onSubmit={this.submitForm}>
+        <div className={styles.url__group}>
+          <input
+            type="text"
+            placeholder="URL изображения профиля"
+            value={this.state.image}
+            onChange={this.updateState('image')} />
+          <ClipIcon />
+        </div>
+        <input
+          type="text"
+          placeholder="Имя пользователя"
+          value={this.state.username}
+          onChange={this.updateState('username')} />
+          
+        <textarea
+          rows="8"
+          placeholder="Информация о Вас"
+          value={this.state.bio}
+          onChange={this.updateState('bio')}>
+        </textarea>
 
-          <fieldset className={[styles.form__group, styles.url__group].join(' ')}>
-            <input
-              className={styles.url__input}
-              type="text"
-              placeholder="URL изображения профиля"
-              value={this.state.image}
-              onChange={this.updateState('image')} />
-            <ClipIcon />
-          </fieldset>
+        <input
+          type="email"
+          placeholder="mail@ya.ru"
+          value={this.state.email}
+          onChange={this.updateState('email')} />
 
-          <fieldset className={styles.form__group}>
-            <input
-              type="text"
-              placeholder="Имя пользователя"
-              value={this.state.username}
-              onChange={this.updateState('username')} />
-          </fieldset>
-
-          <fieldset className={styles.form__group}>
-            <textarea
-              rows="8"
-              placeholder="Информация о Вас"
-              value={this.state.bio}
-              onChange={this.updateState('bio')}>
-            </textarea>
-          </fieldset>
-
-          <fieldset className={styles.form__group}>
-            <input
-              type="email"
-              placeholder="mail@ya.ru"
-              value={this.state.email}
-              onChange={this.updateState('email')} />
-          </fieldset>
-
-          <fieldset className={styles.form__group}>
-            <input
-              type="password"
-              placeholder="Новый пароль"
-              value={this.state.password}
-              onChange={this.updateState('password')} />
-          </fieldset>
-
-          <Button 
-            className={styles.form__button}
-            type="submit"
-            //проверить отправку формы через универсальную кнопку
-            disabled={this.state.inProgress}
-            children="Обновить настройки"
-          />
-        </fieldset>
-      </form>
+        <input
+          type="password"
+          placeholder="Новый пароль"
+          value={this.state.password}
+          onChange={this.updateState('password')} />
+      
+        <Button 
+          type="submit"
+          //проверить отправку формы через универсальную кнопку
+          disabled={this.state.inProgress}
+          children="Обновить настройки"
+        />
+      </Form>
+      
     );
   }
 }
@@ -149,7 +144,7 @@ class Settings extends React.Component {
             currentUser={this.props.currentUser}
             onSubmitForm={this.props.onSubmitForm} />
 
-          <hr />
+          <hr className={styles.br} />
 
           <button
             className={styles.logout__button}

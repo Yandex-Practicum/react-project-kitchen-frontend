@@ -9,23 +9,39 @@ import {
   HOME_PAGE_UNLOADED,
   APPLY_TAG_FILTER
 } from '../../constants/actionTypes';
+// import {
+//   HOME_PAGE_LOADED,
+//   HOME_PAGE_UNLOADED,
+// } from '../../slices/home';
+// import {
+//   HOME_PAGE_LOADED as HOME_ARTICLE_LOADED,
+//   HOME_PAGE_UNLOADED as HOME_ARTICLE_UNLOADED,
+//   APPLY_TAG_FILTER,
+// } from '../../slices/articleList';
+import styles from './home.module.scss'
 
+const {content__container, content__tags, wrapper, tags__title} = styles;
 
 const Promise = global.Promise;
 
 const mapStateToProps = state => ({
   ...state.home,
   appName: state.common.appName,
-  token: state.common.token
+  token: state.common.token,
+  currentUser: state.common.currentUser,
 });
 
 const mapDispatchToProps = dispatch => ({
   onClickTag: (tag, pager, payload) =>
     dispatch({ type: APPLY_TAG_FILTER, tag, pager, payload }),
-  onLoad: (tab, pager, payload) =>
-    dispatch({ type: HOME_PAGE_LOADED, tab, pager, payload }),
-  onUnload: () =>
-    dispatch({  type: HOME_PAGE_UNLOADED })
+  onLoad: (tab, pager, payload) => {
+    dispatch({ type: HOME_PAGE_LOADED, tab, pager, payload });
+    // dispatch({ type: HOME_ARTICLE_LOADED, tab, pager, payload });
+  },
+  onUnload: () => {
+    dispatch({  type: HOME_PAGE_UNLOADED });
+    // dispatch({  type: HOME_ARTICLE_UNLOADED });
+  }
 });
 
 class Home extends React.Component {
@@ -44,30 +60,21 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="home-page">
-
+      <>
         <Banner token={this.props.token} appName={this.props.appName} />
-        <div className="container page">
-          
+        <main className={content__container}>
+          <MainView currentUser={this.props.currentUser}/>
+          <div className={wrapper}>
+            <section className={content__tags}>
+              <p className={tags__title}>Популярные теги</p>
 
-          <div className="row">
-            <MainView />
-
-            <div className="col-md-3">
-              <div className="sidebar">
-
-                <p>Популярные тэги</p>
-
-                <Tags
-                  tags={this.props.tags}
-                  onClickTag={this.props.onClickTag} />
-
-              </div>
-            </div>
+              <Tags
+                tags={this.props.tags}
+                onClickTag={this.props.onClickTag} />
+            </section>
           </div>
-        </div>
-
-      </div>
+        </main>
+      </>
     );
   }
 }

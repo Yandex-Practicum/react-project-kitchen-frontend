@@ -1,0 +1,52 @@
+.wrapper{
+  display: flex;
+  align-items: center;
+  width: 100px;
+  margin-right: auto;
+}
+.text{
+  margin: 0;
+  padding: 0;
+  color:var(--dark);
+}
+.button{
+  margin-left: 20px;
+  position: relative;
+  cursor:pointer;
+  &:focus{
+    border:none;
+    outline:none;
+  }
+  &:before, &:after {
+    content: '';
+    position: absolute;
+  }
+  &:before{
+    width: 40px;
+    height: 20px;
+    background:#a2a393 url(../../assets//ico/moon.svg) no-repeat 80% 50% / 30%;
+    border-radius: 10px;
+    top: -3px;
+    left: -50%;
+    
+  }
+  &:after{
+    transition:.3s left linear;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #a2a393;
+    border-radius: 100%;
+    background:#000;
+    left: -50%;
+    top: -3px;
+  }
+  
+}
+.active{
+  &:after{
+    left: 100%;
+  }
+  &:before{
+    background:#a2a393 url(../../assets//ico/sun.svg) no-repeat 20% 50% / 30%;
+  }
+}

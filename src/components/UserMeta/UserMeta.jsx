@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
-import styles from './user-meta.module.css';
+import styles from './user-meta.module.scss';
 
 const UserMeta = props => {
   let section = '';

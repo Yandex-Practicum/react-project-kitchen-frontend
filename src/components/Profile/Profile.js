@@ -8,7 +8,7 @@ import Button from '../Button/Button';
 import MinusIcon from './MinusIcon';
 import PlusIcon from './PlusIcon';
 
-import styles from './profile.module.css'
+import styles from './profile.module.scss'
 
 import {
   FOLLOW_USER,
@@ -16,6 +16,17 @@ import {
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED
 } from '../../constants/actionTypes';
+// import {
+//   FOLLOW_USER,
+//   UNFOLLOW_USER,
+//   PROFILE_PAGE_LOADED,
+//   PROFILE_PAGE_UNLOADED
+// } from '../../slices/profile';
+// import {
+//   PROFILE_PAGE_LOADED as PROFILE_ARTICLE_LOADED,
+//   PROFILE_PAGE_UNLOADED as PROFILE_ARTICLE_UNLOADED
+// } from '../../slices/articleList';
+import Tags from '../Tags/Tags';
 
 const EditProfileSettings = props => {
   if (props.isUser) {
@@ -85,12 +96,19 @@ const mapDispatchToProps = dispatch => ({
     type: FOLLOW_USER,
     payload: agent.Profile.follow(username)
   }),
-  onLoad: payload => dispatch({ type: PROFILE_PAGE_LOADED, payload }),
+  onLoad: payload => {
+    // dispatch({ type: PROFILE_ARTICLE_LOADED, payload })
+    dispatch({ type: PROFILE_PAGE_LOADED, payload }) 
+    
+  },
   onUnfollow: username => dispatch({
     type: UNFOLLOW_USER,
     payload: agent.Profile.unfollow(username)
   }),
-  onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED })
+  onUnload: () => {
+    // dispatch({ type: PROFILE_ARTICLE_UNLOADED })
+    dispatch({ type: PROFILE_PAGE_UNLOADED })
+  }
 });
 
 class Profile extends React.Component {
@@ -162,10 +180,7 @@ class Profile extends React.Component {
           </div>
         </div>
 
-        <div className="container">
-          <div className="row">
-
-            <div className="col-xs-12 col-md-10 offset-md-1">
+        <div className={styles.content__container}>
 
               <div>
                 {this.renderTabs()}
@@ -176,9 +191,6 @@ class Profile extends React.Component {
                 articles={this.props.articles}
                 articlesCount={this.props.articlesCount}
                 state={this.props.currentPage} />
-            </div>
-
-          </div>
         </div>
 
       </div>

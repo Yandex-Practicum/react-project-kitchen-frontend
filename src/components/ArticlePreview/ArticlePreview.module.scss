@@ -76,9 +76,10 @@
       outline: none;
     }
     &:hover{
+      cursor: pointer;
       svg{
-        fill:var(--red-text);
-        stroke:var(--red-text);
+        fill:var(--red-heart);
+        stroke:var(--red-heart);
       }
     }
     &_favorite{
@@ -89,16 +90,17 @@
       }
     }
     &_unfavorite{
-        color:var(--red-text);
+        color:var(--red-heart);
         svg{
-          fill:var(--red-text);
-          stroke:var(--red-text);
+          fill:var(--red-heart);
+          stroke:var(--red-heart);
         }
     }
   }
   &__title{
     font-size: 24px;
     font-weight: bold;
+    text-decoration: none;
     color: var(--dark-text);
     margin-top: 16px;
     transition: color .5s linear;
@@ -123,11 +125,11 @@
     margin-top: 8px;
   }
   &__more{
+    text-decoration: none;
     color:var(--primary);
     transition:color .5s linear;
     &:hover{
       color:var(--dark-text);
-      text-decoration: none;
     }
   }
   &__footer{

@@ -11,8 +11,9 @@ import {
 } from '../../../constants/actionTypes';
 import Button from "../../Button/Button";
 
-import s from './Register.module.scss';
+import styles from '../Auth.module.scss';
 import clsx from 'clsx';
+import Form from '../../Form/Form';
 
 const mapStateToProps = state => ({ ...state.auth });
 
@@ -53,64 +54,50 @@ class Register extends React.Component {
     const username = this.props.username;
 
     return (
-      <div className="auth-page">
-        <div className="container page">
-          <div className="row">
+      <section className={styles.container}>
+        <h1 className={styles.title}>Зарегистрироваться</h1>
+        <p className={styles.option}>
+          <Link to="/login">
+            Уже есть аккаунт?
+          </Link>
+        </p>
 
-            <div className="col-md-6 offset-md-3 col-xs-12">
-              <h1 className="text-xs-center">Зарегистрироваться</h1>
-              <p className="text-xs-center">
-                <Link to="/login">
-                  Уже есть аккаунт?
-                </Link>
-              </p>
+        <ListErrors errors={this.props.errors} />
 
-              <ListErrors errors={this.props.errors} />
+        <Form onSubmit={this.submitForm(username, email, password)}>
+          <input
+            type="text"
+            placeholder="Никнейм"
+            value={this.props.username || ''}
+            onChange={this.changeUsername} 
+            required
+            maxLength={15}
+          />
 
-              <form onSubmit={this.submitForm(username, email, password)}>
-                <fieldset>
+          <input
+            type="email"
+            placeholder="default@gmail.com"
+            value={this.props.email || ''}
+            onChange={this.changeEmail} 
+            required
+          />
 
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="text"
-                      placeholder="Имя"
-                      value={this.props.username}
-                      onChange={this.changeUsername} />
-                  </fieldset>
+          <input
+            type="password"
+            placeholder="Пароль"
+            value={this.props.password || ''}
+            onChange={this.changePassword} 
+            required
+          />
 
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="email"
-                      placeholder="default@gmail.com"
-                      value={this.props.email}
-                      onChange={this.changeEmail} />
-                  </fieldset>
-
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="password"
-                      placeholder="Пароль"
-                      value={this.props.password}
-                      onChange={this.changePassword} />
-                  </fieldset>
-
-                  <Button
-                    type="submit"
-                    disabled={this.props.inProgress}
-                  >
-                    Зарегистрироваться
-                  </Button>
-
-                </fieldset>
-              </form>
-            </div>
-
-          </div>
-        </div>
-      </div>
+          <Button
+            type="submit"
+            disabled={this.props.inProgress}
+          >
+            Зарегистрироваться
+          </Button>
+        </Form>
+      </section>
     );
   }
 }

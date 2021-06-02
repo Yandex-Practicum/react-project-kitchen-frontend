@@ -11,6 +11,18 @@ import {
   EDITOR_PAGE_UNLOADED,
   UPDATE_FIELD_EDITOR
 } from '../../constants/actionTypes';
+// import {
+//   ADD_TAG,
+//   EDITOR_PAGE_LOADED,
+//   REMOVE_TAG,
+//   EDITOR_PAGE_UNLOADED,
+//   UPDATE_FIELD_EDITOR
+//   // ARTICLE_SUBMITTED,
+
+// } from '../../slices/editor';
+// import {
+//   ARTICLE_SUBMITTED
+// } from '../../slices/settings';
 import clipImg from '../../assets/ico/Clip.svg'
 import s from './Editor.module.scss'
 import Tags from '../Tags/Tags';
@@ -98,59 +110,54 @@ class Editor extends React.Component {
 
   render() {
     return (
-      <div className="editor-page">
-        <div className="container page">
-          <div className="row">
-            <div className="col-md-10 offset-md-1 col-xs-12">
+            <div className={s.container}>
 
               <ListErrors errors={this.props.errors}></ListErrors>
               <h2 className = {s.title}>Новая запись</h2>
               <form className = {s.form}>
-                <fieldset>
-
                   <fieldset className={s.form__item}>
                     <input
                       type="text"
                       placeholder="Название записи"
-                      value={this.props.title}
-                      onChange={this.changeTitle} />
-                  </fieldset>
+                      value={this.props.title || ''}
+                      onChange={this.changeTitle} 
+                      required
+                    />
 
-                  <fieldset className={s.form__item}>
                     <input
                       type="text"
                       placeholder="О чём статья?"
-                      value={this.props.description}
-                      onChange={this.changeDescription} />
-                  </fieldset>
+                      value={this.props.description || ''}
+                      onChange={this.changeDescription} 
+                    />
 
-                  <fieldset className={s.form__item}>
+                    <div className = {s.image_input}>
                     <input
                       type="text"
                       placeholder="Изображение (опционально)"
-                      value={this.props.image}
+                      value={this.props.image || ''}
                       onChange={this.changeImage}
-                      />
-                      <button className = {s.form__clip}>
-                        <img src={clipImg} alt="Clip" />
-                      </button>
-                  </fieldset>
+                    />
+                    <button className = {s.form__clip} disabled>
+                      <img src={clipImg} alt="Clip" />
+                    </button>
+                    </div>
 
-                  <fieldset className={s.form__textarea}>
                     <textarea
                       className="form-control"
                       rows="8"
                       placeholder="Текст записи"
-                      value={this.props.body}
-                      onChange={this.changeBody}>
+                      value={this.props.body || ''}
+                      onChange={this.changeBody}
+                      required>
                     </textarea>
-                  </fieldset>
 
-                  <fieldset className={s.form__item}>
+                    <div className={s.tags_generator}>
                     <input
                       type="text"
-                      placeholder="Тэги (через запятую)"
-                      value={this.props.tagInput}
+                      placeholder="Тэги (введите тег и нажмите enter)"
+                      maxLength={10}
+                      value={this.props.tagInput || ''}
                       onChange={this.changeTagInput}
                       onKeyDown={this.watchForEnter} 
                     />
@@ -158,9 +165,8 @@ class Editor extends React.Component {
                     <Tags tags={this.props.tagList}
                       onClickTag={() => {}} 
                       style="dark"/>
-                      
-                  </fieldset>
-                  <fieldset className = {s.form__item}>
+                    </div>
+
                     <Button
                       className = {s.form__button}
                       onClick = {this.submitForm}
@@ -169,13 +175,9 @@ class Editor extends React.Component {
                     </Button>
                   </fieldset>
 
-                </fieldset>
               </form>
 
             </div>
-          </div>
-        </div>
-      </div>
     );
   }
 }

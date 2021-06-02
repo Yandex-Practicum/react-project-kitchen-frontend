@@ -1,33 +1,29 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
-
-import style from './Header.module.scss';
+import ButtonTheme from '../ButtonTheme/ButtonTheme'
+import styles from './Header.module.scss';
 import clsx from 'clsx';
+import HomeIcon from './HomeIcon';
+import LoginIcon from './LoginIcon';
+import EditIcon from './EditIcon';
 
+const {header, navbar, navbar_brand, nav, navbar_nav, pull_xs_right, nav_item, nav_link, ava_image} = styles;
 
 const LoggedOutView = props => {
   if (!props.currentUser) {
     return (
-      <ul className={clsx(style.nav, style.navbar_nav, style.pull_xs_right)}>
-
-        <li className={style.nav_item}>
-          <Link to="/" className={style.nav_link}>
-            Главная
+      <>
+        <li className={nav_item}>
+          <Link to="/login" className={nav_link}>
+          <LoginIcon/> <span>Войти</span>
           </Link>
         </li>
-        <li className={style.nav_item}>
-          <Link to="/login" className={style.nav_link}>
-            Войти
+        {/* <li className={nav_item}>
+          <Link to="/register" className={nav_link}>
+            Зарегистрироваться
           </Link>
-        </li>
-
-        <li className={style.nav_item}>
-          <Link to="/register" className={style.nav_link}>
-            Зарегестрироваться
-          </Link>
-        </li>
-
-      </ul>
+        </li> */}
+      </>
     );
   }
   return null;
@@ -36,62 +32,54 @@ const LoggedOutView = props => {
 const LoggedInView = props => {
   if (props.currentUser) {
     return (
-      <ul className={clsx(style.nav, style.navbar_nav, style.pull_xs_right)}>
-
-        <li className={style.nav_item}>
-          <Link to="/" className={style.nav_link}>
-          <i className="ion-home"></i>&nbsp;Главная
+      <>
+        <li className={nav_item}>
+          <Link to="/editor" className={nav_link}>
+            <EditIcon/><span>Новая запись</span>
           </Link>
         </li>
 
-        <li className={style.nav_item}>
-          <Link to="/editor" className={style.nav_link}>
-            <i className="ion-compose"></i>&nbsp;Новая запись
-          </Link>
-        </li>
-
-        <li className={style.nav_item}>
-          <Link to="/settings" className={style.nav_link}>
+        {/* <li className={nav_item}>
+          <Link to="/settings" className={nav_link}>
             <i className="ion-gear-a"></i>&nbsp;Настройки
           </Link>
-        </li>
+        </li> */}
 
-        <li className={style.nav_item}>
+        <li className={nav_item}>
           <Link
             to={`/@${props.currentUser.username}`}
-            className={style.nav_link}>
-            <span>
-              <img src={props.currentUser.image ? props.currentUser.image : 'https://static.productionready.io/images/smiley-cyrus.jpg'} alt="ava" className={style.ava_image}/>
-              &nbsp;{props.currentUser.username}
-            </span>
+            className={nav_link}>
+              <img src={props.currentUser.image ? props.currentUser.image : 'https://static.productionready.io/images/smiley-cyrus.jpg'} alt="ava" className={ava_image}/>
+              &nbsp;<p>{props.currentUser.username}</p>
           </Link>
         </li>
-
-      </ul>
+      </>
     );
   }
 
   return null;
 };
 
-interface IHeader {
-  currentUser?: () => void;
-  appName?: string;
-}
-
-const Header: FC<IHeader> = (props) => {
+const Header = (props) => {
+  
   return (
-    <nav className={style.navbar}>
-      <div className={style.container}>
-        <Link to="/" className={style.navbar_brand}>
-          {props.appName.toLowerCase()}
-        </Link>
-
-        <LoggedOutView currentUser={props.currentUser} />
-
-        <LoggedInView currentUser={props.currentUser} />
-      </div>
-    </nav>
+    <header className={header}>
+      <nav className={navbar}>
+          <Link to="/" className={navbar_brand}>
+            {props.appName.toLowerCase()}
+          </Link>
+            <ButtonTheme />
+          <ul className={clsx(nav, navbar_nav, pull_xs_right)}>
+            <li className={nav_item}>
+              <Link to="/" className={nav_link}>
+              <HomeIcon/><span>Главная</span>
+              </Link>
+            </li>
+              <LoggedOutView currentUser={props.currentUser} />
+              <LoggedInView currentUser={props.currentUser} />
+          </ul>
+      </nav>
+    </header>
   );
 }
 

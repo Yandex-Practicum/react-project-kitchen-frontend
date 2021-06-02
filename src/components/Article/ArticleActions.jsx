@@ -3,9 +3,10 @@ import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import { DELETE_ARTICLE } from '../../constants/actionTypes';
-import styles from './article.module.css';
+import styles from './article.module.scss';
 import Button from '../Button/Button'
-import DeleteIcon from '../Comment/DeleteIcon'
+import DeleteIcon from '../Comment/DeleteIcon';
+// import { DELETE_ARTICLE } from '../../slices/common';
 
 const mapDispatchToProps = dispatch => ({
   onClickDelete: payload =>

@@ -1,9 +1,10 @@
 .banner {
   width: 100%;
   height: 276px;
-  background-color: #F4F4F6;
+  background-color: var(--banner-color);
   box-shadow: inset 0px -1px 0px #E0E0E0;
   padding: 32px 0;
+
 }
 
 .banner__container {
@@ -18,7 +19,7 @@
 }
 
 .banner__container h2 {
-  color: #0000FF;
+  color: var(--dark-text);
   font-size: 24px;
   line-height: 28px;
   margin-top: 8px;
@@ -44,7 +45,7 @@
 
 .editbutton {
   display: inline-block;
-  width: 220px;
+  width: 225px;
   float: right;
 }
 .tabs{
@@ -72,4 +73,9 @@
 .link_active{
   border-bottom:2px solid var(--primary);
   color:var(--dark-text);
+}
+
+.content__container {
+  width: 1140px;
+  margin: auto;
 }
