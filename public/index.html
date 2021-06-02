@@ -29,5 +29,16 @@
       To begin the development, run `npm start`.
       To create a production bundle, use `npm run build`.
     -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LdRzAkbAAAAAF3xwlgUVD_bpAK3i64oAA-nnxd7"></script>
+    <script>
+      function onClick(e) {
+        e.preventDefault();
+        grecaptcha.ready(function() {
+          grecaptcha.execute('6LdRzAkbAAAAAF3xwlgUVD_bpAK3i64oAA-nnxd7', {action: 'submit'}).then(function(token) {
+            // Add your logic to submit to your backend server here.
+          });
+        });
+      }
+    </script>
   </body>
 </html>
