@@ -76,9 +76,10 @@
       outline: none;
     }
     &:hover{
+      cursor: pointer;
       svg{
-        fill:var(--red-text);
-        stroke:var(--red-text);
+        fill:var(--red-heart);
+        stroke:var(--red-heart);
       }
     }
     &_favorite{
@@ -89,10 +90,10 @@
       }
     }
     &_unfavorite{
-        color:var(--red-text);
+        color:var(--red-heart);
         svg{
-          fill:var(--red-text);
-          stroke:var(--red-text);
+          fill:var(--red-heart);
+          stroke:var(--red-heart);
         }
     }
   }

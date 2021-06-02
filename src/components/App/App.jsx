@@ -46,6 +46,7 @@ class App extends React.Component {
       tags: '#27292D',
       tagsBorder: '#0B0C0D',
       buttonShadow: 'rgba(255, 144, 14, 0.35)',
+      redHeart:'#F53D5C',
     }
     this.whiteTheme = {
       back: '#ffffff',
@@ -58,6 +59,7 @@ class App extends React.Component {
       tags: 'rgb(241, 241, 241)',
       tagsBorder: '#CCCCCC',
       buttonShadow: 'rgba(0, 0, 255, 0.25)',
+      redHeart:'#F53D5C',
     };
     //'#0000FF'
   }
@@ -89,6 +91,7 @@ componentDidMount() {
       --tags:${this.whiteTheme.tags};
       --tags-border:${this.whiteTheme.tagsBorder};
       --button-shadow:${this.whiteTheme.buttonShadow};
+      --red-heart:${this.whiteTheme.redHeart};
       `
   }
 shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -104,6 +107,7 @@ shouldComponentUpdate(nextProps, nextState, nextContext) {
       --tags:${this.darkTheme.tags};
       --tags-border:${this.darkTheme.tagsBorder};
       --button-shadow:${this.darkTheme.buttonShadow};
+      --red-heart:${this.whiteTheme.redHeart};
       `
     : this.root.style = `--white:${this.whiteTheme.back};
       --dark:${this.whiteTheme.dark};
@@ -115,6 +119,7 @@ shouldComponentUpdate(nextProps, nextState, nextContext) {
       --tags:${this.whiteTheme.tags};
       --tags-border:${this.whiteTheme.tagsBorder};
       --button-shadow:${this.whiteTheme.buttonShadow};
+      --red-heart:${this.whiteTheme.redHeart};
       `;
   return true
 }
