@@ -3,12 +3,6 @@
   display: flex;
 }
 
-.container img {
-  height: 40px;
-  width: 40px;
-  margin-right: 8px;
-}
-
 .info {
   display: flex;
   flex-direction: column;
@@ -19,11 +13,28 @@
   color: var(--dark-text);
   font-size: 16px;
   line-height: 24px;
-  font-weight: 400;
+  font-weight: bold;
+  transition: color .5s linear;
+}
+
+.info__name:hover {
+  color:var(--primary);
+  text-decoration: none;
 }
 
 .info__date {
-  color: #62626A;
+  color: var(--gray-text);
   font-size: 12px;
   line-height: 16px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border:2px solid var(--dark-text);
+  margin-right: 8px;
+  img{
+    max-width:100%;
+    height: auto;
+  }
 }
