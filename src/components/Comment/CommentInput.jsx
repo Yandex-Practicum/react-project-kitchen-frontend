@@ -33,7 +33,8 @@ const CommentInput = (props) => {
           placeholder="Написать комментарий"
           value={body}
           onChange={currentBody}
-          rows="3">
+          rows="3"
+          required>
         </textarea>
       </section>
       <section className={styles.create__footer}>

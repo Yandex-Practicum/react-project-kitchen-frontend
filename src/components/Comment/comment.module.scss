@@ -23,6 +23,7 @@
   border-radius: 0;
   margin: auto;
   margin-bottom: 24px;
+  background-color: var(--comment-container);
 }
 
 .create__header {
@@ -31,13 +32,13 @@
 }
 
 .create__textarea {
-  background-color: var(--banner-color);
   height: 100%;
   width: 100%;
   border: none;
   padding: 24px;
   padding-bottom: 0;
   resize: none;
+  background-color: var(--comment-input);
 }
 
 .create__footer {
@@ -52,9 +53,10 @@
 .published__section {
   min-height: 208px;
   width: 728px;
-  border: 1px solid #CCCCCC;
+  border: 1px solid var(--tags-border);
   margin: auto;
   margin-bottom: 24px;
+  background-color: var(--comment-container);
 }
 
 .published__header {
@@ -99,6 +101,10 @@
   cursor: pointer;
 }
 
+.delete__button path {
+  stroke: var(--dark);
+}
+
 .delete__button:hover path {
   stroke: #F53D5C;
 }
@@ -112,5 +118,5 @@
   word-wrap: break-word;
   font-size: 16px;
   line-height: 24px;
-  color: #62626A;
+  color: var(--gray-text);
 }

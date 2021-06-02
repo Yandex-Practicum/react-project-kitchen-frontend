@@ -74,6 +74,18 @@ svg {
 	margin-right: 8px;
 }
 
+.nav_link:hover img {
+	border-color: var(--primary);
+}
+
+.nav_link:focus img {
+	border-color: var(--primary);
+}
+
+.nav_link:active img {
+	border-color: var(--primary);
+}
+
 .nav_link:focus{
 	text-decoration: none;
 	color: var(--primary);

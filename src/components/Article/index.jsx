@@ -56,7 +56,7 @@ class Article extends React.Component {
               <div className={styles.page__text} dangerouslySetInnerHTML={markup}></div>
 
               <div className={styles.page__taglist}>
-                <Tags tags={this.props.article.tagList} onClickTag={() => {}} style="outline" />
+                <Tags tags={this.props.article.tagList} onClickTag={() => {}} style="grey" />
               </div>
             </div>
           </div>
