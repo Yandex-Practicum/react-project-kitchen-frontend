@@ -29,6 +29,10 @@
 .create__header {
   background-color: #F4F4F6;
   height: 120px;
+  position: relative;
+  button{
+    position: absolute;
+  }
 }
 
 .create__textarea {
