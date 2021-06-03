@@ -94,10 +94,10 @@
   }
   &__more{
     text-decoration: none;
-    color:var(--primary);
+    color:var(--preview-link);
     transition:color .5s linear;
     &:hover{
-      color:var(--dark-text);
+      color:var(--preview-link-hover);
     }
   }
   &__footer{
