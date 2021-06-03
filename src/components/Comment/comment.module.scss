@@ -15,6 +15,16 @@
 
 .logaut__text {
   text-align: center;
+  color: var(--gray-text);
+}
+
+.logaut__text a {
+  color: var(--dark);
+}
+
+.logaut__text a:hover {
+  color: var(--primary);
+  text-decoration: none;
 }
 
 .create__form {
