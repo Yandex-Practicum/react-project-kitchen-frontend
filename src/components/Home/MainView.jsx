@@ -14,6 +14,7 @@ const mapStateToProps = (state) => ({
   ...state.articleList,
   tags: state.home.tags,
   token: state.common.token,
+  currentUser: state.common.currentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -59,6 +60,7 @@ const MainView = (props) => {
         articlesCount={props.articlesCount}
         currentPage={props.currentPage}
         token={props.token}
+        currentUser={props.currentUser}
       />
     </section>
   );

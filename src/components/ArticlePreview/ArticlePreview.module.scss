@@ -58,11 +58,18 @@
       }
     }
     &_unfavorite{
-        color:var(--red-heart);
-        svg{
-          fill:var(--red-heart);
-          stroke:var(--red-heart);
-        }
+      color:var(--red-heart);
+      svg{
+        fill:var(--red-heart);
+        stroke:var(--red-heart);
+      }
+    }
+    &_logout:hover{
+      cursor: default;
+      svg{
+        fill: var(--white);
+        stroke:var(--dark-text);
+      }
     }
   }
   &__title{

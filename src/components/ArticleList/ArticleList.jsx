@@ -24,7 +24,7 @@ const ArticleList = props => {
       {
         props.articles.map(article => {
           return (
-            <ArticlePreview article={article} key={article.slug} token={props.token}/>
+            <ArticlePreview article={article} key={article.slug} token={props.token} currentUser={props.currentUser}/>
           );
         })
       }
