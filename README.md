@@ -47,18 +47,22 @@
 **Сергей Рогальский**
 * [github/Sergey-Rogalskiy](https://github.com/Sergey-Rogalskiy)
 * [vk/sergo](https://vk.com/)
+
 **Никита Кандзюба**
 * [github/Der200](https://github.com/Der200)
 * [vk/nikita](https://vk.com/)
+
 **Александр Иванин**
 * [github/ivalexandr](https://github.com/ivalexandr)
 * [vk/alex](https://vk.com/)
+
 **Егор Шкиря**
 * [github/zuhijan](https://github.com/zuhijan)
 * [vk/egor](https://vk.com/)
+
 **Юрий Беляков**
 
 
 ## You may also like..
 Схожие проекты наших друзей по бета-когорте:
-* 
+**[PCDevs и "Алкостопом по галактике"](https://github.com/PCDevs/react-project-kitchen-frontend)**
