@@ -136,7 +136,7 @@ class Editor extends React.Component {
                     <div className = {s.image_input}>
                     <input
                       type="text"
-                      placeholder="Изображение (опционально)"
+                      placeholder="URL изображения"
                       value={this.props.image || ''}
                       onChange={this.changeImage}
                     />

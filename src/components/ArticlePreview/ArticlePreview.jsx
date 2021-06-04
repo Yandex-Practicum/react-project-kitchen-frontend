@@ -50,7 +50,7 @@ const ArticlePreview = (props) => {
         <div className={s.article__header}>
           <UserMeta section='article' article={props.article} />
           <div>
-            <button className={`${s.article__btn} ${favoriteButtonClass}`} onClick={handleClick} disabled={disabled}>
+            <button className={props.currentUser ? `${s.article__btn} ${favoriteButtonClass}` : `${s.article__btn} ${favoriteButtonClass} ${s.article__btn_logout}`} onClick={handleClick} disabled={disabled}>
               {article.favoritesCount > 0 ? article.favoritesCount : null} <Heart />
             </button>
           </div>

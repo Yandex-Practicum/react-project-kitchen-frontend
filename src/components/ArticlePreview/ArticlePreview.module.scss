@@ -58,11 +58,18 @@
       }
     }
     &_unfavorite{
-        color:var(--red-heart);
-        svg{
-          fill:var(--red-heart);
-          stroke:var(--red-heart);
-        }
+      color:var(--red-heart);
+      svg{
+        fill:var(--red-heart);
+        stroke:var(--red-heart);
+      }
+    }
+    &_logout:hover{
+      cursor: default;
+      svg{
+        fill: var(--white);
+        stroke:var(--dark-text);
+      }
     }
   }
   &__title{
@@ -94,10 +101,10 @@
   }
   &__more{
     text-decoration: none;
-    color:var(--primary);
+    color:var(--preview-link);
     transition:color .5s linear;
     &:hover{
-      color:var(--dark-text);
+      color:var(--preview-link-hover);
     }
   }
   &__footer{

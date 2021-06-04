@@ -49,7 +49,8 @@ class App extends React.Component {
       redHeart:'#F53D5C',
       deleteBtn: '',
       commentContainer: '#27292D',
-      commentInput: '#2D2F34'
+      commentInput: '#2D2F34',
+      previewLink: '#5299ff',
     }
     this.whiteTheme = {
       back: '#ffffff',
@@ -65,7 +66,8 @@ class App extends React.Component {
       redHeart:'#F53D5C',
       deleteBtn: '',
       commentContainer: '#ffffff',
-      commentInput: '#f4f4f6'
+      commentInput: '#f4f4f6',
+      previewLink: '#0000FF',
     };
   }
   UNSAFE_componentWillReceiveProps(nextProps) {
@@ -100,6 +102,7 @@ componentDidMount() {
       --delete-btn:${this.whiteTheme.deleteBtn};
       --comment-container:${this.whiteTheme.commentContainer};
       --comment-input:${this.whiteTheme.commentInput};
+      --preview-link:${this.whiteTheme.previewLink};
       `
   }
 shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -119,6 +122,8 @@ shouldComponentUpdate(nextProps, nextState, nextContext) {
       --delete-btn:${this.darkTheme.deleteBtn};
       --comment-container:${this.darkTheme.commentContainer};
       --comment-input:${this.darkTheme.commentInput};
+      --preview-link:${this.darkTheme.previewLink};
+      --preview-link-hover:${this.darkTheme.primary};
       `
     : this.root.style = `--white:${this.whiteTheme.back};
       --dark:${this.whiteTheme.dark};
@@ -134,6 +139,8 @@ shouldComponentUpdate(nextProps, nextState, nextContext) {
       --delete-btn:${this.whiteTheme.deleteBtn};
       --comment-container:${this.whiteTheme.commentContainer};
       --comment-input:${this.whiteTheme.commentInput};
+      --preview-link:${this.whiteTheme.previewLink};
+      --preview-link-hover:${this.whiteTheme.darkText};
       `;
   return true
 }

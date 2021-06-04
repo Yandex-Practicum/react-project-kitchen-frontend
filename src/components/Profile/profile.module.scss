@@ -67,8 +67,8 @@
   color: var(--gray-text);
 }
 .link:hover{
-  border-bottom:2px solid var(--primary);
   text-decoration: none;
+  color: var(--primary);
 }
 .link_active{
   border-bottom:2px solid var(--primary);
