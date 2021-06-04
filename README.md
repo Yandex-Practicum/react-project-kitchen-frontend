@@ -1,4 +1,4 @@
-# sum42 - looking for exepience and fostering your mastery
+# sum42 - looking for experience and fostering a mastery
 ![sum42 logo](https://i.ibb.co/N1SjczS/Screenshot-3.png "sum42 logo")
 
 # Проектная кухня
