@@ -65,4 +65,10 @@
 
 ## You may also like..
 Схожие проекты наших друзей по бета-когорте:
+
 **[PCDevs и "Алкостопом по галактике"](https://github.com/PCDevs/react-project-kitchen-frontend)**
+
+**[GastroManiacs и "Pickled Bananas"](https://github.com/PCDevs/react-project-kitchen-frontend)**
+https://pickledbananas.com/
+
+**[This Is React Sparta и "Old Star Games"](https://github.com/VitalyBibik/kitchen_project)**
