@@ -1,6 +1,7 @@
 # sum42 - looking for exepience and fostering your mastery
 
 ![sum42 logo](https://ibb.co/Ypx5K0h "sum42 logo")
+![sum42 logo](https://ibb.co/Xy8scT8 "sum42 logo")
 
 # Проектная кухня
 
