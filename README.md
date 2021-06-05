@@ -63,6 +63,7 @@
 Схожие проекты наших друзей по бета-когорте:
 
 **[PCDevs и "Алкостопом по галактике"](https://github.com/PCDevs/react-project-kitchen-frontend)**
+http://pcdevs.space/
 
 **[GastroManiacs и "Pickled Bananas"](https://github.com/PCDevs/react-project-kitchen-frontend)**
 https://pickledbananas.com/
