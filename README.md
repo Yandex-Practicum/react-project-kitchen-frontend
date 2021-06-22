@@ -56,8 +56,6 @@
 **Егор Шкиря**
 * [github/zuhijan](https://github.com/zuhijan)
 
-**Юрий Беляков**
-
 
 ## You may also like..
 Схожие проекты наших друзей по бета-когорте:
