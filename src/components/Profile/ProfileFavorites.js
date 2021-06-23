@@ -49,7 +49,7 @@ class ProfileFavorites extends Profile {
           <Link
             className={s.link}
             to={`/@${this.props.profile.username}`}>
-            Мои записи
+            {this.props.currentUser !== null && (this.props.currentUser.username === this.props.profile.username) ? 'Мои записи' : 'Записи пользователя'}
           </Link>
         </li>
 
