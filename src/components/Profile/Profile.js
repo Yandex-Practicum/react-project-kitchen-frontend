@@ -130,7 +130,7 @@ class Profile extends React.Component {
           <Link
             className={`${styles.link} ${styles.link_active}`}
             to={`/@${this.props.profile.username}`}>
-            Ваши записи
+            {this.props.currentUser.username === this.props.profile.username ? 'Ваши записи' : 'Записи пользователя'}
           </Link>
         </li>
 
