@@ -138,7 +138,6 @@ class Profile extends React.Component {
           <Link
             className={`${styles.link} ${styles.link_active}`}
             to={`/@${this.props.profile.username}`}>
-            {this.props.currentUser === null && 'Записи пользователя'}
             {this.props.currentUser !== null && (this.props.currentUser.username === this.props.profile.username) ? 'Мои записи' : 'Записи пользователя'}
           </Link>
         </li>
