@@ -13,41 +13,139 @@
   text-align: center;
 }
 
+.settings {
+  display: flex;
+  justify-content: center;
+  height: 24px;
+  margin: 0 auto;
+  margin-bottom: 16px;
+}
+
+.editbutton {
+  width: 24px;
+  margin-right: 16px;
+}
+
+.editbutton svg:hover path {
+  stroke: var(--primary);
+  transition:all .5s linear;
+}
+
+.profile__name {
+  color: var(--dark);
+  font-size: 24px;
+  line-height: 28px;
+  margin-bottom: 16px;
+  height: 100%;
+}
+
+.profile__name a {
+  color: inherit;
+}
+
+.profile__name a:hover {
+  color: var(--primary);
+  text-decoration: none;
+  transition:all .5s linear;
+}
+
 .banner__container img {
   width: 120px;
   height: 120px;
 }
 
-.banner__container h2 {
-  color: var(--dark-text);
-  font-size: 24px;
-  line-height: 28px;
-  margin-top: 8px;
-  margin-bottom: 16px;
+.main__block {
+  display: flex;
 }
 
-.followbutton {
-  float: right;
+.main__block img {
+  margin: auto 0;
+  margin-right: 24px;
 }
+
+.main__block section {
+  text-align: start;
+  margin: 0 24px;
+  
+  color: var(--gray-text);
+}
+
+.main__block b {
+  font-weight: 600;
+}
+
+.graph__block {
+  width: 350px;
+  height: 150px;
+  border: 1px dashed var(--gray-text);
+  border-radius: 5%;
+  margin: auto 0;
+  margin-left: 24px;
+}
+
+.graph__block p {
+  display: block;
+  height: 24px;
+  margin-top: 60px;
+  
+  color: var(--gray-text);
+}
+
+.main__block h3 {
+  border-bottom: solid 1px;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+// .followbutton {
+//   float: right;
+// }
 
 .followbutton svg {
   width: 24px;
   height: 24px;
+
+  cursor: pointer;
+  fill: none;
+  stroke: var(--dark);
+
   margin-right: 8px;
   display: inline;
   vertical-align: middle;
 }
 
-.followbutton span {
-  display: inline;
-  vertical-align: middle;
-} 
-
-.editbutton {
-  display: inline-block;
-  width: 225px;
-  float: right;
+.followbutton svg:hover {
+  fill: var(--red-heart);
+  stroke: var(--red-heart);
+  transition:all .5s linear;
 }
+
+.favorite {
+  color: var(--dark);
+  svg {
+    fill: none;
+    stroke: var(--dark);
+  }
+}
+
+.unfavorite {
+  color: var(--red-heart);
+  svg {
+    fill: var(--red-heart);
+    stroke: var(--red-heart);
+  }
+}
+
+// .followbutton span {
+//   display: inline;
+//   vertical-align: middle;
+// } 
+
+// .editbutton {
+//   display: inline-block;
+//   width: 225px;
+//   float: right;
+// }
 .tabs{
   margin-top: 32px;
   padding: 0;

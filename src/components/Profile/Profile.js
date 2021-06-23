@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import Button from '../Button/Button';
 import MinusIcon from './MinusIcon';
 import PlusIcon from './PlusIcon';
+import EditIcon from './EditIcon';
+import HeartIcon from '../Heart/Heart';
 
 import styles from './profile.module.scss'
 
@@ -32,11 +34,13 @@ const EditProfileSettings = props => {
   if (props.isUser) {
     return (
       <Link
+        alt='Настройки профиля'
         to="/settings"
         className={styles.editbutton}>
-        <Button 
+        <EditIcon/>
+        {/* <Button 
           className={styles.editbutton}
-          children={'Редактировать профиль'} />
+          children={'Редактировать профиль'} /> */}
 
       </Link>
     );
@@ -68,7 +72,10 @@ const FollowUserButton = props => {
 
   return (
     props.currentUser && (
-    <Button 
+    <div onClick={handleClick} className={`${styles.followbutton} ${props.user.following ? styles.favorite : styles.unfavorite}`}>
+      <HeartIcon/>
+    </div>
+    /* <Button 
       className={styles.followbutton}
       onClick={handleClick}>
       {props.user.following ? 
@@ -81,7 +88,8 @@ const FollowUserButton = props => {
           <span>Подписаться</span>
         </>
       }
-    </Button>)
+    </Button>) */
+    )
   );
 };
 
@@ -158,26 +166,42 @@ class Profile extends React.Component {
       <div className="profile-page">
 
         <div className={styles.banner}>
-          <div className={styles.banner__container}>
-            <div>
+          <section className={styles.banner__container}>
+            <div className={styles.settings}>
+              <EditProfileSettings isUser={isUser} />
+              <FollowUserButton
+                isUser={isUser}
+                user={profile}
+                follow={this.props.onFollow}
+                unfollow={this.props.onUnfollow}
+                currentUser={this.props.currentUser}
+              />
+              <h2 className={styles.profile__name}><Link to={`/@${profile.username}`}>{profile.username}</Link></h2>
+            </div>
+            <div className={styles.main__block}>
+              <img src={profile.image} className="user-img" alt={profile.username} />
+              <section className={styles.stats__block}>
+                <h3>Статистика</h3>
+                <p><b>Рейтинг:</b> 0,87 (4 место)</p>
+                <p><b>Статьи:</b> 7 (0,03)</p>
+                <p><b>Задачи:</b> 12 (0,15)</p>
+              </section>
+              
+              <section className={styles.employment__block}>
+                <h3>Блок трудоустройства</h3>
+                <p><b>Дата регистрации:</b> 10.06.2021г.</p>
+                <p><b>Репозиторий:</b> ссылка</p>
+                <p><b>Резюме:</b> ссылка</p>
+              </section>
+              <div className={styles.graph__block}><p>Место под график активности</p></div>
+            </div>
               <div className="">
 
-                <img src={profile.image} className="user-img" alt={profile.username} />
-                <h2>{profile.username}</h2>
-                
 
-                <EditProfileSettings isUser={isUser} />
-                <FollowUserButton
-                  isUser={isUser}
-                  user={profile}
-                  follow={this.props.onFollow}
-                  unfollow={this.props.onUnfollow}
-                  currentUser={this.props.currentUser}
-                  />
 
               </div>
-            </div>
-          </div>
+            {/* </div> */}
+          </section>
         </div>
 
         <div className={styles.content__container}>
