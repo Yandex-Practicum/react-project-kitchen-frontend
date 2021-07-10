@@ -120,7 +120,7 @@
   transition:all .5s linear;
 }
 
-.favorite {
+.unfavorite {
   color: var(--dark);
   svg {
     fill: none;
@@ -128,7 +128,7 @@
   }
 }
 
-.unfavorite {
+.favorite {
   color: var(--red-heart);
   svg {
     fill: var(--red-heart);
@@ -176,4 +176,5 @@
 .content__container {
   width: 1140px;
   margin: auto;
+  margin-top: 32px;
 }
