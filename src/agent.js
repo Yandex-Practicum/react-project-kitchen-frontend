@@ -3,7 +3,7 @@ import _superagent from 'superagent';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT = 'https://api.sum42.ru/api';
+const API_ROOT = 'http://49.12.104.175/api';
 
 const encode = encodeURIComponent;
 const responseBody = res => res.body;
