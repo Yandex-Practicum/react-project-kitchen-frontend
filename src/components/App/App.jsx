@@ -9,7 +9,6 @@ import Editor from '../Editor/Editor';
 import Home from '../Home';
 import Login from '../Auth/Login/Login';
 import Profile from '../Profile/Profile';
-import ProfileFavorites from '../Profile/ProfileFavorites';
 import Register from '../Auth/Register/Register';
 import Settings from '../Settings/Settings';
 import { store } from '../../store';
@@ -159,7 +158,6 @@ shouldComponentUpdate(nextProps, nextState, nextContext) {
             <Route path="/editor" component={Editor} />
             <Route path="/article/:id" component={Article} />
             <Route path="/settings" component={Settings} />
-            <Route path="/@:username/favorites" component={ProfileFavorites} />
             <Route path="/@:username" component={Profile} />
             </Switch>
         </>

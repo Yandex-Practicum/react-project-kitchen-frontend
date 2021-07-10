@@ -1,12 +1,8 @@
 import ArticleList from '../ArticleList/ArticleList';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import agent from '../../agent';
 import { connect } from 'react-redux';
-
-import Button from '../Button/Button';
-import MinusIcon from './MinusIcon';
-import PlusIcon from './PlusIcon';
 import EditIcon from './EditIcon';
 import HeartIcon from '../Heart/Heart';
 
@@ -16,7 +12,8 @@ import {
   FOLLOW_USER,
   UNFOLLOW_USER,
   PROFILE_PAGE_LOADED,
-  PROFILE_PAGE_UNLOADED
+  PROFILE_PAGE_UNLOADED,
+  CHANGE_TAB
 } from '../../constants/actionTypes';
 // import {
 //   FOLLOW_USER,
@@ -29,6 +26,8 @@ import {
 //   PROFILE_PAGE_UNLOADED as PROFILE_ARTICLE_UNLOADED
 // } from '../../slices/articleList';
 import Tags from '../Tags/Tags';
+import TabsNavigation from '../Tabs/TabsNavigation/TabsNavigation';
+import TabsItem from '../Tabs/TabItem/TabsItem';
 
 const EditProfileSettings = props => {
   if (props.isUser) {
@@ -38,16 +37,12 @@ const EditProfileSettings = props => {
         to="/settings"
         className={styles.editbutton}>
         <EditIcon/>
-        {/* <Button 
-          className={styles.editbutton}
-          children={'Редактировать профиль'} /> */}
-
       </Link>
     );
   }
   return null;
 };
-        //<i className="ion-gear-a"></i> Редактировать профиль
+
 const FollowUserButton = props => {
   if (props.isUser) {
     return null;
@@ -75,20 +70,6 @@ const FollowUserButton = props => {
     <div onClick={handleClick} className={`${styles.followbutton} ${props.user.following ? styles.favorite : styles.unfavorite}`}>
       <HeartIcon/>
     </div>
-    /* <Button 
-      className={styles.followbutton}
-      onClick={handleClick}>
-      {props.user.following ? 
-        <>
-          <MinusIcon />
-          <span>Отписаться</span>  
-        </> :
-        <>
-          <PlusIcon />
-          <span>Подписаться</span>
-        </>
-      }
-    </Button>) */
     )
   );
 };
@@ -119,107 +100,103 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-class Profile extends React.Component {
-  componentWillMount() {
-    this.props.onLoad(Promise.all([
-      agent.Profile.get(this.props.match.params.username),
-      agent.Articles.byAuthor(this.props.match.params.username)
+ 
+
+const Profile = (props) => {
+  const [tab, setTab] = useState('byAuthor');
+
+  useEffect(() => {
+    props.onLoad(Promise.all([
+      agent.Profile.get(props.match.params.username),
+      agent.Articles.byAuthor(props.match.params.username),
     ]));
-  }
 
-  componentWillUnmount() {
-    this.props.onUnload();
-  }
-
-  renderTabs() {
-    return (
-      <ul className={styles.tabs}>
-        <li className={styles.item}>
-          <Link
-            className={`${styles.link} ${styles.link_active}`}
-            to={`/@${this.props.profile.username}`}>
-            {this.props.currentUser !== null && (this.props.currentUser.username === this.props.profile.username) ? 'Мои записи' : 'Записи пользователя'}
-          </Link>
-        </li>
-
-        <li className={styles.item}>
-          <Link
-            className={styles.link}
-            to={`/@${this.props.profile.username}/favorites`}>
-            Любимые записи
-          </Link>
-        </li>
-      </ul>
-    );
-  }
-
-  render() {
-    const profile = this.props.profile;
-    if (!profile) {
-      return null;
+    return () => {
+      props.onUnload();
     }
+  }, [])
 
-    const isUser = this.props.currentUser &&
-      this.props.profile.username === this.props.currentUser.username;
+  const clickHandler = (type) => {
+    if (type === 'byAuthor') {
+      props.onLoad(Promise.all([
+        agent.Profile.get(props.match.params.username), agent.Articles.byAuthor(props.match.params.username)
+      ]))
+    } else {
+      props.onLoad(Promise.all([
+        agent.Profile.get(props.match.params.username), agent.Articles.favoritedBy(props.match.params.username)
+      ]))
+    }
+    setTab(type);
+  };
 
-    return (
-      <div className="profile-page">
-
-        <div className={styles.banner}>
-          <section className={styles.banner__container}>
-            <div className={styles.settings}>
-              <EditProfileSettings isUser={isUser} />
-              <FollowUserButton
-                isUser={isUser}
-                user={profile}
-                follow={this.props.onFollow}
-                unfollow={this.props.onUnfollow}
-                currentUser={this.props.currentUser}
-              />
-              <h2 className={styles.profile__name}><Link to={`/@${profile.username}`}>{profile.username}</Link></h2>
-            </div>
-            <div className={styles.main__block}>
-              <img src={profile.image} className="user-img" alt={profile.username} />
-              <section className={styles.stats__block}>
-                <h3>Статистика</h3>
-                <p><b>Рейтинг:</b> 0,87 (4 место)</p>
-                <p><b>Статьи:</b> 7 (0,03)</p>
-                <p><b>Задачи:</b> 12 (0,15)</p>
-              </section>
-              
-              <section className={styles.employment__block}>
-                <h3>Блок трудоустройства</h3>
-                <p><b>Дата регистрации:</b> 10.06.2021г.</p>
-                <p><b>Репозиторий:</b> ссылка</p>
-                <p><b>Резюме:</b> ссылка</p>
-              </section>
-              <div className={styles.graph__block}><p>Место под график активности</p></div>
-            </div>
-              <div className="">
-
-
-
-              </div>
-            {/* </div> */}
-          </section>
-        </div>
-
-        <div className={styles.content__container}>
-
-              <div>
-                {this.renderTabs()}
-              </div>
-
-              <ArticleList
-                pager={this.props.pager}
-                articles={this.props.articles}
-                articlesCount={this.props.articlesCount}
-                state={this.props.currentPage} />
-        </div>
-
-      </div>
-    );
+  const profile = props.profile;
+  if (!profile) {
+    return null;
   }
+
+  const isUser = props.currentUser &&
+    props.profile.username === props.currentUser.username;
+
+  return (
+    <div className="profile-page">
+      <div className={styles.banner}>
+        <section className={styles.banner__container}>
+          <div className={styles.settings}>
+            <EditProfileSettings isUser={isUser} />
+            <FollowUserButton
+              isUser={isUser}
+              user={profile}
+              follow={props.onFollow}
+              unfollow={props.onUnfollow}
+              currentUser={props.currentUser}
+            />
+            <h2 className={styles.profile__name}><Link to={`/@${profile.username}`}>{profile.username}</Link></h2>
+          </div>
+          <div className={styles.main__block}>
+            <img src={profile.image} className="user-img" alt={profile.username} />
+            <section className={styles.stats__block}>
+              <h3>Статистика</h3>
+              <p><b>Рейтинг:</b> 0,87 (4 место)</p>
+              <p><b>Статьи:</b> 7 (0,03)</p>
+              <p><b>Задачи:</b> 12 (0,15)</p>
+            </section>
+            
+            <section className={styles.employment__block}>
+              <h3>Блок трудоустройства</h3>
+              <p><b>Дата регистрации:</b> 10.06.2021г.</p>
+              <p><b>Репозиторий:</b> ссылка</p>
+              <p><b>Резюме:</b> ссылка</p>
+            </section>
+            <div className={styles.graph__block}><p>Место под график активности</p></div>
+          </div>
+        </section>
+      </div>
+
+      <div className={styles.content__container}>
+        <div>
+          <TabsNavigation>
+            <TabsItem
+              name={props.currentUser.username === props.profile.username ? "Мои записи" : "Записи пользователя"}
+              type="byAuthor"
+              onTabClick={clickHandler}
+              active={tab === 'byAuthor' ? true : false} 
+            />
+            <TabsItem
+              name="Любимые записи"
+              type="favoritedBy" 
+              onTabClick={clickHandler}
+              active={tab === 'favoritedBy' ? true : false} 
+            />
+          </TabsNavigation>
+        </div>
+        <ArticleList
+          pager={props.pager}
+          articles={props.articles}
+          articlesCount={props.articlesCount}
+          state={props.currentPage} />
+      </div>
+    </div>
+  );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

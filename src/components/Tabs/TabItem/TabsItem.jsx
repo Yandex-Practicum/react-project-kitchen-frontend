@@ -5,6 +5,7 @@ const TabsItem = ({name, onTabClick, type, active, hide = false}) => {
   const handleClick = (e) => {
     e.preventDefault()
     onTabClick && onTabClick(type)
+    console.log(type)
   }
   if(hide) return null
 
