@@ -2,14 +2,11 @@ import ListErrors from '../ListErrors/ListErrors';
 import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
-import styles from './settings.module.scss'
-import Button from '../Button/Button'
-import ClipIcon from './ClipIcon'
-import {
-  SETTINGS_SAVED,
-  SETTINGS_PAGE_UNLOADED,
-  LOGOUT
-} from '../../constants/actionTypes';
+import styles from './settings.module.scss';
+import Button from '../Button/Button';
+import ClipIcon from './ClipIcon';
+import { Link } from 'react-router-dom';
+import { SETTINGS_SAVED, SETTINGS_PAGE_UNLOADED, LOGOUT } from '../../constants/actionTypes';
 // import {
 //   SETTINGS_SAVED,
 //   SETTINGS_PAGE_UNLOADED
@@ -28,16 +25,16 @@ class SettingsForm extends React.Component {
       username: '',
       bio: '',
       email: '',
-      password: ''
+      password: '',
     };
 
-    this.updateState = field => ev => {
+    this.updateState = (field) => (ev) => {
       const state = this.state;
       const newState = Object.assign({}, state, { [field]: ev.target.value });
       this.setState(newState);
     };
 
-    this.submitForm = ev => {
+    this.submitForm = (ev) => {
       ev.preventDefault();
 
       const user = Object.assign({}, this.state);
@@ -55,19 +52,21 @@ class SettingsForm extends React.Component {
         image: this.props.currentUser.image || '',
         username: this.props.currentUser.username,
         bio: this.props.currentUser.bio,
-        email: this.props.currentUser.email
+        email: this.props.currentUser.email,
       });
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentUser) {
-      this.setState(Object.assign({}, this.state, {
-        image: nextProps.currentUser.image || '',
-        username: nextProps.currentUser.username,
-        bio: nextProps.currentUser.bio,
-        email: nextProps.currentUser.email
-      }));
+      this.setState(
+        Object.assign({}, this.state, {
+          image: nextProps.currentUser.image || '',
+          username: nextProps.currentUser.username,
+          bio: nextProps.currentUser.bio,
+          email: nextProps.currentUser.email,
+        }),
+      );
     }
   }
 
@@ -79,82 +78,74 @@ class SettingsForm extends React.Component {
             type="text"
             placeholder="URL изображения профиля"
             value={this.state.image}
-            onChange={this.updateState('image')} />
+            onChange={this.updateState('image')}
+          />
           <ClipIcon />
         </div>
         <input
           type="text"
           placeholder="Имя пользователя"
           value={this.state.username}
-          onChange={this.updateState('username')} />
-          
+          onChange={this.updateState('username')}
+        />
+
         <textarea
           rows="8"
           placeholder="Информация о Вас"
           value={this.state.bio}
-          onChange={this.updateState('bio')}>
-        </textarea>
+          onChange={this.updateState('bio')}></textarea>
 
-        <input
-          type="email"
-          placeholder="mail@ya.ru"
-          value={this.state.email}
-          onChange={this.updateState('email')} />
+        <input type="email" placeholder="mail@ya.ru" value={this.state.email} onChange={this.updateState('email')} />
 
         <input
           type="password"
           placeholder="Новый пароль"
           value={this.state.password}
-          onChange={this.updateState('password')} />
-      
-        <Button 
+          onChange={this.updateState('password')}
+        />
+
+        <Button
           type="submit"
           //проверить отправку формы через универсальную кнопку
           disabled={this.state.inProgress}
           children="Обновить настройки"
         />
       </Form>
-      
     );
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   ...state.settings,
-  currentUser: state.common.currentUser
+  currentUser: state.common.currentUser,
 });
 
-const mapDispatchToProps = dispatch => ({
-  onClickLogout: () => dispatch({ type: LOGOUT }),
-  onSubmitForm: user =>
-    dispatch({ type: SETTINGS_SAVED, payload: agent.Auth.save(user) }),
-  onUnload: () => dispatch({ type: SETTINGS_PAGE_UNLOADED })
+const mapDispatchToProps = (dispatch) => ({
+  onClickLogout: () => {
+    dispatch({ type: LOGOUT });
+  },
+  onSubmitForm: (user) => dispatch({ type: SETTINGS_SAVED, payload: agent.Auth.save(user) }),
+  onUnload: () => dispatch({ type: SETTINGS_PAGE_UNLOADED }),
 });
 
-class Settings extends React.Component {
-  render() {
-    return (
-      <section className={styles.page}>
-        <div className={styles.page__container}>
-          <h1>Ваши настройки</h1>
+const Settings = (props) => {
+  return (
+    <section className={styles.page}>
+      <div className={styles.page__container}>
+        <h1>Ваши настройки</h1>
 
-          <ListErrors errors={this.props.errors}></ListErrors>
+        <ListErrors errors={props.errors}></ListErrors>
 
-          <SettingsForm
-            currentUser={this.props.currentUser}
-            onSubmitForm={this.props.onSubmitForm} />
+        <SettingsForm currentUser={props.currentUser} onSubmitForm={props.onSubmitForm} />
 
-          <hr className={styles.br} />
+        <hr className={styles.br} />
 
-          <button
-            className={styles.logout__button}
-            onClick={this.props.onClickLogout}>
-            Выйти из аккаунта
-          </button>
-        </div>
-      </section>
-    );
-  }
-}
+        <Link className={styles.logout__button} onClick={props.onClickLogout} to={`/`}>
+          Выйти из аккаунта
+        </Link>
+      </div>
+    </section>
+  );
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

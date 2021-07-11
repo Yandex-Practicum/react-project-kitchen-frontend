@@ -30,6 +30,9 @@ const ArticlePreview = (props) => {
   const favoriteButtonClass = article.favorited ? FAVORITED_CLASS : NOT_FAVORITED_CLASS;
 
   const handleClick = (ev) => {
+    if (!props.currentUser) {
+      return;
+    }
     ev.preventDefault();
     if (article.favorited) {
       props.unfavorite(article.slug);

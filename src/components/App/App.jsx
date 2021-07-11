@@ -150,7 +150,6 @@ class App extends React.Component {
           <Header appName={this.props.appName} currentUser={this.props.currentUser} />
           {/* <BrowserRouter> */}
           <Switch>
-            <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/editor/:slug" component={Editor} />
@@ -158,6 +157,7 @@ class App extends React.Component {
             <Route path="/article/:id" component={Article} />
             <Route path="/settings" component={Settings} />
             <Route path="/profile/:username" component={Profile} />
+            <Route exact path="/" component={Home} />
           </Switch>
           {/* </BrowserRouter> */}
         </>
