@@ -103,6 +103,7 @@ const mapDispatchToProps = dispatch => ({
 const Profile = (props) => {
   const [tab, setTab] = useState('byAuthor');
 
+
   useEffect(() => {
     props.onLoad(Promise.all([
       agent.Profile.get(props.match.params.username),
@@ -112,7 +113,7 @@ const Profile = (props) => {
     return () => {
       props.onUnload();
     }
-  }, [])
+  }, [props.match.url])
 
   const clickHandler = (type) => {
     if (type === 'byAuthor') {
