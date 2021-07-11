@@ -109,6 +109,7 @@ const Profile = (props) => {
       agent.Profile.get(props.match.params.username),
       agent.Articles.byAuthor(props.match.params.username),
     ]));
+    setTab('byAuthor');
 
     return () => {
       props.onUnload();
