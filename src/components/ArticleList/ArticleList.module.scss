@@ -17,7 +17,9 @@
   overflow-y: auto;
   scrollbar-width: thin;
 }
-
+.listProfile{
+  max-height: 50vh;
+}
 .list::-webkit-scrollbar{
   width: 8px;
   height: 494px;
