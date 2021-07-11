@@ -13,4 +13,23 @@
   padding: 0;
   max-width: 100%;
   list-style-type: none;
+  max-height: 55vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.listProfile{
+  max-height: 45vh;
+}
+.list::-webkit-scrollbar{
+  width: 8px;
+  height: 494px;
+  background: var(--banner-color);
+}
+.list::-webkit-scrollbar-thumb{
+background: var(--primary);
+border: 3px solid var(--primary);
+}
+.list::-webkit-scrollbar-button:vertical:start:decrement,
+.list::-webkit-scrollbar-button:vertical:start:increment {
+  display: none;
 }

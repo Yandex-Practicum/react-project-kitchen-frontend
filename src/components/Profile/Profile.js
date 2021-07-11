@@ -6,14 +6,9 @@ import { connect } from 'react-redux';
 import EditIcon from '../../assets/ico/EditIcon';
 import HeartIcon from '../Heart/Heart';
 
-import styles from './profile.module.scss'
+import styles from './profile.module.scss';
 
-import {
-  FOLLOW_USER,
-  UNFOLLOW_USER,
-  PROFILE_PAGE_LOADED,
-  PROFILE_PAGE_UNLOADED,
-} from '../../constants/actionTypes';
+import { FOLLOW_USER, UNFOLLOW_USER, PROFILE_PAGE_LOADED, PROFILE_PAGE_UNLOADED } from '../../constants/actionTypes';
 // import {
 //   FOLLOW_USER,
 //   UNFOLLOW_USER,
@@ -27,21 +22,18 @@ import {
 import TabsNavigation from '../Tabs/TabsNavigation/TabsNavigation';
 import TabsItem from '../Tabs/TabItem/TabsItem';
 
-const EditProfileSettings = props => {
+const EditProfileSettings = (props) => {
   if (props.isUser) {
     return (
-      <Link
-        alt='Настройки профиля'
-        to="/settings"
-        className={styles.editbutton}>
-        <EditIcon/>
+      <Link alt="Настройки профиля" to="/settings" className={styles.editbutton}>
+        <EditIcon />
       </Link>
     );
   }
   return null;
 };
 
-const FollowUserButton = props => {
+const FollowUserButton = (props) => {
   if (props.isUser) {
     return null;
   }
@@ -53,78 +45,85 @@ const FollowUserButton = props => {
     classes += ' btn-outline-secondary';
   }
 
-  const handleClick = ev => {
+  const handleClick = (ev) => {
     ev.preventDefault();
     if (props.user.following) {
-      props.unfollow(props.user.username)
+      props.unfollow(props.user.username);
     } else {
-      props.follow(props.user.username)
+      props.follow(props.user.username);
     }
   };
 
-
   return (
     props.currentUser && (
-    <div onClick={handleClick} className={`${styles.followbutton} ${props.user.following ? styles.favorite : styles.unfavorite}`}>
-      <HeartIcon/>
-    </div>
+      <div
+        onClick={handleClick}
+        className={`${styles.followbutton} ${props.user.following ? styles.favorite : styles.unfavorite}`}>
+        <HeartIcon />
+      </div>
     )
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   ...state.articleList,
   currentUser: state.common.currentUser,
-  profile: state.profile
+  profile: state.profile,
 });
 
-const mapDispatchToProps = dispatch => ({
-  onFollow: username => dispatch({
-    type: FOLLOW_USER,
-    payload: agent.Profile.follow(username)
-  }),
-  onLoad: payload => {
+const mapDispatchToProps = (dispatch) => ({
+  onFollow: (username) =>
+    dispatch({
+      type: FOLLOW_USER,
+      payload: agent.Profile.follow(username),
+    }),
+  onLoad: (payload) => {
     // dispatch({ type: PROFILE_ARTICLE_LOADED, payload })
-    dispatch({ type: PROFILE_PAGE_LOADED, payload }) 
-    
+    dispatch({ type: PROFILE_PAGE_LOADED, payload });
   },
-  onUnfollow: username => dispatch({
-    type: UNFOLLOW_USER,
-    payload: agent.Profile.unfollow(username)
-  }),
+  onUnfollow: (username) =>
+    dispatch({
+      type: UNFOLLOW_USER,
+      payload: agent.Profile.unfollow(username),
+    }),
   onUnload: () => {
     // dispatch({ type: PROFILE_ARTICLE_UNLOADED })
-    dispatch({ type: PROFILE_PAGE_UNLOADED })
-  }
+    dispatch({ type: PROFILE_PAGE_UNLOADED });
+  },
 });
-
- 
 
 const Profile = (props) => {
   const [tab, setTab] = useState('byAuthor');
 
-
   useEffect(() => {
-    props.onLoad(Promise.all([
-      agent.Profile.get(props.match.params.username),
-      agent.Articles.byAuthor(props.match.params.username),
-    ]));
+    props.onLoad(
+      Promise.all([
+        agent.Profile.get(props.match.params.username),
+        agent.Articles.byAuthor(props.match.params.username),
+      ]),
+    );
     setTab('byAuthor');
 
     return () => {
       props.onUnload();
-    }
-  }, [props.match.url])
+    };
+  }, [props.match.url]);
 
   const clickHandler = (type) => {
     if (type === 'byAuthor') {
-      props.onLoad(Promise.all([
-        agent.Profile.get(props.match.params.username), agent.Articles.byAuthor(props.match.params.username)
-      ]))
+      props.onLoad(
+        Promise.all([
+          agent.Profile.get(props.match.params.username),
+          agent.Articles.byAuthor(props.match.params.username),
+        ]),
+      );
     } else {
-      props.onLoad(Promise.all([
-        agent.Profile.get(props.match.params.username), agent.Articles.favoritedBy(props.match.params.username)
-      ]))
+      props.onLoad(
+        Promise.all([
+          agent.Profile.get(props.match.params.username),
+          agent.Articles.favoritedBy(props.match.params.username),
+        ]),
+      );
     }
     setTab(type);
   };
@@ -134,70 +133,89 @@ const Profile = (props) => {
     return null;
   }
 
-  const isUser = props.currentUser &&
-    props.profile.username === props.currentUser.username;
+  const isUser = props.currentUser && props.profile.username === props.currentUser.username;
 
-  return profile && (
-    <div className="profile-page">
-      <div className={styles.banner}>
-        <section className={styles.banner__container}>
-          <div className={styles.settings}>
-            <EditProfileSettings isUser={isUser} />
-            <FollowUserButton
-              isUser={isUser}
-              user={profile}
-              follow={props.onFollow}
-              unfollow={props.onUnfollow}
-              currentUser={props.currentUser}
-            />
-            <h2 className={styles.profile__name}><Link to={`/profile/${profile.username}`}>{profile.username}</Link></h2>
-          </div>
-          <div className={styles.main__block}>
-            <img src={profile.image} className="user-img" alt={profile.username} />
-            <section className={styles.stats__block}>
-              <h3>Статистика</h3>
-              <p><b>Рейтинг:</b> 0,87 (4 место)</p>
-              <p><b>Статьи:</b> 7 (0,03)</p>
-              <p><b>Задачи:</b> 12 (0,15)</p>
-            </section>
-            
-            <section className={styles.employment__block}>
-              <h3>Блок трудоустройства</h3>
-              <p><b>Дата регистрации:</b> 10.06.2021г.</p>
-              <p><b>Репозиторий:</b> ссылка</p>
-              <p><b>Резюме:</b> ссылка</p>
-            </section>
-            <div className={styles.graph__block}><p>Место под график активности</p></div>
-          </div>
-        </section>
-      </div>
+  return (
+    profile && (
+      <div className="profile-page">
+        <div className={styles.banner}>
+          <section className={styles.banner__container}>
+            <div className={styles.settings}>
+              <EditProfileSettings isUser={isUser} />
+              <FollowUserButton
+                isUser={isUser}
+                user={profile}
+                follow={props.onFollow}
+                unfollow={props.onUnfollow}
+                currentUser={props.currentUser}
+              />
+              <h2 className={styles.profile__name}>
+                <Link to={`/profile/${profile.username}`}>{profile.username}</Link>
+              </h2>
+            </div>
+            <div className={styles.main__block}>
+              <img src={profile.image} className="user-img" alt={profile.username} />
+              <section className={styles.stats__block}>
+                <h3>Статистика</h3>
+                <p>
+                  <b>Рейтинг:</b> 0,87 (4 место)
+                </p>
+                <p>
+                  <b>Статьи:</b> 7 (0,03)
+                </p>
+                <p>
+                  <b>Задачи:</b> 12 (0,15)
+                </p>
+              </section>
 
-      <div className={styles.content__container}>
-        <div>
-          <TabsNavigation>
-            <TabsItem
-              name={props.currentUser.username === props.profile.username ? "Мои записи" : "Записи пользователя"}
-              type="byAuthor"
-              onTabClick={clickHandler}
-              active={tab === 'byAuthor' ? true : false} 
-            />
-            <TabsItem
-              name="Любимые записи"
-              type="favoritedBy" 
-              onTabClick={clickHandler}
-              active={tab === 'favoritedBy' ? true : false} 
-            />
-          </TabsNavigation>
+              <section className={styles.employment__block}>
+                <h3>Блок трудоустройства</h3>
+                <p>
+                  <b>Дата регистрации:</b> 10.06.2021г.
+                </p>
+                <p>
+                  <b>Репозиторий:</b> ссылка
+                </p>
+                <p>
+                  <b>Резюме:</b> ссылка
+                </p>
+              </section>
+              <div className={styles.graph__block}>
+                <p>Место под график активности</p>
+              </div>
+            </div>
+          </section>
         </div>
-        <ArticleList
-          pager={props.pager}
-          articles={props.articles}
-          articlesCount={props.articlesCount}
-          state={props.currentPage} />
+
+        <div className={styles.content__container}>
+          <div>
+            <TabsNavigation>
+              <TabsItem
+                name={props.currentUser.username === props.profile.username ? 'Мои записи' : 'Записи пользователя'}
+                type="byAuthor"
+                onTabClick={clickHandler}
+                active={tab === 'byAuthor' ? true : false}
+              />
+              <TabsItem
+                name="Любимые записи"
+                type="favoritedBy"
+                onTabClick={clickHandler}
+                active={tab === 'favoritedBy' ? true : false}
+              />
+            </TabsNavigation>
+          </div>
+          <ArticleList
+            pager={props.pager}
+            articles={props.articles}
+            articlesCount={props.articlesCount}
+            state={props.currentPage}
+            profile={true}
+          />
+        </div>
       </div>
-    </div>
+    )
   );
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
 export { Profile, mapStateToProps };
