@@ -13,6 +13,7 @@ import Register from '../Auth/Register/Register';
 import Settings from '../Settings/Settings';
 import { store } from '../../store';
 import { push } from 'react-router-redux';
+import Preloader from '../Preloader/Preloader';
 
 const mapStateToProps = (state) => {
   return {
@@ -158,6 +159,7 @@ class App extends React.Component {
             <Route path="/settings" component={Settings} />
             <Route path="/profile/:username" component={Profile} />
             <Route exact path="/" component={Home} />
+            <Route path = "*" component={Preloader} />
           </Switch>
           {/* </BrowserRouter> */}
         </>
