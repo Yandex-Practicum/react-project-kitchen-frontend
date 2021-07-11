@@ -14,7 +14,23 @@ body{
   margin: 0;
   overflow: hidden;
 }
-
+.article-page{
+  overflow-y: auto;
+  max-height: 95vh;
+}
+.article-page::-webkit-scrollbar{
+  width: 8px;
+  height: 494px;
+  background: var(--banner-color);
+}
+.article-page::-webkit-scrollbar-thumb{
+background: var(--primary);
+border: 3px solid var(--primary);
+}
+.article-page::-webkit-scrollbar-button:vertical:start:decrement,
+.article-page::-webkit-scrollbar-button:vertical:start:increment {
+  display: none;
+}
 #root{
   background-color:var(--white);
   transition-property: background-color, background, color;
