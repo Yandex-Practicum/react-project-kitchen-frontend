@@ -60,8 +60,7 @@
     ]
   },
   "lint-staged": {
-    "*.{js, jsx}": [
-      "node_modules/.bin/eslint --max-warnings=0",
+    "*.{js,jsx}": [
       "prettier --write",
       "git add"
     ]

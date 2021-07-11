@@ -6,10 +6,11 @@ import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../../constants/actionTy
 // import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../../slices/articleList';
 import Heart from '../Heart/Heart';
 import s from './ArticlePreview.module.scss';
-const FAVORITED_CLASS = s.article__btn_unfavorite;
-const NOT_FAVORITED_CLASS = s.article__btn_favorite;
 import Tags from '../Tags/Tags';
 import UserMeta from '../UserMeta/UserMeta';
+
+const FAVORITED_CLASS = s.article__btn_unfavorite;
+const NOT_FAVORITED_CLASS = s.article__btn_favorite;
 
 const mapDispatchToProps = (dispatch) => ({
   favorite: (slug) =>
@@ -48,9 +49,16 @@ const ArticlePreview = (props) => {
       {article.photo && <div className={s.article__photo}></div>}
       <div className={s.article__post}>
         <div className={s.article__header}>
-          <UserMeta section='article' article={props.article} />
+          <UserMeta section="article" article={props.article} />
           <div>
-            <button className={props.currentUser ? `${s.article__btn} ${favoriteButtonClass}` : `${s.article__btn} ${favoriteButtonClass} ${s.article__btn_logout}`} onClick={handleClick} disabled={disabled}>
+            <button
+              className={
+                props.currentUser
+                  ? `${s.article__btn} ${favoriteButtonClass}`
+                  : `${s.article__btn} ${favoriteButtonClass} ${s.article__btn_logout}`
+              }
+              onClick={handleClick}
+              disabled={disabled}>
               {article.favoritesCount > 0 ? article.favoritesCount : null} <Heart />
             </button>
           </div>
