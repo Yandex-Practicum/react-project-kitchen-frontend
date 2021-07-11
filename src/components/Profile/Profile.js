@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import agent from '../../agent';
 import { connect } from 'react-redux';
-import EditIcon from './EditIcon';
+import EditIcon from '../../assets/ico/EditIcon';
 import HeartIcon from '../Heart/Heart';
 
 import styles from './profile.module.scss'
@@ -13,7 +13,6 @@ import {
   UNFOLLOW_USER,
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED,
-  CHANGE_TAB
 } from '../../constants/actionTypes';
 // import {
 //   FOLLOW_USER,
@@ -25,7 +24,6 @@ import {
 //   PROFILE_PAGE_LOADED as PROFILE_ARTICLE_LOADED,
 //   PROFILE_PAGE_UNLOADED as PROFILE_ARTICLE_UNLOADED
 // } from '../../slices/articleList';
-import Tags from '../Tags/Tags';
 import TabsNavigation from '../Tabs/TabsNavigation/TabsNavigation';
 import TabsItem from '../Tabs/TabItem/TabsItem';
 
@@ -105,16 +103,18 @@ const mapDispatchToProps = dispatch => ({
 const Profile = (props) => {
   const [tab, setTab] = useState('byAuthor');
 
+
   useEffect(() => {
     props.onLoad(Promise.all([
       agent.Profile.get(props.match.params.username),
       agent.Articles.byAuthor(props.match.params.username),
     ]));
+    setTab('byAuthor');
 
     return () => {
       props.onUnload();
     }
-  }, [])
+  }, [props.match.url])
 
   const clickHandler = (type) => {
     if (type === 'byAuthor') {
@@ -137,7 +137,7 @@ const Profile = (props) => {
   const isUser = props.currentUser &&
     props.profile.username === props.currentUser.username;
 
-  return (
+  return profile && (
     <div className="profile-page">
       <div className={styles.banner}>
         <section className={styles.banner__container}>
@@ -150,7 +150,7 @@ const Profile = (props) => {
               unfollow={props.onUnfollow}
               currentUser={props.currentUser}
             />
-            <h2 className={styles.profile__name}><Link to={`/@${profile.username}`}>{profile.username}</Link></h2>
+            <h2 className={styles.profile__name}><Link to={`/profile/${profile.username}`}>{profile.username}</Link></h2>
           </div>
           <div className={styles.main__block}>
             <img src={profile.image} className="user-img" alt={profile.username} />

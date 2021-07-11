@@ -9,13 +9,13 @@ const UserMeta = props => {
   return (
     <>
       <div className={styles.container}>
-        <Link to={`/@${section.author.username}`} className={styles.avatar}>
+        <Link to={`/profile/${section.author.username}`} className={styles.avatar}>
           <img src={section.author.image} alt={section.author.username} />
         </Link>
 
         <div className={styles.info}>
           <Link 
-            to={`/@${section.author.username}`} 
+            to={`/profile/${section.author.username}`} 
             className={styles.info__name}>
             {section.author.username}
           </Link>
