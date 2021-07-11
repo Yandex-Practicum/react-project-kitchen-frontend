@@ -12,7 +12,9 @@ body{
   font-family: 'LucidaSans', sans-serif;
   background-color:var(--white);
   margin: 0;
+  overflow: hidden;
 }
+
 #root{
   background-color:var(--white);
   transition-property: background-color, background, color;
