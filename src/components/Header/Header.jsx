@@ -47,7 +47,7 @@ const LoggedInView = props => {
 
         <li className={nav_item}>
           <Link
-            to={`/@${props.currentUser.username}`}
+            to={`/profile/${props.currentUser.username}`}
             className={nav_link}>
               <img src={props.currentUser.image ? props.currentUser.image : 'https://static.productionready.io/images/smiley-cyrus.jpg'} alt="ava" className={ava_image}/>
               &nbsp;<p>{props.currentUser.username}</p>

@@ -148,7 +148,7 @@ const Profile = (props) => {
               unfollow={props.onUnfollow}
               currentUser={props.currentUser}
             />
-            <h2 className={styles.profile__name}><Link to={`/@${profile.username}`}>{profile.username}</Link></h2>
+            <h2 className={styles.profile__name}><Link to={`/profile/${profile.username}`}>{profile.username}</Link></h2>
           </div>
           <div className={styles.main__block}>
             <img src={profile.image} className="user-img" alt={profile.username} />

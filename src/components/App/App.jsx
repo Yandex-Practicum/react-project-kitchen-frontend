@@ -158,7 +158,7 @@ shouldComponentUpdate(nextProps, nextState, nextContext) {
             <Route path="/editor" component={Editor} />
             <Route path="/article/:id" component={Article} />
             <Route path="/settings" component={Settings} />
-            <Route path="/@:username" component={Profile} />
+            <Route path="/profile/:username" component={Profile} />
             </Switch>
         </>
       );
