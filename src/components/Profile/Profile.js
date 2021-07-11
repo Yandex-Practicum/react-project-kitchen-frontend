@@ -13,7 +13,6 @@ import {
   UNFOLLOW_USER,
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED,
-  CHANGE_TAB
 } from '../../constants/actionTypes';
 // import {
 //   FOLLOW_USER,
@@ -25,7 +24,6 @@ import {
 //   PROFILE_PAGE_LOADED as PROFILE_ARTICLE_LOADED,
 //   PROFILE_PAGE_UNLOADED as PROFILE_ARTICLE_UNLOADED
 // } from '../../slices/articleList';
-import Tags from '../Tags/Tags';
 import TabsNavigation from '../Tabs/TabsNavigation/TabsNavigation';
 import TabsItem from '../Tabs/TabItem/TabsItem';
 
@@ -137,7 +135,7 @@ const Profile = (props) => {
   const isUser = props.currentUser &&
     props.profile.username === props.currentUser.username;
 
-  return (
+  return profile && (
     <div className="profile-page">
       <div className={styles.banner}>
         <section className={styles.banner__container}>
