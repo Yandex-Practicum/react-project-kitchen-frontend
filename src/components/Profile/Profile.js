@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import agent from '../../agent';
 import { connect } from 'react-redux';
-import EditIcon from './EditIcon';
+import EditIcon from '../../assets/ico/EditIcon';
 import HeartIcon from '../Heart/Heart';
 
 import styles from './profile.module.scss'
