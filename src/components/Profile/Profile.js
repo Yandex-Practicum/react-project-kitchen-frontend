@@ -213,6 +213,7 @@ const Profile = (props) => {
             articles={props.articles}
             articlesCount={props.articlesCount}
             state={props.currentPage}
+            currentPage={props.currentPage}
             profile={true}
           />
         </div>
