@@ -73,7 +73,7 @@ class App extends React.Component {
     if (nextProps.redirectTo) {
       // this.context.router.replace(nextProps.redirectTo);
       // store.dispatch(push(nextProps.redirectTo));
-      this.props.onRedirect();
+      // this.props.onRedirect();
     }
   }
   UNSAFE_componentWillMount() {

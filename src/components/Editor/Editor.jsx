@@ -2,7 +2,7 @@ import ListErrors from '../ListErrors/ListErrors';
 import React, { useEffect } from 'react';
 import agent from '../../agent';
 import Button from '../Button/Button';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {
   ADD_TAG,
@@ -42,6 +42,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const Editor = (props) => {
+  const slugTest = useSelector((state) => state.editor.article.slug);
   const history = useHistory();
 
   const updateFieldEvent = (key) => (ev) => props.onUpdateField(key, ev.target.value);
@@ -79,8 +80,11 @@ const Editor = (props) => {
     }
     if (!props.articleSlug) {
       props.onSubmit(agent.Articles.create(article));
-      console.log(history);
-      history.replace({ pathname: `/` }, props.articleSlug);
+      if (props.article) {
+        console.log(props.article.slug);
+      }
+
+      // history.replace({ pathname: `/article/${props.article.slug}` }, props.articleSlug);
     }
   };
 
@@ -97,12 +101,12 @@ const Editor = (props) => {
   }, []);
 
   useEffect(() => {
-    if (props.match.params.slug) {
+    if (slugTest !== '') {
+      props.onLoad(agent.Articles.get(props.article.slug));
+      history.replace({ pathname: `/article/${props.article.slug}` }, props.articleSlug);
       props.onUnload();
-      return props.onLoad(agent.Articles.get(props.match.params.slug));
     }
-    props.onLoad(null);
-  }, [props.match.params.slug]);
+  }, [slugTest]);
 
   return (
     <div className={s.container}>
