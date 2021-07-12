@@ -3,7 +3,7 @@ import Header from '../Header/Header';
 import React from 'react';
 import { connect } from 'react-redux';
 import { APP_LOAD, CHANGE_THEME, REDIRECT } from '../../constants/actionTypes';
-import { Route, Switch, BrowserRouter, HashRouter } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Article from '../Article';
 import Editor from '../Editor/Editor';
 import Home from '../Home';
@@ -12,7 +12,6 @@ import Profile from '../Profile/Profile';
 import Register from '../Auth/Register/Register';
 import Settings from '../Settings/Settings';
 import { store } from '../../store';
-import { push } from 'react-router-redux';
 import Preloader from '../Preloader/Preloader';
 
 const mapStateToProps = (state) => {
@@ -73,7 +72,7 @@ class App extends React.Component {
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.redirectTo) {
       // this.context.router.replace(nextProps.redirectTo);
-      store.dispatch(push(nextProps.redirectTo));
+      // store.dispatch(push(nextProps.redirectTo));
       this.props.onRedirect();
     }
   }
@@ -149,7 +148,6 @@ class App extends React.Component {
       return (
         <>
           <Header appName={this.props.appName} currentUser={this.props.currentUser} />
-          {/* <BrowserRouter> */}
           <Switch>
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
@@ -159,9 +157,8 @@ class App extends React.Component {
             <Route path="/settings" component={Settings} />
             <Route path="/profile/:username" component={Profile} />
             <Route exact path="/" component={Home} />
-            <Route path = "*" component={Preloader} />
+            <Route path="*" component={Preloader} />
           </Switch>
-          {/* </BrowserRouter> */}
         </>
       );
     }

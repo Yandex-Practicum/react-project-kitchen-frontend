@@ -24,7 +24,7 @@ const Article = (props) => {
   const history = useHistory();
   console.log(history.location);
   const { id } = useParams();
-  console.log(id);
+  console.log(`${history.location.state}-${history.location.key}`);
   useEffect(() => {
     props.onLoad(Promise.all([agent.Articles.get(id), agent.Comments.forArticle(id)]));
 
