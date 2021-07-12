@@ -1,5 +1,5 @@
 import ArticleActions from './ArticleActions';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import CommentContainer from '../Comment/CommentContainer';
 import React, { useEffect } from 'react';
 import agent from '../../agent';
@@ -21,7 +21,10 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const Article = (props) => {
+  const history = useHistory();
+  console.log(history.location);
   const { id } = useParams();
+  console.log(id);
   useEffect(() => {
     props.onLoad(Promise.all([agent.Articles.get(id), agent.Comments.forArticle(id)]));
 

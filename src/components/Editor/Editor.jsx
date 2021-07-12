@@ -73,13 +73,13 @@ const Editor = (props) => {
 
     const slug = { slug: props.articleSlug };
 
-    if(props.articleSlug) {
-      props.onSubmit(agent.Articles.update(Object.assign(article, slug)))
-      history.replace({pathname: `/article/${props.articleSlug}`});
+    if (props.articleSlug) {
+      props.onSubmit(agent.Articles.update(Object.assign(article, slug)));
+      history.replace({ pathname: `/article/${props.articleSlug}` });
     }
-    if(!props.articleSlug) {
-      props.onSubmit(agent.Articles.create(article))
-      history.replace({pathname: `/article/${slug}`});
+    if (!props.articleSlug) {
+      props.onSubmit(agent.Articles.create(article));
+      history.replace({ pathname: `/article/:id` }, props.articleSlug);
     }
     // const promise = props.articleSlug
     //   ? agent.Articles.update(Object.assign(article, slug))
@@ -90,8 +90,8 @@ const Editor = (props) => {
   };
 
   useEffect(() => {
-    history.replace({pathname: `/editor`});
-    console.log(props.articleSlug)
+    history.replace({ pathname: `/editor` });
+    console.log(props.articleSlug);
     if (props.match.params.slug) {
       return props.onLoad(agent.Articles.get(props.match.params.slug));
     }
