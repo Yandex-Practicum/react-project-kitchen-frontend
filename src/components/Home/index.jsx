@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Banner from './Banner';
 import MainView from './MainView';
 import React from 'react';
@@ -39,35 +40,32 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-class Home extends React.Component {
-  UNSAFE_componentWillMount() {
+const Home = (props) => {
+  useEffect(() => {
     const tab = 'all';
     const articlesPromise = agent.Articles.all;
 
-    this.props.onLoad(tab, articlesPromise, Promise.all([agent.Tags.getAll(), articlesPromise()]));
-  }
-
-  componentWillUnmount() {
-    this.props.onUnload();
-  }
-
-  render() {
-    return (
-      <>
-        <Banner token={this.props.token} appName={this.props.appName} />
-        <main className={content__container}>
-          <MainView currentUser={this.props.currentUser} />
-          <div className={wrapper}>
-            <section className={content__tags}>
-              <p className={tags__title}>Популярные теги</p>
-              {!this.props.tags && <div className={styles.loading}>Теги подгружаются...</div>}
-              {this.props.tags && <Tags tags={this.props.tags} onClickTag={this.props.onClickTag} />}
-            </section>
-          </div>
-        </main>
-      </>
-    );
-  }
-}
+    props.onLoad(tab, articlesPromise, Promise.all([agent.Tags.getAll(), articlesPromise()]));
+    return () => {
+      props.onUnload();
+    };
+    //eslint-disable-next-line
+  }, []);
+  return (
+    <>
+      <Banner token={props.token} appName={props.appName} />
+      <main className={content__container}>
+        <MainView currentUser={props.currentUser} />
+        <div className={wrapper}>
+          <section className={content__tags}>
+            <p className={tags__title}>Популярные теги</p>
+            {!props.tags && <div className={styles.loading}>Теги подгружаются...</div>}
+            {props.tags && <Tags tags={props.tags} onClickTag={props.onClickTag} />}
+          </section>
+        </div>
+      </main>
+    </>
+  );
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
