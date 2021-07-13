@@ -12,57 +12,57 @@ import Profile from '../Profile/Profile';
 import Register from '../Auth/Register/Register';
 import Settings from '../Settings/Settings';
 import { store } from '../../store';
-import { push } from 'react-router-redux';
+import Preloader from '../Preloader/Preloader';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     appLoaded: state.common.appLoaded,
     appName: state.common.appName,
     currentUser: state.common.currentUser,
     redirectTo: state.common.redirectTo,
-    isDarkTheme: state.theme.isDarkTheme
-  }};
+    isDarkTheme: state.theme.isDarkTheme,
+  };
+};
 
-const mapDispatchToProps = dispatch => ({
-  onLoad: (payload, token) =>
-    dispatch({ type: APP_LOAD, payload, token, skipTracking: true }),
+const mapDispatchToProps = (dispatch) => ({
+  onLoad: (payload, token) => dispatch({ type: APP_LOAD, payload, token, skipTracking: true }),
   onRedirect: () => dispatch({ type: REDIRECT }),
-  onChangeTheme:() => dispatch({type:CHANGE_THEME}),
+  onChangeTheme: () => dispatch({ type: CHANGE_THEME }),
 });
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.root = document.querySelector(':root')
+    this.root = document.querySelector(':root');
     this.darkTheme = {
       back: '#1F2023',
       dark: '#5299ff',
       darkText: '#ffffff',
       grayText: '#ffffff',
-      bannerColor:'#27292D',
-      primary:'#FFB852',
+      bannerColor: '#27292D',
+      primary: '#FFB852',
       tagsBlock: '#27292D',
       tags: '#27292D',
       tagsBorder: '#0B0C0D',
       buttonShadow: 'rgba(255, 144, 14, 0.35)',
-      redHeart:'#F53D5C',
+      redHeart: '#F53D5C',
       deleteBtn: '',
       commentContainer: '#27292D',
       commentInput: '#2D2F34',
       previewLink: '#5299ff',
-    }
+    };
     this.whiteTheme = {
       back: '#ffffff',
       dark: '#212121',
       darkText: '#0A0A0B',
       grayText: '#62626A',
-      bannerColor:'#f4f4f6',
-      primary:'#0000FF',
+      bannerColor: '#f4f4f6',
+      primary: '#0000FF',
       tagsBlock: '#f4f4f6',
       tags: 'rgb(241, 241, 241)',
       tagsBorder: '#CCCCCC',
       buttonShadow: 'rgba(0, 0, 255, 0.25)',
-      redHeart:'#F53D5C',
+      redHeart: '#F53D5C',
       deleteBtn: '',
       commentContainer: '#ffffff',
       commentInput: '#f4f4f6',
@@ -72,8 +72,8 @@ class App extends React.Component {
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.redirectTo) {
       // this.context.router.replace(nextProps.redirectTo);
-      store.dispatch(push(nextProps.redirectTo));
-      this.props.onRedirect();
+      // store.dispatch(push(nextProps.redirectTo));
+      // this.props.onRedirect();
     }
   }
   UNSAFE_componentWillMount() {
@@ -83,11 +83,11 @@ class App extends React.Component {
     }
     this.props.onLoad(token ? agent.Auth.current() : null, token);
   }
-componentDidMount() {
- if(localStorage.getItem('isDarkTheme') === 'true'){
-    this.props.onChangeTheme()
- }
-   this.root.style = `--white:${this.whiteTheme.back};
+  componentDidMount() {
+    if (localStorage.getItem('isDarkTheme') === 'true') {
+      this.props.onChangeTheme();
+    }
+    this.root.style = `--white:${this.whiteTheme.back};
       --dark:${this.whiteTheme.dark};
       --dark-text:${this.whiteTheme.darkText};
       --gray-text:${this.whiteTheme.grayText};
@@ -102,12 +102,12 @@ componentDidMount() {
       --comment-container:${this.whiteTheme.commentContainer};
       --comment-input:${this.whiteTheme.commentInput};
       --preview-link:${this.whiteTheme.previewLink};
-      `
+      `;
   }
-shouldComponentUpdate(nextProps, nextState, nextContext) {
-    localStorage.setItem('isDarkTheme', nextProps.isDarkTheme)
-  nextProps.isDarkTheme ?
-    this.root.style = `--white:${this.darkTheme.back};
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    localStorage.setItem('isDarkTheme', nextProps.isDarkTheme);
+    nextProps.isDarkTheme
+      ? (this.root.style = `--white:${this.darkTheme.back};
       --dark:${this.darkTheme.dark};
       --dark-text:${this.darkTheme.darkText};
       --gray-text:${this.darkTheme.grayText};
@@ -123,8 +123,8 @@ shouldComponentUpdate(nextProps, nextState, nextContext) {
       --comment-input:${this.darkTheme.commentInput};
       --preview-link:${this.darkTheme.previewLink};
       --preview-link-hover:${this.darkTheme.primary};
-      `
-    : this.root.style = `--white:${this.whiteTheme.back};
+      `)
+      : (this.root.style = `--white:${this.whiteTheme.back};
       --dark:${this.whiteTheme.dark};
       --dark-text:${this.whiteTheme.darkText};
       --gray-text:${this.whiteTheme.grayText};
@@ -140,18 +140,15 @@ shouldComponentUpdate(nextProps, nextState, nextContext) {
       --comment-input:${this.whiteTheme.commentInput};
       --preview-link:${this.whiteTheme.previewLink};
       --preview-link-hover:${this.whiteTheme.darkText};
-      `;
-  return true
-}
+      `);
+    return true;
+  }
   render() {
     if (this.props.appLoaded) {
       return (
         <>
-          <Header
-            appName={this.props.appName}
-            currentUser={this.props.currentUser} />
-            <Switch>
-            <Route exact path="/" component={Home} />
+          <Header appName={this.props.appName} currentUser={this.props.currentUser} />
+          <Switch>
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/editor/:slug" component={Editor} />
@@ -159,15 +156,15 @@ shouldComponentUpdate(nextProps, nextState, nextContext) {
             <Route path="/article/:id" component={Article} />
             <Route path="/settings" component={Settings} />
             <Route path="/profile/:username" component={Profile} />
-            </Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="*" component={Preloader} />
+          </Switch>
         </>
       );
     }
     return (
       <div>
-        <Header
-          appName={this.props.appName}
-          currentUser={this.props.currentUser} />
+        <Header appName={this.props.appName} currentUser={this.props.currentUser} />
       </div>
     );
   }

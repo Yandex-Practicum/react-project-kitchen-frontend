@@ -7,7 +7,7 @@ import editor from './reducers/editor';
 import home from './reducers/home';
 import profile from './reducers/profile';
 import settings from './reducers/settings';
-import theme from './reducers/theme'
+import theme from './reducers/theme';
 
 // import article from './slices/article';
 // import articleList from './slices/articleList';
@@ -17,8 +17,6 @@ import theme from './reducers/theme'
 // import home from './slices/home';
 // import profile from './slices/profile';
 // import settings from './slices/settings';
-
-import { routerReducer } from 'react-router-redux';
 
 export default combineReducers({
   article,
@@ -30,5 +28,4 @@ export default combineReducers({
   profile,
   settings,
   theme,
-  router: routerReducer
 });

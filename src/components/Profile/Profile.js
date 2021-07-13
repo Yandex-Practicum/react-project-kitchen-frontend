@@ -191,7 +191,11 @@ const Profile = (props) => {
           <div>
             <TabsNavigation>
               <TabsItem
-                name={props.currentUser.username === props.profile.username ? 'Мои записи' : 'Записи пользователя'}
+                name={
+                  props.currentUser && props.currentUser.username === props.profile.username
+                    ? 'Мои записи'
+                    : 'Записи пользователя'
+                }
                 type="byAuthor"
                 onTabClick={clickHandler}
                 active={tab === 'byAuthor' ? true : false}
@@ -209,6 +213,7 @@ const Profile = (props) => {
             articles={props.articles}
             articlesCount={props.articlesCount}
             state={props.currentPage}
+            currentPage={props.currentPage}
             profile={true}
           />
         </div>

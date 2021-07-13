@@ -1,6 +1,7 @@
 import ArticleActions from './ArticleActions';
+import { useParams, useHistory } from 'react-router-dom';
 import CommentContainer from '../Comment/CommentContainer';
-import React from 'react';
+import React, { useEffect } from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import marked from 'marked';
@@ -19,62 +20,59 @@ const mapDispatchToProps = (dispatch) => ({
   onUnload: () => dispatch({ type: ARTICLE_PAGE_UNLOADED }),
 });
 
-class Article extends React.Component {
-  UNSAFE_componentWillMount() {
-    this.props.onLoad(
-      Promise.all([
-        agent.Articles.get(this.props.match.params.id),
-        agent.Comments.forArticle(this.props.match.params.id),
-      ]),
-    );
+const Article = (props) => {
+  const history = useHistory();
+  console.log(history.location);
+  const { id } = useParams();
+  console.log(`${history.location.state}-${history.location.key}`);
+  useEffect(() => {
+    props.onLoad(Promise.all([agent.Articles.get(id), agent.Comments.forArticle(id)]));
+
+    return () => {
+      props.onUnload();
+    };
+  }, []);
+
+  if (!props.article) {
+    return null;
   }
 
-  componentWillUnmount() {
-    this.props.onUnload();
-  }
-
-  render() {
-    if (!this.props.article) {
-      return null;
-    }
-
-    const markup = { __html: marked(this.props.article.body, { sanitize: true }) };
-    const canModify = this.props.currentUser && this.props.currentUser.username === this.props.article.author.username;
-    return (
-      <div className="article-page">
-        <div className={styles.banner}>
-          <div className={styles.banner__container}>
-            <UserMeta article={this.props.article} section="article" />
-            <ArticleActions canModify={canModify} article={this.props.article} />
-          </div>
-        </div>
-
-        <div className={styles.page__container}>
-          <div className={styles.page__content}>
-            <div>
-              <h1>{this.props.article.title}</h1>
-              <div className={styles.page__text} dangerouslySetInnerHTML={markup}></div>
-
-              <div className={styles.page__taglist}>
-                <Tags tags={this.props.article.tagList} onClickTag={() => {}} style="grey" />
-              </div>
-            </div>
-          </div>
-
-          <div className="article-actions"></div>
-
-          <div className="row">
-            <CommentContainer
-              comments={this.props.comments || []}
-              errors={this.props.commentErrors}
-              slug={this.props.match.params.id}
-              currentUser={this.props.currentUser}
-            />
-          </div>
+  const markup = { __html: marked(props.article.body, { sanitize: true }) };
+  const canModify = props.currentUser && props.currentUser.username === props.article.author.username;
+  return (
+    <div className="article-page">
+      <div className={styles.banner}>
+        <div className={styles.banner__container}>
+          <UserMeta article={props.article} section="article" />
+          <ArticleActions canModify={canModify} article={props.article} />
         </div>
       </div>
-    );
-  }
-}
+
+      <div className={styles.page__container}>
+        <div className={styles.page__content}>
+          <div>
+            <h1>{props.article.title}</h1>
+            <div className={styles.page__text} dangerouslySetInnerHTML={markup}></div>
+
+            <div className={styles.page__taglist}>
+              <Tags tags={props.article.tagList} onClickTag={() => {}} style="grey" />
+            </div>
+          </div>
+        </div>
+
+        <div className="article-actions"></div>
+
+        <div className="row">
+          <CommentContainer
+            comments={props.comments || []}
+            errors={props.commentErrors}
+            slug={props.match.params.id}
+            currentUser={props.currentUser}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Article);
