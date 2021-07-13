@@ -10,7 +10,7 @@ const TabsItem = ({ name, onTabClick, type, active, hide = false }) => {
 
   return (
     <li className={s.item}>
-      <a href className={`${s.item__link} ${active ? s.item__link_active : null}`} onClick={handleClick}>
+      <a href="/#" className={`${s.item__link} ${active ? s.item__link_active : null}`} onClick={handleClick}>
         {name}
       </a>
     </li>
