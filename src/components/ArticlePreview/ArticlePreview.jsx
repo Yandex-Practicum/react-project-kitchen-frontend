@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import agent from '../../agent';
 import { connect } from 'react-redux';
@@ -41,11 +41,13 @@ const ArticlePreview = (props) => {
     }
   };
   const [disabled, setDisabled] = React.useState(true);
-  React.useEffect(() => {
+
+  useEffect(() => {
     if (props.token !== null) {
       setDisabled(false);
     }
-  });
+    //eslint-disable-next-line
+  }, []);
 
   return (
     <li className={s.article}>
@@ -74,7 +76,7 @@ const ArticlePreview = (props) => {
           <Link to={`/article/${article.slug}`} className={s.article__more}>
             Развернуть...
           </Link>
-          <Tags tags={article.tagList} onClickTag={() => {}} style="grey" />
+          <Tags tags={article.tagList} onClickTag={() => {}} type="grey" />
         </div>
       </div>
     </li>

@@ -1,21 +1,21 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import ButtonTheme from '../ButtonTheme/ButtonTheme'
+import ButtonTheme from '../ButtonTheme/ButtonTheme';
 import styles from './Header.module.scss';
 import clsx from 'clsx';
 import HomeIcon from './HomeIcon';
 import LoginIcon from './LoginIcon';
 import EditIcon from './EditIcon';
 
-const {header, navbar, navbar_brand, nav, navbar_nav, pull_xs_right, nav_item, nav_link, ava_image} = styles;
+const { header, navbar, navbar_brand, nav, navbar_nav, pull_xs_right, nav_item, nav_link, ava_image } = styles;
 
-const LoggedOutView = props => {
+const LoggedOutView = (props) => {
   if (!props.currentUser) {
     return (
       <>
         <li className={nav_item}>
           <Link to="/login" className={nav_link}>
-          <LoginIcon/> <span>Войти</span>
+            <LoginIcon /> <span>Войти</span>
           </Link>
         </li>
         {/* <li className={nav_item}>
@@ -29,13 +29,14 @@ const LoggedOutView = props => {
   return null;
 };
 
-const LoggedInView = props => {
+const LoggedInView = (props) => {
   if (props.currentUser) {
     return (
       <>
         <li className={nav_item}>
           <Link to="/editor" className={nav_link}>
-            <EditIcon/><span>Новая запись</span>
+            <EditIcon />
+            <span>Новая запись</span>
           </Link>
         </li>
 
@@ -46,11 +47,17 @@ const LoggedInView = props => {
         </li> */}
 
         <li className={nav_item}>
-          <Link
-            to={`/profile/${props.currentUser.username}`}
-            className={nav_link}>
-              <img src={props.currentUser.image ? props.currentUser.image : 'https://static.productionready.io/images/smiley-cyrus.jpg'} alt="ava" className={ava_image}/>
-              &nbsp;<p>{props.currentUser.username}</p>
+          <Link to={`/profile/${props.currentUser.username}`} className={nav_link}>
+            <img
+              src={
+                props.currentUser.image
+                  ? props.currentUser.image
+                  : 'https://static.productionready.io/images/smiley-cyrus.jpg'
+              }
+              alt="ava"
+              className={ava_image}
+            />
+            &nbsp;<p>{props.currentUser.username}</p>
           </Link>
         </li>
       </>
@@ -61,26 +68,26 @@ const LoggedInView = props => {
 };
 
 const Header = (props) => {
-  
   return (
     <header className={header}>
       <nav className={navbar}>
-          <Link to="/" className={navbar_brand}>
-            {props.appName.toLowerCase()}
-          </Link>
-            <ButtonTheme />
-          <ul className={clsx(nav, navbar_nav, pull_xs_right)}>
-            <li className={nav_item}>
-              <Link to="/" className={nav_link}>
-              <HomeIcon/><span>Главная</span>
-              </Link>
-            </li>
-              <LoggedOutView currentUser={props.currentUser} />
-              <LoggedInView currentUser={props.currentUser} />
-          </ul>
+        <Link to="/" className={navbar_brand}>
+          {props.appName.toLowerCase()}
+        </Link>
+        <ButtonTheme />
+        <ul className={clsx(nav, navbar_nav, pull_xs_right)}>
+          <li className={nav_item}>
+            <Link to="/" className={nav_link}>
+              <HomeIcon />
+              <span>Главная</span>
+            </Link>
+          </li>
+          <LoggedOutView currentUser={props.currentUser} />
+          <LoggedInView currentUser={props.currentUser} />
+        </ul>
       </nav>
     </header>
   );
-}
+};
 
 export default Header;

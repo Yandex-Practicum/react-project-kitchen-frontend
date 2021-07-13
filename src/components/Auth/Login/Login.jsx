@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Link, useHistory } from 'react-router-dom';
 import ListErrors from '../../ListErrors/ListErrors';
@@ -8,7 +8,6 @@ import { UPDATE_FIELD_AUTH, LOGIN, LOGIN_PAGE_UNLOADED } from '../../../constant
 import Button from '../../Button/Button';
 
 import styles from '../Auth.module.scss';
-import clsx from 'clsx';
 import Form from '../../Form/Form';
 
 const mapStateToProps = (state) => ({ ...state.auth });
@@ -42,6 +41,7 @@ const Login = (props) => {
     return () => {
       props.onUnload();
     };
+    //eslint-disable-next-line
   }, []);
 
   return (

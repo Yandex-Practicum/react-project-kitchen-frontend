@@ -1,10 +1,9 @@
-import React, { FC } from 'react';
+import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import { SET_PAGE } from '../../constants/actionTypes';
 
 import s from './ListPagination.module.scss';
-import clsx from 'clsx';
 
 const mapDispatchToProps = (dispatch) => ({
   onSetPage: (page, payload) => dispatch({ type: SET_PAGE, page, payload }),
@@ -42,7 +41,7 @@ const ListPagination = (props) => {
               className={isCurrent ? [s.element, s.active__element].join(' ') : s.element}
               onClick={onClick}
               key={v.toString()}>
-              <a className={s.link} href="">
+              <a className={s.link} href>
                 {v + 1}
               </a>
             </li>

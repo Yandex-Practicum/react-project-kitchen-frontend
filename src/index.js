@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import React from 'react';
 import { store } from './store';
 
-import { Route, Switch, BrowserRouter, HashRouter } from 'react-router-dom';
+import { Route, BrowserRouter } from 'react-router-dom';
 
 import App from './components/App/App';
 import './index.scss';

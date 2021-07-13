@@ -58,9 +58,9 @@ const Editor = (props) => {
     }
   };
 
-  const removeTagHandler = (tag) => () => {
-    props.onRemoveTag(tag);
-  };
+  // const removeTagHandler = (tag) => () => {
+  //   props.onRemoveTag(tag);
+  // };
 
   const submitForm = (ev) => {
     ev.preventDefault();
@@ -98,6 +98,7 @@ const Editor = (props) => {
     return () => {
       props.onUnload();
     };
+    //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -106,6 +107,7 @@ const Editor = (props) => {
       history.replace({ pathname: `/article/${props.article.slug}` }, props.articleSlug);
       props.onUnload();
     }
+    //eslint-disable-next-line
   }, [slugTest]);
 
   return (
@@ -148,7 +150,7 @@ const Editor = (props) => {
               disabled={[].concat(props.tagList).length > 2 ? true : false}
             />
 
-            <Tags tags={props.tagList} onClickTag={() => {}} style="dark" />
+            <Tags tags={props.tagList} onClickTag={() => {}} type="dark" />
           </div>
 
           <Button className={s.form__button} onClick={submitForm}>

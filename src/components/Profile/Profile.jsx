@@ -39,11 +39,14 @@ const FollowUserButton = (props) => {
   }
 
   let classes = 'btn btn-sm action-btn';
-  if (props.user.following) {
-    classes += ' btn-secondary';
-  } else {
-    classes += ' btn-outline-secondary';
-  }
+
+  props.user.following ? (classes += ' btn-secondary') : (classes += ' btn-outline-secondary');
+
+  // if (props.user.following) {
+  //   classes += ' btn-secondary';
+  // } else {
+  //   classes += ' btn-outline-secondary';
+  // }
 
   const handleClick = (ev) => {
     ev.preventDefault();
@@ -107,6 +110,7 @@ const Profile = (props) => {
     return () => {
       props.onUnload();
     };
+    //eslint-disable-next-line
   }, [props.match.url]);
 
   const clickHandler = (type) => {

@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux'
+import React from 'react';
+import { connect } from 'react-redux';
 import { CHANGE_THEME } from '../../constants/actionTypes';
 import cn from 'classnames';
 import s from './ButtonTheme.module.scss';
-const mapDispatchToProps = dispatch => ({
-  changeTheme:() => {
-    dispatch({type:CHANGE_THEME})
-  }
-})
-const mapStateToProps = state => ({
-  ...state.theme
-})
+const mapDispatchToProps = (dispatch) => ({
+  changeTheme: () => {
+    dispatch({ type: CHANGE_THEME });
+  },
+});
+const mapStateToProps = (state) => ({
+  ...state.theme,
+});
 const ButtonTheme = (props) => {
   const handleClick = () => {
-    props.changeTheme()
+    props.changeTheme();
   };
   return (
     <div className={cn(s.wrapper)}>
