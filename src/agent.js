@@ -42,7 +42,7 @@ const Articles = {
   del: (slug) => requests.del(`/articles/${slug}`),
   favorite: (slug) => requests.post(`/articles/${slug}/favorite`),
   favoritedBy: (author, page) => requests.get(`/articles?favorited=${encode(author)}&${limit(9999, page)}`),
-  feed: () => requests.get('/articles/feed?limit=10&offset=0'),
+  feed: () => requests.get('/articles/feed?limit=9999&offset=0'),
   get: (slug) => requests.get(`/articles/${slug}`),
   unfavorite: (slug) => requests.del(`/articles/${slug}/favorite`),
   update: (article) => requests.put(`/articles/${article.slug}`, { article: omitSlug(article) }),
