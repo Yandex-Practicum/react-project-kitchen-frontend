@@ -22,7 +22,12 @@ const ArticleList = (props) => {
           );
         })}
       </ul>
-      <ListPagination pager={props.pager} articlesCount={props.articlesCount} currentPage={props.currentPage} />
+      <ListPagination
+        pager={props.pager}
+        articlesCount={props.articlesCount}
+        currentPage={props.currentPage}
+        articles={props.articles}
+      />
     </div>
   );
 };
