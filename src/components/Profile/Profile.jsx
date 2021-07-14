@@ -21,6 +21,7 @@ import { FOLLOW_USER, UNFOLLOW_USER, PROFILE_PAGE_LOADED, PROFILE_PAGE_UNLOADED 
 // } from '../../slices/articleList';
 import TabsNavigation from '../Tabs/TabsNavigation/TabsNavigation';
 import TabsItem from '../Tabs/TabItem/TabsItem';
+import BaseAvatarIcon from '../../assets/ico/BaseAvatarIcon';
 
 const EditProfileSettings = (props) => {
   if (props.isUser) {
@@ -97,6 +98,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const Profile = (props) => {
   const [tab, setTab] = useState('byAuthor');
+  const baseImage = props.profile.image === 'https://static.productionready.io/images/smiley-cyrus.jpg' ? true : false;
 
   useEffect(() => {
     props.onLoad(
@@ -158,7 +160,8 @@ const Profile = (props) => {
               </h2>
             </div>
             <div className={styles.main__block}>
-              <img src={profile.image} className="user-img" alt={profile.username} />
+              {baseImage && <BaseAvatarIcon />}
+              {!baseImage && <img src={profile.image} className="user-img" alt={profile.username} />}
               <section className={styles.stats__block}>
                 <h3>Статистика</h3>
                 <p>
