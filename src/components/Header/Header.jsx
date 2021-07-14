@@ -9,6 +9,7 @@ import LogoutIcon from '../../assets/ico/LogoutIcon';
 import EditIcon from '../../assets/ico/EditIcon';
 import { connect } from 'react-redux';
 import { EDITOR_PAGE_LOADED, LOGOUT } from '../../constants/actionTypes';
+import BaseAvatarIcon from '../../assets/ico/BaseAvatarIcon';
 
 const { header, navbar, navbar_brand, nav, navbar_nav, pull_xs_right, nav_item, nav_link, ava_image } = styles;
 
@@ -58,15 +59,8 @@ const Header = (props) => {
               </li>
               <li className={nav_item}>
                 <Link to={`/profile/${props.currentUser.username}`} className={nav_link}>
-                  <img
-                    src={
-                      props.currentUser.image
-                        ? props.currentUser.image
-                        : 'https://static.productionready.io/images/smiley-cyrus.jpg'
-                    }
-                    alt="ava"
-                    className={ava_image}
-                  />
+                  {props.currentUser.image && <img src={props.currentUser.image} alt="ava" className={ava_image} />}
+                  {!props.currentUser.image && <BaseAvatarIcon />}
                   &nbsp;<p>{props.currentUser.username}</p>
                 </Link>
               </li>

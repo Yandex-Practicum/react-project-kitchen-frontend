@@ -122,13 +122,17 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onClickLogout: () => {
-    dispatch({ type: LOGOUT });
+    // dispatch({ type: LOGOUT });
   },
   onSubmitForm: (user) => dispatch({ type: SETTINGS_SAVED, payload: agent.Auth.save(user) }),
   onUnload: () => dispatch({ type: SETTINGS_PAGE_UNLOADED }),
 });
 
 const Settings = (props) => {
+  const deleteHandler = () => {
+    window.confirm('Вы точно хотите удалить свой аккаунт?');
+  };
+
   return (
     <section className={styles.page}>
       <div className={styles.page__container}>
@@ -140,8 +144,8 @@ const Settings = (props) => {
 
         <hr className={styles.br} />
 
-        <Link className={styles.logout__button} onClick={props.onClickLogout} to={`/`}>
-          Выйти из аккаунта
+        <Link className={styles.logout__button} onClick={deleteHandler} to={`/`}>
+          Удалить аккаунт
         </Link>
       </div>
     </section>
