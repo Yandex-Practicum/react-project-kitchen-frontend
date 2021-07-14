@@ -18,7 +18,13 @@ const ArticleList = (props) => {
       <ul className={cn(styles.list, { [styles.listProfile]: props.profile })}>
         {props.articles.map((article) => {
           return (
-            <ArticlePreview article={article} key={article.slug} token={props.token} currentUser={props.currentUser} />
+            <ArticlePreview
+              article={article}
+              key={article.slug}
+              token={props.token}
+              currentUser={props.currentUser}
+              tab={props.tab}
+            />
           );
         })}
       </ul>

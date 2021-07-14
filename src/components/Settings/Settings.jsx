@@ -6,7 +6,7 @@ import styles from './settings.module.scss';
 import Button from '../Button/Button';
 import ClipIcon from '../../assets/ico/ClipIcon';
 import { Link } from 'react-router-dom';
-import { SETTINGS_SAVED, SETTINGS_PAGE_UNLOADED, LOGOUT } from '../../constants/actionTypes';
+import { SETTINGS_SAVED, SETTINGS_PAGE_UNLOADED } from '../../constants/actionTypes';
 // import {
 //   SETTINGS_SAVED,
 //   SETTINGS_PAGE_UNLOADED

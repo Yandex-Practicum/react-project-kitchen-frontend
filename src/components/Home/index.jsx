@@ -41,6 +41,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const Home = (props) => {
+  // const articles
   useEffect(() => {
     const tab = 'all';
     const articlesPromise = agent.Articles.all;

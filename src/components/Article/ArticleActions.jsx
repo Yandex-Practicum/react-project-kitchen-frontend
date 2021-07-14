@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { DELETE_ARTICLE } from '../../constants/actionTypes';
 import styles from './article.module.scss';
 import Button from '../Button/Button';
-import DeleteIcon from '../Comment/DeleteIcon';
+import DeleteIcon from '../../assets/ico/DeleteIcon';
 // import { DELETE_ARTICLE } from '../../slices/common';
 
 const mapDispatchToProps = (dispatch) => ({

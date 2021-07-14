@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import agent from '../../agent';
 import { connect } from 'react-redux';
-import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../../constants/actionTypes';
+import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED, DELETE_ARTICLE } from '../../constants/actionTypes';
 // import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../../slices/articleList';
 import Heart from '../Heart/Heart';
 import s from './ArticlePreview.module.scss';
 import Tags from '../Tags/Tags';
 import UserMeta from '../UserMeta/UserMeta';
+import DeleteIcon from '../../assets/ico/DeleteIcon';
 
 const FAVORITED_CLASS = s.article__btn_unfavorite;
 const NOT_FAVORITED_CLASS = s.article__btn_favorite;
@@ -23,13 +24,27 @@ const mapDispatchToProps = (dispatch) => ({
       type: ARTICLE_UNFAVORITED,
       payload: agent.Articles.unfavorite(slug),
     }),
+  onClickDelete: (payload) => dispatch({ type: DELETE_ARTICLE, payload }),
 });
 
 const ArticlePreview = (props) => {
   const article = props.article;
   const favoriteButtonClass = article.favorited ? FAVORITED_CLASS : NOT_FAVORITED_CLASS;
+  const articleLikeCounter = article.favoritesCount > 0 ? article.favoritesCount : null;
+  const currentUserArticle = props.currentUser
+    ? props.currentUser.username === props.article.author.username
+      ? true
+      : false
+    : false;
+  const [deleteFlag, setDeleteFlag] = useState(false);
 
-  const handleClick = (ev) => {
+  const handleDeleteClick = (ev) => {
+    ev.preventDefault();
+    props.onClickDelete(agent.Articles.del(props.article.slug));
+    setDeleteFlag(true);
+  };
+
+  const handleFavouriteClick = (ev) => {
     if (!props.currentUser) {
       return;
     }
@@ -50,36 +65,45 @@ const ArticlePreview = (props) => {
   }, []);
 
   return (
-    <li className={s.article}>
-      {article.photo && <div className={s.article__photo}></div>}
-      <div className={s.article__post}>
-        <div className={s.article__header}>
-          <UserMeta section="article" article={props.article} />
-          <div>
-            <button
-              className={
-                props.currentUser
-                  ? `${s.article__btn} ${favoriteButtonClass}`
-                  : `${s.article__btn} ${favoriteButtonClass} ${s.article__btn_logout}`
-              }
-              onClick={handleClick}
-              disabled={disabled}>
-              {article.favoritesCount > 0 ? article.favoritesCount : null} <Heart />
-            </button>
+    !deleteFlag && (
+      <li className={s.article}>
+        {article.photo && <div className={s.article__photo}></div>}
+        <div className={s.article__post}>
+          <div className={s.article__header}>
+            <UserMeta section="article" article={props.article} />
+            <div>
+              {currentUserArticle && (
+                <button className={s.delete__button} onClick={handleDeleteClick}>
+                  <DeleteIcon />
+                </button>
+              )}
+              {!currentUserArticle && (
+                <button
+                  className={
+                    props.currentUser
+                      ? `${s.article__btn} ${favoriteButtonClass}`
+                      : `${s.article__btn} ${favoriteButtonClass} ${s.article__btn_logout}`
+                  }
+                  onClick={handleFavouriteClick}
+                  disabled={disabled}>
+                  {articleLikeCounter} <Heart />
+                </button>
+              )}
+            </div>
+          </div>
+          <Link to={`/article/${article.slug}`} className={s.article__title}>
+            <h2>{article.title}</h2>
+          </Link>
+          <p className={s.article__descr}>{article.description}</p>
+          <div className={s.article__footer}>
+            <Link to={`/article/${article.slug}`} className={s.article__more}>
+              Развернуть...
+            </Link>
+            <Tags tags={article.tagList} onClickTag={() => {}} type="grey" />
           </div>
         </div>
-        <Link to={`/article/${article.slug}`} className={s.article__title}>
-          <h2>{article.title}</h2>
-        </Link>
-        <p className={s.article__descr}>{article.description}</p>
-        <div className={s.article__footer}>
-          <Link to={`/article/${article.slug}`} className={s.article__more}>
-            Развернуть...
-          </Link>
-          <Tags tags={article.tagList} onClickTag={() => {}} type="grey" />
-        </div>
-      </div>
-    </li>
+      </li>
+    )
   );
 };
 

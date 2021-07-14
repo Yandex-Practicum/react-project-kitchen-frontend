@@ -219,6 +219,8 @@ const Profile = (props) => {
             state={props.currentPage}
             currentPage={props.currentPage}
             profile={true}
+            currentUser={props.currentUser}
+            tab={tab}
           />
         </div>
       </div>
