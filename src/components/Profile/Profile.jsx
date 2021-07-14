@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import agent from '../../agent';
 import { connect } from 'react-redux';
-import EditIcon from '../../assets/ico/EditIcon';
+import EditSettingsIcon from '../../assets/ico/EditSettingsIcon';
 import HeartIcon from '../Heart/Heart';
 
 import styles from './profile.module.scss';
@@ -26,7 +26,7 @@ const EditProfileSettings = (props) => {
   if (props.isUser) {
     return (
       <Link alt="Настройки профиля" to="/settings" className={styles.editbutton}>
-        <EditIcon />
+        <EditSettingsIcon />
       </Link>
     );
   }

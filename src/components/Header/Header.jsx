@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import HomeIcon from '../../assets/ico/HomeIcon';
 import LoginIcon from '../../assets/ico/LoginIcon';
 import LogoutIcon from '../../assets/ico/LogoutIcon';
-import EditIcon from '../../assets/ico/EditIcon';
+import EditArticleIcon from '../../assets/ico/EditArticleIcon';
 import { connect } from 'react-redux';
 import { EDITOR_PAGE_LOADED, LOGOUT } from '../../constants/actionTypes';
 import BaseAvatarIcon from '../../assets/ico/BaseAvatarIcon';
@@ -53,7 +53,7 @@ const Header = (props) => {
             <>
               <li className={nav_item}>
                 <Link to="/editor" className={nav_link} onClick={clickEditHandler}>
-                  <EditIcon />
+                  <EditArticleIcon />
                   <span>Новая запись</span>
                 </Link>
               </li>
