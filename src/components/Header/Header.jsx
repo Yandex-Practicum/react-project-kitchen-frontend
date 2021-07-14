@@ -6,68 +6,20 @@ import clsx from 'clsx';
 import HomeIcon from './HomeIcon';
 import LoginIcon from './LoginIcon';
 import EditIcon from './EditIcon';
+import { connect } from 'react-redux';
+import { EDITOR_PAGE_LOADED } from '../../constants/actionTypes';
 
 const { header, navbar, navbar_brand, nav, navbar_nav, pull_xs_right, nav_item, nav_link, ava_image } = styles;
 
-const LoggedOutView = (props) => {
-  if (!props.currentUser) {
-    return (
-      <>
-        <li className={nav_item}>
-          <Link to="/login" className={nav_link}>
-            <LoginIcon /> <span>Войти</span>
-          </Link>
-        </li>
-        {/* <li className={nav_item}>
-          <Link to="/register" className={nav_link}>
-            Зарегистрироваться
-          </Link>
-        </li> */}
-      </>
-    );
-  }
-  return null;
-};
-
-const LoggedInView = (props) => {
-  if (props.currentUser) {
-    return (
-      <>
-        <li className={nav_item}>
-          <Link to="/editor" className={nav_link}>
-            <EditIcon />
-            <span>Новая запись</span>
-          </Link>
-        </li>
-
-        {/* <li className={nav_item}>
-          <Link to="/settings" className={nav_link}>
-            <i className="ion-gear-a"></i>&nbsp;Настройки
-          </Link>
-        </li> */}
-
-        <li className={nav_item}>
-          <Link to={`/profile/${props.currentUser.username}`} className={nav_link}>
-            <img
-              src={
-                props.currentUser.image
-                  ? props.currentUser.image
-                  : 'https://static.productionready.io/images/smiley-cyrus.jpg'
-              }
-              alt="ava"
-              className={ava_image}
-            />
-            &nbsp;<p>{props.currentUser.username}</p>
-          </Link>
-        </li>
-      </>
-    );
-  }
-
-  return null;
-};
+const mapDispatchToProps = (dispatch) => ({
+  onLoad: (payload) => dispatch({ type: EDITOR_PAGE_LOADED, payload }),
+});
 
 const Header = (props) => {
+  const clickHandler = () => {
+    props.onLoad();
+  };
+
   return (
     <header className={header}>
       <nav className={navbar}>
@@ -82,12 +34,41 @@ const Header = (props) => {
               <span>Главная</span>
             </Link>
           </li>
-          <LoggedOutView currentUser={props.currentUser} />
-          <LoggedInView currentUser={props.currentUser} />
+          {!props.currentUser && (
+            <li className={nav_item}>
+              <Link to="/login" className={nav_link}>
+                <LoginIcon /> <span>Войти</span>
+              </Link>
+            </li>
+          )}
+          {props.currentUser && (
+            <>
+              <li className={nav_item}>
+                <Link to="/editor" className={nav_link} onClick={clickHandler}>
+                  <EditIcon />
+                  <span>Новая запись</span>
+                </Link>
+              </li>
+              <li className={nav_item}>
+                <Link to={`/profile/${props.currentUser.username}`} className={nav_link}>
+                  <img
+                    src={
+                      props.currentUser.image
+                        ? props.currentUser.image
+                        : 'https://static.productionready.io/images/smiley-cyrus.jpg'
+                    }
+                    alt="ava"
+                    className={ava_image}
+                  />
+                  &nbsp;<p>{props.currentUser.username}</p>
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
     </header>
   );
 };
 
-export default Header;
+export default connect(null, mapDispatchToProps)(Header);

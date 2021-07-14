@@ -1,12 +1,4 @@
-import {
-  EDITOR_PAGE_LOADED,
-  EDITOR_PAGE_UNLOADED,
-  ARTICLE_SUBMITTED,
-  ASYNC_START,
-  ADD_TAG,
-  REMOVE_TAG,
-  UPDATE_FIELD_EDITOR,
-} from '../constants/actionTypes';
+import { EDITOR_PAGE_LOADED, ARTICLE_SUBMITTED, ASYNC_START, ADD_TAG, REMOVE_TAG } from '../constants/actionTypes';
 
 export default (state = { article: { slug: '' } }, action) => {
   switch (action.type) {
@@ -20,36 +12,38 @@ export default (state = { article: { slug: '' } }, action) => {
         body: action.payload ? action.payload.article.body : '',
         tagInput: '',
         tagList: action.payload ? action.payload.article.tagList : [],
-      };
-    case EDITOR_PAGE_UNLOADED:
-      return {
-        article: { slug: '' },
+        inProgress: false,
       };
     case ARTICLE_SUBMITTED:
       return {
         ...state,
         article: action.payload.article,
-        inProgress: null,
+        inProgress: false,
         errors: action.error ? action.payload.errors : null,
       };
     case ASYNC_START:
       if (action.subtype === ARTICLE_SUBMITTED) {
-        return { ...state, inProgress: true };
+        return {
+          ...state,
+          inProgress: true,
+        };
       }
       break;
     case ADD_TAG:
       return {
         ...state,
-        tagList: state.tagList.concat([state.tagInput]),
+        title: action.payload.title,
+        description: action.payload.description,
+        image: action.payload.image,
+        body: action.payload.body,
         tagInput: '',
+        tagList: state.tagList.concat([action.payload.tagInput]),
       };
     case REMOVE_TAG:
       return {
         ...state,
         tagList: state.tagList.filter((tag) => tag !== action.tag),
       };
-    case UPDATE_FIELD_EDITOR:
-      return { ...state, [action.key]: action.value };
     default:
       return state;
   }

@@ -5,7 +5,8 @@ export default (state = {}, action) => {
     case HOME_PAGE_LOADED:
       return {
         ...state,
-        tags: action.payload[0].tags
+        tags: action.payload[0].tags,
+        inProgress: false,
       };
     case HOME_PAGE_UNLOADED:
       return {};

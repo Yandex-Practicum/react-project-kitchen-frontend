@@ -57,7 +57,7 @@ const Login = (props) => {
           type="email"
           name="email"
           placeholder="default@gmail.com"
-          value={formData.email}
+          value={formData.email || ''}
           onChange={changeDataHandler}
         />
 
@@ -65,7 +65,7 @@ const Login = (props) => {
           type="password"
           name="password"
           placeholder="Пароль"
-          value={formData.password}
+          value={formData.password || ''}
           onChange={changeDataHandler}
         />
         <Button type="submit" disabled={props.inProgress}>
