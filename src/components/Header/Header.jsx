@@ -3,21 +3,28 @@ import { Link } from 'react-router-dom';
 import ButtonTheme from '../ButtonTheme/ButtonTheme';
 import styles from './Header.module.scss';
 import clsx from 'clsx';
-import HomeIcon from './HomeIcon';
-import LoginIcon from './LoginIcon';
-import EditIcon from './EditIcon';
+import HomeIcon from '../../assets/ico/HomeIcon';
+import LoginIcon from '../../assets/ico/LoginIcon';
+import LogoutIcon from '../../assets/ico/LogoutIcon';
+import EditIcon from '../../assets/ico/EditIcon';
 import { connect } from 'react-redux';
-import { EDITOR_PAGE_LOADED } from '../../constants/actionTypes';
+import { EDITOR_PAGE_LOADED, LOGOUT } from '../../constants/actionTypes';
 
 const { header, navbar, navbar_brand, nav, navbar_nav, pull_xs_right, nav_item, nav_link, ava_image } = styles;
 
 const mapDispatchToProps = (dispatch) => ({
   onLoad: (payload) => dispatch({ type: EDITOR_PAGE_LOADED, payload }),
+  onClickLogout: () => {
+    dispatch({ type: LOGOUT });
+  },
 });
 
 const Header = (props) => {
-  const clickHandler = () => {
+  const clickEditHandler = () => {
     props.onLoad();
+  };
+  const clickLogoutHandler = () => {
+    props.onClickLogout();
   };
 
   return (
@@ -44,7 +51,7 @@ const Header = (props) => {
           {props.currentUser && (
             <>
               <li className={nav_item}>
-                <Link to="/editor" className={nav_link} onClick={clickHandler}>
+                <Link to="/editor" className={nav_link} onClick={clickEditHandler}>
                   <EditIcon />
                   <span>Новая запись</span>
                 </Link>
@@ -61,6 +68,11 @@ const Header = (props) => {
                     className={ava_image}
                   />
                   &nbsp;<p>{props.currentUser.username}</p>
+                </Link>
+              </li>
+              <li className={nav_item}>
+                <Link to="/" className={nav_link} onClick={clickLogoutHandler}>
+                  <LogoutIcon />
                 </Link>
               </li>
             </>
