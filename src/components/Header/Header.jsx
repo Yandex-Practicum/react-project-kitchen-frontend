@@ -9,8 +9,8 @@ import LogoutIcon from '../../assets/ico/LogoutIcon';
 import EditArticleIcon from '../../assets/ico/EditArticleIcon';
 import { connect } from 'react-redux';
 import BaseAvatarIcon from '../../assets/ico/BaseAvatarIcon';
-import { S_EDITOR_PAGE_LOADED } from '../../slices/articles';
-import { S_LOGOUT } from '../../slices/common';
+import { S_EDITOR_PAGE_LOADED } from '../../slices/articles-slice/articles';
+import { S_LOGOUT } from '../../slices/common-slice/common';
 
 const { header, navbar, navbar_brand, nav, navbar_nav, pull_xs_right, nav_item, nav_link, ava_image } = styles;
 

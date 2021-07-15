@@ -4,7 +4,12 @@ import agent from '../../agent';
 import Button from '../Button/Button';
 import { connect, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { S_ADD_TAG, S_EDITOR_PAGE_LOADED, S_REMOVE_TAG, S_ARTICLE_SUBMITTED } from '../../slices/articles';
+import {
+  S_ADD_TAG,
+  S_EDITOR_PAGE_LOADED,
+  S_REMOVE_TAG,
+  S_ARTICLE_SUBMITTED,
+} from '../../slices/articles-slice/articles';
 import clipImg from '../../assets/ico/Clip.svg';
 import s from './Editor.module.scss';
 import Tags from '../Tags/Tags';

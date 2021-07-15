@@ -7,6 +7,7 @@ const initialState = {
   viewChangeCounter: 0,
   inProgress: null,
   errors: null,
+  isDarkTheme: false,
 };
 
 export const commonSlice = createSlice({
@@ -23,20 +24,14 @@ export const commonSlice = createSlice({
       state.currentUser = null;
     },
     S_ASYNC_START: (state, action) => {
-      if (action.subtype === S_REGISTER) {
+      if (action.subtype === S_AUTHORIZATION) {
         state.inProgress = true;
       }
       state.inProgress = true;
     },
-    S_LOGIN: (state, action) => {
+    S_AUTHORIZATION: (state, action) => {
       state.inProgress = false;
       state.errors = action.error ? action.payload.errors : null;
-      state.token = action.error ? null : action.payload.res.user.token;
-      state.currentUser = action.error ? null : action.payload.res.user;
-    },
-    S_REGISTER: (state, action) => {
-      state.inProgress = false;
-      state.errors = action.error ? action.payload.res.errors : null;
       state.token = action.error ? null : action.payload.res.user.token;
       state.currentUser = action.error ? null : action.payload.res.user;
     },
@@ -45,13 +40,12 @@ export const commonSlice = createSlice({
       state.inProgress = false;
       state.errors = action.error ? action.payload.res.errors : null;
     },
-    S_DELETE_ARTICLE: (state, action) => {
-      state.redirectTo = '/';
-      state.deleted = true;
+    S_CHANGE_THEME: (state, action) => {
+      state.isDarkTheme = !state.isDarkTheme;
     },
   },
 });
 
 export default commonSlice.reducer;
-export const { S_APP_LOAD, S_REDIRECT, S_LOGOUT, S_SETTINGS_SAVED, S_LOGIN, S_REGISTER, S_DELETE_ARTICLE } =
+export const { S_APP_LOAD, S_REDIRECT, S_LOGOUT, S_SETTINGS_SAVED, S_AUTHORIZATION, S_CHANGE_THEME } =
   commonSlice.actions;

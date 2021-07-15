@@ -85,17 +85,8 @@ export const articleSlice = createSlice({
     },
     S_EDITOR_PAGE_LOADED: (state, action) => {
       if (action.payload) {
-        // const { slug, title, description, image, body, tagList } = action.payload.res.article;
-        // state.articleEditor.articleSlug = slug;
-        // state.articleEditor.title = title;
-        // state.articleEditor.description = description;
-        // state.articleEditor.image = image;
-        // state.articleEditor.body = body;
-        // state.articleEditor.tagInput = '';
-        // state.articleEditor.tagList = tagList;
         state.inProgress = false;
         state.editArticle = action.payload.res;
-        // state.articleEditor.inProgress = false;
       }
       state.inProgress = false;
     },
@@ -116,9 +107,6 @@ export const articleSlice = createSlice({
     },
     S_ARTICLE_SUBMITTED: (state, action) => {
       state.editArticle = action.payload.res.article;
-
-      // state.redirectTo = `/article/${action.payload.res.article.slug}`;
-      // state.articleEditor.inProgress = false;
       state.errors = action.error ? action.payload.res.errors : null;
     },
     S_DELETE_ARTICLE: (state, action) => {

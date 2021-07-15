@@ -8,8 +8,8 @@ import HeartIcon from '../../assets/ico/HeartIcon';
 
 import styles from './profile.module.scss';
 
-import { S_FOLLOW_USER, S_UNFOLLOW_USER, S_PROFILE_PAGE_LOADED } from '../../slices/profile';
-import { S_PROFILE_ARTICLES_LOADED, S_PROFILE_ARTICLES_UNLOADED } from '../../slices/articles';
+import { S_FOLLOW_USER, S_PROFILE_PAGE_LOADED } from '../../slices/profile-slice/profile';
+import { S_PROFILE_ARTICLES_LOADED, S_PROFILE_ARTICLES_UNLOADED } from '../../slices/articles-slice/articles';
 import TabsNavigation from '../Tabs/TabsNavigation/TabsNavigation';
 import TabsItem from '../Tabs/TabItem/TabsItem';
 import BaseAvatarIcon from '../../assets/ico/BaseAvatarIcon';
@@ -33,12 +33,6 @@ const FollowUserButton = (props) => {
   let classes = 'btn btn-sm action-btn';
 
   props.user.following ? (classes += ' btn-secondary') : (classes += ' btn-outline-secondary');
-
-  // if (props.user.following) {
-  //   classes += ' btn-secondary';
-  // } else {
-  //   classes += ' btn-outline-secondary';
-  // }
 
   const handleClick = (ev) => {
     ev.preventDefault();
@@ -73,15 +67,15 @@ const mapDispatchToProps = (dispatch) => ({
       type: S_FOLLOW_USER,
       payload: agent.Profile.follow(username),
     }),
+  onUnfollow: (username) =>
+    dispatch({
+      type: S_FOLLOW_USER,
+      payload: agent.Profile.unfollow(username),
+    }),
   S_onLoad: (payload) => {
     dispatch({ type: S_PROFILE_PAGE_LOADED, payload });
     dispatch({ type: S_PROFILE_ARTICLES_LOADED, payload });
   },
-  onUnfollow: (username) =>
-    dispatch({
-      type: S_UNFOLLOW_USER,
-      payload: agent.Profile.unfollow(username),
-    }),
   S_onUnload: () => {
     dispatch({ type: S_PROFILE_ARTICLES_UNLOADED });
   },

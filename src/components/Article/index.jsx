@@ -8,7 +8,7 @@ import marked from 'marked';
 import styles from './article.module.scss';
 import Tags from '../Tags/Tags';
 import UserMeta from '../UserMeta/UserMeta';
-import { S_ARTICLE_PAGE_LOADED, S_ARTICLE_PAGE_UNLOADED } from '../../slices/articles';
+import { S_ARTICLE_PAGE_LOADED, S_ARTICLE_PAGE_UNLOADED } from '../../slices/articles-slice/articles';
 
 const mapStateToProps = (state) => ({
   ...state.articles,

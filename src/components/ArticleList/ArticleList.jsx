@@ -1,6 +1,5 @@
 import React from 'react';
 import ArticlePreview from '../ArticlePreview/ArticlePreview';
-import ListPagination from '../ListPagination/ListPagination';
 import cn from 'classnames';
 import styles from './ArticleList.module.scss';
 
@@ -28,12 +27,6 @@ const ArticleList = (props) => {
           );
         })}
       </ul>
-      <ListPagination
-        pager={props.pager}
-        articlesCount={props.articlesCount}
-        currentPage={props.currentPage}
-        articles={props.articles}
-      />
     </div>
   );
 };

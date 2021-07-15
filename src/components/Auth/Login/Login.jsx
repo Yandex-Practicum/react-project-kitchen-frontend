@@ -8,12 +8,12 @@ import Button from '../../Button/Button';
 
 import styles from '../Auth.module.scss';
 import Form from '../../Form/Form';
-import { S_LOGIN } from '../../../slices/common';
+import { S_AUTHORIZATION } from '../../../slices/common-slice/common';
 
 const mapStateToProps = (state) => ({ ...state.common });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (email, password) => dispatch({ type: S_LOGIN, payload: agent.Auth.login(email, password) }),
+  onSubmit: (email, password) => dispatch({ type: S_AUTHORIZATION, payload: agent.Auth.login(email, password) }),
 });
 
 const Login = (props) => {

@@ -1,6 +1,6 @@
 import agent from './agent';
-import { ASYNC_START, ASYNC_END, LOGIN, LOGOUT, REGISTER } from './constants/actionTypes';
-import { S_LOGIN, S_REGISTER, S_LOGOUT } from './slices/common';
+import { ASYNC_START, ASYNC_END } from './constants/actionTypes';
+import { S_AUTHORIZATION, S_LOGOUT } from './slices/common-slice/common';
 
 const promiseMiddleware = (store) => (next) => (action) => {
   if (isPromise(action.payload)) {
@@ -42,11 +42,9 @@ const promiseMiddleware = (store) => (next) => (action) => {
 };
 
 const localStorageMiddleware = (store) => (next) => (action) => {
-  if (action.type === S_REGISTER || action.type === S_LOGIN) {
+  if (action.type === S_AUTHORIZATION) {
     if (!action.error) {
-      console.log(action);
       window.localStorage.setItem('jwt', action.payload.res.user.token);
-      console.log(action.payload);
       agent.setToken(action.payload.res.user.token);
     }
   } else if (action.type === S_LOGOUT) {

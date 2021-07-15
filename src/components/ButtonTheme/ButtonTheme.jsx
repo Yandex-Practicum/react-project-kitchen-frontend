@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { CHANGE_THEME } from '../../constants/actionTypes';
 import cn from 'classnames';
 import s from './ButtonTheme.module.scss';
+import { S_CHANGE_THEME } from '../../slices/common-slice/common';
 const mapDispatchToProps = (dispatch) => ({
   changeTheme: () => {
-    dispatch({ type: CHANGE_THEME });
+    dispatch({ type: S_CHANGE_THEME });
   },
 });
 const mapStateToProps = (state) => ({
-  ...state.theme,
+  ...state.common,
 });
 const ButtonTheme = (props) => {
   const handleClick = () => {

@@ -6,7 +6,7 @@ import styles from './settings.module.scss';
 import Button from '../Button/Button';
 import ClipIcon from '../../assets/ico/ClipIcon';
 import { Link } from 'react-router-dom';
-import { S_SETTINGS_SAVED } from '../../slices/common';
+import { S_SETTINGS_SAVED } from '../../slices/common-slice/common';
 import Form from '../Form/Form';
 
 const mapStateToProps = (state) => ({

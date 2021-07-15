@@ -5,8 +5,7 @@ import React from 'react';
 import Tags from '../Tags/Tags';
 import agent from '../../agent';
 import { connect } from 'react-redux';
-import { HOME_PAGE_UNLOADED } from '../../constants/actionTypes';
-import { S_APPLY_TAG_FILTER, S_HOME_ARTICLES_LOADED } from '../../slices/articles';
+import { S_APPLY_TAG_FILTER, S_HOME_ARTICLES_LOADED } from '../../slices/articles-slice/articles';
 
 import styles from './home.module.scss';
 
@@ -28,9 +27,6 @@ const mapDispatchToProps = (dispatch) => ({
   S_onLoad: (tab, pager, payload) => {
     dispatch({ type: S_HOME_ARTICLES_LOADED, tab, pager, payload });
   },
-  S0_onUnload: () => {
-    dispatch({ type: HOME_PAGE_UNLOADED });
-  },
 });
 
 const Home = (props) => {
@@ -40,9 +36,7 @@ const Home = (props) => {
     const articlesPromise = agent.Articles.all;
 
     props.S_onLoad(tab, articlesPromise, Promise.all([agent.Tags.getAll(), articlesPromise()]));
-    return () => {
-      props.S0_onUnload();
-    };
+
     //eslint-disable-next-line
   }, []);
   return (

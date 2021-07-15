@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import ListErrors from '../../ListErrors/ListErrors';
 import agent from '../../../agent';
 import { connect, useSelector } from 'react-redux';
-import { S_REGISTER } from '../../../slices/common';
+import { S_AUTHORIZATION } from '../../../slices/common-slice/common';
 import Button from '../../Button/Button';
 
 import styles from '../Auth.module.scss';
@@ -14,7 +14,7 @@ const mapStateToProps = (state) => ({ ...state.auth });
 const mapDispatchToProps = (dispatch) => ({
   S_onSubmit: (username, email, password) => {
     const payload = agent.Auth.register(username, email, password);
-    dispatch({ type: S_REGISTER, payload });
+    dispatch({ type: S_AUTHORIZATION, payload });
   },
 });
 

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import styles from './article.module.scss';
 import Button from '../Button/Button';
 import DeleteIcon from '../../assets/ico/DeleteIcon';
-import { S_DELETE_ARTICLE } from '../../slices/common';
+import { S_DELETE_ARTICLE } from '../../slices/articles-slice/articles';
 
 const mapDispatchToProps = (dispatch) => ({
   S_onClickDelete: (payload) => dispatch({ type: S_DELETE_ARTICLE, payload }),

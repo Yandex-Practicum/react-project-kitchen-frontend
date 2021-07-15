@@ -7,7 +7,11 @@ import s from './ArticlePreview.module.scss';
 import Tags from '../Tags/Tags';
 import UserMeta from '../UserMeta/UserMeta';
 import DeleteIcon from '../../assets/ico/DeleteIcon';
-import { S_CHANGE_FAVORITES_STATUS, S_HOME_ARTICLES_LOADED, S_DELETE_ARTICLE } from '../../slices/articles';
+import {
+  S_CHANGE_FAVORITES_STATUS,
+  S_HOME_ARTICLES_LOADED,
+  S_DELETE_ARTICLE,
+} from '../../slices/articles-slice/articles';
 
 const FAVORITED_CLASS = s.article__btn_unfavorite;
 const NOT_FAVORITED_CLASS = s.article__btn_favorite;
@@ -68,7 +72,7 @@ const ArticlePreview = (props) => {
       setDisabled(false);
     }
     //eslint-disable-next-line
-  }, []);
+  }, [props.token]);
 
   useEffect(() => {
     if (deleted) {

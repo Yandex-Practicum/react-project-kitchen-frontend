@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import TabsNavigation from '../Tabs/TabsNavigation/TabsNavigation';
 import TabsItem from '../Tabs/TabItem/TabsItem';
 import styles from './home.module.scss';
-import { S_CHANGE_TAB } from '../../slices/articles';
+import { S_CHANGE_TAB } from '../../slices/articles-slice/articles';
 
 const mapStateToProps = (state) => ({
   ...state.articles,

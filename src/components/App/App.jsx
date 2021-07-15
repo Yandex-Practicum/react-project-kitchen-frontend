@@ -2,7 +2,6 @@ import agent from '../../agent';
 import Header from '../Header/Header';
 import React, { useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
-import { CHANGE_THEME } from '../../constants/actionTypes';
 import { Route, Switch } from 'react-router-dom';
 import Article from '../Article';
 import Editor from '../Editor/Editor';
@@ -12,25 +11,23 @@ import Profile from '../Profile/Profile';
 import Register from '../Auth/Register/Register';
 import Settings from '../Settings/Settings';
 import Preloader from '../Preloader/Preloader';
-import { S_APP_LOAD } from '../../slices/common';
+import { S_APP_LOAD, S_CHANGE_THEME } from '../../slices/common-slice/common';
 
 const mapStateToProps = (state) => {
   return {
     appLoaded: state.common.appLoaded,
     appName: state.common.appName,
     currentUser: state.common.currentUser,
-    redirectTo: state.common.redirectTo,
-    isDarkTheme: state.theme.isDarkTheme,
+    isDarkTheme: state.common.isDarkTheme,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   S_onLoad: (payload, token) => dispatch({ type: S_APP_LOAD, payload, token, skipTracking: true }),
-  onChangeTheme: () => dispatch({ type: CHANGE_THEME }),
+  onChangeTheme: () => dispatch({ type: S_CHANGE_THEME }),
 });
 
 const App = (props) => {
-  const user = useSelector((state) => state.common.currentUser);
   const root = document.querySelector(':root');
   const darkTheme = {
     back: '#1F2023',
