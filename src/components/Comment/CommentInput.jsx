@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import { ADD_COMMENT } from '../../constants/actionTypes';
 import styles from './comment.module.scss';
 import Button from '../Button/Button';
-// import { ADD_COMMENT } from '../../slices/articleList';
+import { S_ADD_COMMENT } from '../../slices/articles';
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit: (payload) => dispatch({ type: ADD_COMMENT, payload }),
+  S_onSubmit: (payload) => dispatch({ type: S_ADD_COMMENT, payload }),
 });
 
 const CommentInput = (props) => {
@@ -22,6 +23,7 @@ const CommentInput = (props) => {
     const payload = agent.Comments.create(props.slug, { body: body });
     setBody('');
     props.onSubmit(payload);
+    props.S_onSubmit(payload);
   };
 
   return (

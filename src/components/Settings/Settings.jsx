@@ -7,13 +7,7 @@ import Button from '../Button/Button';
 import ClipIcon from '../../assets/ico/ClipIcon';
 import { Link } from 'react-router-dom';
 import { SETTINGS_SAVED, SETTINGS_PAGE_UNLOADED } from '../../constants/actionTypes';
-// import {
-//   SETTINGS_SAVED,
-//   SETTINGS_PAGE_UNLOADED
-// } from '../../slices/settings';
-// import {
-//   LOGOUT
-// } from '../../constants/actionTypes';
+import { S_SETTINGS_SAVED } from '../../slices/common';
 import Form from '../Form/Form';
 
 class SettingsForm extends React.Component {
@@ -43,6 +37,7 @@ class SettingsForm extends React.Component {
       }
 
       this.props.onSubmitForm(user);
+      this.props.S_onSubmitForm(user);
     };
   }
 
@@ -126,6 +121,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onSubmitForm: (user) => dispatch({ type: SETTINGS_SAVED, payload: agent.Auth.save(user) }),
   onUnload: () => dispatch({ type: SETTINGS_PAGE_UNLOADED }),
+  S_onSubmitForm: (user) => dispatch({ type: S_SETTINGS_SAVED, payload: agent.Auth.save(user) }),
 });
 
 const Settings = (props) => {

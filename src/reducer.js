@@ -9,14 +9,9 @@ import profile from './reducers/profile';
 import settings from './reducers/settings';
 import theme from './reducers/theme';
 
-// import article from './slices/article';
-// import articleList from './slices/articleList';
-// import auth from './slices/auth';
-// import common from './slices/common';
-// import editor from './slices/editor';
-// import home from './slices/home';
-// import profile from './slices/profile';
-// import settings from './slices/settings';
+import S_articles from './slices/articles';
+import S_common from './slices/common';
+import S_profile from './slices/profile';
 
 export default combineReducers({
   article,
@@ -28,4 +23,7 @@ export default combineReducers({
   profile,
   settings,
   theme,
+  S_articles,
+  S_common,
+  S_profile,
 });

@@ -12,6 +12,7 @@ import Profile from '../Profile/Profile';
 import Register from '../Auth/Register/Register';
 import Settings from '../Settings/Settings';
 import Preloader from '../Preloader/Preloader';
+import { S_APP_LOAD } from '../../slices/common';
 
 const mapStateToProps = (state) => {
   return {
@@ -27,6 +28,7 @@ const mapDispatchToProps = (dispatch) => ({
   onLoad: (payload, token) => dispatch({ type: APP_LOAD, payload, token, skipTracking: true }),
   onRedirect: () => dispatch({ type: REDIRECT }),
   onChangeTheme: () => dispatch({ type: CHANGE_THEME }),
+  S_onLoad: (payload, token) => dispatch({ type: S_APP_LOAD, payload, token, skipTracking: true }),
 });
 
 const App = (props) => {
@@ -71,6 +73,7 @@ const App = (props) => {
       agent.setToken(token);
     }
     props.onLoad(token ? agent.Auth.current() : null, token);
+    props.S_onLoad(token ? agent.Auth.current() : null, token);
     if (localStorage.getItem('isDarkTheme') === 'true') {
       props.onChangeTheme();
     }

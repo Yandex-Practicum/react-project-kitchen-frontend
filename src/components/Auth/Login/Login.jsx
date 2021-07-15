@@ -9,11 +9,13 @@ import Button from '../../Button/Button';
 
 import styles from '../Auth.module.scss';
 import Form from '../../Form/Form';
+import { S_LOGIN } from '../../../slices/common';
 
 const mapStateToProps = (state) => ({ ...state.auth });
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit: (email, password) => dispatch({ type: LOGIN, payload: agent.Auth.login(email, password) }),
+  S_onSubmit: (email, password) => dispatch({ type: S_LOGIN, payload: agent.Auth.login(email, password) }),
 });
 
 const Login = (props) => {
@@ -33,6 +35,7 @@ const Login = (props) => {
   const submitForm = (email, password) => (ev) => {
     ev.preventDefault();
     props.onSubmit(email, password);
+    props.S_onSubmit(email, password);
     setSendStatus(true);
   };
 

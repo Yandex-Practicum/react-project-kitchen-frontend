@@ -4,6 +4,7 @@ import ListErrors from '../../ListErrors/ListErrors';
 import agent from '../../../agent';
 import { connect, useSelector } from 'react-redux';
 import { REGISTER } from '../../../constants/actionTypes';
+import { S_REGISTER } from '../../../slices/common';
 import Button from '../../Button/Button';
 
 import styles from '../Auth.module.scss';
@@ -15,6 +16,10 @@ const mapDispatchToProps = (dispatch) => ({
   onSubmit: (username, email, password) => {
     const payload = agent.Auth.register(username, email, password);
     dispatch({ type: REGISTER, payload });
+  },
+  S_onSubmit: (username, email, password) => {
+    const payload = agent.Auth.register(username, email, password);
+    dispatch({ type: S_REGISTER, payload });
   },
 });
 
@@ -28,6 +33,7 @@ const Register = (props) => {
   const submitForm = (username, email, password) => (ev) => {
     ev.preventDefault();
     props.onSubmit(username, email, password);
+    props.S_onSubmit(username, email, password);
     setSendStatus(true);
   };
 

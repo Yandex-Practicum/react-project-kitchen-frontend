@@ -5,18 +5,8 @@ import Button from '../Button/Button';
 import { connect, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { ADD_TAG, EDITOR_PAGE_LOADED, REMOVE_TAG, ARTICLE_SUBMITTED } from '../../constants/actionTypes';
-// import {
-//   ADD_TAG,
-//   EDITOR_PAGE_LOADED,
-//   REMOVE_TAG,
-//   EDITOR_PAGE_UNLOADED,
-//   UPDATE_FIELD_EDITOR
-//   // ARTICLE_SUBMITTED,
-
-// } from '../../slices/editor';
-// import {
-//   ARTICLE_SUBMITTED
-// } from '../../slices/settings';
+import { S_ADD_TAG, S_EDITOR_PAGE_LOADED, S_REMOVE_TAG } from '../../slices/articles';
+import { S_ARTICLE_SUBMITTED } from '../../slices/common';
 import clipImg from '../../assets/ico/Clip.svg';
 import s from './Editor.module.scss';
 import Tags from '../Tags/Tags';
@@ -30,6 +20,10 @@ const mapDispatchToProps = (dispatch) => ({
   onLoad: (payload) => dispatch({ type: EDITOR_PAGE_LOADED, payload }),
   onRemoveTag: (tag) => dispatch({ type: REMOVE_TAG, tag }),
   onSubmit: (payload) => dispatch({ type: ARTICLE_SUBMITTED, payload }),
+  S_onAddTag: (payload) => dispatch({ type: S_ADD_TAG, payload }),
+  S_onLoad: (payload) => dispatch({ type: S_EDITOR_PAGE_LOADED, payload }),
+  S_onRemoveTag: (tag) => dispatch({ type: S_REMOVE_TAG, tag }),
+  S_onSubmit: (payload) => dispatch({ type: S_ARTICLE_SUBMITTED, payload }),
 });
 
 const Editor = (props) => {
@@ -39,9 +33,11 @@ const Editor = (props) => {
 
   useEffect(() => {
     if (props.match.params.slug) {
-      return props.onLoad(agent.Articles.get(props.match.params.slug));
+      props.onLoad(agent.Articles.get(props.match.params.slug));
+      return props.S_onLoad(agent.Articles.get(props.match.params.slug));
     }
     props.onLoad();
+    props.S_onLoad();
     //eslint-disable-next-line
   }, []);
 
@@ -82,6 +78,7 @@ const Editor = (props) => {
     if (ev.keyCode === 13) {
       ev.preventDefault();
       props.onAddTag(formData);
+      props.S_onAddTag(formData);
     }
   };
 
@@ -104,9 +101,11 @@ const Editor = (props) => {
     setSubmitFlag(true);
     if (props.articleSlug) {
       props.onSubmit(agent.Articles.update(Object.assign(article, slug)));
+      props.S_onSubmit(agent.Articles.update(Object.assign(article, slug)));
       return;
     }
     props.onSubmit(agent.Articles.create(article));
+    props.S_onSubmit(agent.Articles.create(article));
   };
 
   return (

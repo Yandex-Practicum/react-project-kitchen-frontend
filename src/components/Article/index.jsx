@@ -9,6 +9,7 @@ import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../constants/acti
 import styles from './article.module.scss';
 import Tags from '../Tags/Tags';
 import UserMeta from '../UserMeta/UserMeta';
+import { S_ARTICLE_PAGE_LOADED, S_ARTICLE_PAGE_UNLOADED } from '../../slices/articles';
 
 const mapStateToProps = (state) => ({
   ...state.article,
@@ -18,6 +19,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onLoad: (payload) => dispatch({ type: ARTICLE_PAGE_LOADED, payload }),
   onUnload: () => dispatch({ type: ARTICLE_PAGE_UNLOADED }),
+  S_onLoad: (payload) => dispatch({ type: S_ARTICLE_PAGE_LOADED, payload }),
+  S_onUnload: () => dispatch({ type: S_ARTICLE_PAGE_UNLOADED }),
 });
 
 const Article = (props) => {
@@ -27,9 +30,11 @@ const Article = (props) => {
   console.log(`${history.location.state}-${history.location.key}`);
   useEffect(() => {
     props.onLoad(Promise.all([agent.Articles.get(id), agent.Comments.forArticle(id)]));
+    props.S_onLoad(Promise.all([agent.Articles.get(id), agent.Comments.forArticle(id)]));
 
     return () => {
       props.onUnload();
+      props.S_onUnload();
     };
     //eslint-disable-next-line
   }, []);

@@ -4,21 +4,12 @@ import { Link } from 'react-router-dom';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import EditSettingsIcon from '../../assets/ico/EditSettingsIcon';
-import HeartIcon from '../Heart/Heart';
+import HeartIcon from '../../assets/ico/HeartIcon';
 
 import styles from './profile.module.scss';
 
 import { FOLLOW_USER, UNFOLLOW_USER, PROFILE_PAGE_LOADED, PROFILE_PAGE_UNLOADED } from '../../constants/actionTypes';
-// import {
-//   FOLLOW_USER,
-//   UNFOLLOW_USER,
-//   PROFILE_PAGE_LOADED,
-//   PROFILE_PAGE_UNLOADED
-// } from '../../slices/profile';
-// import {
-//   PROFILE_PAGE_LOADED as PROFILE_ARTICLE_LOADED,
-//   PROFILE_PAGE_UNLOADED as PROFILE_ARTICLE_UNLOADED
-// } from '../../slices/articleList';
+import { S_FOLLOW_USER, S_UNFOLLOW_USER, S_PROFILE_PAGE_LOADED, S_PROFILE_PAGE_UNLOADED } from '../../slices/profile';
 import TabsNavigation from '../Tabs/TabsNavigation/TabsNavigation';
 import TabsItem from '../Tabs/TabItem/TabsItem';
 import BaseAvatarIcon from '../../assets/ico/BaseAvatarIcon';
@@ -53,8 +44,10 @@ const FollowUserButton = (props) => {
     ev.preventDefault();
     if (props.user.following) {
       props.unfollow(props.user.username);
+      props.S_unfollow(props.user.username);
     } else {
       props.follow(props.user.username);
+      props.S_follow(props.user.username);
     }
   };
 
@@ -82,7 +75,6 @@ const mapDispatchToProps = (dispatch) => ({
       payload: agent.Profile.follow(username),
     }),
   onLoad: (payload) => {
-    // dispatch({ type: PROFILE_ARTICLE_LOADED, payload })
     dispatch({ type: PROFILE_PAGE_LOADED, payload });
   },
   onUnfollow: (username) =>
@@ -91,8 +83,23 @@ const mapDispatchToProps = (dispatch) => ({
       payload: agent.Profile.unfollow(username),
     }),
   onUnload: () => {
-    // dispatch({ type: PROFILE_ARTICLE_UNLOADED })
     dispatch({ type: PROFILE_PAGE_UNLOADED });
+  },
+  S_onFollow: (username) =>
+    dispatch({
+      type: S_FOLLOW_USER,
+      payload: agent.Profile.follow(username),
+    }),
+  S_onLoad: (payload) => {
+    dispatch({ type: S_PROFILE_PAGE_LOADED, payload });
+  },
+  S_onUnfollow: (username) =>
+    dispatch({
+      type: S_UNFOLLOW_USER,
+      payload: agent.Profile.unfollow(username),
+    }),
+  S_onUnload: () => {
+    dispatch({ type: S_PROFILE_PAGE_UNLOADED });
   },
 });
 
@@ -107,10 +114,17 @@ const Profile = (props) => {
         agent.Articles.byAuthor(props.match.params.username),
       ]),
     );
+    props.S_onLoad(
+      Promise.all([
+        agent.Profile.get(props.match.params.username),
+        agent.Articles.byAuthor(props.match.params.username),
+      ]),
+    );
     setTab('byAuthor');
 
     return () => {
       props.onUnload();
+      props.S_onUnload();
     };
     //eslint-disable-next-line
   }, [props.match.url]);
@@ -123,8 +137,20 @@ const Profile = (props) => {
           agent.Articles.byAuthor(props.match.params.username),
         ]),
       );
+      props.S_onLoad(
+        Promise.all([
+          agent.Profile.get(props.match.params.username),
+          agent.Articles.byAuthor(props.match.params.username),
+        ]),
+      );
     } else {
       props.onLoad(
+        Promise.all([
+          agent.Profile.get(props.match.params.username),
+          agent.Articles.favoritedBy(props.match.params.username),
+        ]),
+      );
+      props.S_onLoad(
         Promise.all([
           agent.Profile.get(props.match.params.username),
           agent.Articles.favoritedBy(props.match.params.username),

@@ -4,11 +4,13 @@ import agent from '../../agent';
 import { connect } from 'react-redux';
 import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED, DELETE_ARTICLE } from '../../constants/actionTypes';
 // import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../../slices/articleList';
-import Heart from '../Heart/Heart';
+import Heart from '../../assets/ico/HeartIcon';
 import s from './ArticlePreview.module.scss';
 import Tags from '../Tags/Tags';
 import UserMeta from '../UserMeta/UserMeta';
 import DeleteIcon from '../../assets/ico/DeleteIcon';
+import { S_CHANGE_FAVORITES_STATUS } from '../../slices/articles';
+import { S_DELETE_ARTICLE } from '../../slices/common';
 
 const FAVORITED_CLASS = s.article__btn_unfavorite;
 const NOT_FAVORITED_CLASS = s.article__btn_favorite;
@@ -25,6 +27,17 @@ const mapDispatchToProps = (dispatch) => ({
       payload: agent.Articles.unfavorite(slug),
     }),
   onClickDelete: (payload) => dispatch({ type: DELETE_ARTICLE, payload }),
+  S_favorite: (slug) =>
+    dispatch({
+      type: S_CHANGE_FAVORITES_STATUS,
+      payload: agent.Articles.favorite(slug),
+    }),
+  S_unfavorite: (slug) =>
+    dispatch({
+      type: S_CHANGE_FAVORITES_STATUS,
+      payload: agent.Articles.unfavorite(slug),
+    }),
+  S_onClickDelete: (payload) => dispatch({ type: S_DELETE_ARTICLE, payload }),
 });
 
 const ArticlePreview = (props) => {
@@ -41,6 +54,7 @@ const ArticlePreview = (props) => {
   const handleDeleteClick = (ev) => {
     ev.preventDefault();
     props.onClickDelete(agent.Articles.del(props.article.slug));
+    props.S_onClickDelete(agent.Articles.del(props.article.slug));
     setDeleteFlag(true);
   };
 
@@ -49,10 +63,13 @@ const ArticlePreview = (props) => {
       return;
     }
     ev.preventDefault();
+
     if (article.favorited) {
       props.unfavorite(article.slug);
+      props.S_unfavorite(article.slug);
     } else {
       props.favorite(article.slug);
+      props.S_favorite(article.slug);
     }
   };
   const [disabled, setDisabled] = React.useState(true);

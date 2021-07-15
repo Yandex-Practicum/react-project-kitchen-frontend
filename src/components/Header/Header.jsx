@@ -10,6 +10,7 @@ import EditArticleIcon from '../../assets/ico/EditArticleIcon';
 import { connect } from 'react-redux';
 import { EDITOR_PAGE_LOADED, LOGOUT } from '../../constants/actionTypes';
 import BaseAvatarIcon from '../../assets/ico/BaseAvatarIcon';
+import { S_EDITOR_PAGE_LOADED } from '../../slices/articles';
 
 const { header, navbar, navbar_brand, nav, navbar_nav, pull_xs_right, nav_item, nav_link, ava_image } = styles;
 
@@ -18,14 +19,20 @@ const mapDispatchToProps = (dispatch) => ({
   onClickLogout: () => {
     dispatch({ type: LOGOUT });
   },
+  S_onLoad: (payload) => dispatch({ type: S_EDITOR_PAGE_LOADED, payload }),
+  S_onClickLogout: () => {
+    dispatch({ type: LOGOUT });
+  },
 });
 
 const Header = (props) => {
   const clickEditHandler = () => {
     props.onLoad();
+    props.S_onLoad();
   };
   const clickLogoutHandler = () => {
     props.onClickLogout();
+    props.S_onClickLogout();
   };
 
   return (

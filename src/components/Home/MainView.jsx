@@ -6,9 +6,7 @@ import { CHANGE_TAB } from '../../constants/actionTypes';
 import TabsNavigation from '../Tabs/TabsNavigation/TabsNavigation';
 import TabsItem from '../Tabs/TabItem/TabsItem';
 import styles from './home.module.scss';
-// import {
-//   CHANGE_TAB,
-// } from '../../slices/articleList';
+import { S_CHANGE_TAB } from '../../slices/articles';
 
 const mapStateToProps = (state) => ({
   ...state.articleList,
@@ -19,11 +17,13 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onTabClick: (tab, pager, payload) => dispatch({ type: CHANGE_TAB, tab, pager, payload }),
+  S_onTabClick: (tab, pager, payload) => dispatch({ type: S_CHANGE_TAB, tab, pager, payload }),
 });
 
 const MainView = (props) => {
   const clickHandler = (type) => {
     props.onTabClick(type, agent.Articles[type], agent.Articles[type]());
+    props.S_onTabClick(type, agent.Articles[type], agent.Articles[type]());
   };
 
   return (

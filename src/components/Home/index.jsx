@@ -6,15 +6,8 @@ import Tags from '../Tags/Tags';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import { HOME_PAGE_LOADED, HOME_PAGE_UNLOADED, APPLY_TAG_FILTER } from '../../constants/actionTypes';
-// import {
-//   HOME_PAGE_LOADED,
-//   HOME_PAGE_UNLOADED,
-// } from '../../slices/home';
-// import {
-//   HOME_PAGE_LOADED as HOME_ARTICLE_LOADED,
-//   HOME_PAGE_UNLOADED as HOME_ARTICLE_UNLOADED,
-//   APPLY_TAG_FILTER,
-// } from '../../slices/articleList';
+import { S_APPLY_TAG_FILTER, S_HOME_ARTICLES_LOADED } from '../../slices/articles';
+
 import styles from './home.module.scss';
 
 const { content__container, content__tags, wrapper, tags__title } = styles;
@@ -32,11 +25,16 @@ const mapDispatchToProps = (dispatch) => ({
   onClickTag: (tag, pager, payload) => dispatch({ type: APPLY_TAG_FILTER, tag, pager, payload }),
   onLoad: (tab, pager, payload) => {
     dispatch({ type: HOME_PAGE_LOADED, tab, pager, payload });
-    // dispatch({ type: HOME_ARTICLE_LOADED, tab, pager, payload });
   },
   onUnload: () => {
     dispatch({ type: HOME_PAGE_UNLOADED });
-    // dispatch({  type: HOME_ARTICLE_UNLOADED });
+  },
+  S_onClickTag: (tag, pager, payload) => dispatch({ type: S_APPLY_TAG_FILTER, tag, pager, payload }),
+  S_onLoad: (tab, pager, payload) => {
+    dispatch({ type: S_HOME_ARTICLES_LOADED, tab, pager, payload });
+  },
+  S0_onUnload: () => {
+    dispatch({ type: HOME_PAGE_UNLOADED });
   },
 });
 
@@ -47,8 +45,10 @@ const Home = (props) => {
     const articlesPromise = agent.Articles.all;
 
     props.onLoad(tab, articlesPromise, Promise.all([agent.Tags.getAll(), articlesPromise()]));
+    props.S_onLoad(tab, articlesPromise, Promise.all([agent.Tags.getAll(), articlesPromise()]));
     return () => {
       props.onUnload();
+      props.S0_onUnload();
     };
     //eslint-disable-next-line
   }, []);

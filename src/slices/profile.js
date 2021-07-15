@@ -4,36 +4,35 @@ const initialState = {
   username: '',
   image: '',
   following: null,
-}
+};
 
 export const profileSlice = createSlice({
-  name: 'profile',
+  name: 'S_profile',
   initialState,
   reducers: {
-
-    PROFILE_PAGE_UNLOADED: (state, action) => {
+    S_PROFILE_PAGE_UNLOADED: (state, action) => {
       return {};
     },
-    PROFILE_PAGE_LOADED: (state, action) => {
-      const { username, image, following } = action.payload[0].profile
+    S_PROFILE_PAGE_LOADED: (state, action) => {
+      const { username, image, following } = action.payload[0].profile;
       state.username = username;
       state.image = image;
       state.following = following;
     },
-    FOLLOW_USER: (state, action) => {
-      const { username, image, following } = action.payload.profile
+    S_FOLLOW_USER: (state, action) => {
+      const { username, image, following } = action.payload.profile;
       state.username = username;
       state.image = image;
       state.following = following;
     },
-    UNFOLLOW_USER: (state, action) => {
-      const { username, image, following } = action.payload.profile
+    S_UNFOLLOW_USER: (state, action) => {
+      const { username, image, following } = action.payload.profile;
       state.username = username;
       state.image = image;
       state.following = following;
-    }
-  }
-})
+    },
+  },
+});
 
-export default profileSlice.reducer
-export const { PROFILE_PAGE_LOADED, PROFILE_PAGE_UNLOADED, FOLLOW_USER, UNFOLLOW_USER } = profileSlice.actions
+export default profileSlice.reducer;
+export const { S_PROFILE_PAGE_LOADED, S_PROFILE_PAGE_UNLOADED, S_FOLLOW_USER, S_UNFOLLOW_USER } = profileSlice.actions;
