@@ -3,46 +3,45 @@ import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import ListErrors from '../../ListErrors/ListErrors';
 import agent from '../../../agent';
-import { connect } from 'react-redux';
-import { UPDATE_FIELD_AUTH, LOGIN, LOGIN_PAGE_UNLOADED } from '../../../constants/actionTypes';
+import { connect, useSelector } from 'react-redux';
 import Button from '../../Button/Button';
 
 import styles from '../Auth.module.scss';
 import Form from '../../Form/Form';
+import { AUTHORIZATION } from '../../../slices/common-slice/common';
 
-const mapStateToProps = (state) => ({ ...state.auth });
+const mapStateToProps = (state) => ({ ...state.common });
 
 const mapDispatchToProps = (dispatch) => ({
-  onChangeEmail: (value) => dispatch({ type: UPDATE_FIELD_AUTH, key: 'email', value }),
-  onChangePassword: (value) => dispatch({ type: UPDATE_FIELD_AUTH, key: 'password', value }),
-  onSubmit: (email, password) => dispatch({ type: LOGIN, payload: agent.Auth.login(email, password) }),
-  onUnload: () => dispatch({ type: LOGIN_PAGE_UNLOADED }),
+  onSubmit: (email, password) => dispatch({ type: AUTHORIZATION, payload: agent.Auth.login(email, password) }),
 });
 
 const Login = (props) => {
+  const currentUser = useSelector((state) => state.common.currentUser);
   const history = useHistory();
-  const [state, setState] = useState({ email: '', password: '' });
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const errors = useSelector((state) => state.common.errors);
+  const [sendStatus, setSendStatus] = useState(false);
+
+  useEffect(() => {
+    if (currentUser) {
+      history.replace('/');
+      setSendStatus(false);
+    }
+  }, [history, currentUser]);
 
   const submitForm = (email, password) => (ev) => {
     ev.preventDefault();
     props.onSubmit(email, password);
-    history.replace('/');
+    setSendStatus(true);
   };
 
-  const handleChangeEmail = (event) => {
-    setState({ ...state, email: event.target.value });
+  const changeDataHandler = (ev) => {
+    setFormData({
+      ...formData,
+      [ev.target.name]: ev.target.value,
+    });
   };
-
-  const handleChangePassword = (event) => {
-    setState({ ...state, password: event.target.value });
-  };
-
-  useEffect(() => {
-    return () => {
-      props.onUnload();
-    };
-    //eslint-disable-next-line
-  }, []);
 
   return (
     <section className={styles.container}>
@@ -51,12 +50,24 @@ const Login = (props) => {
         <Link to="/register">Хотите создать аккаунт?</Link>
       </p>
 
-      <ListErrors errors={props.errors} />
+      {sendStatus && errors !== null && <ListErrors errors={props.errors} />}
 
-      <Form onSubmit={submitForm(state.email, state.password)}>
-        <input type="email" placeholder="default@gmail.com" value={state.email} onChange={handleChangeEmail} />
+      <Form onSubmit={submitForm(formData.email, formData.password)}>
+        <input
+          type="email"
+          name="email"
+          placeholder="default@gmail.com"
+          value={formData.email || ''}
+          onChange={changeDataHandler}
+        />
 
-        <input type="password" placeholder="Пароль" value={state.password} onChange={handleChangePassword} />
+        <input
+          type="password"
+          name="password"
+          placeholder="Пароль"
+          value={formData.password || ''}
+          onChange={changeDataHandler}
+        />
         <Button type="submit" disabled={props.inProgress}>
           Войти
         </Button>

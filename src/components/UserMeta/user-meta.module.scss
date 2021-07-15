@@ -32,9 +32,16 @@
   display: flex;
   width: 40px;
   height: 40px;
-  border:2px solid var(--dark-text);
+  // border:2px solid var(--dark-text);
   margin-right: 8px;
   img{
+    border:2px solid var(--dark-text);
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  svg{
+    margin: 0;
     width: 100%;
     height: auto;
     object-fit: cover;

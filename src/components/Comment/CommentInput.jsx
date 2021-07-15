@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
-import { ADD_COMMENT } from '../../constants/actionTypes';
 import styles from './comment.module.scss';
 import Button from '../Button/Button';
-// import { ADD_COMMENT } from '../../slices/articleList';
+import { ADD_COMMENT } from '../../slices/articles-slice/articles';
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit: (payload) => dispatch({ type: ADD_COMMENT, payload }),

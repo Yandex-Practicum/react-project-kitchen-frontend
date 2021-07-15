@@ -1,17 +1,18 @@
 import ArticleActions from './ArticleActions';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import CommentContainer from '../Comment/CommentContainer';
 import React, { useEffect } from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import marked from 'marked';
-import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../constants/actionTypes';
 import styles from './article.module.scss';
 import Tags from '../Tags/Tags';
 import UserMeta from '../UserMeta/UserMeta';
+import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../slices/articles-slice/articles';
 
 const mapStateToProps = (state) => ({
-  ...state.article,
+  ...state.articles,
+  article: state.articles.currentArticle,
   currentUser: state.common.currentUser,
 });
 
@@ -21,10 +22,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const Article = (props) => {
-  const history = useHistory();
-  console.log(history.location);
   const { id } = useParams();
-  console.log(`${history.location.state}-${history.location.key}`);
+
   useEffect(() => {
     props.onLoad(Promise.all([agent.Articles.get(id), agent.Comments.forArticle(id)]));
 
@@ -65,6 +64,7 @@ const Article = (props) => {
 
         <div className="row">
           <CommentContainer
+            article={props.article}
             comments={props.comments || []}
             errors={props.commentErrors}
             slug={props.match.params.id}

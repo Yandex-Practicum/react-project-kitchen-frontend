@@ -2,11 +2,10 @@ import { Link, useHistory } from 'react-router-dom';
 import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
-import { DELETE_ARTICLE } from '../../constants/actionTypes';
 import styles from './article.module.scss';
 import Button from '../Button/Button';
-import DeleteIcon from '../Comment/DeleteIcon';
-// import { DELETE_ARTICLE } from '../../slices/common';
+import DeleteIcon from '../../assets/ico/DeleteIcon';
+import { DELETE_ARTICLE } from '../../slices/articles-slice/articles';
 
 const mapDispatchToProps = (dispatch) => ({
   onClickDelete: (payload) => dispatch({ type: DELETE_ARTICLE, payload }),

@@ -113,3 +113,21 @@
     align-items: center;
   }
 }
+
+.delete__button {
+  background-color: var(--back);
+  border: none;
+  cursor: pointer;
+}
+
+.delete__button:active {
+  border: none;
+}
+
+.delete__button path {
+  stroke: var(--dark);
+}
+
+.delete__button:hover path {
+  stroke: #F53D5C;
+}

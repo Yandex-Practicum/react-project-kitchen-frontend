@@ -3,30 +3,22 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import agent from '../../agent';
 import { connect } from 'react-redux';
-import EditIcon from '../../assets/ico/EditIcon';
-import HeartIcon from '../Heart/Heart';
+import EditSettingsIcon from '../../assets/ico/EditSettingsIcon';
+import HeartIcon from '../../assets/ico/HeartIcon';
 
 import styles from './profile.module.scss';
 
-import { FOLLOW_USER, UNFOLLOW_USER, PROFILE_PAGE_LOADED, PROFILE_PAGE_UNLOADED } from '../../constants/actionTypes';
-// import {
-//   FOLLOW_USER,
-//   UNFOLLOW_USER,
-//   PROFILE_PAGE_LOADED,
-//   PROFILE_PAGE_UNLOADED
-// } from '../../slices/profile';
-// import {
-//   PROFILE_PAGE_LOADED as PROFILE_ARTICLE_LOADED,
-//   PROFILE_PAGE_UNLOADED as PROFILE_ARTICLE_UNLOADED
-// } from '../../slices/articleList';
+import { FOLLOW_USER, PROFILE_PAGE_LOADED } from '../../slices/profile-slice/profile';
+import { PROFILE_ARTICLES_LOADED, PROFILE_ARTICLES_UNLOADED } from '../../slices/articles-slice/articles';
 import TabsNavigation from '../Tabs/TabsNavigation/TabsNavigation';
 import TabsItem from '../Tabs/TabItem/TabsItem';
+import BaseAvatarIcon from '../../assets/ico/BaseAvatarIcon';
 
 const EditProfileSettings = (props) => {
   if (props.isUser) {
     return (
       <Link alt="Настройки профиля" to="/settings" className={styles.editbutton}>
-        <EditIcon />
+        <EditSettingsIcon />
       </Link>
     );
   }
@@ -41,12 +33,6 @@ const FollowUserButton = (props) => {
   let classes = 'btn btn-sm action-btn';
 
   props.user.following ? (classes += ' btn-secondary') : (classes += ' btn-outline-secondary');
-
-  // if (props.user.following) {
-  //   classes += ' btn-secondary';
-  // } else {
-  //   classes += ' btn-outline-secondary';
-  // }
 
   const handleClick = (ev) => {
     ev.preventDefault();
@@ -69,7 +55,8 @@ const FollowUserButton = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  ...state.articleList,
+  ...state.articles,
+  articles: state.articles.articles,
   currentUser: state.common.currentUser,
   profile: state.profile,
 });
@@ -80,23 +67,23 @@ const mapDispatchToProps = (dispatch) => ({
       type: FOLLOW_USER,
       payload: agent.Profile.follow(username),
     }),
-  onLoad: (payload) => {
-    // dispatch({ type: PROFILE_ARTICLE_LOADED, payload })
-    dispatch({ type: PROFILE_PAGE_LOADED, payload });
-  },
   onUnfollow: (username) =>
     dispatch({
-      type: UNFOLLOW_USER,
+      type: FOLLOW_USER,
       payload: agent.Profile.unfollow(username),
     }),
+  onLoad: (payload) => {
+    dispatch({ type: PROFILE_PAGE_LOADED, payload });
+    dispatch({ type: PROFILE_ARTICLES_LOADED, payload });
+  },
   onUnload: () => {
-    // dispatch({ type: PROFILE_ARTICLE_UNLOADED })
-    dispatch({ type: PROFILE_PAGE_UNLOADED });
+    dispatch({ type: PROFILE_ARTICLES_UNLOADED });
   },
 });
 
 const Profile = (props) => {
   const [tab, setTab] = useState('byAuthor');
+  const baseImage = props.profile.image === 'https://static.productionready.io/images/smiley-cyrus.jpg' ? true : false;
 
   useEffect(() => {
     props.onLoad(
@@ -158,7 +145,8 @@ const Profile = (props) => {
               </h2>
             </div>
             <div className={styles.main__block}>
-              <img src={profile.image} className="user-img" alt={profile.username} />
+              {baseImage && <BaseAvatarIcon />}
+              {!baseImage && <img src={profile.image} className="user-img" alt={profile.username} />}
               <section className={styles.stats__block}>
                 <h3>Статистика</h3>
                 <p>
@@ -219,6 +207,8 @@ const Profile = (props) => {
             state={props.currentPage}
             currentPage={props.currentPage}
             profile={true}
+            currentUser={props.currentUser}
+            tab={tab}
           />
         </div>
       </div>
