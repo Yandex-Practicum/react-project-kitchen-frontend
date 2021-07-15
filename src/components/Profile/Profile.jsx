@@ -8,8 +8,8 @@ import HeartIcon from '../../assets/ico/HeartIcon';
 
 import styles from './profile.module.scss';
 
-import { S_FOLLOW_USER, S_PROFILE_PAGE_LOADED } from '../../slices/profile-slice/profile';
-import { S_PROFILE_ARTICLES_LOADED, S_PROFILE_ARTICLES_UNLOADED } from '../../slices/articles-slice/articles';
+import { FOLLOW_USER, PROFILE_PAGE_LOADED } from '../../slices/profile-slice/profile';
+import { PROFILE_ARTICLES_LOADED, PROFILE_ARTICLES_UNLOADED } from '../../slices/articles-slice/articles';
 import TabsNavigation from '../Tabs/TabsNavigation/TabsNavigation';
 import TabsItem from '../Tabs/TabItem/TabsItem';
 import BaseAvatarIcon from '../../assets/ico/BaseAvatarIcon';
@@ -64,20 +64,20 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onFollow: (username) =>
     dispatch({
-      type: S_FOLLOW_USER,
+      type: FOLLOW_USER,
       payload: agent.Profile.follow(username),
     }),
   onUnfollow: (username) =>
     dispatch({
-      type: S_FOLLOW_USER,
+      type: FOLLOW_USER,
       payload: agent.Profile.unfollow(username),
     }),
-  S_onLoad: (payload) => {
-    dispatch({ type: S_PROFILE_PAGE_LOADED, payload });
-    dispatch({ type: S_PROFILE_ARTICLES_LOADED, payload });
+  onLoad: (payload) => {
+    dispatch({ type: PROFILE_PAGE_LOADED, payload });
+    dispatch({ type: PROFILE_ARTICLES_LOADED, payload });
   },
-  S_onUnload: () => {
-    dispatch({ type: S_PROFILE_ARTICLES_UNLOADED });
+  onUnload: () => {
+    dispatch({ type: PROFILE_ARTICLES_UNLOADED });
   },
 });
 
@@ -86,7 +86,7 @@ const Profile = (props) => {
   const baseImage = props.profile.image === 'https://static.productionready.io/images/smiley-cyrus.jpg' ? true : false;
 
   useEffect(() => {
-    props.S_onLoad(
+    props.onLoad(
       Promise.all([
         agent.Profile.get(props.match.params.username),
         agent.Articles.byAuthor(props.match.params.username),
@@ -95,21 +95,21 @@ const Profile = (props) => {
     setTab('byAuthor');
 
     return () => {
-      props.S_onUnload();
+      props.onUnload();
     };
     //eslint-disable-next-line
   }, [props.match.url]);
 
   const clickHandler = (type) => {
     if (type === 'byAuthor') {
-      props.S_onLoad(
+      props.onLoad(
         Promise.all([
           agent.Profile.get(props.match.params.username),
           agent.Articles.byAuthor(props.match.params.username),
         ]),
       );
     } else {
-      props.S_onLoad(
+      props.onLoad(
         Promise.all([
           agent.Profile.get(props.match.params.username),
           agent.Articles.favoritedBy(props.match.params.username),

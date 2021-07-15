@@ -1,5 +1,5 @@
 import ArticleActions from './ArticleActions';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import CommentContainer from '../Comment/CommentContainer';
 import React, { useEffect } from 'react';
 import agent from '../../agent';
@@ -8,7 +8,7 @@ import marked from 'marked';
 import styles from './article.module.scss';
 import Tags from '../Tags/Tags';
 import UserMeta from '../UserMeta/UserMeta';
-import { S_ARTICLE_PAGE_LOADED, S_ARTICLE_PAGE_UNLOADED } from '../../slices/articles-slice/articles';
+import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../slices/articles-slice/articles';
 
 const mapStateToProps = (state) => ({
   ...state.articles,
@@ -17,20 +17,18 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  S_onLoad: (payload) => dispatch({ type: S_ARTICLE_PAGE_LOADED, payload }),
-  S_onUnload: () => dispatch({ type: S_ARTICLE_PAGE_UNLOADED }),
+  onLoad: (payload) => dispatch({ type: ARTICLE_PAGE_LOADED, payload }),
+  onUnload: () => dispatch({ type: ARTICLE_PAGE_UNLOADED }),
 });
 
 const Article = (props) => {
-  const history = useHistory();
-
   const { id } = useParams();
 
   useEffect(() => {
-    props.S_onLoad(Promise.all([agent.Articles.get(id), agent.Comments.forArticle(id)]));
+    props.onLoad(Promise.all([agent.Articles.get(id), agent.Comments.forArticle(id)]));
 
     return () => {
-      props.S_onUnload();
+      props.onUnload();
     };
     //eslint-disable-next-line
   }, []);

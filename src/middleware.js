@@ -1,6 +1,6 @@
 import agent from './agent';
 import { ASYNC_START, ASYNC_END } from './constants/actionTypes';
-import { S_AUTHORIZATION, S_LOGOUT } from './slices/common-slice/common';
+import { AUTHORIZATION, LOGOUT } from './slices/common-slice/common';
 
 const promiseMiddleware = (store) => (next) => (action) => {
   if (isPromise(action.payload)) {
@@ -15,7 +15,7 @@ const promiseMiddleware = (store) => (next) => (action) => {
         if (!skipTracking && currentState.viewChangeCounter !== currentView) {
           return;
         }
-        console.log('RESULT', res);
+        // console.log('RESULT', res);
         action.payload = { res: res, inProgress: false };
         store.dispatch({ type: ASYNC_END, promise: action.payload });
         store.dispatch(action);
@@ -42,12 +42,12 @@ const promiseMiddleware = (store) => (next) => (action) => {
 };
 
 const localStorageMiddleware = (store) => (next) => (action) => {
-  if (action.type === S_AUTHORIZATION) {
+  if (action.type === AUTHORIZATION) {
     if (!action.error) {
       window.localStorage.setItem('jwt', action.payload.res.user.token);
       agent.setToken(action.payload.res.user.token);
     }
-  } else if (action.type === S_LOGOUT) {
+  } else if (action.type === LOGOUT) {
     window.localStorage.setItem('jwt', '');
     agent.setToken(null);
   }

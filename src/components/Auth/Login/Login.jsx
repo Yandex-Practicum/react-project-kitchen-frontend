@@ -8,27 +8,27 @@ import Button from '../../Button/Button';
 
 import styles from '../Auth.module.scss';
 import Form from '../../Form/Form';
-import { S_AUTHORIZATION } from '../../../slices/common-slice/common';
+import { AUTHORIZATION } from '../../../slices/common-slice/common';
 
 const mapStateToProps = (state) => ({ ...state.common });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (email, password) => dispatch({ type: S_AUTHORIZATION, payload: agent.Auth.login(email, password) }),
+  onSubmit: (email, password) => dispatch({ type: AUTHORIZATION, payload: agent.Auth.login(email, password) }),
 });
 
 const Login = (props) => {
+  const currentUser = useSelector((state) => state.common.currentUser);
   const history = useHistory();
   const [formData, setFormData] = useState({ email: '', password: '' });
-  const inProgress = useSelector((state) => state.common.inProgress);
   const errors = useSelector((state) => state.common.errors);
   const [sendStatus, setSendStatus] = useState(false);
 
   useEffect(() => {
-    if (errors === null && !inProgress && sendStatus) {
+    if (currentUser) {
       history.replace('/');
       setSendStatus(false);
     }
-  }, [history, sendStatus, errors, inProgress]);
+  }, [history, currentUser]);
 
   const submitForm = (email, password) => (ev) => {
     ev.preventDefault();

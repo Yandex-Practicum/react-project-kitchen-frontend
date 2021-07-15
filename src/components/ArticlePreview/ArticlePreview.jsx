@@ -7,31 +7,27 @@ import s from './ArticlePreview.module.scss';
 import Tags from '../Tags/Tags';
 import UserMeta from '../UserMeta/UserMeta';
 import DeleteIcon from '../../assets/ico/DeleteIcon';
-import {
-  S_CHANGE_FAVORITES_STATUS,
-  S_HOME_ARTICLES_LOADED,
-  S_DELETE_ARTICLE,
-} from '../../slices/articles-slice/articles';
+import { CHANGE_FAVORITES_STATUS, HOME_ARTICLES_LOADED, DELETE_ARTICLE } from '../../slices/articles-slice/articles';
 
 const FAVORITED_CLASS = s.article__btn_unfavorite;
 const NOT_FAVORITED_CLASS = s.article__btn_favorite;
 
 const mapDispatchToProps = (dispatch) => ({
-  S_favorite: (slug) =>
+  favorite: (slug) =>
     dispatch({
-      type: S_CHANGE_FAVORITES_STATUS,
+      type: CHANGE_FAVORITES_STATUS,
       payload: agent.Articles.favorite(slug),
     }),
-  S_unfavorite: (slug) =>
+  unfavorite: (slug) =>
     dispatch({
-      type: S_CHANGE_FAVORITES_STATUS,
+      type: CHANGE_FAVORITES_STATUS,
       payload: agent.Articles.unfavorite(slug),
     }),
-  S_onClickDelete: (payload) => {
-    dispatch({ type: S_DELETE_ARTICLE, payload });
+  onClickDelete: (payload) => {
+    dispatch({ type: DELETE_ARTICLE, payload });
   },
-  S_onLoadHome: (tab, pager, payload) => {
-    dispatch({ type: S_HOME_ARTICLES_LOADED, tab, pager, payload });
+  onLoadHome: (tab, pager, payload) => {
+    dispatch({ type: HOME_ARTICLES_LOADED, tab, pager, payload });
   },
 });
 
@@ -49,7 +45,7 @@ const ArticlePreview = (props) => {
 
   const handleDeleteClick = (ev) => {
     ev.preventDefault();
-    props.S_onClickDelete(agent.Articles.del(props.article.slug));
+    props.onClickDelete(agent.Articles.del(props.article.slug));
     setDeleteFlag(true);
   };
 
@@ -60,9 +56,9 @@ const ArticlePreview = (props) => {
     ev.preventDefault();
 
     if (article.favorited) {
-      props.S_unfavorite(article.slug);
+      props.unfavorite(article.slug);
     } else {
-      props.S_favorite(article.slug);
+      props.favorite(article.slug);
     }
   };
   const [disabled, setDisabled] = React.useState(true);
@@ -76,8 +72,9 @@ const ArticlePreview = (props) => {
 
   useEffect(() => {
     if (deleted) {
-      props.S_onLoadHome('all', agent.Articles.all, Promise.all([agent.Tags.getAll(), agent.Articles.all()]));
+      props.onLoadHome('all', agent.Articles.all, Promise.all([agent.Tags.getAll(), agent.Articles.all()]));
     }
+    //eslint-disable-next-line
   }, [deleted]);
 
   return (

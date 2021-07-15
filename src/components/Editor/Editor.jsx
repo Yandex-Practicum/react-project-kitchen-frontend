@@ -4,12 +4,7 @@ import agent from '../../agent';
 import Button from '../Button/Button';
 import { connect, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import {
-  S_ADD_TAG,
-  S_EDITOR_PAGE_LOADED,
-  S_REMOVE_TAG,
-  S_ARTICLE_SUBMITTED,
-} from '../../slices/articles-slice/articles';
+import { ADD_TAG, EDITOR_PAGE_LOADED, REMOVE_TAG, ARTICLE_SUBMITTED } from '../../slices/articles-slice/articles';
 import clipImg from '../../assets/ico/Clip.svg';
 import s from './Editor.module.scss';
 import Tags from '../Tags/Tags';
@@ -19,10 +14,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onAddTag: (payload) => dispatch({ type: S_ADD_TAG, payload }),
-  onLoad: (payload) => dispatch({ type: S_EDITOR_PAGE_LOADED, payload }),
-  S_onRemoveTag: (tag) => dispatch({ type: S_REMOVE_TAG, tag }),
-  onSubmit: (payload) => dispatch({ type: S_ARTICLE_SUBMITTED, payload }),
+  onAddTag: (payload) => dispatch({ type: ADD_TAG, payload }),
+  onLoad: (payload) => dispatch({ type: EDITOR_PAGE_LOADED, payload }),
+  onRemoveTag: (tag) => dispatch({ type: REMOVE_TAG, tag }),
+  onSubmit: (payload) => dispatch({ type: ARTICLE_SUBMITTED, payload }),
 });
 
 const Editor = (props) => {
@@ -75,16 +70,6 @@ const Editor = (props) => {
         tagInput: '',
       });
     }
-    // if (!submitFlag && (editorState && !editorState.inProgress)) {
-    //   setFormData({
-    //     title: editorState.title,
-    //     description: editorState.description,
-    //     image: editorState.image,
-    //     body: editorState.body,
-    //     tagList: editorState.tagList,
-    //     tagInput: editorState.tagInput,
-    //   });
-    // }
 
     if (submitFlag && editArticle) {
       if (editArticle.slug) {
@@ -93,6 +78,7 @@ const Editor = (props) => {
         history.replace(`/article/${editArticle.article.slug}`);
       }
     }
+    //eslint-disable-next-line
   }, [editorState, submitFlag, history, editArticle, inProgress, props.match.url]);
 
   const changeDataHandler = (ev) => {
@@ -110,7 +96,6 @@ const Editor = (props) => {
         tagList: [...formData.tagList, formData.tagInput],
         tagInput: '',
       });
-      // props.onAddTag(formData);
     }
   };
 
@@ -133,7 +118,6 @@ const Editor = (props) => {
     setSubmitFlag(true);
     if (props.match.params.slug) {
       const slug = { slug: props.match.params.slug };
-      console.log(`########## ${props.articles.editArticle.article.articleSlug}`);
       props.onSubmit(agent.Articles.update(Object.assign(article, slug)));
       return;
     }

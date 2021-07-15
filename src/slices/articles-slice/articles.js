@@ -24,31 +24,31 @@ export const articleSlice = createSlice({
   name: 'articles',
   initialState,
   reducers: {
-    S_ARTICLE_PAGE_LOADED: (state, action) => {
+    ARTICLE_PAGE_LOADED: (state, action) => {
       state.currentArticle = action.payload.res[0].article;
       state.currentArticle.comments = action.payload.res[1].comments;
     },
-    S_ARTICLE_PAGE_UNLOADED: (state, action) => {
+    ARTICLE_PAGE_UNLOADED: (state, action) => {
       return { initialState };
     },
-    S_ADD_COMMENT: (state, action) => {
+    ADD_COMMENT: (state, action) => {
       state.currentArticle.commentErrors = action.error ? action.payload.res.errors : null;
       state.currentArticle.comments = action.error
         ? null
         : (state.currentArticle.comments || []).concat([action.payload.res.comment]);
     },
-    S_DELETE_COMMENT: (state, action) => {
+    DELETE_COMMENT: (state, action) => {
       const commentId = action.commentId;
       state.currentArticle.comments = state.currentArticle.comments.filter((comment) => comment.id !== commentId);
     },
-    S_APPLY_TAG_FILTER: (state, action) => {
+    APPLY_TAG_FILTER: (state, action) => {
       state.pager = action.pager;
       state.articles = action.payload.res.articles;
       state.articlesCount = action.payload.res.articlesCount;
       state.tab = null;
       state.tag = action.tag;
     },
-    S_HOME_ARTICLES_LOADED: (state, action) => {
+    HOME_ARTICLES_LOADED: (state, action) => {
       state.pager = action.pager;
       state.tags = action.payload.res[0].tags;
       state.articles = action.payload.res[1].articles;
@@ -56,25 +56,25 @@ export const articleSlice = createSlice({
       state.tab = action.tab;
       state.deleted = false;
     },
-    S_HOME_ARTICLES_UNLOADED: (state, action) => {
+    HOME_ARTICLES_UNLOADED: (state, action) => {
       state.articleEditor = { inProgress: true };
     },
-    S_CHANGE_TAB: (state, action) => {
+    CHANGE_TAB: (state, action) => {
       state.pager = action.pager;
       state.articles = action.payload.res.articles;
       state.articlesCount = action.payload.res.articlesCount;
       state.tab = action.tab;
       state.tag = null;
     },
-    S_PROFILE_ARTICLES_LOADED: (state, action) => {
+    PROFILE_ARTICLES_LOADED: (state, action) => {
       state.pager = action.pager;
       state.articles = action.payload.res[1].articles;
       state.articlesCount = action.payload.res[1].articlesCount;
     },
-    S_PROFILE_ARTICLES_UNLOADED: (state, action) => {
+    PROFILE_ARTICLES_UNLOADED: (state, action) => {
       return {};
     },
-    S_CHANGE_FAVORITES_STATUS: (state, action) => {
+    CHANGE_FAVORITES_STATUS: (state, action) => {
       state.articles = state.articles.map((article) => {
         if (article.slug === action.payload.res.article.slug) {
           article.favorited = action.payload.res.article.favorited;
@@ -83,17 +83,17 @@ export const articleSlice = createSlice({
         return article;
       });
     },
-    S_EDITOR_PAGE_LOADED: (state, action) => {
+    EDITOR_PAGE_LOADED: (state, action) => {
       if (action.payload) {
         state.inProgress = false;
         state.editArticle = action.payload.res;
       }
       state.inProgress = false;
     },
-    S_EDITOR_PAGE_UNLOADED: (state, action) => {
+    EDITOR_PAGE_UNLOADED: (state, action) => {
       return {};
     },
-    S_ADD_TAG: (state, action) => {
+    ADD_TAG: (state, action) => {
       state.articleEditor.title = action.payload.res.title;
       state.articleEditor.description = action.payload.res.description;
       state.articleEditor.image = action.payload.res.image;
@@ -102,14 +102,14 @@ export const articleSlice = createSlice({
       state.articleEditor.tagList = state.articleEditor.tagList.concat([action.payload.res.tagInput]);
       state.articleEditor.tagInput = '';
     },
-    S_REMOVE_TAG: (state, action) => {
+    REMOVE_TAG: (state, action) => {
       state.articleEditor.tagList = state.tagList.filter((tag) => tag !== action.tag);
     },
-    S_ARTICLE_SUBMITTED: (state, action) => {
+    ARTICLE_SUBMITTED: (state, action) => {
       state.editArticle = action.payload.res.article;
       state.errors = action.error ? action.payload.res.errors : null;
     },
-    S_DELETE_ARTICLE: (state, action) => {
+    DELETE_ARTICLE: (state, action) => {
       state.redirectTo = '/';
       state.deleted = true;
     },
@@ -118,21 +118,21 @@ export const articleSlice = createSlice({
 
 export default articleSlice.reducer;
 export const {
-  S_ARTICLE_PAGE_LOADED,
-  S_ARTICLE_PAGE_UNLOADED,
-  S_ADD_COMMENT,
-  S_DELETE_COMMENT,
-  S_CHANGE_FAVORITES_STATUS,
-  S_APPLY_TAG_FILTER,
-  S_HOME_ARTICLES_LOADED,
-  S_HOME_ARTICLES_UNLOADED,
-  S_CHANGE_TAB,
-  S_PROFILE_ARTICLES_LOADED,
-  S_PROFILE_ARTICLES_UNLOADED,
-  S_EDITOR_PAGE_LOADED,
-  S_EDITOR_PAGE_UNLOADED,
-  S_ADD_TAG,
-  S_REMOVE_TAG,
-  S_ARTICLE_SUBMITTED,
-  S_DELETE_ARTICLE,
+  ARTICLE_PAGE_LOADED,
+  ARTICLE_PAGE_UNLOADED,
+  ADD_COMMENT,
+  DELETE_COMMENT,
+  CHANGE_FAVORITES_STATUS,
+  APPLY_TAG_FILTER,
+  HOME_ARTICLES_LOADED,
+  HOME_ARTICLES_UNLOADED,
+  CHANGE_TAB,
+  PROFILE_ARTICLES_LOADED,
+  PROFILE_ARTICLES_UNLOADED,
+  EDITOR_PAGE_LOADED,
+  EDITOR_PAGE_UNLOADED,
+  ADD_TAG,
+  REMOVE_TAG,
+  ARTICLE_SUBMITTED,
+  DELETE_ARTICLE,
 } = articleSlice.actions;

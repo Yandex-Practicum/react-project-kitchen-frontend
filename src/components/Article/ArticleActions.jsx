@@ -5,17 +5,17 @@ import { connect } from 'react-redux';
 import styles from './article.module.scss';
 import Button from '../Button/Button';
 import DeleteIcon from '../../assets/ico/DeleteIcon';
-import { S_DELETE_ARTICLE } from '../../slices/articles-slice/articles';
+import { DELETE_ARTICLE } from '../../slices/articles-slice/articles';
 
 const mapDispatchToProps = (dispatch) => ({
-  S_onClickDelete: (payload) => dispatch({ type: S_DELETE_ARTICLE, payload }),
+  onClickDelete: (payload) => dispatch({ type: DELETE_ARTICLE, payload }),
 });
 
 const ArticleActions = (props) => {
   const history = useHistory();
   const article = props.article;
   const del = () => {
-    props.S_onClickDelete(agent.Articles.del(article.slug));
+    props.onClickDelete(agent.Articles.del(article.slug));
     history.replace(`/`);
   };
   if (props.canModify) {

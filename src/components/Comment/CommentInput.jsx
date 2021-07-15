@@ -3,10 +3,10 @@ import agent from '../../agent';
 import { connect } from 'react-redux';
 import styles from './comment.module.scss';
 import Button from '../Button/Button';
-import { S_ADD_COMMENT } from '../../slices/articles-slice/articles';
+import { ADD_COMMENT } from '../../slices/articles-slice/articles';
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (payload) => dispatch({ type: S_ADD_COMMENT, payload }),
+  onSubmit: (payload) => dispatch({ type: ADD_COMMENT, payload }),
 });
 
 const CommentInput = (props) => {

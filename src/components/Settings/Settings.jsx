@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import styles from './settings.module.scss';
 import Button from '../Button/Button';
 import ClipIcon from '../../assets/ico/ClipIcon';
-import { Link } from 'react-router-dom';
-import { S_SETTINGS_SAVED } from '../../slices/common-slice/common';
+import { Link, useHistory } from 'react-router-dom';
+import { SETTINGS_SAVED } from '../../slices/common-slice/common';
 import Form from '../Form/Form';
 
 const mapStateToProps = (state) => ({
@@ -16,10 +16,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onClickLogout: () => {},
-  onSubmitSettingsForm: (user) => dispatch({ type: S_SETTINGS_SAVED, payload: agent.Auth.save(user) }),
+  onSubmitSettingsForm: (user) => dispatch({ type: SETTINGS_SAVED, payload: agent.Auth.save(user) }),
 });
 
 const Settings = (props) => {
+  const history = useHistory();
   const [formData, setFormData] = useState({
     image: '',
     username: '',
@@ -45,6 +46,7 @@ const Settings = (props) => {
         email: props.currentUser.email,
       });
     }
+    //eslint-disable-next-line
   }, [props.currentUser]);
 
   const submitSettingsForm = (ev) => {
@@ -56,6 +58,7 @@ const Settings = (props) => {
     }
 
     props.onSubmitSettingsForm(user);
+    history.replace(`/profile/${formData.username}`);
   };
 
   const deleteHandler = () => {

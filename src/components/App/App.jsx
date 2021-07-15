@@ -1,7 +1,7 @@
 import agent from '../../agent';
 import Header from '../Header/Header';
 import React, { useEffect } from 'react';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import Article from '../Article';
 import Editor from '../Editor/Editor';
@@ -11,7 +11,7 @@ import Profile from '../Profile/Profile';
 import Register from '../Auth/Register/Register';
 import Settings from '../Settings/Settings';
 import Preloader from '../Preloader/Preloader';
-import { S_APP_LOAD, S_CHANGE_THEME } from '../../slices/common-slice/common';
+import { APP_LOAD, CHANGE_THEME } from '../../slices/common-slice/common';
 
 const mapStateToProps = (state) => {
   return {
@@ -23,8 +23,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  S_onLoad: (payload, token) => dispatch({ type: S_APP_LOAD, payload, token, skipTracking: true }),
-  onChangeTheme: () => dispatch({ type: S_CHANGE_THEME }),
+  onLoad: (payload, token) => dispatch({ type: APP_LOAD, payload, token, skipTracking: true }),
+  onChangeTheme: () => dispatch({ type: CHANGE_THEME }),
 });
 
 const App = (props) => {
@@ -63,18 +63,14 @@ const App = (props) => {
     commentInput: '#f4f4f6',
     previewLink: '#0000FF',
   };
-  // useEffect(() => {
-  //   if(user) {
-  //     window.localStorage.setItem('jwt', props.currentUser.token);
-  //   }
-  // }, [user])
+
   useEffect(() => {
     const token = window.localStorage.getItem('jwt');
     if (token) {
       agent.setToken(token);
     }
 
-    props.S_onLoad(token ? agent.Auth.current() : null, token);
+    props.onLoad(token ? agent.Auth.current() : null, token);
     if (localStorage.getItem('isDarkTheme') === 'true') {
       props.onChangeTheme();
     }

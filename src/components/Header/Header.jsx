@@ -9,21 +9,21 @@ import LogoutIcon from '../../assets/ico/LogoutIcon';
 import EditArticleIcon from '../../assets/ico/EditArticleIcon';
 import { connect } from 'react-redux';
 import BaseAvatarIcon from '../../assets/ico/BaseAvatarIcon';
-import { S_EDITOR_PAGE_LOADED } from '../../slices/articles-slice/articles';
-import { S_LOGOUT } from '../../slices/common-slice/common';
+import { EDITOR_PAGE_LOADED } from '../../slices/articles-slice/articles';
+import { LOGOUT } from '../../slices/common-slice/common';
 
 const { header, navbar, navbar_brand, nav, navbar_nav, pull_xs_right, nav_item, nav_link, ava_image } = styles;
 
 const mapDispatchToProps = (dispatch) => ({
-  S_onLoad: (payload) => dispatch({ type: S_EDITOR_PAGE_LOADED, payload }),
+  onLoad: (payload) => dispatch({ type: EDITOR_PAGE_LOADED, payload }),
   onClickLogout: () => {
-    dispatch({ type: S_LOGOUT });
+    dispatch({ type: LOGOUT });
   },
 });
 
 const Header = (props) => {
   const clickEditHandler = () => {
-    props.S_onLoad();
+    props.onLoad();
   };
   const clickLogoutHandler = () => {
     props.onClickLogout();

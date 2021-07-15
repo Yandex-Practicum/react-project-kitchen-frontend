@@ -5,7 +5,7 @@ import React from 'react';
 import Tags from '../Tags/Tags';
 import agent from '../../agent';
 import { connect } from 'react-redux';
-import { S_APPLY_TAG_FILTER, S_HOME_ARTICLES_LOADED } from '../../slices/articles-slice/articles';
+import { APPLY_TAG_FILTER, HOME_ARTICLES_LOADED } from '../../slices/articles-slice/articles';
 
 import styles from './home.module.scss';
 
@@ -23,9 +23,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  S_onClickTag: (tag, pager, payload) => dispatch({ type: S_APPLY_TAG_FILTER, tag, pager, payload }),
-  S_onLoad: (tab, pager, payload) => {
-    dispatch({ type: S_HOME_ARTICLES_LOADED, tab, pager, payload });
+  onClickTag: (tag, pager, payload) => dispatch({ type: APPLY_TAG_FILTER, tag, pager, payload }),
+  onLoad: (tab, pager, payload) => {
+    dispatch({ type: HOME_ARTICLES_LOADED, tab, pager, payload });
   },
 });
 
@@ -35,7 +35,7 @@ const Home = (props) => {
     const tab = 'all';
     const articlesPromise = agent.Articles.all;
 
-    props.S_onLoad(tab, articlesPromise, Promise.all([agent.Tags.getAll(), articlesPromise()]));
+    props.onLoad(tab, articlesPromise, Promise.all([agent.Tags.getAll(), articlesPromise()]));
 
     //eslint-disable-next-line
   }, []);
@@ -48,7 +48,7 @@ const Home = (props) => {
           <section className={content__tags}>
             <p className={tags__title}>Популярные теги</p>
             {!props.tags && <div className={styles.loading}>Теги подгружаются...</div>}
-            {props.tags && <Tags tags={props.tags} onClickTag={props.S_onClickTag} />}
+            {props.tags && <Tags tags={props.tags} onClickTag={props.onClickTag} />}
           </section>
         </div>
       </main>

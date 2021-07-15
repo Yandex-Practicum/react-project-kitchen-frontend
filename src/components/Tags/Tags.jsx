@@ -20,7 +20,7 @@ const Tags = (props) => {
   return (
     <section className={style.tag_list}>
       {tags.map((tag) => {
-        const handleClick = (ev) => {
+        const handleClickTag = (ev) => {
           ev.preventDefault();
           props.onClickTag(tag, (page) => agent.Articles.byTag(tag, page), agent.Articles.byTag(tag));
         };
@@ -30,7 +30,7 @@ const Tags = (props) => {
             href="/#"
             className={clsx(style.tag_default, style.tag_pill, clazz)}
             key={tag + Math.random(10, 100) * 10}
-            onClick={handleClick}>
+            onClick={handleClickTag}>
             {tag}
           </a>
         );
