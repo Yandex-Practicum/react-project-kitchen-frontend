@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import React from 'react';
 import styles from './comment.module.scss';
 
-const CommentContainer = props => {
+const CommentContainer = (props) => {
   if (props.currentUser) {
     return (
       <div className={styles.container}>
@@ -14,10 +14,7 @@ const CommentContainer = props => {
           <CommentInput slug={props.slug} currentUser={props.currentUser} />
         </div>
 
-        <CommentList
-          comments={props.comments}
-          slug={props.slug}
-          currentUser={props.currentUser} />
+        <CommentList comments={props.article.comments} slug={props.slug} currentUser={props.currentUser} />
       </div>
     );
   } else {
@@ -31,10 +28,7 @@ const CommentContainer = props => {
           &nbsp;чтобы добавить комментарий к этой записи.
         </p>
 
-        <CommentList
-          comments={props.comments}
-          slug={props.slug}
-          currentUser={props.currentUser} />
+        <CommentList comments={props.article.comments} slug={props.slug} currentUser={props.currentUser} />
       </div>
     );
   }

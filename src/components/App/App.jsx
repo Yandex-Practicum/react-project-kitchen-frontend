@@ -1,8 +1,8 @@
 import agent from '../../agent';
 import Header from '../Header/Header';
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { APP_LOAD, CHANGE_THEME, REDIRECT } from '../../constants/actionTypes';
+import { connect, useSelector } from 'react-redux';
+import { CHANGE_THEME } from '../../constants/actionTypes';
 import { Route, Switch } from 'react-router-dom';
 import Article from '../Article';
 import Editor from '../Editor/Editor';
@@ -25,13 +25,12 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onLoad: (payload, token) => dispatch({ type: APP_LOAD, payload, token, skipTracking: true }),
-  onRedirect: () => dispatch({ type: REDIRECT }),
-  onChangeTheme: () => dispatch({ type: CHANGE_THEME }),
   S_onLoad: (payload, token) => dispatch({ type: S_APP_LOAD, payload, token, skipTracking: true }),
+  onChangeTheme: () => dispatch({ type: CHANGE_THEME }),
 });
 
 const App = (props) => {
+  const user = useSelector((state) => state.common.currentUser);
   const root = document.querySelector(':root');
   const darkTheme = {
     back: '#1F2023',
@@ -67,12 +66,17 @@ const App = (props) => {
     commentInput: '#f4f4f6',
     previewLink: '#0000FF',
   };
+  // useEffect(() => {
+  //   if(user) {
+  //     window.localStorage.setItem('jwt', props.currentUser.token);
+  //   }
+  // }, [user])
   useEffect(() => {
     const token = window.localStorage.getItem('jwt');
     if (token) {
       agent.setToken(token);
     }
-    props.onLoad(token ? agent.Auth.current() : null, token);
+
     props.S_onLoad(token ? agent.Auth.current() : null, token);
     if (localStorage.getItem('isDarkTheme') === 'true') {
       props.onChangeTheme();

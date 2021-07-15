@@ -5,7 +5,7 @@ import React from 'react';
 import Tags from '../Tags/Tags';
 import agent from '../../agent';
 import { connect } from 'react-redux';
-import { HOME_PAGE_LOADED, HOME_PAGE_UNLOADED, APPLY_TAG_FILTER } from '../../constants/actionTypes';
+import { HOME_PAGE_UNLOADED } from '../../constants/actionTypes';
 import { S_APPLY_TAG_FILTER, S_HOME_ARTICLES_LOADED } from '../../slices/articles';
 
 import styles from './home.module.scss';
@@ -15,20 +15,15 @@ const { content__container, content__tags, wrapper, tags__title } = styles;
 const Promise = global.Promise;
 
 const mapStateToProps = (state) => ({
-  ...state.home,
+  ...state.article,
+  articles: state.articles.articles,
+  tags: state.articles.tags,
   appName: state.common.appName,
   token: state.common.token,
   currentUser: state.common.currentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onClickTag: (tag, pager, payload) => dispatch({ type: APPLY_TAG_FILTER, tag, pager, payload }),
-  onLoad: (tab, pager, payload) => {
-    dispatch({ type: HOME_PAGE_LOADED, tab, pager, payload });
-  },
-  onUnload: () => {
-    dispatch({ type: HOME_PAGE_UNLOADED });
-  },
   S_onClickTag: (tag, pager, payload) => dispatch({ type: S_APPLY_TAG_FILTER, tag, pager, payload }),
   S_onLoad: (tab, pager, payload) => {
     dispatch({ type: S_HOME_ARTICLES_LOADED, tab, pager, payload });
@@ -44,10 +39,8 @@ const Home = (props) => {
     const tab = 'all';
     const articlesPromise = agent.Articles.all;
 
-    props.onLoad(tab, articlesPromise, Promise.all([agent.Tags.getAll(), articlesPromise()]));
     props.S_onLoad(tab, articlesPromise, Promise.all([agent.Tags.getAll(), articlesPromise()]));
     return () => {
-      props.onUnload();
       props.S0_onUnload();
     };
     //eslint-disable-next-line
@@ -61,7 +54,7 @@ const Home = (props) => {
           <section className={content__tags}>
             <p className={tags__title}>Популярные теги</p>
             {!props.tags && <div className={styles.loading}>Теги подгружаются...</div>}
-            {props.tags && <Tags tags={props.tags} onClickTag={props.onClickTag} />}
+            {props.tags && <Tags tags={props.tags} onClickTag={props.S_onClickTag} />}
           </section>
         </div>
       </main>

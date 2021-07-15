@@ -1,32 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import agent from '../../agent';
-import { connect } from 'react-redux';
-import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED, DELETE_ARTICLE } from '../../constants/actionTypes';
-// import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../../slices/articleList';
+import { connect, useSelector } from 'react-redux';
 import Heart from '../../assets/ico/HeartIcon';
 import s from './ArticlePreview.module.scss';
 import Tags from '../Tags/Tags';
 import UserMeta from '../UserMeta/UserMeta';
 import DeleteIcon from '../../assets/ico/DeleteIcon';
-import { S_CHANGE_FAVORITES_STATUS } from '../../slices/articles';
-import { S_DELETE_ARTICLE } from '../../slices/common';
+import { S_CHANGE_FAVORITES_STATUS, S_HOME_ARTICLES_LOADED, S_DELETE_ARTICLE } from '../../slices/articles';
 
 const FAVORITED_CLASS = s.article__btn_unfavorite;
 const NOT_FAVORITED_CLASS = s.article__btn_favorite;
 
 const mapDispatchToProps = (dispatch) => ({
-  favorite: (slug) =>
-    dispatch({
-      type: ARTICLE_FAVORITED,
-      payload: agent.Articles.favorite(slug),
-    }),
-  unfavorite: (slug) =>
-    dispatch({
-      type: ARTICLE_UNFAVORITED,
-      payload: agent.Articles.unfavorite(slug),
-    }),
-  onClickDelete: (payload) => dispatch({ type: DELETE_ARTICLE, payload }),
   S_favorite: (slug) =>
     dispatch({
       type: S_CHANGE_FAVORITES_STATUS,
@@ -37,10 +23,16 @@ const mapDispatchToProps = (dispatch) => ({
       type: S_CHANGE_FAVORITES_STATUS,
       payload: agent.Articles.unfavorite(slug),
     }),
-  S_onClickDelete: (payload) => dispatch({ type: S_DELETE_ARTICLE, payload }),
+  S_onClickDelete: (payload) => {
+    dispatch({ type: S_DELETE_ARTICLE, payload });
+  },
+  S_onLoadHome: (tab, pager, payload) => {
+    dispatch({ type: S_HOME_ARTICLES_LOADED, tab, pager, payload });
+  },
 });
 
 const ArticlePreview = (props) => {
+  const deleted = useSelector((state) => state.articles.deleted);
   const article = props.article;
   const favoriteButtonClass = article.favorited ? FAVORITED_CLASS : NOT_FAVORITED_CLASS;
   const articleLikeCounter = article.favoritesCount > 0 ? article.favoritesCount : null;
@@ -53,7 +45,6 @@ const ArticlePreview = (props) => {
 
   const handleDeleteClick = (ev) => {
     ev.preventDefault();
-    props.onClickDelete(agent.Articles.del(props.article.slug));
     props.S_onClickDelete(agent.Articles.del(props.article.slug));
     setDeleteFlag(true);
   };
@@ -65,10 +56,8 @@ const ArticlePreview = (props) => {
     ev.preventDefault();
 
     if (article.favorited) {
-      props.unfavorite(article.slug);
       props.S_unfavorite(article.slug);
     } else {
-      props.favorite(article.slug);
       props.S_favorite(article.slug);
     }
   };
@@ -80,6 +69,12 @@ const ArticlePreview = (props) => {
     }
     //eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (deleted) {
+      props.S_onLoadHome('all', agent.Articles.all, Promise.all([agent.Tags.getAll(), agent.Articles.all()]));
+    }
+  }, [deleted]);
 
   return (
     !deleteFlag && (
@@ -113,7 +108,7 @@ const ArticlePreview = (props) => {
           </Link>
           <p className={s.article__descr}>{article.description}</p>
           <div className={s.article__footer}>
-            <Link to={`/article/${article.slug}`} className={s.article__more}>
+            <Link to={`/article/${props.article.slug}`} className={s.article__more}>
               Развернуть...
             </Link>
             <Tags tags={article.tagList} onClickTag={() => {}} type="grey" />

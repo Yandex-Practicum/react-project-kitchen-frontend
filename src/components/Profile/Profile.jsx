@@ -8,8 +8,8 @@ import HeartIcon from '../../assets/ico/HeartIcon';
 
 import styles from './profile.module.scss';
 
-import { FOLLOW_USER, UNFOLLOW_USER, PROFILE_PAGE_LOADED, PROFILE_PAGE_UNLOADED } from '../../constants/actionTypes';
-import { S_FOLLOW_USER, S_UNFOLLOW_USER, S_PROFILE_PAGE_LOADED, S_PROFILE_PAGE_UNLOADED } from '../../slices/profile';
+import { S_FOLLOW_USER, S_UNFOLLOW_USER, S_PROFILE_PAGE_LOADED } from '../../slices/profile';
+import { S_PROFILE_ARTICLES_LOADED, S_PROFILE_ARTICLES_UNLOADED } from '../../slices/articles';
 import TabsNavigation from '../Tabs/TabsNavigation/TabsNavigation';
 import TabsItem from '../Tabs/TabItem/TabsItem';
 import BaseAvatarIcon from '../../assets/ico/BaseAvatarIcon';
@@ -44,10 +44,8 @@ const FollowUserButton = (props) => {
     ev.preventDefault();
     if (props.user.following) {
       props.unfollow(props.user.username);
-      props.S_unfollow(props.user.username);
     } else {
       props.follow(props.user.username);
-      props.S_follow(props.user.username);
     }
   };
 
@@ -63,7 +61,8 @@ const FollowUserButton = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  ...state.articleList,
+  ...state.articles,
+  articles: state.articles.articles,
   currentUser: state.common.currentUser,
   profile: state.profile,
 });
@@ -71,35 +70,20 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onFollow: (username) =>
     dispatch({
-      type: FOLLOW_USER,
-      payload: agent.Profile.follow(username),
-    }),
-  onLoad: (payload) => {
-    dispatch({ type: PROFILE_PAGE_LOADED, payload });
-  },
-  onUnfollow: (username) =>
-    dispatch({
-      type: UNFOLLOW_USER,
-      payload: agent.Profile.unfollow(username),
-    }),
-  onUnload: () => {
-    dispatch({ type: PROFILE_PAGE_UNLOADED });
-  },
-  S_onFollow: (username) =>
-    dispatch({
       type: S_FOLLOW_USER,
       payload: agent.Profile.follow(username),
     }),
   S_onLoad: (payload) => {
     dispatch({ type: S_PROFILE_PAGE_LOADED, payload });
+    dispatch({ type: S_PROFILE_ARTICLES_LOADED, payload });
   },
-  S_onUnfollow: (username) =>
+  onUnfollow: (username) =>
     dispatch({
       type: S_UNFOLLOW_USER,
       payload: agent.Profile.unfollow(username),
     }),
   S_onUnload: () => {
-    dispatch({ type: S_PROFILE_PAGE_UNLOADED });
+    dispatch({ type: S_PROFILE_ARTICLES_UNLOADED });
   },
 });
 
@@ -108,12 +92,6 @@ const Profile = (props) => {
   const baseImage = props.profile.image === 'https://static.productionready.io/images/smiley-cyrus.jpg' ? true : false;
 
   useEffect(() => {
-    props.onLoad(
-      Promise.all([
-        agent.Profile.get(props.match.params.username),
-        agent.Articles.byAuthor(props.match.params.username),
-      ]),
-    );
     props.S_onLoad(
       Promise.all([
         agent.Profile.get(props.match.params.username),
@@ -123,7 +101,6 @@ const Profile = (props) => {
     setTab('byAuthor');
 
     return () => {
-      props.onUnload();
       props.S_onUnload();
     };
     //eslint-disable-next-line
@@ -131,12 +108,6 @@ const Profile = (props) => {
 
   const clickHandler = (type) => {
     if (type === 'byAuthor') {
-      props.onLoad(
-        Promise.all([
-          agent.Profile.get(props.match.params.username),
-          agent.Articles.byAuthor(props.match.params.username),
-        ]),
-      );
       props.S_onLoad(
         Promise.all([
           agent.Profile.get(props.match.params.username),
@@ -144,12 +115,6 @@ const Profile = (props) => {
         ]),
       );
     } else {
-      props.onLoad(
-        Promise.all([
-          agent.Profile.get(props.match.params.username),
-          agent.Articles.favoritedBy(props.match.params.username),
-        ]),
-      );
       props.S_onLoad(
         Promise.all([
           agent.Profile.get(props.match.params.username),

@@ -5,35 +5,31 @@ import React, { useEffect } from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import marked from 'marked';
-import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../constants/actionTypes';
 import styles from './article.module.scss';
 import Tags from '../Tags/Tags';
 import UserMeta from '../UserMeta/UserMeta';
 import { S_ARTICLE_PAGE_LOADED, S_ARTICLE_PAGE_UNLOADED } from '../../slices/articles';
 
 const mapStateToProps = (state) => ({
-  ...state.article,
+  ...state.articles,
+  article: state.articles.currentArticle,
   currentUser: state.common.currentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onLoad: (payload) => dispatch({ type: ARTICLE_PAGE_LOADED, payload }),
-  onUnload: () => dispatch({ type: ARTICLE_PAGE_UNLOADED }),
   S_onLoad: (payload) => dispatch({ type: S_ARTICLE_PAGE_LOADED, payload }),
   S_onUnload: () => dispatch({ type: S_ARTICLE_PAGE_UNLOADED }),
 });
 
 const Article = (props) => {
   const history = useHistory();
-  console.log(history.location);
+
   const { id } = useParams();
-  console.log(`${history.location.state}-${history.location.key}`);
+
   useEffect(() => {
-    props.onLoad(Promise.all([agent.Articles.get(id), agent.Comments.forArticle(id)]));
     props.S_onLoad(Promise.all([agent.Articles.get(id), agent.Comments.forArticle(id)]));
 
     return () => {
-      props.onUnload();
       props.S_onUnload();
     };
     //eslint-disable-next-line
@@ -70,6 +66,7 @@ const Article = (props) => {
 
         <div className="row">
           <CommentContainer
+            article={props.article}
             comments={props.comments || []}
             errors={props.commentErrors}
             slug={props.match.params.id}

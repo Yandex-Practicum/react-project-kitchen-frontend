@@ -4,60 +4,23 @@ import agent from '../../agent';
 import Button from '../Button/Button';
 import { connect, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { ADD_TAG, EDITOR_PAGE_LOADED, REMOVE_TAG, ARTICLE_SUBMITTED } from '../../constants/actionTypes';
-import { S_ADD_TAG, S_EDITOR_PAGE_LOADED, S_REMOVE_TAG } from '../../slices/articles';
-import { S_ARTICLE_SUBMITTED } from '../../slices/common';
+import { S_ADD_TAG, S_EDITOR_PAGE_LOADED, S_REMOVE_TAG, S_ARTICLE_SUBMITTED } from '../../slices/articles';
 import clipImg from '../../assets/ico/Clip.svg';
 import s from './Editor.module.scss';
 import Tags from '../Tags/Tags';
 
 const mapStateToProps = (state) => ({
-  ...state.editor,
+  ...state,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onAddTag: (payload) => dispatch({ type: ADD_TAG, payload }),
-  onLoad: (payload) => dispatch({ type: EDITOR_PAGE_LOADED, payload }),
-  onRemoveTag: (tag) => dispatch({ type: REMOVE_TAG, tag }),
-  onSubmit: (payload) => dispatch({ type: ARTICLE_SUBMITTED, payload }),
-  S_onAddTag: (payload) => dispatch({ type: S_ADD_TAG, payload }),
-  S_onLoad: (payload) => dispatch({ type: S_EDITOR_PAGE_LOADED, payload }),
+  onAddTag: (payload) => dispatch({ type: S_ADD_TAG, payload }),
+  onLoad: (payload) => dispatch({ type: S_EDITOR_PAGE_LOADED, payload }),
   S_onRemoveTag: (tag) => dispatch({ type: S_REMOVE_TAG, tag }),
-  S_onSubmit: (payload) => dispatch({ type: S_ARTICLE_SUBMITTED, payload }),
+  onSubmit: (payload) => dispatch({ type: S_ARTICLE_SUBMITTED, payload }),
 });
 
 const Editor = (props) => {
-  const history = useHistory();
-  const editorState = useSelector((state) => state.editor);
-  const [submitFlag, setSubmitFlag] = useState(false);
-
-  useEffect(() => {
-    if (props.match.params.slug) {
-      props.onLoad(agent.Articles.get(props.match.params.slug));
-      return props.S_onLoad(agent.Articles.get(props.match.params.slug));
-    }
-    props.onLoad();
-    props.S_onLoad();
-    //eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
-    if (!submitFlag) {
-      setFormData({
-        title: editorState.title,
-        description: editorState.description,
-        image: editorState.image,
-        body: editorState.body,
-        tagList: editorState.tagList,
-        tagInput: editorState.tagInput,
-      });
-    }
-
-    if (submitFlag && !editorState.inProgress) {
-      history.replace(`/article/${editorState.article.slug}`);
-    }
-  }, [editorState, submitFlag, history]);
-
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -66,6 +29,66 @@ const Editor = (props) => {
     tagList: [],
     tagInput: '',
   });
+  const history = useHistory();
+  const editorState = useSelector((state) => state.articles.articleEditor);
+  const editArticle = useSelector((state) => state.articles.editArticle);
+  const inProgress = useSelector((state) => state.articles.inProgress);
+  const [submitFlag, setSubmitFlag] = useState(false);
+  const [updateFlag, setUpdateFlag] = useState(false);
+
+  useEffect(() => {
+    if (props.match.params.slug) {
+      props.onLoad(agent.Articles.get(props.match.params.slug));
+      return;
+    }
+    props.onLoad();
+
+    //eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    if (!inProgress) {
+      setUpdateFlag(true);
+    }
+    if (!submitFlag && editArticle && updateFlag) {
+      setFormData({
+        ...formData,
+        title: editArticle.title || editArticle.article.title,
+        description: editArticle.description || editArticle.article.description,
+        image: editArticle.image || editArticle.article.image,
+        body: editArticle.body || editArticle.article.body,
+        tagList: editArticle.tagList || editArticle.article.tagList,
+        tagInput: editArticle.tagInput || editArticle.article.tagInput,
+      });
+    } else if (props.match.url !== '/editor') {
+      setFormData({
+        title: '',
+        description: '',
+        image: '',
+        body: '',
+        tagList: [],
+        tagInput: '',
+      });
+    }
+    // if (!submitFlag && (editorState && !editorState.inProgress)) {
+    //   setFormData({
+    //     title: editorState.title,
+    //     description: editorState.description,
+    //     image: editorState.image,
+    //     body: editorState.body,
+    //     tagList: editorState.tagList,
+    //     tagInput: editorState.tagInput,
+    //   });
+    // }
+
+    if (submitFlag && editArticle) {
+      if (editArticle.slug) {
+        history.replace(`/article/${editArticle.slug}`);
+      } else {
+        history.replace(`/article/${editArticle.article.slug}`);
+      }
+    }
+  }, [editorState, submitFlag, history, editArticle, inProgress, props.match.url]);
 
   const changeDataHandler = (ev) => {
     setFormData({
@@ -77,8 +100,12 @@ const Editor = (props) => {
   const watchForEnter = (ev) => {
     if (ev.keyCode === 13) {
       ev.preventDefault();
-      props.onAddTag(formData);
-      props.S_onAddTag(formData);
+      setFormData({
+        ...formData,
+        tagList: [...formData.tagList, formData.tagInput],
+        tagInput: '',
+      });
+      // props.onAddTag(formData);
     }
   };
 
@@ -86,7 +113,7 @@ const Editor = (props) => {
   //   props.onRemoveTag(tag);
   // };
 
-  const submitForm = (ev) => {
+  const submitEditForm = (ev) => {
     ev.preventDefault();
 
     const article = {
@@ -96,24 +123,25 @@ const Editor = (props) => {
       body: formData.body,
       tagList: formData.tagList,
     };
+    console.log(props);
 
-    const slug = { slug: props.articleSlug };
     setSubmitFlag(true);
-    if (props.articleSlug) {
+    if (props.match.params.slug) {
+      const slug = { slug: props.match.params.slug };
+      console.log(`########## ${props.articles.editArticle.article.articleSlug}`);
       props.onSubmit(agent.Articles.update(Object.assign(article, slug)));
-      props.S_onSubmit(agent.Articles.update(Object.assign(article, slug)));
       return;
     }
+
     props.onSubmit(agent.Articles.create(article));
-    props.S_onSubmit(agent.Articles.create(article));
   };
 
   return (
-    !editorState.inProgress && (
+    !inProgress && (
       <div className={s.container}>
         <ListErrors errors={props.errors}></ListErrors>
         <h2 className={s.title}>Новая запись</h2>
-        <form className={s.form} onSubmit={submitForm}>
+        <form className={s.form} onSubmit={submitEditForm}>
           <fieldset className={s.form__item}>
             <input
               type="text"

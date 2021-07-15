@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   appName: 'Sum42',
+  appLoaded: false,
   token: null,
   viewChangeCounter: 0,
   inProgress: null,
@@ -9,13 +10,13 @@ const initialState = {
 };
 
 export const commonSlice = createSlice({
-  name: 'S_common',
+  name: 'common',
   initialState,
   reducers: {
     S_APP_LOAD: (state, action) => {
       state.token = action.token || null;
       state.appLoaded = true;
-      state.currentUser = action.payload ? action.payload.user : null;
+      state.currentUser = action.payload ? action.payload.res.user : null;
     },
     S_LOGOUT: (state, action) => {
       state.token = null;
@@ -25,47 +26,32 @@ export const commonSlice = createSlice({
       if (action.subtype === S_REGISTER) {
         state.inProgress = true;
       }
-      if (action.subtype === S_ARTICLE_SUBMITTED) {
-        state.inProgress = true;
-      }
       state.inProgress = true;
     },
     S_LOGIN: (state, action) => {
       state.inProgress = false;
       state.errors = action.error ? action.payload.errors : null;
-      state.token = action.error ? null : action.payload.user.token;
-      state.currentUser = action.error ? null : action.payload.user;
+      state.token = action.error ? null : action.payload.res.user.token;
+      state.currentUser = action.error ? null : action.payload.res.user;
     },
     S_REGISTER: (state, action) => {
       state.inProgress = false;
-      state.errors = action.error ? action.payload.errors : null;
-      state.token = action.error ? null : action.payload.user.token;
-      state.currentUser = action.error ? null : action.payload.user;
-    },
-    S_ARTICLE_SUBMITTED: (state, action) => {
-      state.redirectTo = `/article/${action.payload.article.slug}`;
-      state.inProgress = null;
-      state.errors = action.error ? action.payload.errors : null;
+      state.errors = action.error ? action.payload.res.errors : null;
+      state.token = action.error ? null : action.payload.res.user.token;
+      state.currentUser = action.error ? null : action.payload.res.user;
     },
     S_SETTINGS_SAVED: (state, action) => {
-      state.currentUser = action.error ? null : action.payload.user;
+      state.currentUser = action.error ? null : action.payload.res.user;
       state.inProgress = false;
-      state.errors = action.error ? action.payload.errors : null;
+      state.errors = action.error ? action.payload.res.errors : null;
     },
     S_DELETE_ARTICLE: (state, action) => {
       state.redirectTo = '/';
+      state.deleted = true;
     },
   },
 });
 
 export default commonSlice.reducer;
-export const {
-  S_APP_LOAD,
-  S_REDIRECT,
-  S_LOGOUT,
-  S_ARTICLE_SUBMITTED,
-  S_SETTINGS_SAVED,
-  S_LOGIN,
-  S_REGISTER,
-  S_DELETE_ARTICLE,
-} = commonSlice.actions;
+export const { S_APP_LOAD, S_REDIRECT, S_LOGOUT, S_SETTINGS_SAVED, S_LOGIN, S_REGISTER, S_DELETE_ARTICLE } =
+  commonSlice.actions;

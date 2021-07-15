@@ -1,12 +1,18 @@
 import { Link } from 'react-router-dom';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './user-meta.module.scss';
 import BaseAvatarIcon from '../../assets/ico/BaseAvatarIcon';
+import Preloader from '../Preloader/Preloader';
 
 const UserMeta = (props) => {
   let section = '';
+  useEffect(() => {}, [section]);
+
+  if (section === undefined) {
+    <Preloader />;
+  }
   props.section === 'article' ? (section = props.article) : (section = props.comment);
-  const authorImage = props.article.author.image;
+  const authorImage = section ? section.author.image : null;
 
   return (
     <>

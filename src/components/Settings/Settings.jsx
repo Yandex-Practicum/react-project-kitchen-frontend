@@ -1,130 +1,63 @@
 import ListErrors from '../ListErrors/ListErrors';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import styles from './settings.module.scss';
 import Button from '../Button/Button';
 import ClipIcon from '../../assets/ico/ClipIcon';
 import { Link } from 'react-router-dom';
-import { SETTINGS_SAVED, SETTINGS_PAGE_UNLOADED } from '../../constants/actionTypes';
 import { S_SETTINGS_SAVED } from '../../slices/common';
 import Form from '../Form/Form';
 
-class SettingsForm extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      image: '',
-      username: '',
-      bio: '',
-      email: '',
-      password: '',
-    };
-
-    this.updateState = (field) => (ev) => {
-      const state = this.state;
-      const newState = Object.assign({}, state, { [field]: ev.target.value });
-      this.setState(newState);
-    };
-
-    this.submitForm = (ev) => {
-      ev.preventDefault();
-
-      const user = Object.assign({}, this.state);
-      if (!user.password) {
-        delete user.password;
-      }
-
-      this.props.onSubmitForm(user);
-      this.props.S_onSubmitForm(user);
-    };
-  }
-
-  componentWillMount() {
-    if (this.props.currentUser) {
-      Object.assign(this.state, {
-        image: this.props.currentUser.image || '',
-        username: this.props.currentUser.username,
-        bio: this.props.currentUser.bio,
-        email: this.props.currentUser.email,
-      });
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.currentUser) {
-      this.setState(
-        Object.assign({}, this.state, {
-          image: nextProps.currentUser.image || '',
-          username: nextProps.currentUser.username,
-          bio: nextProps.currentUser.bio,
-          email: nextProps.currentUser.email,
-        }),
-      );
-    }
-  }
-
-  render() {
-    return (
-      <Form onSubmit={this.submitForm}>
-        <div className={styles.url__group}>
-          <input
-            type="text"
-            placeholder="URL изображения профиля"
-            value={this.state.image}
-            onChange={this.updateState('image')}
-          />
-          <ClipIcon />
-        </div>
-        <input
-          type="text"
-          placeholder="Имя пользователя"
-          value={this.state.username}
-          onChange={this.updateState('username')}
-        />
-
-        <textarea
-          rows="8"
-          placeholder="Информация о Вас"
-          value={this.state.bio}
-          onChange={this.updateState('bio')}></textarea>
-
-        <input type="email" placeholder="mail@ya.ru" value={this.state.email} onChange={this.updateState('email')} />
-
-        <input
-          type="password"
-          placeholder="Новый пароль"
-          value={this.state.password}
-          onChange={this.updateState('password')}
-        />
-
-        <Button
-          type="submit"
-          //проверить отправку формы через универсальную кнопку
-          disabled={this.state.inProgress}
-          children="Обновить настройки"
-        />
-      </Form>
-    );
-  }
-}
-
 const mapStateToProps = (state) => ({
-  ...state.settings,
+  ...state.common,
   currentUser: state.common.currentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onClickLogout: () => {
-    // dispatch({ type: LOGOUT });
-  },
-  onSubmitForm: (user) => dispatch({ type: SETTINGS_SAVED, payload: agent.Auth.save(user) }),
-  onUnload: () => dispatch({ type: SETTINGS_PAGE_UNLOADED }),
-  S_onSubmitForm: (user) => dispatch({ type: S_SETTINGS_SAVED, payload: agent.Auth.save(user) }),
+  onClickLogout: () => {},
+  onSubmitSettingsForm: (user) => dispatch({ type: S_SETTINGS_SAVED, payload: agent.Auth.save(user) }),
 });
 
 const Settings = (props) => {
+  const [formData, setFormData] = useState({
+    image: '',
+    username: '',
+    bio: '',
+    email: '',
+    password: '',
+  });
+
+  const changeDataHandler = (ev) => {
+    setFormData({
+      ...formData,
+      [ev.target.name]: ev.target.value,
+    });
+  };
+
+  useEffect(() => {
+    if (props.currentUser) {
+      setFormData({
+        ...formData,
+        image: props.currentUser.image || '',
+        username: props.currentUser.username,
+        bio: props.currentUser.bio,
+        email: props.currentUser.email,
+      });
+    }
+  }, [props.currentUser]);
+
+  const submitSettingsForm = (ev) => {
+    ev.preventDefault();
+
+    const user = Object.assign({}, formData);
+    if (!user.password) {
+      delete user.password;
+    }
+
+    props.onSubmitSettingsForm(user);
+  };
+
   const deleteHandler = () => {
     window.confirm('Вы точно хотите удалить свой аккаунт?');
   };
@@ -136,7 +69,55 @@ const Settings = (props) => {
 
         <ListErrors errors={props.errors}></ListErrors>
 
-        <SettingsForm currentUser={props.currentUser} onSubmitForm={props.onSubmitForm} />
+        <Form onSubmit={submitSettingsForm}>
+          <div className={styles.url__group}>
+            <input
+              type="text"
+              placeholder="URL изображения профиля"
+              name="image"
+              value={formData.image}
+              onChange={changeDataHandler}
+            />
+            <ClipIcon />
+          </div>
+          <input
+            type="text"
+            placeholder="Имя пользователя"
+            name="username"
+            value={formData.username}
+            onChange={changeDataHandler}
+          />
+
+          <textarea
+            rows="8"
+            placeholder="Информация о Вас"
+            name="bio"
+            value={formData.bio}
+            onChange={changeDataHandler}></textarea>
+
+          <input
+            type="email"
+            name="email"
+            placeholder="mail@ya.ru"
+            value={formData.email}
+            onChange={changeDataHandler}
+          />
+
+          <input
+            type="password"
+            name="password"
+            placeholder="Новый пароль"
+            value={formData.password}
+            onChange={changeDataHandler}
+          />
+
+          <Button
+            type="submit"
+            //проверить отправку формы через универсальную кнопку
+            disabled={props.inProgress}
+            children="Обновить настройки"
+          />
+        </Form>
 
         <hr className={styles.br} />
 

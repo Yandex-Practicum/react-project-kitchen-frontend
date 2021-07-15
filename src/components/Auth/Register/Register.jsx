@@ -3,7 +3,6 @@ import { Link, useHistory } from 'react-router-dom';
 import ListErrors from '../../ListErrors/ListErrors';
 import agent from '../../../agent';
 import { connect, useSelector } from 'react-redux';
-import { REGISTER } from '../../../constants/actionTypes';
 import { S_REGISTER } from '../../../slices/common';
 import Button from '../../Button/Button';
 
@@ -13,10 +12,6 @@ import Form from '../../Form/Form';
 const mapStateToProps = (state) => ({ ...state.auth });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (username, email, password) => {
-    const payload = agent.Auth.register(username, email, password);
-    dispatch({ type: REGISTER, payload });
-  },
   S_onSubmit: (username, email, password) => {
     const payload = agent.Auth.register(username, email, password);
     dispatch({ type: S_REGISTER, payload });
@@ -24,15 +19,14 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const Register = (props) => {
-  const inProgress = useSelector((state) => state.auth.inProgress);
-  const errors = useSelector((state) => state.auth.errors);
+  const inProgress = useSelector((state) => state.common.inProgress);
+  const errors = useSelector((state) => state.common.errors);
   const [sendStatus, setSendStatus] = useState(false);
 
   const history = useHistory();
 
   const submitForm = (username, email, password) => (ev) => {
     ev.preventDefault();
-    props.onSubmit(username, email, password);
     props.S_onSubmit(username, email, password);
     setSendStatus(true);
   };

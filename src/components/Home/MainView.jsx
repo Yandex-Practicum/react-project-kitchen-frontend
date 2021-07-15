@@ -2,27 +2,25 @@ import ArticleList from '../ArticleList/ArticleList';
 import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
-import { CHANGE_TAB } from '../../constants/actionTypes';
 import TabsNavigation from '../Tabs/TabsNavigation/TabsNavigation';
 import TabsItem from '../Tabs/TabItem/TabsItem';
 import styles from './home.module.scss';
 import { S_CHANGE_TAB } from '../../slices/articles';
 
 const mapStateToProps = (state) => ({
-  ...state.articleList,
-  tags: state.home.tags,
+  ...state.articles,
+  articles: state.articles.articles,
+  tags: state.articles.tags,
   token: state.common.token,
   currentUser: state.common.currentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onTabClick: (tab, pager, payload) => dispatch({ type: CHANGE_TAB, tab, pager, payload }),
   S_onTabClick: (tab, pager, payload) => dispatch({ type: S_CHANGE_TAB, tab, pager, payload }),
 });
 
 const MainView = (props) => {
   const clickHandler = (type) => {
-    props.onTabClick(type, agent.Articles[type], agent.Articles[type]());
     props.S_onTabClick(type, agent.Articles[type], agent.Articles[type]());
   };
 

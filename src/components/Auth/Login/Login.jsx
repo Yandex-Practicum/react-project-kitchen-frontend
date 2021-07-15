@@ -4,25 +4,23 @@ import { Link, useHistory } from 'react-router-dom';
 import ListErrors from '../../ListErrors/ListErrors';
 import agent from '../../../agent';
 import { connect, useSelector } from 'react-redux';
-import { LOGIN } from '../../../constants/actionTypes';
 import Button from '../../Button/Button';
 
 import styles from '../Auth.module.scss';
 import Form from '../../Form/Form';
 import { S_LOGIN } from '../../../slices/common';
 
-const mapStateToProps = (state) => ({ ...state.auth });
+const mapStateToProps = (state) => ({ ...state.common });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (email, password) => dispatch({ type: LOGIN, payload: agent.Auth.login(email, password) }),
-  S_onSubmit: (email, password) => dispatch({ type: S_LOGIN, payload: agent.Auth.login(email, password) }),
+  onSubmit: (email, password) => dispatch({ type: S_LOGIN, payload: agent.Auth.login(email, password) }),
 });
 
 const Login = (props) => {
   const history = useHistory();
   const [formData, setFormData] = useState({ email: '', password: '' });
-  const inProgress = useSelector((state) => state.auth.inProgress);
-  const errors = useSelector((state) => state.auth.errors);
+  const inProgress = useSelector((state) => state.common.inProgress);
+  const errors = useSelector((state) => state.common.errors);
   const [sendStatus, setSendStatus] = useState(false);
 
   useEffect(() => {
@@ -35,7 +33,6 @@ const Login = (props) => {
   const submitForm = (email, password) => (ev) => {
     ev.preventDefault();
     props.onSubmit(email, password);
-    props.S_onSubmit(email, password);
     setSendStatus(true);
   };
 
