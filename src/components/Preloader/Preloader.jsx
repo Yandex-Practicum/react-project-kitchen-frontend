@@ -1,9 +1,8 @@
+import React from 'react';
+import s from './style.module.scss';
+
 const Preloader = () => {
-  return (
-    <section>
-      <p>Данные загружаются...</p>
-    </section>
-  );
+  return <div className={s.loader}></div>;
 };
 
 export default Preloader;

@@ -13,7 +13,6 @@ import Settings from '../Settings/Settings';
 import { APP_LOAD, CHANGE_THEME } from '../../slices/common-slice/common';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Page404 from '../404/404';
-
 const mapStateToProps = (state) => {
   return {
     appLoaded: state.common.appLoaded,
