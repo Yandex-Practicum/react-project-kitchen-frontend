@@ -10,9 +10,9 @@ import Login from '../Auth/Login/Login';
 import Profile from '../Profile/Profile';
 import Register from '../Auth/Register/Register';
 import Settings from '../Settings/Settings';
-import Preloader from '../Preloader/Preloader';
 import { APP_LOAD, CHANGE_THEME } from '../../slices/common-slice/common';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import Page404 from '../404/404';
 
 const mapStateToProps = (state) => {
   return {
@@ -147,7 +147,7 @@ const App = (props) => {
             <Route path="/article/:id" children={<Article />} />
             <ProtectedRoute path="/settings" children={<Settings />} />
             <ProtectedRoute path="/profile/:username" children={<Profile />} />
-            <Route path="*" children={<Preloader />} />
+            <Route path="*" children={<Page404 />} />
           </Switch>
         </>
       );
