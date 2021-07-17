@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import agent from '../../agent';
 import Button from '../Button/Button';
 import { connect, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { ADD_TAG, EDITOR_PAGE_LOADED, REMOVE_TAG, ARTICLE_SUBMITTED } from '../../slices/articles-slice/articles';
 import clipImg from '../../assets/ico/Clip.svg';
 import s from './Editor.module.scss';
@@ -35,10 +35,10 @@ const Editor = (props) => {
   const inProgress = useSelector((state) => state.articles.inProgress);
   const [submitFlag, setSubmitFlag] = useState(false);
   const [updateFlag, setUpdateFlag] = useState(false);
-
+  const { slug } = useParams();
   useEffect(() => {
-    if (props.match.params.slug) {
-      props.onLoad(agent.Articles.get(props.match.params.slug));
+    if (slug) {
+      props.onLoad(agent.Articles.get(slug));
       return;
     }
     props.onLoad();
@@ -60,7 +60,7 @@ const Editor = (props) => {
         tagList: editArticle.tagList || editArticle.article.tagList,
         tagInput: editArticle.tagInput || editArticle.article.tagInput,
       });
-    } else if (props.match.url !== '/editor') {
+    } else if (slug !== '/editor') {
       setFormData({
         title: '',
         description: '',
@@ -79,7 +79,7 @@ const Editor = (props) => {
       }
     }
     //eslint-disable-next-line
-  }, [editorState, submitFlag, history, editArticle, inProgress, props.match.url]);
+  }, [editorState, submitFlag, history, editArticle, inProgress, slug]);
 
   const changeDataHandler = (ev) => {
     setFormData({
