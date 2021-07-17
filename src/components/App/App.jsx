@@ -10,9 +10,9 @@ import Login from '../Auth/Login/Login';
 import Profile from '../Profile/Profile';
 import Register from '../Auth/Register/Register';
 import Settings from '../Settings/Settings';
-import Preloader from '../Preloader/Preloader';
 import { APP_LOAD, CHANGE_THEME } from '../../slices/common-slice/common';
-
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import Page404 from '../404/404';
 const mapStateToProps = (state) => {
   return {
     appLoaded: state.common.appLoaded,
@@ -138,15 +138,15 @@ const App = (props) => {
         <>
           <Header appName={props.appName} currentUser={props.currentUser} />
           <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-            <Route path="/editor/:slug" component={Editor} />
-            <Route path="/editor" component={Editor} />
-            <Route path="/article/:id" component={Article} />
-            <Route path="/settings" component={Settings} />
-            <Route path="/profile/:username" component={Profile} />
-            <Route exact path="/" component={Home} />
-            <Route path="*" component={Preloader} />
+            <Route exact path="/" children={<Home />} />
+            <Route path="/login" children={<Login />} />
+            <Route path="/register" children={<Register />} />
+            <ProtectedRoute path="/editor/:slug" children={<Editor />} />
+            <ProtectedRoute path="/editor" children={<Editor />} />
+            <Route path="/article/:id" children={<Article />} />
+            <ProtectedRoute path="/settings" children={<Settings />} />
+            <ProtectedRoute path="/profile/:username" children={<Profile />} />
+            <Route path="*" children={<Page404 />} />
           </Switch>
         </>
       );

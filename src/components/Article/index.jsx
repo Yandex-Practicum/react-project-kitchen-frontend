@@ -67,7 +67,7 @@ const Article = (props) => {
             article={props.article}
             comments={props.comments || []}
             errors={props.commentErrors}
-            slug={props.match.params.id}
+            slug={id}
             currentUser={props.currentUser}
           />
         </div>

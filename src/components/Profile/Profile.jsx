@@ -1,6 +1,6 @@
 import ArticleList from '../ArticleList/ArticleList';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import EditSettingsIcon from '../../assets/ico/EditSettingsIcon';
@@ -84,37 +84,22 @@ const mapDispatchToProps = (dispatch) => ({
 const Profile = (props) => {
   const [tab, setTab] = useState('byAuthor');
   const baseImage = props.profile.image === 'https://static.productionready.io/images/smiley-cyrus.jpg' ? true : false;
-
+  const { username } = useParams();
   useEffect(() => {
-    props.onLoad(
-      Promise.all([
-        agent.Profile.get(props.match.params.username),
-        agent.Articles.byAuthor(props.match.params.username),
-      ]),
-    );
+    props.onLoad(Promise.all([agent.Profile.get(username), agent.Articles.byAuthor(username)]));
     setTab('byAuthor');
 
     return () => {
       props.onUnload();
     };
     //eslint-disable-next-line
-  }, [props.match.url]);
+  }, [username]);
 
   const clickHandler = (type) => {
     if (type === 'byAuthor') {
-      props.onLoad(
-        Promise.all([
-          agent.Profile.get(props.match.params.username),
-          agent.Articles.byAuthor(props.match.params.username),
-        ]),
-      );
+      props.onLoad(Promise.all([agent.Profile.get(username), agent.Articles.byAuthor(username)]));
     } else {
-      props.onLoad(
-        Promise.all([
-          agent.Profile.get(props.match.params.username),
-          agent.Articles.favoritedBy(props.match.params.username),
-        ]),
-      );
+      props.onLoad(Promise.all([agent.Profile.get(username), agent.Articles.favoritedBy(username)]));
     }
     setTab(type);
   };
