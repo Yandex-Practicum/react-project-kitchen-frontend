@@ -135,26 +135,26 @@ const Profile = (props) => {
               <section className={styles.stats__block}>
                 <h3>Статистика</h3>
                 <p>
-                  <b>Рейтинг:</b> 0,87 (4 место)
+                  <b>Рейтинг:</b> {(Math.random() * 10).toFixed(2)} ({(Math.random() * 9).toFixed(0)+1} место)
                 </p>
                 <p>
-                  <b>Статьи:</b> 7 (0,03)
+                  <b>Статьи:</b> {(Math.random() * 19).toFixed(0)+1} ({(Math.random() * 9).toFixed(2)+1})
                 </p>
                 <p>
-                  <b>Задачи:</b> 12 (0,15)
+                  <b>Задачи:</b> {(Math.random() * 19).toFixed(0)+1} ({(Math.random() * 10).toFixed(2)})
                 </p>
               </section>
 
               <section className={styles.employment__block}>
                 <h3>Блок трудоустройства</h3>
                 <p>
-                  <b>Дата регистрации:</b> 10.06.2021г.
+                  <b>Дата регистрации:</b> 10.06.2021г. {console.log(props.profile)}
                 </p>
                 <p>
-                  <b>Репозиторий:</b> ссылка
+                  <b>Репозиторий:</b> {props.profile.gh}
                 </p>
                 <p>
-                  <b>Резюме:</b> ссылка
+                  <b>Резюме:</b> {props.profile.cv}
                 </p>
               </section>
               <div className={styles.graph__block}>

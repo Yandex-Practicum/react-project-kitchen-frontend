@@ -34,6 +34,10 @@ const Tags = {
   getAll: () => requests.get('/tags'),
 };
 
+const People = {
+  getAll: () => requests.get('/people'),
+};
+
 const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
 const omitSlug = (article) => Object.assign({}, article, { slug: undefined });
 const Articles = {
@@ -68,6 +72,7 @@ export default {
   Comments,
   Profile,
   Tags,
+  People,
   setToken: (_token) => {
     token = _token;
   },

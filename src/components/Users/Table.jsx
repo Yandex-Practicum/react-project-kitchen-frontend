@@ -9,7 +9,6 @@ export default props => (
     <thead className="table-dark">
       <tr>
         <th>
-          {console.log(props)} 
         </th>
         <th onClick={() => props.onSort('_id')}>
           ID {props.sortField === '_id'? props.sort == 'asc' ? <UpArrow /> : <DownArrow /> : null}
@@ -30,13 +29,13 @@ export default props => (
     </thead>
     <tbody>
       {(props.data) 
-      ? props.data.map(item => (
+      ? props.data.map((item, index) => (
         <tr key={item._id}>
             <td><img src={item.image}/></td>
             <td>{parseInt(item._id)}</td>
             <td><Link to={`profile/${item.username}`} id={item._id}>{item.username}</Link></td>
             <td>{item.email}</td>
-            <td>{item.rate}</td>
+            <td>{props.rates[index]}</td>
             <td>rest</td>
         </tr>
       ))
