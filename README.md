@@ -9,6 +9,22 @@
 Кодовая база: [Real World](https://github.com/gothinkster/react-redux-realworld-example-app). 
 Тема: блогинговая платформа по тематике вхождения в профессию web разработчика. Созданы разделы собеседование, задачи, полезные материалы, в которых каждый участник может создавать посты, делясь своим опытом.
 
+## Интерфейс
+Демо проекта можно посмотреть тут: www.sum42test.ru
+Возможно, мы перестанем его поддерживать, так что представлем скриншоты интерфейса:
+<div>
+  <img style="margin:1rem 0.5rem"  width=49% src="https://user-images.githubusercontent.com/72499342/126208429-a8615373-2986-4ded-bff2-3fb5fe5b0c1e.png" />
+  <img style="margin:1rem 0.5rem" width=49% src="https://user-images.githubusercontent.com/72499342/126208618-5337eb16-3cb7-4f5c-9cba-f6bfba9a6092.png" />
+</div>
+<div>
+  <img style="margin:1rem 0.5rem"  width=49% src="https://user-images.githubusercontent.com/72499342/126208533-b9d02035-7d65-40fa-9efc-8e69fbb2d459.png" />
+  <img style="margin:1rem 0.5rem" width=49% src="https://user-images.githubusercontent.com/72499342/126208654-916e2f26-413c-421b-b82b-01b641cc6344.png" />
+</div>
+<div>
+  <img style="margin:1rem 0.5rem"  width=49% src="https://user-images.githubusercontent.com/72499342/126208729-a59c5b3a-9560-4706-b309-2e918d888639.png" />
+  <img style="margin:1rem 0.5rem" width=49% src="https://user-images.githubusercontent.com/72499342/126208771-2e65271c-2669-45d7-a0d9-ef114e96a211.png" />
+</div>
+<br>
 
 ## Установка
 
