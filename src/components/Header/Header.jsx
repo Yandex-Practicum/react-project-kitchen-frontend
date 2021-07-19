@@ -6,6 +6,8 @@ import clsx from 'clsx';
 import HomeIcon from '../../assets/ico/HomeIcon';
 import LoginIcon from '../../assets/ico/LoginIcon';
 import LogoutIcon from '../../assets/ico/LogoutIcon';
+import UsersIcon from '../../assets/ico/UsersIcon';
+
 import EditArticleIcon from '../../assets/ico/EditArticleIcon';
 import { connect } from 'react-redux';
 import BaseAvatarIcon from '../../assets/ico/BaseAvatarIcon';
@@ -20,7 +22,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch({ type: LOGOUT });
   },
 });
-
 const Header = (props) => {
   const clickEditHandler = () => {
     props.onLoad();
@@ -52,6 +53,12 @@ const Header = (props) => {
           )}
           {props.currentUser && (
             <>
+              <li className={nav_item}>
+                <Link to="/users" className={nav_link}>
+                  <UsersIcon/>
+                  <span>Пользователи</span>
+                </Link>
+              </li>
               <li className={nav_item}>
                 <Link to="/editor" className={nav_link} onClick={clickEditHandler}>
                   <EditArticleIcon />

@@ -24,6 +24,8 @@ const Settings = (props) => {
   const [formData, setFormData] = useState({
     image: '',
     username: '',
+    cv: '',
+    gh: '',
     bio: '',
     email: '',
     password: '',
@@ -44,6 +46,8 @@ const Settings = (props) => {
         username: props.currentUser.username,
         bio: props.currentUser.bio,
         email: props.currentUser.email,
+        cv: props.currentUser.cv,
+        gh: props.currentUser.gh,
       });
     }
     //eslint-disable-next-line
@@ -57,6 +61,7 @@ const Settings = (props) => {
       delete user.password;
     }
 
+    console.log(user);
     props.onSubmitSettingsForm(user);
     history.replace(`/profile/${formData.username}`);
   };
@@ -88,6 +93,20 @@ const Settings = (props) => {
             placeholder="Имя пользователя"
             name="username"
             value={formData.username}
+            onChange={changeDataHandler}
+          />
+          <input
+            type="text"
+            placeholder="Страница GitHub"
+            name="gh"
+            value={formData.gh}
+            onChange={changeDataHandler}
+          />
+          <input
+            type="text"
+            placeholder="Резюме"
+            name="cv"
+            value={formData.cv}
             onChange={changeDataHandler}
           />
 

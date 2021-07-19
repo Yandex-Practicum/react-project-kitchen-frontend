@@ -4,6 +4,7 @@ import _superagent from 'superagent';
 const superagent = superagentPromise(_superagent, global.Promise);
 
 const API_ROOT = 'https://api.sum42test.ru/api';
+// const API_ROOT = 'http://localhost:3000/api';
 
 const encode = encodeURIComponent;
 const responseBody = (res) => res.body;
@@ -31,6 +32,10 @@ const Auth = {
 
 const Tags = {
   getAll: () => requests.get('/tags'),
+};
+
+const People = {
+  getAll: () => requests.get('/people'),
 };
 
 const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
@@ -67,6 +72,7 @@ export default {
   Comments,
   Profile,
   Tags,
+  People,
   setToken: (_token) => {
     token = _token;
   },

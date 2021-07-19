@@ -8,6 +8,7 @@ import Editor from '../Editor/Editor';
 import Home from '../Home';
 import Login from '../Auth/Login/Login';
 import Profile from '../Profile/Profile';
+import Users from '../Users/Users';
 import Register from '../Auth/Register/Register';
 import Settings from '../Settings/Settings';
 import { APP_LOAD, CHANGE_THEME } from '../../slices/common-slice/common';
@@ -146,6 +147,7 @@ const App = (props) => {
             <Route path="/article/:id" children={<Article />} />
             <ProtectedRoute path="/settings" children={<Settings />} />
             <ProtectedRoute path="/profile/:username" children={<Profile />} />
+            <Route path="/users/" children={<Users />} />
             <Route path="*" children={<Page404 />} />
           </Switch>
         </>

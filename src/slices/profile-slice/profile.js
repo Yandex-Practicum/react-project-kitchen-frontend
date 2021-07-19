@@ -11,10 +11,12 @@ export const profileSlice = createSlice({
   initialState,
   reducers: {
     PROFILE_PAGE_LOADED: (state, action) => {
-      const { username, image, following } = action.payload.res[0].profile;
+      const { username, image, following, gh, cv } = action.payload.res[0].profile;
       state.username = username;
       state.image = image;
       state.following = following;
+      state.gh = gh;
+      state.cv = cv;
     },
     FOLLOW_USER: (state, action) => {
       const { username, image, following } = action.payload.res.profile;
