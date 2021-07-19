@@ -11,16 +11,16 @@ export default props => (
         <th>
         </th>
         <th onClick={() => props.onSort('_id')}>
-          ID {props.sortField === '_id'? props.sort == 'asc' ? <UpArrow /> : <DownArrow /> : null}
+          ID {props.sortField === '_id'? props.sort === 'asc' ? <UpArrow /> : <DownArrow /> : null}
         </th>
         <th onClick={() => props.onSort('username')}>
-          Name  {props.sortField === 'username'? props.sort == 'asc' ? <UpArrow /> : <DownArrow /> : null}
+          Name  {props.sortField === 'username'? props.sort === 'asc' ? <UpArrow /> : <DownArrow /> : null}
         </th>
         <th onClick={() => props.onSort('email')}>
-          Email  {props.sortField === 'email'? props.sort == 'asc' ? <UpArrow /> : <DownArrow /> : null}
+          Email  {props.sortField === 'email'? props.sort === 'asc' ? <UpArrow /> : <DownArrow /> : null}
         </th>
         <th onClick={() => props.onSort('rate')}>
-          Rate  {props.sortField === 'rate'? props.sort == 'asc' ? <UpArrow /> : <DownArrow /> : null}
+          Rate  {props.sortField === 'rate'? props.sort === 'asc' ? <UpArrow /> : <DownArrow /> : null}
         </th>
         <th>
           rest 
@@ -31,7 +31,7 @@ export default props => (
       {(props.data) 
       ? props.data.map((item, index) => (
         <tr key={item._id}>
-            <td><img src={item.image}/></td>
+            <td><img src={item.image} alt='-'/></td>
             <td>{parseInt(item._id)}</td>
             <td><Link to={`profile/${item.username}`} id={item._id}>{item.username}</Link></td>
             <td>{item.email}</td>

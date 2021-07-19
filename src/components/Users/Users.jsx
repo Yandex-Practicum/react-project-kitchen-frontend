@@ -1,7 +1,6 @@
-import React, { FC } from 'react';
+import React from 'react';
 import Table from './Table'
 import { useDispatch, useSelector } from 'react-redux';
-import mockData from '../../slices/mock-data'
 import { useState } from 'react';
 import lodash from 'lodash'
 import agent from '../../agent';
@@ -17,7 +16,7 @@ const Users = () => {
       dispatch({type: GET_PEOPLE, payload: res.people})
       setData(res.people)
     });
-  }, []);
+  }, [dispatch]);
   const [sortField, setSortField] = useState('id')
   const [sort, setSort] = useState('asc')
   const [data, setData] = useState(people)
