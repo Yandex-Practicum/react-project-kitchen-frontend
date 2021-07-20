@@ -9,7 +9,6 @@ ul.tag_list li {
 	display: inline-block!important;
 }
 
-
 .tag_default[href]:focus,
 .tag_default[href]:hover {
 	background-color: var(--primary);
@@ -17,10 +16,8 @@ ul.tag_list li {
 	text-decoration: none; 
 }
 
-.tag_default {
-	background-color: var(--tags);
-	border:solid 1px var(--tags-border);
-	color: var(--dark-text);
+
+.tag {
 	font-size: .8rem;
 	padding-top: .1rem;
 	padding-bottom: .1rem;
@@ -28,29 +25,37 @@ ul.tag_list li {
 	margin-right: 3px;
 	margin-bottom: .2rem;
 	display: inline-block;
-	text-decoration: none; 
-}
+	text-decoration: none; 	
+	border:solid 1px var(--tags-border);
 
-
-.tag_pill {
 	padding-right: .6em;
 	padding-left: .6em;
-	// border-radius: 10rem
-}
-
-.tag_default.tag_dark {
-	border: 1px solid var(--tags-border);
-	color: var(--dark-text)!important;
-	background: var(--tags)!important;
-	text-decoration: none; 
 	cursor: default;
 }
 
-.tag_default.tag_grey {
-	border: 1px solid var(--tags-border);
-	color: var(--dark-text)!important;
-	background: var(--tags)!important;
-	text-decoration: none; 
+.tag_default {
+	background-color: var(--tags);
+	color: var(--dark-text);
+	cursor: pointer;
+}
+
+.tag_sub {
+	background-color: var(--tags);
+	color: var(--dark-text);
+}
+
+.tag_sub:hover {
+	text-decoration: none;
+	color: var(--dark-text);
+}
+
+.tag_active {
+	background-color: var(--primary);
+	color: rgb(241, 241, 241);
 	cursor: default;
 }
 
+.tag_active:hover {
+	color: rgb(241, 241, 241);
+	text-decoration: inherit;
+}

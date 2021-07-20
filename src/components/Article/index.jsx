@@ -55,7 +55,7 @@ const Article = (props) => {
             <div className={styles.page__text} dangerouslySetInnerHTML={markup}></div>
 
             <div className={styles.page__taglist}>
-              <Tags tags={props.article.tagList} onClickTag={() => {}} type="grey" />
+              <Tags tags={props.article.tagList} onClickTag={() => {}} subType={true} />
             </div>
           </div>
         </div>

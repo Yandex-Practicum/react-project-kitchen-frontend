@@ -1,21 +1,12 @@
 import React from 'react';
 import agent from '../../agent';
 import style from './Tags.module.scss';
-import clsx from 'clsx';
+import { useSelector } from 'react-redux';
 
 const Tags = (props) => {
+  const activeTag = useSelector((state) => state.articles.tag);
+
   const tags = [].concat(props.tags);
-  var clazz = '';
-  switch (props.type) {
-    case 'dark':
-      clazz = style.tag_dark;
-      break;
-    case 'grey':
-      clazz = style.tag_grey;
-      break;
-    default:
-      clazz = '';
-  }
 
   return (
     <section className={style.tag_list}>
@@ -28,7 +19,9 @@ const Tags = (props) => {
         return (
           <a
             href="/#"
-            className={clsx(style.tag_default, style.tag_pill, clazz)}
+            className={`${style.tag} ${activeTag === tag && style.tag_active} ${
+              props.subType ? style.tag_sub : style.tag_default
+            }`}
             key={tag + Math.random(10, 100) * 10}
             onClick={handleClickTag}>
             {tag}

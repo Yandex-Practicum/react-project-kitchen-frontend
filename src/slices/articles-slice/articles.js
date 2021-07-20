@@ -112,6 +112,7 @@ export const articleSlice = createSlice({
     DELETE_ARTICLE: (state, action) => {
       state.redirectTo = '/';
       state.deleted = true;
+      state.tag = '';
     },
   },
 });

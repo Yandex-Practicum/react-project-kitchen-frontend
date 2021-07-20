@@ -116,9 +116,9 @@ const Editor = (props) => {
     console.log(props);
 
     setSubmitFlag(true);
-    if (props.match.params.slug) {
-      const slug = { slug: props.match.params.slug };
-      props.onSubmit(agent.Articles.update(Object.assign(article, slug)));
+    if (slug) {
+      const slugArticle = { slug: slug };
+      props.onSubmit(agent.Articles.update(Object.assign(article, slugArticle)));
       return;
     }
 
@@ -177,7 +177,7 @@ const Editor = (props) => {
                 name="tagInput"
                 placeholder={
                   [].concat(formData.tagList).length > 2
-                    ? 'Пасхалка, больше 3х нельзя'
+                    ? 'Достигнут лимит тегов'
                     : 'Теги (введите тег и нажмите enter)'
                 }
                 maxLength={10}
