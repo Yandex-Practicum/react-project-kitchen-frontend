@@ -18,6 +18,7 @@ const initialState = {
   tab: null,
   pager: null,
   inProgress: true,
+  editTags: [],
 };
 
 export const articleSlice = createSlice({
@@ -55,6 +56,7 @@ export const articleSlice = createSlice({
       state.articlesCount = action.payload.res[1].articlesCount;
       state.tab = action.tab;
       state.deleted = false;
+      state.tag = '';
     },
     HOME_ARTICLES_UNLOADED: (state, action) => {
       state.articleEditor = { inProgress: true };
@@ -70,6 +72,7 @@ export const articleSlice = createSlice({
       state.pager = action.pager;
       state.articles = action.payload.res[1].articles;
       state.articlesCount = action.payload.res[1].articlesCount;
+      state.tag = '';
     },
     PROFILE_ARTICLES_UNLOADED: (state, action) => {
       return {};
@@ -84,6 +87,8 @@ export const articleSlice = createSlice({
       });
     },
     EDITOR_PAGE_LOADED: (state, action) => {
+      state.tag = '';
+
       if (action.payload) {
         state.inProgress = false;
         state.editArticle = action.payload.res;
@@ -94,16 +99,14 @@ export const articleSlice = createSlice({
       return {};
     },
     ADD_TAG: (state, action) => {
-      state.articleEditor.title = action.payload.res.title;
-      state.articleEditor.description = action.payload.res.description;
-      state.articleEditor.image = action.payload.res.image;
-      state.articleEditor.body = action.payload.res.body;
-      state.articleEditor.tagInput = '';
-      state.articleEditor.tagList = state.articleEditor.tagList.concat([action.payload.res.tagInput]);
-      state.articleEditor.tagInput = '';
+      state.editTags = action.payload;
     },
     REMOVE_TAG: (state, action) => {
-      state.articleEditor.tagList = state.tagList.filter((tag) => tag !== action.tag);
+      if (state.editArticle.article) {
+        state.editArticle.article.tagList = state.editArticle.article.tagList.filter((tag) => tag !== action.tag);
+      } else {
+        state.editArticle.tagList = state.editArticle.tagList.filter((tag) => tag !== action.tag);
+      }
     },
     ARTICLE_SUBMITTED: (state, action) => {
       state.editArticle = action.payload.res.article;

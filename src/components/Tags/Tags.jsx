@@ -5,14 +5,18 @@ import { useSelector } from 'react-redux';
 
 const Tags = (props) => {
   const activeTag = useSelector((state) => state.articles.tag);
+  const editTags = useSelector((state) => state.editTags);
 
-  const tags = [].concat(props.tags);
+  let tags = [].concat(editTags && editTags.length ? editTags : props.tags);
 
   return (
     <section className={style.tag_list}>
       {tags.map((tag) => {
         const handleClickTag = (ev) => {
           ev.preventDefault();
+          if (props.slug) {
+            return;
+          }
           props.onClickTag(tag, (page) => agent.Articles.byTag(tag, page), agent.Articles.byTag(tag));
         };
 
