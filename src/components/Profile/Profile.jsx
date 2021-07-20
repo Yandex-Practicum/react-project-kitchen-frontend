@@ -152,7 +152,7 @@ const Profile = (props) => {
               <section className={styles.employment__block}>
                 <h3>Блок трудоустройства</h3>
                 <p>
-                  <b>Дата регистрации:</b> {profile.createdAt.slice(0, 10)}
+                  <b>Дата регистрации:</b> {profile.createdAt && profile.createdAt.slice(0, 10)}
                 </p>
                 <p>
                   <b>Репозиторий:</b> {props.profile.gh ? <a href={props.profile.gh}>ссылка</a> : ''}

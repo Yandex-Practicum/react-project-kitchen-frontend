@@ -86,6 +86,14 @@ svg {
 	border-color: var(--primary);
 }
 
+.active_link {
+	color: var(--primary);
+}
+
+.active_link svg path {
+	stroke: var(--primary);
+}
+
 .nav_link:focus{
 	text-decoration: none;
 	color: var(--primary);
