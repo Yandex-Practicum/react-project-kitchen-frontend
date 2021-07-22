@@ -42,46 +42,29 @@
 
 Обращаем ваше внимание, что проект пока не адаптирован под планшеты и мобильные устройства.
 
-## Баги
-
-Ниже вы можете ознакомиться с уже обнаруженными багами, которые мы устраним в ближайшее время:
-* доступ к страницам входа и регистрации при логине;
-* возможность создания пустой статьи;
-* возможность создания в статье тегов с одинаковым содержанием;
-* во время создания\редактирования статьи нельзя удалить выбранные теги;
-* отсутствие ререндера при попытке перейти в окно своего профиля со страницы другого профиля;
-* не отображается перенос строки;
-* переполнение в одной статье при слишком длинном слове;
-* отображение комментариев (при добавлении новые внизу, при обновлении новые наверху);
-* подсветка выбранных тегов в превью к статье;
-* "Ваши статьи" на странице другого пользователя.
-
 
 ## Участие в проекте
 Кидайте пул-реквесты, мы всему будем рады (или забаним вас).
 
-## Авторы
 
-**Сергей Рогальский**
-* [github/Sergey-Rogalskiy](https://github.com/Sergey-Rogalskiy)
+## Авторы 
+****
+**[Сергей Рогальский](https://github.com/Sergey-Rogalskiy)**
+**[Никита Кандзюба](https://github.com/Der200)**
+**[Александр Иванин](https://github.com/ivalexandr)**
+**[Егор Шкиря](https://github.com/zuhijan)**
 
-**Никита Кандзюба**
-* [github/Der200](https://github.com/Der200)
-
-**Александр Иванин**
-* [github/ivalexandr](https://github.com/ivalexandr)
-
-**Егор Шкиря**
-* [github/zuhijan](https://github.com/zuhijan)
+# Текущий состав
+****
+**[Сергей Рогальский](https://github.com/Sergey-Rogalskiy)**
+**[Никита Кандзюба](https://github.com/Der200)**
 
 
 ## You may also like..
 Схожие проекты наших друзей по бета-когорте:
 
 **[PCDevs и "Алкостопом по галактике"](https://github.com/PCDevs/react-project-kitchen-frontend)**
-http://pcdevs.space/
 
-**[GastroManiacs и "Pickled Bananas"](https://github.com/PCDevs/react-project-kitchen-frontend)**
-https://pickledbananas.com/
+**[GastroManiacs и "Pickled Bananas"](https://github.com/gastro-react/gastro)**
 
 **[This Is React Sparta и "Old Star Games"](https://github.com/VitalyBibik/kitchen_project)**
