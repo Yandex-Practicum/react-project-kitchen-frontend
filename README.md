@@ -48,7 +48,7 @@
 
 
 ## Авторы 
-****
+
 **[Сергей Рогальский](https://github.com/Sergey-Rogalskiy)**
 
 **[Никита Кандзюба](https://github.com/Der200)**
@@ -57,8 +57,8 @@
 
 **[Егор Шкиря](https://github.com/zuhijan)**
 
-# Текущий состав
-****
+### Текущий состав
+
 **[Сергей Рогальский](https://github.com/Sergey-Rogalskiy)**
 
 **[Никита Кандзюба](https://github.com/Der200)**
