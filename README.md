@@ -50,13 +50,17 @@
 ## Авторы 
 ****
 **[Сергей Рогальский](https://github.com/Sergey-Rogalskiy)**
+
 **[Никита Кандзюба](https://github.com/Der200)**
+
 **[Александр Иванин](https://github.com/ivalexandr)**
+
 **[Егор Шкиря](https://github.com/zuhijan)**
 
 # Текущий состав
 ****
 **[Сергей Рогальский](https://github.com/Sergey-Rogalskiy)**
+
 **[Никита Кандзюба](https://github.com/Der200)**
 
 
