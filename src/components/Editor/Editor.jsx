@@ -34,7 +34,7 @@ const Editor = (props) => {
   const editArticle = useSelector((state) => state.articles.editArticle);
   const inProgress = useSelector((state) => state.articles.inProgress);
   const [submitFlag, setSubmitFlag] = useState(false);
-  const [updateFlag, setUpdateFlag] = useState(false);
+  const [startFlag, setStartFlag] = useState(true);
   const { slug } = useParams();
   useEffect(() => {
     if (slug) {
@@ -48,19 +48,21 @@ const Editor = (props) => {
 
   useEffect(() => {
     if (!inProgress) {
-      setUpdateFlag(true);
     }
-    if (!submitFlag && editArticle && updateFlag) {
+    if (!submitFlag && slug !== '/editor' && editArticle) {
+      // && updateFlag && startFlag
       setFormData({
         ...formData,
-        title: editArticle.title || editArticle.article.title,
-        description: editArticle.description || editArticle.article.description,
-        image: editArticle.image || editArticle.article.image,
-        body: editArticle.body || editArticle.article.body,
-        tagList: editArticle.tagList || editArticle.article.tagList,
-        tagInput: editArticle.tagInput || editArticle.article.tagInput,
+        title: editArticle?.title || editArticle.article?.title || '',
+        description: editArticle?.description || editArticle.article?.description || '',
+        image: editArticle?.image || editArticle.article?.image || '',
+        body: editArticle?.body || editArticle.article?.body || '',
+        tagList: editArticle?.tagList || editArticle.article?.tagList || '',
+        tagInput: editArticle?.tagInput || editArticle.article?.tagInput || '',
       });
-    } else if (slug !== '/editor') {
+      setStartFlag(false);
+    }
+    if (slug === '/editor' || slug === undefined) {
       setFormData({
         title: '',
         description: '',
@@ -79,7 +81,15 @@ const Editor = (props) => {
       }
     }
     //eslint-disable-next-line
-  }, [editorState, submitFlag, history, editArticle, inProgress, slug]);
+  }, [editorState, submitFlag, history, editArticle, inProgress, slug, startFlag]);
+
+  useEffect(() => {
+    if (slug === undefined) {
+      props.onAddTag(formData.tagList);
+    }
+
+    //eslint-disable-next-line
+  }, [slug, formData.tagList]);
 
   const changeDataHandler = (ev) => {
     setFormData({
@@ -99,10 +109,6 @@ const Editor = (props) => {
     }
   };
 
-  // const removeTagHandler = (tag) => () => {
-  //   props.onRemoveTag(tag);
-  // };
-
   const submitEditForm = (ev) => {
     ev.preventDefault();
 
@@ -113,12 +119,11 @@ const Editor = (props) => {
       body: formData.body,
       tagList: formData.tagList,
     };
-    console.log(props);
 
     setSubmitFlag(true);
-    if (props.match.params.slug) {
-      const slug = { slug: props.match.params.slug };
-      props.onSubmit(agent.Articles.update(Object.assign(article, slug)));
+    if (slug) {
+      const slugArticle = { slug: slug };
+      props.onSubmit(agent.Articles.update(Object.assign(article, slugArticle)));
       return;
     }
 
@@ -177,7 +182,7 @@ const Editor = (props) => {
                 name="tagInput"
                 placeholder={
                   [].concat(formData.tagList).length > 2
-                    ? 'Пасхалка, больше 3х нельзя'
+                    ? 'Достигнут лимит тегов'
                     : 'Теги (введите тег и нажмите enter)'
                 }
                 maxLength={10}
@@ -187,7 +192,13 @@ const Editor = (props) => {
                 disabled={[].concat(formData.tagList).length > 2 ? true : false}
               />
 
-              <Tags tags={formData.tagList} onClickTag={() => {}} type="dark" />
+              <Tags
+                tags={formData.tagList}
+                onClickTag={props.onRemoveTag}
+                slug={slug === undefined ? true : false}
+                subType={slug === undefined ? true : false}
+                onAddTag={props.onAddTag}
+              />
             </div>
 
             <Button className={s.form__button}>Опубликовать запись</Button>

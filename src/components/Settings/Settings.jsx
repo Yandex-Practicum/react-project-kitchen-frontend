@@ -4,7 +4,6 @@ import agent from '../../agent';
 import { connect } from 'react-redux';
 import styles from './settings.module.scss';
 import Button from '../Button/Button';
-import ClipIcon from '../../assets/ico/ClipIcon';
 import { Link, useHistory } from 'react-router-dom';
 import { SETTINGS_SAVED } from '../../slices/common-slice/common';
 import Form from '../Form/Form';
@@ -43,11 +42,11 @@ const Settings = (props) => {
       setFormData({
         ...formData,
         image: props.currentUser.image || '',
-        username: props.currentUser.username,
-        bio: props.currentUser.bio,
-        email: props.currentUser.email,
-        cv: props.currentUser.cv,
-        gh: props.currentUser.gh,
+        username: props.currentUser.username || '',
+        bio: props.currentUser.bio || '',
+        email: props.currentUser.email || '',
+        cv: props.currentUser.cv || '',
+        gh: props.currentUser.gh || '',
       });
     }
     //eslint-disable-next-line
@@ -78,16 +77,6 @@ const Settings = (props) => {
         <ListErrors errors={props.errors}></ListErrors>
 
         <Form onSubmit={submitSettingsForm}>
-          <div className={styles.url__group}>
-            <input
-              type="text"
-              placeholder="URL изображения профиля"
-              name="image"
-              value={formData.image}
-              onChange={changeDataHandler}
-            />
-            <ClipIcon />
-          </div>
           <input
             type="text"
             placeholder="Имя пользователя"
@@ -97,19 +86,21 @@ const Settings = (props) => {
           />
           <input
             type="text"
-            placeholder="Страница GitHub"
+            placeholder="URL страницы GitHub"
             name="gh"
             value={formData.gh}
             onChange={changeDataHandler}
           />
-          <input
-            type="text"
-            placeholder="Резюме"
-            name="cv"
-            value={formData.cv}
-            onChange={changeDataHandler}
-          />
-
+          <input type="text" placeholder="URL резюме" name="cv" value={formData.cv} onChange={changeDataHandler} />
+          <div className={styles.url__group}>
+            <input
+              type="text"
+              placeholder="URL изображения профиля"
+              name="image"
+              value={formData.image}
+              onChange={changeDataHandler}
+            />
+          </div>
           <textarea
             rows="8"
             placeholder="Информация о Вас"

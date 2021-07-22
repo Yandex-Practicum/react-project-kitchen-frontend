@@ -111,6 +111,9 @@ const Profile = (props) => {
 
   const isUser = props.currentUser && props.profile.username === props.currentUser.username;
 
+  const articlesRate = Number((Math.random() * 19).toFixed(0) + 1);
+  const tasksRate = Number((Math.random() * 19).toFixed(0) + 2);
+
   return (
     profile && (
       <div className="profile-page">
@@ -135,26 +138,27 @@ const Profile = (props) => {
               <section className={styles.stats__block}>
                 <h3>Статистика</h3>
                 <p>
-                  <b>Рейтинг:</b> {(Math.random() * 10).toFixed(2)} ({(Math.random() * 9).toFixed(0)+1} место)
+                  <b>Рейтинг:</b> {(articlesRate * 0.4 + tasksRate * 0.2).toFixed(2)} (
+                  {(Math.random() * 9).toFixed(0) + 1} место)
                 </p>
                 <p>
-                  <b>Статьи:</b> {(Math.random() * 19).toFixed(0)+1} ({(Math.random() * 9).toFixed(2)+1})
+                  <b>Статьи:</b> {articlesRate} ({(articlesRate * 0.4).toFixed(2)})
                 </p>
                 <p>
-                  <b>Задачи:</b> {(Math.random() * 19).toFixed(0)+1} ({(Math.random() * 10).toFixed(2)})
+                  <b>Задачи:</b> {tasksRate} ({(tasksRate * 0.2).toFixed(2)})
                 </p>
               </section>
 
               <section className={styles.employment__block}>
                 <h3>Блок трудоустройства</h3>
                 <p>
-                  <b>Дата регистрации:</b> 10.06.2021г. {console.log(props.profile)}
+                  <b>Дата регистрации:</b> {profile.createdAt && profile.createdAt.slice(0, 10)}
                 </p>
                 <p>
-                  <b>Репозиторий:</b> {props.profile.gh}
+                  <b>Репозиторий:</b> {props.profile.gh ? <a href={props.profile.gh}>ссылка</a> : ''}
                 </p>
                 <p>
-                  <b>Резюме:</b> {props.profile.cv}
+                  <b>Резюме:</b> {props.profile.cv ? <a href={props.profile.cv}>ссылка</a> : ''}
                 </p>
               </section>
               <div className={styles.graph__block}>

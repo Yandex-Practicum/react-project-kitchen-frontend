@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import ButtonTheme from '../ButtonTheme/ButtonTheme';
 import styles from './Header.module.scss';
 import clsx from 'clsx';
@@ -14,7 +14,8 @@ import BaseAvatarIcon from '../../assets/ico/BaseAvatarIcon';
 import { EDITOR_PAGE_LOADED } from '../../slices/articles-slice/articles';
 import { LOGOUT } from '../../slices/common-slice/common';
 
-const { header, navbar, navbar_brand, nav, navbar_nav, pull_xs_right, nav_item, nav_link, ava_image } = styles;
+const { header, navbar, navbar_brand, nav, navbar_nav, pull_xs_right, nav_item, nav_link, ava_image, active_link } =
+  styles;
 
 const mapDispatchToProps = (dispatch) => ({
   onLoad: (payload) => dispatch({ type: EDITOR_PAGE_LOADED, payload }),
@@ -23,6 +24,8 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 const Header = (props) => {
+  const { pathname } = useLocation();
+
   const clickEditHandler = () => {
     props.onLoad();
   };
@@ -39,14 +42,14 @@ const Header = (props) => {
         <ButtonTheme />
         <ul className={clsx(nav, navbar_nav, pull_xs_right)}>
           <li className={nav_item}>
-            <Link to="/" className={nav_link}>
+            <Link to="/" className={`${nav_link} ${pathname === '/' ? active_link : ''}`}>
               <HomeIcon />
               <span>Главная</span>
             </Link>
           </li>
           {!props.currentUser && (
             <li className={nav_item}>
-              <Link to="/login" className={nav_link}>
+              <Link to="/login" className={`${nav_link} ${pathname === '/login' ? active_link : ''}`}>
                 <LoginIcon /> <span>Войти</span>
               </Link>
             </li>
@@ -54,22 +57,27 @@ const Header = (props) => {
           {props.currentUser && (
             <>
               <li className={nav_item}>
-                <Link to="/users" className={nav_link}>
-                  <UsersIcon/>
+                <Link to="/users" className={`${nav_link} ${pathname === '/users' ? active_link : ''}`}>
+                  <UsersIcon />
                   <span>Пользователи</span>
                 </Link>
               </li>
               <li className={nav_item}>
-                <Link to="/editor" className={nav_link} onClick={clickEditHandler}>
+                <Link
+                  to="/editor"
+                  className={`${nav_link} ${pathname === '/editor' ? active_link : ''}`}
+                  onClick={clickEditHandler}>
                   <EditArticleIcon />
                   <span>Новая запись</span>
                 </Link>
               </li>
               <li className={nav_item}>
-                <Link to={`/profile/${props.currentUser.username}`} className={nav_link}>
+                <Link
+                  to={`/profile/${props.currentUser.username}`}
+                  className={`${nav_link} ${pathname === `/profile${props.currentUser.username}` ? active_link : ''}`}>
                   {props.currentUser.image && <img src={props.currentUser.image} alt="ava" className={ava_image} />}
                   {!props.currentUser.image && <BaseAvatarIcon />}
-                  &nbsp;<p>{props.currentUser.username}</p>
+                  &nbsp;<span>{props.currentUser.username}</span>
                 </Link>
               </li>
               <li className={nav_item}>
