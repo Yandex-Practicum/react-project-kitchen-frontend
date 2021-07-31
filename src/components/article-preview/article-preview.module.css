@@ -1,0 +1,88 @@
+.container {
+    border-bottom: 1px solid var(--text-hover);
+    width: 808px;
+
+    display: grid;
+    grid-template-columns: auto 1fr;
+
+    padding: 32px 0 64px 0;
+}
+
+.content{
+    margin-left: 16px;
+}
+
+.header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.userDate p {
+    margin: 0 0 0 8px;
+    /*margin-left: 8px;*/
+}
+
+.user{
+    font-family: 'EBGaramond-Regular';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: var(--text);
+}
+
+.date{
+    font-family: 'EBGaramond-Regular' ;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+
+    color: var(--date-color);
+}
+
+.favorite{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    background: inherit;
+}
+
+.article{
+    margin-top: 16px;
+}
+
+.articleTitle{
+    font-family: "Oswald Bold";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 40px;
+
+    margin-bottom: 8px;
+}
+
+.articleBody{
+    font-family: "Oswald Regular";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.footer{
+
+}
+
+.readMore{
+    font-family: 'EBGaramond-Regular';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    text-decoration-line: underline;
+}

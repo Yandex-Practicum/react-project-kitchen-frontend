@@ -1,0 +1,31 @@
+@font-face {
+    src: url(fonts/Oswald-Regular.woff2) format('woff2');
+    font-family: 'Oswald Regular';
+}
+
+@font-face {
+    src: url(fonts/Oswald-Bold.woff2) format('woff2');
+    font-family: 'Oswald Bold';
+}
+
+@font-face {
+    src: url(./fonts/EBGaramond-Regular.woff2) format('woff2');
+    font-family: 'EBGaramond-Regular';
+}
+
+body {
+    background: #E5E5E5;
+    margin: 0;
+    /*font-family: 'Oswald Regular', 'EBGaramond-Regular', 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;*/
+}
+
+:root{
+    --text: #0B0A0A;
+    --text-hover: #8c8c8c;
+    --background: #E5E5E5;
+    --date-color: #6B6761;
+}

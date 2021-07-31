@@ -1,0 +1,57 @@
+.logo {
+    font-family: 'Oswald Regular';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    color: var(--text);
+    margin: 10px 0 10px 0;
+}
+
+.logo:hover {
+    text-decoration: none;
+    color: var(--text-hover);
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-around;
+}
+
+.menu {
+    display: flex;
+    margin: 10px 0 18px 0;
+}
+
+.menu li {
+    list-style-type: none;
+}
+
+.menu li:not(:last-child) {
+    margin-right: 35px;
+}
+
+.block {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.block:hover svg path {
+    stroke: var(--text-hover);
+}
+
+.item {
+    font-family: 'EBGaramond';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+
+    color: var(--text);
+
+    margin-left: 9px;
+}
+
+.item:hover {
+    text-decoration: none;
+    color: var(--text-hover);
+}
