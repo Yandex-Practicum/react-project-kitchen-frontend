@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import agent from '../agent';
 import { connect } from 'react-redux';
 import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../constants/actionTypes';
+import { v4 as uuidv4 } from 'uuid';
 
 const FAVORITED_CLASS = 'btn btn-sm btn-primary';
 const NOT_FAVORITED_CLASS = 'btn btn-sm btn-outline-primary';
@@ -63,8 +64,9 @@ const ArticlePreview = props => {
         <ul className="tag-list">
           {
             article.tagList.map(tag => {
+              const customID = uuidv4();
               return (
-                <li className="tag-default tag-pill tag-outline" key={tag}>
+                <li className="tag-default tag-pill tag-outline" key={customID}>
                   {tag}
                 </li>
               )
