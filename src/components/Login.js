@@ -38,8 +38,9 @@ class Login extends React.Component {
   }
 
   render() {
-    const email = this.props.email;
-    const password = this.props.password;
+    const email = this.props.email || '';
+    const password = this.props.password || '';
+    
     return (
       <div className="auth-page">
         <div className="container page">
