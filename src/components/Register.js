@@ -43,9 +43,9 @@ class Register extends React.Component {
   }
 
   render() {
-    const email = this.props.email;
-    const password = this.props.password;
-    const username = this.props.username;
+    const email = this.props.email || '';
+    const password = this.props.password || '';
+    const username = this.props.username || '';
 
     return (
       <div className="auth-page">
@@ -70,7 +70,7 @@ class Register extends React.Component {
                       className="form-control form-control-lg"
                       type="text"
                       placeholder="Username"
-                      value={this.props.username}
+                      value={username}
                       onChange={this.changeUsername} />
                   </fieldset>
 
@@ -79,7 +79,7 @@ class Register extends React.Component {
                       className="form-control form-control-lg"
                       type="email"
                       placeholder="Email"
-                      value={this.props.email}
+                      value={email}
                       onChange={this.changeEmail} />
                   </fieldset>
 
@@ -88,7 +88,7 @@ class Register extends React.Component {
                       className="form-control form-control-lg"
                       type="password"
                       placeholder="Password"
-                      value={this.props.password}
+                      value={password}
                       onChange={this.changePassword} />
                   </fieldset>
 
