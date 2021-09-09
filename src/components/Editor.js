@@ -42,11 +42,18 @@ class Editor extends React.Component {
     this.changeTagInput = updateFieldEvent('tagInput');
 
     this.watchForEnter = ev => {
-      if (ev.keyCode === 13) {
+      if (ev.keyCode === 13 && this.props.tagInput !== '') {
         ev.preventDefault();
         this.props.onAddTag();
       }
     };
+
+    this.watchForBlur = ev => {
+      if (this.props.tagInput !== '') {
+        ev.preventDefault();
+        this.props.onAddTag();
+      }
+    }
 
     this.removeTagHandler = tag => () => {
       this.props.onRemoveTag(tag);
@@ -138,7 +145,9 @@ class Editor extends React.Component {
                       placeholder="Enter tags"
                       value={this.props.tagInput || ''}
                       onChange={this.changeTagInput}
-                      onKeyUp={this.watchForEnter} />
+                      onKeyUp={this.watchForEnter}
+                      onBlur={this.watchForBlur}
+                    />
 
                     <div className="tag-list">
                       {
