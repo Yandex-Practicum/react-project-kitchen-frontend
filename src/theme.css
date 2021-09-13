@@ -1,0 +1,17 @@
+:root{
+    --text-primary: #0B0A0A;
+    --text-secondary: #686664;
+    --text-alert: #B81414;
+    --text-success: #1466B8;
+    --text-disabled: #2A2927;
+    --text-accent: #141414;
+
+    --background-default: #E5E5E5;
+    --background-primary: #F5F5F4;
+    --background-secondary: #EBEBEA;
+
+    --input-background: #E2E1DF;
+    --input-border-alert: #B81414;
+    --input-border-success: #1466B8;
+    --input-border-accent: #141414;
+}
