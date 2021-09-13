@@ -1,16 +1,17 @@
 import React from 'react';
+import styles from './Banner.module.css';
 
-const Banner = ({ appName, token }) => {
-  if (token) {
-    return null;
-  }
+const Banner = () => {
   return (
-    <div className="banner">
-      <div className="container">
-        <h1 className="logo-font">
-          {appName.toLowerCase()}
+    <div className={`${styles.banner}`}>
+      <div className={`${styles.container}`}>
+        <h1 className={`${styles.title}`}>
+          Обзоры пива
         </h1>
-        <p>Your community project starter pack.</p>
+
+        <p className={`${styles.lead}`}>
+          Место, где варятся ощущения
+        </p>
       </div>
     </div>
   );
