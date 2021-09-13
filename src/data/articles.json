@@ -1,0 +1,206 @@
+{
+    "articles":[
+       {
+          "title":"Grupo Primo",
+          "slug":"grupo-primo-dul8h5",
+          "body":"Follow @thiago.nigro on Instagram",
+          "createdAt":"2021-09-13T06:24:28.775Z",
+          "updatedAt":"2021-09-13T06:24:28.775Z",
+          "tagList":[
+             
+          ],
+          "description":"Best investment and entrepreneur content",
+          "author":{
+             "username":"Grupo Primo",
+             "bio":null,
+             "image":"https://static.productionready.io/images/smiley-cyrus.jpg",
+             "following":false
+          },
+          "favorited":false,
+          "favoritesCount":0
+       },
+       {
+          "title":"Article created by Cypress test",
+          "slug":"article-created-by-cypress-test-gu2kka",
+          "body":"This article is created with Cypress. See code here: https://github.com/helenanull/cypress-example",
+          "createdAt":"2021-09-13T06:05:58.504Z",
+          "updatedAt":"2021-09-13T06:05:58.504Z",
+          "tagList":[
+             "test-automation",
+             "simple",
+             "cypress"
+          ],
+          "description":"https://github.com/helenanull/cypress-example",
+          "author":{
+             "username":"cy355319204",
+             "bio":null,
+             "image":"https://static.productionready.io/images/smiley-cyrus.jpg",
+             "following":false
+          },
+          "favorited":false,
+          "favoritesCount":0
+       },
+       {
+          "title":"Article created by Cypress test",
+          "slug":"article-created-by-cypress-test-7y3i1q",
+          "body":"This article is created with Cypress. See code here: https://github.com/helenanull/cypress-example",
+          "createdAt":"2021-09-13T06:05:24.122Z",
+          "updatedAt":"2021-09-13T06:05:24.122Z",
+          "tagList":[
+             "test-automation",
+             "simple",
+             "cypress"
+          ],
+          "description":"https://github.com/helenanull/cypress-example",
+          "author":{
+             "username":"cy059954293",
+             "bio":null,
+             "image":"https://static.productionready.io/images/smiley-cyrus.jpg",
+             "following":false
+          },
+          "favorited":false,
+          "favoritesCount":1
+       },
+       {
+          "title":"Article created by Cypress test",
+          "slug":"article-created-by-cypress-test-v5vvdl",
+          "body":"This article is created with Cypress. See code here: https://github.com/helenanull/cypress-example",
+          "createdAt":"2021-09-13T06:05:22.832Z",
+          "updatedAt":"2021-09-13T06:05:22.832Z",
+          "tagList":[
+             "test-automation",
+             "simple",
+             "cypress"
+          ],
+          "description":"https://github.com/helenanull/cypress-example",
+          "author":{
+             "username":"cy758816481",
+             "bio":null,
+             "image":"https://static.productionready.io/images/smiley-cyrus.jpg",
+             "following":false
+          },
+          "favorited":false,
+          "favoritesCount":0
+       },
+       {
+          "title":"Article created by Cypress test",
+          "slug":"article-created-by-cypress-test-hro7j5",
+          "body":"Test can edit an article. https://github.com/helenanull/cypress-example",
+          "createdAt":"2021-09-13T06:04:49.288Z",
+          "updatedAt":"2021-09-13T06:04:51.282Z",
+          "tagList":[
+             "test-automation",
+             "simple",
+             "cypress"
+          ],
+          "description":"https://github.com/helenanull/cypress-example",
+          "author":{
+             "username":"cy428944737",
+             "bio":null,
+             "image":"https://static.productionready.io/images/smiley-cyrus.jpg",
+             "following":false
+          },
+          "favorited":false,
+          "favoritesCount":1
+       },
+       {
+          "title":"Article created by Cypress test",
+          "slug":"article-created-by-cypress-test-4dezyh",
+          "body":"This article is created with Cypress. See code here: https://github.com/helenanull/cypress-example",
+          "createdAt":"2021-09-13T06:04:48.319Z",
+          "updatedAt":"2021-09-13T06:04:48.319Z",
+          "tagList":[
+             "test-automation",
+             "simple",
+             "cypress"
+          ],
+          "description":"https://github.com/helenanull/cypress-example",
+          "author":{
+             "username":"cy538694579",
+             "bio":null,
+             "image":"https://static.productionready.io/images/smiley-cyrus.jpg",
+             "following":false
+          },
+          "favorited":false,
+          "favoritesCount":0
+       },
+       {
+          "title":"My post title",
+          "slug":"my-post-title-qog51c",
+          "body":"Simple automation project https://github.com/helenanull/cypress-example",
+          "createdAt":"2021-09-13T06:04:47.183Z",
+          "updatedAt":"2021-09-13T06:04:47.183Z",
+          "tagList":[
+             "test-automation",
+             "cypress"
+          ],
+          "description":"Cypress",
+          "author":{
+             "username":"cy644644748",
+             "bio":null,
+             "image":"https://static.productionready.io/images/smiley-cyrus.jpg",
+             "following":false
+          },
+          "favorited":false,
+          "favoritesCount":0
+       },
+       {
+          "title":"My post title",
+          "slug":"my-post-title-i9op17",
+          "body":"Simple automation project https://github.com/helenanull/cypress-example",
+          "createdAt":"2021-09-13T06:04:42.706Z",
+          "updatedAt":"2021-09-13T06:04:42.706Z",
+          "tagList":[
+             
+          ],
+          "description":"Cypress",
+          "author":{
+             "username":"cy522293901",
+             "bio":null,
+             "image":"https://static.productionready.io/images/smiley-cyrus.jpg",
+             "following":false
+          },
+          "favorited":false,
+          "favoritesCount":0
+       },
+       {
+          "title":"aaabbb",
+          "slug":"aaabbb-yamhz6",
+          "body":"aaabbb",
+          "createdAt":"2021-09-13T05:55:51.517Z",
+          "updatedAt":"2021-09-13T05:55:51.517Z",
+          "tagList":[
+             
+          ],
+          "description":"aaabbb",
+          "author":{
+             "username":"aaabbb123123",
+             "bio":null,
+             "image":"https://static.productionready.io/images/smiley-cyrus.jpg",
+             "following":false
+          },
+          "favorited":false,
+          "favoritesCount":0
+       },
+       {
+          "title":"from node",
+          "slug":"from-node-x1ul1r",
+          "body":"content of post",
+          "createdAt":"2021-09-13T05:26:58.464Z",
+          "updatedAt":"2021-09-13T05:26:58.464Z",
+          "tagList":[
+             "win"
+          ],
+          "description":"about post",
+          "author":{
+             "username":"node",
+             "bio":null,
+             "image":"https://static.productionready.io/images/smiley-cyrus.jpg",
+             "following":false
+          },
+          "favorited":false,
+          "favoritesCount":1
+       }
+    ],
+    "articlesCount":500
+ }

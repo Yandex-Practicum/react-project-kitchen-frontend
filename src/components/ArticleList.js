@@ -1,8 +1,15 @@
 import ArticlePreview from './ArticlePreview';
 import ListPagination from './ListPagination';
 import React from 'react';
+import * as fakeData from './../data/articles.json'
 
 const ArticleList = props => {
+
+    //  DEMO
+    if (!props.articles && fakeData) {
+      props = fakeData;
+    }
+
   if (!props.articles) {
     return (
       <div className="article-preview">Loading...</div>
