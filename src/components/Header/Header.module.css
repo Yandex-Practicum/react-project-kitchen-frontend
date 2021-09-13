@@ -1,0 +1,88 @@
+.header {
+    display: flex;
+    justify-content: center;
+
+    background-color: #EBEBEA;
+}
+
+.nav {
+    display: flex;
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.container {
+    width: 59.36%;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item {
+    padding: 8px 16px 8px 32px;
+    transition: opacity 0.5, linear, 0.2s;
+}
+
+.item:hover {
+    opacity: 0.6;
+}
+
+.title {
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 40px;
+    color: #0B0A0A;
+}
+
+.title:hover {
+    text-decoration: none;
+    color: #0B0A0A;
+    opacity: 0.6;
+}
+
+.link {
+    position: relative;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 28px;
+    color: #0B0A0A;
+}
+
+.link::before {
+    content: '';
+    
+    position: absolute;
+    left: -29px;
+
+    width: 24px;
+    height: 24px;
+    
+}
+
+.home::before {
+    background-image: url('../../images/home.svg');
+}
+
+.post::before {
+    background-image: url('../../images/post.svg');
+}
+
+.settings::before {
+    background-image: url('../../images/settings.svg');
+}
+
+.user::before {
+    background-image: url('../../images/alien.svg');
+}
+
+.login::before {
+    background-image: url('../../images/login.svg');
+}
+
+.link:hover {
+    text-decoration: none;
+    color: #0B0A0A;
+}
