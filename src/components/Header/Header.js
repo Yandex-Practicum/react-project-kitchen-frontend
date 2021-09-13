@@ -7,14 +7,15 @@ const LoggedOutView = props => {
     return (
       <ul className={styles.nav}>
 
-        <li className="nav-item">
-          <Link to="/" className="nav-link">
+        <li className={styles.item}>
+          <Link to="/" className={styles.link}>
+
             Главная
           </Link>
         </li>
 
-        <li className="nav-item">
-          <Link to="/login" className="nav-link">
+        <li className={styles.item}>
+          <Link to="/login" className={`${styles.link} ${styles.login}`}>
             Войти
           </Link>
         </li>
@@ -30,29 +31,29 @@ const LoggedInView = props => {
     return (
       <ul className={styles.nav}>
 
-        <li className="nav-item">
-          <Link to="/" className="nav-link">
+        <li className={styles.item}>
+          <Link to="/" className={`${styles.link} ${styles.home}`}>
             Главная
           </Link>
         </li>
 
-        <li className="nav-item">
-          <Link to="/editor" className="nav-link">
-            <i className="ion-compose"></i>&nbsp;Новая запись
+        <li className={styles.item}>
+          <Link to="/editor" className={`${styles.link} ${styles.post}`}>
+            Новая запись
           </Link>
         </li>
 
-        <li className="nav-item">
-          <Link to="/settings" className="nav-link">
-            <i className="ion-gear-a"></i>&nbsp;Настройка
+        <li className={styles.item}>
+          <Link to="/settings" className={`${styles.link} ${styles.settings}`}>
+            Настройка
           </Link>
         </li>
 
-        <li className="nav-item">
+        <li className={styles.item}>
           <Link
             to={`/@${props.currentUser.username}`}
-            className="nav-link">
-            <span>Hello, {props.currentUser.username}</span>
+            className={`${styles.link} ${styles.user}`}>
+            {props.currentUser.username}
           </Link>
         </li>
 
@@ -66,11 +67,11 @@ const LoggedInView = props => {
 class Header extends React.Component {
   render() {
     return (
-      <nav className="navbar navbar-light">
-        <div className="container">
+      <nav className={styles.header}>
+        <div className={styles.container}>
 
-          <Link to="/" className="navbar-brand">
-            {this.props.appName.toLowerCase()}
+          <Link to="/" className={styles.title}>
+            {this.props.appName}
           </Link>
 
           <LoggedOutView currentUser={this.props.currentUser} />
