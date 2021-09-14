@@ -38,7 +38,10 @@ const promiseMiddleware = store => next => action => {
         }
         store.dispatch(action);
       }
-    );
+    )
+      .catch((error) => {
+        console.log(error);
+      });
 
     return;
   }
