@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Truetypewriter PolyglOTT';
+    src: url('./fonts/ttwpgott.ttf') format('truetype');
+}
+
+.text {
+    font-family: 'Truetypewriter PolyglOTT';
+    font-style: normal;
+}
