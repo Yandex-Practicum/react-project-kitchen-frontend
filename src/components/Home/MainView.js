@@ -3,6 +3,7 @@ import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import { CHANGE_TAB } from '../../constants/actionTypes';
+import * as fakeData from './../../data/articles.json'
 
 const YourFeedTab = props => {
   if (props.token) {
@@ -85,7 +86,7 @@ const MainView = props => {
 
       <ArticleList
         pager={props.pager}
-        articles={props.articles}
+        articles={Array.from(props.articles || []).concat(fakeData.articles)}
         loading={props.loading}
         articlesCount={props.articlesCount}
         currentPage={props.currentPage} />
