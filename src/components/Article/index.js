@@ -7,6 +7,8 @@ import CommentContainer from './CommentContainer';
 import agent from '../../agent';
 import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../constants/actionTypes';
 
+import styles from './index.module.css';
+
 const mapStateToProps = state => ({
   ...state.article,
   currentUser: state.common.currentUser
@@ -54,7 +56,7 @@ const Article = ({ article, commentErrors, comments, currentUser, match, onLoad,
       <div className="container page">
         <div className="row article-content">
           <div className="col-xs-12">
-            <div dangerouslySetInnerHTML={markup}></div>
+            <div className={`${styles.rawMarkup}`} dangerouslySetInnerHTML={markup}></div>
               <ul className="tag-list">
                 {
                   article.tagList.map(tag => {

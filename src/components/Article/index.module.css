@@ -1,0 +1,98 @@
+.rawMarkup {
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-primary);
+  font-size: 20px;
+  line-height: 28px;
+  color: var(--text-primary);
+}
+
+.rawMarkup h1,
+.rawMarkup h2,
+.rawMarkup h3,
+.rawMarkup h4,
+.rawMarkup h5,
+.rawMarkup h6 {
+  margin: 0 0 32px;
+  line-height: 1.4;
+  color: var(--text-primary);
+}
+
+.rawMarkup h1 {
+  font-size: 80px;
+  line-height: 88px;
+}
+
+.rawMarkup h2 {
+  font-size: 40px;
+  line-height: 48px;
+}
+
+.rawMarkup h3 {
+  font-size: 32px;
+  line-height: 40px;
+}
+
+.rawMarkup h4,
+.rawMarkup h5,
+.rawMarkup h6 {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.rawMarkup p {
+  margin: 0 0 32px;
+  padding: 0;
+}
+
+.rawMarkup p img {
+  margin: 0;
+}
+
+.rawMarkup img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 32px;
+  vertical-align: middle;
+  border-radius: 8px;
+  background-color: var(--input-background);
+}
+
+.rawMarkup q,
+.rawMarkup blockquote {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: var(--background-secondary);
+}
+
+.rawMarkup blockquote {
+  margin: 0 0 32px;
+  padding: 32px;
+}
+
+.rawMarkup a,
+.rawMarkup a:visited {
+  color: var(--text-secondary);
+  text-decoration: underline;
+}
+
+.rawMarkup a:hover,
+.rawMarkup a:focus {
+  color: var(--text-accent);
+}
+
+.rawMarkup a:active {
+  color: var(--text-success);
+}
+
+.rawMarkup i,
+.rawMarkup em {
+  font-style: normal;
+}
+
+.rawMarkup b,
+.rawMarkup strong {
+  font-weight: normal;
+}
