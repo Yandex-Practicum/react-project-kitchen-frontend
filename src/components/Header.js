@@ -8,19 +8,19 @@ const LoggedOutView = props => {
 
         <li className="nav-item">
           <Link to="/" className="nav-link">
-            Home
+            Главная
           </Link>
         </li>
 
         <li className="nav-item">
           <Link to="/login" className="nav-link">
-            Sign in
+            Войти
           </Link>
         </li>
 
         <li className="nav-item">
           <Link to="/register" className="nav-link">
-            Sign up
+            Регистрация
           </Link>
         </li>
 
@@ -37,19 +37,19 @@ const LoggedInView = props => {
 
         <li className="nav-item">
           <Link to="/" className="nav-link">
-            Home
+            Главная
           </Link>
         </li>
 
         <li className="nav-item">
           <Link to="/editor" className="nav-link">
-            <i className="ion-compose"></i>&nbsp;New Post
+            <i className="ion-compose"></i>&nbsp;Новый пост
           </Link>
         </li>
 
         <li className="nav-item">
           <Link to="/settings" className="nav-link">
-            <i className="ion-gear-a"></i>&nbsp;Settings
+            <i className="ion-gear-a"></i>&nbsp;Настройки
           </Link>
         </li>
 
@@ -57,7 +57,7 @@ const LoggedInView = props => {
           <Link
             to={`/@${props.currentUser.username}`}
             className="nav-link">
-            <span>Hello, {props.currentUser.username}</span>
+            <span>Привет, {props.currentUser.username}</span>
           </Link>
         </li>
 
@@ -75,7 +75,7 @@ class Header extends React.Component {
         <div className="container">
 
           <Link to="/" className="navbar-brand">
-            {this.props.appName.toLowerCase()}
+            {this.props.appName}
           </Link>
 
           <LoggedOutView currentUser={this.props.currentUser} />

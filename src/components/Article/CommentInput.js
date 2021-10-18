@@ -33,7 +33,7 @@ class CommentInput extends React.Component {
       <form className="card comment-form" onSubmit={this.createComment}>
         <div className="card-block">
           <textarea className="form-control"
-            placeholder="Write a comment..."
+            placeholder="Напишите комментарий..."
             value={this.state.body}
             onChange={this.setBody}
             rows="3">
@@ -47,7 +47,7 @@ class CommentInput extends React.Component {
           <button
             className="btn btn-sm btn-primary"
             type="submit">
-            Post Comment
+            Опубликовать
           </button>
         </div>
       </form>
