@@ -49,7 +49,7 @@ class Login extends React.Component {
               <h1 className="text-xs-center">Sign In</h1>
               <p className="text-xs-center">
                 <Link to="/register">
-                  Need an account?
+                  Нужна регистрация?
                 </Link>
               </p>
 
@@ -62,7 +62,7 @@ class Login extends React.Component {
                     <input
                       className="form-control form-control-lg"
                       type="email"
-                      placeholder="Email"
+                      placeholder="Почта"
                       value={email}
                       onChange={this.changeEmail} />
                   </fieldset>
@@ -71,7 +71,7 @@ class Login extends React.Component {
                     <input
                       className="form-control form-control-lg"
                       type="password"
-                      placeholder="Password"
+                      placeholder="Пароль"
                       value={password}
                       onChange={this.changePassword} />
                   </fieldset>
@@ -80,7 +80,7 @@ class Login extends React.Component {
                     className="btn btn-lg btn-primary pull-xs-right"
                     type="submit"
                     disabled={this.props.inProgress}>
-                    Sign in
+                    Войти
                   </button>
 
                 </fieldset>
