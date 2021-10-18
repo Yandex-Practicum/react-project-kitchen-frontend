@@ -5,7 +5,7 @@ import React from 'react';
 const ArticleList = props => {
   if (!props.articles) {
     return (
-      <div className="article-preview">Pfuheprf...</div>
+      <div className="article-preview">Загрузка...</div>
     );
   }
 
