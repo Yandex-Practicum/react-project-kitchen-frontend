@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'GolosText';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: 
+    url('./Golos-Text_Regular.woff2') format('woff2'),
+    url('./Golos-Text_Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'GolosText';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: 
+    url('./Golos-Text_Medium.woff2') format('woff2'),
+    url('./Golos-Text_Medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'NeueMachina';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./PPNeueMachina-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'NeueMachina';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('./PPNeueMachina-Ultrabold.otf') format('opentype');
+}
