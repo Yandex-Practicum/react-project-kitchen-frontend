@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Banner from './Banner';
+import Banner from '../banner/banner';
 import MainView from './MainView';
 import Tags from './Tags';
 import agent from '../../agent';
