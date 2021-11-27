@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Banner from '../banner/banner';
 import MainView from './MainView';
-import Tags from './Tags';
+import Tags from '../tags/tags';
 import agent from '../../agent';
 import {
   HOME_PAGE_LOADED,
@@ -11,7 +11,6 @@ import {
 } from '../../constants/actionTypes';
 
 const { Promise } = global;
-
 const mapStateToProps = (state) => ({
   ...state.home,
   appName: state.common.appName,
@@ -51,19 +50,10 @@ class Home extends React.Component {
 
           <div className="row">
             <MainView />
-
-            <div className="col-md-3">
-              <div className="sidebar">
-
-                <p>Популярные теги</p>
-
                 <Tags
                   tags={this.props.tags}
                   onClickTag={this.props.onClickTag}
                 />
-
-              </div>
-            </div>
           </div>
         </div>
 
