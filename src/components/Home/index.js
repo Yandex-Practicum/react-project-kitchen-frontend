@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Banner from '../banner/banner';
 import MainView from './MainView';
-import Tags from '../tags/tags';
+import TagsWidget from '../tags-widget/tags-widget';
 import agent from '../../agent';
 import {
   HOME_PAGE_LOADED,
@@ -50,7 +50,7 @@ class Home extends React.Component {
 
           <div className="row">
             <MainView />
-                <Tags
+                <TagsWidget
                   tags={this.props.tags}
                   onClickTag={this.props.onClickTag}
                 />
