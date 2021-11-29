@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TagsContainer from '../tags-container/tags-container';
-import tagsStyle from './tags-widget.module.css';
+import TagsContainer from '../tagsContainer/tagsContainer';
+import tagsStyle from './tagsWidget.module.css';
 
 const TagsWidget = ({ tags, onClickTag }) => (
   <section className={tagsStyle.container}>
