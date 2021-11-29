@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Banner from '../banner/banner';
+import Banner from '../Banner/Banner';
 import MainView from './MainView';
-import TagsWidget from '../tagsWidget/tagsWidget';
+import TagsWidget from '../TagsWidget/TagsWidget';
 import agent from '../../agent';
 import {
   HOME_PAGE_LOADED,

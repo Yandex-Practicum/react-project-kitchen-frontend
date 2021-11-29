@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import bannerStyle from './banner.module.css';
+import bannerStyle from './Banner.module.css';
 
 const Banner = ({ appName }) => (
   <section className={bannerStyle.banner}>

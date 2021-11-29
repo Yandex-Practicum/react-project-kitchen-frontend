@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import agent from '../../agent';
-import tagsStyle from './tagsContainer.module.css';
+import tagsStyle from './TagsContainer.module.css';
 
 const TagsContainer = ({ tags, onClickTag }) => {
   const [isActive, setActive] = React.useState(null);
