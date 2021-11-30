@@ -2,16 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import headerStyles from './Header.module.css';
 import Navigation from './Navigation/Navigation';
-// import './Header.css';
 
-function Header({appName, isLoggedIn}) {
+function Header({appName, isLoggedIn, currentUser}) {
   return (
-    <header className="navbar navbar-light">
-      <div className="container">
-        <Link to="/" className={headerStyles.navbar_name}>
+    <header className={headerStyles.header}>
+      <div className={headerStyles.container}>
+        <Link to="/" className={headerStyles.name}>
           {appName}
         </Link>
-        <Navigation isLoggedIn={isLoggedIn} />
+        <Navigation isLoggedIn={isLoggedIn} currentUser={currentUser}/>
       </div>
     </header>
   );
