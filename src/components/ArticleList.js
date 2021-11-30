@@ -1,5 +1,5 @@
 import React from 'react';
-import ArticlePreview from './ArticlePreview';
+import ArticleCard from './ArticleCard/ArticleCard';
 import ListPagination from './ListPagination';
 
 const ArticleList = (props) => {
@@ -21,7 +21,7 @@ const ArticleList = (props) => {
     <div>
       {
         props.articles.map((article) => (
-          <ArticlePreview article={article} key={article.slug} />
+          <ArticleCard article={article} key={article.slug} />
         ))
       }
 
