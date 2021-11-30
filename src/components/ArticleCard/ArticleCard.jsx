@@ -59,7 +59,13 @@ const ArticleCard = ({ article, ...props }) => {
               {article.author.username}
             </Link>
             <span className={styles.date}>
-              {new Date(article.createdAt).toDateString()}
+              {new Date(article.createdAt)
+                .toLocaleString('ru', {
+                  weekday: 'short',
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
             </span>
           </div>
           {/* TODO: replace with LikeButton */}
