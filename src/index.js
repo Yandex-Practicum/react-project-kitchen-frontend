@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import React from 'react';
+import './index.css';
 import { store, history} from './store';
 
 import { Route, Switch } from 'react-router-dom';
