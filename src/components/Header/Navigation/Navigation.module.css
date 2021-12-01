@@ -3,24 +3,33 @@
   text-decoration: none;
   display: flex;
   flex-direction: row;
+  padding: 0;
+  margin: 0;
 }
 
-.active {
-  color: #FAFAFA;
+.list_item {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.active, .active path {
+  color: #FAFAFA !important;
 }
 
 .link {
   text-decoration: none;
   color: #0A0A0A;
-  margin-right: 16px;
+  font-size: 16px;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
 }
 
-/* .link::before {
-  content: "";
-  display: block;
-  background: url("../../../images/home-icon.svg") no-repeat;
-  width: 24px;
-  height: 24px;
-  float: left;
-  margin: 0 6px 0 0;
-} */
+.icon {
+  margin-right: 8px;
+}
+
+.active path {
+  color: #FAFAFA;
+}
