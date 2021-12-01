@@ -28,24 +28,25 @@ const mapDispatchToProps = dispatch => ({
     dispatch({  type: HOME_PAGE_UNLOADED })
 });
 
-function Home(props) {
-  // componentWillMount() {
-    const tab = props.token ? 'feed' : 'all';
-    const articlesPromise = props.token ?
+class Home extends React.Component {
+  componentWillMount() {
+    const tab = this.props.token ? 'feed' : 'all';
+    const articlesPromise = this.props.token ?
       agent.Articles.feed :
       agent.Articles.all;
 
-    props.onLoad(tab, articlesPromise, Promise.all([agent.Tags.getAll(), articlesPromise()]));
-  // }
+    this.props.onLoad(tab, articlesPromise, Promise.all([agent.Tags.getAll(), articlesPromise()]));
+  }
 
-  // componentWillUnmount() {
-  //   this.props.onUnload();
-  // }
+  componentWillUnmount() {
+    this.props.onUnload();
+  }
 
+  render() {
     return (
       <div className={homeStyles.main}>
 
-        <Banner token={props.token} appName={props.appName} />
+        <Banner token={this.props.token} appName={this.props.appName} />
         <div className="container page">
           <div className="row">
             <MainView />
@@ -56,8 +57,8 @@ function Home(props) {
                 <p>Popular Tags</p>
 
                 <Tags
-                  tags={props.tags}
-                  onClickTag={props.onClickTag} />
+                  tags={this.props.tags}
+                  onClickTag={this.props.onClickTag} />
 
               </div>
             </div>
@@ -66,6 +67,7 @@ function Home(props) {
 
       </div>
     );
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
