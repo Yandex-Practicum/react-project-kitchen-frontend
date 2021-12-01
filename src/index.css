@@ -1,0 +1,28 @@
+@import url('./vendor/normalize.css');
+@import url('./fonts/fonts.css');
+
+#root {
+  
+  box-sizing: border-box;
+  font-family: 'Golos', Arial, sans-serif;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%; 
+  max-width: 1920px;
+  min-width: 320px;
+  min-height: 100vh;
+  position: relative;
+  margin: 0 auto;
+}
+
+body {
+  background-color: #0A0A0A;
+  color: #FAFAFA;
+}
+
+html {
+  scroll-behavior: smooth;
+}

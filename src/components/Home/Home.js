@@ -9,6 +9,7 @@ import {
   HOME_PAGE_UNLOADED,
   APPLY_TAG_FILTER
 } from '../../constants/actionTypes';
+import homeStyles from './Home.module.css'
 
 const Promise = global.Promise;
 
@@ -43,7 +44,7 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="home-page">
+      <div className={homeStyles.main}>
 
         <Banner token={this.props.token} appName={this.props.appName} />
         <div className="container page">
