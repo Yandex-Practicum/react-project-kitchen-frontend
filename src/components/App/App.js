@@ -6,7 +6,7 @@ import { APP_LOAD, REDIRECT } from '../../constants/actionTypes';
 import { Route, Switch } from 'react-router-dom';
 import Article from '../Article';
 import Editor from '../Editor';
-import Home from '../Home';
+import Home from '../Home/Home';
 import Login from '../Login';
 import Profile from '../Profile';
 import ProfileFavorites from '../ProfileFavorites';
@@ -14,7 +14,6 @@ import Register from '../Register';
 import Settings from '../Settings';
 import { store } from '../../store';
 import { push } from 'react-router-redux';
-import appStyles from './App.module.css';
 
 const mapStateToProps = state => {
   return {
@@ -52,7 +51,7 @@ class App extends React.Component {
   render() {
     if (this.props.appLoaded) {
       return (
-        <div className={appStyles.app}>
+        <div>
           <Header
             appName={this.props.appName}
             currentUser={this.props.currentUser} />

@@ -1,24 +1,20 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import navigationStyles from './Navigation.module.css';
-import homePath from '../../../images/home-icon.svg';
-import loginPath from '../../../images/login-icon.svg';
-import articlePath from '../../../images/newArticle-icon.svg';
-import settingsPath from '../../../images/settings-icon.svg';
-import profilePath from '../../../images/profile-icon.svg'
+import * as icons from '../../../images/icons';
 
-function Navigation({isLoggedIn, currentUser}) {
+function Navigation({isLoggedIn}) {
   return (
     <nav className={navigationStyles.nav}>
-      {isLoggedIn ? (
+      {!isLoggedIn ? (
         <ul className={navigationStyles.list}>
           <li className={navigationStyles.list_item}>
             <NavLink 
             exact to="/" 
             className={navigationStyles.link} 
             activeClassName={navigationStyles.active}>
-            <img className={navigationStyles.icon} src={homePath} alt="Home icon" />
-              Главная
+            <icons.HomeIcon/>
+            <span className={navigationStyles.text}>Главная</span>
             </NavLink>
           </li>
           <li className={navigationStyles.list_item}> 
@@ -26,8 +22,8 @@ function Navigation({isLoggedIn, currentUser}) {
             to="/login" 
             className={navigationStyles.link} 
             activeClassName={navigationStyles.active}>
-            <img className={navigationStyles.icon} src={loginPath} alt="Login icon" />
-              Войти
+            <icons.LoginIcon/>
+            <span className={navigationStyles.text}>Войти</span>
             </NavLink>
           </li>
         </ul>    
@@ -38,8 +34,8 @@ function Navigation({isLoggedIn, currentUser}) {
             exact to="/" 
             className={navigationStyles.link} 
             activeClassName={navigationStyles.active}>
-            <img className={navigationStyles.icon} src={homePath} alt="Home icon" />
-              Главная
+            <icons.HomeIcon/>
+            <span className={navigationStyles.text}>Главная</span>
             </NavLink>
           </li>
           <li className={navigationStyles.list_item}>
@@ -47,8 +43,8 @@ function Navigation({isLoggedIn, currentUser}) {
             to="/editor" 
             className={navigationStyles.link} 
             activeClassName={navigationStyles.active}>
-            <img className={navigationStyles.icon} src={articlePath} alt="Article icon" />
-              Новая запись
+            <icons.ArticleIcon/>
+            <span className={navigationStyles.text}>Новая запись</span>  
             </NavLink>
           </li>
           <li className={navigationStyles.list_item}>
@@ -56,8 +52,8 @@ function Navigation({isLoggedIn, currentUser}) {
             to="/settings" 
             className={navigationStyles.link} 
             activeClassName={navigationStyles.active}>
-            <img className={navigationStyles.icon} src={settingsPath} alt="Settings icon" />
-              Настройки
+            <icons.SettingsIcon/>
+            <span className={navigationStyles.text}>Настройки</span>
             </NavLink>
           </li>
           <li className={navigationStyles.list_item}> 
@@ -65,8 +61,8 @@ function Navigation({isLoggedIn, currentUser}) {
               to='/account'
               className={navigationStyles.link} 
               activeClassName={navigationStyles.active}>
-              <img className={navigationStyles.icon} src={profilePath} alt="Profile icon" />
-              <span>User User</span>
+              <icons.ProfileIcon/>
+              <span className={navigationStyles.text}>User User</span>
             </NavLink>
           </li>
         </ul>

@@ -13,8 +13,9 @@
   padding: 0 16px;
 }
 
-.active, .active path {
+.active, .active path, .active circle {
   color: #FAFAFA !important;
+  stroke: #FAFAFA;
 }
 
 .link {
@@ -26,10 +27,6 @@
   align-items: center;
 }
 
-.icon {
-  margin-right: 8px;
-}
-
-.active path {
-  color: #FAFAFA;
+.text {
+  margin-left: 8px;
 }

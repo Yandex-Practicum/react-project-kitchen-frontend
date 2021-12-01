@@ -9,6 +9,7 @@ import {
   HOME_PAGE_UNLOADED,
   APPLY_TAG_FILTER
 } from '../../constants/actionTypes';
+import homeStyles from './Home.module.css'
 
 const Promise = global.Promise;
 
@@ -27,25 +28,24 @@ const mapDispatchToProps = dispatch => ({
     dispatch({  type: HOME_PAGE_UNLOADED })
 });
 
-class Home extends React.Component {
-  componentWillMount() {
-    const tab = this.props.token ? 'feed' : 'all';
-    const articlesPromise = this.props.token ?
+function Home(props) {
+  // componentWillMount() {
+    const tab = props.token ? 'feed' : 'all';
+    const articlesPromise = props.token ?
       agent.Articles.feed :
       agent.Articles.all;
 
-    this.props.onLoad(tab, articlesPromise, Promise.all([agent.Tags.getAll(), articlesPromise()]));
-  }
+    props.onLoad(tab, articlesPromise, Promise.all([agent.Tags.getAll(), articlesPromise()]));
+  // }
 
-  componentWillUnmount() {
-    this.props.onUnload();
-  }
+  // componentWillUnmount() {
+  //   this.props.onUnload();
+  // }
 
-  render() {
     return (
-      <div className="home-page">
+      <div className={homeStyles.main}>
 
-        <Banner token={this.props.token} appName={this.props.appName} />
+        <Banner token={props.token} appName={props.appName} />
         <div className="container page">
           <div className="row">
             <MainView />
@@ -56,8 +56,8 @@ class Home extends React.Component {
                 <p>Popular Tags</p>
 
                 <Tags
-                  tags={this.props.tags}
-                  onClickTag={this.props.onClickTag} />
+                  tags={props.tags}
+                  onClickTag={props.onClickTag} />
 
               </div>
             </div>
@@ -66,7 +66,6 @@ class Home extends React.Component {
 
       </div>
     );
-  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
