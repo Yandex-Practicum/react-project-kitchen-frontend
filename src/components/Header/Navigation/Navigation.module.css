@@ -30,3 +30,13 @@
 .text {
   margin-left: 8px;
 }
+
+.link:hover {
+  opacity: 0.6;
+  transition: all 0.7s ease;
+}
+
+.link:focus {
+  outline: 0;
+  box-shadow: none;
+}
