@@ -10,18 +10,18 @@ function Navigation({isLoggedIn}) {
         <ul className={navigationStyles.list}>
           <li className={navigationStyles.list_item}>
             <NavLink 
-            exact to="/" 
-            className={navigationStyles.link} 
-            activeClassName={navigationStyles.active}>
+              exact to="/" 
+              className={navigationStyles.link} 
+              activeClassName={navigationStyles.active}>
             <icons.HomeIcon/>
             <span className={navigationStyles.text}>Главная</span>
             </NavLink>
           </li>
           <li className={navigationStyles.list_item}> 
             <NavLink 
-            to="/login" 
-            className={navigationStyles.link} 
-            activeClassName={navigationStyles.active}>
+              to="/login" 
+              className={navigationStyles.link} 
+              activeClassName={navigationStyles.active}>
             <icons.LoginIcon/>
             <span className={navigationStyles.text}>Войти</span>
             </NavLink>
@@ -31,27 +31,27 @@ function Navigation({isLoggedIn}) {
         <ul className={navigationStyles.list}>
           <li className={navigationStyles.list_item}>
             <NavLink 
-            exact to="/" 
-            className={navigationStyles.link} 
-            activeClassName={navigationStyles.active}>
+              exact to="/" 
+              className={navigationStyles.link} 
+              activeClassName={navigationStyles.active}>
             <icons.HomeIcon/>
             <span className={navigationStyles.text}>Главная</span>
             </NavLink>
           </li>
           <li className={navigationStyles.list_item}>
             <NavLink 
-            to="/editor" 
-            className={navigationStyles.link} 
-            activeClassName={navigationStyles.active}>
+              to="/editor" 
+              className={navigationStyles.link} 
+              activeClassName={navigationStyles.active}>
             <icons.ArticleIcon/>
             <span className={navigationStyles.text}>Новая запись</span>  
             </NavLink>
           </li>
           <li className={navigationStyles.list_item}>
             <NavLink 
-            to="/settings" 
-            className={navigationStyles.link} 
-            activeClassName={navigationStyles.active}>
+              to="/settings" 
+              className={navigationStyles.link} 
+              activeClassName={navigationStyles.active}>
             <icons.SettingsIcon/>
             <span className={navigationStyles.text}>Настройки</span>
             </NavLink>
@@ -61,8 +61,8 @@ function Navigation({isLoggedIn}) {
               to='/account'
               className={navigationStyles.link} 
               activeClassName={navigationStyles.active}>
-              <icons.ProfileIcon/>
-              <span className={navigationStyles.text}>User User</span>
+            <icons.ProfileIcon/>
+            <span className={navigationStyles.text}>User User</span>
             </NavLink>
           </li>
         </ul>
