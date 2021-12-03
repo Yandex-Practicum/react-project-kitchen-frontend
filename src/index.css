@@ -1,6 +1,13 @@
 @import url('./vendor/normalize.css');
 @import url('./fonts/fonts.css');
 
+:root {
+  --input-background: #292929;
+  --input-border-radius: 20px;
+  --text-color: #FAFAFA;
+  --link-text-color: #EC4926;
+}
+
 #root {
   
   box-sizing: border-box;

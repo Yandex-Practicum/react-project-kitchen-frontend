@@ -4,6 +4,7 @@
     font-weight: 800;
     font-size: 64px;
     line-height: 64px;
+    color: var(--text-color);
 }
 
 .headerTextMedium {
@@ -12,6 +13,7 @@
     font-weight: 800;
     font-size: 36px;
     line-height: 40px;
+    color: var(--text-color);
 }
 
 .headerTextDefault {
@@ -20,6 +22,7 @@
     font-weight: 800;
     font-size: 24px;
     line-height: 28px;
+    color: var(--text-color);
 }
 
 .text {
@@ -28,16 +31,17 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
+    color: var(--text-color);
 }
 
-.textLink {
+.linkText {
     font-family: Golos, Arial, sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
     text-decoration-line: underline;
-    color: #EC4926;
+    color: var(--link-text-color);
 }
 
 .caption {
@@ -46,4 +50,5 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
+    color: var(--text-color);
 }
