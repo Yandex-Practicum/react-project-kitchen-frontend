@@ -1,0 +1,49 @@
+.headerTextLarge {
+    font-family: Neue Machina, Arial, sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 64px;
+    line-height: 64px;
+}
+
+.headerTextMedium {
+    font-family: Neue Machina, Arial, sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 40px;
+}
+
+.headerTextDefault {
+    font-family: Neue Machina, Arial, sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.text {
+    font-family: Golos, Arial, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.textLink {
+    font-family: Golos, Arial, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    text-decoration-line: underline;
+    color: #EC4926;
+}
+
+.caption {
+    font-family: Golos, Arial, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+}
