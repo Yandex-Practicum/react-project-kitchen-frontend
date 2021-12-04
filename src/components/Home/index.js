@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Banner from './Banner';
+import Banner from '../Banner/Banner';
 import MainView from './MainView';
-import Tags from './Tags';
+import TagsWidget from '../TagsWidget/TagsWidget';
 import agent from '../../agent';
 import {
   HOME_PAGE_LOADED,
@@ -11,7 +11,6 @@ import {
 } from '../../constants/actionTypes';
 
 const { Promise } = global;
-
 const mapStateToProps = (state) => ({
   ...state.home,
   appName: state.common.appName,
@@ -51,19 +50,10 @@ class Home extends React.Component {
 
           <div className="row">
             <MainView />
-
-            <div className="col-md-3">
-              <div className="sidebar">
-
-                <p>Популярные теги</p>
-
-                <Tags
+                <TagsWidget
                   tags={this.props.tags}
                   onClickTag={this.props.onClickTag}
                 />
-
-              </div>
-            </div>
           </div>
         </div>
 
