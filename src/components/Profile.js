@@ -1,58 +1,29 @@
 import ArticleList from './ArticleList';
-import React from 'react';
-import { Link } from 'react-router-dom';
-import agent from '../agent';
-import { connect } from 'react-redux';
+import React from "react";
+import { Link } from "react-router-dom";
+import agent from "../agent";
+import { connect } from "react-redux";
 import {
   FOLLOW_USER,
   UNFOLLOW_USER,
   PROFILE_PAGE_LOADED,
-  PROFILE_PAGE_UNLOADED
-} from '../constants/actionTypes';
+  PROFILE_PAGE_UNLOADED,
+} from "../constants/actionTypes";
 
-const EditProfileSettings = props => {
+import FollowUserButton from "../components/common/FollowUserButton/FollowUserButton";
+
+const EditProfileSettings = (props) => {
   if (props.isUser) {
     return (
       <Link
         to="/settings"
-        className="btn btn-sm btn-outline-secondary action-btn">
+        className="btn btn-sm btn-outline-secondary action-btn"
+      >
         <i className="ion-gear-a"></i> Edit Profile Settings
       </Link>
     );
   }
   return null;
-};
-
-const FollowUserButton = props => {
-  if (props.isUser) {
-    return null;
-  }
-
-  let classes = 'btn btn-sm action-btn';
-  if (props.user.following) {
-    classes += ' btn-secondary';
-  } else {
-    classes += ' btn-outline-secondary';
-  }
-
-  const handleClick = ev => {
-    ev.preventDefault();
-    if (props.user.following) {
-      props.unfollow(props.user.username)
-    } else {
-      props.follow(props.user.username)
-    }
-  };
-
-  return (
-    <button
-      className={classes}
-      onClick={handleClick}>
-      <i className="ion-plus-round"></i>
-      &nbsp;
-      {props.user.following ? 'Unfollow' : 'Follow'} {props.user.username}
-    </button>
-  );
 };
 
 const mapStateToProps = state => ({

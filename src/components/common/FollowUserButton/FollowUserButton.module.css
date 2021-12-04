@@ -1,0 +1,15 @@
+.active {
+  height: 40px;
+  border-radius: 20px;
+  padding: 8px, 16px, 8px, 16px;
+  background: #EC4926;
+  color: #0A0A0A;
+  }
+  
+.inactive {
+  height: 40px;
+  border-radius: 20px;
+  padding: 8px, 16px, 8px, 16px;
+  background: #666666;
+  color: #999999;
+}
