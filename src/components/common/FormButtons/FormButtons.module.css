@@ -1,8 +1,8 @@
 .formButtons {
-    display: flex;
-    direction: ltr;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 4px;
-    margin-top: 36px;
+  display: flex;
+  direction: ltr;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+  margin-top: 36px;
 }

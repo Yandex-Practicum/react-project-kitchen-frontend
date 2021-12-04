@@ -7,7 +7,7 @@ import { Route, Switch } from 'react-router-dom';
 import Article from '../Article';
 import Editor from '../Editor';
 import Home from '../Home/Home';
-import Login from '../Login';
+import Login from '../Login/Login';
 import Profile from '../Profile';
 import ProfileFavorites from '../ProfileFavorites';
 import Register from '../Register/Register';
