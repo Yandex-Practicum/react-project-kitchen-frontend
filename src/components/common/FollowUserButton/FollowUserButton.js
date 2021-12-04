@@ -17,12 +17,12 @@ const FollowUserButton = (props) => {
   return (
     <button className={stylesFollowUserButton.active} onClick={handleClick}>
       {props.user.following ? (
-        <i className="ion-plus-round"></i>
-      ) : (
         <i className="ion-minus-round"></i>
+      ) : (
+        <i className="ion-plus-round"></i>
       )}
       &nbsp;
-      {props.user.following ? "Подписаться" : "Отписаться"}
+      {props.user.following ? "Отписаться" : "Подписаться"}
     </button>
   );
 };
