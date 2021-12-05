@@ -2,15 +2,7 @@ import React, { useState } from "react";
 import stylesButton from "../Button/Button.module.css";
 
 const Button = ({ onClick, children, isActive }) => {
-  const [buttonAddStyle, setButtonAddStyle] = useState(stylesButton.active);
-
-  if (isActive) {
-    if (buttonAddStyle === stylesButton.inactive)
-      setButtonAddStyle(stylesButton.active);
-  } else {
-    if (buttonAddStyle === stylesButton.active)
-      setButtonAddStyle(stylesButton.inactive);
-  }
+  const buttonAddStyle = isActive ? stylesButton.active : stylesButton.inactive;
 
   return (
     <button
