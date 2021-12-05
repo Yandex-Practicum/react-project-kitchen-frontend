@@ -119,15 +119,7 @@ class Profile extends React.Component {
                   <p>{profile.bio}</p>
 
                   <EditProfileSettings isUser={isUser} />
-                  {!isUser && (
-                    <Button
-                      onClick={handleClick}
-                      isUser={isUser}
-                      user={profile}
-                      follow={this.props.onFollow}
-                      unfollow={this.props.onUnfollow}
-                    />
-                  )}
+                  {!isUser && <Button onClick={handleClick} user={profile} />}
                 </div>
               </div>
             </div>
