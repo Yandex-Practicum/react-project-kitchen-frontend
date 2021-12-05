@@ -9,8 +9,12 @@ const Button = ({ onClick, isActive, title, icon }) => {
       className={`${stylesButton.button} ${buttonAddStyle}`}
       onClick={onClick}
     >
-      {icon}
-      &nbsp;
+      <div
+        className={stylesButton.icon}
+        style={{ visibility: icon ? "visible" : "hidden" }}
+      >
+        {icon}
+      </div>
       {title}
     </button>
   );
