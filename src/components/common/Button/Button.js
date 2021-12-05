@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import stylesButton from "../Button/Button.module.css";
 
 const FollowUserButton = ({ onClick, children, isActive }) => {
-  const [prevIsActive, setPrevIsActive] = useState(true);
-
   const [buttonAddStyle, setButtonAddStyle] = useState(stylesButton.active);
 
   if (isActive) {
