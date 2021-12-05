@@ -68,7 +68,7 @@ function Navigation({currentUser}) {
               activeClassName={navigationStyles.active}
             >
               <icons.ProfileIcon/>
-              <span className={navigationStyles.text}>User User</span>
+              <span className={navigationStyles.text}>{currentUser.username}</span>
             </NavLink>
           </li>
         </ul>
