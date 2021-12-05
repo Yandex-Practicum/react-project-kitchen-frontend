@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import navigationStyles from './Navigation.module.css';
 import * as icons from '../../../images/icons';
+import PropTypes from "prop-types";
 
 function Navigation({currentUser}) {
   return (
@@ -75,6 +76,10 @@ function Navigation({currentUser}) {
       )}
     </nav>
   )
+}
+
+Navigation.propTypes = {
+  currentUser: PropTypes.object
 }
 
 export default Navigation;

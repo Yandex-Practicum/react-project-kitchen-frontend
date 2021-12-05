@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import headerStyles from './Header.module.css';
 import Navigation from './Navigation/Navigation';
+import PropTypes from "prop-types";
 
 function Header({appName, currentUser}) {
   return (
@@ -15,5 +16,11 @@ function Header({appName, currentUser}) {
     </header>
   );
 }
+
+Header.propTypes = {
+  appName: PropTypes.string,
+  currentUser: PropTypes.object
+}
+
 
 export default Header;
