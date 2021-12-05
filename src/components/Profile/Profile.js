@@ -121,7 +121,8 @@ class Profile extends React.Component {
 
                 <EditProfileSettings isUser={isUser} />
                 {!isUser && (
-                  <Button onClick={handleClick}>
+                  <Button onClick={handleClick} isActive={true}>
+                    {" "}
                     {profile.following ? <MinusIcon /> : <PlusIcon />}
                     &nbsp;
                     {profile.following ? "Отписаться" : "Подписаться"}
