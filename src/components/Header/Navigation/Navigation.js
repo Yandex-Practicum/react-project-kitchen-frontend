@@ -3,10 +3,10 @@ import { NavLink } from 'react-router-dom';
 import navigationStyles from './Navigation.module.css';
 import * as icons from '../../../images/icons';
 
-function Navigation({isLoggedIn}) {
+function Navigation({currentUser}) {
   return (
     <nav className={navigationStyles.nav}>
-      {!isLoggedIn ? (
+      {!currentUser ? (
         <ul className={navigationStyles.list}>
           <li className={navigationStyles.list_item}>
             <NavLink 
