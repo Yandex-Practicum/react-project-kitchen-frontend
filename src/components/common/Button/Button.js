@@ -1,9 +1,7 @@
 import stylesButton from "../Button/Button.module.css";
 
 const FollowUserButton = (props) => {
-  if (props.isUser) {
-    return null;
-  }
+
 
   const handleClick = (ev) => {
     ev.preventDefault();
