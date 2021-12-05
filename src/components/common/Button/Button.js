@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import stylesButton from "../Button/Button.module.css";
 
-const Button = ({ onClick, children, isActive }) => {
+const Button = ({ onClick, isActive, title, icon }) => {
   const buttonAddStyle = isActive ? stylesButton.active : stylesButton.inactive;
 
   return (
@@ -9,9 +9,11 @@ const Button = ({ onClick, children, isActive }) => {
       className={`${stylesButton.button} ${buttonAddStyle}`}
       onClick={onClick}
     >
-      {children}
+      {icon}
+      &nbsp;
+      {title}
     </button>
   );
 };
 
-export default FollowUserButton;
+export default Button;
