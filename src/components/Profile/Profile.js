@@ -95,50 +95,60 @@ class Profile extends React.Component {
       this.props.currentUser &&
       this.props.profile.username === this.props.currentUser.username;
 
-    return (
-      <div className="profile-page">
-        <div className="user-info">
+      const handleClick = (ev) => {
+        ev.preventDefault();
+        if (profile.following) {
+          this.props.onUnfollow(profile.username);
+        } else {
+          this.props.onFollow(profile.username);
+        }
+      };
+
+      return (
+        <div className="profile-page">
+          <div className="user-info">
+            <div className="container">
+              <div className="row">
+                <div className="col-xs-12 col-md-10 offset-md-1">
+                  <img
+                    src={profile.image}
+                    className="user-img"
+                    alt={profile.username}
+                  />
+                  <h4>{profile.username}</h4>
+                  <p>{profile.bio}</p>
+
+                  <EditProfileSettings isUser={isUser} />
+                  {!isUser && (
+                    <Button
+                      onClick={handleClick}
+                      isUser={isUser}
+                      user={profile}
+                      follow={this.props.onFollow}
+                      unfollow={this.props.onUnfollow}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="container">
             <div className="row">
               <div className="col-xs-12 col-md-10 offset-md-1">
-                <img
-                  src={profile.image}
-                  className="user-img"
-                  alt={profile.username}
-                />
-                <h4>{profile.username}</h4>
-                <p>{profile.bio}</p>
+                <div className="articles-toggle">{this.renderTabs()}</div>
 
-                <EditProfileSettings isUser={isUser} />
-                {!isUser && (
-                  <Button
-                    isUser={isUser}
-                    user={profile}
-                    follow={this.props.onFollow}
-                    unfollow={this.props.onUnfollow}
-                  />
-                )}
+                <ArticleList
+                  pager={this.props.pager}
+                  articles={this.props.articles}
+                  articlesCount={this.props.articlesCount}
+                  state={this.props.currentPage}
+                />
               </div>
             </div>
           </div>
         </div>
-
-        <div className="container">
-          <div className="row">
-            <div className="col-xs-12 col-md-10 offset-md-1">
-              <div className="articles-toggle">{this.renderTabs()}</div>
-
-              <ArticleList
-                pager={this.props.pager}
-                articles={this.props.articles}
-                articlesCount={this.props.articlesCount}
-                state={this.props.currentPage}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+      );
   }
 }
 

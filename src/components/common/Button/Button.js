@@ -1,19 +1,8 @@
 import stylesButton from "../Button/Button.module.css";
 
 const FollowUserButton = (props) => {
-
-
-  const handleClick = (ev) => {
-    ev.preventDefault();
-    if (props.user.following) {
-      props.unfollow(props.user.username);
-    } else {
-      props.follow(props.user.username);
-    }
-  };
-
   return (
-    <button className={stylesButton.active} onClick={handleClick}>
+    <button className={stylesButton.active} onClick={props.onClick}>
       {props.user.following ? (
         <i className="ion-minus-round"></i>
       ) : (
