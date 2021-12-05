@@ -1,0 +1,8 @@
+.linkRow {
+  margin: 24px 0 24px;
+}
+
+.link {
+  composes: linkText from "../common/common.module.css";
+  margin: 0;
+}
