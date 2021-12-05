@@ -119,7 +119,17 @@ class Profile extends React.Component {
                   <p>{profile.bio}</p>
 
                   <EditProfileSettings isUser={isUser} />
-                  {!isUser && <Button onClick={handleClick} user={profile} />}
+                  {!isUser && (
+                    <Button onClick={handleClick}>
+                      {profile.following ? (
+                        <i className="ion-minus-round"></i>
+                      ) : (
+                        <i className="ion-plus-round"></i>
+                      )}
+                      &nbsp;
+                      {profile.following ? "Отписаться" : "Подписаться"}
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>
