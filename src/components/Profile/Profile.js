@@ -10,7 +10,7 @@ import {
   PROFILE_PAGE_UNLOADED,
 } from "../../constants/actionTypes";
 
-import FollowUserButton from "../common/FollowUserButton/FollowUserButton";
+import Button from "../common/Button/Button";
 
 const EditProfileSettings = (props) => {
   if (props.isUser) {
@@ -110,7 +110,7 @@ class Profile extends React.Component {
                 <p>{profile.bio}</p>
 
                 <EditProfileSettings isUser={isUser} />
-                <FollowUserButton
+                <Button
                   isUser={isUser}
                   user={profile}
                   follow={this.props.onFollow}
