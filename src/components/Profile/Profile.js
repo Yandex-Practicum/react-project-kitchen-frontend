@@ -97,7 +97,7 @@ class Profile extends React.Component {
       this.props.profile.username === this.props.currentUser.username;
 
       const buttonIcon = profile.following ? <MinusIcon /> : <PlusIcon />;
-      const ButtonTitle = profile.following ? "Отписаться" : "Подписаться";
+      const buttonTitle = profile.following ? "Отписаться" : "Подписаться";
 
       const handleClick = (ev) => {
         ev.preventDefault();
@@ -128,7 +128,7 @@ class Profile extends React.Component {
                       onClick={handleClick}
                       isActive={true}
                       icon={buttonIcon}
-                      title={ButtonTitle}
+                      title={buttonTitle}
                     />
                   )}
                 </div>
