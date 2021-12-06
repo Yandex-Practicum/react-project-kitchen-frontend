@@ -4,6 +4,7 @@
   "private": true,
   "devDependencies": {
     "cross-env": "^5.1.4",
+    "eslint-config-airbnb": "^19.0.2",
     "react-scripts": "^4.0.3"
   },
   "dependencies": {
@@ -31,8 +32,14 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app"
-    ]
+      "react-app",
+      "airbnb"
+    ],
+    "rules": {
+      "linebreak-style": "off",
+      "object-curly-newline": "off",
+      "react/function-component-definition": ["error", { "namedComponents": "arrow-function" }]
+    }
   },
   "browserslist": {
     "production": [
