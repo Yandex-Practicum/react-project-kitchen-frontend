@@ -2,11 +2,12 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import navigationStyles from './Navigation.module.css';
 import * as icons from '../../../images/icons';
+import PropTypes from "prop-types";
 
-function Navigation({isLoggedIn}) {
+function Navigation({currentUser}) {
   return (
     <nav className={navigationStyles.nav}>
-      {!isLoggedIn ? (
+      {!currentUser ? (
         <ul className={navigationStyles.list}>
           <li className={navigationStyles.list_item}>
             <NavLink 
@@ -68,13 +69,17 @@ function Navigation({isLoggedIn}) {
               activeClassName={navigationStyles.active}
             >
               <icons.ProfileIcon/>
-              <span className={navigationStyles.text}>User User</span>
+              <span className={navigationStyles.text}>{currentUser.username}</span>
             </NavLink>
           </li>
         </ul>
       )}
     </nav>
   )
+}
+
+Navigation.propTypes = {
+  currentUser: PropTypes.object
 }
 
 export default Navigation;
