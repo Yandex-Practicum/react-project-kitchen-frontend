@@ -8,7 +8,7 @@ import Article from '../Article';
 import Editor from '../Editor';
 import Home from '../Home/Home';
 import Login from '../Login/Login';
-import Profile from '../Profile';
+import Profile from "../Profile/Profile";
 import ProfileFavorites from '../ProfileFavorites';
 import Register from '../Register/Register';
 import Settings from '../Settings';
