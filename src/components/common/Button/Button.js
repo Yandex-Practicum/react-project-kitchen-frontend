@@ -9,8 +9,7 @@ const Button = ({ onClick, isActive, title, icon }) => {
       className={`${stylesButton.button} ${buttonAddStyle}`}
       onClick={onClick}
     >
-      {icon}
-      {icon && <div>&nbsp;</div>}
+      {icon && <div>{icon} &nbsp;</div>}
       {title}
     </button>
   );
