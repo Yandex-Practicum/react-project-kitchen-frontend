@@ -9,19 +9,35 @@ import {
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED
 } from '../constants/actionTypes';
+import styled from 'styled-components';
 
 const EditProfileSettings = props => {
+  const StyledLink = styled(Link)`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 16px;
+
+    background-color: #0000FF;
+    border-radius: 8px;
+    color: #FFF !important;
+    height: 40px;
+  `;
+
   if (props.isUser) {
     return (
-      <Link
+      <StyledLink
         to="/settings"
-        className="btn btn-sm btn-outline-secondary action-btn">
-        <i className="ion-gear-a"></i> Edit Profile Settings
-      </Link>
+        className="btn btn-sm btn-outline-secondary action-btn"
+      >
+        Редактировать профиль
+      </StyledLink>
     );
   }
   return null;
 };
+
 
 const FollowUserButton = props => {
   if (props.isUser) {
@@ -87,23 +103,33 @@ class Profile extends React.Component {
   }
 
   renderTabs() {
+    const StyledLi = styled.li`
+      background: #FAFAFA;
+      box-shadow: inset 0px -2px 0px #0000FF;
+      max-width: max-content;
+    `;
+    const StyledLink = styled(Link)`
+      font-size: 16px;
+      line-height: 24px;
+      color: #0A0A0B;
+    `;
     return (
       <ul className="nav nav-pills outline-active">
-        <li className="nav-item">
-          <Link
+        <StyledLi className="nav-item">
+          <StyledLink
             className="nav-link active"
             to={`/@${this.props.profile.username}`}>
             My Articles
-          </Link>
-        </li>
+          </StyledLink>
+        </StyledLi>
 
-        <li className="nav-item">
-          <Link
+        <StyledLi className="nav-item">
+          <StyledLink
             className="nav-link"
             to={`/@${this.props.profile.username}/favorites`}>
             Favorited Articles
-          </Link>
-        </li>
+          </StyledLink>
+        </StyledLi>
       </ul>
     );
   }
