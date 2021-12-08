@@ -2,7 +2,8 @@ import ArticleList from './ArticleList';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import agent from '../agent';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
+//import { useDispatch } from 'react-redux';
 import {
   FOLLOW_USER,
   UNFOLLOW_USER,
@@ -10,6 +11,26 @@ import {
   PROFILE_PAGE_UNLOADED
 } from '../constants/actionTypes';
 import styled from 'styled-components';
+
+const StyledLi = styled.li`
+  box-shadow: inset 0px -2px 0px #0000FF;
+  max-width: max-content;
+`;
+const StyledLinkActive = styled(Link)`
+  font-size: 16px;
+  line-height: 24px;
+  color: #0A0A0B;
+`;
+
+const UserImage = styled.img`
+  background: #E9E9ED;
+  border: 2px solid #0A0A0B;
+  border-radius: 50%;;
+  box-sizing: border-box;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 8px;
+`;
 
 const EditProfileSettings = props => {
   const StyledLink = styled(Link)`
@@ -90,106 +111,97 @@ const mapDispatchToProps = dispatch => ({
   onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED })
 });
 
-class Profile extends React.Component {
-  componentWillMount() {
-    this.props.onLoad(Promise.all([
-      agent.Profile.get(this.props.match.params.username),
-      agent.Articles.byAuthor(this.props.match.params.username)
+function Profile(props) {
+  React.useEffect(() => {
+    props.onLoad(Promise.all([
+      agent.Profile.get(props.match.params.username),
+      agent.Articles.byAuthor(props.match.params.username)
     ]));
-  }
+    return () => {
+      props.onUnload();
+    };
 
-  componentWillUnmount() {
-    this.props.onUnload();
-  }
+  },[]);
 
-  renderTabs() {
-    const StyledLi = styled.li`
-      background: #FAFAFA;
-      box-shadow: inset 0px -2px 0px #0000FF;
-      max-width: max-content;
-    `;
-    const StyledLink = styled(Link)`
-      font-size: 16px;
-      line-height: 24px;
-      color: #0A0A0B;
-    `;
+  function renderTabs() {
+    
     return (
       <ul className="nav nav-pills outline-active">
         <StyledLi className="nav-item">
-          <StyledLink
-            className="nav-link active"
-            to={`/@${this.props.profile.username}`}>
-            My Articles
-          </StyledLink>
+          <StyledLinkActive
+            className="nav-link "
+            to={`/@${props.profile.username}`}>
+            Ваши посты
+          </StyledLinkActive>
         </StyledLi>
 
-        <StyledLi className="nav-item">
-          <StyledLink
+        <li className="nav-item">
+          <Link
             className="nav-link"
-            to={`/@${this.props.profile.username}/favorites`}>
-            Favorited Articles
-          </StyledLink>
-        </StyledLi>
+            to={`/@${props.profile.username}/favorites`}>
+            Любимые посты
+          </Link>
+        </li>
       </ul>
     );
   }
 
-  render() {
-    const profile = this.props.profile;
-    if (!profile) {
-      return null;
-    }
+  
+  const profile = props.profile;
+  if (!profile) {
+    return null;
+  }
 
-    const isUser = this.props.currentUser &&
-      this.props.profile.username === this.props.currentUser.username;
+  const isUser = props.currentUser &&
+    props.profile.username === props.currentUser.username;
 
-    return (
-      <div className="profile-page">
+  return (
+    <div className="profile-page">
 
-        <div className="user-info">
-          <div className="container">
-            <div className="row">
-              <div className="col-xs-12 col-md-10 offset-md-1">
-
-                <img src={profile.image} className="user-img" alt={profile.username} />
-                <h4>{profile.username}</h4>
-                <p>{profile.bio}</p>
-
-                <EditProfileSettings isUser={isUser} />
-                <FollowUserButton
-                  isUser={isUser}
-                  user={profile}
-                  follow={this.props.onFollow}
-                  unfollow={this.props.onUnfollow}
-                  />
-
-              </div>
-            </div>
-          </div>
-        </div>
-
+      <div className="user-info">
         <div className="container">
           <div className="row">
-
             <div className="col-xs-12 col-md-10 offset-md-1">
 
-              <div className="articles-toggle">
-                {this.renderTabs()}
-              </div>
+              <UserImage src={profile.image}  alt={profile.username} />
+              <h4>{profile.username}</h4>
+              <p>{profile.bio}</p>
 
-              <ArticleList
-                pager={this.props.pager}
-                articles={this.props.articles}
-                articlesCount={this.props.articlesCount}
-                state={this.props.currentPage} />
+              <EditProfileSettings isUser={isUser} />
+              <FollowUserButton
+                isUser={isUser}
+                user={profile}
+                follow={props.onFollow}
+                unfollow={props.onUnfollow}
+              />
+
             </div>
-
           </div>
         </div>
-
       </div>
-    );
-  }
+
+      <div className="container">
+        <div className="row">
+
+          <div className="col-xs-12 col-md-10 offset-md-1">
+
+            <div className="articles-toggle">
+              {renderTabs()}
+            </div>
+
+            <ArticleList
+              pager={props.pager}
+              articles={props.articles}
+              articlesCount={props.articlesCount}
+              state={props.currentPage} />
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  );
+  
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
