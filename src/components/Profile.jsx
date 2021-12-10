@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import agent from '../agent';
-import ArticleList from './ArticleList';
+import ArticlesContainer from './ArticlesContainer/ArticlesContainer';
 import {
   FOLLOW_USER,
   UNFOLLOW_USER,
@@ -159,7 +159,7 @@ class Profile extends React.Component {
                 {this.renderTabs()}
               </div>
 
-              <ArticleList
+              <ArticlesContainer
                 pager={this.props.pager}
                 articles={this.props.articles}
                 articlesCount={this.props.articlesCount}

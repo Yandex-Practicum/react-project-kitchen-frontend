@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ArticleList from '../ArticleList';
+import ArticlesContainer from '../ArticlesContainer/ArticlesContainer';
 import agent from '../../agent';
 import { CHANGE_TAB } from '../../constants/actionTypes';
 
@@ -90,7 +90,7 @@ const MainView = (props) => (
       </ul>
     </div>
 
-    <ArticleList
+    <ArticlesContainer
       pager={props.pager}
       articles={props.articles}
       loading={props.loading}
