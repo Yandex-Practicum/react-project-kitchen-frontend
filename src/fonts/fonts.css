@@ -1,0 +1,16 @@
+@font-face {
+  font-family: "GolosTextWebRegular";
+  src: url("./GolosTextWeb/Golos-Text_Regular.woff2") format("woff2"),
+    url("./GolosTextWeb/Golos-Text_Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PPNeueMachinaRegular";
+  src: url("./PPNeueMachina/PPNeueMachina-Regular.otf") format("otf"),
+    url("./PPNeueMachina/PPNeueMachina-Regular.woff2") format("woff2"),
+    url("./PPNeueMachina/PPNeueMachina-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
