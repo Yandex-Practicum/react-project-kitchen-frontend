@@ -38,6 +38,8 @@
     "rules": {
       "linebreak-style": "off",
       "object-curly-newline": "off",
+      "react/forbid-prop-types": "off",
+      "react/destructuring-assignment": ["error", "always", { "ignoreClassFields": true }],
       "react/function-component-definition": ["error", { "namedComponents": "arrow-function" }]
     }
   },
