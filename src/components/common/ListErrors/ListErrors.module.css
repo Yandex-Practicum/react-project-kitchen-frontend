@@ -1,0 +1,25 @@
+.errors {
+  width: 100%;
+  margin: 0 0 24px 0;
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border: 2px solid var(--error-color);
+}
+
+.error path {
+  stroke: var(--error-color);
+}
+
+.error svg {
+  flex-shrink: 0;
+}
+
+.text {
+  composes: text from "../common.module.css";
+  margin: 0 0 0 8px;
+  color: var(--error-color);
+}

@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { AlertIcon } from '../../../images/icons';
+import listErrorsStyles from './ListErrors.module.css';
 
 const ListErrors = ({ errors }) => {
   const keys = Object.keys(errors);
@@ -7,15 +9,19 @@ const ListErrors = ({ errors }) => {
     return null;
   }
   return (
-    <ul className="error-messages">
+    <div className={listErrorsStyles.errors}>
       {
         keys.map((key) => (
-          <li key={key}>
-            {errors[key]}
-          </li>
+          <div
+            key={key}
+            className={listErrorsStyles.error}
+          >
+            <AlertIcon />
+            <p className={listErrorsStyles.text}>{errors[key]}</p>
+          </div>
         ))
       }
-    </ul>
+    </div>
   );
 };
 
