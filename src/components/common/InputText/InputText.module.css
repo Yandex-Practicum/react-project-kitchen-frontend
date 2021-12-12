@@ -3,7 +3,7 @@
   flex-direction: column;
 }
 
-.name {
+.label {
   composes: text from "../common.module.css";
   margin: 0 0 4px 16px;
 }
@@ -12,6 +12,19 @@
   composes: text from "../common.module.css";
   padding: 8px 16px;
   background: var(--input-background);
-  border: 0;
+  border-style: solid;
+  border-width: 0;
   border-radius: var(--input-border-radius);
+}
+
+.errorInput {
+  composes: input;
+  border-width: 2px;
+  border-color: var(--error-color);
+}
+
+.error {
+  composes: text from "../common.module.css";
+  color: var(--error-color);
+  margin: 4px 0 0 16px;
 }

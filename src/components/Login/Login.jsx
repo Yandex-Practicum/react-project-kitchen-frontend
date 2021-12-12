@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import ListErrors from '../ListErrors';
+import ListErrors from '../common/ListErrors/ListErrors';
 import agent from '../../agent';
 import {
   UPDATE_FIELD_AUTH,
@@ -16,6 +16,7 @@ import FormButtons from '../common/FormButtons/FormButtons';
 import InputPassword from '../common/InputPassword/InputPassword';
 import InputText from '../common/InputText/InputText';
 import Button from '../common/Button/Button';
+import { transformApiErrors } from '../../utils/api-errors';
 
 const mapStateToProps = (state) => ({ ...state.auth });
 
@@ -47,6 +48,7 @@ class Login extends React.Component {
 
   render() {
     const { email, password, errors, inProgress } = this.props;
+    const { emailError, passwordError, ...restErrors } = transformApiErrors(errors);
     return (
       <DialogPage title="Войти">
 
@@ -56,21 +58,22 @@ class Login extends React.Component {
           </Link>
         </div>
 
-        <ListErrors errors={errors} />
+        <ListErrors errors={restErrors} />
 
         <Form onSubmit={this.submitForm(email, password)}>
 
           <InputText
             label="E-mail"
             placeholder="E-mail"
-            value={email}
+            value={email ?? ''}
+            error={emailError}
             onChange={this.changeEmail}
           />
 
           <InputPassword
             label="Пароль"
             placeholder="Пароль"
-            value={password}
+            error={passwordError}
             onChange={this.changePassword}
           />
 
@@ -89,10 +92,10 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  email: PropTypes.string.isRequired,
+  email: PropTypes.string,
   errors: PropTypes.object,
-  inProgress: PropTypes.bool.isRequired,
-  password: PropTypes.string.isRequired,
+  inProgress: PropTypes.bool,
+  password: PropTypes.string,
   onChangeEmail: PropTypes.func.isRequired,
   onChangePassword: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
@@ -100,7 +103,10 @@ Login.propTypes = {
 };
 
 Login.defaultProps = {
+  email: null,
   errors: null,
+  inProgress: false,
+  password: null,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -1,4 +1,4 @@
-import ListErrors from './ListErrors';
+import ListErrors from './common/ListErrors/ListErrors';
 import React from 'react';
 import agent from '../agent';
 import { connect } from 'react-redux';
@@ -7,6 +7,7 @@ import {
   SETTINGS_PAGE_UNLOADED,
   LOGOUT
 } from '../constants/actionTypes';
+import { transformApiErrors } from '../utils/api-errors';
 
 class SettingsForm extends React.Component {
   constructor() {
@@ -146,7 +147,7 @@ class Settings extends React.Component {
 
               <h1 className="text-xs-center">Your Settings</h1>
 
-              <ListErrors errors={this.props.errors}></ListErrors>
+              <ListErrors errors={transformApiErrors(this.props.errors)}></ListErrors>
 
               <SettingsForm
                 currentUser={this.props.currentUser}

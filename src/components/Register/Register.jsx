@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import React from 'react';
 import { connect } from 'react-redux';
-import ListErrors from '../ListErrors';
+import ListErrors from '../common/ListErrors/ListErrors';
 import agent from '../../agent';
 import {
   UPDATE_FIELD_AUTH,
@@ -16,6 +16,7 @@ import FormButtons from '../common/FormButtons/FormButtons';
 import InputPassword from '../common/InputPassword/InputPassword';
 import InputText from '../common/InputText/InputText';
 import Button from '../common/Button/Button';
+import { transformApiErrors } from '../../utils/api-errors';
 
 const mapStateToProps = (state) => ({ ...state.auth });
 
@@ -50,7 +51,7 @@ class Register extends React.Component {
 
   render() {
     const { email, password, username, errors, inProgress } = this.props;
-
+    const { emailError, passwordError, usernameError, ...restErrors } = transformApiErrors(errors);
     return (
       <DialogPage title="Зарегистрироваться">
 
@@ -60,28 +61,30 @@ class Register extends React.Component {
           </Link>
         </div>
 
-        <ListErrors errors={errors} />
+        <ListErrors errors={restErrors} />
 
         <Form onSubmit={this.submitForm(username, email, password)}>
 
           <InputText
             label="Имя пользователя"
             placeholder="Username"
-            value={username}
+            value={username ?? ''}
+            error={usernameError}
             onChange={this.changeUsername}
           />
 
           <InputText
             label="E-mail"
             placeholder="Username@nomoreparties.space"
-            value={email}
+            value={email ?? ''}
+            error={emailError}
             onChange={this.changeEmail}
           />
 
           <InputPassword
             label="Пароль"
             placeholder="********"
-            value={password}
+            error={passwordError}
             onChange={this.changePassword}
           />
 
@@ -99,11 +102,11 @@ class Register extends React.Component {
 }
 
 Register.propTypes = {
-  email: PropTypes.string.isRequired,
+  email: PropTypes.string,
   errors: PropTypes.object,
-  inProgress: PropTypes.bool.isRequired,
-  password: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired,
+  inProgress: PropTypes.bool,
+  password: PropTypes.string,
+  username: PropTypes.string,
   onChangeEmail: PropTypes.func.isRequired,
   onChangePassword: PropTypes.func.isRequired,
   onChangeUsername: PropTypes.func.isRequired,
@@ -112,7 +115,11 @@ Register.propTypes = {
 };
 
 Register.defaultProps = {
+  email: null,
   errors: null,
+  inProgress: false,
+  password: null,
+  username: null,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);
