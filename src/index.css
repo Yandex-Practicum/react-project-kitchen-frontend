@@ -6,6 +6,7 @@
   --input-border-radius: 20px;
   --text-color: #FAFAFA;
   --link-text-color: #EC4926;
+  --error-color: #EC2626;
 }
 
 #root {

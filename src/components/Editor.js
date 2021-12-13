@@ -1,4 +1,4 @@
-import ListErrors from './ListErrors';
+import ListErrors from './common/ListErrors/ListErrors';
 import React from 'react';
 import agent from '../agent';
 import { connect } from 'react-redux';
@@ -10,6 +10,7 @@ import {
   EDITOR_PAGE_UNLOADED,
   UPDATE_FIELD_EDITOR
 } from '../constants/actionTypes';
+import { transformApiErrors } from '../utils/api-errors';
 
 const mapStateToProps = state => ({
   ...state.editor
@@ -98,7 +99,7 @@ class Editor extends React.Component {
           <div className="row">
             <div className="col-md-10 offset-md-1 col-xs-12">
 
-              <ListErrors errors={this.props.errors}></ListErrors>
+              <ListErrors errors={transformApiErrors(this.props.errors)}></ListErrors>
 
               <form>
                 <fieldset>
