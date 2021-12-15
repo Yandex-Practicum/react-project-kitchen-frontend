@@ -17,7 +17,7 @@ const LoggedInView = ({ currentUser }) => (
         <li className="nav-item">
           <Link to="/editor" className="nav-link">
             <i className="ion-compose" />
-&nbsp;Новый пост
+&nbsp;Новая запись
           </Link>
         </li>
 
