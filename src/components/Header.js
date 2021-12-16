@@ -71,7 +71,7 @@ const LoggedInView = props => {
 class Header extends React.Component {
   render() {
     return (
-      <nav className="navbar navbar-light">
+      <nav className="navbar navbar-light" style={{gridArea: 'head'}}>
         <div className="container">
 
           <Link to="/" className="navbar-brand">
