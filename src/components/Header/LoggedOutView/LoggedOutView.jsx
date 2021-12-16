@@ -1,34 +1,37 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import styles from './LoggedOutView.module.css';
 
 const LoggedOutView = ({ currentUser }) => (
   !currentUser
     ? (
-      <ul className="nav navbar-nav pull-xs-right">
+      <ul className={styles.navbar}>
 
-        <li className="nav-item">
-          <Link to="/" className="nav-link">
-            Главная
-          </Link>
+        <li className={styles['nav-item']}>
+          <NavLink to="/" exact className={styles.link} activeClassName={styles.main}>
+            <i className="ion-home" />
+          &nbsp;Главная
+          </NavLink>
         </li>
 
-        <li className="nav-item">
-          <Link to="/login" className="nav-link">
-            Войти
-          </Link>
+        <li className={styles['nav-item']}>
+          <NavLink to="/login" className={styles.link} activeClassName={styles.main}>
+            <i className="ion-log-in" />
+          &nbsp;Войти
+          </NavLink>
         </li>
 
-        <li className="nav-item">
-          <Link to="/register" className="nav-link">
-            Регистрация
-          </Link>
+        <li className={styles['nav-item']}>
+          <NavLink to="/register" className={styles.link} activeClassName={styles.main}>
+            <i className="ion-person" />
+          &nbsp;Регистрация
+          </NavLink>
         </li>
 
       </ul>
     )
-    : ''
-);
+    : '');
 export default LoggedOutView;
 LoggedOutView.propTypes = {
   currentUser: PropTypes.shape({

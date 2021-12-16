@@ -6,9 +6,9 @@ import LoggedInView from './LoggedInView/LoggedInView';
 import styles from './Header.module.css';
 
 const Header = ({ appName, currentUser }) => (
-  <nav className={`navbar navbar-light ${styles.section}`}>
-    <div className="container">
-      <Link to="/" className={`navbar-brand ${styles.title}`}>
+  <nav className={styles.section}>
+    <div className={styles.container}>
+      <Link to="/" className={styles.title}>
         {appName}
       </Link>
       <LoggedOutView currentUser={currentUser} />

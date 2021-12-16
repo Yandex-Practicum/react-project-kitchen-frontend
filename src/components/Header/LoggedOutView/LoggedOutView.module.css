@@ -1,6 +1,7 @@
 .main {
   color: #fafafa !important;
   text-decoration: none;
+  display: flex;
 }
 .link {
   font-family: 'Golos', Arial, Helvetic, sans-serif;
