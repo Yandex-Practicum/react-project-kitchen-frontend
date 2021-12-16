@@ -6,7 +6,7 @@
   align-items: center;
 }
 .title {
-  color: #fafafa;
+  color: #fafafa !important;
   font-family: 'Neue Machina', Arial, Helvetic, sans-serif;
   font-style: normal;
   font-weight: 800;
@@ -16,6 +16,7 @@
   cursor: pointer;
   margin: 0;
   margin-right: 16.71vw;
+  text-decoration: none !important;
 }
 @media (max-width: 840px) {
   .title {

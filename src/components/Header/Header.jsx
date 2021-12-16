@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import LoggedOutView from './LoggedOutView/LoggedOutView';
-import LoggedInView from './LoggedInView/LoggedInView';
 import styles from './Header.module.css';
+import UserInfo from './UserInfo/UserInfo';
 
 const Header = ({ appName, currentUser }) => (
   <nav className={styles.section}>
@@ -11,8 +10,7 @@ const Header = ({ appName, currentUser }) => (
       <Link to="/" className={styles.title}>
         {appName}
       </Link>
-      <LoggedOutView currentUser={currentUser} />
-      <LoggedInView currentUser={currentUser} />
+      <UserInfo currentUser={currentUser} />
     </div>
   </nav>
 );
