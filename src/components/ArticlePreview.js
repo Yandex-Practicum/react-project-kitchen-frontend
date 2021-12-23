@@ -3,6 +3,13 @@ import { Link } from 'react-router-dom';
 import agent from '../agent';
 import { connect } from 'react-redux';
 import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../constants/actionTypes';
+import styled from 'styled-components';
+
+const FavoriteButton = styled.button`
+  background: none;
+  border: none;
+  color: ${props => props.favorited ? '#F3200C' : '#0A0A0B'}
+`;
 
 const FAVORITED_CLASS = 'btn btn-sm btn-primary';
 const NOT_FAVORITED_CLASS = 'btn btn-sm btn-outline-primary';
@@ -50,9 +57,9 @@ const ArticlePreview = props => {
         </div>
 
         <div className="pull-xs-right">
-          <button className={favoriteButtonClass} onClick={handleClick}>
-            <i className="ion-heart"></i> {article.favoritesCount}
-          </button>
+          <FavoriteButton favorited={article.favorited} onClick={handleClick}>
+            {article.favoritesCount} <i className="ion-heart"></i> 
+          </FavoriteButton>
         </div>
       </div>
 
