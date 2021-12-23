@@ -1,50 +1,21 @@
-import ArticleList from './ArticleList';
+import ArticleList from '../ArticleList';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import agent from '../agent';
-import { connect, useSelector } from 'react-redux';
+import agent from '../../agent';
+import { connect } from 'react-redux';
 //import { useDispatch } from 'react-redux';
 import {
   FOLLOW_USER,
   UNFOLLOW_USER,
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED
-} from '../constants/actionTypes';
-import styled from 'styled-components';
+} from '../../constants/actionTypes';
 
-const StyledLi = styled.li`
-  box-shadow: inset 0px -2px 0px #0000FF;
-  max-width: max-content;
-`;
-const StyledLinkActive = styled(Link)`
-  font-size: 16px;
-  line-height: 24px;
-  color: #0A0A0B;
-`;
-
-const UserImage = styled.img`
-  background: #E9E9ED;
-  border: 2px solid #0A0A0B;
-  border-radius: 50%;;
-  box-sizing: border-box;
-  width: 120px;
-  height: 120px;
-  margin-bottom: 8px;
-`;
+// Styles
+import { StyledLink, StyledLi, UserImage } from './Styles';
 
 const EditProfileSettings = props => {
-  const StyledLink = styled(Link)`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 8px 16px;
 
-    background-color: #0000FF;
-    border-radius: 8px;
-    color: #FFF !important;
-    height: 40px;
-  `;
 
   if (props.isUser) {
     return (
@@ -113,10 +84,14 @@ const mapDispatchToProps = dispatch => ({
 
 function Profile(props) {
   React.useEffect(() => {
-    props.onLoad(Promise.all([
-      agent.Profile.get(props.match.params.username),
-      agent.Articles.byAuthor(props.match.params.username)
-    ]));
+    if(props.isFavorites) {
+      props.onFavoritesLoad();
+    } else {
+      props.onLoad(Promise.all([
+        agent.Profile.get(props.match.params.username),
+        agent.Articles.byAuthor(props.match.params.username)
+      ]));
+    }
     return () => {
       props.onUnload();
     };
@@ -124,25 +99,34 @@ function Profile(props) {
   },[]);
 
   function renderTabs() {
-    
     return (
+      
       <ul className="nav nav-pills outline-active">
-        <StyledLi className="nav-item">
-          <StyledLinkActive
+        <StyledLi 
+          className="nav-item"
+          active={!props.isFavorites} 
+        >
+          <Link
             className="nav-link "
-            to={`/@${props.profile.username}`}>
+            to={`/@${props.profile.username}`}
+          >
             Ваши посты
-          </StyledLinkActive>
+          </Link>
         </StyledLi>
 
-        <li className="nav-item">
+        <StyledLi 
+          className="nav-item"
+          active={props.isFavorites}
+        >
           <Link
             className="nav-link"
-            to={`/@${props.profile.username}/favorites`}>
+            to={`/@${props.profile.username}/favorites`}
+          >
             Любимые посты
           </Link>
-        </li>
+        </StyledLi>
       </ul>
+       
     );
   }
 

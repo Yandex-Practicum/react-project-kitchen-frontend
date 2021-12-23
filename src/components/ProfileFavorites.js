@@ -1,6 +1,6 @@
-import { Profile, mapStateToProps } from './Profile';
+import Profile, { mapStateToProps } from './Profile/Profile';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import agent from '../agent';
 import { connect } from 'react-redux';
 import {
@@ -15,39 +15,17 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: PROFILE_PAGE_UNLOADED })
 });
 
-class ProfileFavorites extends Profile {
-  componentWillMount() {
-    this.props.onLoad(page => agent.Articles.favoritedBy(this.props.match.params.username, page), Promise.all([
-      agent.Profile.get(this.props.match.params.username),
-      agent.Articles.favoritedBy(this.props.match.params.username)
+function ProfileFavorites(props) {
+  const onFavoritesLoad = () => {
+    props.onLoad(page => agent.Articles.favoritedBy(props.match.params.username, page), Promise.all([
+      agent.Profile.get(props.match.params.username),
+      agent.Articles.favoritedBy(props.match.params.username)
     ]));
   }
 
-  componentWillUnmount() {
-    this.props.onUnload();
-  }
-
-  renderTabs() {
-    return (
-      <ul className="nav nav-pills outline-active">
-        <li className="nav-item">
-          <Link
-            className="nav-link"
-            to={`/@${this.props.profile.username}`}>
-            My Articles
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link
-            className="nav-link active"
-            to={`/@${this.props.profile.username}/favorites`}>
-            Favorited Articles
-          </Link>
-        </li>
-      </ul>
-    );
-  }
+  return (
+    <Route render={ (props) => <Profile {...props} onFavoritesLoad={onFavoritesLoad} isFavorites={true} /> } />
+  );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileFavorites);
