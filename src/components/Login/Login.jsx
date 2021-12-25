@@ -74,6 +74,7 @@ class Login extends React.Component {
           <InputPassword
             label="Пароль"
             placeholder="Пароль"
+            value={password ?? ''}
             status={passwordError ? 'error' : null}
             error={passwordError}
             onChange={this.changePassword}
