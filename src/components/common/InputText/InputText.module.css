@@ -8,8 +8,10 @@
   margin: 0 0 4px 16px;
 }
 
-.input {
-  composes: text from "../common.module.css";
+.value {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   padding: 8px 16px;
   background: var(--input-background);
   border-style: solid;
@@ -17,10 +19,33 @@
   border-radius: var(--input-border-radius);
 }
 
-.errorInput {
-  composes: input;
+.errorValue {
+  composes: value;
   border-width: 2px;
   border-color: var(--error-color);
+}
+
+.errorValue path {
+  stroke: var(--error-color);
+}
+
+.successValue {
+  composes: value;
+  border-width: 2px;
+  border-color: var(--success-color);
+}
+
+.successValue path {
+  stroke: var(--success-color);
+}
+
+.input {
+  composes: text from "../common.module.css";
+  background: var(--input-background);
+  padding: 0 0;
+  width: 100%;
+  border-width: 0;
+  outline: none;
 }
 
 .error {

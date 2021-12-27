@@ -7,6 +7,7 @@
   --text-color: #FAFAFA;
   --link-text-color: #EC4926;
   --error-color: #EC2626;
+  --success-color: #26EC26;
 }
 
 #root {

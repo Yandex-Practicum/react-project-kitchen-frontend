@@ -69,6 +69,7 @@ class Register extends React.Component {
             label="Имя пользователя"
             placeholder="Username"
             value={username ?? ''}
+            status={usernameError ? 'error' : null}
             error={usernameError}
             onChange={this.changeUsername}
           />
@@ -77,6 +78,7 @@ class Register extends React.Component {
             label="E-mail"
             placeholder="Username@nomoreparties.space"
             value={email ?? ''}
+            status={emailError ? 'error' : null}
             error={emailError}
             onChange={this.changeEmail}
           />
@@ -84,6 +86,8 @@ class Register extends React.Component {
           <InputPassword
             label="Пароль"
             placeholder="********"
+            value={password ?? ''}
+            status={passwordError ? 'error' : null}
             error={passwordError}
             onChange={this.changePassword}
           />

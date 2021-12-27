@@ -8,7 +8,7 @@ function Header({appName, currentUser}) {
   return (
     <header className={headerStyles.header}>
       <div className={headerStyles.container}>
-        <Link exact to="/" className={headerStyles.name}>
+        <Link to="/" className={headerStyles.name}>
           {appName}
         </Link>
         <Navigation currentUser={currentUser}/>
