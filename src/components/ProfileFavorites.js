@@ -21,7 +21,7 @@ function ProfileFavorites(props) {
       agent.Profile.get(props.match.params.username),
       agent.Articles.favoritedBy(props.match.params.username)
     ]));
-  }
+  };
 
   return (
     <Route render={ (props) => <Profile {...props} onFavoritesLoad={onFavoritesLoad} isFavorites={true} /> } />

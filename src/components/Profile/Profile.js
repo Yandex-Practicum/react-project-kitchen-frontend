@@ -11,8 +11,19 @@ import {
   PROFILE_PAGE_UNLOADED
 } from '../../constants/actionTypes';
 
+// Components
+
+import UserImage from '../UserImage/UserImage';
+
+import defaultAvatarPath from '../../images/default-avatar.svg';
+
 // Styles
-import { StyledLink, StyledLi, UserImage } from './Styles';
+import { 
+  StyledLink, 
+  StyledLi, 
+  UserInfo,
+  ActionButtonWraper
+} from './Styles';
 
 const EditProfileSettings = props => {
 
@@ -95,7 +106,7 @@ function Profile(props) {
     return () => {
       props.onUnload();
     };
-
+    // eslint-disable-next-line
   },[]);
 
   function renderTabs() {
@@ -132,6 +143,7 @@ function Profile(props) {
 
   
   const profile = props.profile;
+
   if (!profile) {
     return null;
   }
@@ -142,27 +154,21 @@ function Profile(props) {
   return (
     <div className="profile-page">
 
-      <div className="user-info">
-        <div className="container">
-          <div className="row">
-            <div className="col-xs-12 col-md-10 offset-md-1">
+      <UserInfo>
+        <UserImage src={profile.image}  alt={profile.username} location='profile' />
+        <h4>{profile.username}</h4>
+        <p>{profile.bio}</p>
 
-              <UserImage src={profile.image}  alt={profile.username} />
-              <h4>{profile.username}</h4>
-              <p>{profile.bio}</p>
-
-              <EditProfileSettings isUser={isUser} />
-              <FollowUserButton
-                isUser={isUser}
-                user={profile}
-                follow={props.onFollow}
-                unfollow={props.onUnfollow}
-              />
-
-            </div>
-          </div>
-        </div>
-      </div>
+        <ActionButtonWraper>
+          <EditProfileSettings isUser={isUser} />
+          <FollowUserButton
+            isUser={isUser}
+            user={profile}
+            follow={props.onFollow}
+            unfollow={props.onUnfollow}
+          />
+        </ActionButtonWraper>
+      </UserInfo>
 
       <div className="container">
         <div className="row">

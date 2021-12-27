@@ -1,15 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import agent from '../agent';
+import agent from '../../agent';
 import { connect } from 'react-redux';
-import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../constants/actionTypes';
-import styled from 'styled-components';
+import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../../constants/actionTypes';
 
-const FavoriteButton = styled.button`
-  background: none;
-  border: none;
-  color: ${props => props.favorited ? '#F3200C' : '#0A0A0B'}
-`;
+// Components
+import LikeIcon from '../LikeIcon/LikeIcon';
+
+import defaultAvatarPath from '../../images/default-avatar.svg';
+
+// Styles
+import { 
+  FavoriteButton, 
+  ArticleMeta, 
+  Info,
+  PreviewLink 
+} from './Styles.jsx';
+import UserImage from '../UserImage/UserImage';
 
 const FAVORITED_CLASS = 'btn btn-sm btn-primary';
 const NOT_FAVORITED_CLASS = 'btn btn-sm btn-outline-primary';
@@ -27,6 +34,7 @@ const mapDispatchToProps = dispatch => ({
 
 const ArticlePreview = props => {
   const article = props.article;
+  
   const favoriteButtonClass = article.favorited ?
     FAVORITED_CLASS :
     NOT_FAVORITED_CLASS;
@@ -42,31 +50,33 @@ const ArticlePreview = props => {
 
   return (
     <div className="article-preview">
-      <div className="article-meta">
-        <Link to={`/@${article.author.username}`}>
-          <img src={article.author.image} alt={article.author.username} />
-        </Link>
-
-        <div className="info">
-          <Link className="author" to={`/@${article.author.username}`}>
-            {article.author.username}
+      <ArticleMeta>
+        <div className='avatar-info-wrapper'>
+          <Link to={`/@${article.author.username}`}>
+            <UserImage src={article.author.image} alt={article.author.username} location='article' />
           </Link>
-          <span className="date">
-            {new Date(article.createdAt).toDateString()}
-          </span>
-        </div>
 
-        <div className="pull-xs-right">
-          <FavoriteButton favorited={article.favorited} onClick={handleClick}>
-            {article.favoritesCount} <i className="ion-heart"></i> 
-          </FavoriteButton>
+          <Info>
+            <Link className="author" to={`/@${article.author.username}`}>
+              {article.author.username}
+            </Link>
+            <span className="date">
+              {new Date(article.createdAt).toDateString()}
+            </span>
+          </Info>
         </div>
-      </div>
+        
 
-      <Link to={`/article/${article.slug}`} className="preview-link">
+        <FavoriteButton favorited={article.favorited} onClick={handleClick}>
+          {article.favoritesCount > 0 && article.favoritesCount} 
+          <LikeIcon favorited={article.favorited} />
+        </FavoriteButton>
+      </ArticleMeta>
+
+      <PreviewLink to={`/article/${article.slug}`}>
         <h1>{article.title}</h1>
         <p>{article.description}</p>
-        <span>Read more...</span>
+        <span>Read more</span>
         <ul className="tag-list">
           {
             article.tagList.map(tag => {
@@ -78,9 +88,9 @@ const ArticlePreview = props => {
             })
           }
         </ul>
-      </Link>
+      </PreviewLink>
     </div>
   );
-}
+};
 
 export default connect(() => ({}), mapDispatchToProps)(ArticlePreview);
