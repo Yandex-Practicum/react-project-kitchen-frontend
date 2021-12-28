@@ -1,9 +1,10 @@
+import PropTypes from 'prop-types';
 import ArticleList from '../ArticleList/ArticleList';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import agent from '../../agent';
 import { connect } from 'react-redux';
-//import { useDispatch } from 'react-redux';
+
 import {
   FOLLOW_USER,
   UNFOLLOW_USER,
@@ -15,14 +16,13 @@ import {
 
 import UserImage from '../UserImage/UserImage';
 
-import defaultAvatarPath from '../../images/default-avatar.svg';
-
 // Styles
 import { 
   StyledLink, 
   StyledLi, 
   UserInfo,
-  ActionButtonWraper
+  ActionButtonWraper,
+  FollowButton
 } from './Styles';
 
 const EditProfileSettings = props => {
@@ -32,7 +32,6 @@ const EditProfileSettings = props => {
     return (
       <StyledLink
         to="/settings"
-        className="btn btn-sm btn-outline-secondary action-btn"
       >
         Редактировать профиль
       </StyledLink>
@@ -47,30 +46,36 @@ const FollowUserButton = props => {
     return null;
   }
 
-  let classes = 'btn btn-sm action-btn';
-  if (props.user.following) {
-    classes += ' btn-secondary';
-  } else {
-    classes += ' btn-outline-secondary';
-  }
-
   const handleClick = ev => {
     ev.preventDefault();
     if (props.user.following) {
-      props.unfollow(props.user.username)
+      props.unfollow(props.user.username);
     } else {
-      props.follow(props.user.username)
+      props.follow(props.user.username);
     }
   };
 
   return (
-    <button
-      className={classes}
+    <FollowButton
       onClick={handleClick}>
-      <i className="ion-plus-round"></i>
-      &nbsp;
-      {props.user.following ? 'Unfollow' : 'Follow'} {props.user.username}
-    </button>
+      
+      {props.user.following ? 
+        (<div className="follow-button">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 1V15" stroke="#FAFAFA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M1 8H15" stroke="#FAFAFA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg> 
+          Подписаться
+        </div>)
+        : 
+        (<div className="follow-button">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 8H15" stroke="#FAFAFA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg> 
+          Отписаться
+        </div>)
+      }
+    </FollowButton>
   );
 };
 
@@ -155,7 +160,7 @@ function Profile(props) {
     <div className="profile-page">
 
       <UserInfo>
-        <UserImage src={profile.image}  alt={profile.username} location='profile' />
+        <UserImage src={profile.image}  alt={profile.username} location="profile" />
         <h4>{profile.username}</h4>
         <p>{profile.bio}</p>
 
@@ -193,6 +198,60 @@ function Profile(props) {
   );
   
 }
+
+EditProfileSettings.propTypes = {
+  isUser: PropTypes.bool,
+};
+
+EditProfileSettings.defaultProps = {
+  isUser: false,
+};
+
+FollowUserButton.propTypes = {
+  isUser: PropTypes.bool,
+  user: PropTypes.object,
+  unfollow: PropTypes.func,
+  follow: PropTypes.func,
+};
+
+/*FollowUserButton.defaultProps = {
+  isUser: false,
+  user: {},
+  unfollow: () => {},
+  follow: () => {},
+};*/
+
+Profile.propTypes = {
+  currentUser: PropTypes.object,
+  onFollow: PropTypes.func,
+  onUnfollow: PropTypes.func,
+  onLoad: PropTypes.func,
+  onUnload: PropTypes.func,
+  isFavorites: PropTypes.bool,
+  onFavoritesLoad: PropTypes.func,
+  match: PropTypes.object,
+  profile: PropTypes.object,
+  pager: PropTypes.any,
+  currentPage: PropTypes.number,
+  articles: PropTypes.arrayOf(PropTypes.object),
+  articlesCount: PropTypes.number
+};
+
+/*Profile.defaultProps = {
+  currentUser: {},
+  onFollow: () => {},
+  onUnfollow: () => {},
+  onLoad: () => {},
+  onUnload: () => {},
+  isFavorites: false,
+  onFavoritesLoad: () => {},
+  match: {},
+  profile: {},
+  pager: undefined,
+  currentPage: 0,
+  articles: [{}],
+  articlesCount: 0
+};*/
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
 export { Profile, mapStateToProps };

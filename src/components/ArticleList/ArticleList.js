@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import ArticlePreview from '../ArticlePreview/ArticlePreview';
 import ListPagination from '../ListPagination';
 import React from 'react';
@@ -33,6 +35,13 @@ const ArticleList = props => {
         currentPage={props.currentPage} />
     </div>
   );
+};
+
+ArticleList.propTypes = {
+  articles: PropTypes.any,
+  articlesCount: PropTypes.number,
+  pager: PropTypes.any,
+  currentPage: PropTypes.any
 };
 
 export default ArticleList;
