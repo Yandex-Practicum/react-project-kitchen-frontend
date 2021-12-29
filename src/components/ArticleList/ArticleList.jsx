@@ -4,23 +4,29 @@ import ArticlePreview from '../ArticlePreview/ArticlePreview';
 import ListPagination from '../ListPagination';
 import React from 'react';
 
+import { ListWrapper } from './Styles';
+
 const ArticleList = props => {
   if (!props.articles) {
     return (
-      <div className="article-preview">Loading...</div>
+      <ListWrapper >
+        Загрузка...
+      </ListWrapper>
     );
   }
 
   if (props.articles.length === 0) {
     return (
-      <div className="article-preview">
-        No articles are here... yet.
-      </div>
+      <ListWrapper >
+        <div className="empty-wrapper">
+          Здесь пусто... Пока что.
+        </div>
+      </ListWrapper>
     );
   }
 
   return (
-    <div>
+    <ListWrapper>
       {
         props.articles.map(article => {
           return (
@@ -32,8 +38,10 @@ const ArticleList = props => {
       <ListPagination
         pager={props.pager}
         articlesCount={props.articlesCount}
-        currentPage={props.currentPage} />
-    </div>
+        currentPage={props.currentPage} 
+      />
+
+    </ListWrapper>
   );
 };
 

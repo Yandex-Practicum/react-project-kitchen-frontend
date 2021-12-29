@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 // Components
 import UserImage from "../UserImage/UserImage";
 import LikeIcon from "../LikeIcon/LikeIcon";
+import AuthorData from "../AuthorDate/AuthorDate";
 
 // Styles
 import { 
-  Info,
   FavoriteButton,
   MetaWrapper 
 } from "./Styles";
@@ -28,15 +28,8 @@ export default function ArticleMeta({ article, unfavorite, favorite }) {
         <Link to={`/@${article.author.username}`}>
           <UserImage src={article.author.image} alt={article.author.username} location="article" />
         </Link>
-
-        <Info>
-          <Link className="author" to={`/@${article.author.username}`}>
-            {article.author.username}
-          </Link>
-          <span className="date">
-            {new Date(article.createdAt).toLocaleDateString('ru', { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' })}
-          </span>
-        </Info>  
+        <AuthorData article={article} />
+        
       </div>
       
 

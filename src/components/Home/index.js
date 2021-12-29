@@ -47,7 +47,7 @@ class Home extends React.Component {
         <Banner token={this.props.token} appName={this.props.appName} />
         <div className="container page">
           <div className="row">
-            <MainView />
+            <MainView location={this.props.location} />
             <div className="col-md-3">
               <div className="sidebar">
                 <p>Popular Tags</p>
