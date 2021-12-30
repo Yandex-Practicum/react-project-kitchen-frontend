@@ -140,3 +140,22 @@ NavTabs.defaultProps = {
   isFavorites: undefined,
   onTabClick: undefined,
 };
+
+YourFeedTab.propTypes = {
+  token: PropTypes.string.isRequired,
+  onTabClick: PropTypes.func.isRequired,
+  tab: PropTypes.string.isRequired,
+};
+
+GlobalFeedTab.propTypes = {
+  onTabClick: PropTypes.func.isRequired,
+  tab: PropTypes.string.isRequired,
+};
+
+TagFilterTab.propTypes = {
+  tag: PropTypes.string,
+};
+
+TagFilterTab.defaultProps = {
+  tag: undefined,
+};
