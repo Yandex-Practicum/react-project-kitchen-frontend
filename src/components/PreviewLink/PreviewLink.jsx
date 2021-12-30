@@ -26,5 +26,5 @@ export default function PreviewLink({ article }) {
 }
 
 PreviewLink.propTypes = {
-  article: PropTypes.object
+  article: PropTypes.object.isRequired
 };

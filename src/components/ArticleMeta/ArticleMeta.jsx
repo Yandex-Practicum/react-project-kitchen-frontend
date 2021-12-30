@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
 // Components
@@ -29,10 +30,8 @@ export default function ArticleMeta({ article, unfavorite, favorite }) {
           <UserImage src={article.author.image} alt={article.author.username} location="article" />
         </Link>
         <AuthorData article={article} />
-        
       </div>
       
-
       <FavoriteButton favorited={article.favorited} onClick={handleClick}>
         {article.favoritesCount > 0 && article.favoritesCount} 
         <LikeIcon favorited={article.favorited} />
@@ -40,3 +39,9 @@ export default function ArticleMeta({ article, unfavorite, favorite }) {
     </MetaWrapper>
   );
 }
+
+ArticleMeta.propTypes = {
+  article: PropTypes.object.isRequired,
+  unfavorite: PropTypes.func.isRequired,
+  favorite: PropTypes.func.isRequired
+};

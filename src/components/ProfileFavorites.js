@@ -1,5 +1,6 @@
-import Profile, { mapStateToProps } from './Profile/Profile';
+import Profile, { mapStateToProps } from './Profile/Profile.jsx';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 import agent from '../agent';
 import { connect } from 'react-redux';
@@ -27,5 +28,10 @@ function ProfileFavorites(props) {
     <Route render={ (props) => <Profile {...props} onFavoritesLoad={onFavoritesLoad} isFavorites={true} /> } />
   );
 }
+
+ProfileFavorites.propTypes = {
+  onLoad: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileFavorites);

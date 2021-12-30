@@ -46,10 +46,17 @@ const ArticleList = props => {
 };
 
 ArticleList.propTypes = {
-  articles: PropTypes.any,
+  articles: PropTypes.array,
   articlesCount: PropTypes.number,
-  pager: PropTypes.any,
-  currentPage: PropTypes.any
+  pager: PropTypes.func,
+  currentPage: PropTypes.number
+};
+
+ArticleList.defaultProps = {
+  articles: undefined,
+  articlesCount: undefined,
+  pager: undefined,
+  currentPage: undefined
 };
 
 export default ArticleList;

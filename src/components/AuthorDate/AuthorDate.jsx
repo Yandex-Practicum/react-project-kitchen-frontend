@@ -19,5 +19,6 @@ export default function AuthorData({ article }) {
 }
 
 AuthorData.propTypes = {
-  article: PropTypes.object
-}
+  article: PropTypes.object.isRequired
+};
+

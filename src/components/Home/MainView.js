@@ -1,5 +1,8 @@
-import ArticleList from '../ArticleList/ArticleList.jsx';
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import ArticleList from '../ArticleList/ArticleList.jsx';
+
 
 import { connect } from 'react-redux';
 import { CHANGE_TAB } from '../../constants/actionTypes';
@@ -32,4 +35,27 @@ const MainView = props => {
   );
 };
 
+MainView.propTypes = {
+  location: PropTypes.object.isRequired,
+  token: PropTypes.string,
+  tab: PropTypes.string,
+  onTabClick: PropTypes.func.isRequired,
+  pager: PropTypes.func,
+  articles: PropTypes.array,
+  articlesCount: PropTypes.number,
+  loading: PropTypes.bool,
+  currentPage: PropTypes.number
+};
+
+MainView.defaultProps = {
+  token: null,
+  tab: undefined,
+  pager: undefined,
+  articles: undefined,
+  articlesCount: undefined,
+  loading: undefined,
+  currentPage: undefined
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(MainView);
+

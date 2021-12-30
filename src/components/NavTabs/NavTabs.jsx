@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
 import agent from '../../agent';
@@ -120,3 +121,22 @@ export default function NavTabs(props) {
     );
   }
 }
+
+NavTabs.propTypes = { 
+  location: PropTypes.object.isRequired,
+  token: PropTypes.string,
+  tab: PropTypes.string,
+  tag: PropTypes.string,
+  onTabClick: PropTypes.func,
+  isFavorites: PropTypes.bool,
+  profile: PropTypes.object.isRequired,
+
+};
+
+NavTabs.defaultProps = {
+  token: null,
+  tag: undefined,
+  tab: undefined,
+  isFavorites: undefined,
+  onTabClick: undefined,
+};

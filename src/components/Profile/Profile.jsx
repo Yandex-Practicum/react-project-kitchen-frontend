@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import ArticleList from '../ArticleList/ArticleList.jsx';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 
@@ -92,36 +91,30 @@ function Profile(props) {
 }
 
 Profile.propTypes = {
-  currentUser: PropTypes.object,
-  onFollow: PropTypes.func,
-  onUnfollow: PropTypes.func,
-  onLoad: PropTypes.func,
-  onUnload: PropTypes.func,
+  currentUser: PropTypes.object.isRequired,
+  onFollow: PropTypes.func.isRequired,
+  onUnfollow: PropTypes.func.isRequired,
+  onLoad: PropTypes.func.isRequired,
+  onUnload: PropTypes.func.isRequired,
   isFavorites: PropTypes.bool,
   onFavoritesLoad: PropTypes.func,
-  match: PropTypes.object,
-  profile: PropTypes.object,
-  pager: PropTypes.any,
+  match: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+  pager: PropTypes.func,
   currentPage: PropTypes.number,
-  articles: PropTypes.arrayOf(PropTypes.object),
-  articlesCount: PropTypes.number
+  articles: PropTypes.array,
+  articlesCount: PropTypes.number,
+  location: PropTypes.object.isRequired
 };
 
-/*Profile.defaultProps = {
-  currentUser: {},
-  onFollow: () => {},
-  onUnfollow: () => {},
-  onLoad: () => {},
-  onUnload: () => {},
-  isFavorites: false,
-  onFavoritesLoad: () => {},
-  match: {},
-  profile: {},
+Profile.defaultProps = {
+  isFavorites: undefined,
+  onFavoritesLoad: undefined,
   pager: undefined,
   currentPage: 0,
-  articles: [{}],
+  articles: undefined,
   articlesCount: 0
-};*/
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
 export { Profile, mapStateToProps };
