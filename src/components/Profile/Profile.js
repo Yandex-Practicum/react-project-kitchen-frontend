@@ -1,4 +1,5 @@
 import ArticleList from "../ArticleList";
+import ProfileHeader from "./ProfileHeader/ProfileHeader";
 import React from "react";
 import { Link } from "react-router-dom";
 import agent from "../../agent";
@@ -96,62 +97,39 @@ class Profile extends React.Component {
       this.props.currentUser &&
       this.props.profile.username === this.props.currentUser.username;
 
-      const buttonIcon = profile.following ? <MinusIcon /> : <PlusIcon />;
-      const buttonTitle = profile.following ? "Отписаться" : "Подписаться";
+    const buttonIcon = profile.following ? <MinusIcon /> : <PlusIcon />;
+    const buttonTitle = profile.following ? "Отписаться" : "Подписаться";
 
-      const handleClick = (ev) => {
-        ev.preventDefault();
-        if (profile.following) {
-          this.props.onUnfollow(profile.username);
-        } else {
-          this.props.onFollow(profile.username);
-        }
-      };
+    const handleClick = (ev) => {
+      ev.preventDefault();
+      if (profile.following) {
+        this.props.onUnfollow(profile.username);
+      } else {
+        this.props.onFollow(profile.username);
+      }
+    };
 
-      return (
-        <div className="profile-page">
-          <div className="user-info">
-            <div className="container">
-              <div className="row">
-                <div className="col-xs-12 col-md-10 offset-md-1">
-                  <img
-                    src={profile.image}
-                    className="user-img"
-                    alt={profile.username}
-                  />
-                  <h4>{profile.username}</h4>
-                  <p>{profile.bio}</p>
+    return (
+      <div className="profile-page">
+        <div className="user-info">
+          <ProfileHeader isUser={isUser} profile={profile} />
+        </div>
+        <div className="container">
+          <div className="row">
+            <div className="col-xs-12 col-md-10 offset-md-1">
+              <div className="articles-toggle">{this.renderTabs()}</div>
 
-                  <EditProfileSettings isUser={isUser} />
-                  {!isUser && (
-                    <Button
-                      onClick={handleClick}
-                      isActive={true}
-                      icon={buttonIcon}
-                      title={buttonTitle}
-                    />
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="container">
-            <div className="row">
-              <div className="col-xs-12 col-md-10 offset-md-1">
-                <div className="articles-toggle">{this.renderTabs()}</div>
-
-                <ArticleList
-                  pager={this.props.pager}
-                  articles={this.props.articles}
-                  articlesCount={this.props.articlesCount}
-                  state={this.props.currentPage}
-                />
-              </div>
+              <ArticleList
+                pager={this.props.pager}
+                articles={this.props.articles}
+                articlesCount={this.props.articlesCount}
+                state={this.props.currentPage}
+              />
             </div>
           </div>
         </div>
-      );
+      </div>
+    );
   }
 }
 
