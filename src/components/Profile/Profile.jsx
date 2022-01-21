@@ -66,18 +66,18 @@ class Profile extends React.Component {
             <TabLinks
               tabs={[
                 {
-                  path: `/:${this.props.profile.username}`,
+                  path: `/@${this.props.profile.username}`,
                   name: "My Articles",
                   isActive:
                     this.props.location.pathname ===
-                    `/:${this.props.profile.username}`,
+                    `/@${this.props.profile.username}`,
                 },
                 {
-                  path: `/:${this.props.profile.username}/favorites`,
+                  path: `/@${this.props.profile.username}/favorites`,
                   name: "Favorited Articles",
                   isActive:
                     this.props.location.pathname ===
-                    `/:${this.props.profile.username}/favorites`,
+                    `/@${this.props.profile.username}/favorites`,
                 },
               ]}
             />
