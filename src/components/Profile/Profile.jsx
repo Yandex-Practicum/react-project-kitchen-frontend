@@ -34,13 +34,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 class Profile extends React.Component {
   componentWillMount() {
-    console.log(
-      "-------------------------------------------------------------------------"
-    );
-    console.log(this.props.location.pathname);
-    console.log(
-      "-------------------------------------------------------------------------"
-    );
     this.props.onLoad(
       Promise.all([
         agent.Profile.get(this.props.match.params.username.slice(1)),
