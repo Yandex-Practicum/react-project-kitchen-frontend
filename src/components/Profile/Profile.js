@@ -1,7 +1,7 @@
 import ArticleList from "../ArticleList";
 import ProfileHeader from "./ProfileHeader/ProfileHeader";
+import TabLinks from "../common/TabLinks/TabLinks";
 import React from "react";
-import { Link } from "react-router-dom";
 import agent from "../../agent";
 import { connect } from "react-redux";
 import {
@@ -10,23 +10,6 @@ import {
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED,
 } from "../../constants/actionTypes";
-
-import Button from "../common/Button/Button";
-import { PlusIcon, MinusIcon } from "../../images/icons";
-
-const EditProfileSettings = (props) => {
-  if (props.isUser) {
-    return (
-      <Link
-        to="/settings"
-        className="btn btn-sm btn-outline-secondary action-btn"
-      >
-        <i className="ion-gear-a"></i> Edit Profile Settings
-      </Link>
-    );
-  }
-  return null;
-};
 
 const mapStateToProps = (state) => ({
   ...state.articleList,
@@ -51,6 +34,13 @@ const mapDispatchToProps = (dispatch) => ({
 
 class Profile extends React.Component {
   componentWillMount() {
+    console.log(
+      "-------------------------------------------------------------------------"
+    );
+    console.log(this.props.location.pathname);
+    console.log(
+      "-------------------------------------------------------------------------"
+    );
     this.props.onLoad(
       Promise.all([
         agent.Profile.get(this.props.match.params.username.slice(1)),
@@ -63,30 +53,6 @@ class Profile extends React.Component {
     this.props.onUnload();
   }
 
-  renderTabs() {
-    return (
-      <ul className="nav nav-pills outline-active">
-        <li className="nav-item">
-          <Link
-            className="nav-link active"
-            to={`/@${this.props.profile.username}`}
-          >
-            My Articles
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link
-            className="nav-link"
-            to={`/@${this.props.profile.username}/favorites`}
-          >
-            Favorited Articles
-          </Link>
-        </li>
-      </ul>
-    );
-  }
-
   render() {
     const profile = this.props.profile;
     if (!profile) {
@@ -97,36 +63,38 @@ class Profile extends React.Component {
       this.props.currentUser &&
       this.props.profile.username === this.props.currentUser.username;
 
-    const buttonIcon = profile.following ? <MinusIcon /> : <PlusIcon />;
-    const buttonTitle = profile.following ? "Отписаться" : "Подписаться";
-
-    const handleClick = (ev) => {
-      ev.preventDefault();
-      if (profile.following) {
-        this.props.onUnfollow(profile.username);
-      } else {
-        this.props.onFollow(profile.username);
-      }
-    };
-
     return (
       <div className="profile-page">
         <div className="user-info">
           <ProfileHeader isUser={isUser} profile={profile} />
         </div>
         <div className="container">
-          <div className="row">
-            <div className="col-xs-12 col-md-10 offset-md-1">
-              <div className="articles-toggle">{this.renderTabs()}</div>
-
-              <ArticleList
-                pager={this.props.pager}
-                articles={this.props.articles}
-                articlesCount={this.props.articlesCount}
-                state={this.props.currentPage}
-              />
-            </div>
+          <div className="articles-toggle">
+            <TabLinks
+              tabs={[
+                {
+                  path: `/@${this.props.profile.username}`,
+                  name: "My Articles",
+                  isActive:
+                    this.props.location.pathname ===
+                    `/@${this.props.profile.username}`,
+                },
+                {
+                  path: `/@${this.props.profile.username}/favorites`,
+                  name: "Favorited Articles",
+                  isActive:
+                    this.props.location.pathname ===
+                    `/@${this.props.profile.username}/favorites`,
+                },
+              ]}
+            />
           </div>
+          <ArticleList
+            pager={this.props.pager}
+            articles={this.props.articles}
+            articlesCount={this.props.articlesCount}
+            state={this.props.currentPage}
+          />
         </div>
       </div>
     );
