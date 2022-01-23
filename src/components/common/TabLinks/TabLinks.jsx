@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import TabLinksStyles from "./TabLinks.module.css";
+import tabLinksStyles from "./TabLinks.module.css";
 
 const TabLinks = ({ tabs }) => {
   return (
-    <ul className={TabLinksStyles.tabLinks}>
+    <ul className={tabLinksStyles.tabLinks}>
       {tabs.map((tab, index) => (
-        <li className={TabLinksStyles.linkContainer} key={index}>
+        <li className={tabLinksStyles.linkContainer} key={index}>
           <Link
             className={
-              TabLinksStyles.link + ` ${tab.isActive && TabLinksStyles.active}`
+              tabLinksStyles.link + ` ${tab.isActive && tabLinksStyles.active}`
             }
             to={tab.path}
           >

@@ -11,7 +11,7 @@ import {
 import Button from "../../common/Button/Button";
 import { PlusIcon, MinusIcon } from "../../../images/icons";
 
-import ProfileHeaderStyles from "./ProfileHeader.module.css";
+import profileHeaderStyles from "./ProfileHeader.module.css";
 
 const mapStateToProps = (state) => ({
   currentUser: state.common.currentUser,
@@ -45,14 +45,14 @@ const ProfileHeader = ({ isUser, profile }) => {
   };
 
   return (
-    <div className={ProfileHeaderStyles.profileHeader}>
+    <div className={profileHeaderStyles.profileHeader}>
       <img
         src={profile.image}
-        className={ProfileHeaderStyles.userImage}
+        className={profileHeaderStyles.userImage}
         alt={profile.username}
       />
-      <h4 className={ProfileHeaderStyles.userName}>{profile.username}</h4>
-      <div className={ProfileHeaderStyles.button}>
+      <h4 className={profileHeaderStyles.userName}>{profile.username}</h4>
+      <div className={profileHeaderStyles.button}>
         {!isUser && (
           <Button
             onClick={handleClick}
