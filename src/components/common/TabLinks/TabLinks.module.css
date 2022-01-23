@@ -24,5 +24,5 @@
 
 .active {
   color: var(--text-color);
-  border-bottom: #EC4926 solid 2px;
+  border-bottom: var(--link-text-color) solid 2px;
 }
