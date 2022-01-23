@@ -11,10 +11,10 @@
 }
 
 .userName {
+  composes: headerTextMedium from "../../common/common.module.css";
   margin: 0;
   margin-top: 8px;
   margin-bottom: 29px;
-  composes: headerTextMedium from "../../common/common.module.css";
 }
 
 .button {
