@@ -1,6 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Button from '../common/Button/Button';
+import DialogPage from '../common/DialogPage/DialogPage';
+import Form from '../common/Form/Form';
+import FormButtons from '../common/FormButtons/FormButtons';
+import InputText from '../common/InputText/InputText';
 import ListErrors from '../common/ListErrors/ListErrors';
 import agent from '../../agent';
 import {
@@ -95,89 +100,68 @@ class Editor extends React.Component {
   }
 
   render() {
-    const { body, description, errors, inProgress, tagInput, tagList, title } = this.props;
+    const {
+      articleSlug,
+      body,
+      description,
+      errors,
+      inProgress,
+      tagInput,
+      tagList,
+      title,
+    } = this.props;
     return (
-      <div className="editor-page">
-        <div className="container page">
-          <div className="row">
-            <div className="col-md-10 offset-md-1 col-xs-12">
+      <DialogPage title={articleSlug ? 'Редактирование записи' : 'Новая запись'}>
+        <ListErrors errors={transformApiErrors(errors)} />
 
-              <ListErrors errors={transformApiErrors(errors)} />
-
-              <form>
-                <fieldset>
-
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="text"
-                      placeholder="Article Title"
-                      value={title ?? ''}
-                      onChange={this.changeTitle}
-                    />
-                  </fieldset>
-
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="What's this article about?"
-                      value={description ?? ''}
-                      onChange={this.changeDescription}
-                    />
-                  </fieldset>
-
-                  <fieldset className="form-group">
-                    <textarea
-                      className="form-control"
-                      rows="8"
-                      placeholder="Write your article (in markdown)"
-                      value={body ?? ''}
-                      onChange={this.changeBody}
-                    />
-                  </fieldset>
-
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="Enter tags"
-                      value={tagInput ?? ''}
-                      onChange={this.changeTagInput}
-                      onKeyUp={this.watchForEnter}
-                    />
-
-                    <div className="tag-list">
-                      {
-                        (tagList || []).map((tag) => (
-                          <span className="tag-default tag-pill" key={tag}>
-                            <i
-                              className="ion-close-round"
-                              onClick={this.removeTagHandler(tag)}
-                            />
-                            {tag}
-                          </span>
-                        ))
-                      }
-                    </div>
-                  </fieldset>
-
-                  <button
-                    className="btn btn-lg pull-xs-right btn-primary"
-                    type="button"
-                    disabled={inProgress}
-                    onClick={this.submitForm}
-                  >
-                    Publish Article
-                  </button>
-
-                </fieldset>
-              </form>
-
-            </div>
+        <Form onSubmit={this.submitForm}>
+          <InputText
+            label="Заголовок"
+            placeholder="Название статьи"
+            value={title ?? ''}
+            onChange={this.changeTitle}
+          />
+          <InputText
+            label="Описание"
+            placeholder="О чем статья"
+            value={description ?? ''}
+            onChange={this.changeDescription}
+          />
+          <InputText
+            label="Содержание"
+            placeholder="Текст статьи"
+            value={body ?? ''}
+            onChange={this.changeBody}
+          />
+          <InputText
+            label="Теги"
+            placeholder="Теги (через запятую)"
+            value={tagInput ?? ''}
+            onChange={this.changeTagInput}
+            onKeyUp={this.watchForEnter}
+          />
+          <div className="tag-list">
+            {
+              (tagList || []).map((tag) => (
+                <span className="tag-default tag-pill" key={tag}>
+                  <i
+                    className="ion-close-round"
+                    onClick={this.removeTagHandler(tag)}
+                  />
+                  {tag}
+                </span>
+              ))
+            }
           </div>
-        </div>
-      </div>
+
+          <FormButtons>
+            <Button
+              title="Опубликовать"
+              isActive={!inProgress}
+            />
+          </FormButtons>
+        </Form>
+      </DialogPage>
     );
   }
 }
