@@ -20,8 +20,8 @@ class ProfileFavorites extends Profile {
       (page) =>
         agent.Articles.favoritedBy(this.props.match.params.username, page),
       Promise.all([
-        agent.Profile.get(this.props.match.params.username.slice(1)),
-        agent.Articles.favoritedBy(this.props.match.params.username.slice(1)),
+        agent.Profile.get(this.props.match.params.username),
+        agent.Articles.favoritedBy(this.props.match.params.username),
       ])
     );
   }

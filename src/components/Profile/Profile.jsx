@@ -36,8 +36,8 @@ class Profile extends React.Component {
   componentWillMount() {
     this.props.onLoad(
       Promise.all([
-        agent.Profile.get(this.props.match.params.username.slice(1)),
-        agent.Articles.byAuthor(this.props.match.params.username.slice(1)),
+        agent.Profile.get(this.props.match.params.username),
+        agent.Articles.byAuthor(this.props.match.params.username),
       ])
     );
   }

@@ -66,7 +66,7 @@ function Navigation({currentUser}) {
           </li>
           <li className={navigationStyles.list_item}>
             <NavLink
-              to={"/:" + currentUser.username}
+              to={`/@${currentUser.username}`}
               className={navigationStyles.link}
               activeClassName={navigationStyles.active}
             >
