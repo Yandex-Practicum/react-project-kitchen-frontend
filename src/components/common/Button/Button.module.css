@@ -10,11 +10,11 @@
 }
 
 .active {
-  background: #EC4926;
-  color: #0A0A0A;
+  background: var(--background-orange);
+  color: var(--background);
   }
   
 .inactive {
-  background: #666666;
-  color: #999999;
+  background: var(button-background-inactive);
+  color: var(--button-text-inactive);
 }

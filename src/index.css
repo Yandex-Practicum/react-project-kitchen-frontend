@@ -2,10 +2,13 @@
 @import url('./fonts/fonts.css');
 
 :root {
+  --background: #0A0A0A;
   --input-background: #292929;
   --input-border-radius: 20px;
+  --button-background-inactive: #666666;
+  --button-text-inactive: #999999;
   --text-color: #FAFAFA;
-  --link-text-color: #EC4926;
+  --background-orange: #EC4926;
   --error-color: #EC2626;
   --success-color: #26EC26;
 }

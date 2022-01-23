@@ -14,13 +14,13 @@
 }
 
 .active, .active path, .active circle {
-  color: #FAFAFA !important;
-  stroke: #FAFAFA;
+  color: var(--text-color) !important;
+  stroke: var(--text-color);
 }
 
 .link {
   text-decoration: none;
-  color: #0A0A0A;
+  color: var(--background);
   font-size: 16px;
   line-height: 1.5;
   display: flex;
