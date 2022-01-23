@@ -8,9 +8,9 @@ const TabLinks = ({ tabs }) => {
       {tabs.map((tab, index) => (
         <li className={tabLinksStyles.linkContainer} key={index}>
           <Link
-            className={
-              tabLinksStyles.link + ` ${tab.isActive && tabLinksStyles.active}`
-            }
+            className={`${tabLinksStyles.link} ${
+              tab.isActive && tabLinksStyles.active
+            }`}
             to={tab.path}
           >
             {tab.name}
