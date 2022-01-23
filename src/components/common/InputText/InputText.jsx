@@ -3,7 +3,7 @@ import React from 'react';
 import { AlertIcon, CheckIcon } from '../../../images/icons';
 import inputTextStyles from './InputText.module.css';
 
-const InputText = ({ label, value, placeholder, status, error, onChange, onKeyUp }) => (
+const InputText = ({ label, value, placeholder, status, error, onChange, onKeyDown }) => (
   <div className={inputTextStyles.container}>
     <p className={inputTextStyles.label}>{label}</p>
     <div className={status ? inputTextStyles[`${status}Value`] : inputTextStyles.value}>
@@ -13,7 +13,7 @@ const InputText = ({ label, value, placeholder, status, error, onChange, onKeyUp
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        onKeyUp={onKeyUp}
+        onKeyDown={onKeyDown}
       />
       {status === 'error' && (
         <AlertIcon />
@@ -35,14 +35,14 @@ InputText.propTypes = {
   status: PropTypes.oneOf(['error', 'success']),
   error: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  onKeyUp: PropTypes.func,
+  onKeyDown: PropTypes.func,
 };
 
 InputText.defaultProps = {
   placeholder: '',
   status: null,
   error: null,
-  onKeyUp: () => {},
+  onKeyDown: () => {},
 };
 
 export default InputText;

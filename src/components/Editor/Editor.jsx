@@ -135,10 +135,10 @@ class Editor extends React.Component {
           />
           <InputText
             label="Теги"
-            placeholder="Теги (через запятую)"
+            placeholder="Введите тег и нажмите Enter"
             value={tagInput ?? ''}
             onChange={this.changeTagInput}
-            onKeyUp={this.watchForEnter}
+            onKeyDown={this.watchForEnter}
           />
           <div className="tag-list">
             {
