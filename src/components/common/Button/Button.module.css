@@ -10,11 +10,11 @@
 }
 
 .active {
-  background: var(--background-orange);
-  color: var(--background);
+  background: var(--button-background-active);
+  color: var(--button-text-active);
   }
   
 .inactive {
-  background: var(button-background-inactive);
+  background: var(--button-background-inactive);
   color: var(--button-text-inactive);
 }
