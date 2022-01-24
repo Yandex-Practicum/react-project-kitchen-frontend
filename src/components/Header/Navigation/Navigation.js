@@ -10,72 +10,76 @@ function Navigation({currentUser}) {
       {!currentUser ? (
         <ul className={navigationStyles.list}>
           <li className={navigationStyles.list_item}>
-            <NavLink 
-              exact to="/" 
-              className={navigationStyles.link} 
+            <NavLink
+              exact
+              to="/"
+              className={navigationStyles.link}
               activeClassName={navigationStyles.active}
             >
-              <icons.HomeIcon/>
+              <icons.HomeIcon />
               <span className={navigationStyles.text}>Главная</span>
             </NavLink>
           </li>
-          <li className={navigationStyles.list_item}> 
-            <NavLink 
-              to="/login" 
-              className={navigationStyles.link} 
+          <li className={navigationStyles.list_item}>
+            <NavLink
+              to="/login"
+              className={navigationStyles.link}
               activeClassName={navigationStyles.active}
             >
-              <icons.LoginIcon/>
+              <icons.LoginIcon />
               <span className={navigationStyles.text}>Войти</span>
             </NavLink>
           </li>
-        </ul>    
-      ): (
+        </ul>
+      ) : (
         <ul className={navigationStyles.list}>
           <li className={navigationStyles.list_item}>
-            <NavLink 
-              exact to="/" 
-              className={navigationStyles.link} 
+            <NavLink
+              exact
+              to="/"
+              className={navigationStyles.link}
               activeClassName={navigationStyles.active}
             >
-              <icons.HomeIcon/>
+              <icons.HomeIcon />
               <span className={navigationStyles.text}>Главная</span>
             </NavLink>
           </li>
           <li className={navigationStyles.list_item}>
-            <NavLink 
-              to="/editor" 
-              className={navigationStyles.link} 
+            <NavLink
+              to="/editor"
+              className={navigationStyles.link}
               activeClassName={navigationStyles.active}
             >
-              <icons.ArticleIcon/>
-              <span className={navigationStyles.text}>Новая запись</span>  
+              <icons.ArticleIcon />
+              <span className={navigationStyles.text}>Новая запись</span>
             </NavLink>
           </li>
           <li className={navigationStyles.list_item}>
-            <NavLink 
-              to="/settings" 
-              className={navigationStyles.link} 
+            <NavLink
+              to="/settings"
+              className={navigationStyles.link}
               activeClassName={navigationStyles.active}
             >
-              <icons.SettingsIcon/>
+              <icons.SettingsIcon />
               <span className={navigationStyles.text}>Настройки</span>
             </NavLink>
           </li>
-          <li className={navigationStyles.list_item}> 
+          <li className={navigationStyles.list_item}>
             <NavLink
-              to='/account'
-              className={navigationStyles.link} 
+              to={`/@${currentUser.username}`}
+              className={navigationStyles.link}
               activeClassName={navigationStyles.active}
             >
-              <icons.ProfileIcon/>
-              <span className={navigationStyles.text}>{currentUser.username}</span>
+              <icons.ProfileIcon />
+              <span className={navigationStyles.text}>
+                {currentUser.username}
+              </span>
             </NavLink>
           </li>
         </ul>
       )}
     </nav>
-  )
+  );
 }
 
 Navigation.propTypes = {

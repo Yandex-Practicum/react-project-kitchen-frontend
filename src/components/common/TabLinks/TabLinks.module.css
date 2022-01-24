@@ -1,0 +1,28 @@
+@import-normalize;
+
+.tabLinks {
+  margin: 0;
+  padding: 0;
+  height: 56px;
+  width: 100%;
+  background-color: var(--background);
+  display:flex;
+  align-items: center;
+}
+
+.linkContainer{
+  text-decoration: none;
+  list-style-type: none;
+}
+.link {
+  composes: text from "../../common/common.module.css";
+  text-decoration: none;
+  padding: 16px 24px;
+  color: var(--button-background-inactive);
+}
+
+
+.active {
+  color: var(--text-color);
+  border-bottom: var(--button-background-active) solid 2px;
+}
