@@ -3,17 +3,14 @@
 
 :root {
   --background: #0A0A0A;
-
+  --header-background: #EC4926;
   --button-background-inactive: #666666;
   --button-text-inactive: #999999;
   --button-background-active: #EC4926;
   --button-text-active: #0A0A0A;
-  
   --input-background: #292929;
   --input-border-radius: 20px;
-  
   --text-color: #FAFAFA;
-  --background-orange: #EC4926;
   --error-color: #EC2626;
   --success-color: #26EC26;
 }
