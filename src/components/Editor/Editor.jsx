@@ -5,6 +5,7 @@ import Button from '../common/Button/Button';
 import DialogPage from '../common/DialogPage/DialogPage';
 import Form from '../common/Form/Form';
 import FormButtons from '../common/FormButtons/FormButtons';
+import InputMultilineText from '../common/InputMultilineText/InputMultilineText';
 import InputText from '../common/InputText/InputText';
 import ListErrors from '../common/ListErrors/ListErrors';
 import agent from '../../agent';
@@ -127,7 +128,7 @@ class Editor extends React.Component {
             value={description ?? ''}
             onChange={this.changeDescription}
           />
-          <InputText
+          <InputMultilineText
             label="Содержание"
             placeholder="Текст статьи"
             value={body ?? ''}
