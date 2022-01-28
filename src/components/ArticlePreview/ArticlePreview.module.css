@@ -1,0 +1,44 @@
+.articlePreview{
+  display: flex;
+  width: 808px;
+  border: 1px white solid;
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+.articleImage{
+  background-color: var(--article-img-background);
+  width: 160px;
+  height: 228px;
+  border-style: none;
+}
+
+.articleDescription{
+width: 100%;
+}
+
+.headerInfo{
+  display: flex;
+}
+
+.articleHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.articleFooter {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerText{
+  display: flex;
+  flex-direction: column;
+}
+
+.userImage{
+  width: 40px;
+  height: 40px;
+}
