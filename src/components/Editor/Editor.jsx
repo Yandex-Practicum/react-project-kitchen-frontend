@@ -8,6 +8,8 @@ import FormButtons from '../common/FormButtons/FormButtons';
 import InputMultilineText from '../common/InputMultilineText/InputMultilineText';
 import InputText from '../common/InputText/InputText';
 import ListErrors from '../common/ListErrors/ListErrors';
+import Tag from '../common/Tag/Tag';
+import TagsRow from '../common/TagsRow/TagsRow';
 import agent from '../../agent';
 import {
   ADD_TAG,
@@ -141,19 +143,16 @@ class Editor extends React.Component {
             onChange={this.changeTagInput}
             onKeyDown={this.watchForEnter}
           />
-          <div className="tag-list">
-            {
-              (tagList || []).map((tag) => (
-                <span className="tag-default tag-pill" key={tag}>
-                  <i
-                    className="ion-close-round"
-                    onClick={this.removeTagHandler(tag)}
-                  />
-                  {tag}
-                </span>
-              ))
-            }
-          </div>
+          <TagsRow>
+            {(tagList || []).map((tag) => (
+              <Tag
+                key={tag}
+                text={tag}
+                closable
+                onClose={this.removeTagHandler(tag)}
+              />
+            ))}
+          </TagsRow>
 
           <FormButtons>
             <Button
