@@ -1,9 +1,8 @@
 .articlePreview{
-  display: flex;
   width: 808px;
   border: 1px white solid;
-  padding-top: 32px;
-  padding-bottom: 32px;
+  padding: 32px 16px;
+
 }
 
 .articleImage{
@@ -11,10 +10,6 @@
   width: 160px;
   height: 228px;
   border-style: none;
-}
-
-.articleDescription{
-width: 100%;
 }
 
 .headerInfo{
@@ -31,6 +26,7 @@ width: 100%;
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .headerText{
@@ -41,4 +37,10 @@ width: 100%;
 .userImage{
   width: 40px;
   height: 40px;
+}
+
+.link {
+  color: var(--link-color-primary);
+  text-decoration: underline;
+  text-decoration-color:  var(--link-color-primary);
 }

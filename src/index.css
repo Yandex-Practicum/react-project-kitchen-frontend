@@ -14,6 +14,8 @@
   --text-color: #FAFAFA;
   --error-color: #EC2626;
   --success-color: #26EC26;
+
+  --link-color-primary: #EC4926;
 }
 
 #root {
@@ -40,4 +42,8 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+
+ul{
+  margin: 0;
 }

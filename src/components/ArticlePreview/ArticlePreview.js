@@ -6,6 +6,9 @@ import {
   ARTICLE_FAVORITED,
   ARTICLE_UNFAVORITED,
 } from "../../constants/actionTypes";
+import Tag from "../common/Tag/Tag";
+import TagsRow from "../common/TagsRow/TagsRow";
+
 import articlePreviewStyle from "./ArticlePreview.module.css";
 
 const FAVORITED_CLASS = "btn btn-sm btn-primary";
@@ -42,46 +45,42 @@ const ArticlePreview = (props) => {
   return (
     <>
       <div className={articlePreviewStyle.articlePreview}>
-        <img src="" alt="" className={articlePreviewStyle.articleImage} />
-        <div className={articlePreviewStyle.articleDescription}>
-          <div className={articlePreviewStyle.articleHeader}>
-            <div className={articlePreviewStyle.headerInfo}>
-              <Link to={`/@${article.author.username}`}>
-                <img
-                  src={article.author.image}
-                  alt={article.author.username}
-                  className={articlePreviewStyle.userImage}
-                />
+        <div className={articlePreviewStyle.articleHeader}>
+          <div className={articlePreviewStyle.headerInfo}>
+            <Link to={`/@${article.author.username}`}>
+              <img
+                src={article.author.image}
+                alt={article.author.username}
+                className={articlePreviewStyle.userImage}
+              />
+            </Link>
+            <div className={articlePreviewStyle.headerText}>
+              <Link className="author" to={`/@${article.author.username}`}>
+                {article.author.username}
               </Link>
-              <div className={articlePreviewStyle.headerText}>
-                <Link className="author" to={`/@${article.author.username}`}>
-                  {article.author.username}
-                </Link>
-                <span className="date">
-                  {new Date(article.createdAt).toDateString()}
-                </span>
-              </div>
+              <span className="date">
+                {new Date(article.createdAt).toDateString()}
+              </span>
             </div>
-            <button className={favoriteButtonClass} onClick={handleClick}>
-              <i className="ion-heart"></i> {article.favoritesCount}
-            </button>
           </div>
-          <div className={articlePreviewStyle.articleText}>
-            <h1>{article.title}</h1>
-            <p>{article.description}</p>
-          </div>
-          <div className={articlePreviewStyle.articleFooter}>
-            <span>Read more...</span>
-            <ul className="tag-list">
-              {article.tagList.map((tag) => {
-                return (
-                  <li className="tag-default tag-pill tag-outline" key={tag}>
-                    {tag}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+
+          <button className={favoriteButtonClass} onClick={handleClick}>
+            <i className="ion-heart"></i> {article.favoritesCount}
+          </button>
+        </div>
+        <div className={articlePreviewStyle.articleText}>
+          <h1>{article.title}</h1>
+          <p>{article.description}</p>
+        </div>
+        <div className={articlePreviewStyle.articleFooter}>
+          <Link to={`/article/${article.slug}`}>
+            <span className={articlePreviewStyle.link}>Read more...</span>
+          </Link>
+          <TagsRow>
+            {(article.tagList || []).map((tag) => (
+              <Tag key={tag} text={tag} />
+            ))}
+          </TagsRow>
         </div>
       </div>
 
