@@ -1,19 +1,19 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { AlertIcon, CheckIcon } from '../../../images/icons';
-import inputTextStyles from './InputText.module.css';
+import inputTextStyles from '../InputText/InputText.module.css';
+import inputMultilineTextStyles from './InputMultilineText.module.css';
 
-const InputText = ({ label, value, placeholder, status, error, onChange, onKeyDown }) => (
+const InputMultilineText = ({ label, value, placeholder, lines, status, error, onChange }) => (
   <div className={inputTextStyles.container}>
     <p className={inputTextStyles.label}>{label}</p>
     <div className={status ? inputTextStyles[`${status}Value`] : inputTextStyles.value}>
-      <input
-        type="text"
-        className={inputTextStyles.input}
+      <textarea
+        className={inputMultilineTextStyles.input}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        onKeyDown={onKeyDown}
+        rows={lines}
       />
       {status === 'error' && (
         <AlertIcon />
@@ -28,21 +28,21 @@ const InputText = ({ label, value, placeholder, status, error, onChange, onKeyDo
   </div>
 );
 
-InputText.propTypes = {
+InputMultilineText.propTypes = {
   label: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
+  lines: PropTypes.number,
   status: PropTypes.oneOf(['error', 'success']),
   error: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  onKeyDown: PropTypes.func,
 };
 
-InputText.defaultProps = {
+InputMultilineText.defaultProps = {
   placeholder: '',
+  lines: 5,
   status: null,
   error: null,
-  onKeyDown: () => {},
 };
 
-export default InputText;
+export default InputMultilineText;
