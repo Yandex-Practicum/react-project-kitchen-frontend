@@ -8,6 +8,7 @@ import {
 } from "../../constants/actionTypes";
 import Tag from "../common/Tag/Tag";
 import TagsRow from "../common/TagsRow/TagsRow";
+import { LikeIcon, LikeDefaultIcon } from "../../images/icons";
 
 import articlePreviewStyle from "./ArticlePreview.module.css";
 
@@ -64,8 +65,8 @@ const ArticlePreview = (props) => {
             </div>
           </div>
 
-          <button className={favoriteButtonClass} onClick={handleClick}>
-            <i className="ion-heart"></i> {article.favoritesCount}
+          <button className={articlePreviewStyle.button} onClick={handleClick}>
+            {article.favoritesCount} <LikeDefaultIcon />
           </button>
         </div>
         <div className={articlePreviewStyle.articleText}>
@@ -77,6 +78,7 @@ const ArticlePreview = (props) => {
             <span className={articlePreviewStyle.link}>Read more...</span>
           </Link>
           <TagsRow>
+            <Tag text={"Теги:"} white />
             {(article.tagList || []).map((tag) => (
               <Tag key={tag} text={tag} />
             ))}

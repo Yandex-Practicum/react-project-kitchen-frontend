@@ -3,9 +3,9 @@ import React from 'react';
 import { XIcon } from '../../../images/icons';
 import tagStyles from './Tag.module.css';
 
-const Tag = ({ text, closable, onClose }) => (
-  <div className={tagStyles.container}>
-    <p className={tagStyles.text}>{text}</p>
+const Tag = ({ text, closable, onClose, white = false }) => (
+  <div className={`${tagStyles.container} + ${white && tagStyles.white}`}>
+    <p className={`${tagStyles.text} + ${white && tagStyles.white}`}>{text}</p>
     {closable && (
       <div className={tagStyles.icon} onClick={onClose}>
         <XIcon />
@@ -18,6 +18,7 @@ Tag.propTypes = {
   text: PropTypes.string.isRequired,
   closable: PropTypes.bool,
   onClose: PropTypes.func,
+  white: PropTypes.bool,
 };
 
 Tag.defaultProps = {
