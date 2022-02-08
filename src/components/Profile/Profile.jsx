@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ArticleList from '../ArticleList';
+import ArticleList from '../common/ArticleList/ArticleList';
 import ProfileHeader from './ProfileHeader/ProfileHeader';
 import TabLinks from '../common/TabLinks/TabLinks';
 import agent from '../../agent';
