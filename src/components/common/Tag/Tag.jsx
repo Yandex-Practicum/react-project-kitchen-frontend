@@ -4,8 +4,10 @@ import { XIcon } from '../../../images/icons';
 import tagStyles from './Tag.module.css';
 
 const Tag = ({ text, closable, onClose, white }) => (
-  <div className={`${tagStyles.container} + ${white && tagStyles.white}`}>
-    <p className={`${tagStyles.text} + ${white && tagStyles.white}`}>{text}</p>
+  <div className={`${tagStyles.container} + ${white ? tagStyles.white : ''}`}>
+    <p className={`${tagStyles.text} + ${white ? tagStyles.white : ''}`}>
+      {text}
+    </p>
     {closable && (
       <div className={tagStyles.icon} onClick={onClose}>
         <XIcon />
