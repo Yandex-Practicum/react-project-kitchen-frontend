@@ -1,9 +1,10 @@
+import React from 'react';
+import { connect } from 'react-redux';
 import ArticleList from '../ArticleList';
 import ProfileHeader from './ProfileHeader/ProfileHeader';
 import TabLinks from '../common/TabLinks/TabLinks';
-import React from 'react';
 import agent from '../../agent';
-import { connect } from 'react-redux';
+
 import {
   FOLLOW_USER,
   UNFOLLOW_USER,

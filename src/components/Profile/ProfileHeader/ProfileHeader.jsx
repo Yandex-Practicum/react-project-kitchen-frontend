@@ -1,15 +1,15 @@
 import React from 'react';
-import agent from '../../../agent';
 import { connect } from 'react-redux';
+import Button from '../../common/Button/Button';
+import { PlusIcon, MinusIcon } from '../../../images/icons';
+import agent from '../../../agent';
+
 import {
   FOLLOW_USER,
   UNFOLLOW_USER,
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED,
 } from '../../../constants/actionTypes';
-
-import Button from '../../common/Button/Button';
-import { PlusIcon, MinusIcon } from '../../../images/icons';
 
 import profileHeaderStyles from './ProfileHeader.module.css';
 

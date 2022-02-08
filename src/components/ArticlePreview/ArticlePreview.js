@@ -1,15 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import agent from '../../agent';
 import { connect } from 'react-redux';
-import {
-  ARTICLE_FAVORITED,
-  ARTICLE_UNFAVORITED,
-} from '../../constants/actionTypes';
 import Tag from '../common/Tag/Tag';
 import TagsRow from '../common/TagsRow/TagsRow';
 import { LikeIcon, LikeDefaultIcon } from '../../images/icons';
 
+import {
+  ARTICLE_FAVORITED,
+  ARTICLE_UNFAVORITED,
+} from '../../constants/actionTypes';
+
+import agent from '../../agent';
 import articlePreviewStyle from './ArticlePreview.module.css';
 
 const FAVORITED_CLASS = 'btn btn-sm btn-primary';
