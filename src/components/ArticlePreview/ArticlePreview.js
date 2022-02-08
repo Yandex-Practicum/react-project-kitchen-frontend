@@ -1,19 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import agent from "../../agent";
-import { connect } from "react-redux";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import agent from '../../agent';
+import { connect } from 'react-redux';
 import {
   ARTICLE_FAVORITED,
   ARTICLE_UNFAVORITED,
-} from "../../constants/actionTypes";
-import Tag from "../common/Tag/Tag";
-import TagsRow from "../common/TagsRow/TagsRow";
-import { LikeIcon, LikeDefaultIcon } from "../../images/icons";
+} from '../../constants/actionTypes';
+import Tag from '../common/Tag/Tag';
+import TagsRow from '../common/TagsRow/TagsRow';
+import { LikeIcon, LikeDefaultIcon } from '../../images/icons';
 
-import articlePreviewStyle from "./ArticlePreview.module.css";
+import articlePreviewStyle from './ArticlePreview.module.css';
 
-const FAVORITED_CLASS = "btn btn-sm btn-primary";
-const NOT_FAVORITED_CLASS = "btn btn-sm btn-outline-primary";
+const FAVORITED_CLASS = 'btn btn-sm btn-primary';
+const NOT_FAVORITED_CLASS = 'btn btn-sm btn-outline-primary';
 
 const mapDispatchToProps = (dispatch) => ({
   favorite: (slug) =>
@@ -56,10 +56,10 @@ const ArticlePreview = (props) => {
               />
             </Link>
             <div className={articlePreviewStyle.headerText}>
-              <Link className="author" to={`/@${article.author.username}`}>
+              <Link className='author' to={`/@${article.author.username}`}>
                 {article.author.username}
               </Link>
-              <span className="date">
+              <span className='date'>
                 {new Date(article.createdAt).toDateString()}
               </span>
             </div>
@@ -78,7 +78,7 @@ const ArticlePreview = (props) => {
             <span className={articlePreviewStyle.link}>Read more...</span>
           </Link>
           <TagsRow>
-            <Tag text={"Теги:"} white />
+            <Tag text={'Теги:'} white />
             {(article.tagList || []).map((tag) => (
               <Tag key={tag} text={tag} />
             ))}

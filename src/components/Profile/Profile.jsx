@@ -1,15 +1,15 @@
-import ArticleList from "../ArticleList";
-import ProfileHeader from "./ProfileHeader/ProfileHeader";
-import TabLinks from "../common/TabLinks/TabLinks";
-import React from "react";
-import agent from "../../agent";
-import { connect } from "react-redux";
+import ArticleList from '../ArticleList';
+import ProfileHeader from './ProfileHeader/ProfileHeader';
+import TabLinks from '../common/TabLinks/TabLinks';
+import React from 'react';
+import agent from '../../agent';
+import { connect } from 'react-redux';
 import {
   FOLLOW_USER,
   UNFOLLOW_USER,
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED,
-} from "../../constants/actionTypes";
+} from '../../constants/actionTypes';
 
 const mapStateToProps = (state) => ({
   ...state.articleList,
@@ -57,24 +57,24 @@ class Profile extends React.Component {
       this.props.profile.username === this.props.currentUser.username;
 
     return (
-      <div className="profile-page">
-        <div className="user-info">
+      <div className='profile-page'>
+        <div className='user-info'>
           <ProfileHeader isUser={isUser} profile={profile} />
         </div>
-        <div className="container">
-          <div className="articles-toggle">
+        <div className='container'>
+          <div className='articles-toggle'>
             <TabLinks
               tabs={[
                 {
                   path: `/@${this.props.profile.username}`,
-                  name: "My Articles",
+                  name: 'My Articles',
                   isActive:
                     this.props.location.pathname ===
                     `/@${this.props.profile.username}`,
                 },
                 {
                   path: `/@${this.props.profile.username}/favorites`,
-                  name: "Favorited Articles",
+                  name: 'Favorited Articles',
                   isActive:
                     this.props.location.pathname ===
                     `/@${this.props.profile.username}/favorites`,
