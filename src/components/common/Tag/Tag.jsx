@@ -3,7 +3,7 @@ import React from 'react';
 import { XIcon } from '../../../images/icons';
 import tagStyles from './Tag.module.css';
 
-const Tag = ({ text, closable, onClose, white = false }) => (
+const Tag = ({ text, closable, onClose, white }) => (
   <div className={`${tagStyles.container} + ${white && tagStyles.white}`}>
     <p className={`${tagStyles.text} + ${white && tagStyles.white}`}>{text}</p>
     {closable && (
@@ -23,6 +23,7 @@ Tag.propTypes = {
 
 Tag.defaultProps = {
   closable: false,
+  white: false,
   onClose: () => {},
 };
 
