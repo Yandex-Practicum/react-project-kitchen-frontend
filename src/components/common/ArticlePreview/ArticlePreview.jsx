@@ -45,48 +45,46 @@ const ArticlePreview = (props) => {
   };
 
   return (
-    <>
-      <div className={articlePreviewStyle.articlePreview}>
-        <div className={articlePreviewStyle.articleHeader}>
-          <div className={articlePreviewStyle.headerInfo}>
-            <Link to={`/@${article.author.username}`}>
-              <img
-                src={article.author.image}
-                alt={article.author.username}
-                className={articlePreviewStyle.userImage}
-              />
-            </Link>
-            <div className={articlePreviewStyle.headerText}>
-              <Link className='author' to={`/@${article.author.username}`}>
-                {article.author.username}
-              </Link>
-              <span className='date'>
-                {new Date(article.createdAt).toDateString()}
-              </span>
-            </div>
-          </div>
-
-          <button className={articlePreviewStyle.button} onClick={handleClick}>
-            {article.favoritesCount} <LikeDefaultIcon />
-          </button>
-        </div>
-        <div className={articlePreviewStyle.articleText}>
-          <h1>{article.title}</h1>
-          <p>{article.description}</p>
-        </div>
-        <div className={articlePreviewStyle.articleFooter}>
-          <Link to={`/article/${article.slug}`}>
-            <span className={articlePreviewStyle.link}>Read more...</span>
+    <div className={articlePreviewStyle.articlePreview}>
+      <div className={articlePreviewStyle.articleHeader}>
+        <div className={articlePreviewStyle.headerInfo}>
+          <Link to={`/@${article.author.username}`}>
+            <img
+              src={article.author.image}
+              alt={article.author.username}
+              className={articlePreviewStyle.userImage}
+            />
           </Link>
-          <TagsRow>
-            <Tag text={'Теги:'} white />
-            {(article.tagList || []).map((tag) => (
-              <Tag key={tag} text={tag} />
-            ))}
-          </TagsRow>
+          <div className={articlePreviewStyle.headerText}>
+            <Link className='author' to={`/@${article.author.username}`}>
+              {article.author.username}
+            </Link>
+            <span className='date'>
+              {new Date(article.createdAt).toDateString()}
+            </span>
+          </div>
         </div>
+
+        <button className={articlePreviewStyle.button} onClick={handleClick}>
+          {article.favoritesCount} <LikeDefaultIcon />
+        </button>
       </div>
-    </>
+      <div className={articlePreviewStyle.articleText}>
+        <h1>{article.title}</h1>
+        <p>{article.description}</p>
+      </div>
+      <div className={articlePreviewStyle.articleFooter}>
+        <Link to={`/article/${article.slug}`}>
+          <span className={articlePreviewStyle.link}>Read more...</span>
+        </Link>
+        <TagsRow>
+          <Tag text={'Теги:'} white />
+          {(article.tagList || []).map((tag) => (
+            <Tag key={tag} text={tag} />
+          ))}
+        </TagsRow>
+      </div>
+    </div>
   );
 };
 
