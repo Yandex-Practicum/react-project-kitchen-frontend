@@ -4,7 +4,7 @@ import ArticlePreview from '../ArticlePreview/ArticlePreview';
 
 const ArticleList = (props) => {
   if (!props.articles) {
-    return <div className='article-preview'>Loading...</div>;
+    return <div className="article-preview">Загрузка...</div>;
   }
 
   if (props.articles.length === 0) {
