@@ -56,10 +56,10 @@ const ArticlePreview = (props) => {
             />
           </Link>
           <div className={articlePreviewStyle.headerText}>
-            <Link className='author' to={`/@${article.author.username}`}>
+            <Link className="author" to={`/@${article.author.username}`}>
               {article.author.username}
             </Link>
-            <span className='date'>
+            <span className="date">
               {new Date(article.createdAt).toDateString()}
             </span>
           </div>

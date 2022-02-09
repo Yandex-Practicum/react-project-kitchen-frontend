@@ -58,12 +58,12 @@ class Profile extends React.Component {
       this.props.profile.username === this.props.currentUser.username;
 
     return (
-      <div className='profile-page'>
-        <div className='user-info'>
+      <div className="profile-page">
+        <div className="user-info">
           <ProfileHeader isUser={isUser} profile={profile} />
         </div>
-        <div className='container'>
-          <div className='articles-toggle'>
+        <div className="container">
+          <div className="articles-toggle">
             <TabLinks
               tabs={[
                 {
