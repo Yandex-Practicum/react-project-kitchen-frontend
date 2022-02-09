@@ -9,10 +9,13 @@
   --button-background-active: #EC4926;
   --button-text-active: #0A0A0A;
   --input-background: #292929;
+  --article-img-background: #292929;
   --input-border-radius: 20px;
   --text-color: #FAFAFA;
   --error-color: #EC2626;
   --success-color: #26EC26;
+
+  --link-color-primary: #EC4926;
 }
 
 #root {
@@ -39,4 +42,13 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul{
+  margin: 0;
 }

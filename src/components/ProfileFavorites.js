@@ -1,12 +1,13 @@
-import { Profile, mapStateToProps } from "./Profile/Profile";
-import React from "react";
-import { Link } from "react-router-dom";
-import agent from "../agent";
-import { connect } from "react-redux";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Profile, mapStateToProps } from './Profile/Profile';
+import agent from '../agent';
+
 import {
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED,
-} from "../constants/actionTypes";
+} from '../constants/actionTypes';
 
 const mapDispatchToProps = (dispatch) => ({
   onLoad: (pager, payload) =>

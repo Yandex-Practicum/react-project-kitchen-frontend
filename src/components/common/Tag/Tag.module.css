@@ -7,6 +7,11 @@
   gap: 4px;
 }
 
+.white {
+  background-color: var(--text-color);
+  color: var(--background);
+}
+
 .text {
   composes: text from "../common.module.css";
   margin: 0;

@@ -1,15 +1,16 @@
-import ArticleList from "../ArticleList";
-import ProfileHeader from "./ProfileHeader/ProfileHeader";
-import TabLinks from "../common/TabLinks/TabLinks";
-import React from "react";
-import agent from "../../agent";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
+import ArticleList from '../common/ArticleList/ArticleList';
+import ProfileHeader from './ProfileHeader/ProfileHeader';
+import TabLinks from '../common/TabLinks/TabLinks';
+import agent from '../../agent';
+
 import {
   FOLLOW_USER,
   UNFOLLOW_USER,
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED,
-} from "../../constants/actionTypes";
+} from '../../constants/actionTypes';
 
 const mapStateToProps = (state) => ({
   ...state.articleList,
@@ -67,14 +68,14 @@ class Profile extends React.Component {
               tabs={[
                 {
                   path: `/@${this.props.profile.username}`,
-                  name: "My Articles",
+                  name: 'My Articles',
                   isActive:
                     this.props.location.pathname ===
                     `/@${this.props.profile.username}`,
                 },
                 {
                   path: `/@${this.props.profile.username}/favorites`,
-                  name: "Favorited Articles",
+                  name: 'Favorited Articles',
                   isActive:
                     this.props.location.pathname ===
                     `/@${this.props.profile.username}/favorites`,

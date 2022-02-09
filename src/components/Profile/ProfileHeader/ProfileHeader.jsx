@@ -1,17 +1,17 @@
-import React from "react";
-import agent from "../../../agent";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
+import Button from '../../common/Button/Button';
+import { PlusIcon, MinusIcon } from '../../../images/icons';
+import agent from '../../../agent';
+
 import {
   FOLLOW_USER,
   UNFOLLOW_USER,
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED,
-} from "../../../constants/actionTypes";
+} from '../../../constants/actionTypes';
 
-import Button from "../../common/Button/Button";
-import { PlusIcon, MinusIcon } from "../../../images/icons";
-
-import profileHeaderStyles from "./ProfileHeader.module.css";
+import profileHeaderStyles from './ProfileHeader.module.css';
 
 const mapStateToProps = (state) => ({
   currentUser: state.common.currentUser,
@@ -33,7 +33,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const ProfileHeader = ({ isUser, profile }) => {
   const buttonIcon = profile.following ? <MinusIcon /> : <PlusIcon />;
-  const buttonTitle = profile.following ? "Отписаться" : "Подписаться";
+  const buttonTitle = profile.following ? 'Отписаться' : 'Подписаться';
 
   const handleClick = (ev) => {
     ev.preventDefault();
