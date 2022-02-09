@@ -33,16 +33,16 @@ class ProfileFavorites extends Profile {
 
   renderTabs() {
     return (
-      <ul className='nav nav-pills outline-active'>
-        <li className='nav-item'>
-          <Link className='nav-link' to={`/@${this.props.profile.username}`}>
+      <ul className="nav nav-pills outline-active">
+        <li className="nav-item">
+          <Link className="nav-link" to={`/@${this.props.profile.username}`}>
             My Articles
           </Link>
         </li>
 
-        <li className='nav-item'>
+        <li className="nav-item">
           <Link
-            className='nav-link active'
+            className="nav-link active"
             to={`/@${this.props.profile.username}/favorites`}
           >
             Favorited Articles

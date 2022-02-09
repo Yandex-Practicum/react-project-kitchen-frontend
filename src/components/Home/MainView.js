@@ -12,9 +12,9 @@ const YourFeedTab = (props) => {
     };
 
     return (
-      <li className='nav-item'>
+      <li className="nav-item">
         <a
-          href=''
+          href=""
           className={props.tab === 'feed' ? 'nav-link active' : 'nav-link'}
           onClick={clickHandler}
         >
