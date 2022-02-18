@@ -3,9 +3,12 @@ import React from 'react';
 import { XIcon } from '../../../images/icons';
 import tagStyles from './Tag.module.css';
 
-const Tag = ({ text, closable, onClose, white }) => (
-  <div className={`${tagStyles.container} + ${white ? tagStyles.white : ''}`}>
-    <p className={`${tagStyles.text} + ${white ? tagStyles.white : ''}`}>
+const Tag = ({ text, closable, onClose, onClick, white }) => (
+  <div
+    className={`${tagStyles.container} ${white ? tagStyles.white : ''} ${onClick ? tagStyles.clickable : ''}`}
+    onClick={onClick ? () => onClick(text) : () => {}}
+  >
+    <p className={`${tagStyles.text} ${white ? tagStyles.white : ''}`}>
       {text}
     </p>
     {closable && (
@@ -20,6 +23,7 @@ Tag.propTypes = {
   text: PropTypes.string.isRequired,
   closable: PropTypes.bool,
   onClose: PropTypes.func,
+  onClick: PropTypes.func,
   white: PropTypes.bool,
 };
 
@@ -27,6 +31,7 @@ Tag.defaultProps = {
   closable: false,
   white: false,
   onClose: () => {},
+  onClick: null,
 };
 
 export default Tag;

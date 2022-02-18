@@ -1,0 +1,4 @@
+.preview {
+  composes: text from "../common.module.css";
+  margin: 32px 0;
+}
