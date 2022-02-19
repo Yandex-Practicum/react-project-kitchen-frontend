@@ -1,16 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import PageBanner from '../../common/PageBanner/PageBanner';
 import Button from '../../common/Button/Button';
 import { PlusIcon, MinusIcon } from '../../../images/icons';
 import agent from '../../../agent';
-
 import {
   FOLLOW_USER,
   UNFOLLOW_USER,
-  PROFILE_PAGE_LOADED,
-  PROFILE_PAGE_UNLOADED,
 } from '../../../constants/actionTypes';
-
+import { authorType } from '../../../utils/types';
 import profileHeaderStyles from './ProfileHeader.module.css';
 
 const mapStateToProps = (state) => ({
@@ -19,33 +18,33 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onFollow: (username) =>
+  onFollow: (username) => (
     dispatch({
       type: FOLLOW_USER,
       payload: agent.Profile.follow(username),
-    }),
-  onUnfollow: (username) =>
+    })),
+  onUnfollow: (username) => (
     dispatch({
       type: UNFOLLOW_USER,
       payload: agent.Profile.unfollow(username),
-    }),
+    })),
 });
 
-const ProfileHeader = ({ isUser, profile }) => {
+const ProfileHeader = ({ isUser, profile, onFollow, onUnfollow }) => {
   const buttonIcon = profile.following ? <MinusIcon /> : <PlusIcon />;
   const buttonTitle = profile.following ? 'Отписаться' : 'Подписаться';
 
   const handleClick = (ev) => {
     ev.preventDefault();
     if (profile.following) {
-      this.props.onUnfollow(profile.username);
+      onUnfollow(profile.username);
     } else {
-      this.props.onFollow(profile.username);
+      onFollow(profile.username);
     }
   };
 
   return (
-    <div className={profileHeaderStyles.profileHeader}>
+    <PageBanner>
       <img
         src={profile.image}
         className={profileHeaderStyles.userImage}
@@ -56,15 +55,21 @@ const ProfileHeader = ({ isUser, profile }) => {
         {!isUser && (
           <Button
             onClick={handleClick}
-            isActive={true}
+            isActive
             icon={buttonIcon}
             title={buttonTitle}
           />
         )}
       </div>
-    </div>
+    </PageBanner>
   );
 };
 
+ProfileHeader.propTypes = {
+  isUser: PropTypes.bool.isRequired,
+  profile: authorType.isRequired,
+  onFollow: PropTypes.func.isRequired,
+  onUnfollow: PropTypes.func.isRequired,
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileHeader);
-export { ProfileHeader, mapStateToProps };

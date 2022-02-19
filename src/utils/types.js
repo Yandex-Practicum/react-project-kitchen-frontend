@@ -1,5 +1,9 @@
 import PropTypes from 'prop-types';
 
+export const locationType = PropTypes.shape({
+  pathname: PropTypes.string.isRequired,
+});
+
 export const matchType = PropTypes.shape({
   params: PropTypes.object.isRequired,
   isExact: PropTypes.bool.isRequired,
