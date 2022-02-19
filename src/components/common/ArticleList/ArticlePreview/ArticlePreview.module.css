@@ -1,7 +1,7 @@
 .articlePreview{
   width: 808px;
   padding: 32px 16px;
-  box-shadow: inset 0 -1px 0 #212531;
+  box-shadow: inset 0 -1px 0 var(--shadow-color);
 }
 
 .articleHeader {

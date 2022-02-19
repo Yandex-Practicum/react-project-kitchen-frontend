@@ -29,3 +29,11 @@ export const articleType = PropTypes.shape({
   favoritesCount: PropTypes.number.isRequired,
   author: authorType,
 });
+
+export const userType = PropTypes.shape({
+  username: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  bio: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  following: PropTypes.bool.isRequired,
+});

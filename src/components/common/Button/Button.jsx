@@ -21,11 +21,12 @@ Button.propTypes = {
   isActive: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   icon: PropTypes.element,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 };
 
 Button.defaultProps = {
   icon: null,
+  onClick: () => {},
 };
 
 export default Button;
