@@ -12,8 +12,11 @@
   --article-img-background: #292929;
   --input-border-radius: 20px;
   --text-color: #FAFAFA;
-  --error-color: #EC2626;
+  --inactive-text-color: #666666;
+  --description-text-color: #999999;
   --success-color: #26EC26;
+  --error-color: #EC2626;
+  --shadow-color: #212531;
 
   --link-color-primary: #EC4926;
 }

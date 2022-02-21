@@ -1,46 +1,39 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Tag from '../../Tag/Tag';
 import TagsRow from '../../TagsRow/TagsRow';
 import { LikeDefaultIcon } from '../../../../images/icons';
-
 import {
   ARTICLE_FAVORITED,
   ARTICLE_UNFAVORITED,
 } from '../../../../constants/actionTypes';
-
 import agent from '../../../../agent';
+import { articleType } from '../../../../utils/types';
+import { ucFirst } from '../../../../utils/string';
 import articlePreviewStyle from './ArticlePreview.module.css';
 
-const FAVORITED_CLASS = 'btn btn-sm btn-primary';
-const NOT_FAVORITED_CLASS = 'btn btn-sm btn-outline-primary';
-
 const mapDispatchToProps = (dispatch) => ({
-  favorite: (slug) =>
+  favorite: (slug) => (
     dispatch({
       type: ARTICLE_FAVORITED,
       payload: agent.Articles.favorite(slug),
-    }),
-  unfavorite: (slug) =>
+    })),
+  unfavorite: (slug) => (
     dispatch({
       type: ARTICLE_UNFAVORITED,
       payload: agent.Articles.unfavorite(slug),
-    }),
+    })),
 });
 
-const ArticlePreview = (props) => {
-  const article = props.article;
-  const favoriteButtonClass = article.favorited
-    ? FAVORITED_CLASS
-    : NOT_FAVORITED_CLASS;
-
+const ArticlePreview = ({ article, favorite, unfavorite }) => {
   const handleClick = (ev) => {
     ev.preventDefault();
     if (article.favorited) {
-      props.unfavorite(article.slug);
+      unfavorite(article.slug);
     } else {
-      props.favorite(article.slug);
+      favorite(article.slug);
     }
   };
 
@@ -56,29 +49,35 @@ const ArticlePreview = (props) => {
             />
           </Link>
           <div className={articlePreviewStyle.headerText}>
-            <Link className="author" to={`/@${article.author.username}`}>
+            <Link className={articlePreviewStyle.author} to={`/@${article.author.username}`}>
               {article.author.username}
             </Link>
-            <span className="date">
-              {new Date(article.createdAt).toDateString()}
+            <span className={articlePreviewStyle.date}>
+              {ucFirst(new Date(article.createdAt).toLocaleDateString('ru', {
+                weekday: 'short',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+              }))}
             </span>
           </div>
         </div>
 
-        <button className={articlePreviewStyle.button} onClick={handleClick}>
-          {article.favoritesCount} <LikeDefaultIcon />
+        <button type="button" className={articlePreviewStyle.button} onClick={handleClick}>
+          {article.favoritesCount}
+          <LikeDefaultIcon />
         </button>
       </div>
       <div className={articlePreviewStyle.articleText}>
-        <h1>{article.title}</h1>
-        <p>{article.description}</p>
+        <h1 className={articlePreviewStyle.title}>{article.title}</h1>
+        <p className={articlePreviewStyle.description}>{article.description}</p>
       </div>
       <div className={articlePreviewStyle.articleFooter}>
         <Link to={`/article/${article.slug}`}>
-          <span className={articlePreviewStyle.link}>Read more...</span>
+          <span className={articlePreviewStyle.link}>Читать дальше</span>
         </Link>
-        <TagsRow>
-          <Tag text={'Теги:'} white />
+        <TagsRow align="right">
+          <Tag text="Теги:" white />
           {(article.tagList || []).map((tag) => (
             <Tag key={tag} text={tag} />
           ))}
@@ -86,6 +85,12 @@ const ArticlePreview = (props) => {
       </div>
     </div>
   );
+};
+
+ArticlePreview.propTypes = {
+  article: articleType.isRequired,
+  favorite: PropTypes.func.isRequired,
+  unfavorite: PropTypes.func.isRequired,
 };
 
 export default connect(() => ({}), mapDispatchToProps)(ArticlePreview);

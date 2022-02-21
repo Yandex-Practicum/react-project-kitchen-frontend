@@ -1,5 +1,15 @@
-.main {
-  max-width: 1140px;
+.content {
+  display: flex;
+  justify-content: space-between;
   width: 100%;
-  margin: 0 auto;
+}
+
+.articles {
+  max-width: 840px;
+  width: 100%;
+}
+
+.tags {
+  max-width: 268px;
+  width: 100%;
 }

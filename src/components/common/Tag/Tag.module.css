@@ -1,19 +1,25 @@
 .container {
   display: flex;
   justify-content: center;
+  align-items: center;
   border: 1px solid;
   border-radius: 100px;
   padding: 4px 8px;
   gap: 4px;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 .white {
   background-color: var(--text-color);
   color: var(--background);
+  border-color: var(--text-color);
 }
 
 .text {
-  composes: text from "../common.module.css";
+  composes: caption from "../common.module.css";
   margin: 0;
 }
 

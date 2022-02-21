@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background: var(--button-background-active);
+  border-radius: 16px;
+  gap: 16px;
+}
+
+.title {
+  composes: text from "../common.module.css";
+  color: var(--button-text-active);
+  margin: 0;
+}
