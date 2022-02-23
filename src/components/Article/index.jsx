@@ -1,12 +1,13 @@
-import CommentContainer from './CommentContainer';
 import React from 'react';
-import agent from '../../agent';
 import { connect } from 'react-redux';
 import marked from 'marked';
+import agent from '../../agent';
+
 import {
   ARTICLE_PAGE_LOADED,
   ARTICLE_PAGE_UNLOADED,
 } from '../../constants/actionTypes';
+import CommentContainer from './CommentContainer';
 import style from './Article.module.css';
 import { Link } from 'react-router-dom';
 import { ucFirst } from '../../utils/string';
@@ -50,7 +51,6 @@ class Article extends React.Component {
       this.props.currentUser.username === this.props.article.author.username;
     return (
       <div className={style.articlePage}>
-        {/*-----------------------------------*/}
         <div className={style.articleHeader}>
           <div className={style.headerInfo}>
             <Link to={`/@${this.props.article.author.username}`}>
@@ -83,8 +83,6 @@ class Article extends React.Component {
             </div>
           </div>
           <ArticleActions article={this.props.article} canModify={canModify} />
-
-          {/*-----------------------------------*/}
         </div>
         <h1 className={style.title}>{this.props.article.title}</h1>
 

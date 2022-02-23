@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
 import React from 'react';
-import agent from '../../../agent';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import agent from '../../../agent';
 import Button from '../../common/Button/Button';
 import { EditIcon, DeleteIcon } from '../../../images/icons';
 import { DELETE_ARTICLE } from '../../../constants/actionTypes';
@@ -12,16 +12,15 @@ const mapDispatchToProps = (dispatch) => ({
   onClickDelete: (payload) => dispatch({ type: DELETE_ARTICLE, payload }),
 });
 
-const ArticleActions = (props) => {
-  const article = props.article;
+const ArticleActions = ({ article, canModify, onClickDelete }) => {
   const del = () => {
-    props.onClickDelete(agent.Articles.del(article.slug));
+    onClickDelete(agent.Articles.del(article.slug));
   };
-  if (props.canModify) {
+  if (canModify) {
     return (
       <span className={styles.buttons}>
         <Link to={`/editor/${article.slug}`}>
-          <Button isActive icon={<EditIcon />} title={'Редактировать запись'} />
+          <Button isActive icon={<EditIcon />} title="Редактировать запись" />
         </Link>
 
         <Button
@@ -29,13 +28,12 @@ const ArticleActions = (props) => {
           isActive
           isBackground={false}
           icon={<DeleteIcon />}
-          title={'Удалить запись'}
+          title="Удалить запись"
         />
       </span>
     );
   }
-
-  return <span></span>;
+  return '';
 };
 
 export default connect(() => ({}), mapDispatchToProps)(ArticleActions);
