@@ -6,7 +6,8 @@ import ListErrors from '../ListErrors';
 
 type TCommentContainerProps = { 
   currentUser: { 
-    username: string; 
+    username: string;
+    image: string;
   }; 
   errors: any; 
   slug: string; 
