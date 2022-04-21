@@ -3,11 +3,21 @@ import agent from "../../agent";
 import { connect } from "react-redux";
 import { ADD_COMMENT } from "../../constants/actionTypes";
 
+type TCommentInputProps = { 
+  comments: any[]; 
+  currentUser: { 
+    username: any, 
+    image: string,
+  }; 
+  slug: any; 
+}
+
+
 const mapDispatchToProps = (dispatch: any) => ({
   onSubmit: (payload: any) => dispatch({ type: ADD_COMMENT, payload }),
 });
 
-const CommentInput = (props: any) => {
+const CommentInput: React.FC<TCommentInputProps> = (props: any) => {
   const [body, setBody] = useState<string>("");
 
   const currentBody = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -29,7 +39,7 @@ const CommentInput = (props: any) => {
           placeholder="Write a comment..."
           value={body}
           onChange={currentBody}
-          //rows="3"
+          // rows="3"
         ></textarea>
       </div>
       <div className="card-footer">
