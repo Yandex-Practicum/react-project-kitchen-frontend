@@ -3,12 +3,11 @@ import _superagent from 'superagent';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT = 'http://localhost:3000/api';
+export const API_ROOT = 'http://localhost:3000/api';
 
 const encode = encodeURIComponent;
 const responseBody = res => res.body;
-
-let token = null;
+ let token = null;
 const tokenPlugin = req => {
   if (token) {
     req.set('authorization', `Token ${token}`);
@@ -26,20 +25,20 @@ const requests = {
     superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody)
 };
 
-const Auth = {
-  current: () =>
-    requests.get('/user'),
-  login: (email, password) =>
-    requests.post('/users/login', { user: { email, password } }),
-  register: (username, email, password) =>
-    requests.post('/users', { user: { username, email, password } }),
-  save: user =>
-    requests.put('/user', { user })
-};
+// const Auth = {
+  // current: () =>
+  //   requests.get('/user'),
+  // login: (email, password) =>
+  //   requests.post('/users/login', { user: { email, password } }),
+  // register: (username, email, password) =>
+  //   requests.post('/users', { user: { username, email, password } }),
+  // save: user =>
+  //   requests.put('/user', { user })
+// };
 
-const Tags = {
-  getAll: () => requests.get('/tags')
-};
+// const Tags = {
+//   getAll: () => requests.get('/tags')
+// };
 
 const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
 const omitSlug = article => Object.assign({}, article, { slug: undefined })
@@ -88,9 +87,9 @@ const Profile = {
 
 export default {
   Articles,
-  Auth,
+  // Auth,
   Comments,
   Profile,
-  Tags,
+  // Tags,
   setToken: _token => { token = _token; }
 };
