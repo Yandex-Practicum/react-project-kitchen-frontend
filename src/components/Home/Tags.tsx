@@ -1,18 +1,22 @@
 import React from 'react';
 import agent from '../../agent';
 
-const Tags = props => {
+type TTagsProps = {
+  tags: string[] | null,
+  onClickTag: (tag: string, pager: (page: any) => {}, payload: any) => {}
+}
+
+const Tags: React.FC<TTagsProps> = props => {
   const tags = props.tags;
   if (tags) {
     return (
       <div className="tag-list">
         {
           tags.map(tag => {
-            const handleClick = ev => {
+            const handleClick = (ev: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
               ev.preventDefault();
               props.onClickTag(tag, page => agent.Articles.byTag(tag, page), agent.Articles.byTag(tag));
             };
-
             return (
               <a
                 href=""
