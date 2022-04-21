@@ -4,9 +4,9 @@ import React from 'react';
 type TCommentListProps = { 
   comments: any[]; 
   currentUser: { 
-    username: any; 
+    username: string; 
   }; 
-  slug: any; 
+  slug: string; 
 }
 
 const CommentList: React.FC<TCommentListProps> = (props) => {

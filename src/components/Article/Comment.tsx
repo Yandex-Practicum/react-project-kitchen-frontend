@@ -7,7 +7,7 @@ type TCommentProps = {
   currentUser: { 
     username: any; 
   }; 
-  slug: any; 
+  slug: string; 
 }
 
 const Comment: React.FC<TCommentProps> = (props) => {

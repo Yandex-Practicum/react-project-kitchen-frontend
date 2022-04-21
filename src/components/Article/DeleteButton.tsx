@@ -9,7 +9,7 @@ const mapDispatchToProps = (dispatch: any) => ({
 });
 
 type TDeleteButtonProps = { 
-  slug: any; 
+  slug: string; 
   commentId: any; 
   onClick: (arg0: any, arg1: any) => void; 
   show: any; 
