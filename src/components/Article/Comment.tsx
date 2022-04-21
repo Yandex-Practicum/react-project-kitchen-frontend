@@ -2,7 +2,15 @@ import DeleteButton from './DeleteButton';
 import { Link } from 'react-router-dom';
 import React from 'react';
 
-const Comment = props => {
+type TCommentProps = { 
+  comment: any; 
+  currentUser: { 
+    username: any; 
+  }; 
+  slug: any; 
+}
+
+const Comment: React.FC<TCommentProps> = (props) => {
   const comment = props.comment;
   const show = props.currentUser &&
     props.currentUser.username === comment.author.username;

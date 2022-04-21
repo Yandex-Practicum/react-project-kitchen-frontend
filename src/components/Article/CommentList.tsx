@@ -1,7 +1,15 @@
 import Comment from './Comment';
 import React from 'react';
 
-const CommentList = props => {
+type TCommentListProps = { 
+  comments: any[]; 
+  currentUser: { 
+    username: any; 
+  }; 
+  slug: any; 
+}
+
+const CommentList: React.FC<TCommentListProps> = (props) => {
   return (
     <div>
       {
