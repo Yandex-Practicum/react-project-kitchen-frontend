@@ -4,12 +4,12 @@ import { connect } from "react-redux";
 import { ADD_COMMENT } from "../../constants/actionTypes";
 
 type TCommentInputProps = { 
-  comments: any[]; 
   currentUser: { 
     username: any, 
     image: string,
   }; 
   slug: any; 
+  onSubmit: (payload: any) => void;
 }
 
 
@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch: any) => ({
   onSubmit: (payload: any) => dispatch({ type: ADD_COMMENT, payload }),
 });
 
-const CommentInput: React.FC<TCommentInputProps> = (props: any) => {
+const CommentInput: React.FC<TCommentInputProps> = (props) => {
   const [body, setBody] = useState<string>("");
 
   const currentBody = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
