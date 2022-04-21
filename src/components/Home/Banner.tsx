@@ -1,6 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-const Banner = ({ appName, token }) => {
+type TBannerProps = {
+  appName: string,
+  token: string | null
+}
+
+const Banner: React.FC<TBannerProps> = ({ appName, token }) => {
   if (token) {
     return null;
   }
