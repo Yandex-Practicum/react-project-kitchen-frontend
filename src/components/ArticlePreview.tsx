@@ -7,31 +7,41 @@ import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../constants/actionTypes
 const FAVORITED_CLASS = 'btn btn-sm btn-primary';
 const NOT_FAVORITED_CLASS = 'btn btn-sm btn-outline-primary';
 
-const mapDispatchToProps = dispatch => ({
-  favorite: slug => dispatch({
+const mapDispatchToProps = (dispatch: any) => ({
+  favorite: (slug: any) => dispatch({
     type: ARTICLE_FAVORITED,
     payload: agent.Articles.favorite(slug)
   }),
-  unfavorite: slug => dispatch({
+  unfavorite: (slug: any) => dispatch({
     type: ARTICLE_UNFAVORITED,
     payload: agent.Articles.unfavorite(slug)
   })
 });
 
-const ArticlePreview = props => {
-  const article = props.article;
+interface TArticlePreviewProps  {
+  article: any;
+  unfavorite: (arg0: any) => void;
+  favorite: (arg0: any) => void;
+}
+
+const ArticlePreview: React.FC<TArticlePreviewProps> = (props) => {
+  const { article } = props
   const favoriteButtonClass = article.favorited ?
     FAVORITED_CLASS :
     NOT_FAVORITED_CLASS;
 
-  const handleClick = ev => {
-    ev.preventDefault();
+
+
+const handleClick = (e: React.SyntheticEvent) => {
+    e.preventDefault();
     if (article.favorited) {
       props.unfavorite(article.slug);
     } else {
       props.favorite(article.slug);
     }
   };
+
+ 
 
   return (
     <div className="article-preview">
@@ -62,7 +72,7 @@ const ArticlePreview = props => {
         <span>Read more...</span>
         <ul className="tag-list">
           {
-            article.tagList.map(tag => {
+            article.tagList.map((tag: any) => {
               return (
                 <li className="tag-default tag-pill tag-outline" key={tag}>
                   {tag}
@@ -75,5 +85,6 @@ const ArticlePreview = props => {
     </div>
   );
 }
+
 
 export default connect(() => ({}), mapDispatchToProps)(ArticlePreview);
