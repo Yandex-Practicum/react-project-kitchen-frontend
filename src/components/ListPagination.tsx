@@ -4,12 +4,19 @@ import { connect } from 'react-redux';
 import { SET_PAGE } from '../constants/actionTypes';
 import { getAllArticles } from '../api';
 
-const mapDispatchToProps = dispatch => ({
-  onSetPage: (page, payload) =>
+const mapDispatchToProps = (dispatch: any) => ({
+  onSetPage: (page: any, payload: any) =>
     dispatch({ type: SET_PAGE, page, payload })
 });
 
-const ListPagination = props => {
+interface TListPaginationProps {
+  articlesCount: any;
+  pager: any;
+  onSetPage: (arg0: any, arg1: any ) => void;
+  currentPage: any
+}
+
+const ListPagination: React.FC<TListPaginationProps> = (props) => {
   if (props.articlesCount <= 10) {
     return null;
   }
@@ -19,7 +26,7 @@ const ListPagination = props => {
     range.push(i);
   }
 
-  const setPage = page => {
+  const setPage = (page: any) => {
     if(props.pager) {
       props.onSetPage(page, props.pager(page));
     }else {
@@ -35,8 +42,8 @@ const ListPagination = props => {
         {
           range.map(v => {
             const isCurrent = v === props.currentPage;
-            const onClick = ev => {
-              ev.preventDefault();
+            const onClick = (e: React.SyntheticEvent) => {
+              e.preventDefault();
               setPage(v);
             };
             return (

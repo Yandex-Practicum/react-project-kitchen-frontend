@@ -11,7 +11,7 @@ import {
 } from '../../constants/actionTypes';
 
 // YOU WILL DELETE NEXT LINE SOON
-import ToDelete from './ToDelete';
+// import ToDelete from './ToDelete';
 import { getAllArticles, getFeedArticles, getTags } from '../../api';
 
 const Promise = global.Promise;
