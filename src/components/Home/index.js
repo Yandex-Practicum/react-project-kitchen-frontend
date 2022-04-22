@@ -12,7 +12,7 @@ import {
 
 // YOU WILL DELETE NEXT LINE SOON
 import ToDelete from './ToDelete';
-import { getTags } from '../../api';
+import { getAllArticles, getFeedArticles, getTags } from '../../api';
 
 const Promise = global.Promise;
 
@@ -35,8 +35,10 @@ class Home extends React.Component {
   componentWillMount() {
     const tab = this.props.token ? 'feed' : 'all';
     const articlesPromise = this.props.token ?
-      agent.Articles.feed :
-      agent.Articles.all;
+      // agent.Articles.feed :
+      // agent.Articles.all;
+      getFeedArticles :
+      getAllArticles;
 
     // this.props.onLoad(tab, articlesPromise, Promise.all([agent.Tags.getAll(), articlesPromise()]));
     this.props.onLoad(tab, articlesPromise, Promise.all([getTags(), articlesPromise()]));

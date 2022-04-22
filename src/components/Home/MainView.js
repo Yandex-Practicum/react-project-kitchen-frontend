@@ -3,12 +3,14 @@ import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import { CHANGE_TAB } from '../../constants/actionTypes';
+import { getAllArticles, getFeedArticles } from '../../api';
 
 const YourFeedTab = props => {
   if (props.token) {
     const clickHandler = ev => {
       ev.preventDefault();
-      props.onTabClick('feed', agent.Articles.feed, agent.Articles.feed());
+      // props.onTabClick('feed', agent.Articles.feed, agent.Articles.feed());
+      props.onTabClick('feed', getFeedArticles, getFeedArticles());
     }
 
     return (
@@ -27,7 +29,9 @@ const YourFeedTab = props => {
 const GlobalFeedTab = props => {
   const clickHandler = ev => {
     ev.preventDefault();
-    props.onTabClick('all', agent.Articles.all, agent.Articles.all());
+    // props.onTabClick('all', agent.Articles.all, agent.Articles.all());
+    props.onTabClick('all', getAllArticles, getAllArticles());
+
   };
   return (
     <li className="nav-item">

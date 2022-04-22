@@ -7,6 +7,8 @@ import {
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED
 } from '../constants/actionTypes';
+import { getFavoritedArticles } from '../api';
+import { getProfile } from '../api';
 
 const mapDispatchToProps = dispatch => ({
   onLoad: (pager, payload) =>
@@ -17,9 +19,12 @@ const mapDispatchToProps = dispatch => ({
 
 class ProfileFavorites extends Profile {
   componentWillMount() {
-    this.props.onLoad(page => agent.Articles.favoritedBy(this.props.match.params.username, page), Promise.all([
-      agent.Profile.get(this.props.match.params.username),
-      agent.Articles.favoritedBy(this.props.match.params.username)
+    // this.props.onLoad(page => agent.Articles.favoritedBy(this.props.match.params.username, page), Promise.all([
+    this.props.onLoad(page => getFavoritedArticles(this.props.match.params.username, page), Promise.all([
+      // agent.Profile.get(this.props.match.params.username),
+      // agent.Articles.favoritedBy(this.props.match.params.username)
+      getProfile(this.props.match.params.username),
+      getFavoritedArticles(this.props.match.params.username)
     ]));
   }
 

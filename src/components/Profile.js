@@ -9,6 +9,10 @@ import {
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED
 } from '../constants/actionTypes';
+import { getArticlesByAuthor } from '../api';
+import { followUser as _followUserApi } from '../api';
+import { getProfile } from '../api';
+import { unfollowUser } from '../api';
 
 const EditProfileSettings = props => {
   if (props.isUser) {
@@ -64,12 +68,14 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onFollow: username => dispatch({
     type: FOLLOW_USER,
-    payload: agent.Profile.follow(username)
+    // payload: agent.Profile.follow(username)
+    payload: _followUserApi(username)
   }),
   onLoad: payload => dispatch({ type: PROFILE_PAGE_LOADED, payload }),
   onUnfollow: username => dispatch({
     type: UNFOLLOW_USER,
-    payload: agent.Profile.unfollow(username)
+    // payload: agent.Profile.unfollow(username)
+    payload: unfollowUser(username)
   }),
   onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED })
 });
@@ -77,8 +83,10 @@ const mapDispatchToProps = dispatch => ({
 class Profile extends React.Component {
   componentWillMount() {
     this.props.onLoad(Promise.all([
-      agent.Profile.get(this.props.match.params.username),
-      agent.Articles.byAuthor(this.props.match.params.username)
+      // agent.Profile.get(this.props.match.params.username),
+      getProfile(this.props.match.params.username),
+      // agent.Articles.byAuthor(this.props.match.params.username)
+      getArticlesByAuthor(this.props.match.params.username)
     ]));
   }
 
