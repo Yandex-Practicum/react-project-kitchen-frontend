@@ -5,7 +5,7 @@ type TTabProps = {
  onTabClick: (arg0: string) => void,
  type: string,
  active: boolean | null,
- hide: boolean,
+ hide: boolean | null,
 }
 
 

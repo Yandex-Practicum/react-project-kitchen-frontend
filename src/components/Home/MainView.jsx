@@ -20,17 +20,17 @@ import TabItem from '../Tab/Tab';
 //   );
 // };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   ...state.articleList,
   tags: state.home.tags,
   token: state.common.token
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onTabClick: (tab, pager, payload) => dispatch({ type: CHANGE_TAB, tab, pager, payload })
 });
 
-const MainView = props => {
+const MainView = (props) => {
 
   const clickHandler = (type) => {
     props.onTabClick(type, agent.Articles[type], agent.Articles[type]());
@@ -46,6 +46,7 @@ const MainView = props => {
               onTabClick={clickHandler}
               type="feed"
               active={props.tab === 'feed' ? true : false}
+              hide={null}
             />
           )}
 
@@ -53,8 +54,10 @@ const MainView = props => {
             name="All Feed" 
             onTabClick={clickHandler} 
             type="all" 
-            active={props.tab === 'all' ? true : false} />
-
+            active={props.tab === 'all' ? true : false} 
+            hide={null}
+            />
+            
           <TabItem
             name={`#${props.tag}`}
             onTabClick={clickHandler}

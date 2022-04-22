@@ -12,21 +12,22 @@ import {
 
 const Promise = global.Promise;
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: any) => ({
   ...state.home,
   appName: state.common.appName,
   token: state.common.token,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onClickTag: (tag, pager, payload) =>
+const mapDispatchToProps = (dispatch: any) => ({
+  onClickTag: (tag: any, pager: any, payload: any) =>
     dispatch({ type: APPLY_TAG_FILTER, tag, pager, payload }),
-  onLoad: (tab, pager, payload) =>
+  onLoad: (tab: any, pager: any, payload: any) =>
     dispatch({ type: HOME_PAGE_LOADED, tab, pager, payload }),
   onUnload: () => dispatch({ type: HOME_PAGE_UNLOADED }),
 });
 
-const Home = (props) => {
+const Home = (props: any) => {
+  
   useEffect(() => {
     const tab = props.token ? "feed" : "all";
     const articlesPromise = props.token
