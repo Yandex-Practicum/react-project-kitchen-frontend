@@ -10,8 +10,6 @@ import {
   APPLY_TAG_FILTER
 } from '../../constants/actionTypes';
 
-// YOU WILL DELETE NEXT LINE SOON
-import ToDelete from './ToDelete';
 
 const Promise = global.Promise;
 
