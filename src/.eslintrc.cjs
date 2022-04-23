@@ -7,7 +7,7 @@ module.exports = {
     mongo: false,
     es6: true,
   },
-  plugins: ['babel', 'prefer-arrow', 'ternary', 'promise', 'import', 'jsx-a11y'],
+  plugins: ['prefer-arrow', 'ternary', 'promise', 'import', 'jsx-a11y', "@typescript-eslint"],
   extends: [
     'plugin:react-hooks/recommended',
     'plugin:ternary/recommended',
@@ -17,17 +17,22 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'airbnb',
+    'airbnb-typescript',
     'airbnb/hooks',
     'plugin:jsx-a11y/strict',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
   ],
-  "parser": "babel-eslint", // Парсер для обработки jsx кода
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true,
       impliedStrict: 'true',
     },
-    "ecmaVersion": 12, // версия стандарта JavaScript. Последний 12 (2021).
-    "sourceType": "module" // Позволяет использовать import/export
+    "ecmaVersion": 12, // Версия стандарта JavaScript. Последний 12 (2021).
+    "sourceType": "module", // Позволяет использовать import/export
+    project: '../tsconfig.json'
   },
   ignorePatterns: ['*.cjs', 'src/reportWebVitals.js', 'src/reportWebVitals.ts', 'src/index.js'],
   rules: {
@@ -62,6 +67,7 @@ module.exports = {
         },
       ],
     'default-param-last': 'off',
+    '@typescript-eslint/rule-name': 'error',
   },
 }
 ;
