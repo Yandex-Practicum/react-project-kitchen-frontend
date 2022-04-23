@@ -1,4 +1,4 @@
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, legacy_createStore } from 'redux';
 import { createLogger } from 'redux-logger'
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import { promiseMiddleware, localStorageMiddleware } from './middleware';
@@ -21,5 +21,5 @@ const getMiddleware = () => {
     }
 };
 
-export const store = createStore(
+export const store = legacy_createStore(
     reducer, composeWithDevTools(getMiddleware()));

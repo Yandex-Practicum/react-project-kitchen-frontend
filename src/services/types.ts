@@ -6,7 +6,7 @@ export type TUser = {
     username: string;
 }
 
-type TAuthor = {
+export type TAuthor = {
     following: boolean;
     image: string;
     username: string;
