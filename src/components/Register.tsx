@@ -9,7 +9,7 @@ import {
   REGISTER_PAGE_UNLOADED
 } from '../constants/actionTypes';
 import { signup } from '../api';
-import SignupLoginSubmitBtn from "./SignupLoginBtn";
+import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
 
 const mapStateToProps = (state: any) => ({ ...state.auth });
 

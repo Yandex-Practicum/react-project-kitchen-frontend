@@ -9,7 +9,7 @@ import {
 import {login} from '../api';
 import auth from "../reducers/auth";
 import {connect} from "react-redux";
-import SignupLoginSubmitBtn from "./SignupLoginBtn";
+import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
 
 // TODO: типизацию useSelector перенести в общий файл
 // export type RootState = ReturnType<typeof rootReducer>;
