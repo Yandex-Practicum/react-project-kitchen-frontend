@@ -3,7 +3,13 @@ import { Link } from 'react-router-dom';
 import React from 'react';
 
 type TArticleActionsProps = {
-  article: any;
+  article: {
+    author: {
+      username: string;
+      image: string;
+    };
+    createdAt: any;
+  };
   canModify: boolean;
 }
 

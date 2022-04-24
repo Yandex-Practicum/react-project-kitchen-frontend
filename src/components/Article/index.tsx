@@ -51,7 +51,7 @@
 
 //           </div>
 //         </div>
-        
+
 
 //         <div className="container page">
 
@@ -105,6 +105,7 @@ import { connect } from 'react-redux';
 import { marked } from 'marked';
 import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../constants/actionTypes';
 
+
 const mapStateToProps = (state: { article: any; common: { currentUser: any; }; }) => ({
   ...state.article,
   currentUser: state.common.currentUser
@@ -113,53 +114,43 @@ const mapStateToProps = (state: { article: any; common: { currentUser: any; }; }
 const mapDispatchToProps = (dispatch: any) => ({
 
   onLoad: (payload: any) => {
-    console.log(payload)
     return dispatch({ type: ARTICLE_PAGE_LOADED, payload })
   },
 
-    
+
   onUnload: () =>
     dispatch({ type: ARTICLE_PAGE_UNLOADED })
 });
 
-type TArticleProps = { 
-  onLoad: any; 
-  match: { 
-    params: { 
-      id: string; 
-    }; 
-  }; 
-  onUnload: () => void; 
-  article: { 
-    body: any; 
-    author: { 
-      username: any; 
-    }; 
-    title: any; 
-    tagList: any[]; 
-  }; 
-  currentUser: { 
-    username: string; 
-    image: string; 
-  }; 
-  comments: any; 
-  commentErrors: any; 
+type TArticleProps = {
+  onLoad: any;
+  match: {
+    params: {
+      id: string;
+    };
+  };
+  onUnload: () => void;
+  article: {
+    body: string;
+    author: {
+      username: string;
+      image: string;
+    };
+    title: string;
+    tagList: any[];
+    createdAt: any;
+  };
+  currentUser: {
+    username: string;
+    image: string;
+  };
+  comments: [];
+  commentErrors: any;
 }
 
 
 
 const Article: React.FC<TArticleProps> = (props) => {
-  // componentWillMount() {
-  //   props.onLoad(Promise.all([
-  //     agent.Articles.get(this.props.match.params.id),
-  //     agent.Comments.forArticle(this.props.match.params.id)
-  //   ]));
-  // }
-
-  // componentWillUnmount() {
-  //   this.props.onUnload();
-  // }
-
   React.useEffect(() => {
     props.onLoad(Promise.all([
       agent.Articles.get(props.match.params.id),
@@ -169,17 +160,16 @@ const Article: React.FC<TArticleProps> = (props) => {
     return () => {
       props.onUnload();
     }
-  },[Promise])
+  },[])
 
-  // const markup = { __html: marked(props.article.body, { sanitize: true }) };
-  // const canModify = props.currentUser &&
-  //   props.currentUser.username === props.article.author.username;
-    const canModify = true
-    console.log(props.article)
-
-  if (!props.article.body) {
+  if (!props.article) {
     return null;
   }
+
+  const markup  = { __html: marked(props.article.body, { sanitize: true }) };
+
+  const canModify = props.currentUser &&
+    props.currentUser.username === props.article.author.username;
 
   return (
     <div className="article-page">
@@ -194,14 +184,13 @@ const Article: React.FC<TArticleProps> = (props) => {
 
         </div>
       </div>
-      
 
       <div className="container page">
 
         <div className="row article-content">
           <div className="col-xs-12">
 
-            {/* <div dangerouslySetInnerHTML={markup}></div> */}
+            <div dangerouslySetInnerHTML={markup}></div>
               <div>{props.article.body}</div>
             <ul className="tag-list">
               {
