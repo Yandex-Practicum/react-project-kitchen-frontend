@@ -9,6 +9,7 @@ import {
 import {login} from '../api';
 import auth from "../reducers/auth";
 import {connect} from "react-redux";
+import SignupLoginSubmitBtn from "./SignupLoginBtn";
 
 // TODO: типизацию useSelector перенести в общий файл
 // export type RootState = ReturnType<typeof rootReducer>;
@@ -122,14 +123,7 @@ export const Login: FunctionComponent<TProps> = ({onSubmit, onUnload, inProgress
                     value={password}
                     onChange={onChangePassword}/>
                 </fieldset>
-
-                <button
-                  className="btn btn-lg btn-primary pull-xs-right"
-                  type="submit"
-                  disabled={inProgress}>
-                  Sign in
-                </button>
-
+                <SignupLoginSubmitBtn btnText="Sign in" disabled={inProgress} />
               </fieldset>
             </form>
           </div>
@@ -138,5 +132,5 @@ export const Login: FunctionComponent<TProps> = ({onSubmit, onUnload, inProgress
       </div>
     </div>
   );
-}
+};
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

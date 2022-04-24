@@ -9,6 +9,7 @@ import {
   REGISTER_PAGE_UNLOADED
 } from '../constants/actionTypes';
 import { signup } from '../api';
+import SignupLoginSubmitBtn from "./SignupLoginBtn";
 
 const mapStateToProps = (state: any) => ({ ...state.auth });
 
@@ -96,14 +97,7 @@ const Register: React.FC<any> =({onSubmit}, errors) => {
                     value={password}
                     onChange={onChangePassword} />
                 </fieldset>
-
-                <button
-                  className="btn btn-lg btn-primary pull-xs-right"
-                  type="submit"
-                >
-                  Sign up
-                </button>
-
+                <SignupLoginSubmitBtn btnText="Sign up" />
               </fieldset>
             </form>
           </div>
