@@ -5,12 +5,18 @@ import { connect } from 'react-redux';
 import { DELETE_ARTICLE } from '../../constants/actionTypes';
 import { deleteArticle } from '../../api';
 
-const mapDispatchToProps = dispatch => ({
-  onClickDelete: payload =>
+const mapDispatchToProps = (dispatch: any) => ({
+  onClickDelete: (payload: any) =>
     dispatch({ type: DELETE_ARTICLE, payload })
 });
 
-const ArticleActions = props => {
+type TArticleActionsProps = {
+  onClickDelete: any;
+  article: any;
+  canModify: boolean;
+}
+
+const ArticleActions: React.FC<TArticleActionsProps> = props => {
   const article = props.article;
   const del = () => {
     // props.onClickDelete(agent.Articles.del(article.slug))
