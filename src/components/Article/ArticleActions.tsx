@@ -3,6 +3,7 @@ import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import { DELETE_ARTICLE } from '../../constants/actionTypes';
+import { deleteArticle } from '../../api';
 
 const mapDispatchToProps = (dispatch: any) => ({
   onClickDelete: (payload: any) =>
@@ -18,7 +19,8 @@ type TArticleActionsProps = {
 const ArticleActions: React.FC<TArticleActionsProps> = props => {
   const article = props.article;
   const del = () => {
-    props.onClickDelete(agent.Articles.del(article.slug))
+    // props.onClickDelete(agent.Articles.del(article.slug))
+    props.onClickDelete(deleteArticle(article.slug))
   };
   if (props.canModify) {
     return (
