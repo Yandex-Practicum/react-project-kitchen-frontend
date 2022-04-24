@@ -5,6 +5,7 @@ import agent from '../../agent';
 import { connect } from 'react-redux';
 import { marked } from 'marked';
 import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../constants/actionTypes';
+import { getArticle, getCommentsForArticle } from '../../api';
 
 
 const mapStateToProps = (state: { article: any; common: { currentUser: any; }; }) => ({
@@ -54,8 +55,8 @@ type TArticleProps = {
 const Article: React.FC<TArticleProps> = (props) => {
   React.useEffect(() => {
     props.onLoad(Promise.all([
-      agent.Articles.get(props.match.params.id),
-      agent.Comments.forArticle(props.match.params.id)
+      getArticle(props.match.params.id),
+      getCommentsForArticle(props.match.params.id)
     ]));
 
     return () => {
