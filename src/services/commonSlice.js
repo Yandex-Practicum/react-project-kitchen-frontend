@@ -4,6 +4,7 @@ const initialState = {
   appName: "Practicum Project Kitchen",
   token: null,
   errors: null,
+  currentUser: {},
 };
 
 export const commonSlice = createSlice({
