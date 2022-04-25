@@ -1,4 +1,3 @@
-import agent from '../agent';
 import Header from './header';
 import React from 'react';
 import {connect} from 'react-redux';
