@@ -1,38 +1,34 @@
 import ArticleList from "../ArticleList";
 import React from "react";
-import agent from "../../agent";
 import { connect } from "react-redux";
 import { CHANGE_TAB } from "../../constants/actionTypes";
 import TabItem from "../Tab/Tab";
 import { getAllArticles, getFeedArticles } from "../../api";
+import { useSelector, useDispatch } from "react-redux";
 
-// const TagFilterTab = props => {
-//   if (!props.tag) {
-//     return null;
-//   }
-
-//   return (
-//     <li className="nav-item">
-//       <a href="" className="nav-link active">
-//         <i className="ion-pound"></i> {props.tag}
-//       </a>
-//     </li>
-//   );
-// };
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: any) => ({
   ...state.articleList,
   tags: state.home.tags,
   token: state.common.token,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onTabClick: (tab, pager, payload) =>
+const mapDispatchToProps = (dispatch: any) => ({
+  onTabClick: (tab: any, pager: any, payload: any) =>
     dispatch({ type: CHANGE_TAB, tab, pager, payload }),
 });
 
-const MainView = (props) => {
-  const clickHandler = (type) => {
+const MainView = (props: any) => {
+  const articles = useSelector((state: any) => state.articleList);
+  const { token } = useSelector((state: any) => state.common);
+  console.log(token);
+  const { tags } = useSelector((state: any) => state.home);
+  const dispatch = useDispatch();
+
+  // const onTabClick = (tab, pager, payload) => {
+  //   dispatch({ type: CHANGE_TAB, tab, pager, payload }),
+  // }
+
+  const clickHandler = (type: string) => {
     if (type === "all") {
       props.onTabClick(type, getAllArticles, getAllArticles());
     } else {
@@ -45,7 +41,7 @@ const MainView = (props) => {
     <div className="col-md-9">
       <div className="feed-toggle">
         <ul className="nav nav-pills outline-active">
-          {props.token && (
+          {token && (
             <TabItem
               name="Your Feed"
               onTabClick={clickHandler}
@@ -85,3 +81,17 @@ const MainView = (props) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainView);
+
+// const TagFilterTab = props => {
+//   if (!props.tag) {
+//     return null;
+//   }
+
+//   return (
+//     <li className="nav-item">
+//       <a href="" className="nav-link active">
+//         <i className="ion-pound"></i> {props.tag}
+//       </a>
+//     </li>
+//   );
+// };

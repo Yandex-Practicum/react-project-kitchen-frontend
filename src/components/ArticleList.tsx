@@ -6,7 +6,9 @@ interface TArticleListProps {
   articles: any;
   pager?: any;
   articlesCount?: any;
+  loading?: boolean;
   state?: any;
+  currentPage?: any;
 }
 
 const ArticleList: React.FC<TArticleListProps> = (props: any) => {
