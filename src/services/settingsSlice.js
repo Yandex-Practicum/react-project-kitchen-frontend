@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   inProgress: false,
+  errors: null,
 }
 
 export const settingsSlice  = createSlice({
@@ -10,10 +11,10 @@ export const settingsSlice  = createSlice({
   reducers: {
     SETTINGS_SAVED: (state, action) => {
       state.inProgress = false
-      // errors: action.error ? action.payload.errors : null
+      errors = action.error ? action.payload.errors : null
     },
     SETTINGS_PAGE_UNLOADED: (state, action) => {
-      return {}
+      return initialState
     },
 
     ASYNC_START: (state, action) => {

@@ -10,6 +10,7 @@ import {
   APPLY_TAG_FILTER,
 } from "../../constants/actionTypes";
 import { getAllArticles, getFeedArticles, getTags } from '../../api';
+import { useSelector, useDispatch } from "react-redux";
 
 const Promise = global.Promise;
 
@@ -28,6 +29,7 @@ const mapDispatchToProps = (dispatch: any) => ({
 });
 
 const Home = (props: any) => {
+  const dispatch = useDispatch()
   
   useEffect(() => {
     const tab = props.token ? "feed" : "all";

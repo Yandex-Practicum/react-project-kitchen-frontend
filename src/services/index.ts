@@ -4,7 +4,8 @@ import articleListReducer from './articleListSlice';
 import commonReducer from './commonSlice';
 import editorReducer from './editorSlice';
 import profileReducer from './profileSLice';
-import settingsReducer from './settingsSlice'
+import settingsReducer from './settingsSlice.js';
+import authReducer from './authSlice.js';
 
 const rootReducer = {
   home: homeReducer,
@@ -14,6 +15,7 @@ const rootReducer = {
   editor: editorReducer,
   profile: profileReducer,
   settings: settingsReducer,
+  auth: authReducer,
 }
 
 export default rootReducer
