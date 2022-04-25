@@ -12,8 +12,8 @@ export const profileSlice = createSlice({
   initialState,
   reducers: {
 
-    PROFILE_PAGE_UNLOADED: (state, action) => {
-      return {};
+    PROFILE_PAGE_UNLOADED: (state, action) => { 
+      return initialState
     },
     PROFILE_PAGE_LOADED: (state, action) => {
       const { username, image, following } = action.payload[0].profile

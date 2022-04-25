@@ -27,8 +27,9 @@ export const editorSlice = createSlice({
       state.tagList = tagList;
     },
     EDITOR_PAGE_UNLOADED: (state, action) => {
-      return {};
+      return initialState;
     },
+
     ADD_TAG: (state, action) => {
       state.tagList = state.tagList.concat([state.tagInput]);
       state.tagInput = "";
@@ -36,10 +37,10 @@ export const editorSlice = createSlice({
     REMOVE_TAG: (state, action) => {
       state.tagList = state.tagList.filter((tag) => tag !== action.tag);
     },
-    UPDATE_FIELD_EDITOR: (state, action) => {
-      console.log({ ...state, [action.key]: action.value });
-      state = { ...state, [action.key]: action.value };
-    },
+    // UPDATE_FIELD_EDITOR: (state, action) => {
+    //   console.log({ ...state, [action.key]: action.value });
+    //   state = { ...state, [action.key]: action.value };
+    // },
   },
 });
 
@@ -49,5 +50,5 @@ export const {
   EDITOR_PAGE_UNLOADED,
   ADD_TAG,
   REMOVE_TAG,
-  UPDATE_FIELD_EDITOR,
+  // UPDATE_FIELD_EDITOR,
 } = editorSlice.actions;
