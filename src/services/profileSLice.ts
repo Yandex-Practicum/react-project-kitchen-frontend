@@ -4,6 +4,7 @@ const initialState = {
   username: '',
   image: '',
   following: null,
+  bio: ''
 }
 
 export const profileSlice = createSlice({

@@ -1,98 +1,90 @@
-import { mapStateToProps } from './Profile';
 import ProfileHeader from './ProfileHeader';
 import RenderTabs from './RenderTabs';
 import { useEffect } from 'react';
-import agent from '../agent';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
+  FOLLOW_USER,
   PROFILE_PAGE_LOADED,
-  PROFILE_PAGE_UNLOADED
+  PROFILE_PAGE_UNLOADED,
+  UNFOLLOW_USER
 } from '../constants/actionTypes';
 import ArticleList from './ArticleList';
-import { getFavoritedArticles } from '../api';
-import { getProfile } from '../api';
+import { getFavoritedArticles, unfollowUser, getProfile } from '../api';
 
+
+//Избавиться от этой бяки после роутинга.
 export type TProfileProps = {
-  profile: {
-    following: boolean;
-    image: string;
-    username: string;
-    bio: string;
-  };
-  currentUser: {
-    email: string;
-    token: string;
-    username: string;
-  };
-  onLoad: any;
-  onUnload: any;
-  onFollow: any;
-  onUnfollow: any;
   match: {
     isExact: boolean;
     path: string;
     url: string;
-    params:{username: string;}
+    params: { username: string; }
   };
-  pager: {
-    length: number;
-    name: string;
-  };
-  articles: Array<any>;
-  articlesCount: number;
-  currentPage: number
 }
 
-const mapDispatchToProps = (dispatch: any) => ({
-  onLoad: (pager: any, payload: any) =>
-    dispatch({ type: PROFILE_PAGE_LOADED, pager, payload }),
-  onUnload: () =>
+function ProfileFavorites({ match }: TProfileProps) {
+
+  const dispatch = useDispatch();
+  const { username, image, following, bio } = useSelector((state: any) => state.profile);
+  const { pager, articles, articlesCount, currentPage } = useSelector((state: any) => state.articleList);
+
+  //Эти onFollow'ы перенести в FollowUserButton после полного подключения Редакс. Здесь они не нужны.
+  const onFollow = (username: string) => {
+    dispatch({
+      type: FOLLOW_USER,
+      payload: _followUserApi(username)
+    })
+  }
+
+  const onUnfollow = (username: string) => {
+    dispatch({
+      type: UNFOLLOW_USER,
+      payload: unfollowUser(username)
+    })
+  }
+  //Вынести эти функции onLoad и onUnload в отдельную директорию или вообще объединить Profile с ProfileFavoritos.
+  const onLoad = (payload: any) => {
+    dispatch({ type: PROFILE_PAGE_LOADED, payload });
+  }
+
+  const onUnload = () => {
     dispatch({ type: PROFILE_PAGE_UNLOADED })
-});
+  }
 
-function ProfileFavorites(props: TProfileProps) {
-
-  const profile = props.profile;
-  const isUser = props.currentUser &&
-    props.profile.username === props.currentUser.username;
-
+  //Match берет данные из роутинга. При обновлении роутера необходимо избавиться от пропсов и считывать из адресной строки. Возможно useEffect отрефакторить.
   useEffect(() => {
-    // props.onLoad((page: any) => agent.Articles.favoritedBy(props.match.params.username, page), Promise.all([
-    props.onLoad((page: any) => getFavoritedArticles(props.match.params.username, page), Promise.all([  
-      // agent.Profile.get(props.match.params.username),
-      // agent.Articles.favoritedBy(props.match.params.username)
-      getProfile(props.match.params.username),
-      getFavoritedArticles(props.match.params.username)
+    onLoad(Promise.all([
+      getProfile(match.params.username),
+      getFavoritedArticles(match.params.username)
     ]));
 
     return () => {
-      props.onUnload();
+      onUnload();
     }
   }, [])
 
 
-  if (!profile) {
+  if (!username) {
     return null;
   }
   return (
     <div className="profile-page">
       <ProfileHeader
-        profile={profile}
-        isUser={isUser}
-        follow={props.onFollow}
-        unfollow={props.onUnfollow}
+        profile={{ username, image, following, bio }}
+        follow={onFollow}
+        unfollow={onUnfollow}
       />
       <div className="container">
         <div className="row">
           <div className="col-xs-12 col-md-10 offset-md-1">
             <div className="articles-toggle">
-              <RenderTabs username={profile.username} />
+              <RenderTabs username={username} />
             </div>
             <ArticleList
-              pager={props.pager}
-              articles={props.articles}
-              articlesCount={props.articlesCount}
-              state={props.currentPage} />
+              pager={pager}
+              articles={articles}
+              articlesCount={articlesCount}
+              state={currentPage} />
           </div>
 
         </div>
@@ -102,4 +94,8 @@ function ProfileFavorites(props: TProfileProps) {
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileFavorites);
+export default ProfileFavorites
+function _followUserApi(username: any) {
+  throw new Error('Function not implemented.');
+}
+
