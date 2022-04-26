@@ -14,7 +14,7 @@ import App from './components/App';
 
 ReactDOM.render((
   <Provider store={store}>
-    <BrowserRouter basename="Blog of Everest">      
+    <BrowserRouter basename="/">
       <Route path="/" component={App} />
     </BrowserRouter>
   </Provider>

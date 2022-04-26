@@ -1,34 +1,23 @@
 import ListErrors from './ListErrors';
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   ARTICLE_SUBMITTED,
 } from '../constants/actionTypes';
 import { getArticle } from '../api';
 import { updateArticle } from '../api';
 import { createArticle } from '../api';
-import { IArticleRes } from '../api/types';
-
-const mapStateToProps = (state: { editor: any; }) => ({
-  ...state.editor
-});
-
-const mapDispatchToProps = (dispatch: (arg0: { type: string; payload?: any; tag?: any; key?: any; value?: any; }) => any) => ({
-  onSubmit: (payload: any) =>
-    dispatch({ type: ARTICLE_SUBMITTED, payload })
-});
 
 type TEditorProps = {
-  onSubmit: (arg0: Promise<IArticleRes>) => void;
   match: {
     params: {
       slug: string;
     };
   };
-  errors: any;
 }
 
 const Editor: React.FC<TEditorProps> = (props) => {
+  const dispatch = useDispatch();
 
   const [form, setForm] = React.useState({ title: "", description: "", body: "", tagInput: ""});
   const [tagList, setTagList] = React.useState<Array<string>>([]);
@@ -54,6 +43,9 @@ const Editor: React.FC<TEditorProps> = (props) => {
     setTagList(tagList.filter(tag => tag !== e.target.parentElement.textContent));
   };
 
+  const onSubmit = (payload: any) =>
+    dispatch({ type: ARTICLE_SUBMITTED, payload })
+
   const submitForm = (ev: { preventDefault: () => void; }) => {
     ev.preventDefault();
 
@@ -75,7 +67,7 @@ const Editor: React.FC<TEditorProps> = (props) => {
       setErrors(err)
     })
 
-    props.onSubmit(promise);
+    onSubmit(promise);
   };
 
   React.useEffect(() => {
@@ -191,4 +183,4 @@ const Editor: React.FC<TEditorProps> = (props) => {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Editor);
+export default Editor;

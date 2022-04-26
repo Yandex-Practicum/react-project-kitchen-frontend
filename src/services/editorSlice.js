@@ -17,7 +17,7 @@ export const editorSlice = createSlice({
     EDITOR_PAGE_LOADED: (state, action) => {
       const { slug, title, description, image, body, tagList } =
       action.payload.article;
-      
+
       state.articleSlug = slug;
       state.title = title;
       state.description = description;
