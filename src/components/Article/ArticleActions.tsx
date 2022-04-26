@@ -19,7 +19,6 @@ type TArticleActionsProps = {
 const ArticleActions: React.FC<TArticleActionsProps> = props => {
   const article = props.article;
   const del = () => {
-    // props.onClickDelete(agent.Articles.del(article.slug))
     props.onClickDelete(deleteArticle(article.slug))
   };
   if (props.canModify) {
