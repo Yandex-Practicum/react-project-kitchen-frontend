@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import ListErrors from './ListErrors';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   REGISTER,
@@ -8,14 +8,31 @@ import {
 } from '../constants/actionTypes';
 import { signup } from '../api';
 import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
+import { useForm } from 'react-hook-form';
 
-const Register: React.FC<any> =() => {
+
+type FormData = {
+  username: string;
+  email: string;
+  password: string
+};
+
+const Register: React.FC<any> = () => {
   const dispatch = useDispatch();
-  const errors = useSelector((state: any) => state.auth.errors)
+  const errorsSubmite = useSelector((state: any) => state.auth.errors)
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
+  const {
+    register,
+    formState: { errors },
+    handleSubmit
+  } = useForm<FormData>({
+    mode: "onChange",
+    defaultValues: {
+      email: '',
+      password: '',
+      username: ''
+    }
+  })
 
   useEffect(() => {
     return () => {
@@ -23,22 +40,10 @@ const Register: React.FC<any> =() => {
     }
   }, [])
 
-  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  }
-
-  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  }
-
-  const onChangeUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value);
-  }
-
-  const submitForm = (e: React.SyntheticEvent<Element, Event>) => {
-    e.preventDefault();
-      dispatch({ type: REGISTER, payload: signup(username, email, password)})
-  }
+  const handleSubmitForm = handleSubmit(({username, email, password}, e) => {
+    e && e.preventDefault();
+    dispatch({ type: REGISTER, payload: signup(username, email, password)})
+  });
 
   return (
     <section className="auth-page">
@@ -53,37 +58,64 @@ const Register: React.FC<any> =() => {
               </Link>
             </p>
 
-            <ListErrors errors={errors} />
+            <ListErrors errors={errorsSubmite} />
 
-            <form action='POST' onSubmit={submitForm}>
+            <form action='POST' onSubmit={handleSubmitForm}>
               <fieldset>
 
                 <fieldset className="form-group">
                   <input
                     className="form-control form-control-lg"
                     type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={onChangeUsername} />
+                    placeholder="username"
+                    {...register('username', {
+                      required: "Это поле обязательно к заполнению.",
+                      minLength: {
+                        value: 2,
+                        message: "Имя должно быть не менее двух букв."
+                      }
+                    })}
+                  />
                 </fieldset>
+                <div style={{ height: 40 }}>
+                  {errors?.username && <p>{errors?.username?.message}</p>}
+                </div>
 
                 <fieldset className="form-group">
                   <input
                     className="form-control form-control-lg"
                     type="email"
                     placeholder="Email"
-                    value={email}
-                    onChange={onChangeEmail} />
+                    {...register('email', {
+                      required: "Это поле обязательно к заполнению.",
+                      pattern: {
+                        value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                        message: 'Пример Email: name@example.com'
+                      }
+                    })}
+                  />
                 </fieldset>
+                <div style={{ height: 40 }}>
+                  {errors?.email && <p>{errors?.email?.message}</p>}
+                </div>
 
                 <fieldset className="form-group">
                   <input
                     className="form-control form-control-lg"
                     type="password"
                     placeholder="Password"
-                    value={password}
-                    onChange={onChangePassword} />
+                    {...register('password', {
+                      required: "Это поле обязательно к заполнению.",
+                      minLength: {
+                        value: 5,
+                        message: "Пароль должен быть более 4 символов."
+                      }
+                    })}
+                  />
                 </fieldset>
+                <div style={{ height: 40 }}>
+                  {errors?.password && <p>{errors?.password?.message}</p>}
+                </div>
                 <SignupLoginSubmitBtn btnText="Sign up" />
               </fieldset>
             </form>
