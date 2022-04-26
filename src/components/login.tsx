@@ -12,65 +12,58 @@ import {
 } from '../services/commonSlice'
 import {login} from '../api';
 import auth from "../reducers/auth";
-import {connect} from "react-redux";
+import {connect, TypedUseSelectorHook, useDispatch, useSelector as selectorHook} from "react-redux";
 import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
+import {store} from "../services/store";
+import rootReducer from "../reducer"; // TODO заменить на rootReducer из services, когда будут готовы слайсы
 
 // TODO: типизацию useSelector перенести в общий файл
-// export type RootState = ReturnType<typeof rootReducer>;
-// export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;
-// export const useAppDispatch = () => useDispatch<typeof store.dispatch>();
+export type RootState = ReturnType<typeof rootReducer>;
+export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;
+export const useAppDispatch = () => useDispatch<typeof store.dispatch>();
 
 // errors - см тип внутри ListErrors
 
-const mapStateToProps = (state: any) => {
-  const {auth} = state
-  return {
-    inProgress: auth.inProgress,
-    errors: auth.errors
-  }
-}
+// const mapStateToProps = (state: any) => {
+//   const {auth} = state
+//   return {
+//     inProgress: auth.inProgress,
+//     errors: auth.errors
+//   }
+// }
 
-const mapDispatchToProps = (dispatch: any) => ({
+// const mapDispatchToProps = (dispatch: any) => ({
   // onChangeEmail: (value: any) =>
   //   dispatch({ type: UPDATE_FIELD_AUTH, key: 'email', value }),
   // onChangePassword: (value: any) =>
   //   dispatch({ type: UPDATE_FIELD_AUTH, key: 'password', value }),
-  onSubmit: (email: string, password: string) =>
-    // dispatch({ type: LOGIN, payload: agent.Auth.login(email, password) }),
-    dispatch({type: LOGIN, payload: login(email, password)}),
-  onUnload: () =>
-    dispatch({type: LOGIN_PAGE_UNLOADED})
-});
+//   onSubmit: (email: string, password: string) =>
+//     // dispatch({ type: LOGIN, payload: agent.Auth.login(email, password) }),
+//     dispatch({type: LOGIN, payload: login(email, password)}),
+//   onUnload: () =>
+//     dispatch({type: LOGIN_PAGE_UNLOADED})
+// });
 
+// export const Login: FunctionComponent<TProps> = ({onSubmit, onUnload, inProgress, errors}) => {
+export const Login: FunctionComponent = () => {
+  const {auth} = useSelector((state: any) => {
+    return state;
+  })
 
-// TODO: нормально типизировать вот это все, если будет нужно
-type TProps = {
-  onSubmit: any,
-  onUnload: any,
-  mapStateToProps: any,
-  errors: any,
-  inProgress: boolean
-}
-
-export const Login: FunctionComponent<TProps> = ({onSubmit, onUnload, inProgress, errors}) => {
-  // const {auth} = useSelector(state => {
-  //   return state;
-  // })
-  //
-  // const dispatch = useAppDispatch();
-  // // TODO: это auth.actions?
+  const dispatch = useAppDispatch();
+  // TODO: это auth.actions?
   // const onChangeEmail = (value: string) => {
   //   dispatch({type: UPDATE_FIELD_AUTH, key: 'email', value})
   // }
   // const onChangePassword = (value: string) => {
   //   dispatch({type: UPDATE_FIELD_AUTH, key: 'password', value})
   // }
-  // const onSubmit = (email: string, password: string) => {
-  //   dispatch({ type: LOGIN, payload: login(email, password) })
-  // }
-  // const onUnload = () => {
-  //   dispatch({type: LOGIN_PAGE_UNLOADED})
-  // }
+  const onSubmit = (email: string, password: string) => {
+    dispatch({ type: LOGIN, payload: login(email, password) })
+  }
+  const onUnload = () => {
+    dispatch({type: LOGIN_PAGE_UNLOADED})
+  }
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -105,7 +98,7 @@ export const Login: FunctionComponent<TProps> = ({onSubmit, onUnload, inProgress
               </Link>
             </p>
 
-            <ListErrors errors={errors}/>
+            <ListErrors errors={auth.errors}/>
 
             <form onSubmit={submitForm}>
               <fieldset>
@@ -127,7 +120,7 @@ export const Login: FunctionComponent<TProps> = ({onSubmit, onUnload, inProgress
                     value={password}
                     onChange={onChangePassword}/>
                 </fieldset>
-                <SignupLoginSubmitBtn btnText="Sign in" disabled={inProgress} />
+                <SignupLoginSubmitBtn btnText="Sign in" disabled={auth.inProgress} />
               </fieldset>
             </form>
           </div>
@@ -137,4 +130,4 @@ export const Login: FunctionComponent<TProps> = ({onSubmit, onUnload, inProgress
     </div>
   );
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;
