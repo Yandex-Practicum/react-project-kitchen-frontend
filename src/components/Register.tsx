@@ -1,56 +1,43 @@
 import { Link } from 'react-router-dom';
 import ListErrors from './ListErrors';
-import React, { useState } from 'react';
-import agent from '../agent';
-import { connect } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
-  UPDATE_FIELD_AUTH,
   REGISTER,
   REGISTER_PAGE_UNLOADED
 } from '../constants/actionTypes';
 import { signup } from '../api';
 import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
 
-const mapStateToProps = (state: any) => ({ ...state.auth });
+const Register: React.FC<any> =() => {
+  const dispatch = useDispatch();
+  const errors = useSelector((state: any) => state.auth.errors)
 
-const mapDispatchToProps = (dispatch: any) => ({
-  onChangeEmail: (value: any) =>
-    dispatch({ type: UPDATE_FIELD_AUTH, key: 'email', value }),
-  onChangePassword: (value: any) =>
-    dispatch({ type: UPDATE_FIELD_AUTH, key: 'password', value }),
-  onChangeUsername: (value: any) =>
-    dispatch({ type: UPDATE_FIELD_AUTH, key: 'username', value }),
-  onSubmit: (username: string, email: string, password: string) => {
-    // const payload = agent.Auth.register(username, email, password);
-    const payload = signup(username, email, password);
-    dispatch({ type: REGISTER, payload })
-  },
-  onUnload: () =>
-    dispatch({ type: REGISTER_PAGE_UNLOADED })
-});
-
-const Register: React.FC<any> =({onSubmit}, errors) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
 
+  useEffect(() => {
+    return () => {
+      dispatch({ type: REGISTER_PAGE_UNLOADED });
+    }
+  }, [])
+
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value)
+    setEmail(e.target.value);
   }
 
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value)
+    setPassword(e.target.value);
   }
 
   const onChangeUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value)
+    setUsername(e.target.value);
   }
 
   const submitForm = (e: React.SyntheticEvent<Element, Event>) => {
     e.preventDefault();
-    if (username && email && password) {
-      onSubmit(username, email, password);
-    }
+      dispatch({ type: REGISTER, payload: signup(username, email, password)})
   }
 
   return (
@@ -108,4 +95,4 @@ const Register: React.FC<any> =({onSubmit}, errors) => {
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Register);
+export default Register
