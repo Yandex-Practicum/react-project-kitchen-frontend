@@ -2,12 +2,18 @@ import ProfileHeader from './ProfileHeader';
 import RenderTabs from './RenderTabs';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+// import {
+//   FOLLOW_USER,
+//   PROFILE_PAGE_LOADED,
+//   PROFILE_PAGE_UNLOADED,
+//   UNFOLLOW_USER
+// } from '../constants/actionTypes';
 import {
   FOLLOW_USER,
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED,
   UNFOLLOW_USER
-} from '../constants/actionTypes';
+} from '../services/profileSlice';
 import ArticleList from './ArticleList';
 import { getFavoritedArticles, unfollowUser, getProfile } from '../api';
 

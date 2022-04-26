@@ -33,4 +33,4 @@ export const authSlice  = createSlice({
 })
 
 export default authSlice.reducer
-export const { ASYNC_START, UPDATE_FIELD_AUTH } = authSlice.actions
+export const { ASYNC_START, REGISTER,REGISTER_PAGE_UNLOADED, UPDATE_FIELD_AUTH } = authSlice.actions

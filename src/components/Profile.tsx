@@ -3,10 +3,14 @@ import ProfileHeader from './ProfileHeader';
 import RenderTabs from './RenderTabs';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+// import {
+//   PROFILE_PAGE_LOADED,
+//   PROFILE_PAGE_UNLOADED
+// } from '../constants/actionTypes';
 import {
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED
-} from '../constants/actionTypes';
+} from '../services/profileSlice';
 import { TProfileProps } from './ProfileFavorites';
 import {
   getArticlesByAuthor,

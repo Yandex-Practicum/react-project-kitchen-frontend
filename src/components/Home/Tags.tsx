@@ -1,5 +1,4 @@
 import React from 'react';
-import agent from '../../agent';
 import { getArticlesByTag } from '../../api';
 
 type TTagsProps = {

@@ -1,7 +1,7 @@
 import React from 'react';
-import agent from '../agent';
 import { connect } from 'react-redux';
-import { SET_PAGE } from '../constants/actionTypes';
+// import { SET_PAGE } from '../constants/actionTypes';
+import { SET_PAGE } from '../services/articleListSlice';
 import { getAllArticles } from '../api';
 
 const mapDispatchToProps = (dispatch: any) => ({

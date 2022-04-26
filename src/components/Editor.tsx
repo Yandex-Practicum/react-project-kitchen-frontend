@@ -1,9 +1,9 @@
 import ListErrors from './ListErrors';
 import React from 'react';
 import { useDispatch } from 'react-redux';
+
 import {
-  ARTICLE_SUBMITTED,
-} from '../constants/actionTypes';
+  ARTICLE_SUBMITTED } from '../services/commonSlice'
 import { getArticle } from '../api';
 import { updateArticle } from '../api';
 import { createArticle } from '../api';

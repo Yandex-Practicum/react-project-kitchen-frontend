@@ -1,7 +1,6 @@
 import React from 'react';
-import agent from '../../agent';
 import { connect, useDispatch } from 'react-redux';
-import { DELETE_COMMENT } from '../../constants/actionTypes';
+import { DELETE_COMMENT } from '../../services/articleSlice';
 import { deleteComment } from '../../api';
 
 type TDeleteButtonProps = {

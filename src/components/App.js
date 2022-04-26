@@ -1,7 +1,9 @@
 import Header from './header';
 import React from 'react';
 import {connect} from 'react-redux';
-import {APP_LOAD, REDIRECT} from '../constants/actionTypes';
+// import {APP_LOAD, REDIRECT} from '../constants/actionTypes';
+import {APP_LOAD, REDIRECT} from '../services/commonSlice';
+
 import {Route, Switch} from 'react-router-dom';
 import Article from '../components/Article';
 import Editor from '../components/Editor';
@@ -11,7 +13,7 @@ import Profile from '../components/Profile';
 import ProfileFavorites from '../components/ProfileFavorites';
 import Register from '../components/Register';
 import Settings from '../components/Settings';
-import { store } from '../store';
+import { store } from '../services/store';
 import { push } from 'react-router-redux';
 import { auth, setTokenAxios } from '../api';
 

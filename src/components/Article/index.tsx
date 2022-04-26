@@ -3,7 +3,7 @@ import CommentContainer from './CommentContainer';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { marked } from 'marked';
-import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../constants/actionTypes';
+import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED} from '../../services/articleSlice';
 import { getArticle, getCommentsForArticle } from '../../api';
 
 type TArticleProps = {

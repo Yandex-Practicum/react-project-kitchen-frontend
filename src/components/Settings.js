@@ -2,11 +2,19 @@ import ListErrors from './ListErrors';
 import React from 'react';
 import agent from '../agent';
 import { connect } from 'react-redux';
+// import {
+//   SETTINGS_SAVED,
+//   SETTINGS_PAGE_UNLOADED,
+//   LOGOUT
+// } from '../constants/actionTypes';
+
 import {
   SETTINGS_SAVED,
   SETTINGS_PAGE_UNLOADED,
-  LOGOUT
-} from '../constants/actionTypes';
+} from '../services/settingsSlice';
+
+import { LOGOUT } from '../services/commonSlice';
+
 import { updateUser } from '../api';
 
 class SettingsForm extends React.Component {

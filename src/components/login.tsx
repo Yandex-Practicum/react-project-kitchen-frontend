@@ -1,11 +1,15 @@
 import {Link} from 'react-router-dom';
 import ListErrors from './ListErrors';
 import React, {ChangeEvent, FunctionComponent, useEffect, useState} from 'react';
+// import {
+//   UPDATE_FIELD_AUTH,
+//   LOGIN,
+//   LOGIN_PAGE_UNLOADED
+// } from '../constants/actionTypes';
 import {
-  UPDATE_FIELD_AUTH,
   LOGIN,
   LOGIN_PAGE_UNLOADED
-} from '../constants/actionTypes';
+} from '../services/commonSlice'
 import {login} from '../api';
 import auth from "../reducers/auth";
 import {connect} from "react-redux";

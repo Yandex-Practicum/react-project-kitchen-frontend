@@ -1,4 +1,3 @@
-import agent from './agent';
 import { setTokenAxios } from './api';
 import {
   ASYNC_START,

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import agent from '../agent';
 import { connect } from 'react-redux';
-import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../constants/actionTypes';
+// import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../constants/actionTypes';
+import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../services/articleListSlice'
 import { setArticleAsFavorite, deleteArticleAsFavorite } from '../api';
 
 const FAVORITED_CLASS = 'btn btn-sm btn-primary';

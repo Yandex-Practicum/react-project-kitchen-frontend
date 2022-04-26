@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { DELETE_ARTICLE } from '../../constants/actionTypes';
+import { DELETE_ARTICLE } from '../../services/commonSlice';
 import { deleteArticle } from '../../api';
 
 type TArticleActionsProps = {

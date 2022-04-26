@@ -1,7 +1,7 @@
 import ArticleList from "../ArticleList";
 import React from "react";
 import { connect } from "react-redux";
-import { CHANGE_TAB } from "../../constants/actionTypes";
+import { CHANGE_TAB } from "../../services/articleListSlice";
 import TabItem from "../Tab/Tab";
 import { getAllArticles, getFeedArticles } from "../../api";
 import { useSelector, useDispatch } from "react-redux";
