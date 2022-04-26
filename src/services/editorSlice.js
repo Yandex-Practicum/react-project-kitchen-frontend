@@ -37,10 +37,7 @@ export const editorSlice = createSlice({
     REMOVE_TAG: (state, action) => {
       state.tagList = state.tagList.filter((tag) => tag !== action.tag);
     },
-    // UPDATE_FIELD_EDITOR: (state, action) => {
-    //   console.log({ ...state, [action.key]: action.value });
-    //   state = { ...state, [action.key]: action.value };
-    // },
+  
   },
 });
 

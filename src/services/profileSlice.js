@@ -1,11 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+// interface IinitialState {
+//   username: string | null,
+//   image: string | null,
+//   following: any,
+//   bio: string | null,
+
+// }
+
+export const initialState =  {
   username: '',
   image: '',
   following: null,
   bio: ''
 }
+
 
 export const profileSlice = createSlice({
   name: 'profile',
@@ -15,6 +24,7 @@ export const profileSlice = createSlice({
     PROFILE_PAGE_UNLOADED: (state, action) => { 
       return initialState
     },
+
     PROFILE_PAGE_LOADED: (state, action) => {
       const { username, image, following } = action.payload[0].profile
       state.username = username;

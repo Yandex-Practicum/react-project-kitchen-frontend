@@ -1,6 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
+interface IinitialState {
+  tags: Array<String>;
+}
+
+const initialState: IinitialState = {
   tags: []
 }
 
