@@ -5,7 +5,7 @@ import commonReducer from './commonSlice';
 import editorReducer from './editorSlice';
 import profileReducer from './profileSlice'
 import settingsReducer from './settingsSlice.js';
-import authReducer from './authSlice.js';
+import authReducer from './authSlice';
 
 const rootReducer = {
   home: homeReducer,

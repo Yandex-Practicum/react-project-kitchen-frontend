@@ -41,6 +41,8 @@ const Register: React.FC<any> = () => {
 
   const handleSubmitForm = handleSubmit(({username, email, password}, e) => {
     e && e.preventDefault();
+    console.log(2222);
+
     dispatch({ type: REGISTER, payload: signup(username, email, password)})
   });
 
