@@ -2,10 +2,6 @@ import { Link } from 'react-router-dom';
 import ListErrors from './ListErrors';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import {
-//   REGISTER,
-//   REGISTER_PAGE_UNLOADED
-// } from '../constants/actionTypes';
 import {
   REGISTER, REGISTER_PAGE_UNLOADED
 } from '../services/authSlice';
