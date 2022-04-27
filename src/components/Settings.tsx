@@ -23,11 +23,7 @@ const mapDispatchToProps = (dispatch: any) => ({
   onUnload: () => dispatch({ type: SETTINGS_PAGE_UNLOADED })
 });
 
-interface TSettingsProps {
-
-}
-
-const Settings: React.FC<TSettingsProps> = (props: any) => {
+const Settings: React.FC = (props: any) => {
   return (
     <div className="settings-page">
       <div className="container page">

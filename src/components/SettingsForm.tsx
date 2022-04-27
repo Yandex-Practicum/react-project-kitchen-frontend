@@ -14,7 +14,7 @@ const SettingsForm: React.FC<TSettingsFormProps> = (props: any) => {
     email: '',
     password: ''
   });
-  const [ disabled, setDisabled ] = useState(false)
+  const [ isProgress, setIsProgress ] = useState(false);
 
   const updateState = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({...state, [field]: e.target.value})
@@ -25,12 +25,14 @@ const SettingsForm: React.FC<TSettingsFormProps> = (props: any) => {
 
     if (!state.password) {
       setState({...state, password: ''})
-    }
+    };
+
+    setIsProgress(true);
 
     props.onSubmitForm(state);
   };
 
-//Надо поправить Object.assign на spread
+
   useEffect(() => {
     if (props.currentUser) {
       Object.assign(state, {
@@ -42,8 +44,6 @@ const SettingsForm: React.FC<TSettingsFormProps> = (props: any) => {
     }
   }, [])
 
-
-//Надо поправить Object.assign на spread
  useMemo(()=> {
   if (props.currentUser) {
     setState(Object.assign({}, state, {
@@ -108,7 +108,7 @@ const SettingsForm: React.FC<TSettingsFormProps> = (props: any) => {
           <button
             className="btn btn-lg btn-primary pull-xs-right"
             type="submit"
-            disabled={disabled}
+            disabled={isProgress}
             //нужно написать переключение dissabled кнопки
             >
             Update Settings
