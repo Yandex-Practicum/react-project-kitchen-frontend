@@ -1,13 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// interface IinitialState {
-//   username: string | null,
-//   image: string | null,
-//   following: any,
-//   bio: string | null,
-
-// }
-
 export const initialState =  {
   username: '',
   image: '',
@@ -21,7 +13,7 @@ export const profileSlice = createSlice({
   initialState,
   reducers: {
 
-    PROFILE_PAGE_UNLOADED: (state, action) => { 
+    PROFILE_PAGE_UNLOADED: (state, action) => {
       return initialState
     },
 

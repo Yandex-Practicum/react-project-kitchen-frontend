@@ -2,12 +2,6 @@ import ProfileHeader from './ProfileHeader';
 import RenderTabs from './RenderTabs';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import {
-//   FOLLOW_USER,
-//   PROFILE_PAGE_LOADED,
-//   PROFILE_PAGE_UNLOADED,
-//   UNFOLLOW_USER
-// } from '../constants/actionTypes';
 import {
   FOLLOW_USER,
   PROFILE_PAGE_LOADED,
@@ -16,6 +10,7 @@ import {
 } from '../services/profileSlice';
 import ArticleList from './ArticleList';
 import { getFavoritedArticles, unfollowUser, getProfile } from '../api';
+import { PROFILE_ARTICLE_LOADED } from '../services/articleListSlice';
 
 
 //Избавиться от этой бяки после роутинга.
@@ -51,6 +46,7 @@ function ProfileFavorites({ match }: TProfileProps) {
   //Вынести эти функции onLoad и onUnload в отдельную директорию или вообще объединить Profile с ProfileFavoritos.
   const onLoad = (payload: any) => {
     dispatch({ type: PROFILE_PAGE_LOADED, payload });
+    dispatch({ type: PROFILE_ARTICLE_LOADED, payload });
   }
 
   const onUnload = () => {

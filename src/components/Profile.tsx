@@ -3,10 +3,6 @@ import ProfileHeader from './ProfileHeader';
 import RenderTabs from './RenderTabs';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import {
-//   PROFILE_PAGE_LOADED,
-//   PROFILE_PAGE_UNLOADED
-// } from '../constants/actionTypes';
 import {
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED
@@ -17,6 +13,7 @@ import {
   followUser as _followUserApi,
   getProfile,
 } from '../api';
+import { PROFILE_ARTICLE_LOADED } from '../services/articleListSlice';
 
 function Profile({ match }: TProfileProps) {
   const dispatch = useDispatch();
@@ -26,6 +23,7 @@ function Profile({ match }: TProfileProps) {
   //Вынести эти функции onLoad и onUnload в отдельную директорию или вообще объединить Profile с ProfileFavoritos.
   const onLoad = (payload: any) => {
     dispatch({ type: PROFILE_PAGE_LOADED, payload });
+    dispatch({ type: PROFILE_ARTICLE_LOADED, payload });
   }
 
   const onUnload = () => {
