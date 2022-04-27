@@ -1,19 +1,27 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
-import agent from '../../agent';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { DELETE_ARTICLE } from '../../constants/actionTypes';
+import { deleteArticle } from '../../api';
 
-const mapDispatchToProps = dispatch => ({
-  onClickDelete: payload =>
+type TArticleActionsProps = {
+  article: any;
+  canModify: boolean;
+}
+
+const ArticleActions: React.FC<TArticleActionsProps> = props => {
+  const dispatch = useDispatch();
+
+  const onClickDelete = (payload: any) =>
     dispatch({ type: DELETE_ARTICLE, payload })
-});
 
-const ArticleActions = props => {
   const article = props.article;
+
   const del = () => {
-    props.onClickDelete(agent.Articles.del(article.slug))
+    onClickDelete(deleteArticle(article.slug))
   };
+
+
   if (props.canModify) {
     return (
       <span>
@@ -38,4 +46,4 @@ const ArticleActions = props => {
   );
 };
 
-export default connect(() => ({}), mapDispatchToProps)(ArticleActions);
+export default ArticleActions;

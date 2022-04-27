@@ -1,24 +1,24 @@
 import React from 'react';
 import agent from '../../agent';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { DELETE_COMMENT } from '../../constants/actionTypes';
+import { deleteComment } from '../../api';
 
-const mapDispatchToProps = (dispatch: any) => ({
-  onClick: (payload: any, commentId: any) =>
-    dispatch({ type: DELETE_COMMENT, payload, commentId })
-});
-
-type TDeleteButtonProps = { 
-  slug: string; 
-  commentId: any; 
-  onClick: (arg0: any, arg1: any) => void; 
-  show: any; 
+type TDeleteButtonProps = {
+  slug: string;
+  commentId: any;
+  show: any;
 }
 
 const DeleteButton: React.FC<TDeleteButtonProps> = (props) => {
+  const dispatch = useDispatch();
+
+  const onClick = (payload: any, commentId: any) =>
+    dispatch({ type: DELETE_COMMENT, payload, commentId })
+
   const del = () => {
-    const payload = agent.Comments.delete(props.slug, props.commentId);
-    props.onClick(payload, props.commentId);
+    const payload = deleteComment(props.slug, props.commentId);
+    onClick(payload, props.commentId);
   };
 
   if (props.show) {
@@ -31,4 +31,4 @@ const DeleteButton: React.FC<TDeleteButtonProps> = (props) => {
   return null;
 };
 
-export default connect(() => ({}), mapDispatchToProps)(DeleteButton);
+export default DeleteButton;

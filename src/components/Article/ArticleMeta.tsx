@@ -2,7 +2,18 @@ import ArticleActions from './ArticleActions';
 import { Link } from 'react-router-dom';
 import React from 'react';
 
-const ArticleMeta = props => {
+type TArticleActionsProps = {
+  article: {
+    author: {
+      username: string;
+      image: string;
+    };
+    createdAt: any;
+  };
+  canModify: boolean;
+}
+
+const ArticleMeta: React.FC<TArticleActionsProps> = (props) => {
   const article = props.article;
   return (
     <div className="article-meta">

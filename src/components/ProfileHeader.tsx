@@ -1,6 +1,8 @@
+import { useSelector } from 'react-redux';
 import EditProfileSettings from './EditProfileSettings';
 import FollowUserButton from './FollowUserButton';
 
+//Рефактор type!
 type TProfileHeader = {
   profile: {
     following: boolean;
@@ -8,12 +10,16 @@ type TProfileHeader = {
     username: string;
     bio: string;
   };
-  isUser: boolean;
-  follow: boolean;
-  unfollow: boolean;
+  follow?: any;
+  unfollow?: any;
 }
 
-function ProfileHeader({profile, isUser, follow, unfollow}: TProfileHeader) {
+function ProfileHeader({ profile, follow, unfollow }: TProfileHeader) {
+
+  const { currentUser } = useSelector((state: any) => state.common);
+
+  const isUser = currentUser &&
+    profile.username === currentUser.username;
 
   return (
     <div className="user-info">

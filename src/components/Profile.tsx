@@ -2,73 +2,64 @@ import ArticleList from './ArticleList';
 import ProfileHeader from './ProfileHeader';
 import RenderTabs from './RenderTabs';
 import { useEffect } from 'react';
-import agent from '../agent';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
-  FOLLOW_USER,
-  UNFOLLOW_USER,
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED
 } from '../constants/actionTypes';
-import { TProfileProps } from './ProfileFavorites'
+import { TProfileProps } from './ProfileFavorites';
+import {
+  getArticlesByAuthor,
+  followUser as _followUserApi,
+  getProfile,
+} from '../api';
 
-const mapStateToProps = (state: any) => ({
-  ...state.articleList,
-  currentUser: state.common.currentUser,
-  profile: state.profile
-});
+function Profile({ match }: TProfileProps) {
+  const dispatch = useDispatch();
+  const { username, image, following, bio } = useSelector((state: any) => state.profile);
+  const { pager, articles, articlesCount, currentPage } = useSelector((state: any) => state.articleList);
 
-const mapDispatchToProps = (dispatch: any) => ({
-  onFollow: (username: any) => dispatch({
-    type: FOLLOW_USER,
-    payload: agent.Profile.follow(username)
-  }),
-  onLoad: (payload: any) => dispatch({ type: PROFILE_PAGE_LOADED, payload }),
-  onUnfollow: (username: any) => dispatch({
-    type: UNFOLLOW_USER,
-    payload: agent.Profile.unfollow(username)
-  }),
-  onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED })
-});
+  //Вынести эти функции onLoad и onUnload в отдельную директорию или вообще объединить Profile с ProfileFavoritos.
+  const onLoad = (payload: any) => {
+    dispatch({ type: PROFILE_PAGE_LOADED, payload });
+  }
 
-function Profile(props: TProfileProps) {
-  const profile = props.profile;
-  const isUser = props.currentUser &&
-    props.profile.username === props.currentUser.username;
+  const onUnload = () => {
+    dispatch({ type: PROFILE_PAGE_UNLOADED })
+  }
 
+  //Match берет данные из роутинга. При обновлении роутера необходимо избавиться от пропсов и считывать из адресной строки. Возможно useEffect отрефакторить.
   useEffect(() => {
-    props.onLoad(Promise.all([
-      agent.Profile.get(props.match.params.username),
-      agent.Articles.byAuthor(props.match.params.username)
+    onLoad(Promise.all([
+      getProfile(match.params.username),
+      getArticlesByAuthor(match.params.username)
     ]));
 
     return () => {
-      props.onUnload();
+      onUnload();
     }
   }, [])
 
-  if (!profile) {
+  if (!username) {
     return null;
   }
   return (
     <div className="profile-page">
       <ProfileHeader
-        profile={profile}
-        isUser={isUser}
-        follow={props.onFollow}
-        unfollow={props.onUnfollow}
+        //Понять что за bio и откуда оно берется, в ответе сервера его нет.
+        profile={{ username, image, following, bio }}
       />
       <div className="container">
         <div className="row">
           <div className="col-xs-12 col-md-10 offset-md-1">
             <div className="articles-toggle">
-              <RenderTabs username={profile.username} />
+              <RenderTabs username={username} />
             </div>
             <ArticleList
-              pager={props.pager}
-              articles={props.articles}
-              articlesCount={props.articlesCount}
-              state={props.currentPage} />
+              pager={pager}
+              articles={articles}
+              articlesCount={articlesCount}
+              state={currentPage} />
           </div>
         </div>
       </div>
@@ -76,5 +67,4 @@ function Profile(props: TProfileProps) {
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
-export { Profile, mapStateToProps };
+export default Profile

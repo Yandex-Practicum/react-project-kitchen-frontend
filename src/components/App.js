@@ -1,4 +1,3 @@
-import agent from '../agent';
 import Header from './header';
 import React from 'react';
 import {connect} from 'react-redux';
@@ -7,13 +6,14 @@ import {Route, Switch} from 'react-router-dom';
 import Article from '../components/Article';
 import Editor from '../components/Editor';
 import Home from '../components/Home';
-import Login from '../components/Login';
+import Login from '../components/login';
 import Profile from '../components/Profile';
 import ProfileFavorites from '../components/ProfileFavorites';
 import Register from '../components/Register';
 import Settings from '../components/Settings';
-import {store} from '../store';
-import {push} from 'react-router-redux';
+import { store } from '../store';
+import { push } from 'react-router-redux';
+import { auth, setTokenAxios } from '../api';
 
 const mapStateToProps = state => {
   return {
@@ -43,10 +43,12 @@ class App extends React.Component {
   componentWillMount() {
     const token = window.localStorage.getItem('jwt');
     if (token) {
-      agent.setToken(token);
+      // agent.setToken(token);
+      setTokenAxios(token);
     }
 
-    this.props.onLoad(token ? agent.Auth.current() : null, token);
+    // this.props.onLoad(token ? agent.Auth.current() : null, token);
+    this.props.onLoad(token ? auth() : null, token);
   }
 
   render() {

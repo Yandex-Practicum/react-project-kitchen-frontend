@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   article: {},
   comments: [],
+  commentErrors: null,
 }
 
 export const articleSlice = createSlice({
@@ -14,13 +15,13 @@ export const articleSlice = createSlice({
       state.comments = action.payload[1].comments;
     },
     ARTICLE_PAGE_UNLOADED: (state, action) => {
-      return {};
+      return initialState;
     },
     ADD_COMMENT: (state, action) => {
       state.commentErrors = action.error ? action.payload.errors : null;
-      state.comments = action.error ?
-        null :
-        (state.comments || []).concat([action.payload.comment])
+      state.comments = action.error 
+      ? null 
+      : (state.comments || []).concat([action.payload.comment])
     },
     DELETE_COMMENT: (state, action) => {
       const commentId = action.commentId;

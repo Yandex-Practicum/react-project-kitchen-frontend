@@ -1,4 +1,5 @@
 import agent from './agent';
+import { setTokenAxios } from './api';
 import {
   ASYNC_START,
   ASYNC_END,
@@ -32,7 +33,7 @@ const promiseMiddleware = store => next => action => {
         }
         console.log('ERROR', error);
         action.error = true;
-        action.payload = error.response.body;
+        action.payload = error.response.data;
         if (!action.skipTracking) {
           store.dispatch({ type: ASYNC_END, promise: action.payload });
         }
@@ -50,11 +51,13 @@ const localStorageMiddleware = store => next => action => {
   if (action.type === REGISTER || action.type === LOGIN) {
     if (!action.error) {
       window.localStorage.setItem('jwt', action.payload.user.token);
-      agent.setToken(action.payload.user.token);
+      // agent.setToken(action.payload.user.token);
+      setTokenAxios(action.payload.user.token);
     }
   } else if (action.type === LOGOUT) {
     window.localStorage.setItem('jwt', '');
-    agent.setToken(null);
+    // agent.setToken(null);
+    setTokenAxios('');
   }
 
   next(action);

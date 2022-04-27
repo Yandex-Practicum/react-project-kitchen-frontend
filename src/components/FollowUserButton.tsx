@@ -1,8 +1,8 @@
 
 type TFollowUserButton = {
-  follow: any;
+  follow?: any;
   isUser: boolean;
-  unfollow: any ;
+  unfollow?: any;
   user: {
     following: boolean;
     image: string;
@@ -10,14 +10,15 @@ type TFollowUserButton = {
   }
 }
 
-function FollowUserButton(props: TFollowUserButton) {
+//Перенести follow и unFollow из ProfileFavorits после полного подключения Редакс.
+function FollowUserButton({ isUser, user, follow, unfollow }: TFollowUserButton) {
 
-  if (props.isUser) {
+  if (isUser) {
     return null;
   }
 
   let classes = 'btn btn-sm action-btn';
-  if (props.user.following) {
+  if (user.following) {
     classes += ' btn-secondary';
   } else {
     classes += ' btn-outline-secondary';
@@ -25,10 +26,10 @@ function FollowUserButton(props: TFollowUserButton) {
 
   const handleClick = (ev: React.SyntheticEvent<Element, Event>) => {
     ev.preventDefault();
-    if (props.user.following) {
-      props.unfollow(props.user.username)
+    if (user.following) {
+      unfollow(user.username)
     } else {
-      props.follow(props.user.username)
+      follow(user.username)
     }
   };
 
@@ -38,7 +39,7 @@ function FollowUserButton(props: TFollowUserButton) {
       onClick={handleClick}>
       <i className="ion-plus-round"></i>
       &nbsp;
-      {props.user.following ? 'Unfollow' : 'Follow'} {props.user.username}
+      {user.following ? 'Unfollow' : 'Follow'} {user.username}
     </button>
   );
 };
