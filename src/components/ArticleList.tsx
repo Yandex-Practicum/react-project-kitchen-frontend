@@ -9,6 +9,7 @@ interface TArticleListProps {
   loading?: boolean;
   state?: any;
   currentPage?: any;
+  tab?: any;
 }
 
 const ArticleList: React.FC<TArticleListProps> = (props: any) => {

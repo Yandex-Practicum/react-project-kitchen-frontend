@@ -1,38 +1,23 @@
 import ArticleList from "../ArticleList";
-import React from "react";
-import { connect } from "react-redux";
+import {FC } from "react";
 import { CHANGE_TAB } from "../../services/articleListSlice";
 import TabItem from "../Tab/Tab";
 import { getAllArticles, getFeedArticles } from "../../api";
 import { useSelector, useDispatch } from "react-redux";
 
-const mapStateToProps = (state: any) => ({
-  ...state.articleList,
-  tags: state.home.tags,
-  token: state.common.token,
-});
-
-const mapDispatchToProps = (dispatch: any) => ({
-  onTabClick: (tab: any, pager: any, payload: any) =>
-    dispatch({ type: CHANGE_TAB, tab, pager, payload }),
-});
-
-const MainView = (props: any) => {
-  const articles = useSelector((state: any) => state.articleList);
+const MainView: FC = (props: any) => {
+  const {articles , articlesCount, currentPage, pager} = useSelector((state: any) => state.articleList);
   const { token } = useSelector((state: any) => state.common);
-  console.log(token);
-  const { tags } = useSelector((state: any) => state.home);
   const dispatch = useDispatch();
 
-  // const onTabClick = (tab, pager, payload) => {
-  //   dispatch({ type: CHANGE_TAB, tab, pager, payload }),
-  // }
+  const onTabClick =(tab: any, pager: any, payload: any) =>
+    dispatch({ type: CHANGE_TAB, tab, pager, payload })
 
   const clickHandler = (type: string) => {
     if (type === "all") {
-      props.onTabClick(type, getAllArticles, getAllArticles());
+      onTabClick(type, getAllArticles, getAllArticles());
     } else {
-      props.onTabClick(type, getFeedArticles, getFeedArticles());
+      onTabClick(type, getFeedArticles, getFeedArticles());
     }
     // props.onTabClick(type, agent.Articles[type], agent.Articles[type]());
   };
@@ -70,17 +55,17 @@ const MainView = (props: any) => {
       </div>
 
       <ArticleList
-        pager={props.pager}
-        articles={props.articles}
-        loading={props.loading}
-        articlesCount={props.articlesCount}
-        currentPage={props.currentPage}
+        pager={pager}
+        articles={articles}
+        // loading={loading}
+        articlesCount={articlesCount}
+        currentPage={currentPage}
       />
     </div>
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainView);
+export default MainView;
 
 // const TagFilterTab = props => {
 //   if (!props.tag) {

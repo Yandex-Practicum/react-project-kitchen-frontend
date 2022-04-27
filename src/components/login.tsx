@@ -11,11 +11,11 @@ import {
   LOGIN_PAGE_UNLOADED
 } from '../services/commonSlice'
 import {login} from '../api';
-import auth from "../reducers/auth";
+import auth from "../utils/reducers/auth";
 import {connect, TypedUseSelectorHook, useDispatch, useSelector as selectorHook} from "react-redux";
 import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
 import {store} from "../services/store";
-import rootReducer from "../reducer"; // TODO заменить на rootReducer из services, когда будут готовы слайсы
+import  rootReducer  from "../utils/reducer"; // TODO заменить на rootReducer из services, когда будут готовы слайсы
 
 // TODO: типизацию useSelector перенести в общий файл
 export type RootState = ReturnType<typeof rootReducer>;

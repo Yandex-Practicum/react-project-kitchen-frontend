@@ -68,6 +68,7 @@ export const getAllArticles = async (page: number = 0): Promise<any> => {
   return response.data;
 };
 
+
 export const getArticlesByAuthor = async (
   author: string,
   page: number = 0

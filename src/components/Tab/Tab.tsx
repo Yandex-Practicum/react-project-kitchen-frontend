@@ -10,12 +10,13 @@ type TTabProps = {
 
 
 const TabItem: React.FC<TTabProps> = ({ name, onTabClick, type, active, hide = false }) => {
+  
   const handleClick = (e: React.SyntheticEvent) => {
     e.preventDefault();
     onTabClick(type);
   };
   if (hide) return null;
-
+  
   return (
     <li className={'nav-item'}>
       <a href="/#" className={active ? 'nav-link active' : 'nav-link'} onClick={handleClick}>
