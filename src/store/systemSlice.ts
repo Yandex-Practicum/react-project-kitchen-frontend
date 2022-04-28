@@ -2,10 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 type TSystemState = {
   isLoggedIn: boolean;
+  appName: string;
 };
 
 const initialState: TSystemState = {
   isLoggedIn: false,
+  appName: 'Real World',
 };
 
 const systemSlice = createSlice({
