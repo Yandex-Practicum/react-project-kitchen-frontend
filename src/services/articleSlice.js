@@ -14,7 +14,7 @@ export const articleSlice = createSlice({
       state.article = action.payload[0].article;
       state.comments = action.payload[1].comments;
     },
-    ARTICLE_PAGE_UNLOADED: (state, action) => {
+    ARTICLE_PAGE_UNLOADED: () => {
       return initialState;
     },
     ADD_COMMENT: (state, action) => {

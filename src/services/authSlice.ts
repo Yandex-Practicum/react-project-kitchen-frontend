@@ -18,7 +18,7 @@ export const authSlice = createSlice({
       state.errors = action.payload.errors ? action.payload.errors : null
     },
 
-    LOGIN_PAGE_UNLOADED: (state, action) => initialState,
+    LOGIN_PAGE_UNLOADED: () => initialState,
 
     REGISTER_PAGE_UNLOADED: (state, action) => initialState,
 

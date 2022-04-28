@@ -65,7 +65,7 @@ export const commonSlice = createSlice({
     SETTINGS_PAGE_UNLOADED: (state, action) => {
       state.viewChangeCounter = state.viewChangeCounter + 1;
     },
-    LOGIN_PAGE_UNLOADED: (state, action) => {
+    LOGIN_PAGE_UNLOADED: (state) => {
       state.viewChangeCounter = state.viewChangeCounter + 1;
     },
     REGISTER_PAGE_UNLOADED: (state, action) => {

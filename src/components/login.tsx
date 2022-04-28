@@ -59,10 +59,10 @@ export const Login: FunctionComponent = () => {
   //   dispatch({type: UPDATE_FIELD_AUTH, key: 'password', value})
   // }
   const onSubmit = (email: string, password: string) => {
-    dispatch({ type: LOGIN, payload: login(email, password) })
+    dispatch(LOGIN(login(email, password)))
   }
   const onUnload = () => {
-    dispatch({type: LOGIN_PAGE_UNLOADED})
+    dispatch(LOGIN_PAGE_UNLOADED())
   }
 
   const [email, setEmail] = useState('');

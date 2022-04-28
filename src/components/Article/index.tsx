@@ -22,22 +22,22 @@ const Article: React.FC<TArticleProps> = (props) => {
   const { comments } = useSelector((state: any) => state.article);
   const { commentErrors } = useSelector((state: any) => state.article);
 
-  const onLoad = (payload: any) => {
-    return dispatch({type: ARTICLE_PAGE_LOADED, payload})
-  }
+  // const onLoad = (payload: any) => {
+  //   return dispatch(ARTICLE_PAGE_LOADED(payload))
+  // }
 
-  const onUnload = () => {
-    return dispatch({ type: ARTICLE_PAGE_UNLOADED })
-  }
+  // const onUnload = () => {
+  //   return dispatch(ARTICLE_PAGE_UNLOADED())
+  // }
 
   useEffect(() => {
-    onLoad(Promise.all([
+    dispatch(ARTICLE_PAGE_LOADED(Promise.all([
       getArticle(props.match.params.id),
       getCommentsForArticle(props.match.params.id)
-    ]));
+    ])))
 
     return () => {
-      onUnload();
+      dispatch(ARTICLE_PAGE_UNLOADED());
     };
   }, []);
 
