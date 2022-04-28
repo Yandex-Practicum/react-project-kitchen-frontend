@@ -28,24 +28,24 @@ export const ListPagination: FC<{ /* pager: (page: number) => void, */ articlesC
       <ul className='pagination'>
 
         {
-                    range.map((v) => {
-                      const isCurrent = v === currentPage;
-                      const onClick = (ev: React.MouseEvent) => {
-                        ev.preventDefault();
-                        setPage(v);
-                      };
-                      return (
-                        <li
-                          className={isCurrent ? 'page-item active' : 'page-item'}
-                          onClick={onClick}
-                          key={v.toString()}>
+          range.map((v) => {
+            const isCurrent = v === currentPage;
+            const onClick = (ev: React.MouseEvent) => {
+              ev.preventDefault();
+              setPage(v);
+            };
+            return (
+              <li
+                className={isCurrent ? 'page-item active' : 'page-item'}
+                onClick={onClick}
+                key={v.toString()}>
 
-                          <a className='page-link' href=''>{v + 1}</a>
+                <a className='page-link' href=''>{v + 1}</a>
 
-                        </li>
-                      );
-                    })
-                }
+              </li>
+            );
+          })
+        }
 
       </ul>
     </nav>
