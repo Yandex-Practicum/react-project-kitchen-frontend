@@ -34,7 +34,9 @@ import {
   clearAll,
 } from './allSlice';
 
-import { setUser, clearUser } from './userSlice';
+import { setUser, clearUser, setCurrentUser } from './userSlice';
+
+
 
 import {
   setViewFeed,
@@ -119,9 +121,11 @@ import {
 import {
   onLogin,
   onLogout,
+
 } from './systemSlice';
 
 export {
+  setCurrentUser,
   setTitle,
   setDescription,
   setBody,

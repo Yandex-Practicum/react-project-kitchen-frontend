@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import { TArticle } from '../../types/types';
 import { ArticlePreview, ListPagination } from '../index';
 
-export const ArticleList:FC<{ pager: (page: number) => void, articlesCount: number, state: number, articles:TArticle[] }> = ({
-  pager, articlesCount, articles, state,
+export const ArticleList:FC<{ /* pager: (page: number) => void, */ articlesCount: number, /* state: number, */ articles:TArticle[] }> = ({
+  /* pager, */ articlesCount, articles,/*  state, */
 }) => {
   if (!articles) {
     return (
@@ -28,9 +28,9 @@ export const ArticleList:FC<{ pager: (page: number) => void, articlesCount: numb
       }
 
       <ListPagination
-        pager={pager}
+        /* pager={pager} */
         articlesCount={articlesCount}
-        currentPage={state} />
+        currentPage={1} />
     </div>
   );
 };

@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { TProfile } from '../types/types';
 
 type TInitialState = {
   username: string | null,
   email: string | null,
   bio: string | null,
   image: string | null
+ 
 };
 
 const initialState:TInitialState = {
@@ -12,6 +14,7 @@ const initialState:TInitialState = {
   email: null,
   bio: null,
   image: null,
+
 };
 
 const profileSlice = createSlice({
@@ -32,7 +35,9 @@ const profileSlice = createSlice({
       state.email = null;
       state.bio = null;
       state.image = null;
-    },
+    }
+   
+    
   },
 });
 

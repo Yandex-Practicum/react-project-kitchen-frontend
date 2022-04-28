@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from '../../services/hooks';
+import { useDispatch } from '../../services/hooks';
 import { TArticle } from '../../types/types';
-import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../../constants/actionTypes';
-import { deleteLikeThunk, addLikeThunk} from '../../store/apiSlice';
+import { deleteLikeThunk, addLikeThunk} from '../../thunks';
 
 
 
@@ -29,20 +28,6 @@ export const ArticlePreview: FC<{ article: TArticle }> = ({ article }) => {
   };
 
 
-  
-/*  export const deleteLikeArticle : ILikeArticle = (slug: string) : AxiosPromise<TAPIArticle> => {
-  const requestConfig : AxiosRequestConfig = {
-    url: `${ARTICLES_ROUTE}/${slug}/favorite`,
-    method: 'delete',
-  };
-  return blogAPI(injectBearerToken(requestConfig));
-};
-export type TAPIArticle = {
-  article : TArticle;
-};
-
-
-*/
 
   return (
     <div className='article-preview'>

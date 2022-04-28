@@ -16,6 +16,9 @@ import Header from './header';
 import HeaderLoggedInView from './header-logged-in-view';
 import HeaderLoggedOutView from './header-logged-out-view';
 
-export {
+/* export {
   EditProfileSettings, Editor, FollowUserButton, Profile, ListErrors, SettingsForm, Header, HeaderLoggedInView, HeaderLoggedOutView, ArticleList, ListPagination, ArticlePreview,
 };
+ */
+
+export {Profile, EditProfileSettings, FollowUserButton, ArticleList, ArticlePreview, ListPagination}

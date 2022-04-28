@@ -2,45 +2,30 @@ import React, { FC, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from '../../services/hooks';
 import { EditProfileSettings, FollowUserButton, ArticleList } from '../index';
-import { FOLLOW_USER, UNFOLLOW_USER } from '../../constants/actionTypes';
-import agent from '../../agent';
-import {
-  fetchProfile, fetchPublicFeed, postFollowProfile, deleteFollowProfile,
-} from '../../services/api';
-import { PROFILE_PAGE_LOADED, PROFILE_PAGE_UNLOADED } from '../../constants';
+
+import { userDataThunk } from '../../thunks';
+import { unfollowProfileThunk, followProfileThunk } from '../../thunks'
 
 export const Profile: FC = () => {
   const dispatch = useDispatch();
-  const { username } = useSelector((state) => state.profile);
-  const { currentUser } = useSelector((state) => state.common);
-  const {
-    pager, articles, articlesCount, currentPage,
-  } = useSelector((state: any) => state.articleList);
-
-  const onLoad = React.useCallback((payload: Promise<any>) => {
-    dispatch({ type: PROFILE_PAGE_LOADED, payload });
-  }, [dispatch]);
+  const { username, image, bio, userobject } = useSelector((state) => state.profile);
+  const { isLoggedIn } = useSelector(state => state.system)
+  const { articles } = useSelector(state => state.all)
+  const {isUserFetching} = useSelector(state=> state.api)
+console.log(isUserFetching)
 
   useEffect(() => {
-    const author = username;
-    onLoad(Promise.all([fetchProfile(username), fetchPublicFeed(5, 0, author)]));
-    return () => {
-      dispatch({ type: PROFILE_PAGE_UNLOADED });
-    };
-  });
+    if (true) {
+      dispatch(userDataThunk())
+    }
+  },[dispatch]);
 
   const onFollow = () => {
-    dispatch({
-      type: FOLLOW_USER,
-      payload: postFollowProfile(username),
-    });
+    dispatch(followProfileThunk(username));
   };
 
   const onUnfollow = () => {
-    dispatch({
-      type: UNFOLLOW_USER,
-      payload: deleteFollowProfile(username),
-    });
+    dispatch(unfollowProfileThunk(username));
   };
 
   const renderTabs = useCallback(() => (
@@ -63,13 +48,11 @@ export const Profile: FC = () => {
     </ul>
   ), [username]);
 
-  const profil = profile;
-  if (!profil) {
-    return null;
-  }
 
-  const isUser = currentUser
-        && profile.username === currentUser.username;
+  /*  if (!isLoggedIn) {
+     return null;
+   } */
+
 
   return (
     <div className='profile-page'>
@@ -79,14 +62,14 @@ export const Profile: FC = () => {
           <div className='row'>
             <div className='col-xs-12 col-md-10 offset-md-1'>
 
-              <img src={profile.image} className='user-img' alt={profile.username} />
-              <h4>{profile.username}</h4>
-              <p>{profile.bio}</p>
+              <img src={image!} className='user-img' alt={username!} />
+              <h4>{username}</h4>
+              <p>{bio}</p>
 
-              <EditProfileSettings isUser={isUser} />
+              <EditProfileSettings isUser={isLoggedIn} />
               <FollowUserButton
-                isUser={isUser}
-                user={profile}
+                isUser={isLoggedIn}
+                user={userobject!} 
                 follow={onFollow}
                 unfollow={onUnfollow} />
 
@@ -105,10 +88,10 @@ export const Profile: FC = () => {
             </div>
 
             <ArticleList
-              pager={pager}
-              articles={articles}
-              articlesCount={articlesCount}
-              state={currentPage} />
+              /*   pager={pager} */
+              articles={articles!}
+              articlesCount={5}
+             /*  state={currentPage}  */ />
           </div>
 
         </div>

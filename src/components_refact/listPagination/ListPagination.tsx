@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { SET_PAGE } from '../../constants';
 import { fetchPublicFeed } from '../../services/api';
 
-export const ListPagination: FC<{ pager: (page: number) => void, articlesCount: number, currentPage: number }> = ({ pager, articlesCount, currentPage }) => {
+export const ListPagination: FC<{ /* pager: (page: number) => void, */ articlesCount: number, currentPage: number }> = ({ /* pager, */ articlesCount, currentPage }) => {
   const dispatch = useDispatch();
 
   if (articlesCount <= 10) {
@@ -16,8 +16,8 @@ export const ListPagination: FC<{ pager: (page: number) => void, articlesCount: 
   }
 
   const setPage = (page: number) => {
-    if (pager !== undefined) {
-      dispatch({ type: SET_PAGE, page, payload: pager(page) });
+    if (true) {
+      dispatch({ type: SET_PAGE, page, payload: 1 });
     } else {
       dispatch({ type: SET_PAGE, page, payload: fetchPublicFeed(10, page * 10) });
     }
