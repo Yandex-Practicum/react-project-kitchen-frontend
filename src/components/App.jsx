@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { connect, useSelector, useDispatch } from 'react-redux';
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from '../services/hooks';
+/*
 import {
   Route, Routes, useNavigate, useLocation,
 } from 'react-router-dom';
-import { APP_LOAD, REDIRECT } from '../constants/actionTypes.ts';
+
 import Header from './Header';
-import agent from '../agent';
 import Article from './Article';
 import { Editor } from '../components_refact';
 import Home from './Home';
@@ -14,82 +15,40 @@ import Profile from './Profile';
 import ProfileFavorites from './ProfileFavorites';
 import Register from './Register';
 import Settings from './Settings';
+*/
+import { loadInitialDataThunk } from '../thunks';
 
-// import { push } from 'react-router-redux';
-/*
-const mapStateToProps = state => {
-  return {
-    appLoaded: state.common.appLoaded,
-    appName: state.common.appName,
-    currentUser: state.common.currentUser,
-    redirectTo: state.common.redirectTo
-  }}; */
-/*
-const mapDispatchToProps = dispatch => ({
-  onLoad: (payload, token) =>
-    dispatch({ type: APP_LOAD, payload, token, skipTracking: true }),
-  onRedirect: () =>
-    dispatch({ type: REDIRECT })
-}); */
-
-export const App = () => {
+const App = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  // const appLoaded = useState(false);
-  // const appName = useState({toLowerCase:'test'});
-  // const currentUser = useState('test')
-  const common = useSelector((state) => state.common);
-  console.log(common);
-  const { appLoaded, appName, currentUser } = useSelector((state) => state.common);
-  const location = useLocation();
+  // const { isLoggedIn } = useSelector((state) => state.system);
+  // const isDataLoaded = useSelector((state) => !!state.all.articles && !!state.all.tags);
+
+  // const location = useLocation();
+
   useEffect(() => {
-    const token = window.localStorage.getItem('jwt');
-    if (token) {
-      agent.setToken(token);
-    }
-    const onLoad = (payload, token) => {
-      dispatch({
-        type: APP_LOAD, payload, token, skipTracking: true,
-      });
-    };
-    onLoad(token ? agent.Auth.current() : null, token);
+    dispatch(loadInitialDataThunk());
 
-    // onLoad(token ? agent.Auth.current() : null, token);
   }, [dispatch]);
-  console.log(location);
 
-  useEffect(() => {
-    if (location) {
-      // this.context.router.replace(nextProps.redirectTo);
-      dispatch({ type: REDIRECT });
-    }
-  }, [dispatch, location]);
-
-  /*
-  <Header
-  appName={appName}
-  currentUser={currentUser} /> */
-
-  if (appLoaded === true) {
-    return (
-      <div>
-        <Header appName={appName} currentUser={currentUser} />
-        <Routes>
-          <Route exact path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/editor/:slug' element={<Editor />} />
-          <Route path='/editor' element={<Editor />} />
-          <Route path='/article/:id' element={<Article />} />
-          <Route path='/settings' element={<Settings />} />
-          <Route path='/@:username/favorites' element={<ProfileFavorites />} />
-          <Route path='/@:username' element={<Profile />} />
-        </Routes>
-      </div>
-    );
-  }
-  return <div>загрузка...</div>;
+  /*  return (
+    <div>
+      <Header appName='test' currentUser={} />
+      <Routes>
+        <Route exact path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/editor/:slug' element={<Editor />} />
+        <Route path='/editor' element={<Editor />} />
+        <Route path='/article/:id' element={<Article />} />
+        <Route path='/settings' element={<Settings />} />
+        <Route path='/@:username/favorites' element={<ProfileFavorites />} />
+        <Route path='/@:username' element={<Profile />} />
+      </Routes>
+    </div>
+  ); */
+  return (<div>загрузка...</div>);
 };
 
 /*

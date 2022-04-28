@@ -169,5 +169,4 @@ class Profile extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
-export { Profile, mapStateToProps };
+export default Profile;
