@@ -1,6 +1,6 @@
 import ArticleMeta from './ArticleMeta';
 import CommentContainer from './CommentContainer';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { marked } from 'marked';
 import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED} from '../../services/articleSlice';
@@ -23,15 +23,14 @@ const Article: React.FC<TArticleProps> = (props) => {
   const { commentErrors } = useSelector((state: any) => state.article);
 
   const onLoad = (payload: any) => {
-    return dispatch({ type: ARTICLE_PAGE_LOADED, payload })
+    return dispatch({type: ARTICLE_PAGE_LOADED, payload})
   }
 
+  const onUnload = () => {
+    return dispatch({ type: ARTICLE_PAGE_UNLOADED })
+  }
 
-  const onUnload = () =>
-    dispatch({ type: ARTICLE_PAGE_UNLOADED })
-
-
-  React.useEffect(() => {
+  useEffect(() => {
     onLoad(Promise.all([
       getArticle(props.match.params.id),
       getCommentsForArticle(props.match.params.id)
@@ -39,10 +38,10 @@ const Article: React.FC<TArticleProps> = (props) => {
 
     return () => {
       onUnload();
-    }
-  },[])
+    };
+  }, []);
 
-  if (!article) {
+  if (Object.keys(article).length === 0) {
     return null;
   }
 
