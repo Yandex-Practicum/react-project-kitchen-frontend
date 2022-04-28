@@ -1,25 +1,26 @@
 import ArticleList from "../ArticleList";
-import {FC } from "react";
+import { FC, useState } from "react";
 import { CHANGE_TAB } from "../../services/articleListSlice";
 import TabItem from "../Tab/Tab";
-import { getAllArticles, getFeedArticles } from "../../api";
 import { useSelector, useDispatch } from "react-redux";
+import { getAllArticlesThunk, getFeedArticlesThunk } from "../../services/thunks";
 
-const MainView: FC = (props: any) => {
-  const {articles , articlesCount, currentPage, pager} = useSelector((state: any) => state.articleList);
+const MainView: FC = () => {
+  const { articles, articlesCount, currentPage, pager } = useSelector(
+    (state: any) => state.articleList
+  );
   const { token } = useSelector((state: any) => state.common);
   const dispatch = useDispatch();
-
-  const onTabClick =(tab: any, pager: any, payload: any) =>
-    dispatch({ type: CHANGE_TAB, tab, pager, payload })
+  const [currentTab, setCurrentTab] = useState("feed");
 
   const clickHandler = (type: string) => {
     if (type === "all") {
-      onTabClick(type, getAllArticles, getAllArticles());
+      setCurrentTab("all");
+      dispatch(getAllArticlesThunk());
     } else {
-      onTabClick(type, getFeedArticles, getFeedArticles());
+      dispatch(getFeedArticlesThunk());
+      setCurrentTab('feed');
     }
-    // props.onTabClick(type, agent.Articles[type], agent.Articles[type]());
   };
 
   return (
@@ -31,7 +32,7 @@ const MainView: FC = (props: any) => {
               name="Your Feed"
               onTabClick={clickHandler}
               type="feed"
-              active={props.tab === "feed" ? true : false}
+              active={currentTab === "feed" ? true : false}
               hide={null}
             />
           )}
@@ -40,17 +41,17 @@ const MainView: FC = (props: any) => {
             name="All Feed"
             onTabClick={clickHandler}
             type="all"
-            active={props.tab === "all" ? true : false}
+            active={currentTab === "all" ? true : false}
             hide={null}
           />
 
-          <TabItem
+          {/* <TabItem
             name={`#${props.tag}`}
             onTabClick={clickHandler}
             type="all"
             active={props.tab ? false : true}
             hide={!props.tag}
-          />
+          /> */}
         </ul>
       </div>
 

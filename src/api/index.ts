@@ -1,17 +1,17 @@
 export {
-  setTokenAxios,
-  getTags,
-  login,
-  signup,
-  auth,
+  setTokenAxios, // not api
+  getTags, // done
+  login, // done
+  signup, // done
+  auth, // done
   updateUser,
-  getAllArticles,
-  getArticlesByAuthor,
+  getAllArticles, // done
+  getArticlesByAuthor, // done
   getArticlesByTag,
   deleteArticle,
   setArticleAsFavorite,
-  getFavoritedArticles,
-  getFeedArticles,
+  getFavoritedArticles, // done
+  getFeedArticles, // done
   getArticle,
   deleteArticleAsFavorite,
   updateArticle,

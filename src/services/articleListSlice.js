@@ -1,4 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import {
+  getAllArticlesThunk,
+  getFeedArticlesThunk,
+  getTagsThunk,
+  getArticlesByAuthorThunk,
+  getFavoritedArticlesThunk
+} from "./thunks";
 
 const initialState = {
   articles: [],
@@ -77,6 +84,26 @@ export const articleListSlice = createSlice({
     PROFILE_FAVORITES_ARTICLE_UNLOADED: (state, action) => {
       return {};
     },
+  },
+
+  extraReducers: {
+    [getFeedArticlesThunk.fulfilled]: (state, action) => {
+      state.articles = action.payload.articles;
+    },
+    [getAllArticlesThunk.fulfilled]: (state, action) => {
+      state.articles = action.payload.articles;
+    },
+    [getTagsThunk.fulfilled]: (state, action) => {
+      state.tags = action.payload.tags;
+    },
+    [getArticlesByAuthorThunk.fulfilled]: (state, action) => {
+      state.articles = action.payload.articles;
+      state.articlesCount = action.payload.articlesCount;
+    },
+    [getFavoritedArticlesThunk.fulfilled]: (state, action) => {
+      state.articles = action.payload.articles;
+      state.articlesCount = action.payload.articlesCount;
+    }
   },
 });
 

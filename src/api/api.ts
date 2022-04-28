@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { IArticleRes, IUserLogin, ApiEnums } from "./types";
 
 // set token on every request
-export const setTokenAxios = (_token: string) => {
+export const setTokenAxios = (_token: string | null) => {
   axios.defaults.headers.common["Authorization"] = `Token ${_token}`;
 };
 
@@ -15,7 +15,7 @@ export const getTags = async (): Promise<any> => {
 };
 
 // Auth
-export const login = async (email: string, password: string): Promise<any> => {
+export const login = async ({ email, password }: any): Promise<any> => {
   const response: AxiosResponse<IUserLogin> = await axios.post(
     `${ApiEnums.BASE_URL}/users/login`,
     { user: { email, password } }
@@ -23,18 +23,26 @@ export const login = async (email: string, password: string): Promise<any> => {
   return response.data;
 };
 
-export const signup = async (
-  username: string,
-  email: string,
-  password: string
-): Promise<any> => {
-  const response: AxiosResponse<IUserLogin> = await axios.post(
-    `${ApiEnums.BASE_URL}/users`,
-    {
-      user: { username, email, password },
-    }
-  );
-  return response.data;
+export const signup = async ({
+  username,
+  email,
+  password,
+}: {
+  username: string;
+  email: string;
+  password: string;
+}): Promise<any> => {
+  try {
+    const response: AxiosResponse<IUserLogin> = await axios.post(
+      `${ApiEnums.BASE_URL}/users`,
+      {
+        user: { username, email, password },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
 };
 
 export const auth = async (): Promise<any> => {
@@ -68,22 +76,28 @@ export const getAllArticles = async (page: number = 0): Promise<any> => {
   return response.data;
 };
 
-
-export const getArticlesByAuthor = async (
-  author: string,
-  page: number = 0
-): Promise<any> => {
-  const response: AxiosResponse<any> = await axios.get(
-    `${ApiEnums.BASE_URL}/articles`,
-    {
-      params: {
-        limit: 5,
-        offset: page,
-        author,
-      },
-    }
-  );
-  return response.data;
+export const getArticlesByAuthor = async ({
+  author,
+  page = 0,
+}: {
+  author: string;
+  page: number;
+}): Promise<any> => {
+  try {
+    const response: AxiosResponse<any> = await axios.get(
+      `${ApiEnums.BASE_URL}/articles`,
+      {
+        params: {
+          limit: 5,
+          offset: page,
+          author,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
 };
 
 export const getArticlesByTag = async (
@@ -118,21 +132,28 @@ export const setArticleAsFavorite = async (slug: string): Promise<any> => {
   return response.data;
 };
 
-export const getFavoritedArticles = async (
-  author: string,
-  page: number = 0
-): Promise<any> => {
-  const response: AxiosResponse<any> = await axios.get(
-    `${ApiEnums.BASE_URL}/articles`,
-    {
-      params: {
-        favorited: author,
-        limit: 5,
-        offset: page,
-      },
-    }
-  );
-  return response.data;
+export const getFavoritedArticles = async ({
+  author,
+  page = 0,
+}: {
+  author: string;
+  page: number;
+}): Promise<any> => {
+  try {
+    const response: AxiosResponse<any> = await axios.get(
+      `${ApiEnums.BASE_URL}/articles`,
+      {
+        params: {
+          favorited: author,
+          limit: 5,
+          offset: page,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
 };
 
 export const getFeedArticles = async (): Promise<any> => {
@@ -220,10 +241,14 @@ export const followUser = async (userName: string): Promise<any> => {
 };
 
 export const getProfile = async (userName: string): Promise<any> => {
-  const response: AxiosResponse<any> = await axios.get(
-    `${ApiEnums.BASE_URL}/profiles/${userName}`
-  );
-  return response.data;
+  try {
+    const response: AxiosResponse<any> = await axios.get(
+      `${ApiEnums.BASE_URL}/profiles/${userName}`
+    );
+    return response.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
 };
 
 export const unfollowUser = async (userName: string): Promise<any> => {
