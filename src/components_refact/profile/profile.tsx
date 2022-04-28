@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../services/hooks';
 import { EditProfileSettings, FollowUserButton, ArticleList } from '../index';
 import { FOLLOW_USER, UNFOLLOW_USER } from '../../constants/actionTypes';
 import agent from '../../agent';
@@ -11,8 +11,8 @@ import { PROFILE_PAGE_LOADED, PROFILE_PAGE_UNLOADED } from '../../constants';
 
 export const Profile: FC = () => {
   const dispatch = useDispatch();
-  const { username, profile } = useSelector((state: any) => state.profile);
-  const { currentUser } = useSelector((state: any) => state.common);
+  const { username } = useSelector((state) => state.profile);
+  const { currentUser } = useSelector((state) => state.common);
   const {
     pager, articles, articlesCount, currentPage,
   } = useSelector((state: any) => state.articleList);
