@@ -1,42 +1,43 @@
 import ArticleList from './ArticleList';
 import ProfileHeader from './ProfileHeader';
 import RenderTabs from './RenderTabs';
-import { useEffect } from 'react';
+import {FunctionComponent, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  PROFILE_PAGE_LOADED,
-  PROFILE_PAGE_UNLOADED
-} from '../services/profileSlice';
-import { TProfileProps } from './ProfileFavorites';
+import {profileSlice} from '../services/profileSlice';
 import {
   getArticlesByAuthor,
-  followUser as _followUserApi,
   getProfile,
 } from '../api';
 import { PROFILE_ARTICLE_LOADED } from '../services/articleListSlice';
+import {useParams} from "react-router-dom";
 
-function Profile({ match }: TProfileProps) {
+// function Profile({ match }: TProfileProps) {
+const Profile: FunctionComponent = () => {
+
   const dispatch = useDispatch();
   const { username, image, following, bio } = useSelector((state: any) => state.profile);
   const { pager, articles, articlesCount, currentPage } = useSelector((state: any) => state.articleList);
 
+  const actionsProfile = profileSlice.actions;
+
+  const params: {username: string} = useParams();
+
   //Вынести эти функции onLoad и onUnload в отдельную директорию или вообще объединить Profile с ProfileFavoritos.
   const onLoad = (payload: any) => {
-    dispatch({ type: PROFILE_PAGE_LOADED, payload });
+    dispatch(actionsProfile.loadSuccess(payload));
     dispatch({ type: PROFILE_ARTICLE_LOADED, payload });
   }
 
   const onUnload = () => {
-    dispatch({ type: PROFILE_PAGE_UNLOADED })
+    dispatch(actionsProfile.unload())
   }
 
   //Match берет данные из роутинга. При обновлении роутера необходимо избавиться от пропсов и считывать из адресной строки. Возможно useEffect отрефакторить.
   useEffect(() => {
     onLoad(Promise.all([
-      getProfile(match.params.username),
-      getArticlesByAuthor(match.params.username)
+      getProfile(params.username),
+      getArticlesByAuthor(params.username)
     ]));
-
     return () => {
       onUnload();
     }

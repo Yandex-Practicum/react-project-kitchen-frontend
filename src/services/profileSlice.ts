@@ -1,35 +1,50 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {TFollowingUser} from "./types";
 
-export const initialState =  {
+interface IInitialState {
+  inProgress: boolean,
+  username: string,
+  image: string,
+  following: null | any, // TODO: уточнить тип. boolean?
+  bio: string
+}
+
+type TArticles = {
+  articles: Array<any>,
+  articlesCount: number;
+}
+
+export const initialState: IInitialState =  {
+  inProgress: false,
   username: '',
   image: '',
   following: null,
   bio: ''
 }
 
-
 export const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
-
-    PROFILE_PAGE_UNLOADED: (state, action) => {
-      return initialState
+    isLoading: (state) => {
+      state.inProgress = true
     },
-
-    PROFILE_PAGE_LOADED: (state, action) => {
+    loadSuccess: (state, action: PayloadAction<[TFollowingUser, TArticles]>) => {
       const { username, image, following } = action.payload[0].profile
       state.username = username;
       state.image = image;
       state.following = following;
     },
-    FOLLOW_USER: (state, action) => {
+    unload: (state) => {
+      return initialState
+    },
+    followUser: (state, action: PayloadAction<TFollowingUser>) => {
       const { username, image, following } = action.payload.profile
       state.username = username;
       state.image = image;
       state.following = following;
     },
-    UNFOLLOW_USER: (state, action) => {
+    unfollowUser: (state, action: PayloadAction<TFollowingUser>) => {
       const { username, image, following } = action.payload.profile
       state.username = username;
       state.image = image;
@@ -39,4 +54,10 @@ export const profileSlice = createSlice({
 })
 
 export default profileSlice.reducer
-export const { PROFILE_PAGE_LOADED, PROFILE_PAGE_UNLOADED, FOLLOW_USER, UNFOLLOW_USER } = profileSlice.actions
+export const {
+  isLoading,
+  loadSuccess,
+  unload,
+  followUser,
+  unfollowUser
+} = profileSlice.actions

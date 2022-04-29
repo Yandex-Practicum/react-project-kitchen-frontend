@@ -3,18 +3,20 @@ import CommentContainer from './CommentContainer';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { marked } from 'marked';
-import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED} from '../../services/articleSlice';
+import { articleSlice } from '../../services/articleSlice';
 import { getArticle, getCommentsForArticle } from '../../api';
+import {useParams} from "react-router-dom";
 
-type TArticleProps = {
-  match: {
-    params: {
-      id: string;
-    };
-  };
-}
+// type TArticleProps = {
+//   match: {
+//     params: {
+//       id: string;
+//     };
+//   };
+// }
 
-const Article: React.FC<TArticleProps> = (props) => {
+// const Article: React.FC<TArticleProps> = (props) => {
+const Article: React.FC = () => {
   const dispatch = useDispatch();
 
   const { article } = useSelector((state: any) => state.article);
@@ -22,19 +24,21 @@ const Article: React.FC<TArticleProps> = (props) => {
   const { comments } = useSelector((state: any) => state.article);
   const { commentErrors } = useSelector((state: any) => state.article);
 
+  const actionsArticle = articleSlice.actions;
+
+  const params: {id: string} = useParams();
+
   const onLoad = (payload: any) => {
-    return dispatch({ type: ARTICLE_PAGE_LOADED, payload })
+    return dispatch(actionsArticle.articlePageWasLoaded(payload))
   }
 
-
   const onUnload = () =>
-    dispatch({ type: ARTICLE_PAGE_UNLOADED })
-
+    dispatch(actionsArticle.articlePageWasUnloaded())
 
   React.useEffect(() => {
     onLoad(Promise.all([
-      getArticle(props.match.params.id),
-      getCommentsForArticle(props.match.params.id)
+      getArticle(params.id),
+      getCommentsForArticle(params.id)
     ]));
 
     return () => {
@@ -97,7 +101,7 @@ const Article: React.FC<TArticleProps> = (props) => {
           <CommentContainer
             comments={comments || []}
             errors={commentErrors}
-            slug={props.match.params.id}
+            slug={params.id}
             currentUser={currentUser} />
         </div>
       </div>

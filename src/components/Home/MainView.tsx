@@ -1,6 +1,6 @@
 import ArticleList from "../ArticleList";
 import {FC } from "react";
-import { CHANGE_TAB } from "../../services/articleListSlice";
+import { articleListSlice } from "../../services/articleListSlice";
 import TabItem from "../Tab/Tab";
 import { getAllArticles, getFeedArticles } from "../../api";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,8 +10,10 @@ const MainView: FC = (props: any) => {
   const { token } = useSelector((state: any) => state.common);
   const dispatch = useDispatch();
 
+  const actionsArticleList = articleListSlice.actions;
+
   const onTabClick =(tab: any, pager: any, payload: any) =>
-    dispatch({ type: CHANGE_TAB, tab, pager, payload })
+    dispatch(actionsArticleList.changeTab(payload))
 
   const clickHandler = (type: string) => {
     if (type === "all") {

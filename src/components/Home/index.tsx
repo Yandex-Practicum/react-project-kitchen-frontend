@@ -2,8 +2,8 @@ import Banner from "./Banner";
 import MainView from "./MainView";
 import { FC, useEffect } from "react";
 import Tags from "./Tags";
-import {HOME_PAGE_LOADED, HOME_PAGE_UNLOADED} from "../../services/homeSlice";
-import { APPLY_TAG_FILTER } from "../../services/articleListSlice"; 
+import {homeSlice} from "../../services/homeSlice";
+import { articleListSlice } from "../../services/articleListSlice";
 import { getAllArticles, getFeedArticles, getTags } from '../../api';
 import { useSelector, useDispatch } from "react-redux";
 
@@ -22,10 +22,10 @@ const Home: FC = () => {
   const onLoad = (tab: string, pager: any, payload: any) =>
     dispatch({ type: HOME_PAGE_LOADED, tab, pager, payload })
 
-  const onUnload = () => 
+  const onUnload = () =>
     dispatch({type: HOME_PAGE_LOADED})
 
- 
+
   useEffect(() => {
     const tab = token ? "feed" : "all";
     const articlesPromise = token

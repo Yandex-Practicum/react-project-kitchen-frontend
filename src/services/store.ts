@@ -1,13 +1,14 @@
 // import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import { ActionCreator, AnyAction, configureStore, Dispatch } from '@reduxjs/toolkit'
 import rootReducer from "./index";
+// import { promiseMiddleware, localStorageMiddleware } from '../middleware';
 import { promiseMiddleware, localStorageMiddleware } from '../middleware';
 import { routerMiddleware } from 'react-router-redux';
 import { createLogger } from 'redux-logger';
 
 
 export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = Dispatch<AnyAction> 
+export type AppDispatch = Dispatch<AnyAction>
 
 // export const history = createHistory();
 export const history = require("history").createBrowserHistory()
@@ -19,9 +20,9 @@ export const store = configureStore({
     ...rootReducer,
   },
   middleware: [
-    myRouterMiddleware, 
-    promiseMiddleware, 
-    localStorageMiddleware, 
+    myRouterMiddleware,
+    promiseMiddleware,
+    localStorageMiddleware,
     createLogger(),
   ],
   devTools: process.env.NODE_ENV !== 'production',

@@ -1,39 +1,41 @@
-import { createSlice } from '@reduxjs/toolkit'
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-const initialState = {
+interface IInitialState {
+  inProgress: boolean,
+  errors: null | any, // TODO: выснить, какого типа ошибки. string или это объект/массив?
+}
+
+const initialState: IInitialState = {
   inProgress: false,
-  errors: null
+  errors: null,
 }
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    LOGIN: (state, action) => {
-      state.inProgress = false,
-      state.errors = action.payload.errors ? action.payload.errors : null
+    isLoading: (state) => {
+      state.inProgress = true;
     },
-    REGISTER: (state, action) => {
-      state.inProgress = false,
-      state.errors = action.payload.errors ? action.payload.errors : null
+    isError: (state,  action: PayloadAction<any>) => { // TODO: см. выше про ошибки
+      // state.errors = action && action.error ? action.payload.errors : null;
     },
+    authSuccess: (state,) => {
+      state.inProgress = false;
+    },
+    pageWasUnloaded: (state) => initialState,
 
-    LOGIN_PAGE_UNLOADED: (state, action) => initialState,
-
-    REGISTER_PAGE_UNLOADED: (state, action) => initialState,
-
-    //Непонятно зачем эти строки, так что пока закомментированными оставим.
     // ASYNC_START: (state, action) => {
-    //   console.log(1111);
-    //   if (action.subtype === LOGIN || action.subtype === REGISTER) {
-    //     return { ...state, inProgress: true };
-    //   }
-    // },
-
+    //   // if (action.subtype === LOGIN || action.subtype === REGISTER) {
+    //   return {...state, inProgress: true};
+    // }
+    // // },
   }
 })
 
 export default authSlice.reducer
-//Раскомментировать со строками 25-31 или удалить вместе с ними.
-// export const { ASYNC_START, REGISTER, REGISTER_PAGE_UNLOADED, UPDATE_FIELD_AUTH } = authSlice.actions
-export const { REGISTER, REGISTER_PAGE_UNLOADED } = authSlice.actions
+export const {
+  isLoading,
+  isError,
+  pageWasUnloaded,
+} = authSlice.actions

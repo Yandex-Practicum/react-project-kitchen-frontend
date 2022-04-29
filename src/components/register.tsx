@@ -2,13 +2,10 @@ import { Link } from 'react-router-dom';
 import ListErrors from './ListErrors';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  REGISTER, REGISTER_PAGE_UNLOADED
-} from '../services/authSlice';
+import {authSlice} from '../services/authSlice';
 import { signup } from '../api';
 import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
 import { useForm } from 'react-hook-form';
-
 
 type FormData = {
   username: string;
@@ -16,9 +13,14 @@ type FormData = {
   password: string
 };
 
-const Register: React.FC<any> = () => {
+const Register: React.FC = () => {
   const dispatch = useDispatch();
-  const errorsSubmite = useSelector((state: any) => state.auth.errors)
+  const submit = useSelector((state: any) => {
+    return {
+      errors: state.auth.errors,
+      inProgress: state.auth.inProgress
+    }
+  })
 
   const {
     register,
@@ -33,17 +35,19 @@ const Register: React.FC<any> = () => {
     }
   })
 
+  const actionsAuth = authSlice.actions;
+
   useEffect(() => {
     return () => {
-      dispatch({ type: REGISTER_PAGE_UNLOADED });
+      dispatch(actionsAuth.pageWasUnloaded());
     }
   }, [])
 
   const handleSubmitForm = handleSubmit(({username, email, password}, e) => {
     e && e.preventDefault();
     console.log(2222);
-
-    dispatch({ type: REGISTER, payload: signup(username, email, password)})
+    dispatch(actionsAuth.authSuccess());
+    signup(username, email, password);
   });
 
   return (
@@ -59,11 +63,10 @@ const Register: React.FC<any> = () => {
               </Link>
             </p>
 
-            <ListErrors errors={errorsSubmite} />
+            <ListErrors errors={submit.errors} />
 
             <form action='POST' onSubmit={handleSubmitForm}>
-              <fieldset>
-
+              {/*<fieldset>*/}
                 <fieldset className="form-group">
                   <input
                     className="form-control form-control-lg"
@@ -117,8 +120,8 @@ const Register: React.FC<any> = () => {
                 <div style={{ height: 40 }}>
                   {errors?.password && <p>{errors?.password?.message}</p>}
                 </div>
-                <SignupLoginSubmitBtn btnText="Sign up" />
-              </fieldset>
+                <SignupLoginSubmitBtn btnText="Sign up" disabled={submit.inProgress}/>
+              {/*</fieldset>*/}
             </form>
           </div>
 

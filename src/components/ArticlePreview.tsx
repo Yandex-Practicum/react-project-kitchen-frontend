@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 // import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../constants/actionTypes';
-import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../services/articleListSlice'
+import { articleListSlice } from '../services/articleListSlice'
 import { setArticleAsFavorite, deleteArticleAsFavorite } from '../api';
 
 const FAVORITED_CLASS = 'btn btn-sm btn-primary';
@@ -33,8 +33,6 @@ const ArticlePreview: React.FC<TArticlePreviewProps> = (props) => {
     FAVORITED_CLASS :
     NOT_FAVORITED_CLASS;
 
-
-
 const handleClick = (e: React.SyntheticEvent) => {
     e.preventDefault();
     if (article.favorited) {
@@ -43,8 +41,6 @@ const handleClick = (e: React.SyntheticEvent) => {
       props.favorite(article.slug);
     }
   };
-
- 
 
   return (
     <div className="article-preview">
@@ -88,6 +84,5 @@ const handleClick = (e: React.SyntheticEvent) => {
     </div>
   );
 }
-
 
 export default connect(() => ({}), mapDispatchToProps)(ArticlePreview);

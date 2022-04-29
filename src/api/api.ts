@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { IArticleRes, IUserLogin, ApiEnums } from "./types";
+import {TFollowingUser} from "../services/types";
 
 // set token on every request
 export const setTokenAxios = (_token: string) => {
@@ -11,6 +12,7 @@ export const getTags = async (): Promise<any> => {
   const response: AxiosResponse<any> = await axios.get(
     `${ApiEnums.BASE_URL}/tags`
   );
+  console.log(response.data)
   return response.data;
 };
 
@@ -20,6 +22,7 @@ export const login = async (email: string, password: string): Promise<any> => {
     `${ApiEnums.BASE_URL}/users/login`,
     { user: { email, password } }
   );
+  console.log(response.data)
   return response.data;
 };
 
@@ -212,7 +215,7 @@ export const getCommentsForArticle = async (slug: string): Promise<any> => {
 };
 
 // Profile
-export const followUser = async (userName: string): Promise<any> => {
+export const followUser = async (userName: string): Promise<TFollowingUser> => {
   const response: AxiosResponse<any> = await axios.post(
     `${ApiEnums.BASE_URL}/profiles/${userName}/follow`
   );

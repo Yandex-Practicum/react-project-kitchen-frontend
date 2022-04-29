@@ -1,63 +1,63 @@
 import ProfileHeader from './ProfileHeader';
 import RenderTabs from './RenderTabs';
-import { useEffect } from 'react';
+import React, {FunctionComponent, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  FOLLOW_USER,
-  PROFILE_PAGE_LOADED,
-  PROFILE_PAGE_UNLOADED,
-  UNFOLLOW_USER
-} from '../services/profileSlice';
+import {profileSlice} from '../services/profileSlice';
 import ArticleList from './ArticleList';
 import { getFavoritedArticles, unfollowUser, getProfile } from '../api';
 import { PROFILE_ARTICLE_LOADED } from '../services/articleListSlice';
+import {useParams} from "react-router-dom";
+import {followUser} from '../api';
 
 
-//Избавиться от этой бяки после роутинга.
-export type TProfileProps = {
-  match: {
-    isExact: boolean;
-    path: string;
-    url: string;
-    params: { username: string; }
-  };
-}
+// // TODO: Избавиться от этой бяки после роутинга.
+// export type TProfileProps = {
+//   match: {
+//     isExact: boolean;
+//     path: string;
+//     url: string;
+//     params: { username: string; }
+//   };
+// }
 
-function ProfileFavorites({ match }: TProfileProps) {
+// function ProfileFavorites({ match }: TProfileProps) {
+const ProfileFavorites: FunctionComponent = () => {
 
   const dispatch = useDispatch();
+
   const { username, image, following, bio } = useSelector((state: any) => state.profile);
   const { pager, articles, articlesCount, currentPage } = useSelector((state: any) => state.articleList);
 
+  const actionsProfile = profileSlice.actions;
+
+  const params: {username: string} = useParams();
+
   //Эти onFollow'ы перенести в FollowUserButton после полного подключения Редакс. Здесь они не нужны.
   const onFollow = (username: string) => {
-    dispatch({
-      type: FOLLOW_USER,
-      payload: _followUserApi(username)
+    followUser(username).then((res) => {
+      dispatch(actionsProfile.followUser(res))
     })
   }
-
   const onUnfollow = (username: string) => {
-    dispatch({
-      type: UNFOLLOW_USER,
-      payload: unfollowUser(username)
+    unfollowUser(username).then((res) => {
+      dispatch(actionsProfile.unfollowUser(res))
     })
   }
   //Вынести эти функции onLoad и onUnload в отдельную директорию или вообще объединить Profile с ProfileFavoritos.
   const onLoad = (payload: any) => {
-    dispatch({ type: PROFILE_PAGE_LOADED, payload });
+    dispatch(actionsProfile.loadSuccess(payload));
     dispatch({ type: PROFILE_ARTICLE_LOADED, payload });
   }
 
   const onUnload = () => {
-    dispatch({ type: PROFILE_PAGE_UNLOADED })
+    dispatch(actionsProfile.unload())
   }
 
   //Match берет данные из роутинга. При обновлении роутера необходимо избавиться от пропсов и считывать из адресной строки. Возможно useEffect отрефакторить.
   useEffect(() => {
     onLoad(Promise.all([
-      getProfile(match.params.username),
-      getFavoritedArticles(match.params.username)
+      getProfile(params.username),
+      getFavoritedArticles(params.username)
     ]));
 
     return () => {
@@ -97,7 +97,7 @@ function ProfileFavorites({ match }: TProfileProps) {
 }
 
 export default ProfileFavorites
-function _followUserApi(username: any) {
-  throw new Error('Function not implemented.');
-}
+// function _followUserApi(username: any) {
+//   throw new Error('Function not implemented.');
+// }
 

@@ -1,4 +1,4 @@
-import { setTokenAxios } from './api';
+import {setTokenAxios, updateUser} from './api';
 import {
   ASYNC_START,
   ASYNC_END,
@@ -6,6 +6,7 @@ import {
   LOGOUT,
   REGISTER
 } from './constants/actionTypes';
+import {authSlice} from "./services/authSlice";
 
 const promiseMiddleware = store => next => action => {
   if (isPromise(action.payload)) {
@@ -47,12 +48,13 @@ const promiseMiddleware = store => next => action => {
 };
 
 const localStorageMiddleware = store => next => action => {
-  if (action.type === REGISTER || action.type === LOGIN) {
-    if (!action.error) {
-      window.localStorage.setItem('jwt', action.payload.user.token);
+  const {payload, token, error} = action;
+  if (authSlice.actions.authSuccess.match(action)) {
+    // if (!error) {
+      window.localStorage.setItem('jwt', token); // как обновить токен, который jwt malformed?????????
       // agent.setToken(action.payload.user.token);
-      setTokenAxios(action.payload.user.token);
-    }
+      setTokenAxios(token);
+    // }
   } else if (action.type === LOGOUT) {
     window.localStorage.setItem('jwt', '');
     // agent.setToken(null);
@@ -60,6 +62,7 @@ const localStorageMiddleware = store => next => action => {
   }
 
   next(action);
+  return store
 };
 
 function isPromise(v) {
