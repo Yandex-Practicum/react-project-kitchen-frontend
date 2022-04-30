@@ -2,13 +2,15 @@ import { setTokenAxios } from "./api";
 
 const localStorageMiddleware = (store) => (next) => (action) => {
 
+  console.log(action);
+
   // TODO: фулфилдится при 500, 400. При ошибке пудет падать стор изза отсутств. нужных полей.
   // надо обработать ошибки
   const goodActions =
     action.type === "LOGIN/fulfilled" || action.type === "SIGNUP/fulfilled";
 
   const badActions =
-    action.type === "LOGOUT" ||
+    action.type === "common/LOGOUT" ||
     action.type === "LOGIN/rejected" ||
     action.type === "SIGNUP/rejected" ||
     action.type === "AUTH/rejected";
@@ -17,7 +19,7 @@ const localStorageMiddleware = (store) => (next) => (action) => {
     if(action.payload?.isAxiosError) {
       console.log('isAxiosError');
       localStorage.setItem("jwt", "");
-      setTokenAxios(null);
+      setTokenAxios('');
     } else {
       localStorage.setItem("jwt", action.payload?.user?.token);
       setTokenAxios(action.payload?.user?.token);
@@ -26,7 +28,7 @@ const localStorageMiddleware = (store) => (next) => (action) => {
   }
   if (badActions) {
     localStorage.setItem("jwt", "");
-    setTokenAxios(null);
+    setTokenAxios('');
   }
   next(action);
 };

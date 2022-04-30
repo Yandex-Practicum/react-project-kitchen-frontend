@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { ADD_COMMENT } from "../../services/articleSlice";
-import { createComment as _createCommentApi } from '../../api';
+// import { ADD_COMMENT } from "../../services/articleSlice";
+import { createComment as _createCommentApi } from "../../api";
 
-type TCommentInputProps = { 
-  currentUser: { 
-    username: any, 
-    image: string,
-  }; 
-  slug: any; 
+type TCommentInputProps = {
+  currentUser: {
+    username: any;
+    image: string;
+  };
+  slug: any;
   onSubmit: (payload: any) => void;
-}
-
+};
 
 const mapDispatchToProps = (dispatch: any) => ({
-  onSubmit: (payload: any) => dispatch({ type: ADD_COMMENT, payload }),
+  // onSubmit: (payload: any) => dispatch({ type: ADD_COMMENT, payload }),
+  onSubmit: () => {},
 });
 
 const CommentInput: React.FC<TCommentInputProps> = (props) => {
@@ -24,7 +24,7 @@ const CommentInput: React.FC<TCommentInputProps> = (props) => {
     setBody(e.target.value);
   };
 
-  const createComment = (e:React.SyntheticEvent) => {
+  const createComment = (e: React.SyntheticEvent) => {
     e.preventDefault();
     // const payload = agent.Comments.create(props.slug, { body: body });
     const payload = _createCommentApi(props.slug, { body: body });

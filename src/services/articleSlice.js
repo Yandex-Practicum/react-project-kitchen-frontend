@@ -1,34 +1,42 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
+import { getArticle } from "../api";
+import {
+  getArticleThunk,
+  deleteArticleThunk,
+  updateArticleThunk,
+  createArticleThunk,
+} from "./thunks";
 
 const initialState = {
   article: {},
   comments: [],
   commentErrors: null,
-}
+};
+
+const setArticle = (state, action) => {
+  if (action.payload?.article) {
+    state.article = action.payload.article;
+  }
+};
 
 export const articleSlice = createSlice({
-  name: 'article',
+  name: "article",
   initialState,
   reducers: {
-    ARTICLE_PAGE_LOADED: (state, action) => {
-      state.article = action.payload[0].article,
-      state.comments = action.payload[1].comments;
+    clearArticle: (state, action) => {
+      state.article = {};
     },
-    ARTICLE_PAGE_UNLOADED: (state, action) => {
-      return initialState;
-    },
-    ADD_COMMENT: (state, action) => {
-      state.commentErrors = action.error ? action.payload.errors : null;
-      state.comments = action.error 
-      ? null 
-      : (state.comments || []).concat([action.payload.comment])
-    },
-    DELETE_COMMENT: (state, action) => {
-      const commentId = action.commentId;
-      state.comments = state.comments.filter(comment => comment.id !== commentId);
-    },
-  }
-})
+  },
 
-export default articleSlice.reducer
-export const {  ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED, ADD_COMMENT, DELETE_COMMENT } = articleSlice.actions
+  extraReducers: {
+    [getArticleThunk.fulfilled]: setArticle,
+    [updateArticleThunk.fulfilled]: setArticle,
+    [createArticleThunk.fulfilled]: setArticle,
+    [deleteArticleThunk.fulfilled]: (state, action) => {
+      state.article = {};
+    },
+  },
+});
+
+export default articleSlice.reducer;
+export const { clearArticle } = articleSlice.actions;

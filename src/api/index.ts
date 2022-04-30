@@ -4,22 +4,22 @@ export {
   login, // done
   signup, // done
   auth, // done
-  updateUser,
+  updateUser, // done
   getAllArticles, // done
   getArticlesByAuthor, // done
   getArticlesByTag,
-  deleteArticle,
-  setArticleAsFavorite,
+  deleteArticle, // done
+  setArticleAsFavorite, // done
   getFavoritedArticles, // done
   getFeedArticles, // done
-  getArticle,
-  deleteArticleAsFavorite,
-  updateArticle,
-  createArticle,
+  getArticle, // done
+  deleteArticleAsFavorite, // done
+  updateArticle, // done
+  createArticle, // done
   createComment,
   deleteComment,
   getCommentsForArticle,
   followUser,
-  getProfile,
+  getProfile, // done
   unfollowUser
 } from "./api";

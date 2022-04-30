@@ -184,13 +184,15 @@ export const deleteArticleAsFavorite = async (slug: string): Promise<any> => {
 };
 
 export const updateArticle = async (article: any): Promise<IArticleRes> => {
-  const response: AxiosResponse<IArticleRes> = await axios.put(
-    `${ApiEnums.BASE_URL}/articles/${article.slug}`,
-    {
-      article: { ...article, slug: undefined },
-    }
-  );
-  return response.data;
+  try {
+    const response: AxiosResponse<IArticleRes> = await axios.put(
+      `${ApiEnums.BASE_URL}/articles/${article.slug}`,
+      { article }
+    );
+    return response.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
 };
 
 export const createArticle = async (article: any): Promise<IArticleRes> => {

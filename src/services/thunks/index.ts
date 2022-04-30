@@ -29,10 +29,11 @@ export const getTagsThunk: any = thunk("GET_TAGS", pc(api.getTags));
 export const getProfileThunk: any = thunk("GET_PROFILE", pc(api.getProfile));
 export const getArticlesByAuthorThunk: any = thunk("GET_ARTICLES_BY_AUTHOR", pc(api.getArticlesByAuthor));
 export const getFavoritedArticlesThunk: any = thunk("GET_FAVORITE_ARTICLES", pc(api.getFavoritedArticles));
+export const updateUserThunk: any = thunk("UPDATE_USER", pc(api.updateUser));
+export const getArticleThunk: any = thunk("GET_ARTICLE", pc(api.getArticle));
+export const deleteArticleThunk: any = thunk("DELETE_ARTICLE", pc(api.deleteArticle));
+export const updateArticleThunk: any = thunk("UPDATE_ARTICLE", pc(api.updateArticle));
+export const createArticleThunk: any = thunk("CREATE_ARTICLE", pc(api.createArticle));
+export const setArticleAsFavoriteThunk: any = thunk("SET_ARTICLE_AS_FAVORITE", pc(api.setArticleAsFavorite));
+export const deleteArticleAsFavoriteThunk: any = thunk("DELETE_ARTICLE_AS_FAVORITE_THUNK", pc(api.deleteArticleAsFavorite));
 
-
-// async (payload: any, thunkAPI) => {
-//   const response = await api.login(payload);
-//   return response;
-// }
-// );
