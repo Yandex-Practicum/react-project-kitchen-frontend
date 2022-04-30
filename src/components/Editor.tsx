@@ -1,11 +1,14 @@
 import ListErrors from "./ListErrors";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-
-import { ARTICLE_SUBMITTED } from "../services/commonSlice";
-import { getArticle } from "../api";
-import { updateArticle } from "../api";
-import { createArticle } from "../api";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router";
+import {
+  createArticleThunk,
+  getArticleThunk,
+  updateArticleThunk,
+} from "../services/thunks";
+import { clearEditor } from "../services/editorSlice";
+import { clearArticle } from "../services/articleSlice";
 
 type TEditorProps = {
   match: {
@@ -17,6 +20,8 @@ type TEditorProps = {
 
 const Editor: React.FC<TEditorProps> = (props) => {
   const dispatch = useDispatch();
+  const { article } = useSelector((state: any) => state.article);
+  const history = useHistory();
 
   const [form, setForm] = useState({
     title: "",
@@ -24,13 +29,57 @@ const Editor: React.FC<TEditorProps> = (props) => {
     body: "",
     tagInput: "",
   });
-  const [tagList, setTagList] = useState<Array<string>>([]);
-  const [articleSlug, setArticleSlug] = useState("");
   const [inProgress, setInProgress] = useState(false);
-  const [errors, setErrors] = useState();
+  const [errors, setErrors] = useState({});
+  const [tagList, setTagList] = useState([]);
+  const params: { slug: string } = useParams();
 
   const onChange = (e: { target: { name: string; value: string } }) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const onRemoveTagClick = (index: number) => {
+    const updatedTagList = tagList.filter((t: string, i) => i !== index);
+    setTagList(updatedTagList);
+  };
+
+  const updateArticle = () => {
+    setInProgress(true);
+    dispatch(
+      updateArticleThunk({
+        ...form,
+        tagList: [...tagList, ...form.tagInput.split(" ").filter((t) => t)],
+        slug: params.slug,
+      })
+    )
+      .unwrap()
+      .then((data: any) => {
+        setInProgress(false)
+        history.push(`/article/${data.article.slug}`)
+      })
+      .catch((err: any) => {
+        setErrors({ error: err.message });
+        setInProgress(false);
+      });
+  };
+
+  const createArticle = () => {
+    setInProgress(true);
+    dispatch(
+      createArticleThunk({
+        ...form,
+        tagList: [...tagList, ...form.tagInput.split(" ").filter((t) => t)],
+      })
+    )
+      .unwrap()
+      .then((data: any) => {
+        setInProgress(false);
+        history.push(`/article/${data.article.slug}`);
+      })
+      .catch((err: any) => {
+        setErrors({ error: err.message });
+        setInProgress(false);
+      });
   };
 
   const watchForEnter = (ev: {
@@ -39,66 +88,42 @@ const Editor: React.FC<TEditorProps> = (props) => {
   }) => {
     if (ev.keyCode === 13) {
       ev.preventDefault();
-      setTagList(tagList.concat([form.tagInput]));
-      setForm({ ...form, tagInput: "" });
+      if (params.slug) {
+        updateArticle();
+      } else {
+        createArticle();
+      }
     }
   };
 
-  const removeTagHandler = (e: any) => {
-    setTagList(
-      tagList.filter((tag) => tag !== e.target.parentElement.textContent)
-    );
-  };
-
-  const onSubmit = (payload: any) =>
-    dispatch({ type: ARTICLE_SUBMITTED, payload });
-
-  const submitForm = (ev: { preventDefault: () => void }) => {
+  const onSubmit = (ev: { preventDefault: () => void }) => {
     ev.preventDefault();
-
-    const article = {
-      title: form.title,
-      description: form.description,
-      body: form.body,
-      tagList: tagList,
-    };
-
-    setInProgress(true);
-
-    const slug = { slug: articleSlug };
-    const promise = articleSlug
-      ? updateArticle(Object.assign(article, slug))
-      : createArticle(article);
-
-    promise.catch((err) => {
-      setErrors(err);
-    });
-
-    onSubmit(promise);
+    if (params.slug) {
+      updateArticle();
+    } else {
+      createArticle();
+    }
   };
 
-  React.useEffect(() => {
-    if (props.match.params.slug) {
-      const article = getArticle(props.match.params.slug);
-      article.then((res) => {
-        setForm({
-          title: res.article.title,
-          description: res.article.description,
-          body: res.article.body,
-          tagInput: "",
-        });
-        setTagList(res.article.tagList);
-        setArticleSlug(res.article.slug);
-      });
+  useEffect(() => {
+    if (params.slug) {
+      dispatch(getArticleThunk(params.slug));
     }
-
     return () => {
       setForm({ title: "", description: "", body: "", tagInput: "" });
-      setTagList([]);
-      setArticleSlug("");
       setInProgress(false);
+      dispatch(clearEditor(null));
+      dispatch(clearArticle(null));
     };
-  }, [props.match.params.slug]);
+  }, [params.slug]);
+
+  useEffect(() => {
+    if (article.slug) {
+      const { body, description, title } = article;
+      setForm({ body, description, title, tagInput: "" });
+      setTagList(article.tagList);
+    }
+  }, [article]);
 
   return (
     <div className="editor-page">
@@ -107,7 +132,7 @@ const Editor: React.FC<TEditorProps> = (props) => {
           <div className="col-md-10 offset-md-1 col-xs-12">
             <ListErrors errors={errors}></ListErrors>
 
-            <form>
+            <form onSubmit={onSubmit}>
               <fieldset>
                 <fieldset className="form-group">
                   <input
@@ -146,37 +171,36 @@ const Editor: React.FC<TEditorProps> = (props) => {
                   <input
                     className="form-control"
                     type="text"
-                    placeholder="Enter tags"
+                    placeholder="Enter tags separated by spaces"
                     value={form.tagInput}
                     name={"tagInput"}
                     onChange={onChange}
                     onKeyUp={watchForEnter}
                   />
 
-                  <div className="tag-list">
-                    {(tagList || []).map((tag: string) => {
-                      return (
-                        <span className="tag-default tag-pill" key={tag}>
-                          <i
-                            className="ion-close-round"
-                            onClick={(e: any) => {
-                              removeTagHandler(e);
-                            }}
-                          ></i>
-                          {tag}
-                        </span>
-                      );
-                    })}
-                  </div>
+                  {article.slug && (
+                    <div className="tag-list">
+                      {tagList.map((tag: string, i) => {
+                        return (
+                          <span className="tag-default tag-pill" key={i}>
+                            <i
+                              className="ion-close-round"
+                              onClick={() => onRemoveTagClick(i)}
+                            ></i>
+                            {tag}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  )}
                 </fieldset>
 
                 <button
                   className="btn btn-lg pull-xs-right btn-primary"
-                  type="button"
+                  type="submit"
                   disabled={inProgress}
-                  onClick={submitForm}
                 >
-                  Publish Article
+                  {article.slug ? "Update" : "Publish"} Article
                 </button>
               </fieldset>
             </form>

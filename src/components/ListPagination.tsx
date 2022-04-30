@@ -1,19 +1,20 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 // import { SET_PAGE } from '../constants/actionTypes';
-import { articleListSlice } from '../services/articleListSlice';
-import { getAllArticles } from '../api';
+// import { SET_PAGE } from '../services/articleListSlice';
+import { getAllArticles } from "../api";
 
 const mapDispatchToProps = (dispatch: any) => ({
-  onSetPage: (page: any, payload: any) =>
-    dispatch({ type: SET_PAGE, page, payload })
+  onSetPage: (page: any, payload: any) => {
+    // dispatch({ type: SET_PAGE, page, payload });
+  },
 });
 
 interface TListPaginationProps {
   articlesCount: any;
   pager: any;
-  onSetPage: (arg0: any, arg1: any ) => void;
-  currentPage: any
+  onSetPage: (arg0: any, arg1: any) => void;
+  currentPage: any;
 }
 
 const ListPagination: React.FC<TListPaginationProps> = (props) => {
@@ -27,38 +28,35 @@ const ListPagination: React.FC<TListPaginationProps> = (props) => {
   }
 
   const setPage = (page: any) => {
-    if(props.pager) {
+    if (props.pager) {
       props.onSetPage(page, props.pager(page));
-    }else {
+    } else {
       // props.onSetPage(page, agent.Articles.all(page))
-      props.onSetPage(page, getAllArticles(page))
+      props.onSetPage(page, getAllArticles(page));
     }
   };
 
   return (
     <nav>
       <ul className="pagination">
-
-        {
-          range.map(v => {
-            const isCurrent = v === props.currentPage;
-            const onClick = (e: React.SyntheticEvent) => {
-              e.preventDefault();
-              setPage(v);
-            };
-            return (
-              <li
-                className={ isCurrent ? 'page-item active' : 'page-item' }
-                onClick={onClick}
-                key={v.toString()}>
-
-                <a className="page-link" href="">{v + 1}</a>
-
-              </li>
-            );
-          })
-        }
-
+        {range.map((v) => {
+          const isCurrent = v === props.currentPage;
+          const onClick = (e: React.SyntheticEvent) => {
+            e.preventDefault();
+            setPage(v);
+          };
+          return (
+            <li
+              className={isCurrent ? "page-item active" : "page-item"}
+              onClick={onClick}
+              key={v.toString()}
+            >
+              <a className="page-link" href="">
+                {v + 1}
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );

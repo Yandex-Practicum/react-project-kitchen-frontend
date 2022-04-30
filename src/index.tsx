@@ -11,7 +11,7 @@ import App from './components/App';
 import { setTokenAxios } from './api';
 
 const token = localStorage.getItem('jwt');
-setTokenAxios(token ? token : null);
+setTokenAxios(token ? token : "");
 
 ReactDOM.render((
   <Provider store={store}>

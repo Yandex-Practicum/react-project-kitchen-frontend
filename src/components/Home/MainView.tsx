@@ -1,6 +1,5 @@
 import ArticleList from "../ArticleList";
 import { FC, useState } from "react";
-import { CHANGE_TAB } from "../../services/articleListSlice";
 import TabItem from "../Tab/Tab";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllArticlesThunk, getFeedArticlesThunk } from "../../services/thunks";
