@@ -1,47 +1,51 @@
-import ArticleList from './ArticleList';
-import ProfileHeader from './ProfileHeader';
-import RenderTabs from './RenderTabs';
-import {FunctionComponent, useEffect} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {profileSlice} from '../services/profileSlice';
+import ArticleList from "./ArticleList";
+import ProfileHeader from "./ProfileHeader";
+import RenderTabs from "./RenderTabs";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+// import { TProfileProps } from "./ProfileFavorites";
+import { useParams, useLocation } from "react-router-dom";
 import {
-  getArticlesByAuthor,
-  getProfile,
-} from '../api';
-import { PROFILE_ARTICLE_LOADED } from '../services/articleListSlice';
-import {useParams} from "react-router-dom";
+  getArticlesByAuthorThunk,
+  getFavoritedArticlesThunk,
+  getProfileThunk,
+} from "../services/thunks";
 
-// function Profile({ match }: TProfileProps) {
-const Profile: FunctionComponent = () => {
+// export type TProfileProps = {
+//   match: {
+//     isExact: boolean;
+//     path: string;
+//     url: string;
+//     params: { username: string; }
+//   };
+// }
 
+function Profile() {
   const dispatch = useDispatch();
-  const { username, image, following, bio } = useSelector((state: any) => state.profile);
-  const { pager, articles, articlesCount, currentPage } = useSelector((state: any) => state.articleList);
+  const { username, image, following, bio } = useSelector(
+    (state: any) => state.profile
+  );
+  const { pager, articles, articlesCount, currentPage } = useSelector(
+    (state: any) => state.articleList
+  );
 
-  const actionsProfile = profileSlice.actions;
+  const params: { username: string; [key: string]: any } = useParams();
+  const { pathname } = useLocation();
 
-  const params: {username: string} = useParams();
-
-  //Вынести эти функции onLoad и onUnload в отдельную директорию или вообще объединить Profile с ProfileFavoritos.
-  const onLoad = (payload: any) => {
-    dispatch(actionsProfile.loadSuccess(payload));
-    dispatch({ type: PROFILE_ARTICLE_LOADED, payload });
-  }
-
-  const onUnload = () => {
-    dispatch(actionsProfile.unload())
-  }
-
-  //Match берет данные из роутинга. При обновлении роутера необходимо избавиться от пропсов и считывать из адресной строки. Возможно useEffect отрефакторить.
   useEffect(() => {
-    onLoad(Promise.all([
-      getProfile(params.username),
-      getArticlesByAuthor(params.username)
-    ]));
-    return () => {
-      onUnload();
+    if (pathname.includes("favorites")) {
+      dispatch(getFavoritedArticlesThunk({ author: params.username, page: 0 }));
+    } else {
+      dispatch(getArticlesByAuthorThunk({ author: params.username, page: 0 }));
     }
-  }, [])
+  }, [pathname]);
+
+  useEffect(() => {
+    if (params.username) {
+      dispatch(getProfileThunk(params.username));
+      dispatch(getArticlesByAuthorThunk({ author: params.username, page: 0 }));
+    }
+  }, []);
 
   if (!username) {
     return null;
@@ -62,12 +66,13 @@ const Profile: FunctionComponent = () => {
               pager={pager}
               articles={articles}
               articlesCount={articlesCount}
-              state={currentPage} />
+              state={currentPage}
+            />
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Profile
+export default Profile;

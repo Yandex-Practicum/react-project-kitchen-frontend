@@ -1,13 +1,33 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { login } from "../api";
+import { authThunk, loginThunk, signupThunk } from "./thunks";
 
 const initialState = {
   appName: "Practicum Project Kitchen",
-  token: null,
+  token: localStorage.getItem("jwt") ? localStorage.getItem("jwt") : "",
   errors: null,
+  isLoggedIn: false,
   currentUser: {
-    email: '',
-    token: '',
-    username: ''
+    email: "",
+    // token: localStorage.getItem('jwt') ? localStorage.getItem('jwt') : "",
+    username: "",
+  },
+};
+
+const setUserRejected = (state, action) => {
+  state.isLoggedIn = false;
+  state.token = null;
+};
+
+const setUserFulfilled = (state, action) => {
+  if (action.payload?.user) {
+    const { token, ...rest } = action.payload.user;
+    state.currentUser = rest;
+    state.isLoggedIn = true;
+    state.token = token;
+  } else {
+    state.isLoggedIn = false;
+    state.token = null;
   }
 };
 
@@ -71,6 +91,15 @@ export const commonSlice = createSlice({
     REGISTER_PAGE_UNLOADED: (state, action) => {
       state.viewChangeCounter = state.viewChangeCounter + 1;
     },
+  },
+  extraReducers: {
+    [authThunk.fulfilled]: setUserFulfilled,
+    [loginThunk.fulfilled]: setUserFulfilled,
+    [signupThunk.fulfilled]: setUserFulfilled,
+
+    [authThunk.rejected]: setUserRejected,
+    [loginThunk.rejected]: setUserRejected,
+    [signupThunk.rejected]: setUserRejected,
   },
 });
 

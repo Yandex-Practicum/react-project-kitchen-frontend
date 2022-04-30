@@ -8,14 +8,15 @@ import { ConnectedRouter } from 'react-router-redux';
 import { BrowserRouter } from "react-router-dom";
 
 import App from './components/App';
+import { setTokenAxios } from './api';
 
-// TODO: to type
-// const storeProp: any = { store };
+const token = localStorage.getItem('jwt');
+setTokenAxios(token ? token : null);
 
 ReactDOM.render((
   <Provider store={store}>
     <BrowserRouter basename="/">
-      <Route path="/" component={App} />
+      <App />
     </BrowserRouter>
   </Provider>
 
