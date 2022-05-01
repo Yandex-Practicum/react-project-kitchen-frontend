@@ -1,6 +1,7 @@
 import React from "react";
 import { connect, useDispatch } from "react-redux";
 // import { DELETE_COMMENT } from '../../services/articleSlice';
+import { deleteComment } from "../../api";
 import { deleteCommentThunk } from "../../services/thunks";
 
 type TDeleteButtonProps = {

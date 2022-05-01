@@ -16,9 +16,9 @@ export {
   deleteArticleAsFavorite, // done
   updateArticle, // done
   createArticle, // done
-  createComment,// done
-  deleteComment,// done
-  getCommentsForArticle,// done
+  createComment, // done
+  deleteComment, // done
+  getCommentsForArticle, // done
   followUser,
   getProfile, // done
   unfollowUser

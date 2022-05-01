@@ -12,7 +12,6 @@ type TCommentInputProps = {
 };
 
 
-
 const CommentInput: React.FC<TCommentInputProps> = (props) => {
   const [body, setBody] = useState<string>("");
   const dispatch = useDispatch();

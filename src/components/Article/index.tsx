@@ -2,10 +2,7 @@ import ArticleMeta from "./ArticleMeta";
 import CommentContainer from "./CommentContainer";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getArticleThunk,
-  getCommentsForArticleThunk,
-} from "../../services/thunks";
+import { getArticleThunk, getCommentsForArticleThunk } from "../../services/thunks";
 import { useParams } from "react-router";
 
 type TArticleProps = {
