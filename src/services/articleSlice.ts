@@ -1,5 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { getArticle } from "../api";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {
   getArticleThunk,
   deleteArticleThunk,
@@ -9,42 +8,50 @@ import {
   deleteCommentThunk,
   getCommentsForArticleThunk,
 } from "./thunks";
+import {TArticle} from "./types";
 
-const initialState = {
+interface IInitialState {
+  article: TArticle | {},
+  comments: Array<any>, // TODO: type
+  commentErrors: any,
+}
+
+const initialState: IInitialState = {
   article: {},
   comments: [],
   commentErrors: null,
 };
 
-const setArticle = (state, action) => {
+const setArticle = (state: IInitialState, action: PayloadAction<TArticle>) => {
   if (action.payload?.article) {
     state.article = action.payload.article;
   }
 };
 
-const setCommentsForArticle = (state, action) => {
+const setCommentsForArticle = (state: IInitialState, action: PayloadAction<any>) => {
   state.comments = action.payload.comments;
 };
 
-const addComment = (state, action) => {
+const addComment = (state: IInitialState, action: PayloadAction<any>) => {
   state.commentErrors = null,
   state.comments = (state.comments || []).concat([action.payload.comment])
 };
 
-const deleteComment = (state, action) => {
+const deleteComment = (state: IInitialState, action: PayloadAction<any>) => {
   state.comments = state.comments.filter(comment => comment.id !== action.payload.commentId)
 }
 
-const addCommentErrors = (state, action) => {
+const addCommentErrors = (state: IInitialState, action: PayloadAction<any>) => {
   state.commentErrors = action.payload.errors,
-  state.comments = null
+  state.comments = initialState.comments
 }
+
 
 export const articleSlice = createSlice({
   name: "article",
   initialState,
   reducers: {
-    clearArticle: (state, action) => {
+    clearArticle: (state) => {
       state.article = {};
     },
   },
@@ -53,7 +60,7 @@ export const articleSlice = createSlice({
     [getArticleThunk.fulfilled]: setArticle,
     [updateArticleThunk.fulfilled]: setArticle,
     [createArticleThunk.fulfilled]: setArticle,
-    [deleteArticleThunk.fulfilled]: (state, action) => {
+    [deleteArticleThunk.fulfilled]: (state) => {
       state.article = {};
     },
     [createCommentThunk.fulfilled]: addComment,

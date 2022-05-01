@@ -1,12 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { getTagsThunk } from "./thunks";
+import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+import {getTagsThunk} from "./thunks";
 
-interface IinitialState {
-  tags: Array<String>;
+interface IInitialState {
+  tags: Array<string>;
   // tagsRequestInProgress: boolean;
 }
 
-const initialState: IinitialState = {
+const initialState: IInitialState = {
   tags: [],
   // tagsRequestInProgress: false,
 };
@@ -15,13 +15,13 @@ export const homeSlice = createSlice({
   name: "home",
   initialState,
   reducers: {
-    HOME_PAGE_LOADED: (state, action) => {
-      if (action.payload[0] === null) {
-        return initialState;
-      }
-      state.tags = action.payload[0].tags;
-    },
-    HOME_PAGE_UNLOADED: (state, action) => {
+    // HOME_PAGE_LOADED: (state, action) => {
+    //   if (action.payload[0] === null) {
+    //     return initialState;
+    //   }
+    //   state.tags = action.payload[0].tags;
+    // },
+    homePageWasUnloaded: (state) => {
       return initialState;
     },
   },
@@ -32,7 +32,7 @@ export const homeSlice = createSlice({
     // [getTagsThunk.rejected]: (state: any, action: any) => {
     //   state.tagsRequestInProgress = false;
     // },
-    [getTagsThunk.fulfilled]: (state: any, action: any) => {      
+    [getTagsThunk.fulfilled]: (state: any, action: PayloadAction<IInitialState>) => {
       state.tags = action.payload.tags;
       // state.tagsRequestInProgress = false;
     },
@@ -40,4 +40,4 @@ export const homeSlice = createSlice({
 });
 
 export default homeSlice.reducer;
-export const { HOME_PAGE_LOADED, HOME_PAGE_UNLOADED } = homeSlice.actions;
+export const { homePageWasUnloaded } = homeSlice.actions;

@@ -9,7 +9,6 @@ type TDeleteButtonProps = {
   commentId: any;
   show: any;
 };
-
 const DeleteButton: React.FC<TDeleteButtonProps> = (props) => {
   const dispatch = useDispatch();
 

@@ -1,10 +1,24 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { authThunk, loginThunk, signupThunk, updateUserThunk } from "./thunks";
 
-const initialState = {
+interface IInitialState {
+  appName: string,
+  token: string | null,
+  // errors: null | any, // TODO: уточнить типы
+  isLoggedIn: boolean,
+  currentUser: {
+    email: string,
+    // token: localStorage.getItem('jwt') ? localStorage.getItem('jwt') : "",
+    bio: string,
+    username: string,
+    image: string,
+  }
+}
+
+const initialState: IInitialState = {
   appName: "Practicum Project Kitchen",
   token: localStorage.getItem("jwt") ? localStorage.getItem("jwt") : null,
-  errors: null,
+  // errors: null,
   isLoggedIn: false,
   currentUser: {
     email: "",
@@ -13,14 +27,14 @@ const initialState = {
     username: "",
     image: "",
   },
-};
+}
 
-const setUserRejected = (state, action) => {
+const setUserRejected = (state: IInitialState) => {
   state.isLoggedIn = false;
   state.token = null;
 };
 
-const setUserFulfilled = (state, action) => {
+const setUserFulfilled = (state: IInitialState, action: PayloadAction<{user: any}>) => { //TODO: тип для бзера
   if (action.payload?.user) {
     const { token, ...rest } = action.payload.user;
     state.currentUser = { ...state.currentUser, ...rest };
@@ -36,8 +50,7 @@ export const commonSlice = createSlice({
   name: "common",
   initialState,
   reducers: {
-    LOGOUT: (state, action) => {
-      state.redirectTo = "/";
+    logout: (state, action) => {
       state.token = null;
       state.isLoggedIn = false;
       state.currentUser = {
@@ -62,4 +75,4 @@ export const commonSlice = createSlice({
 });
 
 export default commonSlice.reducer;
-export const { LOGOUT } = commonSlice.actions;
+export const { logout } = commonSlice.actions;

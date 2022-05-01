@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { connect, useDispatch } from "react-redux";
-// import { ADD_COMMENT } from "../../services/articleSlice";
-import { createComment as _createCommentApi } from "../../api";
+import { useDispatch } from "react-redux";
 import { createCommentThunk } from "../../services/thunks";
+
 
 type TCommentInputProps = {
   currentUser: {

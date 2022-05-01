@@ -1,15 +1,13 @@
 import Header from "./header";
 import React, { useEffect, useState } from "react";
-import { connect, useSelector } from "react-redux";
-// import {APP_LOAD, REDIRECT} from '../constants/actionTypes';
-import { APP_LOAD, REDIRECT } from "../services/commonSlice";
+import { useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import Article from "../components/Article";
 import Editor from "../components/Editor";
 import Home from "../components/Home";
 import Login from "../components/login";
 import Profile from "../components/Profile";
-import Register from "../components/Register";
+import Register from "../components/register";
 import Settings from "../components/Settings";
 import { store } from "../services/store";
 import { push } from "react-router-redux";

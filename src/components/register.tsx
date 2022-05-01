@@ -2,11 +2,10 @@ import { Link, Redirect } from "react-router-dom";
 import ListErrors from "./ListErrors";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { REGISTER, REGISTER_PAGE_UNLOADED } from "../services/authSlice";
-import { signup } from "../api";
 import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
 import { useForm } from "react-hook-form";
 import { signupThunk } from "../services/thunks";
+import {authSlice} from "../services/authSlice";
 
 type FormData = {
   username: string;
@@ -14,10 +13,12 @@ type FormData = {
   password: string;
 };
 
-const Register: React.FC<any> = () => {
+const Register: React.FC = () => {
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state: any) => state.common);
   const [errorsResponse, setErrorsResponse] = useState<any>(null);
+
+  const actionsAuth = authSlice.actions;
 
   const {
     register,
@@ -38,10 +39,16 @@ const Register: React.FC<any> = () => {
     .unwrap()
     .catch((error: any) => {
       console.log(error);
-      
+
       setErrorsResponse({ [error.name]: error.message });
-    });;
+    });
   });
+
+  useEffect(() => {
+    return () => {
+      dispatch(actionsAuth.pageWasUnloaded());
+    }
+  })
 
   if (isLoggedIn) {
     return <Redirect to="/" />;

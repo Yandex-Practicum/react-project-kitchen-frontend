@@ -47,6 +47,7 @@ const ArticlePreview: React.FC<TArticlePreviewProps> = (props) => {
 
         <div className="pull-xs-right">
           <button className={favoriteButtonClass} onClick={handleClick}>
+            {/*TODO: курсивный шрифт вынести в стили*/}
             <i className="ion-heart"></i> {article.favoritesCount}
           </button>
         </div>

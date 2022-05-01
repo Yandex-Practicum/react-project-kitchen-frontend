@@ -1,12 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {
   getArticleThunk,
   updateArticleThunk,
   createArticleThunk,
 } from "./thunks";
+import {TArticle, TArticleProperties} from "./types";
 
-const initialState = {
-  articleSlug: "",
+const initialState: TArticleProperties = {
+  slug : "",
   title: "",
   description: "",
   image: "",
@@ -15,7 +16,7 @@ const initialState = {
   tagList: [],
 };
 
-const setEditor = (state, action) => {
+const setEditor = (state: TArticleProperties, action: PayloadAction<TArticle>) => {
   if (action.payload?.article) {
     return { ...action.payload.article };
   }
@@ -25,7 +26,7 @@ export const editorSlice = createSlice({
   name: "editor",
   initialState,
   reducers: {
-    clearEditor: (state, action) => {
+    clearEditor: (state) => {
       return { ...initialState };
     },
   },
@@ -37,4 +38,4 @@ export const editorSlice = createSlice({
 });
 
 export default editorSlice.reducer;
-export const { clearEditor } = editorSlice.actions;
+export const { clearEditor } = editorSlice.actions

@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { IArticleRes, IUserLogin, ApiEnums } from "./types";
+import {TFollowingUser, TFollowingUserProfile} from "../services/types";
 
 // set token on every request
 export const setTokenAxios = (_token: string | null) => {
@@ -7,19 +8,21 @@ export const setTokenAxios = (_token: string | null) => {
 };
 
 // Tags
-export const getTags = async (): Promise<any> => {
+export const getTags = async (): Promise<Array<string>> => {
   const response: AxiosResponse<any> = await axios.get(
     `${ApiEnums.BASE_URL}/tags`
   );
+  console.log(response.data)
   return response.data;
 };
 
 // Auth
-export const login = async ({ email, password }: any): Promise<any> => {
+export const login = async ({ email, password }: { email: string, password: string }): Promise<{ email: string, password: string }> => {
   const response: AxiosResponse<IUserLogin> = await axios.post(
     `${ApiEnums.BASE_URL}/users/login`,
     { user: { email, password } }
   );
+  console.log(response.data)
   return response.data;
 };
 
@@ -31,7 +34,11 @@ export const signup = async ({
   username: string;
   email: string;
   password: string;
-}): Promise<any> => {
+}): Promise<{
+  username: string;
+  email: string;
+  password: string;
+}> => {
   try {
     const response: AxiosResponse<IUserLogin> = await axios.post(
       `${ApiEnums.BASE_URL}/users`,
@@ -45,14 +52,14 @@ export const signup = async ({
   }
 };
 
-export const auth = async (): Promise<any> => {
-  const response: AxiosResponse<any> = await axios.get(
+export const auth = async (): Promise<{user: {username: string, email: string, token: string}}> => {
+  const response: AxiosResponse<{user: {username: string, email: string, token: string}}> = await axios.get(
     `${ApiEnums.BASE_URL}/user`
   );
   return response.data;
 };
 
-export const updateUser = async (user: IUserLogin): Promise<any> => {
+export const updateUser = async (user: IUserLogin): Promise<IUserLogin> => {
   const response: AxiosResponse<IUserLogin> = await axios.put(
     `${ApiEnums.BASE_URL}/user`,
     {
@@ -84,7 +91,10 @@ export const getArticlesByAuthor = async ({
   page: number;
 }): Promise<any> => {
   try {
-    const response: AxiosResponse<any> = await axios.get(
+    const response: AxiosResponse<{
+      author: string;
+      page: number;
+    }> = await axios.get(
       `${ApiEnums.BASE_URL}/articles`,
       {
         params: {
@@ -104,7 +114,7 @@ export const getArticlesByTag = async (
   tag: string,
   page: number = 0
 ): Promise<any> => {
-  const response: AxiosResponse<any> = await axios.get(
+  const response: AxiosResponse<{tag: string, page: number}> = await axios.get(
     `${ApiEnums.BASE_URL}/articles`,
     {
       params: {
@@ -118,7 +128,7 @@ export const getArticlesByTag = async (
 };
 
 export const deleteArticle = async (slug: string): Promise<any> => {
-  const response: AxiosResponse<any> = await axios.delete(
+  const response: AxiosResponse<{slug: string}> = await axios.delete(
     `${ApiEnums.BASE_URL}/articles/${slug}`
   );
   return response.data;
@@ -211,7 +221,7 @@ export const createComment = async ({
   comment,
 }:{
   slug: string;
-  comment: { body: string };
+  comment?: { body: string };
 }): Promise<any> => {
   console.log(slug, comment)
   const response: AxiosResponse<any> = await axios.post(
@@ -226,7 +236,7 @@ export const deleteComment = async ({
   commentId
 }: {
   slug: string,
-  commentId: string | number
+  commentId?: string | number
 }): Promise<any> => {
   const response: AxiosResponse<any> = await axios.delete(
     `${ApiEnums.BASE_URL}/articles/${slug}/comments/${commentId}`
@@ -240,9 +250,8 @@ export const getCommentsForArticle = async (slug: string): Promise<any> => {
   );
   return response.data;
 };
-
 // Profile
-export const followUser = async (userName: string): Promise<any> => {
+export const followUser = async (userName: string): Promise<TFollowingUserProfile> => {
   const response: AxiosResponse<any> = await axios.post(
     `${ApiEnums.BASE_URL}/profiles/${userName}/follow`
   );

@@ -4,13 +4,23 @@ import React, { FunctionComponent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
 import { loginThunk } from "../services/thunks";
+import {authSlice} from "../services/authSlice";
+
+type TErrors = {
+  [index: string]: string
+}
 
 export const Login: FunctionComponent = () => {
   const dispatch = useDispatch();
+
+  const actionsAuth = authSlice.actions;
+
   const { isLoggedIn } = useSelector((state: any) => state.common);
-  const [errors, setErrors] = useState<any>(null);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { isLoading } = useSelector((state: any) => state.auth);
+
+  const [errors, setErrors] = useState<TErrors | null>(null);
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   if (isLoggedIn) {
     return <Redirect to="/" />;
@@ -19,7 +29,7 @@ export const Login: FunctionComponent = () => {
   const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
-  
+
   const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
@@ -35,6 +45,12 @@ export const Login: FunctionComponent = () => {
     }
   };
 
+  React.useEffect(() => {
+    return () => {
+      dispatch(actionsAuth.pageWasUnloaded());
+    }
+  }, [])
+
   return (
     <div className="auth-page">
       <div className="container page">
@@ -48,7 +64,7 @@ export const Login: FunctionComponent = () => {
             <ListErrors errors={errors} />
 
             <form onSubmit={submitForm}>
-              <fieldset>
+              {/*<fieldset>*/}
                 <fieldset className="form-group">
                   <input
                     className="form-control form-control-lg"
@@ -68,8 +84,8 @@ export const Login: FunctionComponent = () => {
                     onChange={onChangePassword}
                   />
                 </fieldset>
-                <SignupLoginSubmitBtn btnText="Sign in" disabled={false} />
-              </fieldset>
+                <SignupLoginSubmitBtn btnText="Sign in" disabled={isLoading} />
+              {/*</fieldset>*/}
             </form>
           </div>
         </div>
