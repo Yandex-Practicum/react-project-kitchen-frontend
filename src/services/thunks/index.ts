@@ -31,9 +31,13 @@ export const getArticlesByAuthorThunk: any = thunk("GET_ARTICLES_BY_AUTHOR", pc(
 export const getFavoritedArticlesThunk: any = thunk("GET_FAVORITE_ARTICLES", pc(api.getFavoritedArticles));
 export const updateUserThunk: any = thunk("UPDATE_USER", pc(api.updateUser));
 export const getArticleThunk: any = thunk("GET_ARTICLE", pc(api.getArticle));
+export const getCommentsForArticleThunk: any = thunk("GET_COMMENTS_FOR_ARTICLE", pc(api.getCommentsForArticle));
+export const createCommentThunk: any = thunk("CREATE_COMMENT", pc(api.createComment));
+export const deleteCommentThunk: any = thunk("DELETE_COMMENT", pc(api.deleteComment));
 export const deleteArticleThunk: any = thunk("DELETE_ARTICLE", pc(api.deleteArticle));
 export const updateArticleThunk: any = thunk("UPDATE_ARTICLE", pc(api.updateArticle));
 export const createArticleThunk: any = thunk("CREATE_ARTICLE", pc(api.createArticle));
+
 export const setArticleAsFavoriteThunk: any = thunk("SET_ARTICLE_AS_FAVORITE", pc(api.setArticleAsFavorite));
 export const deleteArticleAsFavoriteThunk: any = thunk("DELETE_ARTICLE_AS_FAVORITE_THUNK", pc(api.deleteArticleAsFavorite));
 

@@ -2,7 +2,10 @@ import ArticleMeta from "./ArticleMeta";
 import CommentContainer from "./CommentContainer";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getArticleThunk } from "../../services/thunks";
+import {
+  getArticleThunk,
+  getCommentsForArticleThunk,
+} from "../../services/thunks";
 import { useParams } from "react-router";
 
 type TArticleProps = {
@@ -15,7 +18,6 @@ type TArticleProps = {
 
 const Article: React.FC<TArticleProps> = (props) => {
   const dispatch = useDispatch();
-
   const { article } = useSelector((state: any) => state.article);
   const { currentUser } = useSelector((state: any) => state.common);
   const { comments } = useSelector((state: any) => state.article);
@@ -25,8 +27,19 @@ const Article: React.FC<TArticleProps> = (props) => {
   useEffect(() => {
     if (params.id) {
       dispatch(getArticleThunk(params.id));
+      dispatch(getCommentsForArticleThunk(params.id));
     }
   }, []);
+  useEffect(() => {
+    if (params.id) {
+      dispatch(getArticleThunk(params.id));
+      dispatch(getCommentsForArticleThunk(params.id));
+    }
+  }, []);
+
+  useEffect(() => {
+    dispatch(getCommentsForArticleThunk(params.id));
+}, [comments]);
 
   if (!article.slug) {
     return null;

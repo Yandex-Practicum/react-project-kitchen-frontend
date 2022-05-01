@@ -4,17 +4,22 @@ import {
   deleteArticleThunk,
   updateArticleThunk,
   createArticleThunk,
+  createCommentThunk,
+  deleteCommentThunk,
+  getCommentsForArticleThunk,
 } from "./thunks";
 import {TArticle} from "./types";
 
 interface IInitialState {
   article: TArticle | {},
   comments: Array<any>, // TODO: type
+  commentErrors: any,
 }
 
 const initialState: IInitialState = {
   article: {},
   comments: [],
+  commentErrors: null,
 };
 
 const setArticle = (state: IInitialState, action: PayloadAction<TArticle>) => {
@@ -22,6 +27,25 @@ const setArticle = (state: IInitialState, action: PayloadAction<TArticle>) => {
     state.article = action.payload.article;
   }
 };
+
+const setCommentsForArticle = (state: IInitialState, action: PayloadAction<any>) => {
+  state.comments = action.payload.comments;
+};
+
+const addComment = (state: IInitialState, action: PayloadAction<any>) => {
+  state.commentErrors = null,
+  state.comments = (state.comments || []).concat([action.payload.comment])
+};
+
+const deleteComment = (state: IInitialState, action: PayloadAction<any>) => {
+  state.comments = state.comments.filter(comment => comment.id !== action.payload.commentId)
+}
+
+const addCommentErrors = (state: IInitialState, action: PayloadAction<any>) => {
+  state.commentErrors = action.payload.errors,
+  state.comments = initialState.comments
+}
+
 
 export const articleSlice = createSlice({
   name: "article",
@@ -39,6 +63,10 @@ export const articleSlice = createSlice({
     [deleteArticleThunk.fulfilled]: (state) => {
       state.article = {};
     },
+    [createCommentThunk.fulfilled]: addComment,
+    [createCommentThunk.rejected]: addCommentErrors,
+    [deleteCommentThunk.fulfilled]: deleteComment,
+    [getCommentsForArticleThunk.fulfilled]: setCommentsForArticle,
   },
 });
 
