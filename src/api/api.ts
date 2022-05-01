@@ -206,10 +206,14 @@ export const createArticle = async (article: any): Promise<IArticleRes> => {
 // Comments
 
 // 500
-export const createComment = async (
-  slug: string,
-  comment: { body: string }
-): Promise<any> => {
+export const createComment = async ({
+  slug,
+  comment,
+}:{
+  slug: string;
+  comment: { body: string };
+}): Promise<any> => {
+  console.log(slug, comment)
   const response: AxiosResponse<any> = await axios.post(
     `${ApiEnums.BASE_URL}/articles/${slug}/comments`,
     { comment }
@@ -217,10 +221,13 @@ export const createComment = async (
   return response.data;
 };
 
-export const deleteComment = async (
+export const deleteComment = async ({
+  slug,
+  commentId
+}: {
   slug: string,
   commentId: string | number
-): Promise<any> => {
+}): Promise<any> => {
   const response: AxiosResponse<any> = await axios.delete(
     `${ApiEnums.BASE_URL}/articles/${slug}/comments/${commentId}`
   );

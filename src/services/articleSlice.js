@@ -5,6 +5,9 @@ import {
   deleteArticleThunk,
   updateArticleThunk,
   createArticleThunk,
+  createCommentThunk,
+  deleteCommentThunk,
+  getCommentsForArticleThunk,
 } from "./thunks";
 
 const initialState = {
@@ -18,6 +21,24 @@ const setArticle = (state, action) => {
     state.article = action.payload.article;
   }
 };
+
+const setCommentsForArticle = (state, action) => {
+  state.comments = action.payload.comments;
+};
+
+const addComment = (state, action) => {
+  state.commentErrors = null,
+  state.comments = (state.comments || []).concat([action.payload.comment])
+};
+
+const deleteComment = (state, action) => {
+  state.comments = state.comments.filter(comment => comment.id !== action.payload.commentId)
+}
+
+const addCommentErrors = (state, action) => {
+  state.commentErrors = action.payload.errors,
+  state.comments = null
+}
 
 export const articleSlice = createSlice({
   name: "article",
@@ -35,6 +56,10 @@ export const articleSlice = createSlice({
     [deleteArticleThunk.fulfilled]: (state, action) => {
       state.article = {};
     },
+    [createCommentThunk.fulfilled]: addComment,
+    [createCommentThunk.rejected]: addCommentErrors,
+    [deleteCommentThunk.fulfilled]: deleteComment,
+    [getCommentsForArticleThunk.fulfilled]: setCommentsForArticle,
   },
 });
 

@@ -18,7 +18,7 @@ export {
   createArticle, // done
   createComment,
   deleteComment,
-  getCommentsForArticle,
+  getCommentsForArticle, //deprecated
   followUser,
   getProfile, // done
   unfollowUser
