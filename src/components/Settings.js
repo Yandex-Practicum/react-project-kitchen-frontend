@@ -2,7 +2,7 @@ import ListErrors from "./ListErrors";
 import React, { useEffect, useState } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { updateUserThunk } from "../services/thunks";
-import { LOGOUT as logoutAction } from "../services/commonSlice";
+import { logout as logoutAction } from "../services/commonSlice";
 import { useHistory } from "react-router";
 
 const SettingsForm = ({ setIsUpdatedInfoMsg }) => {
@@ -133,7 +133,7 @@ const Settings = () => {
             <SettingsForm setIsUpdatedInfoMsg={setIsUpdatedInfoMsg} />
 
             <hr />
-            
+
             <button className="btn btn-outline-danger" onClick={logout}>
               Or click here to logout.
             </button>

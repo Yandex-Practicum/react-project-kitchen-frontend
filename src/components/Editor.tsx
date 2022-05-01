@@ -112,8 +112,8 @@ const Editor: React.FC<TEditorProps> = (props) => {
     return () => {
       setForm({ title: "", description: "", body: "", tagInput: "" });
       setInProgress(false);
-      dispatch(clearEditor(null));
-      dispatch(clearArticle(null));
+      dispatch(clearEditor());
+      dispatch(clearArticle());
     };
   }, [params.slug]);
 
@@ -130,7 +130,7 @@ const Editor: React.FC<TEditorProps> = (props) => {
       <div className="container page">
         <div className="row">
           <div className="col-md-10 offset-md-1 col-xs-12">
-            <ListErrors errors={errors}></ListErrors>
+            <ListErrors errors={errors} />
 
             <form onSubmit={onSubmit}>
               <fieldset>

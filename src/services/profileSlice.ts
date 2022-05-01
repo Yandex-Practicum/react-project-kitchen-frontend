@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getProfileThunk } from "./thunks";
+import {TFollowingUser} from "./types";
 
-export const initialState = {
+export const initialState: TFollowingUser = {
   username: "",
   image: "",
-  following: null,
+  following: false,
   bio: "",
 };
 
@@ -12,28 +13,27 @@ export const profileSlice = createSlice({
   name: "profile",
   initialState,
   reducers: {
-    PROFILE_PAGE_UNLOADED: (state, action) => {
+    profilePageWasUnloaded: (state) => {
       return initialState;
     },
-
-    PROFILE_PAGE_LOADED: (state, action) => {
-      const { username, image, following } = action.payload[0].profile;
-      state.username = username;
-      state.image = image;
-      state.following = following;
-    },
-    FOLLOW_USER: (state, action) => {
-      const { username, image, following } = action.payload.profile;
-      state.username = username;
-      state.image = image;
-      state.following = following;
-    },
-    UNFOLLOW_USER: (state, action) => {
-      const { username, image, following } = action.payload.profile;
-      state.username = username;
-      state.image = image;
-      state.following = following;
-    },
+  //   profilePageWasLoaded: (state, action) => {
+  //     const { username, image, following } = action.payload[0].profile;
+  //     state.username = username;
+  //     state.image = image;
+  //     state.following = following;
+  //   },
+  //   followUser: (state, action) => {
+  //     const { username, image, following } = action.payload.profile;
+  //     state.username = username;
+  //     state.image = image;
+  //     state.following = following;
+  //   },
+  //   unfollowUser: (state, action) => {
+  //     const { username, image, following } = action.payload.profile;
+  //     state.username = username;
+  //     state.image = image;
+  //     state.following = following;
+  //   },
   },
 
   extraReducers: {
@@ -47,8 +47,8 @@ export const profileSlice = createSlice({
 
 export default profileSlice.reducer;
 export const {
-  PROFILE_PAGE_LOADED,
-  PROFILE_PAGE_UNLOADED,
-  FOLLOW_USER,
-  UNFOLLOW_USER,
+  profilePageWasUnloaded,
+  // profilePageWasLoaded,
+  // followUser,
+  // unfollowUser
 } = profileSlice.actions;

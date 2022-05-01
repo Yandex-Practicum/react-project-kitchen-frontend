@@ -1,9 +1,18 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {number} from "prop-types";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {
+  getAllArticlesThunk,
+  getFeedArticlesThunk,
+  getTagsThunk,
+  getArticlesByAuthorThunk,
+  getFavoritedArticlesThunk,
+  setArticleAsFavoriteThunk,
+  deleteArticleAsFavoriteThunk,
+} from "./thunks";
+import {TArticle, TArticleProperties} from "./types";
 
 interface IInitialState {
-  articles: Array<any>, // TODO: уточнить типы
-  currentArticle: any,
+  articles: Array<TArticleProperties>, // TODO: уточнить типы
+  currentArticle: TArticleProperties | {},
   articlesCount: number,
   currentPage: 0,
   tab: null | string,
@@ -23,82 +32,42 @@ const initialState: IInitialState = {
   pager: null,
 };
 
+const setFavoritedStatusOnArticle = (state: IInitialState, action: PayloadAction<TArticle>) => { //TODO: уточнить тип статьи
+  state.articles = state.articles.map((art) => {
+    if (art.slug === action.payload.article.slug) { // TODO: тут точно art.slug?
+      return action.payload.article;
+    } else {
+      return art;
+    }
+  });
+};
+
 export const articleListSlice = createSlice({
   name: "articleList",
   initialState,
-  reducers: {
-    articleFavourited: (state, action) => {
-      state.articles = state.articles.map((article) => {
-        if (article.slug === action.payload.article.slug) {
-          article.favorited = action.payload.article.favorited;
-          article.favoritesCount = action.payload.article.favoritesCount;
-        }
-        return article;
-      });
+  reducers: {},
+
+  extraReducers: {
+    [getFeedArticlesThunk.fulfilled]: (state, action: PayloadAction<IInitialState>) => {
+      state.articles = action.payload.articles;
     },
-    setPage: (state, action) => {
-      // state.pager = action.pager; // приходит не из payload, а из мидлвара. Удалить, когда будет нормальный мидлвар
+    [getAllArticlesThunk.fulfilled]: (state, action: PayloadAction<IInitialState>) => {
+      state.articles = action.payload.articles;
+    },
+    [getTagsThunk.fulfilled]: (state, action: PayloadAction<IInitialState>) => {
+      state.tags = action.payload.tags;
+    },
+    [getArticlesByAuthorThunk.fulfilled]: (state, action: PayloadAction<IInitialState>) => {
       state.articles = action.payload.articles;
       state.articlesCount = action.payload.articlesCount;
-      state.tab = null;
-      // state.tag = action.tag;
-      state.currentPage = 0;
     },
-    applyTagFilter: (state, action) => {
-      // state.pager = action.pager;
+    [getFavoritedArticlesThunk.fulfilled]: (state, action: PayloadAction<IInitialState>) => {
       state.articles = action.payload.articles;
       state.articlesCount = action.payload.articlesCount;
-      state.tab = null;
-      // state.tag = action.tag;
-      state.currentPage = 0;
     },
-    homeArticleLoaded: (state, action) => {
-      // state.pager = action.pager;
-      state.tags = action.payload[0].tags;
-      state.articles = action.payload[1].articles;
-      state.articlesCount = action.payload[1].articlesCount;
-      state.currentPage = 0;
-      // state.tab = action.tab;
-    },
-    changeTab: (state, action) => {
-      // state.pager = action.pager;
-      state.articles = action.payload.articles;
-      state.articlesCount = action.payload.articlesCount;
-      // state.tab = action.tab;
-      state.currentPage = 0;
-      state.tag = null;
-    },
-    profileArticlePageWasLoaded: (state, action) => {
-      // state.pager = action.pager;
-      state.articles = action.payload[1].articles;
-      state.articlesCount = action.payload[1].articlesCount;
-      state.currentPage = 0;
-    },
-    // PROFILE_FAVORITES_ARTICLE_LOADED: (state, action) => {
-    //   // state.pager = action.pager;
-    //   state.articles = action.payload[1].articles;
-    //   state.articlesCount = action.payload[1].articlesCount;
-    //   state.currentPage = 0;
-    // },
-    articlePageWasUnloaded: (state) => {
-      return initialState;
-    },
-    // PROFILE_ARTICLE_UNLOADED: (state, action) => {
-    //   return {};
-    // },
-    // PROFILE_FAVORITES_ARTICLE_UNLOADED: (state, action) => {
-    //   return {};
-    // },
+    [setArticleAsFavoriteThunk.fulfilled]: setFavoritedStatusOnArticle,
+    [deleteArticleAsFavoriteThunk.fulfilled]: setFavoritedStatusOnArticle,
   },
 });
 
 export default articleListSlice.reducer;
-export const {
-  articleFavourited,
-  setPage,
-  applyTagFilter,
-  homeArticleLoaded,
-  changeTab,
-  profileArticlePageWasLoaded,
-  articlePageWasUnloaded
-} = articleListSlice.actions;

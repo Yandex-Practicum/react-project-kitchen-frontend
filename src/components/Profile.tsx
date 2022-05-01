@@ -10,6 +10,7 @@ import {
   getFavoritedArticlesThunk,
   getProfileThunk,
 } from "../services/thunks";
+import {profileSlice} from "../services/profileSlice";
 
 // export type TProfileProps = {
 //   match: {
@@ -29,6 +30,8 @@ function Profile() {
     (state: any) => state.articleList
   );
 
+  const actionsProfile = profileSlice.actions;
+
   const params: { username: string; [key: string]: any } = useParams();
   const { pathname } = useLocation();
 
@@ -44,6 +47,9 @@ function Profile() {
     if (params.username) {
       dispatch(getProfileThunk(params.username));
       dispatch(getArticlesByAuthorThunk({ author: params.username, page: 0 }));
+    }
+    return () => {
+      actionsProfile.profilePageWasUnloaded();
     }
   }, []);
 

@@ -7,8 +7,6 @@ type TUseParams = {
   id: string
 }
 
-// export type RootState = ReturnType<typeof rootReducer>;
-
 export const useAppParams = () => useParams<TUseParams>()
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector

@@ -13,6 +13,7 @@ import { routerMiddleware } from "react-router-redux";
 import { createLogger } from "redux-logger";
 import { localStorageMiddleware } from "../middleware";
 
+// export type RootState = ReturnType<typeof rootReducer>;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = Dispatch<AnyAction>;
 

@@ -8,12 +8,15 @@ import {
   getFeedArticlesThunk,
   getTagsThunk,
 } from "../../services/thunks";
+import {homeSlice} from "../../services/homeSlice";
 
 const Home: FC = () => {
   const { appName, token } = useSelector((state: any) => state.common);
   const { tags } = useSelector((state: any) => state.home);
 
   const dispatch = useDispatch();
+
+  const actionsHome = homeSlice.actions;
 
   useEffect(() => {
     if (token) {
@@ -22,6 +25,9 @@ const Home: FC = () => {
       dispatch(getAllArticlesThunk());
     }
     dispatch(getTagsThunk());
+    return () => {
+      dispatch(actionsHome.homePageWasUnloaded());
+    }
   }, []);
 
   return (
