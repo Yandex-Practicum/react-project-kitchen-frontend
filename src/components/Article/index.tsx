@@ -28,10 +28,6 @@ const Article: React.FC<TArticleProps> = (props) => {
     }
   }, []);
 
-  useEffect(() => {
-      dispatch(getCommentsForArticleThunk(params.id));
-  }, [comments]);
-
   if (!article.slug) {
     return null;
   }
