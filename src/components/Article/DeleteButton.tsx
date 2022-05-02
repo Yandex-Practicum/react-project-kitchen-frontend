@@ -2,7 +2,7 @@ import React from "react";
 import { connect, useDispatch } from "react-redux";
 // import { DELETE_COMMENT } from '../../services/articleSlice';
 import { deleteComment } from "../../api";
-import { deleteCommentThunk } from "../../services/thunks";
+import { deleteCommentThunk, getCommentsForArticleThunk } from "../../services/thunks";
 
 type TDeleteButtonProps = {
   slug: string;
@@ -14,7 +14,10 @@ const DeleteButton: React.FC<TDeleteButtonProps> = (props) => {
 
   const deleteComment = (e: React.SyntheticEvent) => {
     e.preventDefault()
-    dispatch(deleteCommentThunk({slug: props.slug, commentId: props.commentId}));
+    dispatch(deleteCommentThunk({slug: props.slug, commentId: props.commentId}))
+    .unwrap().then(() => {
+      dispatch(getCommentsForArticleThunk(props.slug))
+    })
   };
 
   if (props.show) {
