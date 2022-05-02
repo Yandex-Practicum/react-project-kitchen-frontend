@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProfileThunk } from "./thunks";
+import { followUserThunk, getProfileThunk, unfollowUserThunk } from "./thunks";
 import {TFollowingUser} from "./types";
 
 export const initialState: TFollowingUser = {
@@ -42,6 +42,16 @@ export const profileSlice = createSlice({
       state.username = action.payload.profile.username;
       state.image = action.payload.profile.image;
     },
+    [followUserThunk.fulfilled] : (state, action) => {
+      state.following = action.payload.profile.following;
+      state.username = action.payload.profile.username;
+      state.image = action.payload.profile.image;
+    },
+    [unfollowUserThunk.fulfilled] : (state, action) => {
+      state.following = action.payload.profile.following;
+      state.username = action.payload.profile.username;
+      state.image = action.payload.profile.image;
+    }
   },
 });
 

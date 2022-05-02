@@ -7,6 +7,7 @@ import {
   getFavoritedArticlesThunk,
   setArticleAsFavoriteThunk,
   deleteArticleAsFavoriteThunk,
+  getAllArticlesByTagThunk,
 } from "./thunks";
 import {TArticle, TArticleProperties} from "./types";
 
@@ -62,6 +63,10 @@ export const articleListSlice = createSlice({
       state.articlesCount = action.payload.articlesCount;
     },
     [getFavoritedArticlesThunk.fulfilled]: (state, action: PayloadAction<IInitialState>) => {
+      state.articles = action.payload.articles;
+      state.articlesCount = action.payload.articlesCount;
+    },
+    [getAllArticlesByTagThunk.fulfilled]: (state, action: PayloadAction<IInitialState>) => {
       state.articles = action.payload.articles;
       state.articlesCount = action.payload.articlesCount;
     },

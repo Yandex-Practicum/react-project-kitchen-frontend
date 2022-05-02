@@ -110,10 +110,13 @@ export const getArticlesByAuthor = async ({
   }
 };
 
-export const getArticlesByTag = async (
+export const getArticlesByTag = async ({
+  tag,
+  page = 0
+} : {
   tag: string,
-  page: number = 0
-): Promise<any> => {
+  page: number
+}): Promise<any> => {
   const response: AxiosResponse<{tag: string, page: number}> = await axios.get(
     `${ApiEnums.BASE_URL}/articles`,
     {
