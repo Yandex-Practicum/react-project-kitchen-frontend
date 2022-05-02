@@ -7,7 +7,7 @@ export {
   updateUser, // done
   getAllArticles, // done
   getArticlesByAuthor, // done
-  getArticlesByTag,
+  getArticlesByTag, // done
   deleteArticle, // done
   setArticleAsFavorite, // done
   getFavoritedArticles, // done
@@ -19,7 +19,7 @@ export {
   createComment, // done
   deleteComment, // done
   getCommentsForArticle, // done
-  followUser,
+  followUser, // done
   getProfile, // done
-  unfollowUser
+  unfollowUser // done
 } from "./api";
