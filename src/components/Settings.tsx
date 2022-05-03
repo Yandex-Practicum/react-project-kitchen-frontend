@@ -1,12 +1,16 @@
 import ListErrors from "./ListErrors";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, FC } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { updateUserThunk } from "../services/thunks";
 import { logout as logoutAction } from "../services/commonSlice";
 import { useHistory } from "react-router";
 
-const SettingsForm = ({ setIsUpdatedInfoMsg }) => {
-  const { currentUser } = useSelector((state) => state.common);
+interface ISettingsForm {
+  setIsUpdatedInfoMsg: (isUpdatedInfoMsg: boolean) => void
+}
+
+const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
+  const { currentUser } = useSelector((state: any) => state.common);
   const dispatch = useDispatch();
   const [formValues, setFormvalues] = useState({
     image: "",
@@ -22,11 +26,11 @@ const SettingsForm = ({ setIsUpdatedInfoMsg }) => {
     }
   }, [currentUser]);
 
-  const updateForm = (evt) => {
-    setFormvalues({ ...formValues, [evt.target.name]: evt.target.value });
+  const updateForm = (e: { target: { name: string; value: string }}) => {
+    setFormvalues({ ...formValues, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     dispatch(updateUserThunk(formValues))
       .unwrap()
@@ -66,7 +70,7 @@ const SettingsForm = ({ setIsUpdatedInfoMsg }) => {
         <fieldset className="form-group">
           <textarea
             className="form-control form-control-lg"
-            rows="8"
+            rows={8}
             placeholder="Short bio about you"
             value={formValues.bio}
             name="bio"
