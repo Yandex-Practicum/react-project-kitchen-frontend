@@ -2,13 +2,13 @@ import Header from "./header";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import Article from "../components/Article";
-import Editor from "../components/Editor";
-import Home from "../components/Home";
-import Login from "../components/login";
-import Profile from "../components/Profile";
-import Register from "../components/register";
-import Settings from "../components/Settings";
+import Article from "./Article";
+import Editor from "./Editor";
+import Home from "./Home";
+import Login from "./login";
+import Profile from "./Profile";
+import Register from "./register";
+import Settings from "./Settings";
 import { store } from "../services/store";
 import { push } from "react-router-redux";
 import { auth, setTokenAxios } from "../api";
@@ -17,7 +17,7 @@ import { authThunk, loginThunk } from "../services/thunks";
 
 function App() {
   const dispatch = useDispatch();
-  const { appName, currentUser, token } = useSelector(store => store.common);
+  const { appName, currentUser, token } = useSelector((store: any) => store.common);
   const [error, setError] = useState(null);
 
   useEffect(() => {
