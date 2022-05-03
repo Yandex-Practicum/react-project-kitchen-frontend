@@ -1,6 +1,6 @@
 import ListErrors from "./ListErrors";
-import React, { useEffect, useState, FC } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import  { useEffect, useState, FC } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUserThunk } from "../services/thunks";
 import { logout as logoutAction } from "../services/commonSlice";
 import { useHistory } from "react-router";

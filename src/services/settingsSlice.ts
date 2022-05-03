@@ -1,4 +1,5 @@
 import { createSlice,  PayloadAction } from '@reduxjs/toolkit'
+import { updateUserThunk } from "../services/thunks";
 
 
 interface IInitialState {
@@ -24,14 +25,27 @@ export const settingsSlice  = createSlice({
       return initialState
     },
 
-    ASYNC_START: (state) => {
+  },
+  extraReducers: {
+    [updateUserThunk.pending]: (state) => {
       state.inProgress = true
+    },
+
+    [updateUserThunk.rejected]: (state) => {
+      state.inProgress = false
+    },
+
+    [updateUserThunk.fulfilled]: (state) => {
+      state.inProgress = false
     }
-  }
+  },
+  
+
 })
+
+
 
 export default settingsSlice.reducer
 export const {
   SETTINGS_SAVED,
-  SETTINGS_PAGE_UNLOADED,
-  ASYNC_START} = settingsSlice.actions
+  SETTINGS_PAGE_UNLOADED} = settingsSlice.actions
