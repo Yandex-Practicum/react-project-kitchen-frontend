@@ -1,21 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { store } from './store';
-// import { store } from './services/store';
+// import { store } from './store';
+import { store } from './services/store';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 import { BrowserRouter } from "react-router-dom";
 
 import App from './components/App';
+import { setTokenAxios } from './api';
 
-// TODO: to type
-// const storeProp: any = { store };
+const token = localStorage.getItem('jwt');
+setTokenAxios(token ? token : "");
 
 ReactDOM.render((
   <Provider store={store}>
     <BrowserRouter basename="/">
-      <Route path="/" component={App} />
+      <App />
     </BrowserRouter>
   </Provider>
 

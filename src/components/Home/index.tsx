@@ -1,63 +1,52 @@
 import Banner from "./Banner";
 import MainView from "./MainView";
-import React, { useEffect } from "react";
+import { FC, useEffect } from "react";
 import Tags from "./Tags";
-import agent from "../../agent";
-import { connect } from "react-redux";
-import {
-  HOME_PAGE_LOADED,
-  HOME_PAGE_UNLOADED,
-  APPLY_TAG_FILTER,
-} from "../../constants/actionTypes";
-import { getAllArticles, getFeedArticles, getTags } from '../../api';
 import { useSelector, useDispatch } from "react-redux";
+import {
+  getAllArticlesThunk,
+  getFeedArticlesThunk,
+  getTagsThunk,
+} from "../../services/thunks";
+import {homeSlice} from "../../services/homeSlice";
 
-const Promise = global.Promise;
+const Home: FC = () => {
+  const { appName, token } = useSelector((state: any) => state.common);
+  const { tags } = useSelector((state: any) => state.home);
 
-const mapStateToProps = (state: any) => ({
-  ...state.home,
-  appName: state.common.appName,
-  token: state.common.token,
-});
+  const dispatch = useDispatch();
 
-const mapDispatchToProps = (dispatch: any) => ({
-  onClickTag: (tag: any, pager: any, payload: any) =>
-    dispatch({ type: APPLY_TAG_FILTER, tag, pager, payload }),
-  onLoad: (tab: any, pager: any, payload: any) =>
-    dispatch({ type: HOME_PAGE_LOADED, tab, pager, payload }),
-  onUnload: () => dispatch({ type: HOME_PAGE_UNLOADED }),
-});
+  const actionsHome = homeSlice.actions;
 
-const Home = (props: any) => {
-  const dispatch = useDispatch()
-  
   useEffect(() => {
-    const tab = props.token ? "feed" : "all";
-    const articlesPromise = props.token
-      // ? agent.Articles.feed
-      // : agent.Articles.all;
-      ? getFeedArticles
-      : getAllArticles;
-    props.onLoad(
-      tab,
-      articlesPromise,
-      // Promise.all([agent.Tags.getAll(), articlesPromise()])
-      Promise.all([getTags(), articlesPromise()])
-    );
-    return props.onUnload();
+    if (token) {
+      dispatch(getFeedArticlesThunk());
+    } else {
+      dispatch(getAllArticlesThunk());
+    }
+    dispatch(getTagsThunk());
+    return () => {
+      dispatch(actionsHome.homePageWasUnloaded());
+    }
   }, []);
 
   return (
     <div className="home-page">
-      <Banner token={props.token} appName={props.appName} />
+      <Banner token={token} appName={appName} />
       <div className="container page">
         <div className="row">
           <MainView />
           <div className="col-md-3">
             <div className="sidebar">
               <p>Popular Tags</p>
-
-              <Tags tags={props.tags} onClickTag={props.onClickTag} />
+              <Tags
+                tags={tags}
+                onClickTag={(
+                  tag: string,
+                  pager: (page: any) => {},
+                  payload: any
+                ) => ({})}
+              />
             </div>
           </div>
         </div>
@@ -66,4 +55,4 @@ const Home = (props: any) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;

@@ -9,9 +9,10 @@ interface TArticleListProps {
   loading?: boolean;
   state?: any;
   currentPage?: any;
+  tab?: any;
 }
 
-const ArticleList: React.FC<TArticleListProps> = (props: any) => {
+const ArticleList: React.FC<TArticleListProps> = (props) => {
   if (!props.articles) {
     return (
       <div className="article-preview">Loading...</div>

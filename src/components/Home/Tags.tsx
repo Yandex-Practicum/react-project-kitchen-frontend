@@ -1,6 +1,7 @@
 import React from 'react';
-import agent from '../../agent';
+import { useDispatch } from 'react-redux';
 import { getArticlesByTag } from '../../api';
+import { getAllArticlesByTagThunk } from '../../services/thunks';
 
 type TTagsProps = {
   tags: string[] | null,
@@ -8,6 +9,7 @@ type TTagsProps = {
 }
 
 const Tags: React.FC<TTagsProps> = props => {
+  const dispatch = useDispatch()
   const tags = props.tags;
   if (tags) {
     return (
@@ -17,7 +19,7 @@ const Tags: React.FC<TTagsProps> = props => {
             const handleClick = (ev: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
               ev.preventDefault();
               // props.onClickTag(tag, page => agent.Articles.byTag(tag, page), agent.Articles.byTag(tag));
-              props.onClickTag(tag, page => getArticlesByTag(tag, page), getArticlesByTag(tag));
+              dispatch(getAllArticlesByTagThunk({ tag: tag, page: 0 }));
             };
             return (
               <a

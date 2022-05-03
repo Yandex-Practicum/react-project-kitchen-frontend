@@ -1,40 +1,25 @@
 import ArticleList from "../ArticleList";
-import React from "react";
-import { connect } from "react-redux";
-import { CHANGE_TAB } from "../../constants/actionTypes";
+import { FC, useState } from "react";
 import TabItem from "../Tab/Tab";
-import { getAllArticles, getFeedArticles } from "../../api";
 import { useSelector, useDispatch } from "react-redux";
+import { getAllArticlesThunk, getFeedArticlesThunk } from "../../services/thunks";
 
-const mapStateToProps = (state: any) => ({
-  ...state.articleList,
-  tags: state.home.tags,
-  token: state.common.token,
-});
-
-const mapDispatchToProps = (dispatch: any) => ({
-  onTabClick: (tab: any, pager: any, payload: any) =>
-    dispatch({ type: CHANGE_TAB, tab, pager, payload }),
-});
-
-const MainView = (props: any) => {
-  const articles = useSelector((state: any) => state.articleList);
+const MainView: FC = () => {
+  const { articles, articlesCount, currentPage, pager } = useSelector(
+    (state: any) => state.articleList
+  );
   const { token } = useSelector((state: any) => state.common);
-  console.log(token);
-  const { tags } = useSelector((state: any) => state.home);
   const dispatch = useDispatch();
-
-  // const onTabClick = (tab, pager, payload) => {
-  //   dispatch({ type: CHANGE_TAB, tab, pager, payload }),
-  // }
+  const [currentTab, setCurrentTab] = useState("feed");
 
   const clickHandler = (type: string) => {
     if (type === "all") {
-      props.onTabClick(type, getAllArticles, getAllArticles());
+      setCurrentTab("all");
+      dispatch(getAllArticlesThunk());
     } else {
-      props.onTabClick(type, getFeedArticles, getFeedArticles());
+      dispatch(getFeedArticlesThunk());
+      setCurrentTab('feed');
     }
-    // props.onTabClick(type, agent.Articles[type], agent.Articles[type]());
   };
 
   return (
@@ -46,7 +31,7 @@ const MainView = (props: any) => {
               name="Your Feed"
               onTabClick={clickHandler}
               type="feed"
-              active={props.tab === "feed" ? true : false}
+              active={currentTab === "feed" ? true : false}
               hide={null}
             />
           )}
@@ -55,32 +40,32 @@ const MainView = (props: any) => {
             name="All Feed"
             onTabClick={clickHandler}
             type="all"
-            active={props.tab === "all" ? true : false}
+            active={currentTab === "all" ? true : false}
             hide={null}
           />
 
-          <TabItem
+          {/* <TabItem
             name={`#${props.tag}`}
             onTabClick={clickHandler}
             type="all"
             active={props.tab ? false : true}
             hide={!props.tag}
-          />
+          /> */}
         </ul>
       </div>
 
       <ArticleList
-        pager={props.pager}
-        articles={props.articles}
-        loading={props.loading}
-        articlesCount={props.articlesCount}
-        currentPage={props.currentPage}
+        pager={pager}
+        articles={articles}
+        // loading={loading}
+        articlesCount={articlesCount}
+        currentPage={currentPage}
       />
     </div>
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainView);
+export default MainView;
 
 // const TagFilterTab = props => {
 //   if (!props.tag) {

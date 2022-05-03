@@ -3,9 +3,9 @@ import articleReducer from './articleSlice';
 import articleListReducer from './articleListSlice';
 import commonReducer from './commonSlice';
 import editorReducer from './editorSlice';
-import profileReducer from './profileSLice';
-import settingsReducer from './settingsSlice.js';
-import authReducer from './authSlice.js';
+import profileReducer from './profileSlice'
+import settingsReducer from './settingsSlice';
+import authReducer from './authSlice';
 
 const rootReducer = {
   home: homeReducer,

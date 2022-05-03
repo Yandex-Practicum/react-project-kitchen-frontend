@@ -1,50 +1,33 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import agent from '../agent';
-import { connect } from 'react-redux';
-import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../constants/actionTypes';
-import { setArticleAsFavorite, deleteArticleAsFavorite } from '../api';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+  deleteArticleAsFavoriteThunk,
+  setArticleAsFavoriteThunk,
+} from "../services/thunks";
 
-const FAVORITED_CLASS = 'btn btn-sm btn-primary';
-const NOT_FAVORITED_CLASS = 'btn btn-sm btn-outline-primary';
+const FAVORITED_CLASS = "btn btn-sm btn-primary";
+const NOT_FAVORITED_CLASS = "btn btn-sm btn-outline-primary";
 
-const mapDispatchToProps = (dispatch: any) => ({
-  favorite: (slug: any) => dispatch({
-    type: ARTICLE_FAVORITED,
-    // payload: agent.Articles.favorite(slug)
-    payload: setArticleAsFavorite(slug)
-  }),
-  unfavorite: (slug: any) => dispatch({
-    type: ARTICLE_UNFAVORITED,
-    // payload: agent.Articles.unfavorite(slug)
-    payload: deleteArticleAsFavorite(slug)
-  })
-});
-
-interface TArticlePreviewProps  {
+interface TArticlePreviewProps {
   article: any;
-  unfavorite: (arg0: any) => void;
-  favorite: (arg0: any) => void;
 }
 
 const ArticlePreview: React.FC<TArticlePreviewProps> = (props) => {
-  const { article } = props
-  const favoriteButtonClass = article.favorited ?
-    FAVORITED_CLASS :
-    NOT_FAVORITED_CLASS;
+  const dispatch = useDispatch();
 
+  const { article } = props;
+  const favoriteButtonClass = article.favorited
+    ? FAVORITED_CLASS
+    : NOT_FAVORITED_CLASS;
 
-
-const handleClick = (e: React.SyntheticEvent) => {
-    e.preventDefault();
+  const handleClick = (e: React.SyntheticEvent) => {
     if (article.favorited) {
-      props.unfavorite(article.slug);
+      dispatch(deleteArticleAsFavoriteThunk(article.slug));
     } else {
-      props.favorite(article.slug);
+      dispatch(setArticleAsFavoriteThunk(article.slug));
     }
   };
-
- 
 
   return (
     <div className="article-preview">
@@ -64,6 +47,7 @@ const handleClick = (e: React.SyntheticEvent) => {
 
         <div className="pull-xs-right">
           <button className={favoriteButtonClass} onClick={handleClick}>
+            {/*TODO: курсивный шрифт вынести в стили*/}
             <i className="ion-heart"></i> {article.favoritesCount}
           </button>
         </div>
@@ -74,20 +58,17 @@ const handleClick = (e: React.SyntheticEvent) => {
         <p>{article.description}</p>
         <span>Read more...</span>
         <ul className="tag-list">
-          {
-            article.tagList.map((tag: any) => {
-              return (
-                <li className="tag-default tag-pill tag-outline" key={tag}>
-                  {tag}
-                </li>
-              )
-            })
-          }
+          {article.tagList.map((tag: any, i: number) => {
+            return (
+              <li className="tag-default tag-pill tag-outline" key={i}>
+                {tag}
+              </li>
+            );
+          })}
         </ul>
       </Link>
     </div>
   );
-}
+};
 
-
-export default connect(() => ({}), mapDispatchToProps)(ArticlePreview);
+export default ArticlePreview;
