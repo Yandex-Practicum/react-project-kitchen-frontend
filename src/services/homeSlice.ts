@@ -39,5 +39,9 @@ export const homeSlice = createSlice({
   },
 });
 
+
+// export default homeSlice.reducer
+// export const { HOME_PAGE_LOADED, HOME_PAGE_UNLOADED } = homeSlice.actions
+
 export default homeSlice.reducer;
 export const { homePageWasUnloaded } = homeSlice.actions;

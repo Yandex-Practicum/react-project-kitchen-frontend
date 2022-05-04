@@ -9,6 +9,9 @@ const initialState: IInitialState = {
   inProgress: false
 };
 
+
+    // LOGIN_PAGE_UNLOADED: () => initialState,
+
 const setInProgressTrue = (state: IInitialState) => {
   state.inProgress = true;
 };

@@ -1,5 +1,18 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+
+// import { ADD_COMMENT } from "../../services/articleSlice";
+// import { createComment as _createCommentApi } from '../../api';
+
+// type TCommentInputProps = {
+//   currentUser: {
+//     username: any,
+//     image: string,
+//   };
+//   slug: any;
+// }
+
+
 import { createCommentThunk } from "../../services/thunks";
 
 
@@ -12,12 +25,23 @@ type TCommentInputProps = {
 };
 
 
+
 const CommentInput: React.FC<TCommentInputProps> = (props) => {
-  const [body, setBody] = useState<string>("");
   const dispatch = useDispatch();
+
+  const [body, setBody] = useState<string>("");
+  // const dispatch = useDispatch();
   const currentBody = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setBody(e.target.value);
   };
+
+  // const onSubmit = (payload: any) => dispatch({ type: ADD_COMMENT, payload });
+
+  // const createComment = (e:React.SyntheticEvent) => {
+  //   e.preventDefault();
+  //   const payload = _createCommentApi(props.slug, { body: body });
+  //   setBody("");
+  //   dispatch(ADD_COMMENT(payload));
 
   const createComment = (e: React.SyntheticEvent) => {
     e.preventDefault();

@@ -1,3 +1,16 @@
+
+// import DOMPurify from 'dompurify';
+// import ArticleMeta from './ArticleMeta';
+// import CommentContainer from './CommentContainer';
+// import React, { useEffect } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { marked } from 'marked';
+// import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED} from '../../services/articleSlice';
+// import { getArticle, getCommentsForArticle } from '../../api';
+
+
+import DOMPurify from 'dompurify';
+import { marked } from 'marked';
 import ArticleMeta from "./ArticleMeta";
 import CommentContainer from "./CommentContainer";
 import React, { useEffect } from "react";
@@ -21,6 +34,35 @@ const Article: React.FC<TArticleProps> = (props) => {
   const { commentErrors } = useSelector((state: any) => state.article);
   const params: { id: string } = useParams();
 
+
+  // const onLoad = (payload: any) => {
+  //   return dispatch(ARTICLE_PAGE_LOADED(payload))
+  // }
+
+  // const onUnload = () => {
+  //   return dispatch(ARTICLE_PAGE_UNLOADED())
+  // }
+
+  // useEffect(() => {
+  //   dispatch(ARTICLE_PAGE_LOADED(Promise.all([
+  //     getArticle(props.match.params.id),
+  //     getCommentsForArticle(props.match.params.id)
+  //   ])))
+
+  //   return () => {
+  //     dispatch(ARTICLE_PAGE_UNLOADED());
+  //   };
+  // }, []);
+
+  // if (Object.keys(article).length === 0) {
+  //   return null;
+  // }
+
+  // const articleBody = DOMPurify.sanitize(article.body);
+  // const markup  = { __html: marked(articleBody)};
+
+  // const canModify = currentUser && currentUser.username === article.author.username;
+
   useEffect(() => {
     if (params.id) {
       dispatch(getArticleThunk(params.id));
@@ -31,6 +73,9 @@ const Article: React.FC<TArticleProps> = (props) => {
   if (!article.slug) {
     return null;
   }
+
+  const articleBody = DOMPurify.sanitize(article.body);
+  const markup  = { __html: marked(articleBody)};
 
   const canModify =
     currentUser && currentUser.username === article.author.username;
@@ -47,7 +92,7 @@ const Article: React.FC<TArticleProps> = (props) => {
       <div className="container page">
         <div className="row article-content">
           <div className="col-xs-12">
-            <div>{article.body}</div>
+            <div dangerouslySetInnerHTML={markup}></div>
 
             <ul className="tag-list">
               {article.tagList.map((tag: any) => {

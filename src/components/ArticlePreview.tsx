@@ -1,3 +1,15 @@
+
+// import React from 'react';
+// import { Link } from 'react-router-dom';
+// import { connect, useDispatch } from 'react-redux';
+// // import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../constants/actionTypes';
+// import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../services/articleListSlice'
+// import { setArticleAsFavorite, deleteArticleAsFavorite } from '../api';
+
+// const FAVORITED_CLASS = 'btn btn-sm btn-primary';
+// const NOT_FAVORITED_CLASS = 'btn btn-sm btn-outline-primary';
+// interface TArticlePreviewProps  {
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -15,6 +27,32 @@ interface TArticlePreviewProps {
 
 const ArticlePreview: React.FC<TArticlePreviewProps> = (props) => {
   const dispatch = useDispatch();
+
+  // const { article } = props
+  // const favoriteButtonClass = article.favorited ?
+  //   FAVORITED_CLASS :
+  //   NOT_FAVORITED_CLASS;
+
+    // const favorite = (slug: any) => dispatch({
+    //   type: ARTICLE_FAVORITED,
+    //   payload: setArticleAsFavorite(slug)
+    // });
+
+    // const unfavorite = (slug: any) => dispatch({
+    //   type: ARTICLE_UNFAVORITED,
+    //   payload: deleteArticleAsFavorite(slug)
+    // })
+
+  // const handleClick = (e: React.SyntheticEvent) => {
+  //   e.preventDefault();
+
+  //   if (article.favorited) {
+  //     dispatch(ARTICLE_FAVORITED(setArticleAsFavorite(article.slug)))
+  //   } else {
+  //     dispatch(ARTICLE_FAVORITED(setArticleAsFavorite(article.slug)))
+  //   }
+  // };
+
 
   const { article } = props;
   const favoriteButtonClass = article.favorited

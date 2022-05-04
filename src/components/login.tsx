@@ -22,6 +22,20 @@ export const Login: FunctionComponent = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  // const dispatch = useAppDispatch();
+  // // TODO: это auth.actions?
+  // // const onChangeEmail = (value: string) => {
+  // //   dispatch({type: UPDATE_FIELD_AUTH, key: 'email', value})
+  // // }
+  // // const onChangePassword = (value: string) => {
+  // //   dispatch({type: UPDATE_FIELD_AUTH, key: 'password', value})
+  // // }
+  // const onSubmit = (email: string, password: string) => {
+  //   dispatch(LOGIN(login(email, password)))
+  // }
+  // const onUnload = () => {
+  //   dispatch(LOGIN_PAGE_UNLOADED())
+
   if (isLoggedIn) {
     return <Redirect to="/" />;
   }
