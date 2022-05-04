@@ -1,3 +1,4 @@
+import DOMPurify from 'dompurify';
 import ArticleMeta from './ArticleMeta';
 import CommentContainer from './CommentContainer';
 import React, { useEffect } from 'react';
@@ -45,7 +46,8 @@ const Article: React.FC<TArticleProps> = (props) => {
     return null;
   }
 
-  const markup  = { __html: marked(article.body, { sanitize: true }) };
+  const articleBody = DOMPurify.sanitize(article.body);
+  const markup  = { __html: marked(articleBody)};
 
   const canModify = currentUser && currentUser.username === article.author.username;
 
