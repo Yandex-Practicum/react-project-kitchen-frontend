@@ -1,42 +1,64 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
+import { followUserThunk, getProfileThunk, unfollowUserThunk } from "./thunks";
+import {TFollowingUser} from "./types";
 
-export const initialState =  {
-  username: '',
-  image: '',
-  following: null,
-  bio: ''
-}
-
+export const initialState: TFollowingUser = {
+  username: "",
+  image: "",
+  following: false,
+  bio: "",
+};
 
 export const profileSlice = createSlice({
-  name: 'profile',
+  name: "profile",
   initialState,
   reducers: {
+    profilePageWasUnloaded: (state) => {
+      return initialState;
+    },
+  //   profilePageWasLoaded: (state, action) => {
+  //     const { username, image, following } = action.payload[0].profile;
+  //     state.username = username;
+  //     state.image = image;
+  //     state.following = following;
+  //   },
+  //   followUser: (state, action) => {
+  //     const { username, image, following } = action.payload.profile;
+  //     state.username = username;
+  //     state.image = image;
+  //     state.following = following;
+  //   },
+  //   unfollowUser: (state, action) => {
+  //     const { username, image, following } = action.payload.profile;
+  //     state.username = username;
+  //     state.image = image;
+  //     state.following = following;
+  //   },
+  },
 
-    PROFILE_PAGE_UNLOADED: (state, action) => {
-      return initialState
+  extraReducers: {
+    [getProfileThunk.fulfilled]: (state, action) => {
+      state.following = action.payload.profile.following;
+      state.username = action.payload.profile.username;
+      state.image = action.payload.profile.image;
     },
-
-    PROFILE_PAGE_LOADED: (state, action) => {
-      const { username, image, following } = action.payload[0].profile
-      state.username = username;
-      state.image = image;
-      state.following = following;
+    [followUserThunk.fulfilled] : (state, action) => {
+      state.following = action.payload.profile.following;
+      state.username = action.payload.profile.username;
+      state.image = action.payload.profile.image;
     },
-    FOLLOW_USER: (state, action) => {
-      const { username, image, following } = action.payload.profile
-      state.username = username;
-      state.image = image;
-      state.following = following;
-    },
-    UNFOLLOW_USER: (state, action) => {
-      const { username, image, following } = action.payload.profile
-      state.username = username;
-      state.image = image;
-      state.following = following;
+    [unfollowUserThunk.fulfilled] : (state, action) => {
+      state.following = action.payload.profile.following;
+      state.username = action.payload.profile.username;
+      state.image = action.payload.profile.image;
     }
-  }
-})
+  },
+});
 
-export default profileSlice.reducer
-export const { PROFILE_PAGE_LOADED, PROFILE_PAGE_UNLOADED, FOLLOW_USER, UNFOLLOW_USER } = profileSlice.actions
+export default profileSlice.reducer;
+export const {
+  profilePageWasUnloaded,
+  // profilePageWasLoaded,
+  // followUser,
+  // unfollowUser
+} = profileSlice.actions;

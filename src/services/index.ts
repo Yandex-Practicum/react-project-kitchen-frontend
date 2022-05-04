@@ -4,7 +4,7 @@ import articleListReducer from './articleListSlice';
 import commonReducer from './commonSlice';
 import editorReducer from './editorSlice';
 import profileReducer from './profileSlice'
-import settingsReducer from './settingsSlice.js';
+import settingsReducer from './settingsSlice';
 import authReducer from './authSlice';
 
 const rootReducer = {

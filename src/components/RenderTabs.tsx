@@ -1,7 +1,6 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 
-function RenderTabs({ username }: {username: string}) {
-
+function RenderTabs({ username }: { username: string }) {
   return (
     <ul className="nav nav-pills outline-active">
       <li className="nav-item">
@@ -9,7 +8,8 @@ function RenderTabs({ username }: {username: string}) {
           className="nav-link"
           activeClassName="nav-link active"
           to={`/@${username}`}
-          exact>
+          exact
+        >
           My Articles
         </NavLink>
       </li>
@@ -18,7 +18,8 @@ function RenderTabs({ username }: {username: string}) {
           className="nav-link"
           activeClassName="nav-link active"
           to={`/@${username}/favorites`}
-          exact>
+          exact
+        >
           Favorited Articles
         </NavLink>
       </li>
@@ -26,4 +27,4 @@ function RenderTabs({ username }: {username: string}) {
   );
 }
 
-export default RenderTabs
+export default RenderTabs;

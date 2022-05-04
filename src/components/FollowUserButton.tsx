@@ -1,3 +1,5 @@
+import { useDispatch, useSelector } from "react-redux";
+import { followUserThunk, unfollowUserThunk } from "../services/thunks";
 
 type TFollowUserButton = {
   follow?: any;
@@ -13,6 +15,9 @@ type TFollowUserButton = {
 //Перенести follow и unFollow из ProfileFavorits после полного подключения Редакс.
 function FollowUserButton({ isUser, user, follow, unfollow }: TFollowUserButton) {
 
+  const { following } = useSelector((state: any) => state.profile);
+  const dispatch = useDispatch()
+
   if (isUser) {
     return null;
   }
@@ -26,11 +31,9 @@ function FollowUserButton({ isUser, user, follow, unfollow }: TFollowUserButton)
 
   const handleClick = (ev: React.SyntheticEvent<Element, Event>) => {
     ev.preventDefault();
-    if (user.following) {
-      unfollow(user.username)
-    } else {
-      follow(user.username)
-    }
+    user.following
+    ? dispatch(unfollowUserThunk(user.username))
+    : dispatch(followUserThunk(user.username))
   };
 
   return (
