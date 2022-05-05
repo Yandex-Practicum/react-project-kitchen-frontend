@@ -92,3 +92,7 @@ export const AuthError = styled.p`
 export const ErrorsContainer = styled.div`
   height: 24px;
 `
+export const AuthFieldSet = styled.fieldset`
+  display: flex;
+  flex-direction: column;
+`

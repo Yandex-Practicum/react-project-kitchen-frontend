@@ -10,13 +10,12 @@ interface ISignupLoginSubmitBtnProps {
 const SignupLoginSubmitBtn: FC<ISignupLoginSubmitBtnProps> = ({
   btnText,
   type = "submit",
-  disabled = false,
+  disabled,
 }) => {
   return (
     <StyleBtn
       disabled={disabled}
       type={type}
-      className="btn btn-lg btn-primary pull-xs-right"
     >
       {btnText}
     </StyleBtn>
