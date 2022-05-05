@@ -32,7 +32,7 @@ const Home: FC = () => {
 
   return (
     <div className="home-page">
-      <Banner token={token} appName={appName} />
+      <Banner />
       <div className="container page">
         <div className="row">
           <MainView />
