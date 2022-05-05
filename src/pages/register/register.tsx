@@ -1,12 +1,12 @@
 import { Link, Redirect } from "react-router-dom";
-import ListErrors from "./ListErrors";
+import ListErrors from "../../components/ListErrors";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
+import SignupLoginSubmitBtn from "../../components/SignupLoginSubmitBtn";
 import { useForm } from "react-hook-form";
-import { signupThunk } from "../services/thunks";
-import {authSlice} from "../services/authSlice";
-import { AuthSection, AuthTitle } from "../components/StyledComponents/authStyles";
+import { signupThunk } from "../../services/thunks";
+import {authSlice} from "../../services/authSlice";
+import { AuthSection, AuthTitle } from "../../components/StyledComponents/authStyles";
 
 type FormData = {
   username: string;
