@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
 import { useForm } from "react-hook-form";
 import { signupThunk } from "../services/thunks";
-import {authSlice} from "../services/authSlice";
-import { AuthSection, AuthTitle } from "../components/StyledComponents/authStyles";
+import { authSlice } from "../services/authSlice";
+import * as Styles from "../components/StyledComponents/authStyles";
 
 type FormData = {
   username: string;
@@ -36,13 +36,13 @@ const Register: React.FC = () => {
 
   const handleSubmitForm = handleSubmit(({ username, email, password }, e) => {
     e && e.preventDefault();
-    dispatch(signupThunk({ username, email, password }))
-    .unwrap()
-    .catch((error: any) => {
-      console.log(error);
+    console.log({ username, email, password });
 
-      setErrorsResponse({ [error.name]: error.message });
-    });
+    dispatch(signupThunk({ username, email, password }))
+      .unwrap()
+      .catch((error: any) => {
+        setErrorsResponse({ [error.name]: error.message });
+      });
   });
 
   useEffect(() => {
@@ -55,10 +55,75 @@ const Register: React.FC = () => {
     return <Redirect to="/" />;
   }
 
+  console.log(errorsResponse);
+
+
   return (
-    <AuthSection>
-      <AuthTitle>Регистрация</AuthTitle>
-    </AuthSection>
+    <Styles.AuthSection>
+      <Styles.AuthTitle>Зарегистрироваться</Styles.AuthTitle>
+      <Styles.StyledLink to="/login">Войти</Styles.StyledLink>
+
+      <Styles.AuthForm action="POST" onSubmit={handleSubmitForm}>
+        <fieldset>
+
+          <Styles.AuthLabel>
+            Имя пользователя
+            <Styles.AuthInput
+              isError={errors.username}
+              {...register("username", {
+                required: "Это поле обязательно к заполнению.",
+                minLength: {
+                  value: 2,
+                  message: "Имя должно быть не менее двух букв.",
+                },
+              })}
+            />
+          </Styles.AuthLabel>
+          <Styles.ErrorsContainer>
+            {errors?.username && <Styles.AuthError>{errors?.username?.message}</Styles.AuthError>}
+          </Styles.ErrorsContainer>
+
+          <Styles.AuthLabel>
+            Email
+            <Styles.AuthInput
+              isError={errors.email}
+              {...register("email", {
+                required: "Это поле обязательно к заполнению.",
+                pattern: {
+                  value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                  message: "Пример Email: name@example.com",
+                },
+              })}
+            />
+          </Styles.AuthLabel>
+          <Styles.ErrorsContainer>
+            {errors?.email && <Styles.AuthError>{errors?.email?.message}</Styles.AuthError>}
+          </Styles.ErrorsContainer>
+
+          <Styles.AuthLabel>
+            Пароль
+            <Styles.AuthInput
+              isError={errors.password}
+              {...register("password", {
+                required: "Это поле обязательно к заполнению.",
+                minLength: {
+                  value: 5,
+                  message: "Пароль должен быть более 4 символов.",
+                },
+              })}
+            />
+          </Styles.AuthLabel>
+          <Styles.ErrorsContainer>
+            {errors?.password && <Styles.AuthError>{errors?.password?.message}</Styles.AuthError>}
+          </Styles.ErrorsContainer>
+
+          <SignupLoginSubmitBtn btnText="Зарегистрироваться" />
+
+        </fieldset>
+      </Styles.AuthForm>
+
+      <ListErrors errors={errorsResponse} />
+    </Styles.AuthSection>
     // <section className="auth-page">
     //   <div className="container page">
     //     <div className="row">
