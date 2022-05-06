@@ -3,21 +3,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateUserThunk } from "../services/thunks";
 import { logout as logoutAction } from "../services/commonSlice";
 import { useHistory } from "react-router";
+import { useForm } from "react-hook-form";
+import * as Styles from "../components/StyledComponents/settingsStyles";
+import SignupLoginSubmitBtn from "../components/SignupLoginSubmitBtn";
 
 interface ISettingsForm {
   setIsUpdatedInfoMsg: (isUpdatedInfoMsg: boolean) => void
 }
 
 const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
-  const { currentUser } = useSelector((state: any) => state.common);
   const dispatch = useDispatch();
+  const { currentUser } = useSelector((state: any) => state.common);
+  const [isError, setIsError] = useState(false);
+  const [errorsResponse, setErrorsResponse] = useState<any>(null);
   const [formValues, setFormvalues] = useState({
     image: "",
     username: "",
-    bio: "",
     email: "",
     password: "",
   });
+
 
   useEffect(() => {
     if (currentUser) {
@@ -37,76 +42,79 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
         setIsUpdatedInfoMsg(true);
         setTimeout(() => {
           setIsUpdatedInfoMsg(false);
-        }, 1500);
-      });
+        }, 1500)
+      })
+      .catch((error: any) => {
+        setErrorsResponse({ [error.name]: error.message });
+      })
   };
+
+
 
   return (
     <form onSubmit={onSubmit}>
-      <fieldset>
-        <fieldset className="form-group">
-          <input
-            className="form-control"
-            type="text"
-            placeholder="URL of profile picture"
-            value={formValues.image}
-            name="image"
-            onChange={updateForm}
-          />
-        </fieldset>
+       <Styles.SettingsFieldSet>
+          <Styles.SettingsLabel>
+            URL изображения профиля
+              <Styles.SettingsInput
+                  isError={false}
+                  type="url"
+                  placeholder="URL of profile picture"
+                  value={formValues.image}
+                  name="image"
+                  onChange={updateForm}
+                 />
+          </Styles.SettingsLabel>
+        </Styles.SettingsFieldSet>
+        {/* second */}
 
-        <fieldset className="form-group">
-          <input
-            className="form-control form-control-lg"
-            type="text"
-            placeholder="username"
-            value={formValues.username}
-            name="username"
-            onChange={updateForm}
-          />
-        </fieldset>
+        <Styles.SettingsFieldSet>
+          <Styles.SettingsLabel>
+            Имя пользователя
+            <Styles.SettingsInput
+              isError={false}
+              type="text"
+              placeholder="username"
+              value={formValues.username}
+              name="username"
+              onChange={updateForm}
+           />
 
-        <fieldset className="form-group">
-          <textarea
-            className="form-control form-control-lg"
-            rows={8}
-            placeholder="Short bio about you"
-            value={formValues.bio}
-            name="bio"
-            onChange={updateForm}
-          ></textarea>
-        </fieldset>
+          </Styles.SettingsLabel>
+        </Styles.SettingsFieldSet>
+         {/* third*/}
+        <Styles.SettingsFieldSet>
+          <Styles.SettingsLabel>
+           E-mail
+            <Styles.SettingsInput
+              isError={false}              
+              type="email"
+              placeholder="Email"
+              value={formValues.email}
+              name="email"
+              onChange={updateForm}
+           />
+          </Styles.SettingsLabel>
 
-        <fieldset className="form-group">
-          <input
-            className="form-control form-control-lg"
-            type="email"
-            placeholder="Email"
-            value={formValues.email}
-            name="email"
-            onChange={updateForm}
-          />
-        </fieldset>
+        </Styles.SettingsFieldSet>
+         {/* third*/}
 
-        <fieldset className="form-group">
-          <input
-            className="form-control form-control-lg"
-            type="password"
-            placeholder="New Password"
-            value={formValues.password}
-            name="password"
-            onChange={updateForm}
-          />
-        </fieldset>
-
-        <button
-          className="btn btn-lg btn-primary pull-xs-right"
-          type="submit"
-          disabled={false}
-        >
-          Update Settings
-        </button>
-      </fieldset>
+         <Styles.SettingsFieldSet>
+          <Styles.SettingsLabel>
+            Новый пароль
+            <Styles.SettingsInput
+              isError={false} 
+              type="password"
+              placeholder="Новый пароль"
+              value={formValues.password}
+              name="password"
+              onChange={updateForm}
+              
+           />
+          </Styles.SettingsLabel>
+        </Styles.SettingsFieldSet>
+        <SignupLoginSubmitBtn btnText="Обновить настройки" disabled={false} />
+    
     </form>
   );
   // }

@@ -5,7 +5,8 @@ import { updateUserThunk } from "../../services/thunks";
 import { logout as logoutAction } from "../../services/commonSlice";
 import { useHistory } from "react-router";
 import SettingsForm from "../../components/settings-form";
-
+import * as Styles from "../../components/StyledComponents/settingsStyles";
+import SignupLoginSubmitBtn from '../../components/SignupLoginSubmitBtn'
 // interface ISettingsForm {
 //   setIsUpdatedInfoMsg: (isUpdatedInfoMsg: boolean) => void
 // }
@@ -15,17 +16,17 @@ const Settings = () => {
   const history = useHistory();
   const [isUpdatedInfoMsg, setIsUpdatedInfoMsg] = useState(false);
 
-  const logout = () => {
-    dispatch(logoutAction());
-    history.push("/");
-  };
+  // const logout = () => {
+  //   dispatch(logoutAction());
+  //   history.push("/");
+  // };
 
   return (
     <div className="settings-page">
       <div className="container page">
         <div className="row">
           <div className="col-md-6 offset-md-3 col-xs-12">
-            <h1 className="text-xs-center">Your Settings</h1>
+            <Styles.SettingsTitle>Ваши настройки</Styles.SettingsTitle>
 
             {isUpdatedInfoMsg && <h4 className="text-xs-center">Updated</h4>}
 
@@ -33,11 +34,9 @@ const Settings = () => {
 
             <SettingsForm setIsUpdatedInfoMsg={setIsUpdatedInfoMsg} />
 
-            <hr />
-
-            <button className="btn btn-outline-danger" onClick={logout}>
+            {/* <button className="btn btn-outline-danger" onClick={logout}>
               Or click here to logout.
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
