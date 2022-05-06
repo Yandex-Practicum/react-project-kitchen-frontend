@@ -1,18 +1,24 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import {textColor, linkColor, inputBorderColor} from './constantsStyles';
+import { textColor, linkColor, inputBorderColor, device } from './constantsStyles';
 
 export const AuthSection = styled.section`
   max-width: 540px;
   margin: 0 auto;
-  padding: 40px 20px 0;
+  padding: 56px 20px 0;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
+  @media ${device.tablet} {
+    padding-top: 64px;
+  }
+  @media ${device.mobileS} {
+    padding-top: 72px;
+  }
 `
-export const AuthTitle = styled.h1`
+export const AuthTitle = styled.h2`
   text-align: center;
 
   font-family: 'AlegreyaSans', Times, serif;
@@ -23,6 +29,10 @@ export const AuthTitle = styled.h1`
   color: ${textColor.headers};
 
   margin-bottom: 40px;
+
+  @media ${device.tablet} {
+    font-size: 32px;
+  }
 `
 export const StyledLink = styled(Link)`
   font-family: 'AlegreyaSans', Times, serif;
