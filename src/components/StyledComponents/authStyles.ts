@@ -4,8 +4,7 @@ import styled from 'styled-components';
 export const AuthSection = styled.section`
   max-width: 540px;
   margin: 0 auto;
-  padding-top: 40px;
-  padding-bottom: 150px;
+  padding: 40px 20px 0;
 
   display: flex;
   flex-direction: column;
