@@ -18,12 +18,17 @@ type TProfileHeader = {
 function ProfileHeader({ profile, follow, unfollow }: TProfileHeader) {
 
   const { currentUser } = useSelector((state: any) => state.common);
+  console.log(profile.image);
+
 
   const isUser = currentUser &&
     profile.username === currentUser.username;
 
   return (
     <Styles.headerPrfContainer>
+      <Styles.userImageContainer>
+        <Styles.profileImage src={profile.image} alt="" />
+      </Styles.userImageContainer>
       <Styles.headerPrfTitle>{profile.username}</Styles.headerPrfTitle>
 
       <FollowUserButton

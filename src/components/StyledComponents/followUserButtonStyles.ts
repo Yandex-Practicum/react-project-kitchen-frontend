@@ -23,4 +23,5 @@ export const followBtn = styled.button`
 `
 export const followImg = styled.img`
   margin-right: 13px;
+  background: transparent;
 `

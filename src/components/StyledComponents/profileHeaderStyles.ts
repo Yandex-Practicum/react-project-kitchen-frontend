@@ -9,7 +9,7 @@ export const headerPrfContainer = styled.div`
   max-width: 304px;
 
   margin: 0 auto;
-`;
+`
 
 export const headerPrfTitle = styled.h2`
   font-family: 'AlegreyaSans', Times, serif;
@@ -21,5 +21,21 @@ export const headerPrfTitle = styled.h2`
 
   margin-bottom: 24px;
 
-  text-align: center
+  text-align: center;
+`
+
+export const userImageContainer = styled.div`
+  border-radius: 50%;
+
+  overflow: hidden;
+
+  width: 230px;
+  height: 230px;
+
+  margin-bottom: 24px;
+`
+export const profileImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `
