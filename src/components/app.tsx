@@ -28,10 +28,10 @@ function App() {
 
     return (
       <div>
-        <Header
+       {/*  <Header
           appName={appName}
           currentUser={currentUser}
-        />
+        /> */}
         {error && <p>{error}</p> }
         <Switch>
           <Route exact path="/" component={Home} />
