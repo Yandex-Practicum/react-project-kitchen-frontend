@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import {textColor, linkColor, inputBorderColor} from './constantsStyles';
 
 export const AuthSection = styled.section`
   max-width: 540px;
@@ -19,7 +20,7 @@ export const AuthTitle = styled.h1`
   font-size: 36px;
   line-height: 1.11;
 
-  color: #0A0A0B;
+  color: ${textColor.headers};
 
   margin-bottom: 40px;
 `
@@ -28,7 +29,7 @@ export const StyledLink = styled(Link)`
   font-weight: 400;
   font-size: 18px;
   line-height: 1.33;
-  color: #008AFF;
+  color: ${linkColor.blue};
   text-align: center;
 
   margin-bottom: 24px;
@@ -37,7 +38,7 @@ export const StyledLink = styled(Link)`
 
   &:hover {
     text-decoration: none;
-    color: #007CE6;
+    color: ${linkColor.blueHover};
   }
 `
 export const AuthLabel = styled.label`
@@ -47,7 +48,7 @@ export const AuthLabel = styled.label`
   font-weight:400;
   font-size: 16px;
   line-height: 1.5;
-  color: #62626A;
+  color: ${textColor.secondaryText};
 
   margin: 0;
 `
@@ -57,14 +58,14 @@ export const AuthInput = styled.input<{isError: any}>`
   width: 100%;
   height: 40px;
 
-  border: 1px solid ${props => props.isError ? `#FF1E1E` : `#CCCCCC`};
+  border: 1px solid ${props => props.isError ? `${inputBorderColor.error}` : `${inputBorderColor.default}`};
   border-radius: 4px;
 
   font-family: 'AlegreyaSans', Times, serif;
   font-weight:400;
   font-size: 16px;
   line-height: 1.5;
-  color: #62626A;
+  color: ${textColor.secondaryText};
 
   padding: 0 16px;
 
@@ -72,7 +73,7 @@ export const AuthInput = styled.input<{isError: any}>`
 
   &:focus{
     outline: none;
-    border-color: ${props => props.isError ? `#FF1E1E` : `#A3A3A3`};
+    border-color: ${props => props.isError ? `${inputBorderColor.error}` : `${inputBorderColor.active}`};
   }
 `
 
@@ -84,7 +85,7 @@ export const AuthError = styled.p`
   font-weight:400;
   font-size: 16px;
   line-height: 1.5;
-  color: #FF413B;
+  color: ${textColor.error};
 
   margin: 0;
 `
