@@ -1,14 +1,20 @@
 import React, {FunctionComponent} from "react";
 
-const ArticleSidebarView: FunctionComponent = () => {
+import {ArticleHeading, ArticleWrapper, AuthorWrapper} from "./StyledComponents/sidebar-information-styles";
+import ProfileInformationView from "./profile-information-view";
+import Like from "./Article/like";
+import like from "../images/like-icon.svg";
+
+const ArticleSidebarView: FunctionComponent<{likesCount: number, articleHeading: string}> = (props) => {
   return (
     <>
-      <img src="" alt="фото профиля"/>
-      <div>
-        <h3>Имя Фамилия</h3>
-        <p>01.01.1999</p>
-      </div>
-
+      <ArticleWrapper>
+        <AuthorWrapper>
+          <ProfileInformationView/>
+          <Like counter={props.likesCount} icon={like}/>
+        </AuthorWrapper>
+        <ArticleHeading>{props.articleHeading}</ArticleHeading>
+      </ArticleWrapper>
     </>
   )
 }

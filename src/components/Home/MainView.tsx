@@ -23,7 +23,7 @@ const MainView: FC = () => {
   };
 
   return (
-    <div className="col-md-9">
+    <div className="col-md-8">
       <div className="feed-toggle">
         <ul className="nav nav-pills outline-active">
           {token && (

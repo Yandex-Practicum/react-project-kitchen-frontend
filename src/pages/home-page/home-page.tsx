@@ -9,11 +9,14 @@ import {
   getTagsThunk,
 } from "../../services/thunks";
 import {homeSlice} from "../../services/homeSlice";
+import SidebarInformation from "../../components/sidebar-information";
+import {SidebarRight} from "../../components/StyledComponents/sidebar-information-styles";
 
 const Home: FC = () => {
   const { appName, token } = useSelector((state: any) => state.common);
   const { tags } = useSelector((state: any) => state.home);
-
+  const { articles } = useSelector((state: any) => state.articleList);
+console.log(articles)
   const dispatch = useDispatch();
 
   const actionsHome = homeSlice.actions;
@@ -36,8 +39,9 @@ const Home: FC = () => {
       <div className="container page">
         <div className="row">
           <MainView />
-          <div className="col-md-3">
-            <div className="sidebar">
+          {/*<div className="col-md-3">*/}
+          {/*<div className="sidebar">*/}
+            <SidebarRight>
               <p>Popular Tags</p>
               <Tags
                 tags={tags}
@@ -47,8 +51,9 @@ const Home: FC = () => {
                   payload: any
                 ) => ({})}
               />
-            </div>
-          </div>
+              <SidebarInformation articles={articles}/>
+            </SidebarRight>
+          {/*</div>*/}
         </div>
       </div>
     </div>
