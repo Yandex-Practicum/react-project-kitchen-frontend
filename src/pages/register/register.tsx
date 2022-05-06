@@ -24,9 +24,8 @@ const Register: React.FC = () => {
 
   const {
     register,
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
-    formState: { isValid }
   } = useForm<FormData>({
     mode: "onChange",
     defaultValues: {
