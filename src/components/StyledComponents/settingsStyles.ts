@@ -90,12 +90,17 @@ export const SettingsInputContainer = styled.div
 
 export const SettingsIcon = styled.span
   `
+    display: flex;
+    justife-content: center;
+    align-items: center;
     position:absolute;
-    bottom:25%;
+    bottom:10%;
     right:17px;
     width:24px;
     height:24px;
-  `
+    cursor: pointer;
+    z-index: 1000
+      `
 
 export const SettingsError = styled.p`
   font-family: 'AlegreyaSans', Times, serif;

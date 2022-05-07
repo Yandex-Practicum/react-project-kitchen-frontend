@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import * as Styles from "../components/StyledComponents/settingsStyles";
 import SignupLoginSubmitBtn from "../components/SignupLoginSubmitBtn";
 import IconInput from "../UI/icon-input/icon-input";
+import IconInputFile from '../UI/icon-input-file/icon-input-file'
 
 interface ISettingsForm {
   setIsUpdatedInfoMsg: (isUpdatedInfoMsg: boolean) => void;
@@ -28,7 +29,7 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
 
   useEffect(() => {
     if (currentUser) {
-      setFormvalues({ ...currentUser, password: "" });
+      setFormvalues({ ...currentUser, image: '', password: "" });
     }
   }, [currentUser]);
 
@@ -58,9 +59,11 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
   return (
     <Styles.SettingsForm action="POST" onSubmit={onSubmit}>
       <Styles.SettingsFieldSet>
+      
         <Styles.SettingsLabel>
-          URL изображения профиля
-          <Styles.SettingsInput
+        URL изображения профиля
+        <Styles.SettingsInputContainer>
+        <Styles.SettingsInput
             isError={false}
             type="url"
             placeholder="URL изображения профиля"
@@ -68,6 +71,13 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
             name="image"
             onChange={updateForm}
           />
+           <Styles.SettingsIcon>
+              <IconInputFile/>
+          </Styles.SettingsIcon>
+          
+        </Styles.SettingsInputContainer>
+         
+         
         </Styles.SettingsLabel>
         {/* second */}
 
@@ -111,6 +121,10 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
             <Styles.SettingsIcon>
               <IconInput visible={visible} toggle={onToggle} />
             </Styles.SettingsIcon>
+
+            <input 
+              type="file"
+            />
           </Styles.SettingsInputContainer>
         </Styles.SettingsLabel>
         
