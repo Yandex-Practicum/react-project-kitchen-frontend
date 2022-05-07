@@ -1,8 +1,9 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import EditProfileSettings from './EditProfileSettings';
 import FollowUserButton from './FollowUserButton';
 import * as Styles from "./StyledComponents/profileHeaderStyles";
-
+import { logout as logoutAction } from "../services/commonSlice";
+import { useHistory } from 'react-router-dom';
 //Рефактор type!
 type TProfileHeader = {
   profile: {
@@ -16,6 +17,14 @@ type TProfileHeader = {
 }
 
 function ProfileHeader({ profile, follow, unfollow }: TProfileHeader) {
+
+  //Для кнопки logout. Удалить вместе с ней.
+  // const dispatch = useDispatch();
+  // const history = useHistory();
+  // const logout = () => {
+  //   dispatch(logoutAction());
+  //   history.push("/");
+  // };
 
   const { currentUser } = useSelector((state: any) => state.common);
   console.log(profile.image);
@@ -37,6 +46,11 @@ function ProfileHeader({ profile, follow, unfollow }: TProfileHeader) {
         follow={follow}
         unfollow={unfollow}
       />
+
+      {/* Кнопка для logout пока не сверстана шапка. Удалить. */}
+      {/* <button className="btn btn-outline-danger" onClick={logout}>
+        Or click here to logout.
+      </button> */}
 
     </Styles.headerPrfContainer>
     // <div className="user-info">
