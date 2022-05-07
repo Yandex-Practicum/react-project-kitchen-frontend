@@ -1,4 +1,4 @@
-import  { useEffect, useState, FC } from "react";
+import { useEffect, useState, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserThunk } from "../services/thunks";
 import { logout as logoutAction } from "../services/commonSlice";
@@ -6,16 +6,19 @@ import { useHistory } from "react-router";
 import { useForm } from "react-hook-form";
 import * as Styles from "../components/StyledComponents/settingsStyles";
 import SignupLoginSubmitBtn from "../components/SignupLoginSubmitBtn";
+import IconInput from "../UI/icon-input/icon-input";
 
 interface ISettingsForm {
-  setIsUpdatedInfoMsg: (isUpdatedInfoMsg: boolean) => void
+  setIsUpdatedInfoMsg: (isUpdatedInfoMsg: boolean) => void;
 }
 
 const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
   const dispatch = useDispatch();
+
   const { currentUser } = useSelector((state: any) => state.common);
   const [isError, setIsError] = useState(false);
   const [errorsResponse, setErrorsResponse] = useState<any>(null);
+  const [visible, setVisible] = useState(false);
   const [formValues, setFormvalues] = useState({
     image: "",
     username: "",
@@ -23,14 +26,13 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
     password: "",
   });
 
-
   useEffect(() => {
     if (currentUser) {
       setFormvalues({ ...currentUser, password: "" });
     }
   }, [currentUser]);
 
-  const updateForm = (e: { target: { name: string; value: string }}) => {
+  const updateForm = (e: { target: { name: string; value: string } }) => {
     setFormvalues({ ...formValues, [e.target.name]: e.target.value });
   };
 
@@ -42,80 +44,81 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
         setIsUpdatedInfoMsg(true);
         setTimeout(() => {
           setIsUpdatedInfoMsg(false);
-        }, 1500)
+        }, 1500);
       })
       .catch((error: any) => {
         setErrorsResponse({ [error.name]: error.message });
-      })
+      });
   };
 
-
+  const onToggle = () => {
+    setVisible((visible) => !visible);
+  };
 
   return (
-    <form onSubmit={onSubmit}>
-       <Styles.SettingsFieldSet>
-          <Styles.SettingsLabel>
-            URL изображения профиля
-              <Styles.SettingsInput
-                  isError={false}
-                  type="url"
-                  placeholder="URL of profile picture"
-                  value={formValues.image}
-                  name="image"
-                  onChange={updateForm}
-                 />
-          </Styles.SettingsLabel>
-        </Styles.SettingsFieldSet>
+    <Styles.SettingsForm action="POST" onSubmit={onSubmit}>
+      <Styles.SettingsFieldSet>
+        <Styles.SettingsLabel>
+          URL изображения профиля
+          <Styles.SettingsInput
+            isError={false}
+            type="url"
+            placeholder="URL изображения профиля"
+            value={formValues.image}
+            name="image"
+            onChange={updateForm}
+          />
+        </Styles.SettingsLabel>
         {/* second */}
 
-        <Styles.SettingsFieldSet>
-          <Styles.SettingsLabel>
-            Имя пользователя
+        <Styles.SettingsLabel>
+          Имя пользователя
+          <Styles.SettingsInput
+            isError={false}
+            type="text"
+            placeholder="Имя пользователя"
+            value={formValues.username}
+            name="username"
+            onChange={updateForm}
+          />
+        </Styles.SettingsLabel>
+        {/* third*/}
+        <Styles.SettingsLabel>
+          E-mail
+          <Styles.SettingsInput
+            isError={false}
+            type="email"
+            placeholder="Email"
+            value={formValues.email}
+            name="email"
+            onChange={updateForm}
+          />
+        </Styles.SettingsLabel>
+
+        {/* third*/}
+
+        <Styles.SettingsLabel>
+          Новый пароль
+          <Styles.SettingsInputContainer>
             <Styles.SettingsInput
               isError={false}
-              type="text"
-              placeholder="username"
-              value={formValues.username}
-              name="username"
-              onChange={updateForm}
-           />
-
-          </Styles.SettingsLabel>
-        </Styles.SettingsFieldSet>
-         {/* third*/}
-        <Styles.SettingsFieldSet>
-          <Styles.SettingsLabel>
-           E-mail
-            <Styles.SettingsInput
-              isError={false}              
-              type="email"
-              placeholder="Email"
-              value={formValues.email}
-              name="email"
-              onChange={updateForm}
-           />
-          </Styles.SettingsLabel>
-
-        </Styles.SettingsFieldSet>
-         {/* third*/}
-
-         <Styles.SettingsFieldSet>
-          <Styles.SettingsLabel>
-            Новый пароль
-            <Styles.SettingsInput
-              isError={false} 
-              type="password"
+              type={visible ? "text" : "password"}
               placeholder="Новый пароль"
               value={formValues.password}
               name="password"
               onChange={updateForm}
-              
-           />
-          </Styles.SettingsLabel>
-        </Styles.SettingsFieldSet>
+            />
+            <Styles.SettingsIcon>
+              <IconInput visible={visible} toggle={onToggle} />
+            </Styles.SettingsIcon>
+          </Styles.SettingsInputContainer>
+        </Styles.SettingsLabel>
+        
         <SignupLoginSubmitBtn btnText="Обновить настройки" disabled={false} />
-    
-    </form>
+
+      </Styles.SettingsFieldSet>
+
+    </Styles.SettingsForm>
   );
   // }
 };
