@@ -1,4 +1,4 @@
-import { device } from './constantsStyles';
+import { device } from "./constantsStyles";
 import styled from "styled-components";
 import centerFigure from "../../images/Banner/centerFigure.svg";
 import blueCurve from "../../images/Banner/blueCurve.svg";
@@ -14,12 +14,12 @@ export const BannerContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
-`
+`;
 
 export const TextContainer = styled.div`
   position: relative;
   width: 1140px;
-  margin-top: 118px;
+  margin-top: 118px; //убрать после добавления навигации
   display: grid;
   grid-template-columns: max-content 225px 1fr;
   gap: 30px;
@@ -35,7 +35,7 @@ export const TextContainer = styled.div`
   @media ${device.laptopL} {
     width: 955px;
     padding-bottom: 40px;
-    margin-top: 86px;
+    margin-top: 86px; //убрать после добавления навигации
   }
 
   @media ${device.laptop} {
@@ -48,15 +48,14 @@ export const TextContainer = styled.div`
     width: 280px;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
-    margin-top: 78px;
+    margin-top: 78px; //убрать после добавления навигации
     gap: 13px;
     padding-bottom: 17px;
   }
-
 `;
 
 export const Title = styled.h1`
-  font-family: 'AlegreyaSans';
+  font-family: "AlegreyaSans";
   margin: 0;
   font-style: normal;
   font-weight: 400;
@@ -74,10 +73,10 @@ export const Title = styled.h1`
   @media ${device.tablet} {
     font-size: 40px;
   }
-  `;
+`;
 
 export const Subtitle = styled.p`
-  font-family: 'AlegreyaSans';
+  font-family: "AlegreyaSans";
   margin: 0;
   margin-bottom: 23px;
   max-width: 225px;
@@ -100,8 +99,6 @@ export const Subtitle = styled.p`
     margin-bottom: 0;
     font-size: 16px;
   }
-
-
 `;
 /*
 export const Parallelogram = styled.div`
@@ -153,7 +150,6 @@ export const TopFigure = styled.img`
     bottom: 102px;
     left: 91px;
   }
-
 `;
 
 export const BlueCurve = styled.img`
@@ -190,9 +186,20 @@ export const BlackChevron = styled.img`
   height: 263px;
   bottom: 77px;
   left: -379px;
+  animation: 15s linear 1s infinite alternate fly;
 
   @media ${device.desktop} {
     display: none;
+  }
+
+  @keyframes fly {
+    from {
+      bottom: 77px;
+    }
+
+    to {
+      bottom: 177px;
+    }
   }
 `;
 
@@ -201,8 +208,8 @@ export const BlackCircle = styled.img`
   position: absolute;
   width: 175px;
   height: 75px;
-  bottom: -2px;
-  right: 20px;
+  bottom: -1px;
+  right: 21px;
 
   @media ${device.desktop} {
     bottom: -2px;
@@ -229,43 +236,101 @@ export const BlackCurve = styled.img`
   width: 351px;
   height: 818px;
   bottom: -304px;
-  right: -351px;
+  right: -340px;
 
   @media ${device.desktop} {
     width: 300px;
     height: 697px;
     bottom: -304px;
-    right: -329px;
+    right: -315px;
   }
 
-  @media ${device.laptopL} {
+  @media ${device.laptopXL} {
     display: none;
   }
-
 `;
 
 export const Ball = styled.img`
   background-color: transparent;
   position: absolute;
   width: 428px;
-  height: 135px;
-  bottom: 28px;
+  height: 123px;
+  bottom: -29px;
   right: -390px;
+  transform: rotate(10deg);
+  animation: 6s ease-out 1s infinite alternate orbit;
 
   @media ${device.desktop} {
-    width: 365px;
-    height: 115px;
-    bottom: 22px;
-    right: -354px;
+    width: 363px;
+    height: 111px;
+    bottom: -19px;
+    right: -358px;
+    transform: rotate(10deg);
+    animation: 6s ease-out 1s infinite alternate orbitDesktop;
   }
 
-  @media ${device.desktop} {
-    width: 370px;
-
+  @media ${device.laptopXL} {
+    width: 363px;
+    height: 111px;
+    bottom: -19px;
+    right: -358px;
+    transform: rotate(10deg);
+    animation: 6s ease-out 1s infinite alternate orbitLaptopXL;
   }
 
   @media ${device.laptopL} {
     display: none;
+  }
+
+  @keyframes orbit {
+    from {
+      width: 428px;
+      height: 123px;
+      bottom: -29px;
+      right: -390px;
+      transform: rotate(10deg);
+    }
+    to {
+      width: 428px;
+      height: 135px;
+      bottom: 56px;
+      right: -380px;
+      transform: rotate(-10deg);
+    }
+  }
+
+  @keyframes orbitDesktop {
+    from {
+      width: 363px;
+      height: 111px;
+      bottom: -19px;
+      right: -358px;
+      transform: rotate(10deg);
+    }
+    to {
+      width: 363px;
+      height: 111px;
+      bottom: 59px;
+      right: -332px;
+      transform: rotate(-10deg);
+    }
+  }
+
+  @keyframes orbitLaptopXL {
+    from {
+      width: 363px;
+      height: 111px;
+      bottom: -19px;
+      right: -358px;
+      transform: rotate(10deg);
+    }
+    to {
+      width: 366px;
+      height: 111px;
+      bottom: 55px;
+      right: -332px;
+      transform: rotate(-10deg);
+    }
   }
 `;
 
@@ -278,12 +343,20 @@ export const YellowCirce = styled.div<TYellowCircle>`
   background-color: #ffc600;
   width: 20px;
   height: 20px;
+  animation: ${(props) =>
+    props.location === "right"
+      ? "9s ease-in-out infinite alternate slideRightCircle"
+      : "9s ease-in-out infinite alternate slideLeftCircle"};
   bottom: ${(props) => (props.location === "left" ? "74px" : "169px")};
   left: ${(props) => (props.location === "left" ? "-41px" : "1000px")};
 
   @media ${device.desktop} {
-    bottom: ${(props) => (props.location === "left" ? "74px" : "125px")};
+    bottom: ${(props) => (props.location === "left" ? "74px" : "169px")};
     left: ${(props) => (props.location === "left" ? "-31px" : "1223px")};
+    animation: ${(props) =>
+      props.location === "right"
+        ? "9s ease-in-out infinite alternate slideRightCircleDesktop"
+        : "9s ease-in-out infinite alternate slideLeftCircleDesktop"};
   }
 
   @media ${device.laptopXL} {
@@ -294,5 +367,45 @@ export const YellowCirce = styled.div<TYellowCircle>`
 
   @media ${device.laptopL} {
     display: none;
+  }
+
+  @keyframes slideRightCircle {
+    from {
+      left: 1000px;
+    }
+
+    to {
+      left: -41px;
+    }
+  }
+
+  @keyframes slideLeftCircle {
+    from {
+      bottom: 74px;
+    }
+
+    to {
+      bottom: 169px;
+    }
+  }
+
+  @keyframes slideRightCircleDesktop {
+    from {
+      left: 1000px;
+    }
+
+    to {
+      left: -31px;
+    }
+  }
+
+  @keyframes slideLeftCircleDesktop {
+    from {
+      bottom: 74px;
+    }
+
+    to {
+      bottom: 169px;
+    }
   }
 `;
