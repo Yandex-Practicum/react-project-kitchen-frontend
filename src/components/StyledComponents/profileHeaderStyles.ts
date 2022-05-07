@@ -8,7 +8,11 @@ export const headerPrfContainer = styled.div`
 
   max-width: 304px;
 
-  margin: 0 auto;
+  margin: 0 auto 16px;
+
+  @media ${device.tablet} {
+    margin-bottom: 20px;
+  }
 `
 
 export const headerPrfTitle = styled.h2`
@@ -22,6 +26,10 @@ export const headerPrfTitle = styled.h2`
   margin-bottom: 24px;
 
   text-align: center;
+
+  @media ${device.tablet} {
+    font-size: 32px;
+  }
 `
 
 export const userImageContainer = styled.div`
