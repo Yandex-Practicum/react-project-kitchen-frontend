@@ -1,110 +1,107 @@
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import ListErrors from "./ListErrors";
-import React, { FunctionComponent, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
 import { loginThunk } from "../services/thunks";
-import {authSlice} from "../services/authSlice";
+import { authSlice } from "../services/authSlice";
+import { useForm } from "react-hook-form";
+import * as Styles from "../components/StyledComponents/authStyles";
 
-type TErrors = {
-  [index: string]: string
+type FormData = {
+  email: string;
+  password: string;
 }
 
-export const Login: FunctionComponent = () => {
+export const Login: React.FC = () => {
   const dispatch = useDispatch();
-
+  const { isLoggedIn } = useSelector((state: any) => state.common);
+  //Здесь нужно получить объект ошибок от сервера.
+  const [errorsResponse, setErrorsResponse] = useState<any>(null);
+  const [isError, setIsError] = useState(false);
   const actionsAuth = authSlice.actions;
 
-  const { isLoggedIn } = useSelector((state: any) => state.common);
-  const { isLoading } = useSelector((state: any) => state.auth);
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+  } = useForm<FormData>({
+    mode: "onChange",
+    defaultValues: {
+      password: "",
+      email: "",
+    },
+  });
 
-  const [errors, setErrors] = useState<TErrors | null>(null);
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const handleSubmitForm = handleSubmit(({ email, password }, e) => {
+    e && e.preventDefault();
+    dispatch(loginThunk({ email, password }))
+      .unwrap()
+      .catch((error: any) => {
+        setErrorsResponse({ [error.name]: error.message });
+      });
+  });
 
-  // const dispatch = useAppDispatch();
-  // // TODO: это auth.actions?
-  // // const onChangeEmail = (value: string) => {
-  // //   dispatch({type: UPDATE_FIELD_AUTH, key: 'email', value})
-  // // }
-  // // const onChangePassword = (value: string) => {
-  // //   dispatch({type: UPDATE_FIELD_AUTH, key: 'password', value})
-  // // }
-  // const onSubmit = (email: string, password: string) => {
-  //   dispatch(LOGIN(login(email, password)))
-  // }
-  // const onUnload = () => {
-  //   dispatch(LOGIN_PAGE_UNLOADED())
+  useEffect(() => {
+    setIsError(isValid)
+    return () => {
+      dispatch(actionsAuth.pageWasUnloaded());
+    }
+  })
 
   if (isLoggedIn) {
     return <Redirect to="/" />;
   }
 
-  const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-  };
-
-  const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
-
-  const submitForm = (event: React.SyntheticEvent<Element, Event>) => {
-    event.preventDefault();
-    if (email && password) {
-      dispatch(loginThunk({ email, password }))
-        .unwrap()
-        .catch((error: any) => {
-          setErrors({ [error.name]: error.message });
-        });
-    }
-  };
-
-  React.useEffect(() => {
-    return () => {
-      dispatch(actionsAuth.pageWasUnloaded());
-    }
-  }, [])
-
   return (
-    <div className="auth-page">
-      <div className="container page">
-        <div className="row">
-          <div className="col-md-6 offset-md-3 col-xs-12">
-            <h1 className="text-xs-center">Sign In</h1>
-            <p className="text-xs-center">
-              <Link to="/register">Need an account?</Link>
-            </p>
+    <Styles.AuthSection>
+      <Styles.AuthTitle>Войти</Styles.AuthTitle>
+      <Styles.StyledLink to="/register">Зарегистрироваться</Styles.StyledLink>
 
-            <ListErrors errors={errors} />
+      <Styles.AuthForm action="POST" onSubmit={handleSubmitForm}>
+        <Styles.AuthFieldSet>
 
-            <form onSubmit={submitForm}>
-              {/*<fieldset>*/}
-                <fieldset className="form-group">
-                  <input
-                    className="form-control form-control-lg"
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={onChangeEmail}
-                  />
-                </fieldset>
+          <Styles.AuthLabel>
+            Email
+            <Styles.AuthInput
+              isError={errors.email}
+              {...register("email", {
+                required: "Это поле обязательно к заполнению.",
+                pattern: {
+                  value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                  message: "Пример Email: name@example.com",
+                },
+              })}
+            />
+          </Styles.AuthLabel>
+          <Styles.ErrorsContainer>
+            {errors?.email && <Styles.AuthError>{errors?.email?.message}</Styles.AuthError>}
+          </Styles.ErrorsContainer>
 
-                <fieldset className="form-group">
-                  <input
-                    className="form-control form-control-lg"
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={onChangePassword}
-                  />
-                </fieldset>
-                <SignupLoginSubmitBtn btnText="Sign in" disabled={isLoading} />
-              {/*</fieldset>*/}
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+          <Styles.AuthLabel>
+            Пароль
+            <Styles.AuthInput
+              isError={errors.password}
+              {...register("password", {
+                required: "Это поле обязательно к заполнению.",
+                minLength: {
+                  value: 5,
+                  message: "Пароль должен быть более 4 символов.",
+                },
+              })}
+            />
+          </Styles.AuthLabel>
+          <Styles.ErrorsContainer>
+            {errors?.password && <Styles.AuthError>{errors?.password?.message}</Styles.AuthError>}
+          </Styles.ErrorsContainer>
+
+          <SignupLoginSubmitBtn btnText="Войти" disabled={!isError} />
+
+        </Styles.AuthFieldSet>
+      </Styles.AuthForm>
+
+      {/* <ListErrors errors={errorsResponse} /> */}
+    </Styles.AuthSection>
   );
 };
 

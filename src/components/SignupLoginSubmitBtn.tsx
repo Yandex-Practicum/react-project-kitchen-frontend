@@ -1,5 +1,5 @@
-import React, { FC } from "react";
-import {StyleBtn} from "./StyledComponents/SignupLoginSubmitBtnStyles"
+import { FC } from "react";
+import {StyleBtn} from "./StyledComponents/signupLoginSubmitBtnStyles";
 
 interface ISignupLoginSubmitBtnProps {
   btnText: string;
