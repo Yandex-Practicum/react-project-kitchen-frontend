@@ -1,6 +1,5 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { textColor, linkColor, inputBorderColor, device } from './constantsStyles';
+import { textColor, inputBorderColor, device } from './constantsStyles';
 
 export const SettingsSection = styled.section`
   max-width: 540px;
@@ -12,14 +11,22 @@ export const SettingsSection = styled.section`
   align-items: center;
 
   @media ${device.tablet} {
-    padding-top: 64px;
+    padding-top: 48px;
   }
   @media ${device.mobileS} {
-    padding-top: 72px;
+    padding-top: 56px;
   }
 `
+export const SettingsForm = styled.form`
+  width: 100%;
+`
 
-export const SettingsTitle = styled.h1`
+export const SettingsFieldSet = styled.fieldset`
+  display: flex;
+  flex-direction: column;
+`
+
+export const SettingsTitle = styled.h2`
   text-align: center;
 
   font-family: 'AlegreyaSans', Times, serif;
@@ -33,22 +40,8 @@ export const SettingsTitle = styled.h1`
 
   @media ${device.tablet} {
     font-size: 32px;
-  }
-`
-export const SettingsSubTitle = styled.h2`
-  text-align: center;
+    line-height: 36px;
 
-  font-family: 'AlegreyaSans', Times, serif;
-  font-weight:400;
-  font-size: 36px;
-  line-height: 1.11;
-
-  color: ${textColor.headers};
-
-  margin-bottom: 40px;
-
-  @media ${device.tablet} {
-    font-size: 32px;
   }
 `
 
@@ -60,8 +53,10 @@ export const SettingsLabel = styled.label`
   font-size: 16px;
   line-height: 1.5;
   color: ${textColor.secondaryText};
-
-  margin: 0;
+  &:last-of-type {
+    margin: 0 0 24px 0;
+}
+  margin: 0 0 16px 0;
 `
 export const SettingsInput = styled.input<{isError: any}>`
   display: block;
@@ -88,9 +83,7 @@ export const SettingsInput = styled.input<{isError: any}>`
   }
 `
 
-export const SettingsForm = styled.form`
-  width: 100%;
-`
+
 export const SettingsError = styled.p`
   font-family: 'AlegreyaSans', Times, serif;
   font-weight:400;
@@ -103,7 +96,4 @@ export const SettingsError = styled.p`
 export const ErrorsContainer = styled.div`
   height: 24px;
 `
-export const SettingsFieldSet = styled.fieldset`
-  display: flex;
-  flex-direction: column;
-`
+

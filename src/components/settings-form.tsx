@@ -1,4 +1,4 @@
-import  { useEffect, useState, FC } from "react";
+import { useEffect, useState, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserThunk } from "../services/thunks";
 import { logout as logoutAction } from "../services/commonSlice";
@@ -8,7 +8,7 @@ import * as Styles from "../components/StyledComponents/settingsStyles";
 import SignupLoginSubmitBtn from "../components/SignupLoginSubmitBtn";
 
 interface ISettingsForm {
-  setIsUpdatedInfoMsg: (isUpdatedInfoMsg: boolean) => void
+  setIsUpdatedInfoMsg: (isUpdatedInfoMsg: boolean) => void;
 }
 
 const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
@@ -23,14 +23,13 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
     password: "",
   });
 
-
   useEffect(() => {
     if (currentUser) {
       setFormvalues({ ...currentUser, password: "" });
     }
   }, [currentUser]);
 
-  const updateForm = (e: { target: { name: string; value: string }}) => {
+  const updateForm = (e: { target: { name: string; value: string } }) => {
     setFormvalues({ ...formValues, [e.target.name]: e.target.value });
   };
 
@@ -42,80 +41,69 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
         setIsUpdatedInfoMsg(true);
         setTimeout(() => {
           setIsUpdatedInfoMsg(false);
-        }, 1500)
+        }, 1500);
       })
       .catch((error: any) => {
         setErrorsResponse({ [error.name]: error.message });
-      })
+      });
   };
 
-
-
   return (
-    <form onSubmit={onSubmit}>
-       <Styles.SettingsFieldSet>
-          <Styles.SettingsLabel>
-            URL изображения профиля
-              <Styles.SettingsInput
-                  isError={false}
-                  type="url"
-                  placeholder="URL of profile picture"
-                  value={formValues.image}
-                  name="image"
-                  onChange={updateForm}
-                 />
-          </Styles.SettingsLabel>
-        </Styles.SettingsFieldSet>
+    <Styles.SettingsForm action="POST" onSubmit={onSubmit}>
+      <Styles.SettingsFieldSet>
+        <Styles.SettingsLabel>
+          URL изображения профиля
+          <Styles.SettingsInput
+            isError={false}
+            type="url"
+            placeholder="URL изображения профиля"
+            value={formValues.image}
+            name="image"
+            onChange={updateForm}
+          />
+        </Styles.SettingsLabel>
         {/* second */}
 
-        <Styles.SettingsFieldSet>
-          <Styles.SettingsLabel>
-            Имя пользователя
-            <Styles.SettingsInput
-              isError={false}
-              type="text"
-              placeholder="username"
-              value={formValues.username}
-              name="username"
-              onChange={updateForm}
-           />
+        <Styles.SettingsLabel>
+          Имя пользователя
+          <Styles.SettingsInput
+            isError={false}
+            type="text"
+            placeholder="Имя пользователя"
+            value={formValues.username}
+            name="username"
+            onChange={updateForm}
+          />
+        </Styles.SettingsLabel>
+        {/* third*/}
+        <Styles.SettingsLabel>
+          E-mail
+          <Styles.SettingsInput
+            isError={false}
+            type="email"
+            placeholder="Email"
+            value={formValues.email}
+            name="email"
+            onChange={updateForm}
+          />
+        </Styles.SettingsLabel>
 
-          </Styles.SettingsLabel>
-        </Styles.SettingsFieldSet>
-         {/* third*/}
-        <Styles.SettingsFieldSet>
-          <Styles.SettingsLabel>
-           E-mail
-            <Styles.SettingsInput
-              isError={false}              
-              type="email"
-              placeholder="Email"
-              value={formValues.email}
-              name="email"
-              onChange={updateForm}
-           />
-          </Styles.SettingsLabel>
+        {/* third*/}
 
-        </Styles.SettingsFieldSet>
-         {/* third*/}
-
-         <Styles.SettingsFieldSet>
-          <Styles.SettingsLabel>
-            Новый пароль
-            <Styles.SettingsInput
-              isError={false} 
-              type="password"
-              placeholder="Новый пароль"
-              value={formValues.password}
-              name="password"
-              onChange={updateForm}
-              
-           />
-          </Styles.SettingsLabel>
-        </Styles.SettingsFieldSet>
+        <Styles.SettingsLabel>
+          Новый пароль
+          <Styles.SettingsInput
+            isError={false}
+            type="password"
+            placeholder="Новый пароль"
+            value={formValues.password}
+            name="password"
+            onChange={updateForm}
+          />
+        </Styles.SettingsLabel>
         <SignupLoginSubmitBtn btnText="Обновить настройки" disabled={false} />
-    
-    </form>
+      </Styles.SettingsFieldSet>
+    </Styles.SettingsForm>
   );
   // }
 };
