@@ -1,5 +1,5 @@
 import React from "react";
-import { Ball, BannerContainer, BlackChevron, BlackCircle, BlackCurve, BlueCurve, Subtitle, Title, TopFigure, YellowCirce } from "../StyledComponents/bannerStyles";
+import { Ball, BannerContainer, BlackChevron, BlackCircle, BlackCurve, BlueCurve, Subtitle, TextContainer, Title, TopFigure, YellowCirce } from "../StyledComponents/bannerStyles";
 import styled from "styled-components";
 import centerFigure from "../../images/Banner/centerFigure.svg";
 import blueCurve from "../../images/Banner/blueCurve.svg";
@@ -17,16 +17,18 @@ const Banner: React.FC<TBannerProps> = ({ token, appName }) => {
   return (
     <>
       <BannerContainer>
-        <Title>Когда вырасту</Title>
-        <Subtitle>Каково быть джуном в турбулентном мире</Subtitle>
-        <BlackCircle src={halfCircle} />
-        <TopFigure src={centerFigure} />
-        <BlueCurve src={blueCurve} />
-        <BlackChevron src={blackChevron} />
-        <YellowCirce location="left" />
-        <YellowCirce location="right" />
-        <BlackCurve src={blackCurve} />
-        <Ball src={ball} />
+        <TextContainer>
+          <Title>Когда вырасту</Title>
+          <Subtitle>Каково быть джуном в турбулентном мире</Subtitle>
+          <BlackCircle src={halfCircle} />
+          <TopFigure src={centerFigure} />
+          <BlueCurve src={blueCurve} />
+          <BlackChevron src={blackChevron} />
+          <YellowCirce location="left" />
+          <YellowCirce location="right" />
+          <BlackCurve src={blackCurve} />
+          <Ball src={ball} />
+        </TextContainer>
       </BannerContainer>
     </>
   );
