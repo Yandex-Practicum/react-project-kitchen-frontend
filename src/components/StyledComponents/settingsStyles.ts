@@ -60,7 +60,6 @@ export const SettingsLabel = styled.label`
 `
 export const SettingsInput = styled.input<{isError: any}>`
   display: block;
-
   width: 100%;
   height: 40px;
 
@@ -83,6 +82,20 @@ export const SettingsInput = styled.input<{isError: any}>`
   }
 `
 
+export const SettingsInputContainer = styled.div
+  `
+  position:relative;
+
+  `
+
+export const SettingsIcon = styled.span
+  `
+    position:absolute;
+    bottom:25%;
+    right:17px;
+    width:24px;
+    height:24px;
+  `
 
 export const SettingsError = styled.p`
   font-family: 'AlegreyaSans', Times, serif;

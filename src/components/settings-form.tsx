@@ -6,6 +6,7 @@ import { useHistory } from "react-router";
 import { useForm } from "react-hook-form";
 import * as Styles from "../components/StyledComponents/settingsStyles";
 import SignupLoginSubmitBtn from "../components/SignupLoginSubmitBtn";
+import IconInput from "../UI/icon-input/icon-input";
 
 interface ISettingsForm {
   setIsUpdatedInfoMsg: (isUpdatedInfoMsg: boolean) => void;
@@ -13,9 +14,11 @@ interface ISettingsForm {
 
 const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
   const dispatch = useDispatch();
+
   const { currentUser } = useSelector((state: any) => state.common);
   const [isError, setIsError] = useState(false);
   const [errorsResponse, setErrorsResponse] = useState<any>(null);
+  const [visible, setVisible] = useState(false);
   const [formValues, setFormvalues] = useState({
     image: "",
     username: "",
@@ -46,6 +49,10 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
       .catch((error: any) => {
         setErrorsResponse({ [error.name]: error.message });
       });
+  };
+
+  const onToggle = () => {
+    setVisible((visible) => !visible);
   };
 
   return (
@@ -92,17 +99,25 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
 
         <Styles.SettingsLabel>
           Новый пароль
-          <Styles.SettingsInput
-            isError={false}
-            type="password"
-            placeholder="Новый пароль"
-            value={formValues.password}
-            name="password"
-            onChange={updateForm}
-          />
+          <Styles.SettingsInputContainer>
+            <Styles.SettingsInput
+              isError={false}
+              type={visible ? "text" : "password"}
+              placeholder="Новый пароль"
+              value={formValues.password}
+              name="password"
+              onChange={updateForm}
+            />
+            <Styles.SettingsIcon>
+              <IconInput visible={visible} toggle={onToggle} />
+            </Styles.SettingsIcon>
+          </Styles.SettingsInputContainer>
         </Styles.SettingsLabel>
+        
         <SignupLoginSubmitBtn btnText="Обновить настройки" disabled={false} />
+
       </Styles.SettingsFieldSet>
+
     </Styles.SettingsForm>
   );
   // }
