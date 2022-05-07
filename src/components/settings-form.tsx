@@ -121,10 +121,6 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
             <Styles.SettingsIcon>
               <IconInput visible={visible} toggle={onToggle} />
             </Styles.SettingsIcon>
-
-            <input 
-              type="file"
-            />
           </Styles.SettingsInputContainer>
         </Styles.SettingsLabel>
         
