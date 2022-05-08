@@ -42,7 +42,7 @@ const Tags: React.FC<TTagsProps> = (props) => {
               });
           };
           return (
-            <Tag key={tag} isActive={isActive} onClick={handleClick}>
+            <Tag key={tag} isActive={isActive} onClick={handleClick} onBlur={() => setIsActive(false)}>
               {tag}
               {isActive && <CancelButton tag={tag} />}
             </Tag>
