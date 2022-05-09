@@ -93,7 +93,7 @@ export const SettingsIcon = styled.span`
     width:24px;
     height:24px;
     cursor: pointer;
-    z-index: 1000;
+    z-index: 900;
       `
 
 export const SettingsError = styled.p`
