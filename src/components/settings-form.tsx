@@ -59,7 +59,7 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
   return (
     <Styles.SettingsForm action="POST" onSubmit={onSubmit}>
       <Styles.SettingsFieldSet>
-      
+
         <Styles.SettingsLabel>
         URL изображения профиля
         <Styles.SettingsInputContainer>
@@ -74,10 +74,10 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
            <Styles.SettingsIcon>
               <IconInputFile/>
           </Styles.SettingsIcon>
-          
+
         </Styles.SettingsInputContainer>
-         
-         
+
+
         </Styles.SettingsLabel>
         {/* second */}
 
@@ -123,7 +123,7 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
             </Styles.SettingsIcon>
           </Styles.SettingsInputContainer>
         </Styles.SettingsLabel>
-        
+
         <SignupLoginSubmitBtn btnText="Обновить настройки" disabled={false} />
 
       </Styles.SettingsFieldSet>

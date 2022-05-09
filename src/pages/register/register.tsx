@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import SignupLoginSubmitBtn from "../../components/SignupLoginSubmitBtn";
 import { useForm } from "react-hook-form";
 import { signupThunk } from "../../services/thunks";
-import { authSlice } from "../../services/authSlice";
 import * as Styles from "../../components/StyledComponents/authStyles";
 
 type FormData = {
@@ -20,7 +19,8 @@ const Register: React.FC = () => {
   //Здесь нужно получить объект ошибок от сервера.
   const [errorsResponse, setErrorsResponse] = useState<any>(null);
   const [isError, setIsError] = useState(false);
-  const actionsAuth = authSlice.actions;
+  const { inProgress } = useSelector((state: any) => state.auth);
+
 
   const {
     register,
@@ -46,10 +46,7 @@ const Register: React.FC = () => {
 
   useEffect(() => {
     setIsError(isValid)
-    return () => {
-      dispatch(actionsAuth.pageWasUnloaded());
-    }
-  })
+  },)
 
   if (isLoggedIn) {
     return <Redirect to="/" />;
@@ -118,7 +115,7 @@ const Register: React.FC = () => {
             {errors?.password && <Styles.AuthError>{errors?.password?.message}</Styles.AuthError>}
           </Styles.ErrorsContainer>
 
-          <SignupLoginSubmitBtn btnText="Зарегистрироваться" disabled={!isError} />
+          <SignupLoginSubmitBtn btnText="Зарегистрироваться" disabled={!isError || inProgress} />
 
         </Styles.AuthFieldSet>
       </Styles.AuthForm>
