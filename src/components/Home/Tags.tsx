@@ -1,10 +1,14 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { getArticlesByTag } from "../../api";
-import { getAllArticlesByTagThunk } from "../../services/thunks";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllArticles, getArticlesByTag } from "../../api";
+import {
+  getAllArticlesByTagThunk,
+  getAllArticlesThunk,
+} from "../../services/thunks";
 import {
   CancelButtonDiv,
   Tag,
+  TagContainer,
   TagsContainer,
 } from "../StyledComponents/tagsStyles";
 
@@ -13,39 +17,48 @@ type TTagsProps = {
   onClickTag: (tag: string, pager: (page: any) => {}, payload: any) => {};
 };
 
-type TCancelButtonProps = {
-  tag: string;
-};
-
-const CancelButton: React.FC<TCancelButtonProps> = (tag, setIsActive) => {
-  return <CancelButtonDiv />;
-};
-
 const Tags: React.FC<TTagsProps> = (props) => {
   const dispatch = useDispatch();
+
   const tags = props.tags;
+  const [activeTag, setActiveTag] = useState("");
+
+  const CancelButton: React.FC = () => {
+    const deactivate = (
+      ev: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+      ev.preventDefault();
+      dispatch(getAllArticlesThunk())
+        .unwrap()
+        .then(() => {
+          setActiveTag("");
+        });
+    };
+
+    return <CancelButtonDiv onClick={deactivate} />;
+  };
 
   if (tags) {
     return (
       <TagsContainer>
         {tags.map((tag) => {
-          const [isActive, setIsActive] = useState(false);
-
-          const handleClick = (
+          const activate = (
             ev: React.MouseEvent<HTMLButtonElement, MouseEvent>
           ) => {
             ev.preventDefault();
             dispatch(getAllArticlesByTagThunk({ tag: tag, page: 0 }))
               .unwrap()
               .then(() => {
-                isActive ? setIsActive(false) : setIsActive(true);
+                setActiveTag(tag);
               });
           };
           return (
-            <Tag key={tag} isActive={isActive} onClick={handleClick} onBlur={() => setIsActive(false)}>
-              {tag}
-              {isActive && <CancelButton tag={tag} />}
-            </Tag>
+            <TagContainer key={tag}>
+              <Tag isActive={activeTag === tag} onClick={activate}>
+                {tag}
+              </Tag>
+              {activeTag === tag && <CancelButton />}
+            </TagContainer>
           );
         })}
       </TagsContainer>

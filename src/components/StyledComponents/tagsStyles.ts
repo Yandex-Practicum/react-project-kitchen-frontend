@@ -8,6 +8,11 @@ export const TagsContainer = styled.div`
   gap: 24px;
 `;
 
+export const TagContainer = styled.div`
+  display: flex;
+  gap: 4px;
+`;
+
 type TTagProps = {
   isActive: boolean;
   onClick: (ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
