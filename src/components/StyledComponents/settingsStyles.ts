@@ -94,7 +94,12 @@ export const SettingsIcon = styled.span`
     height:24px;
     cursor: pointer;
     z-index: 900;
-      `
+    &:hover{
+      opacity: .7;
+     
+    }
+
+    `
 
 export const SettingsError = styled.p`
   font-family: 'AlegreyaSans', Times, serif;
