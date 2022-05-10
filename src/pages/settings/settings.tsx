@@ -10,13 +10,21 @@ import * as Styles from "../../components/StyledComponents/settingsStyles";
 //   setIsUpdatedInfoMsg: (isUpdatedInfoMsg: boolean) => void
 // }
 
+
 const Settings = () => {
   const dispatch = useDispatch();
+  const logout = () => {
+    dispatch(logoutAction());
+    history.push("/");
+  };
+  
   const history = useHistory();
   const [isUpdatedInfoMsg, setIsUpdatedInfoMsg] = useState(false);
 
 
   return (
+    <>
+   
     <Styles.SettingsSection>
       <Styles.SettingsTitle>Ваши настройки</Styles.SettingsTitle>
 
@@ -26,7 +34,13 @@ const Settings = () => {
 
       <SettingsForm setIsUpdatedInfoMsg={setIsUpdatedInfoMsg} />
     </Styles.SettingsSection>
+    {/* <button className="btn btn-outline-danger" onClick={logout}>
+      Or click here to logout.
+    </button> */}
+  </>
   );
+
+  
   // }
 };
 
