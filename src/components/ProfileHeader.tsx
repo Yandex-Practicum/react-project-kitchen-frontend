@@ -27,7 +27,6 @@ function ProfileHeader({ profile, follow, unfollow }: TProfileHeader) {
   };
 
   const { currentUser } = useSelector((state: any) => state.common);
-  console.log(profile.image);
 
 
   const isUser = currentUser &&

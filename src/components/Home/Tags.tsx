@@ -1,43 +1,70 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { getArticlesByTag } from '../../api';
-import { getAllArticlesByTagThunk } from '../../services/thunks';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllArticles, getArticlesByTag } from "../../api";
+import {
+  getAllArticlesByTagThunk,
+  getAllArticlesThunk,
+} from "../../services/thunks";
+import {
+  CancelButtonDiv,
+  Tag,
+  TagContainer,
+  TagsContainer,
+} from "../StyledComponents/tagsStyles";
 
 type TTagsProps = {
-  tags: string[] | null,
-  onClickTag: (tag: string, pager: (page: any) => {}, payload: any) => {}
-}
+  tags: string[] | null;
+  onClickTag: (tag: string, pager: (page: any) => {}, payload: any) => {};
+};
 
-const Tags: React.FC<TTagsProps> = props => {
-  const dispatch = useDispatch()
+const Tags: React.FC<TTagsProps> = (props) => {
+  const dispatch = useDispatch();
+
   const tags = props.tags;
+  const [activeTag, setActiveTag] = useState("");
+
+  const CancelButton: React.FC = () => {
+    const deactivate = (
+      ev: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+      ev.preventDefault();
+      dispatch(getAllArticlesThunk())
+        .unwrap()
+        .then(() => {
+          setActiveTag("");
+        });
+    };
+
+    return <CancelButtonDiv onClick={deactivate} />;
+  };
+
   if (tags) {
     return (
-      <div className="tag-list">
-        {
-          tags.map(tag => {
-            const handleClick = (ev: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-              ev.preventDefault();
-              // props.onClickTag(tag, page => agent.Articles.byTag(tag, page), agent.Articles.byTag(tag));
-              dispatch(getAllArticlesByTagThunk({ tag: tag, page: 0 }));
-            };
-            return (
-              <a
-                href=""
-                className="tag-default tag-pill"
-                key={tag}
-                onClick={handleClick}>
+      <TagsContainer>
+        {tags.map((tag) => {
+          const activate = (
+            ev: React.MouseEvent<HTMLButtonElement, MouseEvent>
+          ) => {
+            ev.preventDefault();
+            dispatch(getAllArticlesByTagThunk({ tag: tag, page: 0 }))
+              .unwrap()
+              .then(() => {
+                setActiveTag(tag);
+              });
+          };
+          return (
+            <TagContainer key={tag}>
+              <Tag isActive={activeTag === tag} onClick={activate}>
                 {tag}
-              </a>
-            );
-          })
-        }
-      </div>
+              </Tag>
+              {activeTag === tag && <CancelButton />}
+            </TagContainer>
+          );
+        })}
+      </TagsContainer>
     );
   } else {
-    return (
-      <div>Loading Tags...</div>
-    );
+    return <div>Loading Tags...</div>;
   }
 };
 
