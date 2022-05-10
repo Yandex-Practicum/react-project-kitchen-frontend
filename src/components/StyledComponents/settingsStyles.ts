@@ -53,10 +53,7 @@ export const SettingsLabel = styled.label`
   font-size: 16px;
   line-height: 1.5;
   color: ${textColor.secondaryText};
-  &:last-of-type {
-    margin: 0 0 24px 0;
-}
-  margin: 0 0 16px 0;
+  margin: 0;
 `
 export const SettingsInput = styled.input<{isError: any}>`
   display: block;
@@ -82,16 +79,13 @@ export const SettingsInput = styled.input<{isError: any}>`
   }
 `
 
-export const SettingsInputContainer = styled.div
-  `
+export const SettingsInputContainer = styled.div`
   position:relative;
-
   `
 
-export const SettingsIcon = styled.span
-  `
+export const SettingsIcon = styled.span`
     display: flex;
-    justife-content: center;
+    justify-content: center;
     align-items: center;
     position:absolute;
     bottom:10%;
@@ -99,8 +93,13 @@ export const SettingsIcon = styled.span
     width:24px;
     height:24px;
     cursor: pointer;
-    z-index: 1000
-      `
+    z-index: 900;
+    &:hover{
+      opacity: .7;
+     
+    }
+
+    `
 
 export const SettingsError = styled.p`
   font-family: 'AlegreyaSans', Times, serif;
@@ -115,3 +114,15 @@ export const ErrorsContainer = styled.div`
   height: 24px;
 `
 
+export const AutoError = styled.p`
+  font-family: 'AlegreyaSans', Times, serif;
+  font-weight:400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: ${textColor.error};
+
+  margin: 0;
+  &:last-of-type {
+    margin-bottom: 8px;
+}
+`

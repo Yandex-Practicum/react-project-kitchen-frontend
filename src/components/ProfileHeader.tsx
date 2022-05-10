@@ -19,12 +19,12 @@ type TProfileHeader = {
 function ProfileHeader({ profile, follow, unfollow }: TProfileHeader) {
 
   //Для кнопки logout. Удалить вместе с ней.
-  // const dispatch = useDispatch();
-  // const history = useHistory();
-  // const logout = () => {
-  //   dispatch(logoutAction());
-  //   history.push("/");
-  // };
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const logout = () => {
+    dispatch(logoutAction());
+    history.push("/");
+  };
 
   const { currentUser } = useSelector((state: any) => state.common);
 
@@ -47,9 +47,9 @@ function ProfileHeader({ profile, follow, unfollow }: TProfileHeader) {
       />
 
       {/* Кнопка для logout пока не сверстана шапка. Удалить. */}
-      {/* <button className="btn btn-outline-danger" onClick={logout}>
+      <button className="btn btn-outline-danger" onClick={logout}>
         Or click here to logout.
-      </button> */}
+      </button>
 
     </Styles.headerPrfContainer>
     // <div className="user-info">

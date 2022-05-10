@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {ReactComponent as Clip} from '../../images/clip.svg'
 import { IconFileLabel, IconFileInput } from '../../components/StyledComponents/icon-file-styles'
 
@@ -8,15 +8,16 @@ import { IconFileLabel, IconFileInput } from '../../components/StyledComponents/
 // }
 
 const IconInputFile: React.FC = () => {
-
+ 
   return (
     <>
 
         <IconFileLabel>
           <IconFileInput
-              type="file"
+              type="text"
               name="file" 
               accept=".jpg, .jpeg, .png, .gif"
+
               />
           <Clip/>
         </IconFileLabel>
