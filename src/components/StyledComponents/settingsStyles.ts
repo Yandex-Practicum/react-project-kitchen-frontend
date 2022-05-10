@@ -1,8 +1,7 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { textColor, linkColor, inputBorderColor, device } from './constantsStyles';
+import { textColor, inputBorderColor, device } from './constantsStyles';
 
-export const AuthSection = styled.section`
+export const SettingsSection = styled.section`
   max-width: 540px;
   margin: 0 auto;
   padding: 56px 20px 0;
@@ -12,13 +11,22 @@ export const AuthSection = styled.section`
   align-items: center;
 
   @media ${device.tablet} {
-    padding-top: 64px;
+    padding-top: 48px;
   }
   @media ${device.mobileS} {
-    padding-top: 72px;
+    padding-top: 56px;
   }
 `
-export const AuthTitle = styled.h2`
+export const SettingsForm = styled.form`
+  width: 100%;
+`
+
+export const SettingsFieldSet = styled.fieldset`
+  display: flex;
+  flex-direction: column;
+`
+
+export const SettingsTitle = styled.h2`
   text-align: center;
 
   font-family: 'AlegreyaSans', Times, serif;
@@ -32,26 +40,12 @@ export const AuthTitle = styled.h2`
 
   @media ${device.tablet} {
     font-size: 32px;
+    line-height: 36px;
+
   }
 `
-export const StyledLink = styled(Link)`
-  font-family: 'AlegreyaSans', Times, serif;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 1.33;
-  color: ${linkColor.blue};
-  text-align: center;
 
-  margin-bottom: 24px;
-
-  transition: all 0.2s linear;
-
-  &:hover {
-    text-decoration: none;
-    color: ${linkColor.blueHover};
-  }
-`
-export const AuthLabel = styled.label`
+export const SettingsLabel = styled.label`
   display: block;
 
   font-family: 'AlegreyaSans', Times, serif;
@@ -59,12 +53,13 @@ export const AuthLabel = styled.label`
   font-size: 16px;
   line-height: 1.5;
   color: ${textColor.secondaryText};
-
-  margin: 0;
+  &:last-of-type {
+    margin: 0 0 24px 0;
+}
+  margin: 0 0 16px 0;
 `
-export const AuthInput = styled.input<{isError: any}>`
+export const SettingsInput = styled.input<{isError: any}>`
   display: block;
-
   width: 100%;
   height: 40px;
 
@@ -87,10 +82,27 @@ export const AuthInput = styled.input<{isError: any}>`
   }
 `
 
-export const AuthForm = styled.form`
-  width: 100%;
-`
-export const AuthError = styled.p`
+export const SettingsInputContainer = styled.div
+  `
+  position:relative;
+
+  `
+
+export const SettingsIcon = styled.span
+  `
+    display: flex;
+    justife-content: center;
+    align-items: center;
+    position:absolute;
+    bottom:10%;
+    right:17px;
+    width:24px;
+    height:24px;
+    cursor: pointer;
+    z-index: 1000
+      `
+
+export const SettingsError = styled.p`
   font-family: 'AlegreyaSans', Times, serif;
   font-weight:400;
   font-size: 16px;
@@ -102,7 +114,4 @@ export const AuthError = styled.p`
 export const ErrorsContainer = styled.div`
   height: 24px;
 `
-export const AuthFieldSet = styled.fieldset`
-  display: flex;
-  flex-direction: column;
-`
+

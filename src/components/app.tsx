@@ -14,7 +14,6 @@ import { push } from "react-router-redux";
 import { auth, setTokenAxios } from "../api";
 import { useDispatch } from "react-redux";
 import { authThunk, loginThunk } from "../services/thunks";
-import ProfileInformationView from "./profile-information-view";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,11 +28,10 @@ function App() {
 
     return (
       <div>
-        <Header
+        {/* <Header
           appName={appName}
           currentUser={currentUser}
-        />
-        <ProfileInformationView/>
+        /> */}
         {error && <p>{error}</p> }
         <Switch>
           <Route exact path="/" component={Home} />

@@ -1,31 +1,39 @@
-import  { useEffect, useState, FC } from "react";
+import { useEffect, useState, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserThunk } from "../services/thunks";
 import { logout as logoutAction } from "../services/commonSlice";
 import { useHistory } from "react-router";
+import { useForm } from "react-hook-form";
+import * as Styles from "../components/StyledComponents/settingsStyles";
+import SignupLoginSubmitBtn from "../components/SignupLoginSubmitBtn";
+import IconInput from "../UI/icon-input/icon-input";
+import IconInputFile from '../UI/icon-input-file/icon-input-file'
 
 interface ISettingsForm {
-  setIsUpdatedInfoMsg: (isUpdatedInfoMsg: boolean) => void
+  setIsUpdatedInfoMsg: (isUpdatedInfoMsg: boolean) => void;
 }
 
 const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
-  const { currentUser } = useSelector((state: any) => state.common);
   const dispatch = useDispatch();
+
+  const { currentUser } = useSelector((state: any) => state.common);
+  const [isError, setIsError] = useState(false);
+  const [errorsResponse, setErrorsResponse] = useState<any>(null);
+  const [visible, setVisible] = useState(false);
   const [formValues, setFormvalues] = useState({
     image: "",
     username: "",
-    bio: "",
     email: "",
     password: "",
   });
 
   useEffect(() => {
     if (currentUser) {
-      setFormvalues({ ...currentUser, password: "" });
+      setFormvalues({ ...currentUser, image: '', password: "" });
     }
   }, [currentUser]);
 
-  const updateForm = (e: { target: { name: string; value: string }}) => {
+  const updateForm = (e: { target: { name: string; value: string } }) => {
     setFormvalues({ ...formValues, [e.target.name]: e.target.value });
   };
 
@@ -38,76 +46,89 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
         setTimeout(() => {
           setIsUpdatedInfoMsg(false);
         }, 1500);
+      })
+      .catch((error: any) => {
+        setErrorsResponse({ [error.name]: error.message });
       });
   };
 
+  const onToggle = () => {
+    setVisible((visible) => !visible);
+  };
+
   return (
-    <form onSubmit={onSubmit}>
-      <fieldset>
-        <fieldset className="form-group">
-          <input
-            className="form-control"
-            type="text"
-            placeholder="URL of profile picture"
+    <Styles.SettingsForm action="POST" onSubmit={onSubmit}>
+      <Styles.SettingsFieldSet>
+
+        <Styles.SettingsLabel>
+        URL изображения профиля
+        <Styles.SettingsInputContainer>
+        <Styles.SettingsInput
+            isError={false}
+            type="url"
+            placeholder="URL изображения профиля"
             value={formValues.image}
             name="image"
             onChange={updateForm}
           />
-        </fieldset>
+           <Styles.SettingsIcon>
+              <IconInputFile/>
+          </Styles.SettingsIcon>
 
-        <fieldset className="form-group">
-          <input
-            className="form-control form-control-lg"
+        </Styles.SettingsInputContainer>
+
+
+        </Styles.SettingsLabel>
+        {/* second */}
+
+        <Styles.SettingsLabel>
+          Имя пользователя
+          <Styles.SettingsInput
+            isError={false}
             type="text"
-            placeholder="username"
+            placeholder="Имя пользователя"
             value={formValues.username}
             name="username"
             onChange={updateForm}
           />
-        </fieldset>
-
-        <fieldset className="form-group">
-          <textarea
-            className="form-control form-control-lg"
-            rows={8}
-            placeholder="Short bio about you"
-            value={formValues.bio}
-            name="bio"
-            onChange={updateForm}
-          ></textarea>
-        </fieldset>
-
-        <fieldset className="form-group">
-          <input
-            className="form-control form-control-lg"
+        </Styles.SettingsLabel>
+        {/* third*/}
+        <Styles.SettingsLabel>
+          E-mail
+          <Styles.SettingsInput
+            isError={false}
             type="email"
             placeholder="Email"
             value={formValues.email}
             name="email"
             onChange={updateForm}
           />
-        </fieldset>
+        </Styles.SettingsLabel>
 
-        <fieldset className="form-group">
-          <input
-            className="form-control form-control-lg"
-            type="password"
-            placeholder="New Password"
-            value={formValues.password}
-            name="password"
-            onChange={updateForm}
-          />
-        </fieldset>
+        {/* third*/}
 
-        <button
-          className="btn btn-lg btn-primary pull-xs-right"
-          type="submit"
-          disabled={false}
-        >
-          Update Settings
-        </button>
-      </fieldset>
-    </form>
+        <Styles.SettingsLabel>
+          Новый пароль
+          <Styles.SettingsInputContainer>
+            <Styles.SettingsInput
+              isError={false}
+              type={visible ? "text" : "password"}
+              placeholder="Новый пароль"
+              value={formValues.password}
+              name="password"
+              onChange={updateForm}
+            />
+            <Styles.SettingsIcon>
+              <IconInput visible={visible} toggle={onToggle} />
+            </Styles.SettingsIcon>
+          </Styles.SettingsInputContainer>
+        </Styles.SettingsLabel>
+
+        <SignupLoginSubmitBtn btnText="Обновить настройки" disabled={false} />
+
+      </Styles.SettingsFieldSet>
+
+    </Styles.SettingsForm>
   );
   // }
 };
