@@ -8,7 +8,7 @@ import {
   getFeedArticlesThunk,
   getTagsThunk,
 } from "../../services/thunks";
-import {homeSlice} from "../../services/homeSlice";
+import { homeSlice } from "../../services/homeSlice";
 
 const Home: FC = () => {
   const { appName, token } = useSelector((state: any) => state.common);
@@ -27,12 +27,11 @@ const Home: FC = () => {
     dispatch(getTagsThunk());
     return () => {
       dispatch(actionsHome.homePageWasUnloaded());
-    }
+    };
   }, []);
 
   return (
     <div className="home-page">
-      <Banner token={token} appName={appName} />
       <div className="container page">
         <div className="row">
           <MainView />
