@@ -1,6 +1,7 @@
-export type TFontSize = {
+export type TFontStyle = {
   fontSize: string;
   lineHeight: string;
+  underlined?: boolean;
 };
 
 export type TAvatar = {

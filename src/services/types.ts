@@ -10,12 +10,12 @@ export type TFollowingUserProfile = {
 }
 
 export type TArticleProperties = {
-  author?: TFollowingUser,
+  author: TFollowingUser,
   body: string,
-  createdAt?: string,
+  createdAt: string,
   description: string,
-  favorited?: boolean,
-  favoritesCount?: number,
+  favorited: boolean,
+  favoritesCount: number,
   slug: string,
   tagList: Array<string> | [],
   title: string,
@@ -23,7 +23,15 @@ export type TArticleProperties = {
   image?: string
 }
 
-export type TEditingArticleProperties = {tagInput: string} & TArticleProperties
+export type TEditingArticleProperties = {
+  tagInput: string,
+  slug: string,
+  title: string,
+  description: string,
+  image: string,
+  body: string,
+  tagList: Array<string> | []
+}
 
 export type TArticle = {
   article: TArticleProperties

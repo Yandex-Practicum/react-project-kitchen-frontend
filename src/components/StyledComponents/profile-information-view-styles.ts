@@ -1,10 +1,12 @@
 import styled from "styled-components";
-import {TAvatar, TFontSize} from "./types";
+import {TAvatar, TFontStyle} from "./types";
+import {Link} from "react-router-dom";
 
 export const ProfileContainer = styled.div`
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  margin: 0;
 `
 
 export const ProfileImageWrapper = styled.div`
@@ -41,9 +43,10 @@ export const ProfileTextWrapper = styled.div`
   flex-direction: column;
 `
 
-export const ProfileText = styled.p<TFontSize>`
+export const ProfileText = styled.p<TFontStyle>`
   box-sizing: border-box;
   margin: 0 0 4px 0;
+  text-decoration: ${props => props.underlined ? 'underline' : 'none'};
   font-family: 'AlegreyaSans', sans-serif;
   font-weight: 400;
   font-size: ${props => props.fontSize};
@@ -51,5 +54,12 @@ export const ProfileText = styled.p<TFontSize>`
   color: #62626A;
   &:last-of-type {
     margin-bottom: 0;
+  };
+`
+
+export const HoverLink = styled(Link)<{underlined: boolean}>`
+  margin: 0;
+  &:hover {
+    text-decoration: ${props => props.underlined ? 'underline' : 'none'};
   };
 `

@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
 export const SidebarRight = styled.div`
-
   min-width: 359px;
-  background: #E5E5E5;
+  background: #FFFFFF;
 `
 
 export const SidebarHeading = styled.h2`
@@ -24,6 +23,9 @@ export const AuthorWrapper = styled.div`
 export const ArticleWrapper = styled.div`
   padding: 24px 24px 24px 0;
   border-bottom: #CCCCCC solid 1px;
+  &:last-of-type {
+    border-bottom: none;
+  }
 `
 
 export const ArticleHeading = styled.h3`
