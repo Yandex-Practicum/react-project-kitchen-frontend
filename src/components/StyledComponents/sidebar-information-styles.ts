@@ -2,7 +2,13 @@ import styled from "styled-components";
 
 export const SidebarRight = styled.div`
   min-width: 359px;
-  background: #FFFFFF;
+  position: sticky;
+  align-self: flex-start;
+  //--offset: 2rem;
+  ////flex-grow: 1;
+  ////flex-basis: 300px;
+  //top: var(--offset);
+  z-index: 10;
 `
 
 export const SidebarHeading = styled.h2`

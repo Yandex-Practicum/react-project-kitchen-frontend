@@ -3,15 +3,15 @@ import React, {FunctionComponent} from "react";
 import {SidebarHeading} from "./StyledComponents/sidebar-information-styles";
 import ArticleSidebarView from "./article-sidebar-view";
 import {TArticleProperties} from "../services/types";
+import {sortArrayOfObjects} from "../utils/utiils";
 
 const SidebarInformation: FunctionComponent<{ sectionTitle: string, articles: Array<TArticleProperties> }> = (props) => {
   let articlesArrayForSort;
 
   // копируем иммутабельный массив из состояния дл ятого, чтобы отсортировать его. Сортировка не возвращает новое значение, а сортирует прямо на месте!
   articlesArrayForSort = [...props.articles];
-  articlesArrayForSort.sort((a, b) => {
-    return b.favoritesCount - a.favoritesCount
-  }).slice(0, 6);
+  articlesArrayForSort = sortArrayOfObjects(articlesArrayForSort, 'favoritesCount')
+    .slice(0, 6);
 
   const composeCreatedDate = (date: string) => {
     const createdDate = new Date(date).toLocaleDateString('ru-RU', {

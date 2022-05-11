@@ -38,10 +38,10 @@ const Home: FC = () => {
     <div className="home-page">
       <Banner token={token} appName={appName}/>
       <div className="container page">
-        <div className="row">
+        <div className="row" style={{overflowY: 'auto'}}>
           <MainView/>
           {/*<div className="col-md-3">*/}
-          {/*<div className="sidebar">*/}
+          {/*<div className="sidebar" style={{position: "sticky", top: '20%'}}>*/}
           <SidebarRight>
             <TagsTitle>Популярные теги</TagsTitle>
             <Tags
