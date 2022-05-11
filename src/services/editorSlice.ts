@@ -4,9 +4,9 @@ import {
   updateArticleThunk,
   createArticleThunk,
 } from "./thunks";
-import {TArticle, TArticleProperties} from "./types";
+import {TEditingArticle, TEditingArticleProperties} from "./types";
 
-const initialState: TArticleProperties = {
+const initialState: TEditingArticleProperties = {
   slug : "",
   title: "",
   description: "",
@@ -16,7 +16,7 @@ const initialState: TArticleProperties = {
   tagList: [],
 };
 
-const setEditor = (state: TArticleProperties, action: PayloadAction<TArticle>) => {
+const setEditor = (state: TEditingArticleProperties, action: PayloadAction<TEditingArticle>) => {
   if (action.payload?.article) {
     return { ...action.payload.article };
   }

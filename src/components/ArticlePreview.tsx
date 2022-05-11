@@ -1,4 +1,3 @@
-
 // import React from 'react';
 // import { Link } from 'react-router-dom';
 // import { connect, useDispatch } from 'react-redux';
@@ -11,21 +10,22 @@
 // interface TArticlePreviewProps  {
 
 import React from "react";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import {Link} from "react-router-dom";
+import {useDispatch} from "react-redux";
 import {
   deleteArticleAsFavoriteThunk,
   setArticleAsFavoriteThunk,
 } from "../services/thunks";
+import {TArticleProperties} from "../services/types";
 
 const FAVORITED_CLASS = "btn btn-sm btn-primary";
 const NOT_FAVORITED_CLASS = "btn btn-sm btn-outline-primary";
 
-interface TArticlePreviewProps {
-  article: any;
-}
+// interface TArticlePreviewProps {
+//   article: any;
+// }
 
-const ArticlePreview: React.FC<TArticlePreviewProps> = (props) => {
+const ArticlePreview: React.FC<{ article: TArticleProperties }> = (props) => {
   const dispatch = useDispatch();
 
   // const { article } = props
@@ -33,15 +33,15 @@ const ArticlePreview: React.FC<TArticlePreviewProps> = (props) => {
   //   FAVORITED_CLASS :
   //   NOT_FAVORITED_CLASS;
 
-    // const favorite = (slug: any) => dispatch({
-    //   type: ARTICLE_FAVORITED,
-    //   payload: setArticleAsFavorite(slug)
-    // });
+  // const favorite = (slug: any) => dispatch({
+  //   type: ARTICLE_FAVORITED,
+  //   payload: setArticleAsFavorite(slug)
+  // });
 
-    // const unfavorite = (slug: any) => dispatch({
-    //   type: ARTICLE_UNFAVORITED,
-    //   payload: deleteArticleAsFavorite(slug)
-    // })
+  // const unfavorite = (slug: any) => dispatch({
+  //   type: ARTICLE_UNFAVORITED,
+  //   payload: deleteArticleAsFavorite(slug)
+  // })
 
   // const handleClick = (e: React.SyntheticEvent) => {
   //   e.preventDefault();
@@ -54,7 +54,7 @@ const ArticlePreview: React.FC<TArticlePreviewProps> = (props) => {
   // };
 
 
-  const { article } = props;
+  const {article} = props;
   const favoriteButtonClass = article.favorited
     ? FAVORITED_CLASS
     : NOT_FAVORITED_CLASS;
@@ -70,19 +70,23 @@ const ArticlePreview: React.FC<TArticlePreviewProps> = (props) => {
   return (
     <div className="article-preview">
       <div className="article-meta">
-        <Link to={`/@${article.author.username}`}>
-          <img src={article.author.image} alt={article.author.username} />
-        </Link>
+        {
+          article.author && article.createdAt &&
+          <>
+            <Link to={`/@${article.author.username}`}>
+              <img src={article.author.image} alt={article.author.username}/>
+            </Link>
 
-        <div className="info">
-          <Link className="author" to={`/@${article.author.username}`}>
-            {article.author.username}
-          </Link>
-          <span className="date">
+            <div className="info">
+              <Link className="author" to={`/@${article.author.username}`}>
+                {article.author.username}
+              </Link>
+              <span className="date">
             {new Date(article.createdAt).toDateString()}
           </span>
-        </div>
-
+            </div>
+          </>
+        }
         <div className="pull-xs-right">
           <button className={favoriteButtonClass} onClick={handleClick}>
             {/*TODO: курсивный шрифт вынести в стили*/}
