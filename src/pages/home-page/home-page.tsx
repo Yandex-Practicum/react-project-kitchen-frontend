@@ -52,7 +52,7 @@ const Home: FC = () => {
                 payload: any
               ) => ({})}
             />
-            <SidebarInformation sectionTitle="Популярные материалы" articles={articles}/>
+            <SidebarInformation sectionTitle="Популярные материалы" articles={articles} keyName='favoritesCount'/>
           </SidebarRight>
           {/*</div>*/}
         </div>

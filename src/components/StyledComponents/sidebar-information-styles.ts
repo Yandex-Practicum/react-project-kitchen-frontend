@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const SidebarRight = styled.div`
-  min-width: 359px;
+  width: 360px;
   position: sticky;
   align-self: flex-start;
   //--offset: 2rem;

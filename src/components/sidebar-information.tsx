@@ -5,12 +5,12 @@ import ArticleSidebarView from "./article-sidebar-view";
 import {TArticleProperties} from "../services/types";
 import {sortArrayOfObjects} from "../utils/utiils";
 
-const SidebarInformation: FunctionComponent<{ sectionTitle: string, articles: Array<TArticleProperties> }> = (props) => {
+const SidebarInformation: FunctionComponent<{sectionTitle: string, articles: Array<TArticleProperties>, keyName: string}> = (props) => {
   let articlesArrayForSort;
 
   // копируем иммутабельный массив из состояния дл ятого, чтобы отсортировать его. Сортировка не возвращает новое значение, а сортирует прямо на месте!
   articlesArrayForSort = [...props.articles];
-  articlesArrayForSort = sortArrayOfObjects(articlesArrayForSort, 'favoritesCount')
+  articlesArrayForSort = sortArrayOfObjects(articlesArrayForSort, props.keyName)
     .slice(0, 6);
 
   const composeCreatedDate = (date: string) => {
