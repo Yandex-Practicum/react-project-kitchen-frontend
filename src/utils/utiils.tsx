@@ -1,5 +1,4 @@
 import React from "react";
-import {TArticleProperties} from "../services/types";
 
 export const sortArrayOfObjects = (array: Array<any>, keyName: string) => {
   array.sort((a, b) => {
@@ -8,3 +7,12 @@ export const sortArrayOfObjects = (array: Array<any>, keyName: string) => {
   return array;
 }
 
+export const composeCreatedDate = (date: string) => {
+  const createdDate = new Date(date).toLocaleDateString('ru-RU', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  })
+  const deleteLastChar = createdDate.indexOf('г');
+  return createdDate.slice(0, deleteLastChar - 1);
+}

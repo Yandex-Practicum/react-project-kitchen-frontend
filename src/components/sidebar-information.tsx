@@ -3,7 +3,7 @@ import React, {FunctionComponent} from "react";
 import {SidebarHeading} from "./StyledComponents/sidebar-information-styles";
 import ArticleSidebarView from "./article-sidebar-view";
 import {TArticleProperties} from "../services/types";
-import {sortArrayOfObjects} from "../utils/utiils";
+import {composeCreatedDate, sortArrayOfObjects} from "../utils/utiils";
 
 const SidebarInformation: FunctionComponent<{sectionTitle: string, articles: Array<TArticleProperties>, keyName: string}> = (props) => {
   let articlesArrayForSort;
@@ -13,15 +13,15 @@ const SidebarInformation: FunctionComponent<{sectionTitle: string, articles: Arr
   articlesArrayForSort = sortArrayOfObjects(articlesArrayForSort, props.keyName)
     .slice(0, 6);
 
-  const composeCreatedDate = (date: string) => {
-    const createdDate = new Date(date).toLocaleDateString('ru-RU', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
-    })
-    const deleteLastChar = createdDate.indexOf('г');
-    return createdDate.slice(0, deleteLastChar - 1);
-  }
+  // const composeCreatedDate = (date: string) => {
+  //   const createdDate = new Date(date).toLocaleDateString('ru-RU', {
+  //     month: 'long',
+  //     day: 'numeric',
+  //     year: 'numeric',
+  //   })
+  //   const deleteLastChar = createdDate.indexOf('г');
+  //   return createdDate.slice(0, deleteLastChar - 1);
+  // }
 
   return (
     <>
