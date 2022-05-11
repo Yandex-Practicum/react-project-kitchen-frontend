@@ -20,7 +20,7 @@ export const NavigationItem = styled.li`
   padding: 0 16px 0 18px;
 
   img {
-    margin-right: 11px;
+    margin: 0 11px 0 0;
   }
 
   &:not(:first-child):hover {
@@ -100,19 +100,19 @@ export const NewNoteIcon = styled.div`
   background-image: url(${newNoteIcon});
   width: 24px;
   height: 24px;
-  margin-right: 11px;
+  margin: 0 11px 0 0;
 `;
 
 export const SettingsIcon = styled.div`
   background-image: url(${settingsIcon});
   width: 24px;
   height: 24px;
-  margin-right: 11px;
+  margin: 0 11px 0 0;
 `;
 
 export const LogoutIcon = styled.div`
   background-image: url(${logoutIcon});
   width: 24px;
   height: 24px;
-  margin-right: 11px;
+  margin: 0 11px 0 0;
 `;
