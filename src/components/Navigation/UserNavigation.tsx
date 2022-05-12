@@ -40,13 +40,13 @@ const UserNavigation = () => {
       </NavigationItem>
 
       <NavigationItem>
-        <CustomNavigationLink to="editor" />
+        <CustomNavigationLink to="/editor" />
         <NewNoteIcon />
         Новая запись
       </NavigationItem>
 
       <NavigationItem>
-        <CustomNavigationLink to="settings" />
+        <CustomNavigationLink to="/settings" />
         <SettingsIcon />
         Настройки
       </NavigationItem>

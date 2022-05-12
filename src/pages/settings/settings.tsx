@@ -31,7 +31,7 @@ const Settings = () => {
   const closingModal = () => {
     setIsOpen(false);
   };
- 
+
   const handleOpenModal = () => {
       openingModal();
     }
@@ -40,28 +40,23 @@ const Settings = () => {
       <>
         <Styles.SettingsSection>
           <Styles.SettingsTitle>Ваши настройки</Styles.SettingsTitle>
-  
+
           {isUpdatedInfoMsg && <h4 className="text-xs-center">Updated</h4>}
-  
+
           {/* <ListErrors errors={this.props.errors}></ListErrors> */}
-  
+
           <SettingsForm setIsUpdatedInfoMsg={setIsUpdatedInfoMsg} />
 
           <button onClick={openingModal}> Тест открытия </button>
           { isOpen &&
             <Modal title = "Удалить запись " onClose={closingModal}></Modal>
           }
-                
+
         </Styles.SettingsSection>
-  
+
       </>
     );
-  
-
 };
-
-
- 
   // }
 
 

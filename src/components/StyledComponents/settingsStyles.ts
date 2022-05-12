@@ -16,14 +16,6 @@ export const SettingsSection = styled.section`
     padding-top: 56px;
   }
 `
-export const SettingsForm = styled.form`
-  width: 100%;
-`
-
-export const SettingsFieldSet = styled.fieldset`
-  display: flex;
-  flex-direction: column;
-`
 
 export const SettingsTitle = styled.h2`
   text-align: center;
@@ -42,86 +34,4 @@ export const SettingsTitle = styled.h2`
     line-height: 36px;
 
   }
-`
-
-export const SettingsLabel = styled.label`
-  display: block;
-
-  font-family: 'AlegreyaSans', Times, serif;
-  font-weight:400;
-  font-size: 16px;
-  line-height: 1.5;
-  color: ${textColor.secondaryText};
-  margin: 0;
-`
-export const SettingsInput = styled.input<{isError: any}>`
-  display: block;
-  width: 100%;
-  height: 40px;
-
-  border: 1px solid ${props => props.isError ? `${inputBorderColor.error}` : `${inputBorderColor.default}`};
-  border-radius: 4px;
-
-  font-family: 'AlegreyaSans', Times, serif;
-  font-weight:400;
-  font-size: 16px;
-  line-height: 1.5;
-  color: ${textColor.secondaryText};
-
-  padding: 0 16px;
-
-  transition: all 0.2s linear;
-
-  &:focus{
-    outline: none;
-    border-color: ${props => props.isError ? `${inputBorderColor.error}` : `${inputBorderColor.active}`};
-  }
-`
-
-export const SettingsInputContainer = styled.div`
-  position:relative;
-  `
-
-export const SettingsIcon = styled.span`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position:absolute;
-    bottom:10%;
-    right:17px;
-    width:24px;
-    height:24px;
-    cursor: pointer;
-    z-index: 7;
-    &:hover{
-      opacity: .7;
-     
-    }
-
-    `
-
-export const SettingsError = styled.p`
-  font-family: 'AlegreyaSans', Times, serif;
-  font-weight:400;
-  font-size: 16px;
-  line-height: 1.5;
-  color: ${textColor.error};
-
-  margin: 0;
-`
-export const ErrorsContainer = styled.div`
-  height: 24px;
-`
-
-export const AutoError = styled.p`
-  font-family: 'AlegreyaSans', Times, serif;
-  font-weight:400;
-  font-size: 16px;
-  line-height: 1.5;
-  color: ${textColor.error};
-
-  margin: 0;
-  &:last-of-type {
-    margin-bottom: 8px;
-}
 `
