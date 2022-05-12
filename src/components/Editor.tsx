@@ -1,214 +1,203 @@
 import ListErrors from "./ListErrors";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import {
   createArticleThunk,
-  getArticleThunk,
   updateArticleThunk,
 } from "../services/thunks";
-import { clearEditor } from "../services/editorSlice";
-import { clearArticle } from "../services/articleSlice";
+import { useForm } from "react-hook-form";
+import * as Styles from "../components/StyledComponents/editorStyles";
+import IconInputFile from "../UI/icon-input-file/icon-input-file";
+import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
+import DeleteArticleBtn from "./DeleteArticleBtn";
 
-type TEditorProps = {
-  match: {
-    params: {
-      slug: string;
-    };
-  };
-};
+type FormData = {
+  title: string;
+  description: string;
+  image: string;
+  body: string;
+  tagInput: string;
+}
 
-const Editor: React.FC<TEditorProps> = (props) => {
+function Editor() {
   const dispatch = useDispatch();
-  const { article } = useSelector((state: any) => state.article);
   const history = useHistory();
 
-  const [form, setForm] = useState({
-    title: "",
-    description: "",
-    body: "",
-    tagInput: "",
-  });
-  const [inProgress, setInProgress] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [errorsResponse, setErrorsResponse] = useState<any>(null);
+  const [isError, setIsError] = useState(false);
   const [tagList, setTagList] = useState([]);
+  const { inProgress } = useSelector((state: any) => state.article);
   const params: { slug: string } = useParams();
+  const { article } = useSelector((state: any) => state.article);
 
-  const onChange = (e: { target: { name: string; value: string } }) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  const {
+    register,
+    setValue,
+    formState: { errors, isValid },
+    handleSubmit,
+  } = useForm<FormData>({
+    mode: "onChange",
+    defaultValues: {
+      title: "",
+      description: "",
+      image: "",
+      body: "",
+      tagInput: ""
+    }
+  });
 
-  const onRemoveTagClick = (index: number) => {
-    const updatedTagList = tagList.filter((t: string, i) => i !== index);
-    setTagList(updatedTagList);
-  };
+  useEffect(() => {
+    if (!params.slug) {
+      setValue("title", "");
+      setValue("description", "");
+      setValue("body", "");
+      setValue("tagInput", "");
+    }
+    else {
+      setValue("title", article.title);
+      setValue("description", article.description);
+      setValue("body", article.body);
+      setValue("tagInput", article.tagList[0]);
+    }
+  }, [article, params])
 
-  const updateArticle = () => {
-    setInProgress(true);
-    dispatch(
-      updateArticleThunk({
-        ...form,
-        tagList: [...tagList, ...form.tagInput.split(" ").filter((t) => t)],
-        slug: params.slug,
-      })
+  useEffect(() => {
+    setIsError(isValid)
+  })
+
+  const handleSubmitForm = handleSubmit(({ title, description, image, body, tagInput }, e) => {
+    e && e.preventDefault();
+    if (params.hasOwnProperty('slug')) {
+      updateArticle(title, description, image, body, tagInput);
+    }
+    else {
+      createArticle(title, description, image, body, tagInput);
+    }
+  });
+
+  const createArticle = (title: string, description: string, image: string, body: string, tagInput: string) => {
+    dispatch(createArticleThunk({
+      title, description, image, body,
+      tagList: [...tagList, tagInput.split(",").filter((t) => t)],
+    })
     )
       .unwrap()
       .then((data: any) => {
-        setInProgress(false)
-        history.push(`/article/${data.article.slug}`)
-      })
-      .catch((err: any) => {
-        setErrors({ error: err.message });
-        setInProgress(false);
-      });
-  };
-
-  const createArticle = () => {
-    setInProgress(true);
-    dispatch(
-      createArticleThunk({
-        ...form,
-        tagList: [...tagList, ...form.tagInput.split(" ").filter((t) => t)],
-      })
-    )
-      .unwrap()
-      .then((data: any) => {
-        setInProgress(false);
         history.push(`/article/${data.article.slug}`);
       })
-      .catch((err: any) => {
-        setErrors({ error: err.message });
-        setInProgress(false);
+      .catch((error: any) => {
+        setErrorsResponse({ [error.name]: error.message });
       });
-  };
+  }
 
-  const watchForEnter = (ev: {
-    keyCode: number;
-    preventDefault: () => void;
-  }) => {
-    if (ev.keyCode === 13) {
-      ev.preventDefault();
-      if (params.slug) {
-        updateArticle();
-      } else {
-        createArticle();
-      }
-    }
-  };
-
-  const onSubmit = (ev: { preventDefault: () => void }) => {
-    ev.preventDefault();
-    if (params.slug) {
-      updateArticle();
-    } else {
-      createArticle();
-    }
-  };
-
-  useEffect(() => {
-    if (params.slug) {
-      dispatch(getArticleThunk(params.slug));
-    }
-    return () => {
-      setForm({ title: "", description: "", body: "", tagInput: "" });
-      setInProgress(false);
-      dispatch(clearEditor());
-      dispatch(clearArticle());
-    };
-  }, [params.slug]);
-
-  useEffect(() => {
-    if (article.slug) {
-      const { body, description, title } = article;
-      setForm({ body, description, title, tagInput: "" });
-      setTagList(article.tagList);
-    }
-  }, [article]);
+  const updateArticle = (title: string, description: string, image: string, body: string, tagInput: string) => {
+    dispatch(updateArticleThunk({
+      title, description, image, body,
+      tagList: [...tagList, tagInput.split(",").filter((t) => t)],
+      slug: params.slug,
+    })
+    )
+      .unwrap()
+      .then((data: any) => {
+        history.push(`/article/${data.article.slug}`);
+      })
+      .catch((error: any) => {
+        setErrorsResponse({ [error.name]: error.message });
+      });
+  }
 
   return (
-    <div className="editor-page">
-      <div className="container page">
-        <div className="row">
-          <div className="col-md-10 offset-md-1 col-xs-12">
-            <ListErrors errors={errors} />
+    <Styles.EditorSection>
+      <Styles.EditorTitle>{params.hasOwnProperty('slug') ? "Редактировать запись" : "Название статьи"}</Styles.EditorTitle>
 
-            <form onSubmit={onSubmit}>
-              <fieldset>
-                <fieldset className="form-group">
-                  <input
-                    className="form-control form-control-lg"
-                    type="text"
-                    placeholder="Article Title"
-                    value={form.title}
-                    name={"title"}
-                    onChange={onChange}
-                  />
-                </fieldset>
+      <Styles.EditorForm action="POST" onSubmit={handleSubmitForm}>
+        <Styles.EditorFieldSet>
 
-                <fieldset className="form-group">
-                  <input
-                    className="form-control"
-                    type="text"
-                    placeholder="What's this article about?"
-                    value={form.description}
-                    name={"description"}
-                    onChange={onChange}
-                  />
-                </fieldset>
+          <Styles.EditorLabel>
+            Название статьи
+            <Styles.EditorInput
+              isError={errors.title}
+              {...register("title", {
+                required: "Это поле обязательно к заполнению.",
+              })}
+            />
+          </Styles.EditorLabel>
+          <Styles.ErrorsContainer>
+            {errors?.title && <Styles.EditorError>{errors?.title?.message}</Styles.EditorError>}
+          </Styles.ErrorsContainer>
 
-                <fieldset className="form-group">
-                  <textarea
-                    className="form-control"
-                    rows={8}
-                    placeholder="Write your article (in markdown)"
-                    value={form.body}
-                    name={"body"}
-                    onChange={onChange}
-                  ></textarea>
-                </fieldset>
+          <Styles.EditorLabel>
+            О чем статья
+            <Styles.EditorInput
+              isError={errors.description}
+              {...register("description", {
+                required: "Это поле обязательно к заполнению.",
+              })}
+            />
+          </Styles.EditorLabel>
+          <Styles.ErrorsContainer>
+            {errors?.description && <Styles.EditorError>{errors?.description?.message}</Styles.EditorError>}
+          </Styles.ErrorsContainer>
 
-                <fieldset className="form-group">
-                  <input
-                    className="form-control"
-                    type="text"
-                    placeholder="Enter tags separated by spaces"
-                    value={form.tagInput}
-                    name={"tagInput"}
-                    onChange={onChange}
-                    onKeyUp={watchForEnter}
-                  />
+          <Styles.EditorLabel>
+            URL изображения (опционально)
+            <Styles.EditorInputContainer>
+              <Styles.EditorInput
+                isError={errors.image}
+                {...register("image", {
+                  pattern: {
+                    value: /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi,
+                    message: "Введите корректный url.",
+                  },
+                })}
+              />
+              <Styles.EditorIcon>
+                <IconInputFile />
+              </Styles.EditorIcon>
+            </Styles.EditorInputContainer>
+          </Styles.EditorLabel>
+          <Styles.ErrorsContainer>
+            {errors?.image && <Styles.EditorError>{errors?.image?.message}</Styles.EditorError>}
+          </Styles.ErrorsContainer>
+          <Styles.EditorLabel>
+            Текст статьи
+            <Styles.EditorTextarea
+              minRows={5.4}
+              isError={errors.body}
+              {...register("body", {
+                required: "Это поле обязательно к заполнению.",
+              })}
+            />
+          </Styles.EditorLabel>
+          <Styles.ErrorsContainer>
+            {errors?.body && <Styles.EditorError>{errors?.body?.message}</Styles.EditorError>}
+          </Styles.ErrorsContainer>
 
-                  {article.slug && (
-                    <div className="tag-list">
-                      {tagList.map((tag: string, i) => {
-                        return (
-                          <span className="tag-default tag-pill" key={i}>
-                            <i
-                              className="ion-close-round"
-                              onClick={() => onRemoveTagClick(i)}
-                            ></i>
-                            {tag}
-                          </span>
-                        );
-                      })}
-                    </div>
-                  )}
-                </fieldset>
+          <Styles.EditorLabel>
+            Теги (через запятую)
+            <Styles.EditorInput
+              isError={errors.tagInput}
+              {...register("tagInput")}
+            />
+          </Styles.EditorLabel>
+          <Styles.ErrorsContainer>
+            {errors?.tagInput && <Styles.EditorError>{errors?.tagInput?.message}</Styles.EditorError>}
+          </Styles.ErrorsContainer>
 
-                <button
-                  className="btn btn-lg pull-xs-right btn-primary"
-                  type="submit"
-                  disabled={inProgress}
-                >
-                  {article.slug ? "Update" : "Publish"} Article
-                </button>
-              </fieldset>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+          <SignupLoginSubmitBtn
+            btnText={params.hasOwnProperty('slug') ? "Сохранить  запись" : "Опубликовать запись"}
+            disabled={!isError || inProgress}
+          />
+
+        </Styles.EditorFieldSet>
+
+      </Styles.EditorForm >
+
+      {params.slug && <DeleteArticleBtn mrgTop="24px" text="Удалить запись" />}
+
+    </Styles.EditorSection>
+  )
+}
 
 export default Editor;
