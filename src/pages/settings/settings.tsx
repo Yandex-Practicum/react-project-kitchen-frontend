@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateUserThunk } from "../../services/thunks";
 import { logout as logoutAction } from "../../services/commonSlice";
 import { useHistory } from "react-router";
-import SettingsForm from "../../components/settings-form";
 import * as Styles from "../../components/StyledComponents/settingsStyles";
+import SignupLoginSubmitBtn from "../../components/SignupLoginSubmitBtn";
+import Modal from '../../components/modal/modal'
+import SettingsForm from "../../components/settings-form"
+
 // interface ISettingsForm {
 //   setIsUpdatedInfoMsg: (isUpdatedInfoMsg: boolean) => void
 // }
-
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -20,28 +22,42 @@ const Settings = () => {
 
   const history = useHistory();
   const [isUpdatedInfoMsg, setIsUpdatedInfoMsg] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
+  const openingModal = () => {
+    setIsOpen(true);
+  };
 
-  return (
-    <>
+  const closingModal = () => {
+    setIsOpen(false);
+  };
 
-    <Styles.SettingsSection>
-      <Styles.SettingsTitle>Ваши настройки</Styles.SettingsTitle>
+  const handleOpenModal = () => {
+      openingModal();
+    }
 
-      {isUpdatedInfoMsg && <h4 className="text-xs-center">Updated</h4>}
+    return (
+      <>
+        <Styles.SettingsSection>
+          <Styles.SettingsTitle>Ваши настройки</Styles.SettingsTitle>
 
-      {/* <ListErrors errors={this.props.errors}></ListErrors> */}
+          {isUpdatedInfoMsg && <h4 className="text-xs-center">Updated</h4>}
 
-      <SettingsForm setIsUpdatedInfoMsg={setIsUpdatedInfoMsg} />
-    </Styles.SettingsSection>
-    {/* <button className="btn btn-outline-danger" onClick={logout}>
-      Or click here to logout.
-    </button> */}
-  </>
-  );
+          {/* <ListErrors errors={this.props.errors}></ListErrors> */}
 
+          <SettingsForm setIsUpdatedInfoMsg={setIsUpdatedInfoMsg} />
 
-  // }
+          <button onClick={openingModal}> Тест открытия </button>
+          { isOpen &&
+            <Modal title = "Удалить запись " onClose={closingModal}></Modal>
+          }
+
+        </Styles.SettingsSection>
+
+      </>
+    );
 };
+  // }
+
 
 export default Settings;

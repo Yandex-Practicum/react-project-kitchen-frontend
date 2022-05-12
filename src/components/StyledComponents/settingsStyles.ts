@@ -5,7 +5,6 @@ export const SettingsSection = styled.section`
   max-width: 540px;
   margin: 0 auto;
   padding: 56px 20px 0;
-
   display: flex;
   flex-direction: column;
   align-items: center;
