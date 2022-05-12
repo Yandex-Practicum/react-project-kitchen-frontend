@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { colors, device} from '../constantsStyles'
+import popup_close from '../../../images/popup_close.svg'
 
 export const ModalContainer = styled.div`
   background-color: #fff;
   border: 1px solid rgba(76, 76, 255, 0.2);
   box-sizing: border-box;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 0px 4px rgba(0, 0, 0, 0.08), 0px 0px 1px rgba(0, 0, 0, 0.08););
   border-radius: 20px;
   max-width: 600px;
   width: 100%;
@@ -21,13 +21,14 @@ export const ModalContainer = styled.div`
   flex-direction: column;
   transition: opacity .3s linear;
 
-  @media ${device.mobileM} {
+  @media ${device.mobileL} {
     max-width: 280px;
     width: 100%;;
 
   }
-  
-`;
+
+
+`
 
 export const ModalHeading = styled.h2`
   margin: 0;
@@ -61,6 +62,7 @@ export const ModalSubHeading = styled.p`
 `;
 
 export const ModalButtonClose = styled.button`
+  background-image: url(${popup_close});
   border: none;
   width: 24px;
   height: 24px;

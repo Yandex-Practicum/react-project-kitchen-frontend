@@ -3,7 +3,6 @@ import { createPortal } from "react-dom";
 import ModalOverlay from "../modal-overlay/modal-overlay";
 import { FC } from "react";
 import * as Styles from "../StyledComponents/modalStyles/modalStyles";
-import IconClose from "../../UI/icon-close/icon-close";
 // interface IModal {
 //   title?: string;
 //   onClose: () => void;
@@ -34,7 +33,6 @@ const Modal = ({ title, onClose }) => {
         </Styles.ModalSubHeading>
 
         <Styles.ModalButtonClose onClick={onClose}>
-          <IconClose />
         </Styles.ModalButtonClose>
 
         <Styles.ModalButtonSubmit>
