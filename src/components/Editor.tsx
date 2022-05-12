@@ -59,7 +59,7 @@ function Editor() {
       setValue("title", article.title);
       setValue("description", article.description);
       setValue("body", article.body);
-      setValue("tagInput", article.tagList[0]);
+      setValue("tagInput", article.tagList);
     }
   }, [article, params])
 
@@ -80,7 +80,7 @@ function Editor() {
   const createArticle = (title: string, description: string, image: string, body: string, tagInput: string) => {
     dispatch(createArticleThunk({
       title, description, image, body,
-      tagList: [...tagList, tagInput.split(",").filter((t) => t)],
+      tagList: [...tagList, ...tagInput.split(",").filter((t) => t)],
     })
     )
       .unwrap()
@@ -95,7 +95,7 @@ function Editor() {
   const updateArticle = (title: string, description: string, image: string, body: string, tagInput: string) => {
     dispatch(updateArticleThunk({
       title, description, image, body,
-      tagList: [...tagList, tagInput.split(",").filter((t) => t)],
+      tagList: [...tagList, ...tagInput.split(",").filter((t) => t)],
       slug: params.slug,
     })
     )
@@ -179,7 +179,12 @@ function Editor() {
             Теги (через запятую)
             <FormStyles.Input
               isError={errors.tagInput}
-              {...register("tagInput")}
+              {...register("tagInput", {
+                minLength: {
+                  value: 0,
+                  message: ""
+                }
+              })}
             />
           </FormStyles.Label>
           <FormStyles.ErrorsContainer>

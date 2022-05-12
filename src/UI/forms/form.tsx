@@ -4,7 +4,6 @@ import { textColor, inputBorderColor } from '../../components/StyledComponents/c
 
 export const Form = styled.form`
   width: 100%;
- 
 `
 
 export const FieldSet = styled.fieldset`
