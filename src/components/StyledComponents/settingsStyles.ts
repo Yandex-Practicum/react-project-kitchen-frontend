@@ -95,8 +95,7 @@ export const SettingsIcon = styled.span`
     cursor: pointer;
     z-index: 900;
     &:hover{
-      opacity: .7;
-     
+    opacity: .7;
     }
 
     `
@@ -112,6 +111,7 @@ export const SettingsError = styled.p`
 `
 export const ErrorsContainer = styled.div`
   height: 24px;
+  margin: 0;
 `
 
 export const AutoError = styled.p`

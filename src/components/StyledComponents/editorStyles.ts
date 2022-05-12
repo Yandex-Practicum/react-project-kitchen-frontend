@@ -87,6 +87,7 @@ export const EditorError = styled.p`
 `
 export const ErrorsContainer = styled.div`
   height: 24px;
+  margin: 0;
 `
 export const EditorInputContainer = styled.div`
   position:relative;
@@ -123,8 +124,6 @@ export const EditorTextarea = styled(TextareaAutosize)<{isError: any}>`
   color: ${textColor.secondaryText};
 
   padding: 0 16px;
-
-  resize: vertical;
 
   transition: all 0.2s linear;
 

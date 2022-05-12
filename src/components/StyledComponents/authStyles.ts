@@ -96,11 +96,10 @@ export const AuthError = styled.p`
   font-size: 16px;
   line-height: 1.5;
   color: ${textColor.error};
-
-  margin: 0;
 `
 export const ErrorsContainer = styled.div`
   height: 24px;
+  margin: 0;
 `
 export const AuthFieldSet = styled.fieldset`
   display: flex;
