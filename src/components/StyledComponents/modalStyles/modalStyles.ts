@@ -21,9 +21,19 @@ export const ModalContainer = styled.div`
   flex-direction: column;
   transition: opacity .3s linear;
 
+
+  @media ${device.tablet} {
+    width: 500px;
+
+  }
+
+  @media ${device.tablet} {
+    width: 400px;
+
+  }
   @media ${device.mobileL} {
-    max-width: 280px;
-    width: 100%;;
+    width: 280px;
+
 
   }
 
