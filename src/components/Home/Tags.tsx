@@ -55,7 +55,7 @@ const Tags: React.FC<TTagsProps> = (props) => {
           return (
             <TagContainer key={tag}>
               <Tag isActive={activeTag === tag} onClick={activate}>
-                {tag}
+              {'#' + tag.replaceAll('#', '')}
               </Tag>
               {activeTag === tag && <CancelButton />}
             </TagContainer>

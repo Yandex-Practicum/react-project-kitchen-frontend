@@ -10,7 +10,7 @@ const localStorageMiddleware = (store) => (next) => (action) => {
     action.type === "LOGIN/fulfilled" || action.type === "SIGNUP/fulfilled";
 
   const badActions =
-    action.type === "common/LOGOUT" ||
+    action.type === "common/logout" ||
     action.type === "LOGIN/rejected" ||
     action.type === "SIGNUP/rejected" ||
     action.type === "AUTH/rejected";
