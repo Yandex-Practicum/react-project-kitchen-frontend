@@ -9,7 +9,7 @@ import ball from "../../images/Banner/ball.svg";
 
 export const BannerContainer = styled.div`
   overflow: hidden;
-  height: 600px;
+  height: 380px;
   width: 100%;
   display: flex;
   justify-content: center;

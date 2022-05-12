@@ -5,12 +5,15 @@ import blueCross from "../../images/blueCross.svg";
 export const TagsContainer = styled.div`
   max-width: 100%;
   display: flex;
-  gap: 24px;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  padding-bottom: 56px;
 `;
 
 export const TagContainer = styled.div`
   display: flex;
   gap: 4px;
+  margin: 0;
 `;
 
 type TTagProps = {
