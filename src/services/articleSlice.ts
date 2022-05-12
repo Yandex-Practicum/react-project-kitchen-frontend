@@ -14,18 +14,21 @@ interface IInitialState {
   article: TArticle | {},
   comments: Array<any>, // TODO: type
   commentErrors: any,
+  inProgress: boolean
 }
 
 const initialState: IInitialState = {
   article: {},
   comments: [],
   commentErrors: null,
+  inProgress: false
 };
 
 const setArticle = (state: IInitialState, action: PayloadAction<TArticle>) => {
   if (action.payload?.article) {
     state.article = action.payload.article;
   }
+  state.inProgress = false;
 };
 
 const setCommentsForArticle = (state: IInitialState, action: PayloadAction<any>) => {
@@ -46,6 +49,14 @@ const addCommentErrors = (state: IInitialState, action: PayloadAction<any>) => {
   state.comments = initialState.comments
 }
 
+const setInProgressTrue = (state: IInitialState) => {
+  state.inProgress = true;
+};
+
+const setInProgressFalse = (state: IInitialState) => {
+  state.inProgress = false;
+};
+
 
 export const articleSlice = createSlice({
   name: "article",
@@ -57,9 +68,15 @@ export const articleSlice = createSlice({
   },
 
   extraReducers: {
-    [getArticleThunk.fulfilled]: setArticle,
-    [updateArticleThunk.fulfilled]: setArticle,
+    [createArticleThunk.pending]: setInProgressTrue,
     [createArticleThunk.fulfilled]: setArticle,
+    [createArticleThunk.rejected]: setInProgressFalse,
+
+    [updateArticleThunk.pending]: setInProgressTrue,
+    [updateArticleThunk.fulfilled]: setArticle,
+    [updateArticleThunk.rejected]: setInProgressFalse,
+
+    [getArticleThunk.fulfilled]: setArticle,
     [deleteArticleThunk.fulfilled]: (state) => {
       state.article = {};
     },

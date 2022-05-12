@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const LikeIconContainer = styled.div`
   display: flex;
   align-items: center;
+  margin: 0;
 `
 
 export const LikeIconNumber = styled.p`

@@ -1,21 +1,18 @@
-import React, {FunctionComponent} from 'react';
-import {Link} from 'react-router-dom';
-import {NavigationView} from "./navigation-view";
+import React, { FC } from "react";
+import { useSelector } from "react-redux";
+import Banner from "./Home/Banner";
+import Navigation from "./Navigation";
+import { HeaderContainer } from "./StyledComponents/headerStyles";
 
-const Header: FunctionComponent<{appName: string, currentUser: {username: string}}> = (props) => {
+const Header: FC = () => {
+  const { appName, token } = useSelector((store: any) => store.common);
+
   return (
-    <nav className="navbar navbar-light">
-      <header className="container">
-
-        <Link to="/" className="navbar-brand">
-          {props.appName.toLowerCase()}
-        </Link>
-
-        <NavigationView currentUser={props.currentUser}/>
-
-      </header>
-    </nav>
+    <HeaderContainer>
+      <Navigation />
+      <Banner token={token} appName={appName} />
+    </HeaderContainer>
   );
-}
+};
 
 export default Header;
