@@ -4,11 +4,13 @@ import { textColor, inputBorderColor } from '../../components/StyledComponents/c
 
 export const Form = styled.form`
   width: 100%;
+ 
 `
 
 export const FieldSet = styled.fieldset`
   display: flex;
   flex-direction: column;
+  z-index: -1
 `
 
 export const Label = styled.label`
@@ -73,7 +75,7 @@ export const Icon = styled.span`
   width:24px;
   height:24px;
   cursor: pointer;
-  z-index: 900;
+  z-index: 7;
   &:hover{
     opacity: .7;
 }

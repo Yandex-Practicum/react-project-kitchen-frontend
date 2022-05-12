@@ -6,7 +6,7 @@ export const IconFileInput = styled.input`
 	opacity: 0;
 	overflow: hidden;
 	position: absolute;
-	z-index: -1;
+	z-index: 1;
   
 `
 export const IconFileLabel = styled.label`

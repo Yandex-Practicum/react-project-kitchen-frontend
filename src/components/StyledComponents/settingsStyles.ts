@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { textColor, inputBorderColor, device } from './constantsStyles';
 
 export const SettingsSection = styled.section`
+  position: relative;
   max-width: 540px;
   margin: 0 auto;
   padding: 56px 20px 0;
