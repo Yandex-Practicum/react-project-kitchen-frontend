@@ -5,6 +5,7 @@ import popup_close from '../../../images/popup_close.svg'
 export const ModalContainer = styled.div`
   background-color: #fff;
   border: 1px solid rgba(76, 76, 255, 0.2);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 0px 4px;
   box-sizing: border-box;
   border-radius: 20px;
   max-width: 600px;
