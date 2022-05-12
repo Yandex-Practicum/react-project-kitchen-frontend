@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {Link} from "react-router-dom";
 
 export const SidebarRight = styled.div`
   width: 360px;
@@ -40,4 +41,12 @@ export const ArticleHeading = styled.h3`
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
+`
+
+export const ArticleLink = styled(Link)`
+  color: #0A0A0B;
+  &:hover {
+    text-decoration: none;
+    color: #008AFF;
+  }
 `

@@ -7,12 +7,13 @@ import {
   getFavoritedArticlesThunk,
   setArticleAsFavoriteThunk,
   deleteArticleAsFavoriteThunk,
-  getAllArticlesByTagThunk,
+  getAllArticlesByTagThunk, getAllArticlesForSortThunk,
 } from "./thunks";
 import {TArticle, TArticleProperties} from "./types";
 
 interface IInitialState {
-  articles: Array<TArticleProperties>, // TODO: уточнить типы
+  articles: Array<TArticleProperties>,
+  allArticles: Array<TArticleProperties>,
   currentArticle: TArticleProperties | {},
   articlesCount: number,
   currentPage: 0,
@@ -24,6 +25,7 @@ interface IInitialState {
 
 const initialState: IInitialState = {
   articles: [],
+  allArticles: [],
   currentArticle: {},
   articlesCount: 0,
   currentPage: 0,
@@ -54,6 +56,9 @@ export const articleListSlice = createSlice({
     },
     [getAllArticlesThunk.fulfilled]: (state, action: PayloadAction<IInitialState>) => {
       state.articles = action.payload.articles;
+    },
+    [getAllArticlesForSortThunk.fulfilled]: (state, action: PayloadAction<IInitialState>) => {
+      state.allArticles = action.payload.articles;
     },
     [getTagsThunk.fulfilled]: (state, action: PayloadAction<IInitialState>) => {
       state.tags = action.payload.tags;

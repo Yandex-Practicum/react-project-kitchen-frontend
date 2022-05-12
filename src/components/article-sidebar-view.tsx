@@ -1,22 +1,27 @@
 import React, {FunctionComponent} from "react";
 
-import {ArticleHeading, ArticleWrapper, AuthorWrapper} from "./StyledComponents/sidebar-information-styles";
+import {
+  ArticleLink,
+  ArticleHeading,
+  ArticleWrapper,
+  AuthorWrapper
+} from "./StyledComponents/sidebar-information-styles";
 import ProfileInformationView from "./profile-information-view";
 import Like from "./Article/like";
 import like from "../images/like-icon.svg";
-import {TFollowingUser} from "../services/types";
+import {TArticleProperties} from "../services/types";
 
-const ArticleSidebarView: FunctionComponent<{ likesCount: number, articleHeading: string, articleDate: string, articleAuthor: TFollowingUser }> = (props) => {
+const ArticleSidebarView: FunctionComponent<{ article: TArticleProperties, articleDate: string }> = (props) => {
   return (
-    <>
-      <ArticleWrapper>
-        <AuthorWrapper>
-          <ProfileInformationView articleDate={props.articleDate} author={props.articleAuthor}/>
-          <Like counter={props.likesCount} icon={like}/>
-        </AuthorWrapper>
-        <ArticleHeading>{props.articleHeading}</ArticleHeading>
-      </ArticleWrapper>
-    </>
+    <ArticleWrapper>
+      <AuthorWrapper>
+        <ProfileInformationView articleDate={props.articleDate} author={props.article.author}/>
+        <Like counter={props.article.favoritesCount} icon={like}/>
+      </AuthorWrapper>
+      <ArticleLink to={`/article/${props.article.slug}`}>
+        <ArticleHeading>{props.article.title}</ArticleHeading>
+      </ArticleLink>
+    </ArticleWrapper>
   )
 }
 

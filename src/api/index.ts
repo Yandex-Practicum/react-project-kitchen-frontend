@@ -6,6 +6,7 @@ export {
   auth, // done
   updateUser, // done
   getAllArticles, // done
+  getAllArticlesForSort, // done
   getArticlesByAuthor, // done
   getArticlesByTag, // done
   deleteArticle, // done
