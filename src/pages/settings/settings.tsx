@@ -17,14 +17,14 @@ const Settings = () => {
     dispatch(logoutAction());
     history.push("/");
   };
-  
+
   const history = useHistory();
   const [isUpdatedInfoMsg, setIsUpdatedInfoMsg] = useState(false);
 
 
   return (
     <>
-   
+
     <Styles.SettingsSection>
       <Styles.SettingsTitle>Ваши настройки</Styles.SettingsTitle>
 
@@ -40,7 +40,7 @@ const Settings = () => {
   </>
   );
 
-  
+
   // }
 };
 

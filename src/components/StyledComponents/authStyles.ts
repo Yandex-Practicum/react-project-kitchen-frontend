@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { textColor, linkColor, inputBorderColor, device } from './constantsStyles';
+import { textColor, linkColor, device } from './constantsStyles';
 
 export const AuthSection = styled.section`
   max-width: 540px;
@@ -50,58 +50,4 @@ export const StyledLink = styled(Link)`
     text-decoration: none;
     color: ${linkColor.blueHover};
   }
-`
-export const AuthLabel = styled.label`
-  display: block;
-
-  font-family: 'AlegreyaSans', Times, serif;
-  font-weight:400;
-  font-size: 16px;
-  line-height: 1.5;
-  color: ${textColor.secondaryText};
-
-  margin: 0;
-`
-export const AuthInput = styled.input<{isError: any}>`
-  display: block;
-
-  width: 100%;
-  height: 40px;
-
-  border: 1px solid ${props => props.isError ? `${inputBorderColor.error}` : `${inputBorderColor.default}`};
-  border-radius: 4px;
-
-  font-family: 'AlegreyaSans', Times, serif;
-  font-weight:400;
-  font-size: 16px;
-  line-height: 1.5;
-  color: ${textColor.secondaryText};
-
-  padding: 0 16px;
-
-  transition: all 0.2s linear;
-
-  &:focus{
-    outline: none;
-    border-color: ${props => props.isError ? `${inputBorderColor.error}` : `${inputBorderColor.active}`};
-  }
-`
-
-export const AuthForm = styled.form`
-  width: 100%;
-`
-export const AuthError = styled.p`
-  font-family: 'AlegreyaSans', Times, serif;
-  font-weight:400;
-  font-size: 16px;
-  line-height: 1.5;
-  color: ${textColor.error};
-`
-export const ErrorsContainer = styled.div`
-  height: 24px;
-  margin: 0;
-`
-export const AuthFieldSet = styled.fieldset`
-  display: flex;
-  flex-direction: column;
 `

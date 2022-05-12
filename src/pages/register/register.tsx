@@ -6,6 +6,7 @@ import SignupLoginSubmitBtn from "../../components/SignupLoginSubmitBtn";
 import { useForm } from "react-hook-form";
 import { signupThunk } from "../../services/thunks";
 import * as Styles from "../../components/StyledComponents/authStyles";
+import * as FormStyles from "../../UI/forms/form";
 
 type FormData = {
   username: string;
@@ -57,12 +58,12 @@ const Register: React.FC = () => {
       <Styles.AuthTitle>Зарегистрироваться</Styles.AuthTitle>
       <Styles.StyledLink to="/login">Войти</Styles.StyledLink>
 
-      <Styles.AuthForm action="POST" onSubmit={handleSubmitForm}>
-        <Styles.AuthFieldSet>
+      <FormStyles.Form action="POST" onSubmit={handleSubmitForm}>
+        <FormStyles.FieldSet>
 
-          <Styles.AuthLabel>
+          <FormStyles.Label>
             Имя пользователя
-            <Styles.AuthInput
+            <FormStyles.Input
               isError={errors.username}
               {...register("username", {
                 required: "Это поле обязательно к заполнению.",
@@ -76,14 +77,14 @@ const Register: React.FC = () => {
                 },
               })}
             />
-          </Styles.AuthLabel>
-          <Styles.ErrorsContainer>
-            {errors?.username && <Styles.AuthError>{errors?.username?.message}</Styles.AuthError>}
-          </Styles.ErrorsContainer>
+          </FormStyles.Label>
+          <FormStyles.ErrorsContainer>
+            {errors?.username && <FormStyles.Error>{errors?.username?.message}</FormStyles.Error>}
+          </FormStyles.ErrorsContainer>
 
-          <Styles.AuthLabel>
+          <FormStyles.Label>
             Email
-            <Styles.AuthInput
+            <FormStyles.Input
               isError={errors.email}
               {...register("email", {
                 required: "Это поле обязательно к заполнению.",
@@ -93,14 +94,14 @@ const Register: React.FC = () => {
                 },
               })}
             />
-          </Styles.AuthLabel>
-          <Styles.ErrorsContainer>
-            {errors?.email && <Styles.AuthError>{errors?.email?.message}</Styles.AuthError>}
-          </Styles.ErrorsContainer>
+          </FormStyles.Label>
+          <FormStyles.ErrorsContainer>
+            {errors?.email && <FormStyles.Error>{errors?.email?.message}</FormStyles.Error>}
+          </FormStyles.ErrorsContainer>
 
-          <Styles.AuthLabel>
+          <FormStyles.Label>
             Пароль
-            <Styles.AuthInput
+            <FormStyles.Input
               isError={errors.password}
               {...register("password", {
                 required: "Это поле обязательно к заполнению.",
@@ -110,15 +111,15 @@ const Register: React.FC = () => {
                 },
               })}
             />
-          </Styles.AuthLabel>
-          <Styles.ErrorsContainer>
-            {errors?.password && <Styles.AuthError>{errors?.password?.message}</Styles.AuthError>}
-          </Styles.ErrorsContainer>
+          </FormStyles.Label>
+          <FormStyles.ErrorsContainer>
+            {errors?.password && <FormStyles.Error>{errors?.password?.message}</FormStyles.Error>}
+          </FormStyles.ErrorsContainer>
 
           <SignupLoginSubmitBtn btnText="Зарегистрироваться" disabled={!isError || inProgress} />
 
-        </Styles.AuthFieldSet>
-      </Styles.AuthForm>
+        </FormStyles.FieldSet>
+      </FormStyles.Form>
 
       {/* <ListErrors errors={errorsResponse} /> */}
     </Styles.AuthSection>
