@@ -30,7 +30,7 @@ const ArticleMeta: React.FC<TArticleActionsProps> = (props) => {
         </span>
       </div>
 
-      <ArticleActions canModify={props.canModify} article={article} />
+      {/* <ArticleActions canModify={props.canModify} article={article} /> */}
     </div>
   );
 };

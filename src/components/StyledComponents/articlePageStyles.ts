@@ -21,19 +21,19 @@ export const PageBody = styled.div`
   display: flex;
   gap: 81px;
 
-  margin-top: -307px;
+  margin-top: calc(-307px + 56px);
 
   @media ${device.laptopL} {
-    margin-top: -371px;
+    margin-top: calc(-371px + 48px);
   }
 
   @media ${device.laptop} {
-    margin-top: -403px;
+    margin-top: calc(-403px + 48px);
     gap: 40px;
   }
   @media ${device.tablet} {
     max-width: 280px;
-    margin-top: -411px;
+    margin-top: calc(-411px + 40px);
   }
 `
 

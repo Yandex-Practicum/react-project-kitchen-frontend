@@ -3,6 +3,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteArticle } from "../../api";
 import { deleteArticleThunk } from "../../services/thunks";
+import { ArticleActionsEditor, ArticleActionsEditorIcon, ArticleActionsWrapper } from "../StyledComponents/arcticleActionsStyles";
+import plus from "../../images/whitePlus.svg";
+
+import DeleteArticleBtn from "../DeleteArticleBtn";
 
 type TArticleActionsProps = {
   article: any;
@@ -20,21 +24,25 @@ const ArticleActions: React.FC<TArticleActionsProps> = (props) => {
 
   if (props.canModify) {
     return (
-      <span>
-        <Link
+        <ArticleActionsWrapper>
+          <ArticleActionsEditor
           to={`/editor/${article.slug}`}
-          className="btn btn-outline-secondary btn-sm"
-        >
-          <i className="ion-edit"></i> Edit Article
-        </Link>
+          >
+            <ArticleActionsEditorIcon src={plus}/>
+            Редактировать запись
+          </ArticleActionsEditor>
 
-        <button
-          className="btn btn-outline-danger btn-sm"
-          onClick={deleteArticle}
-        >
-          <i className="ion-trash-a"></i> Delete Article
-        </button>
-      </span>
+          <DeleteArticleBtn mrgTop="0px" text="Удалить запись" />
+          {/* <Styles.button
+            mrgTop={'0px'}
+            onClick={deleteArticle}
+          >sdfgdsf
+          </Styles.button> */}
+
+
+        </ArticleActionsWrapper>
+
+
     );
   }
 

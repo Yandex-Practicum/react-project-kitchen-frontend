@@ -7,7 +7,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getArticleThunk, getCommentsForArticleThunk } from "../../services/thunks";
 import { useParams } from "react-router";
-import Banner from '../Home/Banner';
+import ArticleActions from './ArticleActions';
 import { ArticlePage, ASide, PageBody, PageContent } from '../StyledComponents/articlePageStyles';
 
 
@@ -47,8 +47,6 @@ const Article: React.FC<TArticleProps> = (props) => {
     currentUser && currentUser.username === article.author.username;
 
   return (<>
-    <Banner token={token} appName={appName} />
-
     <ArticlePage>
 
 
@@ -56,7 +54,7 @@ const Article: React.FC<TArticleProps> = (props) => {
 
         <PageContent>
 
-
+                <ArticleActions canModify={canModify} article={article} />
                 <h1>{article.title}</h1>
                 <ArticleMeta article={article} canModify={canModify} />
 
