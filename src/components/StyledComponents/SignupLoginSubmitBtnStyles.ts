@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
+
 export const StyleBtn = styled.button`
   background-color: #008AFF;
-
   padding: 8px 16px;
 
   border: none;

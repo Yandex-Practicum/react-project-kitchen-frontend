@@ -1,4 +1,5 @@
 import * as Styles from '../components/StyledComponents/DeleteArticleBtnStyles';
+import Modal from './modal/modal';
 
 type TBtnStyles = {
   mrgTop: string;
@@ -7,11 +8,16 @@ type TBtnStyles = {
 }
 
 function DeleteArticleBtn (styles: TBtnStyles) {
-
-  return(
+  // const onClose = () => {
+  //   console.log('ss')
+  // }
+  return(<>
+  {/* <Modal title={"Удалить запись"} onClose={onClose} /> */}
     <Styles.button mrgTop={styles.mrgTop} height={styles.height}>
       {styles.text}
     </Styles.button>
+  </>
+
   )
 }
 

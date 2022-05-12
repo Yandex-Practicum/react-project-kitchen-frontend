@@ -5,7 +5,6 @@ export const SettingsSection = styled.section`
   max-width: 540px;
   margin: 0 auto;
   padding: 56px 20px 0;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -93,7 +92,7 @@ export const SettingsIcon = styled.span`
     width:24px;
     height:24px;
     cursor: pointer;
-    z-index: 900;
+    z-index: 7;
     &:hover{
       opacity: .7;
      

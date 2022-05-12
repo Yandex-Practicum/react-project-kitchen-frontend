@@ -14,6 +14,5 @@ export const IconFileLabel = styled.label`
   width:24px;
   height:24px;
   cursor: pointer;
-  z-index: 100;
-
+  z-index: 7;
 `

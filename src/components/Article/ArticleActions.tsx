@@ -33,12 +33,6 @@ const ArticleActions: React.FC<TArticleActionsProps> = (props) => {
           </ArticleActionsEditor>
 
           <DeleteArticleBtn mrgTop="0px" text="Удалить запись" />
-          {/* <Styles.button
-            mrgTop={'0px'}
-            onClick={deleteArticle}
-          >sdfgdsf
-          </Styles.button> */}
-
 
         </ArticleActionsWrapper>
 

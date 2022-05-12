@@ -9,6 +9,7 @@ import { getArticleThunk, getCommentsForArticleThunk } from "../../services/thun
 import { useParams } from "react-router";
 import ArticleActions from './ArticleActions';
 import { ArticlePage, ASide, PageBody, PageContent } from '../StyledComponents/articlePageStyles';
+import Modal from '../modal/modal';
 
 
 type TArticleProps = {
@@ -46,6 +47,9 @@ const Article: React.FC<TArticleProps> = (props) => {
   const canModify =
     currentUser && currentUser.username === article.author.username;
 
+  const onClose = () => {
+    console.log('ss')
+  }
   return (<>
     <ArticlePage>
 
@@ -98,6 +102,8 @@ const Article: React.FC<TArticleProps> = (props) => {
 
       </PageBody>
     </ArticlePage>
+
+    {/* <Modal title={"Удалить запись"} onClose={onClose} /> */}
 
   </>);
 };
