@@ -13,6 +13,11 @@ export const IconFileLabel = styled.label`
   display: inline-block;
   width:24px;
   height:24px;
+  margin: 0;
+  padding: 0;
   cursor: pointer;
   z-index: 7;
+  &:hover{
+    opacity: .7;
+    transition: all 0.4s linear;
 `

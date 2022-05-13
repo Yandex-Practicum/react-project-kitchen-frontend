@@ -47,14 +47,10 @@ const Settings = () => {
 
           <SettingsForm setIsUpdatedInfoMsg={setIsUpdatedInfoMsg} />
 
-          <button onClick={openingModal}> Тест открытия </button>
-          { isOpen &&
-            <Modal title = "Удалить запись " onClose={closingModal}></Modal>
-          }
-
         </Styles.SettingsSection>
-
+        
       </>
+      
     );
 };
   // }

@@ -1,6 +1,7 @@
 import React from 'react'
 import {ReactComponent as EyeSlash} from '../../images/eye-of.svg'
 import {ReactComponent as Eye} from '../../images/eye-on.svg'
+import {IconPassword} from '../../components/StyledComponents/icon-pass-styles'
 
 type TIConInputProps = {
  visible: boolean,
@@ -10,12 +11,9 @@ type TIConInputProps = {
 const IconInput: React.FC<TIConInputProps> = ({visible, toggle}) => {
 
   return (
-
-    <span onClick={toggle}>
-  
+    <IconPassword onClick={toggle}>
         {!visible ? <EyeSlash/> : <Eye/>}
-    
-    </span>
+    </IconPassword>
   );
 };
 
