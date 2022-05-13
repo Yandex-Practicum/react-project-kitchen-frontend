@@ -5,11 +5,8 @@ export const SidebarRight = styled.div`
   width: 360px;
   position: sticky;
   align-self: flex-start;
-  //--offset: 2rem;
-  ////flex-grow: 1;
-  ////flex-basis: 300px;
-  //top: var(--offset);
-  z-index: 10;
+  top: 0;
+  right: 0;
 `
 
 export const SidebarHeading = styled.h2`

@@ -40,7 +40,7 @@ const Home: FC = () => {
   return (
     <div className="home-page">
       <div className="container page">
-        <div className="row" style={{overflowY: "auto"}}>
+        <div className="row">
           <MainView/>
           {/*<div className="col-md-3">*/}
           {/*<div className="sidebar" style={{position: "sticky", top: '20%'}}>*/}
