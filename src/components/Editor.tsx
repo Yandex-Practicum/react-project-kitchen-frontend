@@ -110,7 +110,7 @@ function Editor() {
 
   return (
     <Styles.EditorSection>
-      <Styles.EditorTitle>{params.hasOwnProperty('slug') ? "Редактировать запись" : "Название статьи"}</Styles.EditorTitle>
+      <Styles.EditorTitle>{params.hasOwnProperty('slug') ? "Редактировать запись" : "Новая запись"}</Styles.EditorTitle>
 
       <FormStyles.Form action="POST" onSubmit={handleSubmitForm}>
         <FormStyles.FieldSet>
