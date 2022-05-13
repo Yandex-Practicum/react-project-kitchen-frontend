@@ -11,7 +11,7 @@ const SidebarInformation: FunctionComponent<{sectionTitle: string, articles: Arr
   // копируем иммутабельный массив из состояния дл ятого, чтобы отсортировать его. Сортировка не возвращает новое значение, а сортирует прямо на месте!
   articlesArrayForSort = [...props.articles];
   articlesArrayForSort = sortArrayOfObjects(articlesArrayForSort, props.keyName)
-    .slice(0, 6);
+    .slice(0, 5);
 
   return (
     <>

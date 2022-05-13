@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import {Link} from "react-router-dom";
+import {device} from "./constantsStyles";
 
 export const SidebarRight = styled.div`
   width: 360px;
@@ -7,6 +8,12 @@ export const SidebarRight = styled.div`
   align-self: flex-start;
   top: 0;
   right: 0;
+  padding: 0 0 81px;
+
+  @media ${device.tablet} {
+    width: 277px;
+    padding-left: 46px;
+  }
 `
 
 export const SidebarHeading = styled.h2`
@@ -15,6 +22,11 @@ export const SidebarHeading = styled.h2`
   font-weight: 400;
   font-size: 32px;
   line-height: 40px;
+
+  @media ${device.tablet} {
+    font-size: 28px;
+    line-height: 32px;
+  }
 `
 
 export const AuthorWrapper = styled.div`
@@ -38,6 +50,11 @@ export const ArticleHeading = styled.h3`
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
+
+  @media ${device.tablet} {
+    font-size: 18px;
+    line-height: 22px;
+  }
 `
 
 export const ArticleLink = styled(Link)`
