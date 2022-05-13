@@ -1,11 +1,10 @@
 import { useEffect, useState, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserThunk } from "../services/thunks";
+import { getProfileThunk, updateUserThunk } from "../services/thunks";
 import { useForm } from "react-hook-form";
 import SignupLoginSubmitBtn from "../components/SignupLoginSubmitBtn";
 import IconInput from "../UI/icon-input/icon-input";
 import IconInputFile from "../UI/icon-input-file/icon-input-file";
-import * as Styles from "../components/StyledComponents/settingsStyles";
 import * as FormStyles from "../UI/forms/form";
 import Preloader from "./Preloader";
 
@@ -20,19 +19,20 @@ type FormData = {
   password: string;
 };
 
-const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
+const SettingsForm: FC<ISettingsForm> = () => {
   const { currentUser } = useSelector((state: any) => state.common)
   const dispatch = useDispatch();
   const [isError, setIsError] = useState(false);
   const [errorsResponse, setErrorsResponse] = useState<any>(null);
   const [visible, setVisible] = useState(false);
   const { inProgress } = useSelector((state: any) => state.settings);
+  const { image } = useSelector((state: any) => state.profile);
 
-  const { register, setValue, getValues, formState: { errors, isValid }, handleSubmit,
+  const { register, setValue, formState: { errors, isValid }, handleSubmit,
   } = useForm<FormData>({
     mode: "onChange",
     defaultValues: {
-      image: currentUser.image,
+      image: image,
       email: currentUser.email,
       password: "",
       username: currentUser.username,
@@ -41,11 +41,20 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
 
   const handleSubmitForm = handleSubmit(({ image, username, email, password }, e) => {
     e && e.preventDefault();
-    dispatch(updateUserThunk({ image, username, email, password }))
+    if(password === "") {
+      dispatch(updateUserThunk({ image, username, email }))
       .unwrap()
       .catch((error: any) => {
         setErrorsResponse({ [error.name]: error.message });
       });
+    }
+    else {
+      dispatch(updateUserThunk({ image, username, email, password }))
+      .unwrap()
+      .catch((error: any) => {
+        setErrorsResponse({ [error.name]: error.message });
+      });
+    }
   });
 
   useEffect(() => {
@@ -53,11 +62,11 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
   })
 
   useEffect(() => {
+    dispatch(getProfileThunk(currentUser.username));
     setValue('username', currentUser.username);
     setValue('email', currentUser.email);
-  }, [currentUser.username, currentUser.email])
-
-  const isDisabled = getValues('password') === "" || inProgress;
+    setValue('image', image);
+  }, [currentUser.username, currentUser.email, dispatch, image])
 
   const onToggle = () => {
     setVisible((visible) => !visible);
@@ -156,7 +165,7 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
             {errors?.password && <FormStyles.Error>{errors?.password?.message}</FormStyles.Error>}
           </FormStyles.ErrorsContainer>
 
-          <SignupLoginSubmitBtn btnText="Обновить настройки" disabled={!isError || isDisabled} />
+          <SignupLoginSubmitBtn btnText="Обновить настройки" disabled={!isError || inProgress} />
 
         </FormStyles.FieldSet>
 
