@@ -78,7 +78,7 @@ export const Login: React.FC = () => {
             </FormStyles.Label>
             <FormStyles.ErrorsContainer>
               {errors?.email && <FormStyles.Error>{errors?.email?.message}</FormStyles.Error>}
-              {errorsResponse['email or password'] && <FormStyles.Error>{'Неверное имя пользователя или пароль'}</FormStyles.Error>}
+              {errorsResponse['email or password'] && <FormStyles.Error>{'Неверный email или пароль'}</FormStyles.Error>}
             </FormStyles.ErrorsContainer>
 
             <FormStyles.Label>
@@ -99,7 +99,7 @@ export const Login: React.FC = () => {
             </FormStyles.Label>
             <FormStyles.ErrorsContainer>
               {errors?.password && <FormStyles.Error>{errors?.password?.message}</FormStyles.Error>}
-              {errorsResponse['email or password'] && <FormStyles.Error>{'Неверное имя пользователя или пароль'}</FormStyles.Error>}
+              {errorsResponse['email or password'] && <FormStyles.Error>{'Неверный email или пароль'}</FormStyles.Error>}
             </FormStyles.ErrorsContainer>
 
             <SignupLoginSubmitBtn btnText="Войти" disabled={!isError || inProgress} />
