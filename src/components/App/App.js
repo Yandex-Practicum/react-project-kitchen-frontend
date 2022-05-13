@@ -1,19 +1,20 @@
-import agent from "../agent";
-import Header from "./Header";
+import agent from "../../agent";
+import Header from "../Header";
 import React from "react";
 import { connect } from "react-redux";
-import { APP_LOAD, REDIRECT } from "../constants/actionTypes";
+import { APP_LOAD, REDIRECT } from "../../constants/actionTypes";
 import { Route, Switch } from "react-router-dom";
-import Article from "../components/Article";
-import Editor from "../components/Editor";
-import Home from "../components/Home";
-import Login from "../components/Login";
-import Profile from "../components/Profile";
-import ProfileFavorites from "../components/ProfileFavorites";
-import Register from "../components/Register";
-import Settings from "../components/Settings";
-import { store } from "../store";
+import Article from "../Article";
+import Editor from "../Editor";
+import Home from "../Home";
+import Login from "../Login";
+import Profile from "../Profile";
+import ProfileFavorites from "../ProfileFavorites";
+import Register from "../Register";
+import Settings from "../Settings";
+import { store } from "../../store";
 import { push } from "react-router-redux";
+import styles from "./app.modules.css";
 
 const mapStateToProps = (state) => {
   return {
@@ -51,7 +52,7 @@ class App extends React.Component {
   render() {
     if (this.props.appLoaded) {
       return (
-        <div>
+        <section className={styles.main}>
           <Header
             appName={this.props.appName}
             currentUser={this.props.currentUser}
@@ -67,7 +68,7 @@ class App extends React.Component {
             <Route path="/@:username/favorites" component={ProfileFavorites} />
             <Route path="/@:username" component={Profile} />
           </Switch>
-        </div>
+        </section>
       );
     }
     return (
