@@ -12,6 +12,7 @@ import * as FormStyles from "../UI/forms/form";
 import IconInputFile from "../UI/icon-input-file/icon-input-file";
 import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
 import DeleteArticleBtn from "./DeleteArticleBtn";
+import Preloader from "./Preloader";
 
 type FormData = {
   title: string;
@@ -27,13 +28,13 @@ function Editor() {
 
   const [errorsResponse, setErrorsResponse] = useState<any>(null);
   const [isError, setIsError] = useState(false);
-  const [tagList, setTagList] = useState([]);
   const { inProgress } = useSelector((state: any) => state.article);
   const params: { slug: string } = useParams();
   const { article } = useSelector((state: any) => state.article);
 
   const {
     register,
+    getValues,
     setValue,
     formState: { errors, isValid },
     handleSubmit,
@@ -78,9 +79,10 @@ function Editor() {
   });
 
   const createArticle = (title: string, description: string, image: string, body: string, tagInput: string) => {
+
     dispatch(createArticleThunk({
       title, description, image, body,
-      tagList: [...tagList, ...tagInput.split(",").filter((t) => t)],
+      tagList: getValues('tagInput').split(','),
     })
     )
       .unwrap()
@@ -93,9 +95,12 @@ function Editor() {
   }
 
   const updateArticle = (title: string, description: string, image: string, body: string, tagInput: string) => {
+    const tags = getValues('tagInput');
+    const tagsArray = typeof(tags) === 'string' ? tags.split(',') : tags;
+
     dispatch(updateArticleThunk({
       title, description, image, body,
-      tagList: [...tagList, ...tagInput.split(",").filter((t) => t)],
+      tagList: tagsArray,
       slug: params.slug,
     })
     )
@@ -109,100 +114,104 @@ function Editor() {
   }
 
   return (
-    <Styles.EditorSection>
-      <Styles.EditorTitle>{params.hasOwnProperty('slug') ? "Редактировать запись" : "Новая запись"}</Styles.EditorTitle>
+    <>
+      {inProgress && (<Preloader />)}
 
-      <FormStyles.Form action="POST" onSubmit={handleSubmitForm}>
-        <FormStyles.FieldSet>
+      <Styles.EditorSection>
+        <Styles.EditorTitle>{params.hasOwnProperty('slug') ? "Редактировать запись" : "Новая запись"}</Styles.EditorTitle>
 
-          <FormStyles.Label>
-            Название статьи
-            <FormStyles.Input
-              isError={errors.title}
-              {...register("title", {
-                required: "Это поле обязательно к заполнению.",
-              })}
-            />
-          </FormStyles.Label>
-          <FormStyles.ErrorsContainer>
-            {errors?.title && <FormStyles.Error>{errors?.title?.message}</FormStyles.Error>}
-          </FormStyles.ErrorsContainer>
+        <FormStyles.Form action="POST" onSubmit={handleSubmitForm}>
+          <FormStyles.FieldSet>
 
-          <FormStyles.Label>
-            О чем статья
-            <FormStyles.Input
-              isError={errors.description}
-              {...register("description", {
-                required: "Это поле обязательно к заполнению.",
-              })}
-            />
-          </FormStyles.Label>
-          <FormStyles.ErrorsContainer>
-            {errors?.description && <FormStyles.Error>{errors?.description?.message}</FormStyles.Error>}
-          </FormStyles.ErrorsContainer>
-
-          <FormStyles.Label>
-            URL изображения (опционально)
-            <FormStyles.InputContainer>
+            <FormStyles.Label>
+              Название статьи
               <FormStyles.Input
-                isError={errors.image}
-                {...register("image", {
-                  pattern: {
-                    value: /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi,
-                    message: "Введите корректный url.",
-                  },
+                isError={errors.title}
+                {...register("title", {
+                  required: "Это поле обязательно к заполнению.",
                 })}
               />
-              <FormStyles.Icon>
-                <IconInputFile />
-              </FormStyles.Icon>
-            </FormStyles.InputContainer>
-          </FormStyles.Label>
-          <FormStyles.ErrorsContainer>
-            {errors?.image && <FormStyles.Error>{errors?.image?.message}</FormStyles.Error>}
-          </FormStyles.ErrorsContainer>
-          <FormStyles.Label>
-            Текст статьи
-            <Styles.EditorTextarea
-              minRows={5.4}
-              isError={errors.body}
-              {...register("body", {
-                required: "Это поле обязательно к заполнению.",
-              })}
+            </FormStyles.Label>
+            <FormStyles.ErrorsContainer>
+              {errors?.title && <FormStyles.Error>{errors?.title?.message}</FormStyles.Error>}
+            </FormStyles.ErrorsContainer>
+
+            <FormStyles.Label>
+              О чем статья
+              <FormStyles.Input
+                isError={errors.description}
+                {...register("description", {
+                  required: "Это поле обязательно к заполнению.",
+                })}
+              />
+            </FormStyles.Label>
+            <FormStyles.ErrorsContainer>
+              {errors?.description && <FormStyles.Error>{errors?.description?.message}</FormStyles.Error>}
+            </FormStyles.ErrorsContainer>
+
+            <FormStyles.Label>
+              URL изображения (опционально)
+              <FormStyles.InputContainer>
+                <FormStyles.Input
+                  isError={errors.image}
+                  {...register("image", {
+                    pattern: {
+                      value: /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi,
+                      message: "Введите корректный url.",
+                    },
+                  })}
+                />
+                <FormStyles.Icon>
+                  <IconInputFile />
+                </FormStyles.Icon>
+              </FormStyles.InputContainer>
+            </FormStyles.Label>
+            <FormStyles.ErrorsContainer>
+              {errors?.image && <FormStyles.Error>{errors?.image?.message}</FormStyles.Error>}
+            </FormStyles.ErrorsContainer>
+            <FormStyles.Label>
+              Текст статьи
+              <Styles.EditorTextarea
+                minRows={5.4}
+                isError={errors.body}
+                {...register("body", {
+                  required: "Это поле обязательно к заполнению.",
+                })}
+              />
+            </FormStyles.Label>
+            <FormStyles.ErrorsContainer>
+              {errors?.body && <FormStyles.Error>{errors?.body?.message}</FormStyles.Error>}
+            </FormStyles.ErrorsContainer>
+
+            <FormStyles.Label>
+              Теги (через запятую)
+              <FormStyles.Input
+                isError={errors.tagInput}
+                {...register("tagInput", {
+                  minLength: {
+                    value: 0,
+                    message: ""
+                  }
+                })}
+              />
+            </FormStyles.Label>
+            <FormStyles.ErrorsContainer>
+              {errors?.tagInput && <FormStyles.Error>{errors?.tagInput?.message}</FormStyles.Error>}
+            </FormStyles.ErrorsContainer>
+
+            <SignupLoginSubmitBtn
+              btnText={params.hasOwnProperty('slug') ? "Сохранить  запись" : "Опубликовать запись"}
+              disabled={!isError || inProgress}
             />
-          </FormStyles.Label>
-          <FormStyles.ErrorsContainer>
-            {errors?.body && <FormStyles.Error>{errors?.body?.message}</FormStyles.Error>}
-          </FormStyles.ErrorsContainer>
 
-          <FormStyles.Label>
-            Теги (через запятую)
-            <FormStyles.Input
-              isError={errors.tagInput}
-              {...register("tagInput", {
-                minLength: {
-                  value: 0,
-                  message: ""
-                }
-              })}
-            />
-          </FormStyles.Label>
-          <FormStyles.ErrorsContainer>
-            {errors?.tagInput && <FormStyles.Error>{errors?.tagInput?.message}</FormStyles.Error>}
-          </FormStyles.ErrorsContainer>
+          </FormStyles.FieldSet>
 
-          <SignupLoginSubmitBtn
-            btnText={params.hasOwnProperty('slug') ? "Сохранить  запись" : "Опубликовать запись"}
-            disabled={!isError || inProgress}
-          />
+        </FormStyles.Form >
 
-        </FormStyles.FieldSet>
+        {params.slug && <DeleteArticleBtn mrgTop="24px" text="Удалить запись" />}
 
-      </FormStyles.Form >
-
-      {params.slug && <DeleteArticleBtn mrgTop="24px" text="Удалить запись" />}
-
-    </Styles.EditorSection>
+      </Styles.EditorSection>
+    </>
   )
 }
 
