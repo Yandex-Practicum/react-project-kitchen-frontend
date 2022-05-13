@@ -13,9 +13,6 @@ export const SettingsSection = styled.section`
   @media ${device.laptop} {
     margin: -358px auto 0;
   }
-  /* @media ${device.mobileS} {
-    padding-top: 56px;
-  } */
 `
 
 export const SettingsTitle = styled.h2`
@@ -33,6 +30,5 @@ export const SettingsTitle = styled.h2`
   @media ${device.laptop} {
     font-size: 32px;
     line-height: 36px;
-
   }
 `

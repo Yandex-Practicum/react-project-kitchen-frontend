@@ -3,19 +3,16 @@ import styled from 'styled-components';
 import { textColor, linkColor, device } from './constantsStyles';
 
 export const AuthSection = styled.section`
-  max-width: 540px;
-  margin: 0 auto;
-  padding: 56px 20px 0;
+max-width: 580px;
+  margin: -250px auto 0;
+  padding: 0 20px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  @media ${device.tablet} {
-    padding-top: 64px;
-  }
-  @media ${device.mobileS} {
-    padding-top: 72px;
+  @media ${device.laptop} {
+    margin: -358px auto 0;
   }
 `
 export const AuthTitle = styled.h2`
@@ -30,7 +27,7 @@ export const AuthTitle = styled.h2`
 
   margin-bottom: 40px;
 
-  @media ${device.tablet} {
+  @media ${device.laptop} {
     font-size: 32px;
   }
 `

@@ -152,7 +152,7 @@ const SettingsForm: FC<ISettingsForm> = () => {
                   },
                   minLength: {
                     value: 5,
-                    message: "Пароль должен быть более 5 символов.",
+                    message: "Пароль должен быть более 4 символов.",
                   },
                 })}
               />
