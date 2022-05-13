@@ -64,18 +64,12 @@ export const ErrorsContainer = styled.div`
 export const InputContainer = styled.div`
   position:relative;
   `
-export const Icon = styled.span`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position:absolute;
-  bottom:10%;
-  right:17px;
-  width:24px;
-  height:24px;
+export const Icon = styled.div`
+  position: absolute;
+  top: 20%;
+  right: 17px;
   cursor: pointer;
   z-index: 7;
-  &:hover{
-    opacity: .7;
+  
 }
 `
