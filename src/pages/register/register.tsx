@@ -1,5 +1,4 @@
 import { Redirect } from "react-router-dom";
-import ListErrors from "../../components/ListErrors";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SignupLoginSubmitBtn from "../../components/SignupLoginSubmitBtn";
@@ -18,8 +17,7 @@ type FormData = {
 const Register: React.FC = () => {
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state: any) => state.common);
-  //Здесь нужно получить объект ошибок от сервера.
-  const [errorsResponse, setErrorsResponse] = useState<any>(null);
+  const [errorsResponse, setErrorsResponse] = useState<any>({});
   const [isError, setIsError] = useState(false);
   const { inProgress } = useSelector((state: any) => state.auth);
 
@@ -42,13 +40,13 @@ const Register: React.FC = () => {
     dispatch(signupThunk({ username, email, password }))
       .unwrap()
       .catch((error: any) => {
-        setErrorsResponse({ [error.name]: error.message });
+        setErrorsResponse(error);
       });
   });
 
   useEffect(() => {
     setIsError(isValid)
-  })
+  }, [isValid])
 
   if (isLoggedIn) {
     return <Redirect to="/" />;
@@ -68,7 +66,10 @@ const Register: React.FC = () => {
             <FormStyles.Label>
               Имя пользователя
               <FormStyles.Input
-                isError={errors.username}
+                onInput={() => {
+                  { "username" in errorsResponse && setErrorsResponse({ ...errorsResponse, username: "" }) }
+                }}
+                isError={errors.username || errorsResponse?.username}
                 {...register("username", {
                   required: "Это поле обязательно к заполнению.",
                   pattern: {
@@ -84,12 +85,16 @@ const Register: React.FC = () => {
             </FormStyles.Label>
             <FormStyles.ErrorsContainer>
               {errors?.username && <FormStyles.Error>{errors?.username?.message}</FormStyles.Error>}
+              {errorsResponse?.username && <FormStyles.Error>{'Такое имя пользователя уже существует'}</FormStyles.Error>}
             </FormStyles.ErrorsContainer>
 
             <FormStyles.Label>
               Email
               <FormStyles.Input
-                isError={errors.email}
+                onInput={() => {
+                  { "email" in errorsResponse && setErrorsResponse({ ...errorsResponse, email: "" }) }
+                }}
+                isError={errors.email || errorsResponse?.email}
                 {...register("email", {
                   required: "Это поле обязательно к заполнению.",
                   pattern: {
@@ -101,12 +106,16 @@ const Register: React.FC = () => {
             </FormStyles.Label>
             <FormStyles.ErrorsContainer>
               {errors?.email && <FormStyles.Error>{errors?.email?.message}</FormStyles.Error>}
+              {errorsResponse?.email && <FormStyles.Error>{'Такой email уже существует'}</FormStyles.Error>}
             </FormStyles.ErrorsContainer>
 
             <FormStyles.Label>
               Пароль
               <FormStyles.Input
-                isError={errors.password}
+                onInput={() => {
+                  { "password" in errorsResponse && setErrorsResponse({ ...errorsResponse, password: "" }) }
+                }}
+                isError={errors.password || errorsResponse?.password}
                 {...register("password", {
                   required: "Это поле обязательно к заполнению.",
                   minLength: {
@@ -118,14 +127,13 @@ const Register: React.FC = () => {
             </FormStyles.Label>
             <FormStyles.ErrorsContainer>
               {errors?.password && <FormStyles.Error>{errors?.password?.message}</FormStyles.Error>}
+              {errorsResponse?.password && <FormStyles.Error>{errorsResponse?.password}</FormStyles.Error>}
             </FormStyles.ErrorsContainer>
 
             <SignupLoginSubmitBtn btnText="Зарегистрироваться" disabled={!isError || inProgress} />
 
           </FormStyles.FieldSet>
         </FormStyles.Form>
-
-        {/* <ListErrors errors={errorsResponse} /> */}
       </Styles.AuthSection>
     </>
   );

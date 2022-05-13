@@ -15,7 +15,7 @@ const pc = (
         : await apiRequest();
       return response;
     } catch (error) {
-      return Promise.reject(error);
+      return thunkAPI.rejectWithValue(error);
     }
   };
 };
