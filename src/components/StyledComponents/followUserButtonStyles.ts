@@ -20,6 +20,14 @@ export const followBtn = styled.button`
   &:hover{
     background-color: ${btnSbmtColor.hover};
   }
+
+  &:active{
+    background-color: ${btnSbmtColor.active};
+  }
+
+  &:focus{
+    outline: none;
+  }
 `
 export const followImg = styled.img`
   margin-right: 13px;

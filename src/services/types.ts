@@ -2,7 +2,8 @@ export type TFollowingUser = {
   username: string,
   image: string,
   following: boolean,
-  bio?: string
+  bio?: string,
+  isLoading: boolean,
 }
 
 export type TFollowingUserProfile = {
