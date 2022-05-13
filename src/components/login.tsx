@@ -1,5 +1,4 @@
 import { Redirect } from "react-router-dom";
-import ListErrors from "./ListErrors";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
@@ -17,8 +16,7 @@ type FormData = {
 export const Login: React.FC = () => {
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state: any) => state.common);
-  //Здесь нужно получить объект ошибок от сервера.
-  const [errorsResponse, setErrorsResponse] = useState<any>(null);
+  const [errorsResponse, setErrorsResponse] = useState<any>({});
   const [isError, setIsError] = useState(false);
   const { inProgress } = useSelector((state: any) => state.auth);
 
@@ -39,7 +37,7 @@ export const Login: React.FC = () => {
     dispatch(loginThunk({ email, password }))
       .unwrap()
       .catch((error: any) => {
-        setErrorsResponse({ [error.name]: error.message });
+        setErrorsResponse(error);
       });
   });
 
@@ -65,7 +63,10 @@ export const Login: React.FC = () => {
             <FormStyles.Label>
               Email
               <FormStyles.Input
-                isError={errors.email}
+                onInput={() => {
+                  { "email or password" in errorsResponse && setErrorsResponse({ ...errorsResponse, "email or password": "" }) }
+                }}
+                isError={errors.email || errorsResponse['email or password']}
                 {...register("email", {
                   required: "Это поле обязательно к заполнению.",
                   pattern: {
@@ -77,12 +78,16 @@ export const Login: React.FC = () => {
             </FormStyles.Label>
             <FormStyles.ErrorsContainer>
               {errors?.email && <FormStyles.Error>{errors?.email?.message}</FormStyles.Error>}
+              {errorsResponse['email or password'] && <FormStyles.Error>{'Неверное имя пользователя или пароль'}</FormStyles.Error>}
             </FormStyles.ErrorsContainer>
 
             <FormStyles.Label>
               Пароль
               <FormStyles.Input
-                isError={errors.password}
+                onInput={() => {
+                  { "email or password" in errorsResponse && setErrorsResponse({ ...errorsResponse, "email or password": "" }) }
+                }}
+                isError={errors.password || errorsResponse['email or password']}
                 {...register("password", {
                   required: "Это поле обязательно к заполнению.",
                   minLength: {
@@ -94,14 +99,13 @@ export const Login: React.FC = () => {
             </FormStyles.Label>
             <FormStyles.ErrorsContainer>
               {errors?.password && <FormStyles.Error>{errors?.password?.message}</FormStyles.Error>}
+              {errorsResponse['email or password'] && <FormStyles.Error>{'Неверное имя пользователя или пароль'}</FormStyles.Error>}
             </FormStyles.ErrorsContainer>
 
             <SignupLoginSubmitBtn btnText="Войти" disabled={!isError || inProgress} />
 
           </FormStyles.FieldSet>
         </FormStyles.Form>
-
-        {/* <ListErrors errors={errorsResponse} /> */}
       </Styles.AuthSection>
     </>
   );
