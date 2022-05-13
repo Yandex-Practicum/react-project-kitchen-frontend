@@ -70,6 +70,4 @@ export const Icon = styled.div`
   right: 17px;
   cursor: pointer;
   z-index: 7;
-  
-}
 `
