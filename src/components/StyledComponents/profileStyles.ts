@@ -2,16 +2,13 @@ import styled from 'styled-components';
 import { device } from './constantsStyles';
 
 export const ProfileSection = styled.section`
-  padding-top: 56px 20px 0;
+  padding: 0 20px;
 
-  max-width: 700px;
+  max-width: 740px;
 
-  margin: 0 auto;
+  margin: -250px auto 0;
 
-  @media ${device.tablet} {
-    padding-top: 48px;
-  }
-  @media ${device.mobileS} {
-    padding-top: 40px;
+  @media ${device.laptop} {
+    margin: -358px auto 0;
   }
 `

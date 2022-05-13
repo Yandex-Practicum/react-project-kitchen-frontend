@@ -7,6 +7,7 @@ import { loginThunk } from "../services/thunks";
 import { useForm } from "react-hook-form";
 import * as Styles from "../components/StyledComponents/authStyles";
 import * as FormStyles from "../UI/forms/form";
+import Preloader from "./Preloader";
 
 type FormData = {
   email: string;
@@ -44,61 +45,65 @@ export const Login: React.FC = () => {
 
   useEffect(() => {
     setIsError(isValid)
-  },)
+  })
 
   if (isLoggedIn) {
     return <Redirect to="/" />;
   }
 
   return (
-    <Styles.AuthSection>
-      <Styles.AuthTitle>Войти</Styles.AuthTitle>
-      <Styles.StyledLink to="/register">Зарегистрироваться</Styles.StyledLink>
+    <>
+      {inProgress && (<Preloader />)}
 
-      <FormStyles.Form action="POST" onSubmit={handleSubmitForm}>
-        <FormStyles.FieldSet>
+      <Styles.AuthSection>
+        <Styles.AuthTitle>Войти</Styles.AuthTitle>
+        <Styles.StyledLink to="/register">Зарегистрироваться</Styles.StyledLink>
 
-          <FormStyles.Label>
-            Email
-            <FormStyles.Input
-              isError={errors.email}
-              {...register("email", {
-                required: "Это поле обязательно к заполнению.",
-                pattern: {
-                  value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-                  message: "Пример Email: name@example.com",
-                },
-              })}
-            />
-          </FormStyles.Label>
-          <FormStyles.ErrorsContainer>
-            {errors?.email && <FormStyles.Error>{errors?.email?.message}</FormStyles.Error>}
-          </FormStyles.ErrorsContainer>
+        <FormStyles.Form action="POST" onSubmit={handleSubmitForm}>
+          <FormStyles.FieldSet>
 
-          <FormStyles.Label>
-            Пароль
-            <FormStyles.Input
-              isError={errors.password}
-              {...register("password", {
-                required: "Это поле обязательно к заполнению.",
-                minLength: {
-                  value: 5,
-                  message: "Пароль должен быть более 4 символов.",
-                },
-              })}
-            />
-          </FormStyles.Label>
-          <FormStyles.ErrorsContainer>
-            {errors?.password && <FormStyles.Error>{errors?.password?.message}</FormStyles.Error>}
-          </FormStyles.ErrorsContainer>
+            <FormStyles.Label>
+              Email
+              <FormStyles.Input
+                isError={errors.email}
+                {...register("email", {
+                  required: "Это поле обязательно к заполнению.",
+                  pattern: {
+                    value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                    message: "Пример Email: name@example.com",
+                  },
+                })}
+              />
+            </FormStyles.Label>
+            <FormStyles.ErrorsContainer>
+              {errors?.email && <FormStyles.Error>{errors?.email?.message}</FormStyles.Error>}
+            </FormStyles.ErrorsContainer>
 
-          <SignupLoginSubmitBtn btnText="Войти" disabled={!isError || inProgress} />
+            <FormStyles.Label>
+              Пароль
+              <FormStyles.Input
+                isError={errors.password}
+                {...register("password", {
+                  required: "Это поле обязательно к заполнению.",
+                  minLength: {
+                    value: 5,
+                    message: "Пароль должен быть более 4 символов.",
+                  },
+                })}
+              />
+            </FormStyles.Label>
+            <FormStyles.ErrorsContainer>
+              {errors?.password && <FormStyles.Error>{errors?.password?.message}</FormStyles.Error>}
+            </FormStyles.ErrorsContainer>
 
-        </FormStyles.FieldSet>
-      </FormStyles.Form>
+            <SignupLoginSubmitBtn btnText="Войти" disabled={!isError || inProgress} />
 
-      {/* <ListErrors errors={errorsResponse} /> */}
-    </Styles.AuthSection>
+          </FormStyles.FieldSet>
+        </FormStyles.Form>
+
+        {/* <ListErrors errors={errorsResponse} /> */}
+      </Styles.AuthSection>
+    </>
   );
 };
 
