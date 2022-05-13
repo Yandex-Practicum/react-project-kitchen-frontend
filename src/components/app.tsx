@@ -13,6 +13,7 @@ import NotFound404 from "../pages/notFound404/notFound404"
 import { useDispatch } from "react-redux";
 import { authThunk } from "../services/thunks";
 import { Layout } from "./StyledComponents/Layout";
+import Footer from "./Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ function App() {
           <Route component={NotFound404}/>
         </Switch>
       </Layout>
+      <Footer />
     </>
   );
 }
