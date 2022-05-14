@@ -30,41 +30,12 @@ type TArticleProps = {
 
 const Article: React.FC<TArticleProps> = (props) => {
   const dispatch = useDispatch();
-  const {articles} = useSelector((state: any) => state.articleList);
+  const {allArticles} = useSelector((state: any) => state.articleList);
   const {article} = useSelector((state: any) => state.article);
   const {currentUser} = useSelector((state: any) => state.common);
   const {comments} = useSelector((state: any) => state.article);
   const {commentErrors} = useSelector((state: any) => state.article);
   const params: { id: string } = useParams();
-
-
-  // const onLoad = (payload: any) => {
-  //   return dispatch(ARTICLE_PAGE_LOADED(payload))
-  // }
-
-  // const onUnload = () => {
-  //   return dispatch(ARTICLE_PAGE_UNLOADED())
-  // }
-
-  // useEffect(() => {
-  //   dispatch(ARTICLE_PAGE_LOADED(Promise.all([
-  //     getArticle(props.match.params.id),
-  //     getCommentsForArticle(props.match.params.id)
-  //   ])))
-
-  //   return () => {
-  //     dispatch(ARTICLE_PAGE_UNLOADED());
-  //   };
-  // }, []);
-
-  // if (Object.keys(article).length === 0) {
-  //   return null;
-  // }
-
-  // const articleBody = DOMPurify.sanitize(article.body);
-  // const markup  = { __html: marked(articleBody)};
-
-  // const canModify = currentUser && currentUser.username === article.author.username;
 
   useEffect(() => {
     if (params.id) {
@@ -125,7 +96,7 @@ const Article: React.FC<TArticleProps> = (props) => {
           </div>
         </div>
         <SidebarRight>
-          <SidebarInformation sectionTitle="Свежие новости" articles={articles} keyName="createdAt"/>
+          <SidebarInformation sectionTitle="Свежие новости" articles={allArticles} keyName="createdAt"/>
         </SidebarRight>
       </div>
     </div>

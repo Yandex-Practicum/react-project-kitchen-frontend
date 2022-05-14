@@ -94,6 +94,19 @@ export const getAllArticles = async (page: number = 0): Promise<any> => {
   return response.data;
 };
 
+export const getAllArticlesForSort = async (page: number = 0): Promise<any> => {
+  const response: AxiosResponse<any> = await axios.get(
+    `${ApiEnums.BASE_URL}/articles`,
+    {
+      params: {
+        limit: 999,
+        offset: page,
+      },
+    }
+  );
+  return response.data;
+};
+
 export const getArticlesByAuthor = async ({
   author,
   page = 0,

@@ -1,5 +1,4 @@
 import React, {FunctionComponent} from "react";
-import {Link} from "react-router-dom";
 
 import avatar from '../images/no-avatar-image.png';
 
@@ -10,6 +9,7 @@ import {
   ProfileImageWrapper, ProfileText,
   ProfileTextWrapper
 } from "./StyledComponents/profile-information-view-styles";
+
 import {useAppSelector} from "../services/hooks";
 import {TFollowingUser} from "../services/types";
 
@@ -22,7 +22,7 @@ const ProfileInformationView: FunctionComponent<{ articleDate: string, author: T
   console.log(user)
 
   return (
-    <HoverLink to={`/@${props.author.username}`} underlined>
+    <HoverLink to={`/@${props.author.username}`}>
 
       <ProfileContainer>
 
@@ -36,8 +36,8 @@ const ProfileInformationView: FunctionComponent<{ articleDate: string, author: T
         </ProfileImageWrapper>
 
         <ProfileTextWrapper>
-          <ProfileText fontSize="16px" lineHeight="20px">{props.author.username}</ProfileText>
-          <ProfileText fontSize="12px" lineHeight="16px" underlined={false}>{props.articleDate}</ProfileText>
+          <ProfileText fontSize="16px" lineHeight="20px" underlined={true}>{props.author.username}</ProfileText>
+          <ProfileText fontSize="12px" lineHeight="16px">{props.articleDate}</ProfileText>
         </ProfileTextWrapper>
       </ProfileContainer>
 

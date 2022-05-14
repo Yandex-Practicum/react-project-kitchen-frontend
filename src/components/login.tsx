@@ -53,7 +53,7 @@ export const Login: React.FC = () => {
     <>
       {inProgress && (<Preloader />)}
 
-      <Styles.AuthSection>
+      <Styles.LoginSection>
         <Styles.AuthTitle>Войти</Styles.AuthTitle>
         <Styles.StyledLink to="/register">Зарегистрироваться</Styles.StyledLink>
 
@@ -106,7 +106,7 @@ export const Login: React.FC = () => {
 
           </FormStyles.FieldSet>
         </FormStyles.Form>
-      </Styles.AuthSection>
+      </Styles.LoginSection>
     </>
   );
 };

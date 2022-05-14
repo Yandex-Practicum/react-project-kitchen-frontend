@@ -1,6 +1,6 @@
 import React from "react";
 import {useDispatch} from "react-redux";
-import {composeCreatedDate} from "../utils/utiils";
+import {composeCreatedDate} from "../utils/utils";
 import {
   deleteArticleAsFavoriteThunk,
   setArticleAsFavoriteThunk,
