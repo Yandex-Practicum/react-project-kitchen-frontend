@@ -20,7 +20,7 @@ const ArticlePreview: React.FC<{ article: TArticleProperties } > = (props) => {
   // const dispatch = useDispatch();
 
   const {article} = props;
-
+  console.log(article)
   // const favoriteButtonClass = article.favorited
   //   ? FAVORITED_CLASS
   //   : NOT_FAVORITED_CLASS;

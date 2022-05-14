@@ -7,15 +7,23 @@ export const HomePageSection = styled.section`
   display: flex;
   justify-content: space-between;
   overflowY: "auto" ;
+  padding-bottom: 30px;
 
-  @media ${device.laptop} {
-    
+  @media ${device.laptopL} {
+   margin: -314px auto 0;
    max-width: 720px;
   }
 
+  @media ${device.laptop} {
+    margin: -355px auto 0;
+    max-width: 720px;
+    padding-bottom: 40px;
+  }
+
   @media ${device.tablet} {
-    
-    flex-direction: column;
+    margin: -371px auto 0;
+    flex-direction: column-reverse;
+    align-items: center;
   }
 
 `

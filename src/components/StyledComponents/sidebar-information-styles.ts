@@ -10,6 +10,10 @@ export const SidebarRight = styled.div`
   ////flex-basis: 300px;
   //top: var(--offset);
   z-index: 10;
+
+  @media ${device.laptop} {
+    width: 227px;
+  }
 `
 
 export const SidebarHeading = styled.h2`
