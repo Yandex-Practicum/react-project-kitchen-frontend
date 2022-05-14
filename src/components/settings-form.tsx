@@ -1,11 +1,11 @@
 import { useEffect, useState, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserThunk } from "../services/thunks";
+import { getProfileThunk, updateUserThunk } from "../services/thunks";
 import { useForm } from "react-hook-form";
 import SignupLoginSubmitBtn from "../components/SignupLoginSubmitBtn";
 import IconInput from "../UI/icon-input/icon-input";
 import IconInputFile from "../UI/icon-input-file/icon-input-file";
-import * as Styles from "../components/StyledComponents/settingsStyles";
+import * as FormStyles from "../UI/forms/form";
 import Preloader from "./Preloader";
 
 interface ISettingsForm {
@@ -19,19 +19,20 @@ type FormData = {
   password: string;
 };
 
-const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
+const SettingsForm: FC<ISettingsForm> = () => {
   const { currentUser } = useSelector((state: any) => state.common)
   const dispatch = useDispatch();
   const [isError, setIsError] = useState(false);
-  const [errorsResponse, setErrorsResponse] = useState<any>(null);
+  const [errorsResponse, setErrorsResponse] = useState<any>({});
   const [visible, setVisible] = useState(false);
   const { inProgress } = useSelector((state: any) => state.settings);
+  const { image } = useSelector((state: any) => state.profile);
 
-  const { register, setValue, getValues, formState: { errors, isValid }, handleSubmit,
+  const { register, setValue, formState: { errors, isValid }, handleSubmit,
   } = useForm<FormData>({
     mode: "onChange",
     defaultValues: {
-      image: currentUser.image,
+      image: image,
       email: currentUser.email,
       password: "",
       username: currentUser.username,
@@ -40,23 +41,32 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
 
   const handleSubmitForm = handleSubmit(({ image, username, email, password }, e) => {
     e && e.preventDefault();
-    dispatch(updateUserThunk({ image, username, email, password }))
-      .unwrap()
-      .catch((error: any) => {
-        setErrorsResponse({ [error.name]: error.message });
-      });
+    if (password === "") {
+      dispatch(updateUserThunk({ image, username, email }))
+        .unwrap()
+        .catch((error: any) => {
+          setErrorsResponse(error);
+        });
+    }
+    else {
+      dispatch(updateUserThunk({ image, username, email, password }))
+        .unwrap()
+        .catch((error: any) => {
+          setErrorsResponse(error);
+        });
+    }
   });
 
   useEffect(() => {
     setIsError(isValid)
-  })
+  }, [isValid])
 
   useEffect(() => {
+    dispatch(getProfileThunk(currentUser.username));
     setValue('username', currentUser.username);
     setValue('email', currentUser.email);
-  }, [currentUser.username, currentUser.email])
-
-  const isDisabled = getValues('password') === "" || inProgress;
+    setValue('image', image);
+  }, [currentUser.username, currentUser.email, dispatch, image])
 
   const onToggle = () => {
     setVisible((visible) => !visible);
@@ -68,13 +78,13 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
         <Preloader />
       )}
 
-      <Styles.SettingsForm action="POST" onSubmit={handleSubmitForm}>
-        <Styles.SettingsFieldSet>
+      <FormStyles.Form action="POST" onSubmit={handleSubmitForm}>
+        <FormStyles.FieldSet>
 
-          <Styles.SettingsLabel>
+          <FormStyles.Label>
             URL изображения профиля
-            <Styles.SettingsInputContainer>
-              <Styles.SettingsInput
+            <FormStyles.InputContainer>
+              <FormStyles.Input
                 isError={errors.image}
                 {...register("image", {
                   pattern: {
@@ -83,18 +93,21 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
                   },
                 })}
               />
-              <Styles.SettingsIcon>
+              <FormStyles.Icon>
                 <IconInputFile />
-              </Styles.SettingsIcon>
-            </Styles.SettingsInputContainer>
-          </Styles.SettingsLabel>
-          <Styles.ErrorsContainer>
-            {errors?.image && <Styles.SettingsError>{errors?.image?.message}</Styles.SettingsError>}
-          </Styles.ErrorsContainer>
+              </FormStyles.Icon>
+            </FormStyles.InputContainer>
+          </FormStyles.Label>
+          <FormStyles.ErrorsContainer>
+            {errors?.image && <FormStyles.Error>{errors?.image?.message}</FormStyles.Error>}
+          </FormStyles.ErrorsContainer>
 
-          <Styles.SettingsLabel>
+          <FormStyles.Label>
             Имя пользователя
-            <Styles.SettingsInput
+            <FormStyles.Input
+              onInput={() => {
+                { "username" in errorsResponse && setErrorsResponse({ ...errorsResponse, username: "" }) }
+              }}
               isError={errors.username}
               {...register("username", {
                 pattern: {
@@ -107,14 +120,18 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
                 },
               })}
             />
-          </Styles.SettingsLabel>
-          <Styles.ErrorsContainer>
-            {errors?.username && <Styles.AutoError>{errors?.username?.message}</Styles.AutoError>}
-          </Styles.ErrorsContainer>
+          </FormStyles.Label>
+          <FormStyles.ErrorsContainer>
+            {errors?.username && <FormStyles.Error>{errors?.username?.message}</FormStyles.Error>}
+            {errorsResponse?.username && <FormStyles.Error>{'Такое имя пользователя уже существует'}</FormStyles.Error>}
+          </FormStyles.ErrorsContainer>
 
-          <Styles.SettingsLabel>
+          <FormStyles.Label>
             E-mail
-            <Styles.SettingsInput
+            <FormStyles.Input
+              onInput={() => {
+                { "email" in errorsResponse && setErrorsResponse({ ...errorsResponse, email: "" }) }
+              }}
               isError={errors.email}
               {...register("email", {
                 pattern: {
@@ -123,15 +140,16 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
                 },
               })}
             />
-          </Styles.SettingsLabel>
-          <Styles.ErrorsContainer>
-            {errors?.email && <Styles.AutoError>{errors?.email?.message}</Styles.AutoError>}
-          </Styles.ErrorsContainer>
+          </FormStyles.Label>
+          <FormStyles.ErrorsContainer>
+            {errors?.email && <FormStyles.Error>{errors?.email?.message}</FormStyles.Error>}
+            {errorsResponse?.email && <FormStyles.Error>{'Такой email уже существует'}</FormStyles.Error>}
+          </FormStyles.ErrorsContainer>
 
-          <Styles.SettingsLabel>
+          <FormStyles.Label>
             Новый пароль
-            <Styles.SettingsInputContainer>
-              <Styles.SettingsInput
+            <FormStyles.InputContainer>
+              <FormStyles.Input
                 autoComplete="new-password"
                 type={visible ? "text" : "password"}
                 isError={errors.password}
@@ -142,24 +160,24 @@ const SettingsForm: FC<ISettingsForm> = ({ setIsUpdatedInfoMsg }) => {
                   },
                   minLength: {
                     value: 5,
-                    message: "Пароль должен быть более 5 символов.",
+                    message: "Пароль должен быть более 4 символов.",
                   },
                 })}
               />
-              <Styles.SettingsIcon>
+              <FormStyles.Icon>
                 <IconInput visible={visible} toggle={onToggle} />
-              </Styles.SettingsIcon>
-            </Styles.SettingsInputContainer>
-          </Styles.SettingsLabel>
-          <Styles.ErrorsContainer>
-            {errors?.password && <Styles.AutoError>{errors?.password?.message}</Styles.AutoError>}
-          </Styles.ErrorsContainer>
+              </FormStyles.Icon>
+            </FormStyles.InputContainer>
+          </FormStyles.Label>
+          <FormStyles.ErrorsContainer>
+            {errors?.password && <FormStyles.Error>{errors?.password?.message}</FormStyles.Error>}
+          </FormStyles.ErrorsContainer>
 
-          <SignupLoginSubmitBtn btnText="Обновить настройки" disabled={!isError || isDisabled} />
+          <SignupLoginSubmitBtn btnText="Обновить настройки" disabled={!isError || inProgress} />
 
-        </Styles.SettingsFieldSet>
+        </FormStyles.FieldSet>
 
-      </Styles.SettingsForm>
+      </FormStyles.Form>
     </>
   );
 };

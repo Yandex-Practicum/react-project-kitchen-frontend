@@ -1,11 +1,12 @@
 import { Redirect } from "react-router-dom";
-import ListErrors from "./ListErrors";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
 import { loginThunk } from "../services/thunks";
 import { useForm } from "react-hook-form";
 import * as Styles from "../components/StyledComponents/authStyles";
+import * as FormStyles from "../UI/forms/form";
+import Preloader from "./Preloader";
 
 type FormData = {
   email: string;
@@ -15,8 +16,7 @@ type FormData = {
 export const Login: React.FC = () => {
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state: any) => state.common);
-  //Здесь нужно получить объект ошибок от сервера.
-  const [errorsResponse, setErrorsResponse] = useState<any>(null);
+  const [errorsResponse, setErrorsResponse] = useState<any>({});
   const [isError, setIsError] = useState(false);
   const { inProgress } = useSelector((state: any) => state.auth);
 
@@ -37,67 +37,77 @@ export const Login: React.FC = () => {
     dispatch(loginThunk({ email, password }))
       .unwrap()
       .catch((error: any) => {
-        setErrorsResponse({ [error.name]: error.message });
+        setErrorsResponse(error);
       });
   });
 
   useEffect(() => {
     setIsError(isValid)
-  },)
+  })
 
   if (isLoggedIn) {
     return <Redirect to="/" />;
   }
 
   return (
-    <Styles.AuthSection>
-      <Styles.AuthTitle>Войти</Styles.AuthTitle>
-      <Styles.StyledLink to="/register">Зарегистрироваться</Styles.StyledLink>
+    <>
+      {inProgress && (<Preloader />)}
 
-      <Styles.AuthForm action="POST" onSubmit={handleSubmitForm}>
-        <Styles.AuthFieldSet>
+      <Styles.AuthSection>
+        <Styles.AuthTitle>Войти</Styles.AuthTitle>
+        <Styles.StyledLink to="/register">Зарегистрироваться</Styles.StyledLink>
 
-          <Styles.AuthLabel>
-            Email
-            <Styles.AuthInput
-              isError={errors.email}
-              {...register("email", {
-                required: "Это поле обязательно к заполнению.",
-                pattern: {
-                  value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-                  message: "Пример Email: name@example.com",
-                },
-              })}
-            />
-          </Styles.AuthLabel>
-          <Styles.ErrorsContainer>
-            {errors?.email && <Styles.AuthError>{errors?.email?.message}</Styles.AuthError>}
-          </Styles.ErrorsContainer>
+        <FormStyles.Form action="POST" onSubmit={handleSubmitForm}>
+          <FormStyles.FieldSet>
 
-          <Styles.AuthLabel>
-            Пароль
-            <Styles.AuthInput
-              isError={errors.password}
-              {...register("password", {
-                required: "Это поле обязательно к заполнению.",
-                minLength: {
-                  value: 5,
-                  message: "Пароль должен быть более 4 символов.",
-                },
-              })}
-            />
-          </Styles.AuthLabel>
-          <Styles.ErrorsContainer>
-            {errors?.password && <Styles.AuthError>{errors?.password?.message}</Styles.AuthError>}
-          </Styles.ErrorsContainer>
+            <FormStyles.Label>
+              Email
+              <FormStyles.Input
+                onInput={() => {
+                  { "email or password" in errorsResponse && setErrorsResponse({ ...errorsResponse, "email or password": "" }) }
+                }}
+                isError={errors.email || errorsResponse['email or password']}
+                {...register("email", {
+                  required: "Это поле обязательно к заполнению.",
+                  pattern: {
+                    value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                    message: "Пример Email: name@example.com",
+                  },
+                })}
+              />
+            </FormStyles.Label>
+            <FormStyles.ErrorsContainer>
+              {errors?.email && <FormStyles.Error>{errors?.email?.message}</FormStyles.Error>}
+              {errorsResponse['email or password'] && <FormStyles.Error>{'Неверный email или пароль'}</FormStyles.Error>}
+            </FormStyles.ErrorsContainer>
 
-          <SignupLoginSubmitBtn btnText="Войти" disabled={!isError || inProgress} />
+            <FormStyles.Label>
+              Пароль
+              <FormStyles.Input
+                onInput={() => {
+                  { "email or password" in errorsResponse && setErrorsResponse({ ...errorsResponse, "email or password": "" }) }
+                }}
+                isError={errors.password || errorsResponse['email or password']}
+                {...register("password", {
+                  required: "Это поле обязательно к заполнению.",
+                  minLength: {
+                    value: 5,
+                    message: "Пароль должен быть более 4 символов.",
+                  },
+                })}
+              />
+            </FormStyles.Label>
+            <FormStyles.ErrorsContainer>
+              {errors?.password && <FormStyles.Error>{errors?.password?.message}</FormStyles.Error>}
+              {errorsResponse['email or password'] && <FormStyles.Error>{'Неверный email или пароль'}</FormStyles.Error>}
+            </FormStyles.ErrorsContainer>
 
-        </Styles.AuthFieldSet>
-      </Styles.AuthForm>
+            <SignupLoginSubmitBtn btnText="Войти" disabled={!isError || inProgress} />
 
-      {/* <ListErrors errors={errorsResponse} /> */}
-    </Styles.AuthSection>
+          </FormStyles.FieldSet>
+        </FormStyles.Form>
+      </Styles.AuthSection>
+    </>
   );
 };
 

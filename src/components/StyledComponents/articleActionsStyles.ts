@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import { btnSbmtColor, textColor, linkColor, inputBorderColor, device } from './constantsStyles';
+import { btnSbmtColor, textColor, device } from './constantsStyles';
 
 export const ArticleActionsWrapper = styled.div`
   display: flex;
@@ -10,9 +10,6 @@ export const ArticleActionsWrapper = styled.div`
   width: 100%;
   margin-bottom: 24px;
 
-  @media ${device.laptopL} {
-
-  }
 
   @media ${device.tablet} {
     flex-direction: column;
@@ -42,17 +39,6 @@ export const ArticleActionsEditor = styled(Link)`
   &:active {
     background-color: ${btnSbmtColor.active};
   }
-
-  @media ${device.laptopL} {
-
-  }
-
-  @media ${device.laptop} {
-
-  }
-  @media ${device.mobileS} {
-
-  }
 `
 
 export const ArticleActionsEditorIcon = styled.img`
@@ -61,16 +47,4 @@ export const ArticleActionsEditorIcon = styled.img`
   margin-right: 8px;
 
   background-color: transparent;
-
-
-  @media ${device.laptopL} {
-
-  }
-
-  @media ${device.laptop} {
-
-  }
-  @media ${device.mobileS} {
-
-  }
 `

@@ -6,7 +6,7 @@ type TBtnStyles = {
   text?: string;
   height?: string;
   align?: string;
-  onClick?: () => void;
+  onClick?: (e: React.SyntheticEvent) => void;
 }
 
 function DeleteArticleBtn (props: TBtnStyles) {

@@ -5,13 +5,13 @@ import Tags from "../../components/Home/Tags";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getAllArticlesThunk,
-  getFeedArticlesThunk,
   getTagsThunk,
 } from "../../services/thunks";
 import { homeSlice } from "../../services/homeSlice";
 import SidebarInformation from "../../components/sidebar-information";
 import { SidebarRight } from "../../components/StyledComponents/sidebar-information-styles";
 import { TagsTitle } from "../../components/StyledComponents/home-page-styles";
+import { HomePageSection } from "../../components/StyledComponents/homepage/homepageStyles";
 
 const Home: FC = () => {
   const { appName, token } = useSelector((state: any) => state.common);
@@ -23,11 +23,7 @@ const Home: FC = () => {
   const actionsHome = homeSlice.actions;
 
   useEffect(() => {
-    if (token) {
-      dispatch(getFeedArticlesThunk());
-    } else {
-      dispatch(getAllArticlesThunk());
-    }
+    dispatch(getAllArticlesThunk());
     dispatch(getTagsThunk());
     return () => {
       dispatch(actionsHome.homePageWasUnloaded());
@@ -35,9 +31,8 @@ const Home: FC = () => {
   }, []);
 
   return (
-    <div className="home-page">
-      <div className="container page">
-        <div className="row" style={{ overflowY: "auto" }}>
+      <HomePageSection>
+       
           <MainView />
           {/*<div className="col-md-3">*/}
           {/*<div className="sidebar" style={{position: "sticky", top: '20%'}}>*/}
@@ -54,9 +49,8 @@ const Home: FC = () => {
             <SidebarInformation sectionTitle="Популярные материалы" articles={articles} keyName='favoritesCount'/>
           </SidebarRight>
           {/*</div>*/}
-        </div>
-      </div>
-    </div>
+        
+      </HomePageSection>
   );
 };
 

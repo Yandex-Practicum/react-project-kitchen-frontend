@@ -1,4 +1,3 @@
-import ListErrors from "./ListErrors";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
@@ -9,10 +8,13 @@ import {
 } from "../services/thunks";
 import { useForm } from "react-hook-form";
 import * as Styles from "../components/StyledComponents/editorStyles";
+import * as FormStyles from "../UI/forms/form";
 import IconInputFile from "../UI/icon-input-file/icon-input-file";
 import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
 import DeleteArticleBtn from "./DeleteArticleBtn";
+
 import Modal from "./modal/modal";
+import Preloader from "./Preloader";
 
 type FormData = {
   title: string;
@@ -26,9 +28,7 @@ function Editor() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const [errorsResponse, setErrorsResponse] = useState<any>(null);
   const [isError, setIsError] = useState(false);
-  const [tagList, setTagList] = useState([]);
   const { inProgress } = useSelector((state: any) => state.article);
   const params: { slug: string, id: string } = useParams();
   const { article } = useSelector((state: any) => state.article);
@@ -53,6 +53,7 @@ function Editor() {
 
   const {
     register,
+    getValues,
     setValue,
     formState: { errors, isValid },
     handleSubmit,
@@ -78,7 +79,7 @@ function Editor() {
       setValue("title", article.title);
       setValue("description", article.description);
       setValue("body", article.body);
-      setValue("tagInput", article.tagList[0]);
+      setValue("tagInput", article.tagList);
     }
   }, [article, params])
 
@@ -97,24 +98,25 @@ function Editor() {
   });
 
   const createArticle = (title: string, description: string, image: string, body: string, tagInput: string) => {
+
     dispatch(createArticleThunk({
       title, description, image, body,
-      tagList: [...tagList, tagInput.split(",").filter((t) => t)],
+      tagList: getValues('tagInput').split(','),
     })
     )
       .unwrap()
       .then((data: any) => {
         history.push(`/article/${data.article.slug}`);
       })
-      .catch((error: any) => {
-        setErrorsResponse({ [error.name]: error.message });
-      });
   }
 
   const updateArticle = (title: string, description: string, image: string, body: string, tagInput: string) => {
+    const tags = getValues('tagInput');
+    const tagsArray = typeof(tags) === 'string' ? tags.split(',') : tags;
+
     dispatch(updateArticleThunk({
       title, description, image, body,
-      tagList: [...tagList, tagInput.split(",").filter((t) => t)],
+      tagList: tagsArray,
       slug: params.slug,
     })
     )
@@ -122,49 +124,48 @@ function Editor() {
       .then((data: any) => {
         history.push(`/article/${data.article.slug}`);
       })
-      .catch((error: any) => {
-        setErrorsResponse({ [error.name]: error.message });
-      });
   }
 
   return (
     <>
+      {inProgress && (<Preloader />)}
+
       <Styles.EditorSection>
-        <Styles.EditorTitle>{params.hasOwnProperty('slug') ? "Редактировать запись" : "Название статьи"}</Styles.EditorTitle>
+        <Styles.EditorTitle>{params.hasOwnProperty('slug') ? "Редактировать запись" : "Новая запись"}</Styles.EditorTitle>
 
-        <Styles.EditorForm action="POST" onSubmit={handleSubmitForm}>
-          <Styles.EditorFieldSet>
+        <FormStyles.Form action="POST" onSubmit={handleSubmitForm}>
+          <FormStyles.FieldSet>
 
-            <Styles.EditorLabel>
+            <FormStyles.Label>
               Название статьи
-              <Styles.EditorInput
+              <FormStyles.Input
                 isError={errors.title}
                 {...register("title", {
                   required: "Это поле обязательно к заполнению.",
                 })}
               />
-            </Styles.EditorLabel>
-            <Styles.ErrorsContainer>
-              {errors?.title && <Styles.EditorError>{errors?.title?.message}</Styles.EditorError>}
-            </Styles.ErrorsContainer>
+            </FormStyles.Label>
+            <FormStyles.ErrorsContainer>
+              {errors?.title && <FormStyles.Error>{errors?.title?.message}</FormStyles.Error>}
+            </FormStyles.ErrorsContainer>
 
-            <Styles.EditorLabel>
+            <FormStyles.Label>
               О чем статья
-              <Styles.EditorInput
+              <FormStyles.Input
                 isError={errors.description}
                 {...register("description", {
                   required: "Это поле обязательно к заполнению.",
                 })}
               />
-            </Styles.EditorLabel>
-            <Styles.ErrorsContainer>
-              {errors?.description && <Styles.EditorError>{errors?.description?.message}</Styles.EditorError>}
-            </Styles.ErrorsContainer>
+            </FormStyles.Label>
+            <FormStyles.ErrorsContainer>
+              {errors?.description && <FormStyles.Error>{errors?.description?.message}</FormStyles.Error>}
+            </FormStyles.ErrorsContainer>
 
-            <Styles.EditorLabel>
+            <FormStyles.Label>
               URL изображения (опционально)
-              <Styles.EditorInputContainer>
-                <Styles.EditorInput
+              <FormStyles.InputContainer>
+                <FormStyles.Input
                   isError={errors.image}
                   {...register("image", {
                     pattern: {
@@ -173,15 +174,15 @@ function Editor() {
                     },
                   })}
                 />
-                <Styles.EditorIcon>
+                <FormStyles.Icon>
                   <IconInputFile />
-                </Styles.EditorIcon>
-              </Styles.EditorInputContainer>
-            </Styles.EditorLabel>
-            <Styles.ErrorsContainer>
-              {errors?.image && <Styles.EditorError>{errors?.image?.message}</Styles.EditorError>}
-            </Styles.ErrorsContainer>
-            <Styles.EditorLabel>
+                </FormStyles.Icon>
+              </FormStyles.InputContainer>
+            </FormStyles.Label>
+            <FormStyles.ErrorsContainer>
+              {errors?.image && <FormStyles.Error>{errors?.image?.message}</FormStyles.Error>}
+            </FormStyles.ErrorsContainer>
+            <FormStyles.Label>
               Текст статьи
               <Styles.EditorTextarea
                 minRows={5.4}
@@ -190,30 +191,36 @@ function Editor() {
                   required: "Это поле обязательно к заполнению.",
                 })}
               />
-            </Styles.EditorLabel>
-            <Styles.ErrorsContainer>
-              {errors?.body && <Styles.EditorError>{errors?.body?.message}</Styles.EditorError>}
-            </Styles.ErrorsContainer>
+            </FormStyles.Label>
+            <FormStyles.ErrorsContainer>
+              {errors?.body && <FormStyles.Error>{errors?.body?.message}</FormStyles.Error>}
+            </FormStyles.ErrorsContainer>
 
-            <Styles.EditorLabel>
+            <FormStyles.Label>
               Теги (через запятую)
-              <Styles.EditorInput
+              <FormStyles.Input
                 isError={errors.tagInput}
-                {...register("tagInput")}
+                {...register("tagInput", {
+                  minLength: {
+                    value: 0,
+                    message: ""
+                  }
+                })}
               />
-            </Styles.EditorLabel>
-            <Styles.ErrorsContainer>
-              {errors?.tagInput && <Styles.EditorError>{errors?.tagInput?.message}</Styles.EditorError>}
-            </Styles.ErrorsContainer>
+            </FormStyles.Label>
+            <FormStyles.ErrorsContainer>
+              {errors?.tagInput && <FormStyles.Error>{errors?.tagInput?.message}</FormStyles.Error>}
+            </FormStyles.ErrorsContainer>
 
             <SignupLoginSubmitBtn
               btnText={params.hasOwnProperty('slug') ? "Сохранить  запись" : "Опубликовать запись"}
               disabled={!isError || inProgress}
             />
 
-          </Styles.EditorFieldSet>
 
-        </Styles.EditorForm >
+          </FormStyles.FieldSet>
+
+        </FormStyles.Form >
 
         {params.slug && <DeleteArticleBtn  onClick={openModal} mrgTop="24px" text="Удалить запись" align="flex-end"/>}
 
@@ -222,6 +229,7 @@ function Editor() {
       { isModalOpen &&
         <Modal deleteArticle={deleteArticle} title={"Удалить запись"} onClose={onClose} />
       }
+
     </>
   )
 }

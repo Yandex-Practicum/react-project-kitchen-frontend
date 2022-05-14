@@ -10,10 +10,6 @@ export const ArticleMetaWrapper = styled.div`
   width: 100%;
   margin-bottom: 24px;
 
-  @media ${device.laptopL} {
-
-  }
-
   @media ${device.tablet} {
     margin-bottom: 16px;
   }
@@ -24,10 +20,6 @@ export const ArticleNameAndDate = styled.div`
   gap: 24px;
 
   margin: 0;
-
-  @media ${device.laptopL} {
-
-  }
 
   @media ${device.tablet} {
     flex-direction: column;
@@ -45,15 +37,6 @@ export const ArticleMetaName = styled(Link)`
   margin: 0;
 
   color: ${textColor.secondaryText};
-
-
-  @media ${device.laptopL} {
-
-  }
-
-  @media ${device.laptop} {
-
-  }
 `
 
 export const ArticleMetaDate = styled.span`
@@ -68,13 +51,4 @@ export const ArticleMetaDate = styled.span`
   margin-right: 24px;
 
   color: ${textColor.secondaryText};
-
-
-  @media ${device.laptopL} {
-
-  }
-
-  @media ${device.laptop} {
-
-  }
 `

@@ -21,23 +21,16 @@ export const ModalContainer = styled.form`
   flex-direction: column;
   transition: opacity .3s linear;
 
-
   @media ${device.tablet} {
     width: 500px;
-
   }
 
   @media ${device.tablet} {
     width: 400px;
-
   }
   @media ${device.mobileL} {
     width: 280px;
-
-
   }
-
-
 `
 
 export const ModalHeading = styled.h2`
@@ -51,7 +44,6 @@ export const ModalHeading = styled.h2`
   @media ${device.tablet} {
     font-size: 32px;
     line-height: 36px;
-
   }
 
 `;
@@ -83,8 +75,6 @@ export const ModalButtonClose = styled.button`
   &:hover {
    opacity: .7;
   }
-
-
 `;
 
 export const ModalButtonSubmit = styled.button`
@@ -123,6 +113,7 @@ export const ModalOverlay = styled.div`
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 998;
+
   display: flex;
   justify-content: center;
   align-items: center;

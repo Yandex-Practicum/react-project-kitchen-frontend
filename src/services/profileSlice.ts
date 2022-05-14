@@ -7,6 +7,7 @@ export const initialState: TFollowingUser = {
   image: "",
   following: false,
   bio: "",
+  isLoading: false,
 };
 
 export const profileSlice = createSlice({
@@ -42,16 +43,32 @@ export const profileSlice = createSlice({
       state.username = action.payload.profile.username;
       state.image = action.payload.profile.image;
     },
+
+    [followUserThunk.pending] : (state) => {
+      state.isLoading = true;
+    },
     [followUserThunk.fulfilled] : (state, action) => {
       state.following = action.payload.profile.following;
       state.username = action.payload.profile.username;
       state.image = action.payload.profile.image;
+      state.isLoading = false;
+    },
+    [followUserThunk.rejected] : (state) => {
+      state.isLoading = false;
+    },
+
+    [unfollowUserThunk.pending] : (state) => {
+      state.isLoading = true;
     },
     [unfollowUserThunk.fulfilled] : (state, action) => {
       state.following = action.payload.profile.following;
       state.username = action.payload.profile.username;
       state.image = action.payload.profile.image;
-    }
+      state.isLoading = false;
+    },
+    [unfollowUserThunk.rejected] : (state) => {
+      state.isLoading = false;
+    },
   },
 });
 

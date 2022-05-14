@@ -17,7 +17,6 @@ const IconInputFile: React.FC = () => {
               type="text"
               name="file" 
               accept=".jpg, .jpeg, .png, .gif"
-
               />
           <Clip/>
         </IconFileLabel>

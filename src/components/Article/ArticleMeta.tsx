@@ -18,6 +18,7 @@ type TArticleActionsProps = {
 
 const ArticleMeta: React.FC<TArticleActionsProps> = (props) => {
   const article = props.article;
+
   return (
     <ArticleMetaWrapper>
       <ArticleNameAndDate>
@@ -32,8 +33,6 @@ const ArticleMeta: React.FC<TArticleActionsProps> = (props) => {
       <Like counter={article.favoritesCount} icon={like}/>
 
     </ArticleMetaWrapper>
-
-
   );
 };
 

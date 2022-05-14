@@ -1,8 +1,7 @@
 import React from "react";
-import { connect, useDispatch } from "react-redux";
-// import { DELETE_COMMENT } from '../../services/articleSlice';
-import { deleteComment } from "../../api";
+import { useDispatch } from "react-redux";
 import { deleteCommentThunk, getCommentsForArticleThunk } from "../../services/thunks";
+import DeleteArticleBtn from "../DeleteArticleBtn";
 
 type TDeleteButtonProps = {
   slug: string;
@@ -22,9 +21,7 @@ const DeleteButton: React.FC<TDeleteButtonProps> = (props) => {
 
   if (props.show) {
     return (
-      <span className="mod-options">
-        <i className="ion-trash-a" onClick={deleteComment}></i>
-      </span>
+      <DeleteArticleBtn onClick={deleteComment} height={'16px'}  mrgTop="0px" />
     );
   }
   return null;

@@ -1,8 +1,5 @@
-import { Link, useHistory } from "react-router-dom";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteArticle } from "../../api";
-import { deleteArticleThunk } from "../../services/thunks";
+import {  useSelector } from "react-redux";
 import { ArticleActionsEditor, ArticleActionsEditorIcon, ArticleActionsWrapper } from "../StyledComponents/articleActionsStyles";
 import plus from "../../images/whitePlus.svg";
 

@@ -22,7 +22,7 @@ export const button = styled.button<{mrgTop: string, height: string | undefined,
 
   margin-top: ${props => props.mrgTop};
 
-  padding: 8px ${props => props.height ? "0px" : "16px"} 8px ${props => props.height ? "24px" : "32px"};
+  padding: ${props => props.height ? "16px" : "8px"} ${props => props.height ? "0px" : "16px"} 8px ${props => props.height ? "24px" : "32px"};
 
   transition: all 0.2s linear;
 

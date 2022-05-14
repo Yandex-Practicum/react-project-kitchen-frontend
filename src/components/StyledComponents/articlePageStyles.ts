@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { textColor, linkColor, inputBorderColor, device } from './constantsStyles';
+import { textColor, device } from './constantsStyles';
 
 export const ArticlePage = styled.section`
   max-width: 1140px;
@@ -88,13 +88,7 @@ export const ArticleBody = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media ${device.laptopL} {
-
-  }
-
-  @media ${device.laptop} {
-
-  }
+  margin-bottom: 48px;
 `
 
 export const ArticleText = styled.div<{marginBottom: string}>`
@@ -107,10 +101,6 @@ export const ArticleText = styled.div<{marginBottom: string}>`
   margin-bottom: ${props => props.marginBottom};
 
   color: ${textColor.articles};
-
-  @media ${device.laptopL} {
-
-  }
 
   @media ${device.tablet} {
     font-size: 16px;
@@ -125,13 +115,7 @@ export const ArticleTagsList = styled.ul`
 
   margin: 0;
 
-  @media ${device.laptopL} {
-
-  }
-
-  @media ${device.tablet} {
-
-  }
+  list-style: none;
 `
 
 export const ArticleTag = styled.li`
@@ -140,13 +124,7 @@ export const ArticleTag = styled.li`
   font-weight: 500;
   line-height: 24px;
 
+  margin: 0;
+
   color: ${textColor.secondaryText};
-
-  @media ${device.laptopL} {
-
-  }
-
-  @media ${device.tablet} {
-
-  }
 `

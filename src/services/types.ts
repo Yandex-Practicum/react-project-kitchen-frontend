@@ -2,7 +2,8 @@ export type TFollowingUser = {
   username: string,
   image: string,
   following: boolean,
-  bio?: string
+  bio?: string,
+  isLoading: boolean,
 }
 
 export type TFollowingUserProfile = {
@@ -20,7 +21,7 @@ export type TArticleProperties = {
   tagList: Array<string> | [],
   title: string,
   updatedAt?: string,
-  image?: string
+  image?: string,
 }
 
 export type TEditingArticleProperties = {
