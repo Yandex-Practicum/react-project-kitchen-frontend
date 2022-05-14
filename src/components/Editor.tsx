@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import {
   createArticleThunk,
+  deleteArticleThunk,
   updateArticleThunk,
 } from "../services/thunks";
 import { useForm } from "react-hook-form";
@@ -11,6 +12,8 @@ import * as FormStyles from "../UI/forms/form";
 import IconInputFile from "../UI/icon-input-file/icon-input-file";
 import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
 import DeleteArticleBtn from "./DeleteArticleBtn";
+
+import Modal from "./modal/modal";
 import Preloader from "./Preloader";
 
 type FormData = {
@@ -27,8 +30,26 @@ function Editor() {
 
   const [isError, setIsError] = useState(false);
   const { inProgress } = useSelector((state: any) => state.article);
-  const params: { slug: string } = useParams();
+  const params: { slug: string, id: string } = useParams();
   const { article } = useSelector((state: any) => state.article);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  }
+
+  const onClose = (e: any) => {
+    e.preventDefault();
+
+    setIsModalOpen(false);
+  }
+
+  const deleteArticle = (e: any) => {
+    e.preventDefault();
+    dispatch(deleteArticleThunk(article.slug)).then(() => history.push("/"));
+    setIsModalOpen(false);
+  };
 
   const {
     register,
@@ -196,13 +217,19 @@ function Editor() {
               disabled={!isError || inProgress}
             />
 
+
           </FormStyles.FieldSet>
 
         </FormStyles.Form >
 
-        {params.slug && <DeleteArticleBtn mrgTop="24px" text="Удалить запись" />}
+        {params.slug && <DeleteArticleBtn  onClick={openModal} mrgTop="24px" text="Удалить запись" align="flex-end"/>}
 
       </Styles.EditorSection>
+
+      { isModalOpen &&
+        <Modal deleteArticle={deleteArticle} title={"Удалить запись"} onClose={onClose} />
+      }
+
     </>
   )
 }

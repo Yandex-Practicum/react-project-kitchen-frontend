@@ -1,23 +1,32 @@
 import CommentInput from './CommentInput';
 import CommentList from './CommentList';
-import { Link } from 'react-router-dom';
 import React from 'react';
 import ListErrors from '../ListErrors';
+import { CommentContainerTitle, CommentContainerWrapper, CommentIsntLogin, CommentLink } from '../StyledComponents/commentContainerStyle';
 
-type TCommentContainerProps = { 
-  currentUser: { 
+type TCommentContainerProps = {
+  currentUser: {
     username: string;
     image: string;
-  }; 
-  errors: any; 
-  slug: string; 
-  comments: any[]; 
+    email: string;
+    following: boolean,
+    bio?: string,
+    isLoading: boolean,
+  };
+  errors: any;
+  slug: string;
+  comments: any[];
 }
 
 const CommentContainer: React.FC<TCommentContainerProps>  = (props) => {
-  if (props.currentUser) {
+
+  if (props.currentUser.email) {
     return (
-      <div className="col-xs-12 col-md-8 offset-md-2">
+      <CommentContainerWrapper>
+        <CommentContainerTitle>
+          Комментарии:
+        </CommentContainerTitle>
+
         <div>
           <ListErrors errors={props.errors} />
           <CommentInput slug={props.slug} currentUser={props.currentUser} />
@@ -27,23 +36,27 @@ const CommentContainer: React.FC<TCommentContainerProps>  = (props) => {
           comments={props.comments}
           slug={props.slug}
           currentUser={props.currentUser} />
-      </div>
+      </CommentContainerWrapper>
     );
   } else {
     return (
-      <div className="col-xs-12 col-md-8 offset-md-2">
-        <p>
-          <Link to="/login">Sign in</Link>
-          &nbsp;or&nbsp;
-          <Link to="/register">sign up</Link>
-          &nbsp;to add comments on this article.
-        </p>
+      <CommentContainerWrapper>
+        <CommentContainerTitle>
+          Комментарии:
+        </CommentContainerTitle>
+
+        <CommentIsntLogin>
+          <CommentLink to="/login">Зайдите</CommentLink>
+          &nbsp;или&nbsp;
+          <CommentLink to="/register">зарегистрируйтесь</CommentLink>
+          &nbsp;чтобы оставить комментарий.
+        </CommentIsntLogin>
 
         <CommentList
           comments={props.comments}
           slug={props.slug}
           currentUser={props.currentUser} />
-      </div>
+      </CommentContainerWrapper>
     );
   }
 };

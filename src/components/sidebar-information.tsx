@@ -21,8 +21,9 @@ const SidebarInformation: FunctionComponent<{sectionTitle: string, articles: Arr
         {
           articlesArrayForSort.map((article, index) => (
             <>
-              <ArticleSidebarView key={index} article={article}
-                                  articleDate={composeCreatedDate(article.createdAt)}/>
+              <ArticleSidebarView
+              key={index} article={article}
+              articleDate={composeCreatedDate(article.createdAt)}/>
             </>
 
           ))

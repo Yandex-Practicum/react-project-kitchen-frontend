@@ -1,47 +1,31 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-// import { ADD_COMMENT } from "../../services/articleSlice";
-// import { createComment as _createCommentApi } from '../../api';
-
-// type TCommentInputProps = {
-//   currentUser: {
-//     username: any,
-//     image: string,
-//   };
-//   slug: any;
-// }
-
-
 import { createCommentThunk } from "../../services/thunks";
-
+import { composeCreatedDate } from "../../utils/utils";
+import ProfileInformationView from "../profile-information-view";
+import { CommentForm, CommentTextAria, CommentTextAriaWrapper, CommentFooterWrapper } from "../StyledComponents/commentContainerStyle";
+import * as Styled from "../StyledComponents/followUserButtonStyles";
 
 type TCommentInputProps = {
   currentUser: {
     username: any;
     image: string;
+    following: boolean,
+    bio?: string,
+    isLoading: boolean,
   };
   slug: any;
 };
-
-
 
 const CommentInput: React.FC<TCommentInputProps> = (props) => {
   const dispatch = useDispatch();
 
   const [body, setBody] = useState<string>("");
-  // const dispatch = useDispatch();
+
   const currentBody = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setBody(e.target.value);
   };
-
-  // const onSubmit = (payload: any) => dispatch({ type: ADD_COMMENT, payload });
-
-  // const createComment = (e:React.SyntheticEvent) => {
-  //   e.preventDefault();
-  //   const payload = _createCommentApi(props.slug, { body: body });
-  //   setBody("");
-  //   dispatch(ADD_COMMENT(payload));
 
   const createComment = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -49,29 +33,28 @@ const CommentInput: React.FC<TCommentInputProps> = (props) => {
     setBody("");
   };
 
+  const todayDate = new Date(Date.now()).toISOString().split('T')[0];
+
   return (
-    <form className="card comment-form" onSubmit={createComment}>
-      <div className="card-block">
-        <textarea
-          className="form-control"
-          placeholder="Write a comment..."
-          value={body}
-          onChange={currentBody}
-          // rows="3"
-        ></textarea>
-      </div>
-      <div className="card-footer">
-        F
-        <img
-          src={props.currentUser.image}
-          className="comment-author-img"
-          alt={props.currentUser.username}
-        />
-        <button className="btn btn-sm btn-primary" type="submit">
-          Post Comment
-        </button>
-      </div>
-    </form>
+    <CommentForm onSubmit={createComment}>
+
+      <CommentTextAriaWrapper>
+        <CommentTextAria
+            placeholder="Напишите комментарий..."
+            value={body}
+            onChange={currentBody}
+            rows={3}
+          ></CommentTextAria>
+      </CommentTextAriaWrapper>
+
+      <CommentFooterWrapper align="flex-start" gap="10px" column="column" >
+        <ProfileInformationView articleDate={composeCreatedDate(todayDate)} author={props.currentUser}/>
+
+        <Styled.followBtn type="submit">
+          Отправить комментарий
+        </Styled.followBtn>
+      </CommentFooterWrapper>
+    </CommentForm>
   );
 };
 

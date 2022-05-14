@@ -6,7 +6,6 @@ import { getAllArticles } from "../../api";
 import { device } from '../StyledComponents/constantsStyles';
 import { ArcticleListCont } from '../StyledComponents/ArticleListStyles';
 
-
 const MainView: FC = () => {
   const { articles, articlesCount, currentPage, pager } = useSelector(
     (state: any) => state.articleList

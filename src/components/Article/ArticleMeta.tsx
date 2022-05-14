@@ -1,6 +1,9 @@
-import ArticleActions from './ArticleActions';
 import { Link } from 'react-router-dom';
 import React from 'react';
+import { ArticleMetaWrapper, ArticleNameAndDate, ArticleMetaName, ArticleMetaDate } from '../StyledComponents/articleMetaStyles';
+import Like from './like';
+import like from "../../images/like-icon.svg";
+import { composeCreatedDate } from '../../utils/utils';
 
 type TArticleActionsProps = {
   article: {
@@ -8,30 +11,28 @@ type TArticleActionsProps = {
       username: string;
       image: string;
     };
+    favoritesCount: number;
     createdAt: any;
   };
-  canModify: boolean;
 }
 
 const ArticleMeta: React.FC<TArticleActionsProps> = (props) => {
   const article = props.article;
+
   return (
-    <div className="article-meta">
-      <Link to={`/@${article.author.username}`}>
-        <img src={article.author.image} alt={article.author.username} />
-      </Link>
-
-      <div className="info">
-        <Link to={`/@${article.author.username}`} className="author">
+    <ArticleMetaWrapper>
+      <ArticleNameAndDate>
+        <ArticleMetaName to={`/@${article.author.username}`}>
           {article.author.username}
-        </Link>
-        <span className="date">
-          {new Date(article.createdAt).toDateString()}
-        </span>
-      </div>
+        </ArticleMetaName>
+        <ArticleMetaDate>
+          {composeCreatedDate(article.createdAt)}
+        </ArticleMetaDate>
+      </ArticleNameAndDate>
 
-      <ArticleActions canModify={props.canModify} article={article} />
-    </div>
+      <Like counter={article.favoritesCount} icon={like}/>
+
+    </ArticleMetaWrapper>
   );
 };
 

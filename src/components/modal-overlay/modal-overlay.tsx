@@ -4,14 +4,15 @@ import * as Styles from "../../components/StyledComponents/modalStyles/modalStyl
 import {FC} from 'react'
 
 interface IModalOverlay {
-  onClick: () => void
+  onClick: any;
 }
+
 const ModalOverlay: FC<IModalOverlay> = ({ onClick }) => {
   const overlay = useRef(null)
   useEffect(() => {
     const handleOverlayClick = (e: MouseEvent) => {
       if (e.target === overlay.current) {
-        onClick();
+        onClick(e);
       }
     };
     document.addEventListener("click", handleOverlayClick);
@@ -20,7 +21,7 @@ const ModalOverlay: FC<IModalOverlay> = ({ onClick }) => {
       document.removeEventListener("click", handleOverlayClick);
     };
   }, [onClick]);
-  
+
   return (
     <Styles.ModalOverlay ref={overlay}></Styles.ModalOverlay>
   );

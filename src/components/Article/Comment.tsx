@@ -2,41 +2,39 @@ import DeleteButton from './DeleteButton';
 import { Link } from 'react-router-dom';
 import React from 'react';
 
-type TCommentProps = { 
-  comment: any; 
-  currentUser: { 
-    username: any; 
-  }; 
-  slug: string; 
+import { CommentWrapper, CommentText, CommentInfo } from '../StyledComponents/commentContainerStyle';
+import ProfileInformationView from '../profile-information-view';
+import { composeCreatedDate } from '../../utils/utils';
+import Like from './like';
+
+type TCommentProps = {
+  comment: any;
+  currentUser: {
+    username: string;
+    image: string;
+    following: boolean,
+    bio?: string,
+    isLoading: boolean,
+  };
+  slug: string;
 }
 
 const Comment: React.FC<TCommentProps> = (props) => {
   const comment = props.comment;
   const show = props.currentUser &&
     props.currentUser.username === comment.author.username;
+
   return (
-    <div className="card">
-      <div className="card-block">
-        <p className="card-text">{comment.body}</p>
-      </div>
-      <div className="card-footer">
-        <Link
-          to={`/@${comment.author.username}`}
-          className="comment-author">
-          <img src={comment.author.image} className="comment-author-img" alt={comment.author.username} />
-        </Link>
-        &nbsp;
-        <Link
-          to={`/@${comment.author.username}`}
-          className="comment-author">
-          {comment.author.username}
-        </Link>
-        <span className="date-posted">
-          {new Date(comment.createdAt).toDateString()}
-        </span>
+    <CommentWrapper>
+
+      <CommentInfo>
+        <ProfileInformationView articleDate={composeCreatedDate(comment.createdAt)} author={comment.author}/>
+
         <DeleteButton show={show} slug={props.slug} commentId={comment.id} />
-      </div>
-    </div>
+      </CommentInfo>
+
+      <CommentText className="card-text">{comment.body}</CommentText>
+    </CommentWrapper>
   );
 };
 

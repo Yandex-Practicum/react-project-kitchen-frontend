@@ -1,17 +1,23 @@
 import Comment from './Comment';
 import React from 'react';
+import { CommentListWrapper } from '../StyledComponents/commentContainerStyle';
 
-type TCommentListProps = { 
-  comments: any[]; 
-  currentUser: { 
-    username: string; 
-  }; 
-  slug: string; 
+type TCommentListProps = {
+  comments: any[];
+  currentUser: {
+    username: string;
+    image: string;
+    email: string;
+    following: boolean,
+    bio?: string,
+    isLoading: boolean,
+  };
+  slug: string;
 }
 
 const CommentList: React.FC<TCommentListProps> = (props) => {
   return (
-    <div>
+    <CommentListWrapper>
       {
         props.comments.map(comment => {
           return (
@@ -23,7 +29,7 @@ const CommentList: React.FC<TCommentListProps> = (props) => {
           );
         })
       }
-    </div>
+    </CommentListWrapper>
   );
 };
 
