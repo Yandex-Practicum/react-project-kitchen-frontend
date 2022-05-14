@@ -1,4 +1,3 @@
-import Banner from "../../components/Home/Banner";
 import MainView from "../../components/Home/MainView";
 import {FC, useEffect} from "react";
 import Tags from "../../components/Home/Tags";
@@ -10,16 +9,13 @@ import {
 } from "../../services/thunks";
 import {homeSlice} from "../../services/homeSlice";
 import SidebarInformation from "../../components/sidebar-information";
+import {HomePageSection} from "../../components/StyledComponents/homepage/homepageStyles";
 import {SidebarRight} from "../../components/StyledComponents/sidebar-information-styles";
 import {TagsTitle} from "../../components/StyledComponents/home-page-styles";
-import {getAllArticlesForSort} from "../../api";
-import {SidebarSlider} from "../../components/sidebar-slider";
 
 const Home: FC = () => {
-  const {token} = useSelector((state: any) => state.common);
   const {tags} = useSelector((state: any) => state.home);
   const {allArticles} = useSelector((state: any) => state.articleList);
-  console.log(allArticles)
   const dispatch = useDispatch();
 
   const actionsHome = homeSlice.actions;
@@ -34,24 +30,21 @@ const Home: FC = () => {
   }, []);
 
   return (
-      <HomePageSection>
-
-          <MainView />
-          <SidebarRight>
-            <TagsTitle>Популярные теги</TagsTitle>
-            <Tags
-              tags={tags}
-              onClickTag={(
-                tag: string,
-                pager: (page: any) => {},
-                payload: any
-              ) => ({})}
-            />
-            <SidebarInformation sectionTitle="Популярные материалы" articles={articles} keyName='favoritesCount'/>
-          </SidebarRight>
-          {/*</div>*/}
-
-      </HomePageSection>
+    <HomePageSection>
+      <MainView/>
+      <SidebarRight>
+        <TagsTitle>Популярные теги</TagsTitle>
+        <Tags
+          tags={tags}
+          onClickTag={(
+            tag: string,
+            pager: (page: any) => {},
+            payload: any
+          ) => ({})}
+        />
+        <SidebarInformation sectionTitle="Популярные материалы" articles={allArticles} keyName='favoritesCount'/>
+      </SidebarRight>
+    </HomePageSection>
   );
 };
 

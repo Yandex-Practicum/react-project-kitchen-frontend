@@ -10,8 +10,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {SliderContainerCarousel} from "./StyledComponents/sidebar-information-styles";
 
 export const SidebarSlider: FunctionComponent<{ articles: Array<TArticleProperties> }> = (props) => {
-  const baseChildren = <div>{props.articles.map((article =>
-    <ArticleSidebarView article={article}
+  const baseChildren = <div>{props.articles.map((article, index) => (
+    <ArticleSidebarView key={index} article={article}
                         articleDate={composeCreatedDate(article.createdAt)}/>))}</div>
 
   return (

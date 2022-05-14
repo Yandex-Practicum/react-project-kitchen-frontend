@@ -13,7 +13,9 @@ import likeActive from "../images/like-active-icon.svg";
 import {TArticleProperties} from "../services/types";
 import {useAppSelector} from "../services/hooks";
 
-const ArticleSidebarView: FunctionComponent<{ likesCount: number, articleHeading: string, articleDate: string, articleAuthor: TFollowingUser }> = (props) => {
+const ArticleSidebarView: FunctionComponent<{ articleDate: string, article: TArticleProperties }> = (props) => {
+  const {currentUser} = useAppSelector((store) => store.common)
+
   return (
     <ArticleWrapper padding="20px">
       <AuthorWrapper margin="12px">

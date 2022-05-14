@@ -14,11 +14,11 @@ export const SidebarRight = styled.div`
   @media ${device.tablet} {
     width: 277px;
     padding-left: 46px;
-    border-bottom: #ccc 1px solid;
   }
 
   @media ${device.tabletVert} {
     padding: 0 20px 40px;
+    border-bottom: #ccc 1px solid;
   }
 `
 
