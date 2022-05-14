@@ -35,8 +35,6 @@ export const ArticleMetaName = styled(Link)`
   line-height: 24px;
 
   margin: 0;
-
-  color: ${textColor.secondaryText};
 `
 
 export const ArticleMetaDate = styled.span`

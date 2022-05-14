@@ -61,7 +61,6 @@ export const ASide = styled.section`
 
   @media ${device.laptop} {
     max-width: 277px;
-    height: 50px;
   }
 `
 export const ArticleTitle = styled.h1`

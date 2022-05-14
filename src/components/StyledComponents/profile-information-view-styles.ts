@@ -24,7 +24,7 @@ export const ProfileImageBorder =  styled.div<TAvatar>`
   box-sizing: border-box;
   border-radius: 50%;
   overflow: hidden;
-  border: ${props => props.avatar ? '#008AFF' : 'none'} solid 1px;
+  border: ${props => props.avatar ? '#008AFF solid 1px' : 'none'};
 `
 
 export const ProfileImage = styled.img`
@@ -46,7 +46,6 @@ export const ProfileTextWrapper = styled.div`
 export const ProfileText = styled.p<TFontStyle>`
   box-sizing: border-box;
   margin: 0 0 4px 0;
-  text-decoration: ${props => props.underlined ? 'underline' : 'none'};
   font-family: 'AlegreyaSans', sans-serif;
   font-weight: 400;
   font-size: ${props => props.fontSize};
@@ -55,11 +54,15 @@ export const ProfileText = styled.p<TFontStyle>`
   &:last-of-type {
     margin-bottom: 0;
   };
-`
-
-export const HoverLink = styled(Link)<{underlined: boolean}>`
-  margin: 0;
   &:hover {
     text-decoration: ${props => props.underlined ? 'underline' : 'none'};
+  };
+`
+
+export const HoverLink = styled(Link)`
+  margin: 0;
+  color: #62626A;
+  &:hover {
+    text-decoration: none;
   };
 `

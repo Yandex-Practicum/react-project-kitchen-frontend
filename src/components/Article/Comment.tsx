@@ -4,7 +4,7 @@ import React from 'react';
 
 import { CommentWrapper, CommentText, CommentInfo } from '../StyledComponents/commentContainerStyle';
 import ProfileInformationView from '../profile-information-view';
-import { composeCreatedDate } from '../../utils/utiils';
+import { composeCreatedDate } from '../../utils/utils';
 import Like from './like';
 
 type TCommentProps = {

@@ -3,7 +3,7 @@ import React from 'react';
 import { ArticleMetaWrapper, ArticleNameAndDate, ArticleMetaName, ArticleMetaDate } from '../StyledComponents/articleMetaStyles';
 import Like from './like';
 import like from "../../images/like-icon.svg";
-import { composeCreatedDate } from '../../utils/utiils';
+import { composeCreatedDate } from '../../utils/utils';
 
 type TArticleActionsProps = {
   article: {

@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { createCommentThunk } from "../../services/thunks";
-import { composeCreatedDate } from "../../utils/utiils";
-import FollowUserButton from "../FollowUserButton";
+import { composeCreatedDate } from "../../utils/utils";
 import ProfileInformationView from "../profile-information-view";
 import { CommentForm, CommentTextAria, CommentTextAriaWrapper, CommentFooterWrapper } from "../StyledComponents/commentContainerStyle";
 import * as Styled from "../StyledComponents/followUserButtonStyles";
-
 
 type TCommentInputProps = {
   currentUser: {

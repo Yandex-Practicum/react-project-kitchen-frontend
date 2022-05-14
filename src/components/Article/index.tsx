@@ -9,6 +9,8 @@ import { useHistory, useParams } from "react-router";
 import ArticleActions from './ArticleActions';
 import { ArticleBody, ArticlePage, ArticleTitle, ASide, PageBody, PageContent, ArticleText, ArticleTagsList, ArticleTag } from '../StyledComponents/articlePageStyles';
 import Modal from '../modal/modal';
+import { SidebarRight } from '../StyledComponents/sidebar-information-styles';
+import SidebarInformation from '../sidebar-information';
 
 type TArticleProps = {
   match: {
@@ -20,6 +22,9 @@ type TArticleProps = {
 
 const Article: React.FC<TArticleProps> = (props) => {
   const dispatch = useDispatch();
+
+  const {allArticles} = useSelector((state: any) => state.articleList);
+
   const {article} = useSelector((state: any) => state.article);
   const {currentUser} = useSelector((state: any) => state.common);
   const {comments} = useSelector((state: any) => state.article);
@@ -104,7 +109,7 @@ const Article: React.FC<TArticleProps> = (props) => {
         </PageContent>
 
         <ASide>
-
+            <SidebarInformation sectionTitle="Свежие новости" articles={allArticles} keyName="createdAt"/>
         </ASide>
 
       </PageBody>
