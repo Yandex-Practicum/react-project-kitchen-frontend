@@ -6,17 +6,17 @@ export const ArticleActionsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   width: 100%;
+  margin-bottom: 24px;
 
   @media ${device.laptopL} {
 
   }
 
-  @media ${device.laptop} {
-
-  }
-  @media ${device.mobileS} {
+  @media ${device.tablet} {
     flex-direction: column;
+    gap: 20px;
   }
 `
 

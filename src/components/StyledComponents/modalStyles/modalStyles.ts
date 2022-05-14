@@ -15,7 +15,7 @@ export const ModalContainer = styled.form`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 150;
+  z-index: 999;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -122,7 +122,7 @@ export const ModalOverlay = styled.div`
   width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
-  z-index: 10;
+  z-index: 998;
   display: flex;
   justify-content: center;
   align-items: center;

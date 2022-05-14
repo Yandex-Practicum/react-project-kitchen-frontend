@@ -39,14 +39,14 @@ function App() {
       <Switch>
         <Layout>
           <Route exact path="/" component={Home} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
           <Route path="/editor/:slug" component={Editor} exact />
           <Route path="/editor" component={Editor} exact />
-          <Route path="/article/:id" component={Article} />
-          <Route path="/settings" component={Settings} />
-          <Route path="/@:username/favorites" component={Profile} />
-          <Route path="/@:username" component={Profile} />
+          <Route exact path="/article/:id" component={Article} />
+          <Route exact path="/settings" component={Settings} />
+          <Route exact path="/@:username/favorites" component={Profile} />
+          <Route exact path="/@:username" component={Profile} />
         </Layout>
       </Switch>
     </>

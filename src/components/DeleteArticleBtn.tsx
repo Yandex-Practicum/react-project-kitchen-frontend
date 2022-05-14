@@ -5,19 +5,16 @@ type TBtnStyles = {
   mrgTop: string;
   text?: string;
   height?: string;
+  align?: string;
+  onClick?: () => void;
 }
 
-function DeleteArticleBtn (styles: TBtnStyles) {
-  // const onClose = () => {
-  //   console.log('ss')
-  // }
-  return(<>
-  {/* <Modal title={"Удалить запись"} onClose={onClose} /> */}
-    <Styles.button mrgTop={styles.mrgTop} height={styles.height}>
-      {styles.text}
-    </Styles.button>
-  </>
+function DeleteArticleBtn (props: TBtnStyles) {
 
+  return(
+    <Styles.button onClick={props.onClick} mrgTop={props.mrgTop} height={props.height} align={props.align}>
+      {props.text}
+    </Styles.button>
   )
 }
 

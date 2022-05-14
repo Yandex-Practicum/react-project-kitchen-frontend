@@ -32,6 +32,8 @@ export const PageBody = styled.div`
     gap: 40px;
   }
   @media ${device.tablet} {
+    flex-direction: column-reverse;
+
     max-width: 280px;
     margin-top: calc(-411px + 40px);
   }
@@ -45,11 +47,8 @@ export const PageContent = styled.div`
   }
 
   @media ${device.tablet} {
-    width: 453px;
+    width: 100%;
   }
-  /* @media ${device.mobileS} {
-    max-width: (280px / 320px);
-  } */
 `
 
 export const ASide = styled.section`
@@ -62,26 +61,92 @@ export const ASide = styled.section`
 
   @media ${device.laptop} {
     max-width: 277px;
+    height: 50px;
   }
-  /* @media ${device.mobileS} {
-    max-width: 280px;
-  } */
 `
-export const ArticleTitle = styled.section`
+export const ArticleTitle = styled.h1`
+  font-family: 'AlegreyaSans';
   font-size: 56px;
   font-weight: 400;
   line-height: 64px;
 
+  margin-bottom: 24px;
+
   color: ${textColor.headers};
 
   @media ${device.laptopL} {
-    max-width: 377px;
+    font-size: 40px;
+    line-height: 48px;
   }
 
   @media ${device.laptop} {
-    max-width: 277px;
+    margin-bottom: 16px;
   }
-  /* @media ${device.mobileS} {
-    max-width: 280px;
-  } */
+`
+
+export const ArticleBody = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media ${device.laptopL} {
+
+  }
+
+  @media ${device.laptop} {
+
+  }
+`
+
+export const ArticleText = styled.div<{marginBottom: string}>`
+  font-family: 'Alegreya';
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+
+  margin: 0;
+  margin-bottom: ${props => props.marginBottom};
+
+  color: ${textColor.articles};
+
+  @media ${device.laptopL} {
+
+  }
+
+  @media ${device.tablet} {
+    font-size: 16px;
+    line-height: 20px;
+  }
+`
+export const ArticleTagsList = styled.ul`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+
+  margin: 0;
+
+  @media ${device.laptopL} {
+
+  }
+
+  @media ${device.tablet} {
+
+  }
+`
+
+export const ArticleTag = styled.li`
+  font-family: 'AlegreyaSans';
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+
+  color: ${textColor.secondaryText};
+
+  @media ${device.laptopL} {
+
+  }
+
+  @media ${device.tablet} {
+
+  }
 `

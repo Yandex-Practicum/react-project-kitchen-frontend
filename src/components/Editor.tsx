@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import {
   createArticleThunk,
+  deleteArticleThunk,
   updateArticleThunk,
 } from "../services/thunks";
 import { useForm } from "react-hook-form";
@@ -11,6 +12,7 @@ import * as Styles from "../components/StyledComponents/editorStyles";
 import IconInputFile from "../UI/icon-input-file/icon-input-file";
 import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
 import DeleteArticleBtn from "./DeleteArticleBtn";
+import Modal from "./modal/modal";
 
 type FormData = {
   title: string;
@@ -28,8 +30,26 @@ function Editor() {
   const [isError, setIsError] = useState(false);
   const [tagList, setTagList] = useState([]);
   const { inProgress } = useSelector((state: any) => state.article);
-  const params: { slug: string } = useParams();
+  const params: { slug: string, id: string } = useParams();
   const { article } = useSelector((state: any) => state.article);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  }
+
+  const onClose = (e: any) => {
+    e.preventDefault();
+
+    setIsModalOpen(false);
+  }
+
+  const deleteArticle = (e: any) => {
+    e.preventDefault();
+    dispatch(deleteArticleThunk(article.slug)).then(() => history.push("/"));
+    setIsModalOpen(false);
+  };
 
   const {
     register,
@@ -108,95 +128,101 @@ function Editor() {
   }
 
   return (
-    <Styles.EditorSection>
-      <Styles.EditorTitle>{params.hasOwnProperty('slug') ? "Редактировать запись" : "Название статьи"}</Styles.EditorTitle>
+    <>
+      <Styles.EditorSection>
+        <Styles.EditorTitle>{params.hasOwnProperty('slug') ? "Редактировать запись" : "Название статьи"}</Styles.EditorTitle>
 
-      <Styles.EditorForm action="POST" onSubmit={handleSubmitForm}>
-        <Styles.EditorFieldSet>
+        <Styles.EditorForm action="POST" onSubmit={handleSubmitForm}>
+          <Styles.EditorFieldSet>
 
-          <Styles.EditorLabel>
-            Название статьи
-            <Styles.EditorInput
-              isError={errors.title}
-              {...register("title", {
-                required: "Это поле обязательно к заполнению.",
-              })}
-            />
-          </Styles.EditorLabel>
-          <Styles.ErrorsContainer>
-            {errors?.title && <Styles.EditorError>{errors?.title?.message}</Styles.EditorError>}
-          </Styles.ErrorsContainer>
-
-          <Styles.EditorLabel>
-            О чем статья
-            <Styles.EditorInput
-              isError={errors.description}
-              {...register("description", {
-                required: "Это поле обязательно к заполнению.",
-              })}
-            />
-          </Styles.EditorLabel>
-          <Styles.ErrorsContainer>
-            {errors?.description && <Styles.EditorError>{errors?.description?.message}</Styles.EditorError>}
-          </Styles.ErrorsContainer>
-
-          <Styles.EditorLabel>
-            URL изображения (опционально)
-            <Styles.EditorInputContainer>
+            <Styles.EditorLabel>
+              Название статьи
               <Styles.EditorInput
-                isError={errors.image}
-                {...register("image", {
-                  pattern: {
-                    value: /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi,
-                    message: "Введите корректный url.",
-                  },
+                isError={errors.title}
+                {...register("title", {
+                  required: "Это поле обязательно к заполнению.",
                 })}
               />
-              <Styles.EditorIcon>
-                <IconInputFile />
-              </Styles.EditorIcon>
-            </Styles.EditorInputContainer>
-          </Styles.EditorLabel>
-          <Styles.ErrorsContainer>
-            {errors?.image && <Styles.EditorError>{errors?.image?.message}</Styles.EditorError>}
-          </Styles.ErrorsContainer>
-          <Styles.EditorLabel>
-            Текст статьи
-            <Styles.EditorTextarea
-              minRows={5.4}
-              isError={errors.body}
-              {...register("body", {
-                required: "Это поле обязательно к заполнению.",
-              })}
+            </Styles.EditorLabel>
+            <Styles.ErrorsContainer>
+              {errors?.title && <Styles.EditorError>{errors?.title?.message}</Styles.EditorError>}
+            </Styles.ErrorsContainer>
+
+            <Styles.EditorLabel>
+              О чем статья
+              <Styles.EditorInput
+                isError={errors.description}
+                {...register("description", {
+                  required: "Это поле обязательно к заполнению.",
+                })}
+              />
+            </Styles.EditorLabel>
+            <Styles.ErrorsContainer>
+              {errors?.description && <Styles.EditorError>{errors?.description?.message}</Styles.EditorError>}
+            </Styles.ErrorsContainer>
+
+            <Styles.EditorLabel>
+              URL изображения (опционально)
+              <Styles.EditorInputContainer>
+                <Styles.EditorInput
+                  isError={errors.image}
+                  {...register("image", {
+                    pattern: {
+                      value: /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi,
+                      message: "Введите корректный url.",
+                    },
+                  })}
+                />
+                <Styles.EditorIcon>
+                  <IconInputFile />
+                </Styles.EditorIcon>
+              </Styles.EditorInputContainer>
+            </Styles.EditorLabel>
+            <Styles.ErrorsContainer>
+              {errors?.image && <Styles.EditorError>{errors?.image?.message}</Styles.EditorError>}
+            </Styles.ErrorsContainer>
+            <Styles.EditorLabel>
+              Текст статьи
+              <Styles.EditorTextarea
+                minRows={5.4}
+                isError={errors.body}
+                {...register("body", {
+                  required: "Это поле обязательно к заполнению.",
+                })}
+              />
+            </Styles.EditorLabel>
+            <Styles.ErrorsContainer>
+              {errors?.body && <Styles.EditorError>{errors?.body?.message}</Styles.EditorError>}
+            </Styles.ErrorsContainer>
+
+            <Styles.EditorLabel>
+              Теги (через запятую)
+              <Styles.EditorInput
+                isError={errors.tagInput}
+                {...register("tagInput")}
+              />
+            </Styles.EditorLabel>
+            <Styles.ErrorsContainer>
+              {errors?.tagInput && <Styles.EditorError>{errors?.tagInput?.message}</Styles.EditorError>}
+            </Styles.ErrorsContainer>
+
+            <SignupLoginSubmitBtn
+              btnText={params.hasOwnProperty('slug') ? "Сохранить  запись" : "Опубликовать запись"}
+              disabled={!isError || inProgress}
             />
-          </Styles.EditorLabel>
-          <Styles.ErrorsContainer>
-            {errors?.body && <Styles.EditorError>{errors?.body?.message}</Styles.EditorError>}
-          </Styles.ErrorsContainer>
 
-          <Styles.EditorLabel>
-            Теги (через запятую)
-            <Styles.EditorInput
-              isError={errors.tagInput}
-              {...register("tagInput")}
-            />
-          </Styles.EditorLabel>
-          <Styles.ErrorsContainer>
-            {errors?.tagInput && <Styles.EditorError>{errors?.tagInput?.message}</Styles.EditorError>}
-          </Styles.ErrorsContainer>
+          </Styles.EditorFieldSet>
 
-          <SignupLoginSubmitBtn
-            btnText={params.hasOwnProperty('slug') ? "Сохранить  запись" : "Опубликовать запись"}
-            disabled={!isError || inProgress}
-          />
+        </Styles.EditorForm >
 
-        </Styles.EditorFieldSet>
+        {params.slug && <DeleteArticleBtn  onClick={openModal} mrgTop="24px" text="Удалить запись" align="flex-end"/>}
 
-      </Styles.EditorForm >
+      </Styles.EditorSection>
 
-      {params.slug && <DeleteArticleBtn mrgTop="24px" text="Удалить запись" />}
-
-    </Styles.EditorSection>
+      { isModalOpen &&
+        <Modal deleteArticle={deleteArticle} title={"Удалить запись"} onClose={onClose} />
+      }
+    </>
   )
 }
 

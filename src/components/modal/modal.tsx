@@ -5,12 +5,13 @@ import { FC } from "react";
 import * as Styles from "../StyledComponents/modalStyles/modalStyles";
 interface IModal {
   title?: string;
-  onClose: () => void;
+  onClose: any;
+  deleteArticle?: any;
 }
 
 const modalRoot = document.getElementById("modal-root");
 
-const Modal: FC<IModal> = ({ title, onClose }) => {
+const Modal: FC<IModal> = ({ title, onClose, deleteArticle }) => {
   if (!modalRoot) {
     throw new Error("The element #portal wasn't found");
   }
@@ -18,7 +19,7 @@ const Modal: FC<IModal> = ({ title, onClose }) => {
   useEffect(() => {
     const handleEsc = (e: any) => {
       if (e.key === "Escape") {
-        onClose();
+        onClose(e);
       }
     };
     window.addEventListener("keydown", handleEsc);
@@ -40,7 +41,7 @@ const Modal: FC<IModal> = ({ title, onClose }) => {
         <Styles.ModalButtonClose onClick={onClose}>
         </Styles.ModalButtonClose>
 
-        <Styles.ModalButtonSubmit>
+        <Styles.ModalButtonSubmit onClick={deleteArticle}>
          {'Удалить запись'}
         </Styles.ModalButtonSubmit>
       </Styles.ModalContainer>

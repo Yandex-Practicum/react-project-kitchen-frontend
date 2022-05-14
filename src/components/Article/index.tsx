@@ -3,12 +3,12 @@ import DOMPurify from 'dompurify';
 import {marked} from 'marked';
 import ArticleMeta from "./ArticleMeta";
 import CommentContainer from "./CommentContainer";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getArticleThunk, getCommentsForArticleThunk } from "../../services/thunks";
-import { useParams } from "react-router";
+import { deleteArticleThunk, getArticleThunk, getCommentsForArticleThunk } from "../../services/thunks";
+import { useHistory, useParams } from "react-router";
 import ArticleActions from './ArticleActions';
-import { ArticlePage, ASide, PageBody, PageContent } from '../StyledComponents/articlePageStyles';
+import { ArticleBody, ArticlePage, ArticleTitle, ASide, PageBody, PageContent, ArticleText, ArticleTagsList } from '../StyledComponents/articlePageStyles';
 import Modal from '../modal/modal';
 
 
@@ -30,6 +30,8 @@ const Article: React.FC<TArticleProps> = (props) => {
   const params: { id: string } = useParams();
   const { appName, token } = useSelector((state: any) => state.common);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   useEffect(() => {
     if (params.id) {
       dispatch(getArticleThunk(params.id));
@@ -47,41 +49,62 @@ const Article: React.FC<TArticleProps> = (props) => {
   const canModify =
     currentUser && currentUser.username === article.author.username;
 
-  const onClose = () => {
-    console.log('ss')
+  const openModal = () => {
+    setIsModalOpen(true);
   }
+
+
+  const onClose = (e: any) => {
+    e.preventDefault();
+
+    setIsModalOpen(false);
+  }
+
+  const history = useHistory();
+
+  const deleteArticle = (e: any) => {
+    e.preventDefault();
+    dispatch(deleteArticleThunk(article.slug)).then(() => history.push("/"));
+    setIsModalOpen(false);
+  };
+
+  const isTags = article.tagList.length === 0 ? "0px" : "24px"
+
   return (<>
     <ArticlePage>
-
 
       <PageBody>
 
         <PageContent>
 
-                <ArticleActions canModify={canModify} article={article} />
-                <h1>{article.title}</h1>
-                <ArticleMeta article={article} canModify={canModify} />
+            <ArticleActions onClick={openModal} canModify={canModify} article={article} />
+
+            <ArticleTitle>
+              {article.title}
+            </ArticleTitle>
+
+            <ArticleMeta article={article} />
 
 
 
-            <div className="container page">
-              <div className="row article-content">
-                <div className="col-xs-12">
-                  <div dangerouslySetInnerHTML={markup}></div>
 
-                  <ul className="tag-list">
-                    {article.tagList.map((tag: any) => {
-                      return (
-                        <li className="tag-default tag-pill tag-outline" key={tag}>
-                          {tag}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              </div>
+              <ArticleBody>
+                <ArticleText marginBottom={isTags} dangerouslySetInnerHTML={markup}></ArticleText>
 
-              <hr />
+                <ArticleTagsList>
+                  {article.tagList.map((tag: any) => {
+                    return (
+                      <li className="tag-default tag-pill tag-outline" key={tag}>
+                        {tag}
+                      </li>
+                    );
+                  })}
+                </ArticleTagsList>
+              </ArticleBody>
+
+
+
+
 
               <div className="article-actions"></div>
 
@@ -93,7 +116,7 @@ const Article: React.FC<TArticleProps> = (props) => {
                   currentUser={currentUser}
                 />
               </div>
-            </div>
+
         </PageContent>
 
         <ASide>
@@ -103,7 +126,10 @@ const Article: React.FC<TArticleProps> = (props) => {
       </PageBody>
     </ArticlePage>
 
-    {/* <Modal title={"Удалить запись"} onClose={onClose} /> */}
+    { isModalOpen &&
+      <Modal deleteArticle={deleteArticle} title={"Удалить запись"} onClose={onClose} />
+    }
+
 
   </>);
 };
