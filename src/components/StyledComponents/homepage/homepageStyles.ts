@@ -8,7 +8,13 @@ export const HomePageSection = styled.section`
   justify-content: space-between;
   overflowY: "auto" ;
 
+  @media ${device.laptop} {
+    
+   max-width: 720px;
+  }
+
   @media ${device.tablet} {
+    
     flex-direction: column;
   }
 

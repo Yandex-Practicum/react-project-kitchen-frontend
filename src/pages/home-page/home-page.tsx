@@ -32,7 +32,6 @@ const Home: FC = () => {
 
   return (
       <HomePageSection>
-       
           <MainView />
           {/*<div className="col-md-3">*/}
           {/*<div className="sidebar" style={{position: "sticky", top: '20%'}}>*/}
@@ -49,7 +48,6 @@ const Home: FC = () => {
             <SidebarInformation sectionTitle="Популярные материалы" articles={articles} keyName='favoritesCount'/>
           </SidebarRight>
           {/*</div>*/}
-        
       </HomePageSection>
   );
 };
