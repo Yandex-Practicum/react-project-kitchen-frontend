@@ -14,8 +14,8 @@ export const ArcticleListContainer = styled.div`
   }
 
   @media ${device.tablet} {
-    width: 360px;
-    border-top: #CCCCCC solid 1px;
+    width: 280px;
+
     margin-top: 40px;
   }
 

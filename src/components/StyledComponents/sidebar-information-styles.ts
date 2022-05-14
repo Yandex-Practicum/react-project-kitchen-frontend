@@ -20,9 +20,13 @@ export const SidebarRight = styled.div`
 
   @media ${device.tablet} 
   {
-    margin: 0 auto;
     width: 280px;   
-    padding-left: 46px;
+  }
+
+  @media ${device.tablet} 
+  {
+    margin: 0 auto;
+    // padding-left: 46px;
   }
   @media ${device.tabletVert} {
    
