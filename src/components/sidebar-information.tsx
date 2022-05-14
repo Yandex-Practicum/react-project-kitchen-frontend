@@ -1,6 +1,6 @@
 import React, {FunctionComponent, useCallback} from "react";
 
-import {SidebarHeading} from "./StyledComponents/sidebar-information-styles";
+import {SidebarHeading, SidebarVisibleBlock} from "./StyledComponents/sidebar-information-styles";
 import ArticleSidebarView from "./article-sidebar-view";
 import {TArticleProperties} from "../services/types";
 import {composeCreatedDate, sortArrayOfObjects} from "../utils/utils";
@@ -17,15 +17,18 @@ const SidebarInformation: FunctionComponent<{sectionTitle: string, articles: Arr
   return (
     <>
       <SidebarHeading>{props.sectionTitle}</SidebarHeading>
-      {
-        articlesArrayForSort.map((article, index) => (
-          <>
-            <ArticleSidebarView key={index} article={article}
-                                articleDate={composeCreatedDate(article.createdAt)}/>
-          </>
+      <SidebarVisibleBlock>
+        {
+          articlesArrayForSort.map((article, index) => (
+            <>
+              <ArticleSidebarView key={index} article={article}
+                                  articleDate={composeCreatedDate(article.createdAt)}/>
+            </>
 
-        ))
-      }
+          ))
+        }
+      </SidebarVisibleBlock>
+
       <SidebarSlider articles={articlesArrayForSort}/>
     </>
   )
