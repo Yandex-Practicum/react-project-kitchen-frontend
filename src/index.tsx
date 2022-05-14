@@ -22,5 +22,3 @@ ReactDOM.render((
 
 ), document.getElementById('root'));
 
-
-//delete commit

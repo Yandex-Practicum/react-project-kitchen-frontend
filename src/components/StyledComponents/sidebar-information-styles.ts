@@ -46,7 +46,7 @@ export const SidebarHeading = styled.h2`
 export const SidebarVisibleBlock = styled.div`
   display: block;
 
-  @media ${device.tabletVert} {
+  @media ${device.tablet} {
     display: none;
   }
 `
@@ -68,12 +68,10 @@ export const ArticleWrapper = styled.div<{padding: string}>`
   }
 
   @media ${device.tablet} {
-    padding: ${(props) => props.padding};
-  }
 
-  @media ${device.tabletVert} {
     text-align: left;
   }
+
 `
 interface IArticleHeading {
   fontSize: string,
@@ -95,13 +93,11 @@ export const ArticleHeading = styled.h3<IArticleHeading>`
     line-height: ${(props) => props.lineHeightLap};
   }
 
-  @media ${device.tabletVert} {
-    margin-bottom: 16px;
-  }
-
   @media ${device.tablet} {
     font-size: 18px;
     line-height: 22px;
+
+    margin-bottom: 16px;
   }
 `
 
@@ -137,7 +133,7 @@ export const SliderContainerCarousel = styled(Carousel)`
     background: #008AFF;
   }
 
-  @media ${device.tabletVert} {
+  @media ${device.tablet} {
     display: block;
   }
 `

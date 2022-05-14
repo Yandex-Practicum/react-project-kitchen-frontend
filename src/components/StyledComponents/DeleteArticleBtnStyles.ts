@@ -4,7 +4,7 @@ import binHover from '../../images/binHover.svg';
 import binFocus from '../../images/binFocus.svg';
 import { btnTextDeleteColor } from './constantsStyles';
 
-export const button = styled.button<{mrgTop: string, height: string | undefined}>`
+export const button = styled.button<{mrgTop: string, height: string | undefined, align: string | undefined}>`
   border: none;
 
   height: ${props => props.height};
@@ -18,11 +18,11 @@ export const button = styled.button<{mrgTop: string, height: string | undefined}
 
   color: ${btnTextDeleteColor.default};
 
-  align-self: flex-end;
+  align-self: ${props => props.align || "auto"};
 
   margin-top: ${props => props.mrgTop};
 
-  padding: 8px ${props => props.height ? "0px" : "16px"} 8px ${props => props.height ? "24px" : "32px"};
+  padding: ${props => props.height ? "16px" : "8px"} ${props => props.height ? "0px" : "16px"} 8px ${props => props.height ? "24px" : "32px"};
 
   transition: all 0.2s linear;
 

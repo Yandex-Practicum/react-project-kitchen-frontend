@@ -4,7 +4,6 @@ import popup_close from '../../../images/popup_close.svg'
 
 export const ModalContainer = styled.form`
   background-color: #fff;
-  border: 1px solid rgba(76, 76, 255, 0.2);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 0px 4px;
   box-sizing: border-box;
   border-radius: 20px;
@@ -16,29 +15,22 @@ export const ModalContainer = styled.form`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 150;
+  z-index: 999;
   display: flex;
   align-items: center;
   flex-direction: column;
   transition: opacity .3s linear;
 
-
   @media ${device.tablet} {
     width: 500px;
-
   }
 
   @media ${device.tablet} {
     width: 400px;
-
   }
   @media ${device.mobileL} {
     width: 280px;
-
-
   }
-
-
 `
 
 export const ModalHeading = styled.h2`
@@ -52,9 +44,8 @@ export const ModalHeading = styled.h2`
   @media ${device.tablet} {
     font-size: 32px;
     line-height: 36px;
-
   }
-  
+
 `;
 
 export const ModalSubHeading = styled.p`
@@ -84,8 +75,6 @@ export const ModalButtonClose = styled.button`
   &:hover {
    opacity: .7;
   }
-
-
 `;
 
 export const ModalButtonSubmit = styled.button`
@@ -123,7 +112,8 @@ export const ModalOverlay = styled.div`
   width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
-  z-index: 15;
+  z-index: 998;
+
   display: flex;
   justify-content: center;
   align-items: center;

@@ -37,6 +37,7 @@ export const ArticleBody = styled.div`
 
   @media ${device.laptopL} {
     flex-direction: column;
+  }
 `;
 
 export const ArticleImg = styled.div<{ urlImg:string }>`
@@ -48,7 +49,7 @@ export const ArticleImg = styled.div<{ urlImg:string }>`
     width: 280px;
     height: 150px;
   }
-`
+`;
 
 export const ArticleText = styled.p<{fontSizeLap: string, lineHeightLap: string}>`
   font-family: 'Alegreya', Times, serif;
