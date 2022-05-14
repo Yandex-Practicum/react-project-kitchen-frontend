@@ -21,7 +21,7 @@ export type TArticleProperties = {
   tagList: Array<string> | [],
   title: string,
   updatedAt?: string,
-  image?: string
+  image?: string,
 }
 
 export type TEditingArticleProperties = {
