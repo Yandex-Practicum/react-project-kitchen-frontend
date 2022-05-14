@@ -72,11 +72,6 @@ export const UserNavigationList = styled.ul<any>(
     listStyleType: "none",
     boxSizing: "border-box",
     width: "172px",
-    // position: "absolute",
-    // top: "0",
-    // left: "100%",
-    // transform: "translateX(-100%)",
-    // zIndex: "9999",
     overflow: "hidden",
     maxHeight: isHovered ? "163px" : "40px",
     boxShadow: isHovered
