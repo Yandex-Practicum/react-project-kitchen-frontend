@@ -5,15 +5,23 @@ import TextareaAutosize from 'react-textarea-autosize';
 export const EditorSection = styled.section`
   max-width: 580px;
   margin: -250px auto 0;
-  padding: 0 20px 150px;
+  padding: 0 20px 110px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
+  @media ${device.laptopL} {
+    margin: -338px auto 0;
+  }
+
   @media ${device.laptop} {
     margin: -358px auto 0;
-    padding-bottom: 100px;
+    padding-bottom: 25px;
+  }
+
+  @media ${device.tablet} {
+    padding-bottom: 30px;
   }
 `
 export const EditorTitle = styled.h2`

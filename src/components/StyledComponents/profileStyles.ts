@@ -8,6 +8,10 @@ export const ProfileSection = styled.section`
 
   margin: -250px auto 0;
 
+  @media ${device.laptopL} {
+    margin: -338px auto 0;
+  }
+
   @media ${device.laptop} {
     margin: -358px auto 0;
   }
