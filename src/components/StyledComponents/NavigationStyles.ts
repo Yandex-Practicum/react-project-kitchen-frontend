@@ -6,6 +6,23 @@ import settingsIcon from "../../images/Navigation/settingsicon.svg";
 import hoveredNewNoteIcon from "../../images/Navigation/hoveredhomeicon.svg";
 import hoveredLogoutIcon from "../../images/Navigation/hoveredloginicon.svg";
 import hoveredSettingsIcon from "../../images/Navigation/hoveredsettingsicon.svg";
+import { device } from "./constantsStyles";
+
+export const NavigationItemWrapper = styled.div`
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  width: 0px;
+  z-index: 10;
+
+  @media ${device.laptopL} {
+    top: 35px;
+  }
+
+  @media ${device.tablet} {
+    top: 33px;
+  }
+`;
 
 export const NavigationItem = styled.li`
   position: relative;
@@ -55,11 +72,11 @@ export const UserNavigationList = styled.ul<any>(
     listStyleType: "none",
     boxSizing: "border-box",
     width: "172px",
-    position: "absolute",
-    top: "0",
-    left: "100%",
-    transform: "translateX(-100%)",
-    zIndex: "9999",
+    // position: "absolute",
+    // top: "0",
+    // left: "100%",
+    // transform: "translateX(-100%)",
+    // zIndex: "9999",
     overflow: "hidden",
     maxHeight: isHovered ? "163px" : "40px",
     boxShadow: isHovered
@@ -77,15 +94,43 @@ export const UserNavAvatar = styled.img`
 
 export const LeftFixedNavItem = styled(Link)`
   position: absolute;
-  top: 50px;
-  left: 10%;
+  top: 0;
+  right: 455px;
   text-decoration: none !important;
+
+  @media ${device.laptopL} {
+    right: 365px;
+  }
+
+  @media ${device.laptop} {
+    right: 245px;
+  }
+
+  @media ${device.tablet} {
+    right: 30px;
+  }
 `;
 
 export const RightFixedNavItem = styled.div`
   position: absolute;
-  top: 50px;
-  right: 10%;
+  top: 0;
+  left: 455px;
+
+  @media ${device.laptopL} {
+    left: 320px;
+  }
+
+  @media ${device.laptop} {
+    left: 210px;
+  }
+
+  @media ${device.tablet} {
+    left: 0px;
+  }
+
+  @media ${device.mobileM} {
+    left: -20px;
+  }
 `;
 
 export const CustomNavigationLink = styled(Link)`
