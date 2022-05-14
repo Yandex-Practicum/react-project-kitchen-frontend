@@ -10,13 +10,13 @@ export const HomePageSection = styled.section`
   padding-bottom: 30px;
 
   @media ${device.laptopL} {
+   max-width: 980px;
    margin: -314px auto 0;
-   max-width: 720px;
   }
 
   @media ${device.laptop} {
-    margin: -355px auto 0;
     max-width: 720px;
+    margin: -355px auto 0;
     padding-bottom: 40px;
   }
 
@@ -24,6 +24,7 @@ export const HomePageSection = styled.section`
     margin: -371px auto 0;
     flex-direction: column-reverse;
     align-items: center;
+   
   }
 
 `

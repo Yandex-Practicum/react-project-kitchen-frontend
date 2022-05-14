@@ -7,7 +7,7 @@ export const ArcticleListContainer = styled.div`
   margin: 0;
 
   @media ${device.laptopL} {
-    width: 600px;
+    max-width: 600px;
   }
   @media ${device.laptop} {
     width: 453px;

@@ -4,10 +4,10 @@ import {device} from "./constantsStyles";
 import {Carousel} from "react-responsive-carousel";
 
 export const SidebarRight = styled.div`
+  margin: 0;
   width: 360px;
   position: sticky;
   align-self: flex-start;
-<<<<<<< HEAD
   //--offset: 2rem;
   ////flex-grow: 1;
   ////flex-basis: 300px;
@@ -15,21 +15,19 @@ export const SidebarRight = styled.div`
   z-index: 10;
 
   @media ${device.laptop} {
-    width: 227px;
-=======
-  top: 0;
-  right: 0;
-  padding: 0 0 81px;
-
-  @media ${device.tablet} {
-    width: 277px;
-    padding-left: 46px;
+    width: 227px;   
   }
 
+  @media ${device.tablet} 
+  {
+    margin: 0 auto;
+    width: 280px;   
+    padding-left: 46px;
+  }
   @media ${device.tabletVert} {
+   
     padding: 0 20px 40px;
     border-bottom: #ccc 1px solid;
->>>>>>> develop
   }
 `
 
@@ -62,6 +60,7 @@ export const AuthorWrapper = styled.div<{margin: string}>`
 
 export const ArticleWrapper = styled.div<{padding: string}>`
   width: 100%;
+  box-sizing: border-box;
   padding: 24px 24px 24px 0;
   border-bottom: #CCCCCC solid 1px;
   &:last-of-type {

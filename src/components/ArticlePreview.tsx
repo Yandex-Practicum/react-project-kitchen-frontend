@@ -6,8 +6,8 @@ import {
   setArticleAsFavoriteThunk,
 } from "../services/thunks";
 import {TArticleProperties} from "../services/types";
-import { ArticleBody, AdditionalInfo, ReadMoreLink, Tagslist, ArticleTag, ArticleText, ArticleImg } from './StyledComponents/ArticlePreviewStyles'
-import {ArticleHeading, ArticleWrapper, AuthorWrapper} from "./StyledComponents/sidebar-information-styles";
+import { ArticleBody, AdditionalInfo, ArticleWrapper, ReadMoreLink, Tagslist, ArticleTag, ArticleText, ArticleImg } from './StyledComponents/ArticlePreviewStyles'
+import {ArticleHeading , AuthorWrapper} from "./StyledComponents/sidebar-information-styles";
 import ProfileInformationView from "./profile-information-view";
 import Like from "./Article/like";
 import like from "../images/like-icon.svg";
@@ -34,8 +34,7 @@ const ArticlePreview: React.FC<{ article: TArticleProperties } > = (props) => {
   // };
 
   return (
-    <>
-      <ArticleWrapper padding="20px">
+    <ArticleWrapper >
         <AuthorWrapper margin="16px">
           <ProfileInformationView articleDate={composeCreatedDate(article.createdAt)} author={article.author}/>
           <Like counter={article.favoritesCount} icon={like}/>
@@ -57,8 +56,7 @@ const ArticlePreview: React.FC<{ article: TArticleProperties } > = (props) => {
           })}
           </Tagslist>
         </AdditionalInfo>
-      </ArticleWrapper>
-    </>
+    </ArticleWrapper>
   );
 };
 

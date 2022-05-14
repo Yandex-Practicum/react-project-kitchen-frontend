@@ -11,6 +11,7 @@ import AlegreyaSansMediumWoff2 from '../../fonts/AlegreyaSans/AlegreyaSans-Mediu
 
 
 export const Global = createGlobalStyle`
+
   * {
     margin: 0 auto;
     padding: 0;
