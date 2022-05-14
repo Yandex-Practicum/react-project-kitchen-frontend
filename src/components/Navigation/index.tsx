@@ -7,6 +7,7 @@ import {
   LeftFixedNavItem,
   RightFixedNavItem,
   CustomNavigationLink,
+  NavigationItemWrapper,
 } from "../StyledComponents/NavigationStyles";
 import UserNavigation from "./UserNavigation";
 
@@ -15,26 +16,30 @@ const Navigation = () => {
 
   return (
     <>
-      <LeftFixedNavItem to="/">
-        <NavigationItem>
-          <img src={homeIcon} alt="Home icon" />
-          Главная
-        </NavigationItem>
-      </LeftFixedNavItem>
-
-      {isLoggedIn ? (
-        <RightFixedNavItem>
-          <UserNavigation />
-        </RightFixedNavItem>
-      ) : (
-        <RightFixedNavItem>
+      <NavigationItemWrapper>
+        <LeftFixedNavItem to="/">
           <NavigationItem>
-            <CustomNavigationLink to="/login" />
-            <img src={loginIcon} alt="Login icon" />
-            Войти
+            <img src={homeIcon} alt="Home icon" />
+            Главная
           </NavigationItem>
-        </RightFixedNavItem>
-      )}
+        </LeftFixedNavItem>
+      </NavigationItemWrapper>
+
+      <NavigationItemWrapper>
+        {isLoggedIn ? (
+          <RightFixedNavItem>
+            <UserNavigation />
+          </RightFixedNavItem>
+        ) : (
+          <RightFixedNavItem>
+            <NavigationItem>
+              <CustomNavigationLink to="/login" />
+              <img src={loginIcon} alt="Login icon" />
+              Войти
+            </NavigationItem>
+          </RightFixedNavItem>
+        )}
+      </NavigationItemWrapper>
     </>
   );
 };

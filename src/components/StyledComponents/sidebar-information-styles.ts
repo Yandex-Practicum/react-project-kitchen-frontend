@@ -42,32 +42,48 @@ export const SidebarVisibleBlock = styled.div`
   }
 `
 
-export const AuthorWrapper = styled.div`
+export const AuthorWrapper = styled.div<{margin: string}>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: ${({margin}) => margin};
 `
 
-export const ArticleWrapper = styled.div`
+export const ArticleWrapper = styled.div<{padding: string}>`
+  width: 100%;
   padding: 24px 24px 24px 0;
-  border-bottom: #ccc solid 1px;
-
+  border-bottom: #CCCCCC solid 1px;
   &:last-of-type {
     border-bottom: none;
+  }
+
+  @media ${device.tablet} {
+    padding: ${(props) => props.padding};
   }
 
   @media ${device.tabletVert} {
     text-align: left;
   }
 `
+interface IArticleHeading {
+  fontSize: string,
+  lineHeight: string,
+  margin: string,
+  fontSizeLap: string,
+  lineHeightLap: string
+}
 
-export const ArticleHeading = styled.h3`
-  margin: 0;
+export const ArticleHeading = styled.h3<IArticleHeading>`
+  margin: ${({margin}) => margin};
   font-family: 'AlegreyaSans', sans-serif;
   font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
+  font-size: ${(props) => props.fontSize};
+  line-height: ${(props) => props.lineHeight};
+
+  @media ${device.laptopL} {
+    font-size: ${(props) => props.fontSizeLap};
+    line-height: ${(props) => props.lineHeightLap};
+  }
 
   @media ${device.tabletVert} {
     margin-bottom: 16px;

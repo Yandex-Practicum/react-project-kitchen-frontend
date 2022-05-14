@@ -1,4 +1,3 @@
-import ListErrors from "./ListErrors";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
@@ -26,7 +25,6 @@ function Editor() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const [errorsResponse, setErrorsResponse] = useState<any>(null);
   const [isError, setIsError] = useState(false);
   const { inProgress } = useSelector((state: any) => state.article);
   const params: { slug: string } = useParams();
@@ -89,9 +87,6 @@ function Editor() {
       .then((data: any) => {
         history.push(`/article/${data.article.slug}`);
       })
-      .catch((error: any) => {
-        setErrorsResponse({ [error.name]: error.message });
-      });
   }
 
   const updateArticle = (title: string, description: string, image: string, body: string, tagInput: string) => {
@@ -108,9 +103,6 @@ function Editor() {
       .then((data: any) => {
         history.push(`/article/${data.article.slug}`);
       })
-      .catch((error: any) => {
-        setErrorsResponse({ [error.name]: error.message });
-      });
   }
 
   return (

@@ -1,115 +1,64 @@
-// import React from 'react';
-// import { Link } from 'react-router-dom';
-// import { connect, useDispatch } from 'react-redux';
-// // import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../constants/actionTypes';
-// import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../services/articleListSlice'
-// import { setArticleAsFavorite, deleteArticleAsFavorite } from '../api';
-
-// const FAVORITED_CLASS = 'btn btn-sm btn-primary';
-// const NOT_FAVORITED_CLASS = 'btn btn-sm btn-outline-primary';
-// interface TArticlePreviewProps  {
-
 import React from "react";
-import {Link} from "react-router-dom";
 import {useDispatch} from "react-redux";
+import {composeCreatedDate} from "../utils/utiils";
 import {
   deleteArticleAsFavoriteThunk,
   setArticleAsFavoriteThunk,
 } from "../services/thunks";
 import {TArticleProperties} from "../services/types";
+import { ArticleBody, AdditionalInfo, ReadMoreLink, Tagslist, ArticleTag, ArticleText, ArticleImg } from './StyledComponents/ArticlePreviewStyles'
+import {ArticleHeading, ArticleWrapper, AuthorWrapper} from "./StyledComponents/sidebar-information-styles";
+import ProfileInformationView from "./profile-information-view";
+import Like from "./Article/like";
+import like from "../images/like-icon.svg";
 
 const FAVORITED_CLASS = "btn btn-sm btn-primary";
 const NOT_FAVORITED_CLASS = "btn btn-sm btn-outline-primary";
 
-// interface TArticlePreviewProps {
-//   article: any;
-// }
 
-const ArticlePreview: React.FC<{ article: TArticleProperties }> = (props) => {
-  const dispatch = useDispatch();
+const ArticlePreview: React.FC<{ article: TArticleProperties } > = (props) => {
+  // const dispatch = useDispatch();
 
-  // const { article } = props
-  // const favoriteButtonClass = article.favorited ?
-  //   FAVORITED_CLASS :
-  //   NOT_FAVORITED_CLASS;
+  const {article} = props;
 
-  // const favorite = (slug: any) => dispatch({
-  //   type: ARTICLE_FAVORITED,
-  //   payload: setArticleAsFavorite(slug)
-  // });
-
-  // const unfavorite = (slug: any) => dispatch({
-  //   type: ARTICLE_UNFAVORITED,
-  //   payload: deleteArticleAsFavorite(slug)
-  // })
+  // const favoriteButtonClass = article.favorited
+  //   ? FAVORITED_CLASS
+  //   : NOT_FAVORITED_CLASS;
 
   // const handleClick = (e: React.SyntheticEvent) => {
-  //   e.preventDefault();
-
   //   if (article.favorited) {
-  //     dispatch(ARTICLE_FAVORITED(setArticleAsFavorite(article.slug)))
+  //     dispatch(deleteArticleAsFavoriteThunk(article.slug));
   //   } else {
-  //     dispatch(ARTICLE_FAVORITED(setArticleAsFavorite(article.slug)))
+  //     dispatch(setArticleAsFavoriteThunk(article.slug));
   //   }
   // };
 
-
-  const {article} = props;
-  const favoriteButtonClass = article.favorited
-    ? FAVORITED_CLASS
-    : NOT_FAVORITED_CLASS;
-
-  const handleClick = (e: React.SyntheticEvent) => {
-    if (article.favorited) {
-      dispatch(deleteArticleAsFavoriteThunk(article.slug));
-    } else {
-      dispatch(setArticleAsFavoriteThunk(article.slug));
-    }
-  };
-
   return (
-    <div className="article-preview">
-      <div className="article-meta">
-        {
-          article.author && article.createdAt &&
-          <>
-            <Link to={`/@${article.author.username}`}>
-              <img src={article.author.image} alt={article.author.username}/>
-            </Link>
-
-            <div className="info">
-              <Link className="author" to={`/@${article.author.username}`}>
-                {article.author.username}
-              </Link>
-              <span className="date">
-            {new Date(article.createdAt).toDateString()}
-          </span>
-            </div>
-          </>
-        }
-        <div className="pull-xs-right">
-          <button className={favoriteButtonClass} onClick={handleClick}>
-            {/*TODO: курсивный шрифт вынести в стили*/}
-            <i className="ion-heart"></i> {article.favoritesCount}
-          </button>
-        </div>
-      </div>
-
-      <Link to={`/article/${article.slug}`} className="preview-link">
-        <h1>{article.title}</h1>
-        <p>{article.description}</p>
-        <span>Read more...</span>
-        <ul className="tag-list">
+    <>
+      <ArticleWrapper padding="20px">
+        <AuthorWrapper margin="16px">
+          <ProfileInformationView articleDate={composeCreatedDate(article.createdAt)} author={article.author}/>
+          <Like counter={article.favoritesCount} icon={like}/>
+        </AuthorWrapper>
+        <ArticleHeading fontSize='36px' lineHeight="40px" margin="0 0 16px" fontSizeLap="32px" lineHeightLap="36px">{article.title}</ArticleHeading>
+        <ArticleBody >
+          {article.image && (<ArticleImg urlImg={`${article.image}`}/>)}
+          <ArticleText fontSizeLap="16px" lineHeightLap="20px">{article.body}</ArticleText>
+        </ArticleBody>
+        <AdditionalInfo>
+          <ReadMoreLink to={`/article/${article.slug}`}>Читать дальше</ReadMoreLink>
+          <Tagslist>
           {article.tagList.map((tag: any, i: number) => {
             return (
-              <li className="tag-default tag-pill tag-outline" key={i}>
+              <ArticleTag key={i}>
                 {tag}
-              </li>
+              </ArticleTag>
             );
           })}
-        </ul>
-      </Link>
-    </div>
+          </Tagslist>
+        </AdditionalInfo>
+      </ArticleWrapper>
+    </>
   );
 };
 

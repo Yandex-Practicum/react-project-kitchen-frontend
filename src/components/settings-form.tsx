@@ -23,7 +23,7 @@ const SettingsForm: FC<ISettingsForm> = () => {
   const { currentUser } = useSelector((state: any) => state.common)
   const dispatch = useDispatch();
   const [isError, setIsError] = useState(false);
-  const [errorsResponse, setErrorsResponse] = useState<any>(null);
+  const [errorsResponse, setErrorsResponse] = useState<any>({});
   const [visible, setVisible] = useState(false);
   const { inProgress } = useSelector((state: any) => state.settings);
   const { image } = useSelector((state: any) => state.profile);
@@ -41,25 +41,25 @@ const SettingsForm: FC<ISettingsForm> = () => {
 
   const handleSubmitForm = handleSubmit(({ image, username, email, password }, e) => {
     e && e.preventDefault();
-    if(password === "") {
+    if (password === "") {
       dispatch(updateUserThunk({ image, username, email }))
-      .unwrap()
-      .catch((error: any) => {
-        setErrorsResponse({ [error.name]: error.message });
-      });
+        .unwrap()
+        .catch((error: any) => {
+          setErrorsResponse(error);
+        });
     }
     else {
       dispatch(updateUserThunk({ image, username, email, password }))
-      .unwrap()
-      .catch((error: any) => {
-        setErrorsResponse({ [error.name]: error.message });
-      });
+        .unwrap()
+        .catch((error: any) => {
+          setErrorsResponse(error);
+        });
     }
   });
 
   useEffect(() => {
     setIsError(isValid)
-  })
+  }, [isValid])
 
   useEffect(() => {
     dispatch(getProfileThunk(currentUser.username));
@@ -105,6 +105,9 @@ const SettingsForm: FC<ISettingsForm> = () => {
           <FormStyles.Label>
             Имя пользователя
             <FormStyles.Input
+              onInput={() => {
+                { "username" in errorsResponse && setErrorsResponse({ ...errorsResponse, username: "" }) }
+              }}
               isError={errors.username}
               {...register("username", {
                 pattern: {
@@ -120,11 +123,15 @@ const SettingsForm: FC<ISettingsForm> = () => {
           </FormStyles.Label>
           <FormStyles.ErrorsContainer>
             {errors?.username && <FormStyles.Error>{errors?.username?.message}</FormStyles.Error>}
+            {errorsResponse?.username && <FormStyles.Error>{'Такое имя пользователя уже существует'}</FormStyles.Error>}
           </FormStyles.ErrorsContainer>
 
           <FormStyles.Label>
             E-mail
             <FormStyles.Input
+              onInput={() => {
+                { "email" in errorsResponse && setErrorsResponse({ ...errorsResponse, email: "" }) }
+              }}
               isError={errors.email}
               {...register("email", {
                 pattern: {
@@ -136,6 +143,7 @@ const SettingsForm: FC<ISettingsForm> = () => {
           </FormStyles.Label>
           <FormStyles.ErrorsContainer>
             {errors?.email && <FormStyles.Error>{errors?.email?.message}</FormStyles.Error>}
+            {errorsResponse?.email && <FormStyles.Error>{'Такой email уже существует'}</FormStyles.Error>}
           </FormStyles.ErrorsContainer>
 
           <FormStyles.Label>

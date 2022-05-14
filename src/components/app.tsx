@@ -9,9 +9,11 @@ import Login from "./login";
 import Profile from "./Profile";
 import Register from "../pages/register/register";
 import Settings from "../pages/settings/settings";
+import NotFound404 from "../pages/notFound404/notFound404"
 import { useDispatch } from "react-redux";
 import { authThunk } from "../services/thunks";
 import { Layout } from "./StyledComponents/Layout";
+import Footer from "./Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,8 +28,8 @@ function App() {
   return (
     <>
       <Header />
-      <Switch>
-        <Layout>
+      <Layout>
+        <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
@@ -37,8 +39,10 @@ function App() {
           <Route path="/settings" component={Settings} />
           <Route path="/@:username/favorites" component={Profile} />
           <Route path="/@:username" component={Profile} />
-        </Layout>
-      </Switch>
+          <Route component={NotFound404}/>
+        </Switch>
+      </Layout>
+      <Footer />
     </>
   );
 }

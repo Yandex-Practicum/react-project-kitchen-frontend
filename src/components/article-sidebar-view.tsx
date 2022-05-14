@@ -13,18 +13,16 @@ import likeActive from "../images/like-active-icon.svg";
 import {TArticleProperties} from "../services/types";
 import {useAppSelector} from "../services/hooks";
 
-const ArticleSidebarView: FunctionComponent<{ article: TArticleProperties, articleDate: string }> = (props) => {
-  const {currentUser} = useAppSelector((store: any) => store.common);
-
+const ArticleSidebarView: FunctionComponent<{ likesCount: number, articleHeading: string, articleDate: string, articleAuthor: TFollowingUser }> = (props) => {
   return (
-    <ArticleWrapper>
-      <AuthorWrapper>
+    <ArticleWrapper padding="20px">
+      <AuthorWrapper margin="12px">
         <ProfileInformationView articleDate={props.articleDate} author={props.article.author}/>
         <Like counter={props.article.favoritesCount}
               icon={`${currentUser.username === props.article.author.username && props.article.favoritesCount !== 0 ? likeActive : like}`}/>
       </AuthorWrapper>
       <ArticleLink to={`/article/${props.article.slug}`}>
-        <ArticleHeading>{props.article.title}</ArticleHeading>
+        <ArticleHeading fontSize="20px" lineHeight="24px" margin="0" lineHeightLap="22px" fontSizeLap="18px">{props.article.title}</ArticleHeading>
       </ArticleLink>
     </ArticleWrapper>
   )

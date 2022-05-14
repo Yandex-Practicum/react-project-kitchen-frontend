@@ -6,7 +6,6 @@ import {useSelector, useDispatch} from "react-redux";
 import {
   getAllArticlesForSortThunk,
   getAllArticlesThunk,
-  getFeedArticlesThunk,
   getTagsThunk,
 } from "../../services/thunks";
 import {homeSlice} from "../../services/homeSlice";
@@ -27,11 +26,7 @@ const Home: FC = () => {
 
   useEffect(() => {
     dispatch(getAllArticlesForSortThunk());
-    if (token) {
-      dispatch(getFeedArticlesThunk());
-    } else {
-      dispatch(getAllArticlesThunk());
-    }
+    dispatch(getAllArticlesThunk());
     dispatch(getTagsThunk());
     return () => {
       dispatch(actionsHome.homePageWasUnloaded());
@@ -39,12 +34,9 @@ const Home: FC = () => {
   }, []);
 
   return (
-    <div className="home-page">
-      <div className="container page">
-        <div className="row">
-          <MainView/>
-          {/*<div className="col-md-3">*/}
-          {/*<div className="sidebar" style={{position: "sticky", top: '20%'}}>*/}
+      <HomePageSection>
+
+          <MainView />
           <SidebarRight>
             <TagsTitle>Популярные теги</TagsTitle>
             <Tags
@@ -55,12 +47,11 @@ const Home: FC = () => {
                 payload: any
               ) => ({})}
             />
-            <SidebarInformation sectionTitle="Популярные материалы" articles={allArticles} keyName='favoritesCount'/>
+            <SidebarInformation sectionTitle="Популярные материалы" articles={articles} keyName='favoritesCount'/>
           </SidebarRight>
           {/*</div>*/}
-        </div>
-      </div>
-    </div>
+
+      </HomePageSection>
   );
 };
 

@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { IArticleRes, IUserLogin, ApiEnums } from "./types";
-import {TFollowingUser, TFollowingUserProfile} from "../services/types";
+import { TFollowingUser, TFollowingUserProfile } from "../services/types";
 
 // set token on every request
 export const setTokenAxios = (_token: string | null) => {
@@ -18,12 +18,17 @@ export const getTags = async (): Promise<Array<string>> => {
 
 // Auth
 export const login = async ({ email, password }: { email: string, password: string }): Promise<{ email: string, password: string }> => {
-  const response: AxiosResponse<IUserLogin> = await axios.post(
-    `${ApiEnums.BASE_URL}/users/login`,
-    { user: { email, password } }
-  );
-  console.log(response.data)
-  return response.data;
+  try {
+    const response: AxiosResponse<IUserLogin> = await axios.post(
+      `${ApiEnums.BASE_URL}/users/login`,
+      { user: { email, password } }
+    );
+    return response.data;
+  } catch (error) {
+    const { response }: any = error;
+    return Promise.reject(response.data.errors);
+  }
+
 };
 
 export const signup = async ({
@@ -48,25 +53,31 @@ export const signup = async ({
     );
     return response.data;
   } catch (error) {
-    return Promise.reject(error);
+    const { response }: any = error;
+    return Promise.reject(response.data.errors);
   }
 };
 
-export const auth = async (): Promise<{user: {username: string, email: string, token: string}}> => {
-  const response: AxiosResponse<{user: {username: string, email: string, token: string}}> = await axios.get(
+export const auth = async (): Promise<{ user: { username: string, email: string, token: string } }> => {
+  const response: AxiosResponse<{ user: { username: string, email: string, token: string } }> = await axios.get(
     `${ApiEnums.BASE_URL}/user`
   );
   return response.data;
 };
 
 export const updateUser = async (user: IUserLogin): Promise<IUserLogin> => {
-  const response: AxiosResponse<IUserLogin> = await axios.put(
-    `${ApiEnums.BASE_URL}/user`,
-    {
-      user,
-    }
-  );
-  return response.data;
+  try {
+    const response: AxiosResponse<IUserLogin> = await axios.put(
+      `${ApiEnums.BASE_URL}/user`,
+      {
+        user,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    const { response }: any = error;
+    return Promise.reject(response.data.errors);
+  }
 };
 
 // Articles
@@ -126,11 +137,11 @@ export const getArticlesByAuthor = async ({
 export const getArticlesByTag = async ({
   tag,
   page = 0
-} : {
+}: {
   tag: string,
   page: number
 }): Promise<any> => {
-  const response: AxiosResponse<{tag: string, page: number}> = await axios.get(
+  const response: AxiosResponse<{ tag: string, page: number }> = await axios.get(
     `${ApiEnums.BASE_URL}/articles`,
     {
       params: {
@@ -144,7 +155,7 @@ export const getArticlesByTag = async ({
 };
 
 export const deleteArticle = async (slug: string): Promise<any> => {
-  const response: AxiosResponse<{slug: string}> = await axios.delete(
+  const response: AxiosResponse<{ slug: string }> = await axios.delete(
     `${ApiEnums.BASE_URL}/articles/${slug}`
   );
   return response.data;
@@ -235,7 +246,7 @@ export const createArticle = async (article: any): Promise<IArticleRes> => {
 export const createComment = async ({
   slug,
   comment,
-}:{
+}: {
   slug: string;
   comment?: { body: string };
 }): Promise<any> => {
