@@ -1,5 +1,5 @@
 import React from 'react';
-import { NotFoundContainer, NotFoundTitle, NotFoundText, NavLink } from '../../components/StyledComponents/notFound404';
+import { NotFoundContainer, NotFoundTitle, NotFoundText, NavLink } from '../../components/StyledComponents/notFound404Styles';
 
 const NotFound404 = () => {
   return (
