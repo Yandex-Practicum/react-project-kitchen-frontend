@@ -53,7 +53,6 @@ export const PageContent = styled.div`
 
 export const ASide = styled.section`
   width: 359px;
-  background-color: aqua;
 
   @media ${device.laptopL} {
     max-width: 377px;
