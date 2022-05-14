@@ -56,7 +56,7 @@ const Register: React.FC = () => {
     <>
       {inProgress && (<Preloader />)}
 
-      <Styles.AuthSection>
+      <Styles.RegisterSection>
         <Styles.AuthTitle>Зарегистрироваться</Styles.AuthTitle>
         <Styles.StyledLink to="/login">Войти</Styles.StyledLink>
 
@@ -134,7 +134,7 @@ const Register: React.FC = () => {
 
           </FormStyles.FieldSet>
         </FormStyles.Form>
-      </Styles.AuthSection>
+      </Styles.RegisterSection>
     </>
   );
 };
