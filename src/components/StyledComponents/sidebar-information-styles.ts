@@ -28,7 +28,7 @@ export const AuthorWrapper = styled.div<{margin: string}>`
 `
 
 export const ArticleWrapper = styled.div<{padding: string}>`
-  max-width: 700px;
+  width: 100%;
   padding: 24px;
   border-bottom: #CCCCCC solid 1px;
   &:last-of-type {
