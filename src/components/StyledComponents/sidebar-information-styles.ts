@@ -4,19 +4,32 @@ import {device} from "./constantsStyles";
 import {Carousel} from "react-responsive-carousel";
 
 export const SidebarRight = styled.div`
+  margin: 0;
   width: 360px;
   position: sticky;
   align-self: flex-start;
-  top: 0;
-  right: 0;
-  padding: 0 0 81px;
+  //--offset: 2rem;
+  ////flex-grow: 1;
+  ////flex-basis: 300px;
+  //top: var(--offset);
+  z-index: 10;
 
-  @media ${device.tablet} {
-    width: 277px;
-    padding-left: 46px;
+  @media ${device.laptop} {
+    width: 227px;   
   }
 
+  @media ${device.tablet} 
+  {
+    width: 280px;   
+  }
+
+  @media ${device.tablet} 
+  {
+    margin: 0 auto;
+    // padding-left: 46px;
+  }
   @media ${device.tabletVert} {
+   
     padding: 0 20px 40px;
     border-bottom: #ccc 1px solid;
   }
@@ -51,6 +64,7 @@ export const AuthorWrapper = styled.div<{margin: string}>`
 
 export const ArticleWrapper = styled.div<{padding: string}>`
   width: 100%;
+  box-sizing: border-box;
   padding: 24px 24px 24px 0;
   border-bottom: #CCCCCC solid 1px;
   &:last-of-type {

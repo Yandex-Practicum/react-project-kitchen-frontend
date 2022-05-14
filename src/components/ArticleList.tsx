@@ -3,7 +3,9 @@ import ListPagination from './ListPagination';
 import React from 'react';
 import Preloader from './Preloader'
 import { ArticleWrapper } from "./StyledComponents/sidebar-information-styles";
+import { ArcticleListContainer } from './StyledComponents/articleList/ArticleListStyles';
 import { TArticleProperties} from "../services/types";
+
 
 type TArticleListProps = {
   articles: Array<TArticleProperties> | [];
@@ -17,7 +19,7 @@ type TArticleListProps = {
 
 const ArticleList: React.FC<TArticleListProps> = (props) => {
   return (
-    <>
+    <ArcticleListContainer>
     {!props.articles && (<Preloader />)}
 
     {props.articles.length === 0 && (
@@ -37,7 +39,7 @@ const ArticleList: React.FC<TArticleListProps> = (props) => {
         pager={props.pager}
         articlesCount={props.articlesCount}
         currentPage={props.currentPage} />
-    </>
+    </ArcticleListContainer>
   );
 };
 

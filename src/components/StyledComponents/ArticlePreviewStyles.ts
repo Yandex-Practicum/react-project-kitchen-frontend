@@ -7,6 +7,27 @@ export const ArticleContent = styled.div`
   padding: 32px 0;
 `;
 
+export const ArticleWrapper  = styled.div
+`
+  width: 100%;
+  box-sizing: border-box;
+  padding: 33px 0 33px;
+  border-bottom: #CCCCCC solid 1px;
+  &:last-of-type {
+    border-bottom: none;
+  }
+  &:first-of-type {
+    padding-top: 0;
+  }
+
+  @media ${device.tablet} {
+    
+  }
+
+  @media ${device.tabletVert} {
+    text-align: left;
+  }
+`
 export const ArticleBody = styled.div`
   display: flex;
   flex-direction: row;
@@ -20,7 +41,7 @@ export const ArticleBody = styled.div`
 `;
 
 export const ArticleImg = styled.div<{ urlImg:string }>`
-  background-image: url(../../../ggg.jpg);
+  background-image: url(${props => props.urlImg})
   width: 158px;
   height: 85px;
 
