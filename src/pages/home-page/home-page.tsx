@@ -14,6 +14,7 @@ import SidebarInformation from "../../components/sidebar-information";
 import {SidebarRight} from "../../components/StyledComponents/sidebar-information-styles";
 import {TagsTitle} from "../../components/StyledComponents/home-page-styles";
 import {getAllArticlesForSort} from "../../api";
+import {SidebarSlider} from "../../components/sidebar-slider";
 
 const Home: FC = () => {
   const {token} = useSelector((state: any) => state.common);
