@@ -28,7 +28,7 @@ const ArticleList: React.FC<TArticleListProps> = (props) => {
   }
 
   return (
-    <div>
+    <>
       {
         props.articles.map((article: any) => {
           return (
@@ -41,7 +41,7 @@ const ArticleList: React.FC<TArticleListProps> = (props) => {
         pager={props.pager}
         articlesCount={props.articlesCount}
         currentPage={props.currentPage} />
-    </div>
+    </>
   );
 };
 

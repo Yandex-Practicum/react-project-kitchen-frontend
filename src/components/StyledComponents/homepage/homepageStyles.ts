@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import { colors, device} from '../constantsStyles'
-import popup_close from '../../../images/popup_close.svg'
-
+import { device} from '../constantsStyles'
 
 export const HomePageSection = styled.section`
   margin: -250px auto 0;
@@ -9,9 +7,10 @@ export const HomePageSection = styled.section`
   display: flex;
   justify-content: space-between;
   overflowY: "auto" ;
-  
-  @media ${device.laptop} {
-    margin: -358px auto 0;
+
+  @media ${device.tablet} {
+    flex-direction: column;
   }
+
 `
 
