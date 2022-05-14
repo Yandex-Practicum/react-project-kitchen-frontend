@@ -9,12 +9,12 @@ import {TFollowingUser} from "../services/types";
 const ArticleSidebarView: FunctionComponent<{ likesCount: number, articleHeading: string, articleDate: string, articleAuthor: TFollowingUser }> = (props) => {
   return (
     <>
-      <ArticleWrapper>
-        <AuthorWrapper>
+      <ArticleWrapper padding="20px">
+        <AuthorWrapper margin="12px">
           <ProfileInformationView articleDate={props.articleDate} author={props.articleAuthor}/>
           <Like counter={props.likesCount} icon={like}/>
         </AuthorWrapper>
-        <ArticleHeading>{props.articleHeading}</ArticleHeading>
+        <ArticleHeading  fontSize="20px" lineHeight="24px" margin="0" lineHeightLap="22px" fontSizeLap="18px">{props.articleHeading}</ArticleHeading>
       </ArticleWrapper>
     </>
   )

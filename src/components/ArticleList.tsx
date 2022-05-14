@@ -1,34 +1,30 @@
 import ArticlePreview from './ArticlePreview';
 import ListPagination from './ListPagination';
 import React from 'react';
+import Preloader from './Preloader'
+import { ArticleWrapper } from "./StyledComponents/sidebar-information-styles";
+import { TArticleProperties} from "../services/types";
 
-interface TArticleListProps {
-  articles: any;
+type TArticleListProps = {
+  articles: Array<TArticleProperties> | [];
   pager?: any;
-  articlesCount?: any;
+  articlesCount?: number;
   loading?: boolean;
   state?: any;
   currentPage?: any;
-  tab?: any;
+  tab?: null | string;
 }
 
 const ArticleList: React.FC<TArticleListProps> = (props) => {
-  if (!props.articles) {
-    return (
-      <div className="article-preview">Loading...</div>
-    );
-  }
-
-  if (props.articles.length === 0) {
-    return (
-      <div className="article-preview">
-        No articles are here... yet.
-      </div>
-    );
-  }
-
   return (
     <>
+    {!props.articles && (<Preloader />)}
+
+    {props.articles.length === 0 && (
+      <ArticleWrapper padding="20px">
+        No articles are here... yet.
+      </ArticleWrapper>)}
+
       {
         props.articles.map((article: any) => {
           return (

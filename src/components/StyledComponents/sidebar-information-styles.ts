@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from './constantsStyles';
 
 export const SidebarRight = styled.div`
   width: 360px;
@@ -19,25 +20,42 @@ export const SidebarHeading = styled.h2`
   line-height: 40px;
 `
 
-export const AuthorWrapper = styled.div`
+export const AuthorWrapper = styled.div<{margin: string}>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: ${({margin}) => margin};
 `
 
-export const ArticleWrapper = styled.div`
-  padding: 24px 24px 24px 0;
+export const ArticleWrapper = styled.div<{padding: string}>`
+  max-width: 700px;
+  padding: 24px;
   border-bottom: #CCCCCC solid 1px;
   &:last-of-type {
     border-bottom: none;
   }
-`
 
-export const ArticleHeading = styled.h3`
-  margin: 0;
+  @media ${device.tablet} {
+    padding: ${(props) => props.padding};
+  }
+`
+interface IArticleHeading {
+  fontSize: string,
+  lineHeight: string,
+  margin: string,
+  fontSizeLap: string,
+  lineHeightLap: string
+}
+
+export const ArticleHeading = styled.h3<IArticleHeading>`
+  margin: ${({margin}) => margin};
   font-family: 'AlegreyaSans', sans-serif;
   font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
+  font-size: ${(props) => props.fontSize};
+  line-height: ${(props) => props.lineHeight};
+
+  @media ${device.laptopL} {
+    font-size: ${(props) => props.fontSizeLap};
+    line-height: ${(props) => props.lineHeightLap};
+  }
 `
