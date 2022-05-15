@@ -53,7 +53,7 @@ const Article: React.FC<TArticleProps> = (props) => {
     }
   }, [params.id]);
 
-  if (!article.slug) {
+  if (!article || !article.slug) {
     return null;
   }
 

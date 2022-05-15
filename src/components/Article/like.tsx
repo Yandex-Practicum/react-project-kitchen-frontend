@@ -7,11 +7,13 @@ import {
 import {LikeIconContainer, LikeIconButton, LikeIconNumber} from "../StyledComponents/like-icon-styles";
 import {useAppDispatch} from "../../services/hooks";
 import {TArticleProperties} from "../../services/types";
+import {articleSlice} from "../../services/articleSlice";
 
 type TLIkeProperties = {
   article: TArticleProperties,
   icon: string,
   isButton?: boolean,
+  onClick?: () => void,
 }
 
 const Like: FunctionComponent<TLIkeProperties> = (props) => {
@@ -34,9 +36,12 @@ const Like: FunctionComponent<TLIkeProperties> = (props) => {
             if (props.article.favorited) {
               dispatch(deleteArticleAsFavoriteThunk(props.article.slug))
             } else {
-              dispatch(setArticleAsFavoriteThunk(props.article.slug))
-            }}
-          }>
+              dispatch(setArticleAsFavoriteThunk(props.article.slug));
+            }
+            if (props.onClick) {
+              props.onClick();
+            }
+          }}>
             <LikeIconNumber>{props.article.favoritesCount}</LikeIconNumber>
             <img src={props.icon} alt="Иконка лайка"/>
           </LikeIconButton>
