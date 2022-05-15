@@ -1,7 +1,7 @@
 import { Redirect } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import SignupLoginSubmitBtn from "../../components/SignupLoginSubmitBtn";
+import SubmitButton from "../../components/submitButton";
 import { useForm } from "react-hook-form";
 import { signupThunk } from "../../services/thunks";
 import * as Styles from "../../components/StyledComponents/authStyles";
@@ -130,7 +130,7 @@ const Register: React.FC = () => {
               {errorsResponse?.password && <FormStyles.Error>{errorsResponse?.password}</FormStyles.Error>}
             </FormStyles.ErrorsContainer>
 
-            <SignupLoginSubmitBtn btnText="Зарегистрироваться" disabled={!isError || inProgress} />
+            <SubmitButton btnText="Зарегистрироваться" disabled={!isError || inProgress} />
 
           </FormStyles.FieldSet>
         </FormStyles.Form>

@@ -5,16 +5,16 @@ import {
   createArticleThunk,
   deleteArticleThunk,
   updateArticleThunk,
-} from "../services/thunks";
+} from "../../services/thunks";
 import { useForm } from "react-hook-form";
-import * as Styles from "../components/StyledComponents/editorStyles";
-import * as FormStyles from "../UI/forms/form";
-import IconInputFile from "../UI/icon-input-file/icon-input-file";
-import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
-import DeleteArticleBtn from "./DeleteArticleBtn";
+import * as Styles from "../../components/StyledComponents/editorStyles";
+import * as FormStyles from "../../UI/forms/form";
+import IconInputFile from "../../UI/icon-input-file/icon-input-file";
+import SubmitButton from "../../components/submitButton";
+import DeleteArticleBtn from "../../components/DeleteArticleBtn";
 
-import Modal from "./modal/modal";
-import Preloader from "./Preloader";
+import Modal from "../../components/modal/modal";
+import Preloader from "../../components/Preloader";
 
 type FormData = {
   title: string;
@@ -212,7 +212,7 @@ function Editor() {
               {errors?.tagInput && <FormStyles.Error>{errors?.tagInput?.message}</FormStyles.Error>}
             </FormStyles.ErrorsContainer>
 
-            <SignupLoginSubmitBtn
+            <SubmitButton
               btnText={params.hasOwnProperty('slug') ? "Сохранить  запись" : "Опубликовать запись"}
               disabled={!isError || inProgress}
             />
