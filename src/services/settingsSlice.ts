@@ -4,13 +4,10 @@ import { updateUserThunk } from "../services/thunks";
 
 interface IInitialState {
   inProgress: boolean
-  // errors: any;
-  // tagsRequestInProgress: boolean;
 }
 
 const initialState: IInitialState = {
   inProgress: false,
-  // errors: null,
 }
 
 export const settingsSlice  = createSlice({
@@ -19,7 +16,6 @@ export const settingsSlice  = createSlice({
   reducers: {
     SETTINGS_SAVED: (state: IInitialState, action: PayloadAction<any>) => {
       state.inProgress = false;
-      // state.errors = action.payload.errors ? action.payload.errors : null
     },
     SETTINGS_PAGE_UNLOADED: (state, action) => {
       return initialState
@@ -39,7 +35,7 @@ export const settingsSlice  = createSlice({
       state.inProgress = false
     }
   },
-  
+
 
 })
 
