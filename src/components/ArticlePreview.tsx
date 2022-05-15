@@ -6,8 +6,8 @@ import {
   setArticleAsFavoriteThunk,
 } from "../services/thunks";
 import {TArticleProperties} from "../services/types";
-import { ArticleBody, AdditionalInfo, ArticleWrapper, ReadMoreLink, Tagslist, ArticleTag, ArticleText, ArticleImg } from './StyledComponents/ArticlePreviewStyles'
-import {ArticleHeading , AuthorWrapper} from "./StyledComponents/sidebar-information-styles";
+import { ArticleBody, AdditionalInfo, ArticleWrapper, ReadMoreLink, Tagslist, ArticleTag, ArticleText, ArticleImg, ArticleHeading } from './StyledComponents/ArticlePreviewStyles'
+import { AuthorWrapper} from "./StyledComponents/sidebar-information-styles";
 import ProfileInformationView from "./profile-information-view";
 import Like from "./Article/like";
 import like from "../images/like-icon.svg";
@@ -39,7 +39,7 @@ const ArticlePreview: React.FC<{ article: TArticleProperties } > = (props) => {
           <ProfileInformationView articleDate={composeCreatedDate(article.createdAt)} author={article.author}/>
           <Like counter={article.favoritesCount} icon={like}/>
         </AuthorWrapper>
-        <ArticleHeading fontSize='36px' lineHeight="40px" margin="0 0 16px" fontSizeLap="32px" lineHeightLap="36px">{article.title}</ArticleHeading>
+        <ArticleHeading>{article.title}</ArticleHeading>
         <ArticleBody >
           {article.image && (<ArticleImg urlImg={`${article.image}`}/>)}
           <ArticleText fontSizeLap="16px" lineHeightLap="20px">{article.body}</ArticleText>
@@ -47,10 +47,11 @@ const ArticlePreview: React.FC<{ article: TArticleProperties } > = (props) => {
         <AdditionalInfo>
           <ReadMoreLink to={`/article/${article.slug}`}>Читать дальше</ReadMoreLink>
           <Tagslist>
-          {article.tagList.map((tag: any, i: number) => {
+          
+          {article.tagList.length > 0 && article.tagList.map((tag: any, i: number) => {
             return (
               <ArticleTag key={i}>
-                {tag}
+                {tag ? `#${tag}` : tag}
               </ArticleTag>
             );
           })}
