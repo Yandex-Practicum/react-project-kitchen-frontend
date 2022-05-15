@@ -1,16 +1,16 @@
-import ArticleList from "./ArticleList";
-import ProfileHeader from "./ProfileHeader";
+import ArticleList from "../../components/ArticleList";
+import ProfileHeader from "../../components/ProfileHeader";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getArticlesByAuthorThunk, getProfileThunk } from "../services/thunks";
-import { profileSlice } from "../services/profileSlice";
-import * as Styles from "./StyledComponents/profileStyles";
-import {ArcticleListContainer} from '../components/StyledComponents/articleList/ArticleListStyles';
-import { ArticleWrapper } from "../components/StyledComponents/sidebar-information-styles";
-import ArticlePreview  from "../components/ArticlePreview"
+import { getArticlesByAuthorThunk, getProfileThunk } from "../../services/thunks";
+import { profileSlice } from "../../services/profileSlice";
+import * as Styles from "../../components/StyledComponents/profileStyles";
+import {ArcticleListContainer} from '../../components/StyledComponents/articleList/ArticleListStyles';
+import { ArticleWrapper } from "../../components/StyledComponents/sidebar-information-styles";
+import ArticlePreview  from "../../components/ArticlePreview"
 
-import Preloader from "./Preloader";
+import Preloader from "../../components/Preloader";
 
 function Profile() {
   const dispatch = useDispatch();

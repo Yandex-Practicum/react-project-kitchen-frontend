@@ -1,13 +1,13 @@
 import { FC } from "react";
 import {StyleBtn} from "./StyledComponents/SignupLoginSubmitBtnStyles";
 
-interface ISignupLoginSubmitBtnProps {
+interface ISubmitButtonProps {
   btnText: string;
   type?: "submit" | "button" | "reset" | undefined;
   disabled?: boolean;
 }
 
-const SignupLoginSubmitBtn: FC<ISignupLoginSubmitBtnProps> = ({
+const SubmitButton: FC<ISubmitButtonProps> = ({
   btnText,
   type = "submit",
   disabled,
@@ -22,4 +22,4 @@ const SignupLoginSubmitBtn: FC<ISignupLoginSubmitBtnProps> = ({
   );
 };
 
-export default SignupLoginSubmitBtn;
+export default SubmitButton;

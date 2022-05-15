@@ -1,12 +1,12 @@
 import { Redirect } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
-import { loginThunk } from "../services/thunks";
+import SubmitButton from "../../components/submitButton";
+import { loginThunk } from "../../services/thunks";
 import { useForm } from "react-hook-form";
-import * as Styles from "../components/StyledComponents/authStyles";
-import * as FormStyles from "../UI/forms/form";
-import Preloader from "./Preloader";
+import * as Styles from "../../components/StyledComponents/authStyles";
+import * as FormStyles from "../../UI/forms/form";
+import Preloader from "../../components/Preloader";
 
 type FormData = {
   email: string;
@@ -102,7 +102,7 @@ export const Login: React.FC = () => {
               {errorsResponse['email or password'] && <FormStyles.Error>{'Неверный email или пароль'}</FormStyles.Error>}
             </FormStyles.ErrorsContainer>
 
-            <SignupLoginSubmitBtn btnText="Войти" disabled={!isError || inProgress} />
+            <SubmitButton btnText="Войти" disabled={!isError || inProgress} />
 
           </FormStyles.FieldSet>
         </FormStyles.Form>

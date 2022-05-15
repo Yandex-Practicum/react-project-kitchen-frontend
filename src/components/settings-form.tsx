@@ -2,7 +2,7 @@ import { useEffect, useState, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileThunk, updateUserThunk } from "../services/thunks";
 import { useForm } from "react-hook-form";
-import SignupLoginSubmitBtn from "../components/SignupLoginSubmitBtn";
+import SubmitButton from "./submitButton";
 import IconInput from "../UI/icon-input/icon-input";
 import IconInputFile from "../UI/icon-input-file/icon-input-file";
 import * as FormStyles from "../UI/forms/form";
@@ -173,7 +173,7 @@ const SettingsForm: FC<ISettingsForm> = () => {
             {errors?.password && <FormStyles.Error>{errors?.password?.message}</FormStyles.Error>}
           </FormStyles.ErrorsContainer>
 
-          <SignupLoginSubmitBtn btnText="Обновить настройки" disabled={!isError || inProgress} />
+          <SubmitButton btnText="Обновить настройки" disabled={!isError || inProgress} />
 
         </FormStyles.FieldSet>
 
