@@ -18,13 +18,13 @@ export const SidebarRight = styled.div`
 
   @media ${device.tablet}
   {
+    padding: 0 0 40px;
+    border-bottom: #ccc 1px solid;
     margin: 0 auto;
     // padding-left: 46px;
   }
-  @media ${device.tabletVert} {
-    padding: 0 20px 40px;
-    border-bottom: #ccc 1px solid;
-  }
+
+ 
 `
 
 export const StickyContainer = styled(SidebarRight)`

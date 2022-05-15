@@ -21,7 +21,9 @@ export const ArticleWrapper  = styled.div
   }
 
   @media ${device.tablet} {
-    
+    &:first-of-type {
+      padding-top: 33px;
+    }
   }
 
   @media ${device.tabletVert} {

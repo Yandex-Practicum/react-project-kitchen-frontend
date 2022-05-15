@@ -11,9 +11,10 @@ import {
   Tagslist,
   ArticleTag,
   ArticleText,
-  ArticleImg
+  ArticleImg,
+  ArticleHeading,
 } from './StyledComponents/ArticlePreviewStyles'
-import {ArticleHeading, AuthorWrapper} from "./StyledComponents/sidebar-information-styles";
+import { AuthorWrapper } from "./StyledComponents/sidebar-information-styles";
 import ProfileInformationView from "./profile-information-view";
 import Like from "./Article/like";
 import like from "../images/like-icon.svg";
@@ -31,8 +32,7 @@ const ArticlePreview: React.FC<{ article: TArticleProperties }> = (props) => {
               icon={`${props.article.favorited ? likeActive : like}`}
               isButton={true}/>
       </AuthorWrapper>
-      <ArticleHeading fontSize='36px' lineHeight="40px" margin="0 0 16px" fontSizeLap="32px"
-                      lineHeightLap="36px">{article.title}</ArticleHeading>
+      <ArticleHeading >{article.title}</ArticleHeading>
       <ArticleBody>
         {article.image && (<ArticleImg urlImg={`${article.image}`}/>)}
         <ArticleText fontSizeLap="16px" lineHeightLap="20px">{article.body}</ArticleText>

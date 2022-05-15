@@ -15,14 +15,7 @@ export const ArcticleListContainer = styled.div`
 
   @media ${device.tablet} {
     width: 280px;
-
-    margin-top: 40px;
   }
-
-  @media ${device.mobileL} {
-    width: 280px;
-  }
-
 
 
 `;
