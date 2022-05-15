@@ -8,8 +8,8 @@ export const headerPrfContainer = styled.div`
 
   max-width: 304px;
 
-  margin: 0 auto 16px;
-
+  margin: 0 auto 48px;
+  
   @media ${device.tablet} {
     margin-bottom: 20px;
   }
