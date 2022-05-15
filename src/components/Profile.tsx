@@ -3,12 +3,13 @@ import ProfileHeader from "./ProfileHeader";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import {
-  getArticlesByAuthorThunk,
-  getProfileThunk,
-} from "../services/thunks";
+import { getArticlesByAuthorThunk, getProfileThunk } from "../services/thunks";
 import { profileSlice } from "../services/profileSlice";
 import * as Styles from "./StyledComponents/profileStyles";
+import {ArcticleListContainer} from '../components/StyledComponents/articleList/ArticleListStyles';
+import { ArticleWrapper } from "../components/StyledComponents/sidebar-information-styles";
+import ArticlePreview  from "../components/ArticlePreview"
+
 import Preloader from "./Preloader";
 
 function Profile() {
@@ -22,7 +23,7 @@ function Profile() {
 
   const actionsProfile = profileSlice.actions;
 
-  const params: { username: string;[key: string]: any } = useParams();
+  const params: { username: string; [key: string]: any } = useParams();
 
   useEffect(() => {
     if (params.username) {
@@ -31,7 +32,7 @@ function Profile() {
     }
     return () => {
       actionsProfile.profilePageWasUnloaded();
-    }
+    };
   }, [dispatch]);
 
   if (!username) {
@@ -39,13 +40,25 @@ function Profile() {
   }
   return (
     <>
-    {(isLoading && <Preloader />)}
+      {isLoading && <Preloader />}
 
-    <Styles.ProfileSection>
-      <ProfileHeader
-        profile={{ username, image, following }}
-      />
-    </Styles.ProfileSection>
+      <Styles.ProfileSection>
+        <ProfileHeader profile={{ username, image, following }} />
+        <ArcticleListContainer>
+          {!articles && <Preloader />}
+
+          {articles.length === 0 && (
+            <ArticleWrapper padding="20px">
+              No articles are here... yet.
+            </ArticleWrapper>
+          )}
+
+          {articles.map((article: any) => {
+            return <ArticlePreview article={article} key={article.slug} />;
+          })}
+
+        </ArcticleListContainer>
+      </Styles.ProfileSection>
     </>
   );
 }
