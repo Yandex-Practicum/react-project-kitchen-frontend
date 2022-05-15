@@ -2,14 +2,25 @@ import DOMPurify from 'dompurify';
 import {marked} from 'marked';
 import ArticleMeta from "./ArticleMeta";
 import CommentContainer from "./CommentContainer";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteArticleThunk, getArticleThunk, getCommentsForArticleThunk } from "../../services/thunks";
-import { useHistory, useParams } from "react-router";
+import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {deleteArticleThunk, getArticleThunk, getCommentsForArticleThunk} from "../../services/thunks";
+import {useHistory, useParams} from "react-router";
 import ArticleActions from './ArticleActions';
-import { ArticleBody, ArticlePage, ArticleTitle, ASide, PageBody, PageContent, ArticleText, ArticleTagsList, ArticleTag } from '../StyledComponents/articlePageStyles';
+import {
+  ArticleBody,
+  ArticlePage,
+  ArticleTitle,
+  ASide,
+  AsideStickyContainer,
+  PageBody,
+  PageContent,
+  ArticleText,
+  ArticleTagsList,
+  ArticleTag
+} from '../StyledComponents/articlePageStyles';
 import Modal from '../modal/modal';
-import { SidebarRight } from '../StyledComponents/sidebar-information-styles';
+import {SidebarRight} from '../StyledComponents/sidebar-information-styles';
 import SidebarInformation from '../sidebar-information';
 
 type TArticleProps = {
@@ -40,7 +51,7 @@ const Article: React.FC<TArticleProps> = (props) => {
       dispatch(getArticleThunk(params.id));
       dispatch(getCommentsForArticleThunk(params.id));
     }
-  }, []);
+  }, [params.id]);
 
   if (!article.slug) {
     return null;
@@ -70,20 +81,17 @@ const Article: React.FC<TArticleProps> = (props) => {
 
   const isTags = article.tagList.length === 0 ? "0px" : "24px";
 
-
-  console.log(article)
-
   return (<>
     <ArticlePage>
       <PageBody>
         <PageContent>
-          <ArticleActions onClick={openModal} canModify={canModify} article={article} />
+          <ArticleActions onClick={openModal} canModify={canModify} article={article}/>
 
           <ArticleTitle>
             {article.title}
           </ArticleTitle>
 
-          <ArticleMeta article={article} />
+          <ArticleMeta article={article}/>
 
           <ArticleBody>
             <ArticleText marginBottom={isTags} dangerouslySetInnerHTML={markup}></ArticleText>
@@ -109,14 +117,16 @@ const Article: React.FC<TArticleProps> = (props) => {
         </PageContent>
 
         <ASide>
+          <AsideStickyContainer>
             <SidebarInformation sectionTitle="Свежие новости" articles={allArticles} keyName="createdAt"/>
+          </AsideStickyContainer>
         </ASide>
 
       </PageBody>
     </ArticlePage>
 
-    { isModalOpen &&
-      <Modal deleteArticle={deleteArticle} title={"Удалить запись"} onClose={onClose} />
+    {isModalOpen &&
+      <Modal deleteArticle={deleteArticle} title={"Удалить запись"} onClose={onClose}/>
     }
   </>);
 };

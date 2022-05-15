@@ -6,7 +6,7 @@ import {TArticleProperties} from "../services/types";
 import {composeCreatedDate, sortArrayOfObjects} from "../utils/utils";
 import {SidebarSlider} from "./sidebar-slider";
 
-const SidebarInformation: FunctionComponent<{sectionTitle: string, articles: Array<TArticleProperties>, keyName: string}> = (props) => {
+const SidebarInformation: FunctionComponent<{ sectionTitle: string, articles: Array<TArticleProperties>, keyName: string }> = (props) => {
   let articlesArrayForSort;
 
   // копируем иммутабельный массив из состояния дл ятого, чтобы отсортировать его. Сортировка не возвращает новое значение, а сортирует прямо на месте!
@@ -22,8 +22,8 @@ const SidebarInformation: FunctionComponent<{sectionTitle: string, articles: Arr
           articlesArrayForSort.map((article, index) => (
             <>
               <ArticleSidebarView
-              key={index} article={article}
-              articleDate={composeCreatedDate(article.createdAt)}/>
+                key={index} article={article}
+                articleDate={composeCreatedDate(article.createdAt)}/>
             </>
 
           ))

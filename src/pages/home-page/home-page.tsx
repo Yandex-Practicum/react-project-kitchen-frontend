@@ -10,7 +10,7 @@ import {
 import {homeSlice} from "../../services/homeSlice";
 import SidebarInformation from "../../components/sidebar-information";
 import {HomePageSection} from "../../components/StyledComponents/homepage/homepageStyles";
-import {SidebarRight} from "../../components/StyledComponents/sidebar-information-styles";
+import {SidebarRight, StickyContainer} from "../../components/StyledComponents/sidebar-information-styles";
 import {TagsTitle} from "../../components/StyledComponents/home-page-styles";
 
 const Home: FC = () => {
@@ -33,16 +33,18 @@ const Home: FC = () => {
     <HomePageSection>
       <MainView/>
       <SidebarRight>
-        <TagsTitle>Популярные теги</TagsTitle>
-        <Tags
-          tags={tags}
-          onClickTag={(
-            tag: string,
-            pager: (page: any) => {},
-            payload: any
-          ) => ({})}
-        />
-        <SidebarInformation sectionTitle="Популярные материалы" articles={allArticles} keyName='favoritesCount'/>
+        <StickyContainer>
+          <TagsTitle>Популярные теги</TagsTitle>
+          <Tags
+            tags={tags}
+            onClickTag={(
+              tag: string,
+              pager: (page: any) => {},
+              payload: any
+            ) => ({})}
+          />
+          <SidebarInformation sectionTitle="Популярные материалы" articles={allArticles} keyName='favoritesCount'/>
+        </StickyContainer>
       </SidebarRight>
     </HomePageSection>
   );
