@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { followUserThunk, unfollowUserThunk } from "../services/thunks";
 import * as Styles from "./StyledComponents/followUserButtonStyles";
 import minus from "../images/whiteMinus.svg";
@@ -15,10 +15,8 @@ type TFollowUserButton = {
   }
 }
 
-//Проверить здесь все, когда можно будет подписываться.
-function FollowUserButton({ isUser, user, follow, unfollow }: TFollowUserButton) {
+function FollowUserButton({ user }: TFollowUserButton) {
 
-  const { following } = useSelector((state: any) => state.profile);
   const dispatch = useDispatch()
 
   const handleClick = (ev: React.SyntheticEvent<Element, Event>) => {
@@ -27,10 +25,6 @@ function FollowUserButton({ isUser, user, follow, unfollow }: TFollowUserButton)
     ? dispatch(unfollowUserThunk(user.username))
     : dispatch(followUserThunk(user.username))
   };
-//Вернуть это условие.
-  // if (isUser) {
-  //   return null;
-  // }
 
   return (
     <Styles.followBtn onClick={handleClick}>
