@@ -6,7 +6,7 @@ export const HomePageSection = styled.section`
   max-width: 1140px;
   display: flex;
   justify-content: space-between;
-  overflowY: "auto" ;
+  //overflowY: "auto" ;
   padding-bottom: 30px;
 
   @media ${device.laptopL} {
@@ -24,7 +24,7 @@ export const HomePageSection = styled.section`
     margin: -371px auto 0;
     flex-direction: column-reverse;
     align-items: center;
-   
+
   }
 
 `

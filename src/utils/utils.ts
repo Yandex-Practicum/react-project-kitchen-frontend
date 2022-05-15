@@ -1,5 +1,3 @@
-import React from "react";
-
 export const sortArrayOfObjects = (array: Array<any>, keyName: string) => {
   array.sort((a, b) => {
     return b[keyName] - a[keyName]

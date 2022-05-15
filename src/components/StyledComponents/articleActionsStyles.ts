@@ -18,13 +18,17 @@ export const ArticleActionsWrapper = styled.div`
 `
 
 export const ArticleActionsEditor = styled(Link)`
+  display: flex;
+  align-items: center;
+
+  padding: 8px 16px;
+  margin: 0;
+
   font-family: 'AlegreyaSans';
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;
-
-  padding: 8px 16px;
-  margin: 0;
+  text-decoration: none;
 
   background-color: ${btnSbmtColor.default};
   color: ${textColor.whiteText};
@@ -33,10 +37,12 @@ export const ArticleActionsEditor = styled(Link)`
   transition: all 0.2s linear;
 
   &:hover {
+    text-decoration: underline;
     background-color: ${btnSbmtColor.hover};
   }
 
   &:active {
+    text-decoration: none;
     background-color: ${btnSbmtColor.active};
   }
 `
