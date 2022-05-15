@@ -100,7 +100,7 @@ const Article: React.FC<TArticleProps> = (props) => {
               {article.tagList.map((tag: any) => {
                 return (
                   <ArticleTag key={tag}>
-                    {`#${tag}`}
+                    {'#' + tag.replaceAll('#', '')}
                   </ArticleTag>
                 );
               })}
