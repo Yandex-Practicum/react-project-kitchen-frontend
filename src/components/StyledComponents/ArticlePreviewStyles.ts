@@ -43,7 +43,7 @@ export const ArticleBody = styled.div`
 `;
 
 export const ArticleImg = styled.div<{ urlImg:string }>`
-  background-image: url(${props => props.urlImg})
+  background-image: url(${props => props.urlImg});
   width: 158px;
   height: 85px;
 
