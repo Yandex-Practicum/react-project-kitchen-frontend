@@ -20,6 +20,7 @@ import Like from "./Article/like";
 import like from "../images/like-icon.svg";
 import likeActive from "../images/like-active-icon.svg";
 import {useAppSelector} from "../services/hooks";
+import {articleSlice} from "../services/articleSlice";
 
 const ArticlePreview: React.FC<{ article: TArticleProperties }> = (props) => {
   const {article} = props;

@@ -3,7 +3,7 @@ export type TFollowingUser = {
   image: string,
   following: boolean,
   bio?: string,
-  isLoading: boolean,
+  isLoading?: boolean,
 }
 
 export type TFollowingUserProfile = {
@@ -40,4 +40,11 @@ export type TArticle = {
 
 export type TEditingArticle = {
   article: TEditingArticleProperties
+}
+
+export type TCommentProperties = {
+  author: TFollowingUser,
+  body: string,
+  createdAt: string,
+  id: string
 }
