@@ -113,7 +113,7 @@ export const Tagslist = styled.ul`
 `;
 
 export const ArticleTag = styled.li`
-  font-family: 'Alegreya Sans', Times, serif;
+  font-family: 'AlegreyaSans',sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -124,7 +124,7 @@ export const ArticleTag = styled.li`
 `
 
 export const ArticleHeading = styled.h2`
-  font-family: 'Alegreya Sans', Times, serif;
+  font-family: 'AlegreyaSans',sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 36px;
