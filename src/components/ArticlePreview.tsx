@@ -2,6 +2,7 @@ import React from "react";
 import {useDispatch} from "react-redux";
 import {composeCreatedDate} from "../utils/utils";
 import {TArticleProperties} from "../services/types";
+
 import {
   ArticleBody,
   AdditionalInfo,
@@ -42,7 +43,7 @@ const ArticlePreview: React.FC<{ article: TArticleProperties }> = (props) => {
           {article.tagList.map((tag: any, i: number) => {
             return (
               <ArticleTag key={i}>
-                {tag}
+                {tag ? `#${tag}` : tag}
               </ArticleTag>
             );
           })}
