@@ -8,17 +8,17 @@ import {
   deleteCommentThunk,
   getCommentsForArticleThunk,
 } from "./thunks";
-import {TArticle} from "./types";
+import {TArticle, TArticleProperties, TCommentProperties} from "./types";
 
 interface IInitialState {
-  article: TArticle | {},
-  comments: Array<any>, // TODO: type
+  article: TArticleProperties | null,
+  comments: Array<TCommentProperties>,
   commentErrors: any,
   inProgress: boolean
 }
 
 const initialState: IInitialState = {
-  article: {},
+  article: null,
   comments: [],
   commentErrors: null,
   inProgress: false
@@ -57,14 +57,23 @@ const setInProgressFalse = (state: IInitialState) => {
   state.inProgress = false;
 };
 
-
 export const articleSlice = createSlice({
   name: "article",
   initialState,
   reducers: {
     clearArticle: (state) => {
-      state.article = {};
+      state.article = null;
     },
+    setArticleLike: (state: IInitialState, action: PayloadAction<boolean>) => {
+      if (state.article!== null) {
+        state.article.favorited = action.payload;
+        if (action.payload) {
+          state.article.favoritesCount++;
+        } else {
+          state.article.favoritesCount--;
+        }
+      }
+    }
   },
 
   extraReducers: {
@@ -78,7 +87,7 @@ export const articleSlice = createSlice({
 
     [getArticleThunk.fulfilled]: setArticle,
     [deleteArticleThunk.fulfilled]: (state) => {
-      state.article = {};
+      state.article = null;
     },
     [createCommentThunk.fulfilled]: addComment,
     [createCommentThunk.rejected]: addCommentErrors,

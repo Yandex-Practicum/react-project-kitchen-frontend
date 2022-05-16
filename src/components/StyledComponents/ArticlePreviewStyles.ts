@@ -21,7 +21,9 @@ export const ArticleWrapper  = styled.div
   }
 
   @media ${device.tablet} {
-    
+    &:first-of-type {
+      padding-top: 33px;
+    }
   }
 
   @media ${device.tabletVert} {
@@ -41,7 +43,7 @@ export const ArticleBody = styled.div`
 `;
 
 export const ArticleImg = styled.div<{ urlImg:string }>`
-  background-image: url(${props => props.urlImg})
+  background-image: url(${props => props.urlImg});
   width: 158px;
   height: 85px;
 
@@ -62,7 +64,7 @@ export const ArticleText = styled.p<{fontSizeLap: string, lineHeightLap: string}
   @media ${device.laptopL} {
     font-size: ${(props) => props.fontSizeLap};
     line-height: ${(props) => props.lineHeightLap};
-}
+  }
 `;
 
 export const AdditionalInfo = styled.div`
@@ -72,6 +74,16 @@ export const AdditionalInfo = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   padding: 0px;
+
+  @media ${device.tablet} {
+    flex-direction: column-reverse;
+    column-gap: 20px;
+  }
+
+  @media ${device.tabletVert} {
+    text-align: left;
+  }
+
 `;
 
 export const ReadMoreLink = styled(Link)`
@@ -94,10 +106,16 @@ export const Tagslist = styled.ul`
   flex-wrap: wrap;
   max-width: 318px;
   max-height: 52px;
+
+  @media ${device.tablet} {
+    margin: 0;
+
+  }
+
 `;
 
 export const ArticleTag = styled.li`
-  font-family: 'Alegreya Sans', Times, serif;
+  font-family: 'AlegreyaSans',sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -105,4 +123,20 @@ export const ArticleTag = styled.li`
   list-style-type: none;
   margin: 0;
   color: ${colors.darkGrey};
+`
+
+export const ArticleHeading = styled.h2`
+  font-family: 'AlegreyaSans',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 40px;
+  margin-bottom: 16px;
+
+  @media ${device.laptop} {
+    font-size: 32px;
+    line-height: 36px;
+  }
+
+
 `

@@ -15,11 +15,11 @@ type TFollowUserButton = {
   }
 }
 
-//Проверить здесь все, когда можно будет подписываться.
-function FollowUserButton({ isUser, user, follow, unfollow }: TFollowUserButton) {
+function FollowUserButton({ user }: TFollowUserButton) {
 
   const { following } = useAppSelector((state) => state.profile);
   const dispatch = useAppDispatch()
+
 
   const handleClick = (ev: React.SyntheticEvent<Element, Event>) => {
     ev.preventDefault();
@@ -27,10 +27,6 @@ function FollowUserButton({ isUser, user, follow, unfollow }: TFollowUserButton)
     ? dispatch(unfollowUserThunk(user.username))
     : dispatch(followUserThunk(user.username))
   };
-//Вернуть это условие.
-  // if (isUser) {
-  //   return null;
-  // }
 
   return (
     <Styles.followBtn onClick={handleClick}>

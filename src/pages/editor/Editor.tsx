@@ -4,24 +4,23 @@ import {
   createArticleThunk,
   deleteArticleThunk,
   updateArticleThunk,
-} from "../services/thunks";
+} from "../../services/thunks";
 import { useForm } from "react-hook-form";
-import * as Styles from "../components/StyledComponents/editorStyles";
-import * as FormStyles from "../UI/forms/form";
-import IconInputFile from "../UI/icon-input-file/icon-input-file";
-import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
-import DeleteArticleBtn from "./DeleteArticleBtn";
+import * as Styles from "../../components/StyledComponents/editorStyles";
+import * as FormStyles from "../../UI/forms/form";
+import IconInputFile from "../../UI/icon-input-file/icon-input-file";
+import SubmitButton from "../../components/submitButton";
+import DeleteArticleBtn from "../../components/DeleteArticleBtn";
 
-import Modal from "./modal/modal";
-import Preloader from "./Preloader";
-import { useAppDispatch, useAppSelector } from "../services/hooks";
+import Modal from "../../components/modal/modal";
+import Preloader from "../../components/Preloader";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
 
 const texts = {
   title: "Удалить запись",
   text: 'Нажимая кнопку «Удалить запись», материал будет удален без возможности восстановления',
   button: 'Удалить запись'
 }
-
 type FormData = {
   title: string;
   description: string;
@@ -36,7 +35,7 @@ function Editor() {
 
   const [isError, setIsError] = useState(false);
 
-  const { inProgress } = useAppSelector((state) => state.article);
+  const { inProgress } = useAppSelector((state: any) => state.article);
   const params: { slug: string, id: string } = useParams();
   const { article } = useAppSelector((state: any) => state.article);
 
@@ -220,7 +219,7 @@ function Editor() {
               {errors?.tagInput && <FormStyles.Error>{errors?.tagInput?.message}</FormStyles.Error>}
             </FormStyles.ErrorsContainer>
 
-            <SignupLoginSubmitBtn
+            <SubmitButton
               btnText={params.hasOwnProperty('slug') ? "Сохранить  запись" : "Опубликовать запись"}
               disabled={!isError || inProgress}
             />

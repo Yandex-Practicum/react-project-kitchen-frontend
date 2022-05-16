@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import { btnSbmtColor, textColor, linkColor, inputBorderColor, device } from './constantsStyles';
+import {btnSbmtColor, textColor, linkColor, inputBorderColor, device} from './constantsStyles';
 
 export const ArticleMetaWrapper = styled.div`
   display: flex;
@@ -29,12 +29,27 @@ export const ArticleNameAndDate = styled.div`
 `
 
 export const ArticleMetaName = styled(Link)`
+  margin: 0;
+
+  text-decoration: none;
   font-family: 'AlegreyaSans';
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
+  color: ${textColor.secondaryText};
 
-  margin: 0;
+  &:hover {
+    text-decoration: underline;
+    color: ${textColor.secondaryText};
+  }
+  &:focus {
+    text-decoration: underline;
+    color: ${textColor.secondaryText};
+  }
+  &:active {
+    text-decoration: underline;
+    color: ${textColor.secondaryText};
+  }
 `
 
 export const ArticleMetaDate = styled.span`

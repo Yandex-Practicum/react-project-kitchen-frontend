@@ -4,6 +4,7 @@ import { getAllArticlesThunk } from "../../services/thunks";
 import { getAllArticles } from "../../api";
 import { useAppSelector } from "../../services/hooks";
 
+
 const MainView: FC = () => {
   const { articles, articlesCount, currentPage, pager } = useAppSelector(
     (state) => state.articleList

@@ -1,12 +1,15 @@
 import { Redirect } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
-import { loginThunk } from "../services/thunks";
+// src/components/login.tsx
+// import SignupLoginSubmitBtn from "./SignupLoginSubmitBtn";
+import { loginThunk } from "../../services/thunks/index";
 import { useForm } from "react-hook-form";
-import * as Styles from "../components/StyledComponents/authStyles";
-import * as FormStyles from "../UI/forms/form";
-import Preloader from "./Preloader";
-import { useAppDispatch, useAppSelector } from "../services/hooks";
+import * as Styles from "../../components/StyledComponents/authStyles";
+import * as FormStyles from "../../UI/forms/form";
+import Preloader from "../../components/Preloader";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
+import SubmitButton from "../../components/submitButton";
+
 
 type FormData = {
   email: string;
@@ -15,10 +18,10 @@ type FormData = {
 
 export const Login: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { isLoggedIn } = useAppSelector((state) => state.common);
+  const { isLoggedIn } = useAppSelector((state: any) => state.common);
   const [errorsResponse, setErrorsResponse] = useState<any>({});
   const [isError, setIsError] = useState(false);
-  const { inProgress } = useAppSelector((state) => state.auth);
+  const { inProgress } = useAppSelector((state: any) => state.auth);
 
   const {
     register,
@@ -102,7 +105,7 @@ export const Login: React.FC = () => {
               {errorsResponse['email or password'] && <FormStyles.Error>{'Неверный email или пароль'}</FormStyles.Error>}
             </FormStyles.ErrorsContainer>
 
-            <SignupLoginSubmitBtn btnText="Войти" disabled={!isError || inProgress} />
+            <SubmitButton btnText="Войти" disabled={!isError || inProgress} />
 
           </FormStyles.FieldSet>
         </FormStyles.Form>

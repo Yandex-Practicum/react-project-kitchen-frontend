@@ -1,5 +1,7 @@
 import React from "react";
+
 import { ArticleActionsEditor, ArticleActionsEditorIcon, ArticleActionsWrapper } from "../StyledComponents/articleActionsStyles";
+
 import plus from "../../images/whitePlus.svg";
 
 import DeleteArticleBtn from "../DeleteArticleBtn";
@@ -19,13 +21,13 @@ const ArticleActions: React.FC<TArticleActionsProps> = (props) => {
     return (
       <ArticleActionsWrapper>
         <ArticleActionsEditor
-        to={`/editor/${article.slug}`}
+          to={`/editor/${article.slug}`}
         >
           <ArticleActionsEditorIcon src={plus}/>
           Редактировать запись
         </ArticleActionsEditor>
 
-        <DeleteArticleBtn onClick={props.onClick} mrgTop="0px" text="Удалить запись" />
+        <DeleteArticleBtn onClick={props.onClick} mrgTop="0px" text="Удалить запись"/>
 
       </ArticleActionsWrapper>
     );

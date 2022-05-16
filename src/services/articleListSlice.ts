@@ -35,9 +35,9 @@ const initialState: IInitialState = {
   pager: null,
 };
 
-const setFavoritedStatusOnArticle = (state: IInitialState, action: PayloadAction<TArticle>) => { //TODO: уточнить тип статьи
+const setFavoritedStatusOnArticle = (state: IInitialState, action: PayloadAction<TArticle>) => {
   state.articles = state.articles.map((art) => {
-    if (art.slug === action.payload.article.slug) { // TODO: тут точно art.slug?
+    if (art.slug === action.payload.article.slug) {
       return action.payload.article;
     } else {
       return art;

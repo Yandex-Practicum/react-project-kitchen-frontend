@@ -2,10 +2,10 @@ import Header from "./header";
 import { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import Article from "./Article";
-import Editor from "./Editor";
+import Editor from "../pages/editor/Editor";
 import Home from "../pages/home-page/home-page";
-import Login from "./login";
-import Profile from "./Profile";
+import Login from "../pages/login/login";
+import Profile from "../pages/profile/Profile";
 import Register from "../pages/register/register";
 import Settings from "../pages/settings/settings";
 import NotFound404 from "../pages/notFound404/notFound404"

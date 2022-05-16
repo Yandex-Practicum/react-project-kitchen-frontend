@@ -4,7 +4,7 @@ import { updateUserThunk } from "../../services/thunks";
 import { logout as logoutAction } from "../../services/commonSlice";
 import { useHistory } from "react-router";
 import * as Styles from "../../components/StyledComponents/settingsStyles";
-import SignupLoginSubmitBtn from "../../components/SignupLoginSubmitBtn";
+import SignupLoginSubmitBtn from "../../components/submitButton";
 import Modal from '../../components/modal/modal'
 import SettingsForm from "../../components/settings-form"
 import { useAppDispatch } from "../../services/hooks";

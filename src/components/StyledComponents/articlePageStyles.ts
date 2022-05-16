@@ -62,6 +62,23 @@ export const ASide = styled.section`
     max-width: 277px;
   }
 `
+
+export const AsideStickyContainer = styled.div`
+  position: sticky;
+  top: 0;
+  right: 0;
+
+  width: 359px;
+
+  @media ${device.laptopL} {
+    max-width: 377px;
+  }
+
+  @media ${device.laptop} {
+    max-width: 277px;
+  }
+`
+
 export const ArticleTitle = styled.h1`
   font-family: 'AlegreyaSans';
   font-size: 56px;

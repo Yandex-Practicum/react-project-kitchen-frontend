@@ -20,8 +20,8 @@ const ArticleSidebarView: FunctionComponent<{ articleDate: string, article: TArt
     <ArticleWrapper padding="20px">
       <AuthorWrapper margin="12px">
         <ProfileInformationView articleDate={props.articleDate} author={props.article.author}/>
-        <Like counter={props.article.favoritesCount}
-              icon={`${currentUser.username === props.article.author.username && props.article.favoritesCount !== 0 ? likeActive : like}`}/>
+        <Like article={props.article}
+              icon={`${props.article.favorited ? likeActive : like}`}/>
       </AuthorWrapper>
       <ArticleLink to={`/article/${props.article.slug}`}>
         <ArticleHeading fontSize="20px" lineHeight="24px" margin="0" lineHeightLap="22px" fontSizeLap="18px">{props.article.title}</ArticleHeading>

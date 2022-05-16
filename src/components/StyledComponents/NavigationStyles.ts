@@ -134,6 +134,7 @@ export const CustomNavigationLink = styled(Link)`
   display: block;
   height: 40px;
   width: 100%;
+  background-color: transparent;
 `;
 
 export const NewNoteIcon = styled.div`

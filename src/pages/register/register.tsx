@@ -1,12 +1,13 @@
 import { Redirect } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import SignupLoginSubmitBtn from "../../components/SignupLoginSubmitBtn";
+
 import { useForm } from "react-hook-form";
 import { signupThunk } from "../../services/thunks";
 import * as Styles from "../../components/StyledComponents/authStyles";
 import * as FormStyles from "../../UI/forms/form";
 import Preloader from "../../components/Preloader";
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
+import SubmitButton from "../../components/submitButton";
 
 type FormData = {
   username: string;
@@ -130,7 +131,7 @@ const Register: React.FC = () => {
               {errorsResponse?.password && <FormStyles.Error>{errorsResponse?.password}</FormStyles.Error>}
             </FormStyles.ErrorsContainer>
 
-            <SignupLoginSubmitBtn btnText="Зарегистрироваться" disabled={!isError || inProgress} />
+            <SubmitButton btnText="Зарегистрироваться" disabled={!isError || inProgress} />
 
           </FormStyles.FieldSet>
         </FormStyles.Form>

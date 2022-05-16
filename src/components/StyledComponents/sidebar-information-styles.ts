@@ -6,33 +6,31 @@ import {Carousel} from "react-responsive-carousel";
 export const SidebarRight = styled.div`
   margin: 0;
   width: 360px;
-  position: sticky;
-  align-self: flex-start;
-  //--offset: 2rem;
-  ////flex-grow: 1;
-  ////flex-basis: 300px;
-  //top: var(--offset);
-  z-index: 10;
 
   @media ${device.laptop} {
-    width: 227px;   
+    width: 227px;
   }
 
-  @media ${device.tablet} 
+  @media ${device.tablet}
   {
-    width: 280px;   
+    width: 280px;
   }
 
-  @media ${device.tablet} 
+  @media ${device.tablet}
   {
+    padding: 0 0 40px;
+    border-bottom: #ccc 1px solid;
     margin: 0 auto;
     // padding-left: 46px;
   }
-  @media ${device.tabletVert} {
-   
-    padding: 0 20px 40px;
-    border-bottom: #ccc 1px solid;
-  }
+
+ 
+`
+
+export const StickyContainer = styled(SidebarRight)`
+  position: sticky;
+  top: 0;
+  right: 0;
 `
 
 export const SidebarHeading = styled.h2`
@@ -72,7 +70,6 @@ export const ArticleWrapper = styled.div<{padding: string}>`
   }
 
   @media ${device.tablet} {
-
     text-align: left;
   }
 
@@ -109,6 +106,14 @@ export const ArticleLink = styled(Link)`
   color: #0A0A0B;
 
   &:hover {
+    text-decoration: none;
+    color: #008AFF;
+  }
+  &:focus {
+    text-decoration: none;
+    color: #008AFF;
+  }
+  &:active {
     text-decoration: none;
     color: #008AFF;
   }
