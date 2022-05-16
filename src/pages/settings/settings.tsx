@@ -37,20 +37,16 @@ const Settings = () => {
     }
 
     return (
-      <>
-        <Styles.SettingsSection>
-          <Styles.SettingsTitle>Ваши настройки</Styles.SettingsTitle>
+      <Styles.SettingsSection>
+        <Styles.SettingsTitle>Ваши настройки</Styles.SettingsTitle>
 
-          {isUpdatedInfoMsg && <h4 className="text-xs-center">Updated</h4>}
+        {isUpdatedInfoMsg && <h4 className="text-xs-center">Updated</h4>}
 
-          {/* <ListErrors errors={this.props.errors}></ListErrors> */}
+        {/* <ListErrors errors={this.props.errors}></ListErrors> */}
 
-          <SettingsForm setIsUpdatedInfoMsg={setIsUpdatedInfoMsg} />
+        <SettingsForm setIsUpdatedInfoMsg={setIsUpdatedInfoMsg} />
 
-        </Styles.SettingsSection>
-        
-      </>
-      
+      </Styles.SettingsSection>
     );
 };
   // }
