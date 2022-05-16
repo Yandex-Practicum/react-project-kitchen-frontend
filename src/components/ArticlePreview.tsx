@@ -1,5 +1,4 @@
 import React from "react";
-import {useDispatch} from "react-redux";
 import {composeCreatedDate} from "../utils/utils";
 import {
   deleteArticleAsFavoriteThunk,
@@ -17,10 +16,8 @@ const NOT_FAVORITED_CLASS = "btn btn-sm btn-outline-primary";
 
 
 const ArticlePreview: React.FC<{ article: TArticleProperties } > = (props) => {
-  // const dispatch = useDispatch();
 
   const {article} = props;
-  console.log(article)
   // const favoriteButtonClass = article.favorited
   //   ? FAVORITED_CLASS
   //   : NOT_FAVORITED_CLASS;

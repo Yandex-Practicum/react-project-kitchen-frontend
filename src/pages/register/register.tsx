@@ -1,12 +1,12 @@
 import { Redirect } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import SignupLoginSubmitBtn from "../../components/SignupLoginSubmitBtn";
 import { useForm } from "react-hook-form";
 import { signupThunk } from "../../services/thunks";
 import * as Styles from "../../components/StyledComponents/authStyles";
 import * as FormStyles from "../../UI/forms/form";
 import Preloader from "../../components/Preloader";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
 
 type FormData = {
   username: string;
@@ -15,11 +15,11 @@ type FormData = {
 };
 
 const Register: React.FC = () => {
-  const dispatch = useDispatch();
-  const { isLoggedIn } = useSelector((state: any) => state.common);
+  const dispatch = useAppDispatch();
+  const { isLoggedIn } = useAppSelector((state) => state.common);
   const [errorsResponse, setErrorsResponse] = useState<any>({});
   const [isError, setIsError] = useState(false);
-  const { inProgress } = useSelector((state: any) => state.auth);
+  const { inProgress } = useAppSelector((state) => state.auth);
 
 
   const {

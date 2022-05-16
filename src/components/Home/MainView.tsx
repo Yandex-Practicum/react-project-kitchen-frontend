@@ -1,12 +1,12 @@
 import ArticleList from "../ArticleList";
 import { FC, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { getAllArticlesThunk } from "../../services/thunks";
 import { getAllArticles } from "../../api";
+import { useAppSelector } from "../../services/hooks";
 
 const MainView: FC = () => {
-  const { articles, articlesCount, currentPage, pager } = useSelector(
-    (state: any) => state.articleList
+  const { articles, articlesCount, currentPage, pager } = useAppSelector(
+    (state) => state.articleList
   );
 
   return (

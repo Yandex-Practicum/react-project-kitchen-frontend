@@ -3,7 +3,6 @@ import {marked} from 'marked';
 import ArticleMeta from "./ArticleMeta";
 import CommentContainer from "./CommentContainer";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { deleteArticleThunk, getArticleThunk, getCommentsForArticleThunk } from "../../services/thunks";
 import { useHistory, useParams } from "react-router";
 import ArticleActions from './ArticleActions';
@@ -11,6 +10,7 @@ import { ArticleBody, ArticlePage, ArticleTitle, ASide, PageBody, PageContent, A
 import Modal from '../modal/modal';
 import { SidebarRight } from '../StyledComponents/sidebar-information-styles';
 import SidebarInformation from '../sidebar-information';
+import { useAppDispatch, useAppSelector } from '../../services/hooks';
 
 const texts = {
   title: "Удалить запись",
@@ -27,14 +27,14 @@ type TArticleProps = {
 };
 
 const Article: React.FC<TArticleProps> = (props) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const {allArticles} = useSelector((state: any) => state.articleList);
+  const {allArticles} = useAppSelector((state) => state.articleList);
 
-  const {article} = useSelector((state: any) => state.article);
-  const {currentUser} = useSelector((state: any) => state.common);
-  const {comments} = useSelector((state: any) => state.article);
-  const {commentErrors} = useSelector((state: any) => state.article);
+  const {article} = useAppSelector((state: any) => state.article);
+  const {currentUser} = useAppSelector((state: any) => state.common);
+  const {comments} = useAppSelector((state) => state.article);
+  const {commentErrors} = useAppSelector((state) => state.article);
   const params: { id: string } = useParams();
 
   const [isModalOpen, setIsModalOpen] = useState(false);

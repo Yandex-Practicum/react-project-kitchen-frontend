@@ -1,7 +1,6 @@
 import ArticleList from "./ArticleList";
 import ProfileHeader from "./ProfileHeader";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
   getArticlesByAuthorThunk,
@@ -10,14 +9,15 @@ import {
 import { profileSlice } from "../services/profileSlice";
 import * as Styles from "./StyledComponents/profileStyles";
 import Preloader from "./Preloader";
+import { useAppDispatch, useAppSelector } from "../services/hooks";
 
 function Profile() {
-  const dispatch = useDispatch();
-  const { username, image, following, isLoading } = useSelector(
-    (state: any) => state.profile
+  const dispatch = useAppDispatch();
+  const { username, image, following, isLoading } = useAppSelector(
+    (state) => state.profile
   );
-  const { pager, articles, articlesCount, currentPage } = useSelector(
-    (state: any) => state.articleList
+  const { pager, articles, articlesCount, currentPage } = useAppSelector(
+    (state) => state.articleList
   );
 
   const actionsProfile = profileSlice.actions;
