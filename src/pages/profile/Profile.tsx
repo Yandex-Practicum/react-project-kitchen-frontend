@@ -49,7 +49,7 @@ function Profile() {
 
           {articles.length === 0 && (
             <ArticleWrapper padding="20px">
-              No articles are here... yet.
+              У вас пока нет статей
             </ArticleWrapper>
           )}
 

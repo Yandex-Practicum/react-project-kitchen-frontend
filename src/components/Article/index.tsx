@@ -75,9 +75,7 @@ const Article: React.FC<TArticleProps> = (props) => {
     setIsModalOpen(true);
   }
 
-  const onClose = (e: any) => {
-    e.preventDefault();
-
+  const onClose = () => {
     setIsModalOpen(false);
   }
 
