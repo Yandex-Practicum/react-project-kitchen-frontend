@@ -12,6 +12,12 @@ import Modal from '../modal/modal';
 import { SidebarRight } from '../StyledComponents/sidebar-information-styles';
 import SidebarInformation from '../sidebar-information';
 
+const texts = {
+  title: "Удалить запись",
+  text: 'Нажимая кнопку «Удалить запись», материал будет удален без возможности восстановления',
+  button: 'Удалить запись'
+}
+
 type TArticleProps = {
   match: {
     params: {
@@ -116,7 +122,7 @@ const Article: React.FC<TArticleProps> = (props) => {
     </ArticlePage>
 
     { isModalOpen &&
-      <Modal deleteArticle={deleteArticle} title={"Удалить запись"} onClose={onClose} />
+       <Modal deleteArticle={deleteArticle} title={texts.title} text={texts.text} button={texts.button} onClose={onClose} />
     }
   </>);
 };

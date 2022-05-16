@@ -16,6 +16,12 @@ import DeleteArticleBtn from "./DeleteArticleBtn";
 import Modal from "./modal/modal";
 import Preloader from "./Preloader";
 
+const texts = {
+  title: "Удалить запись",
+  text: 'Нажимая кнопку «Удалить запись», материал будет удален без возможности восстановления',
+  button: 'Удалить запись'
+}
+
 type FormData = {
   title: string;
   description: string;
@@ -227,7 +233,7 @@ function Editor() {
       </Styles.EditorSection>
 
       { isModalOpen &&
-        <Modal deleteArticle={deleteArticle} title={"Удалить запись"} onClose={onClose} />
+        <Modal deleteArticle={deleteArticle} title={texts.title} text={texts.text} button={texts.button} onClose={onClose} />
       }
 
     </>
