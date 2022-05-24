@@ -1,0 +1,36 @@
+#!/bin/sh
+
+declare -r COMMIT_MESSAGE_REGEX="^(build|ci|docs|feat|fix|perf|refactor|store|style|test)[[:space:]]*\(.+\):[[:space:]]+.*"
+ 
+declare -a LINES
+
+function ReadCommitMessage() {
+            local in=$1
+            local i=0
+            while read line; do
+                        LINES[$i]=$line
+                        let i++
+            done <"$in"
+}
+
+function CheckCommitMessage() {
+            local msg=$1
+            if ! [[ "$msg" =~ $COMMIT_MESSAGE_REGEX ]]; then
+                        echo "ERROR - Invalid commit message."
+                        echo ""
+                        echo "$msg"
+                        echo ""
+                        echo "The commit message should be structured as follows:"
+                        echo "{type}({scope}): {commit_message}"
+                        echo ""
+                        echo "The following {type}s are allowed:"
+                        echo "build, ci, docs, feat, fix, perf, refactor, store, style, test"
+                        echo ""
+                        echo "Read more at https://www.conventionalcommits.org/ru/v1.0.0/"
+                        exit 1
+            fi
+}
+
+ReadCommitMessage "$1"
+
+CheckCommitMessage "${LINES[0]}"
