@@ -75,15 +75,11 @@ const mapDispatchToProps = dispatch => ({
 });
 
 function Profile(props) {
-  useEffect(() => {
-    props.onLoad(Promise.all([
-      agent.Profile.get(props.match.params.username),
-      agent.Articles.byAuthor(props.match.params.username)
-    ]))
-    return () => props.onUnload()
-  }, [])
 
-  function renderTabs() {
+  const profile = props.profile;
+  const isUser = props.currentUser && props.profile.username === props.currentUser.username;
+
+  const renderTabs = () => {
     return (
       <ul className="nav nav-pills outline-active">
         <li className="nav-item">
@@ -102,64 +98,67 @@ function Profile(props) {
           </Link>
         </li>
       </ul>
-    );
+    )
   }
 
-    const profile = props.profile;
-    if (!profile) {
-      return null;
-    }
+  useEffect(() => {
+    props.onLoad(Promise.all([
+      agent.Profile.get(props.match.params.username),
+      agent.Articles.byAuthor(props.match.params.username)
+    ]))
+    return () => props.onUnload()
+  }, [])
 
-    const isUser = props.currentUser &&
-      props.profile.username === props.currentUser.username;
+  if (!profile) {
+    return null
+  }
 
-    return (
-      <div className="profile-page">
+  return (
+    <div className="profile-page">
 
-        <div className="user-info">
-          <div className="container">
-            <div className="row">
-              <div className="col-xs-12 col-md-10 offset-md-1">
-
-                <img src={profile.image} className="user-img" alt={profile.username} />
-                <h4>{profile.username}</h4>
-                <p>{profile.bio}</p>
-
-                <EditProfileSettings isUser={isUser} />
-                <FollowUserButton
-                  isUser={isUser}
-                  user={profile}
-                  follow={props.onFollow}
-                  unfollow={props.onUnfollow}
-                  />
-
-              </div>
-            </div>
-          </div>
-        </div>
-
+      <div className="user-info">
         <div className="container">
           <div className="row">
-
             <div className="col-xs-12 col-md-10 offset-md-1">
 
-              <div className="articles-toggle">
-                {renderTabs()}
-              </div>
+              <img src={profile.image} className="user-img" alt={profile.username} />
+              <h4>{profile.username}</h4>
+              <p>{profile.bio}</p>
 
-              <ArticleList
-                pager={props.pager}
-                articles={props.articles}
-                articlesCount={props.articlesCount}
-                state={props.currentPage} />
+              <EditProfileSettings isUser={isUser} />
+              <FollowUserButton
+                isUser={isUser}
+                user={profile}
+                follow={props.onFollow}
+                unfollow={props.onUnfollow}
+              />
 
             </div>
-
           </div>
         </div>
-
       </div>
-    );
+
+      <div className="container">
+        <div className="row">
+
+          <div className="col-xs-12 col-md-10 offset-md-1">
+
+            <div className="articles-toggle">
+              {renderTabs()}
+            </div>
+
+            <ArticleList
+              pager={props.pager}
+              articles={props.articles}
+              articlesCount={props.articlesCount}
+              state={props.currentPage} />
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
