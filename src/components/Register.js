@@ -32,7 +32,7 @@ function Register(props) {
   const email = props.email
   const password = props.password
 
-  function onSubmitHandler(event) {
+  const onSubmitHandler = (event) => {
     event.preventDefault()
     props.onSubmit(username, email, password)
   }
