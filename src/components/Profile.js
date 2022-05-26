@@ -1,5 +1,5 @@
 import ArticleList from './ArticleList';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import agent from '../agent';
 import { connect } from 'react-redux';
@@ -74,25 +74,22 @@ const mapDispatchToProps = dispatch => ({
   onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED })
 });
 
-class Profile extends React.Component {
-  componentWillMount() {
-    this.props.onLoad(Promise.all([
-      agent.Profile.get(this.props.match.params.username),
-      agent.Articles.byAuthor(this.props.match.params.username)
-    ]));
-  }
+function Profile(props) {
+  useEffect(() => {
+    props.onLoad(Promise.all([
+      agent.Profile.get(props.match.params.username),
+      agent.Articles.byAuthor(props.match.params.username)
+    ]))
+    return () => props.onUnload()
+  }, [])
 
-  componentWillUnmount() {
-    this.props.onUnload();
-  }
-
-  renderTabs() {
+  function renderTabs() {
     return (
       <ul className="nav nav-pills outline-active">
         <li className="nav-item">
           <Link
             className="nav-link active"
-            to={`/@${this.props.profile.username}`}>
+            to={`/@${props.profile.username}`}>
             My Articles
           </Link>
         </li>
@@ -100,7 +97,7 @@ class Profile extends React.Component {
         <li className="nav-item">
           <Link
             className="nav-link"
-            to={`/@${this.props.profile.username}/favorites`}>
+            to={`/@${props.profile.username}/favorites`}>
             Favorited Articles
           </Link>
         </li>
@@ -108,14 +105,13 @@ class Profile extends React.Component {
     );
   }
 
-  render() {
-    const profile = this.props.profile;
+    const profile = props.profile;
     if (!profile) {
       return null;
     }
 
-    const isUser = this.props.currentUser &&
-      this.props.profile.username === this.props.currentUser.username;
+    const isUser = props.currentUser &&
+      props.profile.username === props.currentUser.username;
 
     return (
       <div className="profile-page">
@@ -133,8 +129,8 @@ class Profile extends React.Component {
                 <FollowUserButton
                   isUser={isUser}
                   user={profile}
-                  follow={this.props.onFollow}
-                  unfollow={this.props.onUnfollow}
+                  follow={props.onFollow}
+                  unfollow={props.onUnfollow}
                   />
 
               </div>
@@ -148,14 +144,15 @@ class Profile extends React.Component {
             <div className="col-xs-12 col-md-10 offset-md-1">
 
               <div className="articles-toggle">
-                {this.renderTabs()}
+                {renderTabs()}
               </div>
 
               <ArticleList
-                pager={this.props.pager}
-                articles={this.props.articles}
-                articlesCount={this.props.articlesCount}
-                state={this.props.currentPage} />
+                pager={props.pager}
+                articles={props.articles}
+                articlesCount={props.articlesCount}
+                state={props.currentPage} />
+
             </div>
 
           </div>
@@ -163,7 +160,6 @@ class Profile extends React.Component {
 
       </div>
     );
-  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
