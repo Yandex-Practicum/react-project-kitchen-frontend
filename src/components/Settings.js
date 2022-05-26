@@ -35,7 +35,8 @@ function SettingsForm(props) {
   
   useEffect(() => {
     if (props.currentUser) {
-      Object.assign(formState, {
+      setFormState({
+        ...formState,
         image: props.currentUser.image || '',
         username: props.currentUser.username,
         bio: props.currentUser.bio,
@@ -46,12 +47,13 @@ function SettingsForm(props) {
 
   useEffect(() => {
     if (props.currentUser) {
-      setFormState(Object.assign({}, formState, {
+      setFormState({
+        ...formState,
         image: props.currentUser.image || '',
         username: props.currentUser.username,
         bio: props.currentUser.bio,
         email: props.currentUser.email
-      }));
+      })
     }
   }, [props.currentUser])
   
