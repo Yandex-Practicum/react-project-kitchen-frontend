@@ -1,12 +1,12 @@
-import ListErrors from './ListErrors';
+import ListErrors from '../ListErrors';
 import React, { useEffect, useState } from 'react';
-import agent from '../agent';
+import agent from '../../agent';
 import { connect } from 'react-redux';
 import {
   SETTINGS_SAVED,
   SETTINGS_PAGE_UNLOADED,
   LOGOUT
-} from '../constants/actionTypes';
+} from '../../constants/actionTypes';
 
 function SettingsForm(props) {
 
@@ -17,7 +17,7 @@ function SettingsForm(props) {
     email: '',
     password: ''
   })
-  
+
   const updateState = field => ev => {
     const newState = Object.assign({}, formState, { [field]: ev.target.value })
     setFormState(newState)
@@ -32,7 +32,7 @@ function SettingsForm(props) {
     }
     props.onSubmitForm(user)
   }
-  
+
   useEffect(() => {
     if (props.currentUser) {
       setFormState({
@@ -56,7 +56,7 @@ function SettingsForm(props) {
       })
     }
   }, [props.currentUser])
-  
+
   return (
     <form onSubmit={submitForm}>
       <fieldset>
