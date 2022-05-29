@@ -1,4 +1,4 @@
-import Banner from './Banner';
+import Banner from '../Banner/Banner';
 import MainView from './MainView';
 import React, { useEffect } from 'react';
 import Tags from './Tags';
