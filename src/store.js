@@ -4,10 +4,8 @@ import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import { promiseMiddleware, localStorageMiddleware } from './middleware';
 import reducer from './reducer';
 
-import { routerMiddleware } from 'react-router-redux'
-import { createBrowserHistory } from 'history';
-
-export const history = createBrowserHistory();
+import { routerMiddleware } from 'connected-react-router';
+import { history } from './history';
 
 // Build the middleware for intercepting and dispatching navigation actions
 const myRouterMiddleware = routerMiddleware(history);
