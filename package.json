@@ -9,7 +9,7 @@
   "dependencies": {
     "@redux-devtools/extension": "^3.2.2",
     "connected-react-router": "^6.9.2",
-    "history": "^4.6.3",
+    "history": "^4.7.2",
     "marked": "^4.0.17",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
@@ -17,8 +17,8 @@
     "react-redux": "^7.2.8",
     "react-router": "^5.3.3",
     "react-router-dom": "^5.3.3",
-    "redux": "^3.6.0",
-    "redux-logger": "^3.0.1",
+    "redux": "^4.2.0",
+    "redux-logger": "^3.0.6",
     "superagent": "^8.0.0",
     "superagent-promise": "^1.1.0"
   },
