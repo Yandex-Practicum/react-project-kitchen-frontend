@@ -38,7 +38,7 @@ class SettingsForm extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount () {
     if (this.props.currentUser) {
       Object.assign(this.state, {
         image: this.props.currentUser.image || '',
@@ -49,7 +49,7 @@ class SettingsForm extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps (nextProps) {
     if (nextProps.currentUser) {
       this.setState(Object.assign({}, this.state, {
         image: nextProps.currentUser.image || '',
@@ -60,7 +60,7 @@ class SettingsForm extends React.Component {
     }
   }
 
-  render() {
+  render () {
     return (
       <form onSubmit={this.submitForm}>
         <fieldset>
@@ -137,7 +137,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Settings extends React.Component {
-  render() {
+  render () {
     return (
       <div className="settings-page">
         <div className="container page">

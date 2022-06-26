@@ -1,13 +1,11 @@
 import { applyMiddleware, createStore } from 'redux';
 import { createLogger } from 'redux-logger'
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+import { composeWithDevToolsDevelopmentOnly } from '@redux-devtools/extension';
 import { promiseMiddleware, localStorageMiddleware } from './middleware';
 import reducer from './reducer';
 
-import { routerMiddleware } from 'react-router-redux'
-import createHistory from 'history/createBrowserHistory';
-
-export const history = createHistory();
+import { routerMiddleware } from 'connected-react-router';
+import { history } from './history';
 
 // Build the middleware for intercepting and dispatching navigation actions
 const myRouterMiddleware = routerMiddleware(history);
@@ -22,4 +20,4 @@ const getMiddleware = () => {
 };
 
 export const store = createStore(
-  reducer, composeWithDevTools(getMiddleware()));
+  reducer, composeWithDevToolsDevelopmentOnly(getMiddleware()));

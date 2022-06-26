@@ -3,7 +3,7 @@ import CommentContainer from './CommentContainer';
 import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
-import marked from 'marked';
+import { marked } from 'marked';
 import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../constants/actionTypes';
 
 const mapStateToProps = state => ({
@@ -19,18 +19,18 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Article extends React.Component {
-  componentWillMount() {
+  componentDidMount () {
     this.props.onLoad(Promise.all([
       agent.Articles.get(this.props.match.params.id),
       agent.Comments.forArticle(this.props.match.params.id)
     ]));
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.props.onUnload();
   }
 
-  render() {
+  render () {
     if (!this.props.article) {
       return null;
     }
@@ -51,7 +51,7 @@ class Article extends React.Component {
 
           </div>
         </div>
-        
+
 
         <div className="container page">
 
