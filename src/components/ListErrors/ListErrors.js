@@ -2,24 +2,21 @@ import React from 'react';
 
 class ListErrors extends React.Component {
   render() {
-    const errors = this.props.errors;
+    const { errors } = this.props;
     if (errors) {
       return (
         <ul className="error-messages">
           {
-            Object.keys(errors).map(key => {
-              return (
+            Object.keys(errors).map((key) => (
                 <li key={key}>
                   {key} {errors[key]}
                 </li>
-              );
-            })
+            ))
           }
         </ul>
       );
-    } else {
-      return null;
     }
+    return null;
   }
 }
 

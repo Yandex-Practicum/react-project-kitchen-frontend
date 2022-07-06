@@ -1,43 +1,41 @@
-import ArticleMeta from './ArticleMeta';
-import CommentContainer from './CommentContainer';
 import React from 'react';
-import agent from '../../../agent';
 import { connect } from 'react-redux';
 import { marked } from 'marked';
+import ArticleMeta from './ArticleMeta';
+import CommentContainer from './CommentContainer';
+import agent from '../../../agent';
 import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../../constants/actionTypes';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   ...state.article,
-  currentUser: state.common.currentUser
+  currentUser: state.common.currentUser,
 });
 
-const mapDispatchToProps = dispatch => ({
-  onLoad: payload =>
-    dispatch({ type: ARTICLE_PAGE_LOADED, payload }),
-  onUnload: () =>
-    dispatch({ type: ARTICLE_PAGE_UNLOADED })
+const mapDispatchToProps = (dispatch) => ({
+  onLoad: (payload) => dispatch({ type: ARTICLE_PAGE_LOADED, payload }),
+  onUnload: () => dispatch({ type: ARTICLE_PAGE_UNLOADED }),
 });
 
 class Article extends React.Component {
-  componentDidMount () {
+  componentDidMount() {
     this.props.onLoad(Promise.all([
       agent.Articles.get(this.props.match.params.id),
-      agent.Comments.forArticle(this.props.match.params.id)
+      agent.Comments.forArticle(this.props.match.params.id),
     ]));
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.props.onUnload();
   }
 
-  render () {
+  render() {
     if (!this.props.article) {
       return null;
     }
 
     const markup = { __html: marked(this.props.article.body, { sanitize: true }) };
-    const canModify = this.props.currentUser &&
-      this.props.currentUser.username === this.props.article.author.username;
+    const canModify = this.props.currentUser
+      && this.props.currentUser.username === this.props.article.author.username;
     return (
       <div className="article-page">
 
@@ -52,7 +50,6 @@ class Article extends React.Component {
           </div>
         </div>
 
-
         <div className="container page">
 
           <div className="row article-content">
@@ -62,15 +59,13 @@ class Article extends React.Component {
 
               <ul className="tag-list">
                 {
-                  this.props.article.tagList.map(tag => {
-                    return (
+                  this.props.article.tagList.map((tag) => (
                       <li
                         className="tag-default tag-pill tag-outline"
                         key={tag}>
                         {tag}
                       </li>
-                    );
-                  })
+                  ))
                 }
               </ul>
 

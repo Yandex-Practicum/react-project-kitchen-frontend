@@ -1,11 +1,11 @@
-import ListErrors from '../ListErrors/ListErrors';
 import React from 'react';
-import agent from '../../agent';
 import { connect } from 'react-redux';
+import ListErrors from '../ListErrors/ListErrors';
+import agent from '../../agent';
 import {
   SETTINGS_SAVED,
   SETTINGS_PAGE_UNLOADED,
-  LOGOUT
+  LOGOUT,
 } from '../../constants/actionTypes';
 
 class SettingsForm extends React.Component {
@@ -17,19 +17,19 @@ class SettingsForm extends React.Component {
       username: '',
       bio: '',
       email: '',
-      password: ''
+      password: '',
     };
 
-    this.updateState = field => ev => {
-      const state = this.state;
-      const newState = Object.assign({}, state, { [field]: ev.target.value });
+    this.updateState = (field) => (ev) => {
+      const { state } = this;
+      const newState = { ...state, [field]: ev.target.value };
       this.setState(newState);
     };
 
-    this.submitForm = ev => {
+    this.submitForm = (ev) => {
       ev.preventDefault();
 
-      const user = Object.assign({}, this.state);
+      const user = { ...this.state };
       if (!user.password) {
         delete user.password;
       }
@@ -38,29 +38,30 @@ class SettingsForm extends React.Component {
     };
   }
 
-  componentDidMount () {
+  componentDidMount() {
     if (this.props.currentUser) {
       Object.assign(this.state, {
         image: this.props.currentUser.image || '',
         username: this.props.currentUser.username,
         bio: this.props.currentUser.bio,
-        email: this.props.currentUser.email
+        email: this.props.currentUser.email,
       });
     }
   }
 
-  UNSAFE_componentWillReceiveProps (nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.currentUser) {
-      this.setState(Object.assign({}, this.state, {
+      this.setState({
+        ...this.state,
         image: nextProps.currentUser.image || '',
         username: nextProps.currentUser.username,
         bio: nextProps.currentUser.bio,
-        email: nextProps.currentUser.email
-      }));
+        email: nextProps.currentUser.email,
+      });
     }
   }
 
-  render () {
+  render() {
     return (
       <form onSubmit={this.submitForm}>
         <fieldset>
@@ -124,20 +125,19 @@ class SettingsForm extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   ...state.settings,
-  currentUser: state.common.currentUser
+  currentUser: state.common.currentUser,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onClickLogout: () => dispatch({ type: LOGOUT }),
-  onSubmitForm: user =>
-    dispatch({ type: SETTINGS_SAVED, payload: agent.Auth.save(user) }),
-  onUnload: () => dispatch({ type: SETTINGS_PAGE_UNLOADED })
+  onSubmitForm: (user) => dispatch({ type: SETTINGS_SAVED, payload: agent.Auth.save(user) }),
+  onUnload: () => dispatch({ type: SETTINGS_PAGE_UNLOADED }),
 });
 
 class Settings extends React.Component {
-  render () {
+  render() {
     return (
       <div className="settings-page">
         <div className="container page">
