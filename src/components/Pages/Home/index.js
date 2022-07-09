@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import Banner from './Banner';
 import MainView from './MainView';
 import Tags from './Tags';
-import agent from '../../agent';
+import agent from '../../../agent';
 import {
   HOME_PAGE_LOADED,
   HOME_PAGE_UNLOADED,
   APPLY_TAG_FILTER,
-} from '../../constants/actionTypes';
+} from '../../../constants/actionTypes';
 
 // YOU WILL DELETE NEXT LINE SOON
 import ToDelete from './ToDelete';

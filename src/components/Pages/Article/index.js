@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { marked } from 'marked';
 import ArticleMeta from './ArticleMeta';
 import CommentContainer from './CommentContainer';
-import agent from '../../agent';
-import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../constants/actionTypes';
+import agent from '../../../agent';
+import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../../constants/actionTypes';
 
 const mapStateToProps = (state) => ({
   ...state.article,

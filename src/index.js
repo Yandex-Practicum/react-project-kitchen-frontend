@@ -4,8 +4,8 @@ import React from 'react';
 
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
-import { store } from './store';
-import { history } from './history';
+import store from './store';
+import history from './history';
 
 import App from './components/App/App';
 

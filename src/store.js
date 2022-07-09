@@ -5,7 +5,7 @@ import { routerMiddleware } from 'connected-react-router';
 import { promiseMiddleware, localStorageMiddleware } from './middleware';
 import reducer from './reducer';
 
-import { history } from './history';
+import history from './history';
 
 // Build the middleware for intercepting and dispatching navigation actions
 const myRouterMiddleware = routerMiddleware(history);
@@ -15,7 +15,13 @@ const getMiddleware = () => {
     return applyMiddleware(myRouterMiddleware, promiseMiddleware, localStorageMiddleware);
   }
   // Enable additional logging in non-production environments.
-  return applyMiddleware(myRouterMiddleware, promiseMiddleware, localStorageMiddleware, createLogger());
+  return applyMiddleware(
+    myRouterMiddleware,
+    promiseMiddleware,
+    localStorageMiddleware,
+    createLogger(),
+  );
 };
 
-export const store = createStore(reducer, composeWithDevToolsDevelopmentOnly(getMiddleware()));
+const store = createStore(reducer, composeWithDevToolsDevelopmentOnly(getMiddleware()));
+export default store;
