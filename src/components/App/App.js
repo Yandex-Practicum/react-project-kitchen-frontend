@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import { push } from 'connected-react-router';
 import agent from '../../agent';
 import Header from '../Header/Header';
-import { APP_LOAD, REDIRECT } from '../../constants/actionTypes';
+import { APP_LOAD, REDIRECT, LOGIN } from '../../constants/actionTypes';
 import Article from '../Pages/Article';
 import Editor from '../Editor/Editor';
 import Home from '../Pages/Home';
@@ -13,7 +13,7 @@ import { Profile } from '../Profile/Profile';
 import ProfileFavorites from '../ProfileFavorites/ProfileFavorites';
 import Register from '../Register/Register';
 import Settings from '../Settings/Settings';
-import { store } from '../../store';
+import store from '../../store';
 
 const mapStateToProps = (state) => ({
   appLoaded: state.common.appLoaded,

@@ -7,6 +7,10 @@ import {
   REGISTER,
 } from './constants/actionTypes';
 
+function isPromise(v) {
+  return v && typeof v.then === 'function';
+}
+
 const promiseMiddleware = (store) => (next) => (action) => {
   if (isPromise(action.payload)) {
     store.dispatch({ type: ASYNC_START, subtype: action.type });
@@ -45,8 +49,8 @@ const promiseMiddleware = (store) => (next) => (action) => {
 
   next(action);
 };
-
-const localStorageMiddleware = (store) => (next) => (action) => {
+// store было передано в функцию
+const localStorageMiddleware = () => (next) => (action) => {
   if (action.type === REGISTER || action.type === LOGIN) {
     if (!action.error) {
       window.localStorage.setItem('jwt', action.payload.user.token);
@@ -59,9 +63,5 @@ const localStorageMiddleware = (store) => (next) => (action) => {
 
   next(action);
 };
-
-function isPromise(v) {
-  return v && typeof v.then === 'function';
-}
 
 export { promiseMiddleware, localStorageMiddleware };
