@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "cross-env": "^7.0.3",
-    "react-scripts": "^5.0.1"
+    "@babel/eslint-parser": "^7.18.2",  
+    "cross-env": "^7.0.3",    
+    "eslint": "^8.19.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "react-scripts": "^5.0.1"  
   },
   "dependencies": {
     "@redux-devtools/extension": "^3.2.2",
@@ -26,7 +29,8 @@
     "start": "cross-env PORT=4100 react-scripts start",
     "build": "react-scripts build",
     "test": "cross-env PORT=4100 react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "npx eslint ."
   },
   "browserslist": {
     "production": [

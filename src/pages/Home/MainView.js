@@ -1,19 +1,19 @@
-import ArticleList from '../../ArticleList/ArticleList';
 import React from 'react';
-import agent from '../../../agent';
 import { connect } from 'react-redux';
+import ArticleList from '../../ArticleList/ArticleList';
+import agent from '../../../agent';
 import { CHANGE_TAB } from '../../../constants/actionTypes';
 
-const YourFeedTab = props => {
+const YourFeedTab = (props) => {
   if (props.token) {
-    const clickHandler = ev => {
+    const clickHandler = (ev) => {
       ev.preventDefault();
       props.onTabClick('feed', agent.Articles.feed, agent.Articles.feed());
-    }
+    };
 
     return (
       <li className="nav-item">
-        <a  href=""
+        <a href=""
             className={ props.tab === 'feed' ? 'nav-link active' : 'nav-link' }
             onClick={clickHandler}>
           Your Feed
@@ -24,8 +24,8 @@ const YourFeedTab = props => {
   return null;
 };
 
-const GlobalFeedTab = props => {
-  const clickHandler = ev => {
+const GlobalFeedTab = (props) => {
+  const clickHandler = (ev) => {
     ev.preventDefault();
     props.onTabClick('all', agent.Articles.all, agent.Articles.all());
   };
@@ -41,7 +41,7 @@ const GlobalFeedTab = props => {
   );
 };
 
-const TagFilterTab = props => {
+const TagFilterTab = (props) => {
   if (!props.tag) {
     return null;
   }
@@ -55,18 +55,19 @@ const TagFilterTab = props => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   ...state.articleList,
   tags: state.home.tags,
-  token: state.common.token
+  token: state.common.token,
 });
 
-const mapDispatchToProps = dispatch => ({
-  onTabClick: (tab, pager, payload) => dispatch({ type: CHANGE_TAB, tab, pager, payload })
+const mapDispatchToProps = (dispatch) => ({
+  onTabClick: (tab, pager, payload) => dispatch({
+    type: CHANGE_TAB, tab, pager, payload,
+  }),
 });
 
-const MainView = props => {
-  return (
+const MainView = (props) => (
     <div className="col-md-9">
       <div className="feed-toggle">
         <ul className="nav nav-pills outline-active">
@@ -90,7 +91,6 @@ const MainView = props => {
         articlesCount={props.articlesCount}
         currentPage={props.currentPage} />
     </div>
-  );
-};
+);
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainView);

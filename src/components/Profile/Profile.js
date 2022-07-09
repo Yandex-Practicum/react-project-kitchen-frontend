@@ -1,16 +1,16 @@
-import ArticleList from '../ArticleList/ArticleList';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import agent from '../../agent';
 import { connect } from 'react-redux';
+import agent from '../../agent';
+import ArticleList from '../ArticleList/ArticleList';
 import {
   FOLLOW_USER,
   UNFOLLOW_USER,
   PROFILE_PAGE_LOADED,
-  PROFILE_PAGE_UNLOADED
+  PROFILE_PAGE_UNLOADED,
 } from '../../constants/actionTypes';
 
-const EditProfileSettings = props => {
+const EditProfileSettings = (props) => {
   if (props.isUser) {
     return (
       <Link
@@ -23,7 +23,7 @@ const EditProfileSettings = props => {
   return null;
 };
 
-const FollowUserButton = props => {
+const FollowUserButton = (props) => {
   if (props.isUser) {
     return null;
   }
@@ -35,12 +35,12 @@ const FollowUserButton = props => {
     classes += ' btn-outline-secondary';
   }
 
-  const handleClick = ev => {
+  const handleClick = (ev) => {
     ev.preventDefault();
     if (props.user.following) {
-      props.unfollow(props.user.username)
+      props.unfollow(props.user.username);
     } else {
-      props.follow(props.user.username)
+      props.follow(props.user.username);
     }
   };
 
@@ -55,30 +55,30 @@ const FollowUserButton = props => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   ...state.articleList,
   currentUser: state.common.currentUser,
-  profile: state.profile
+  profile: state.profile,
 });
 
-const mapDispatchToProps = dispatch => ({
-  onFollow: username => dispatch({
+const mapDispatchToProps = (dispatch) => ({
+  onFollow: (username) => dispatch({
     type: FOLLOW_USER,
-    payload: agent.Profile.follow(username)
+    payload: agent.Profile.follow(username),
   }),
-  onLoad: payload => dispatch({ type: PROFILE_PAGE_LOADED, payload }),
-  onUnfollow: username => dispatch({
+  onLoad: (payload) => dispatch({ type: PROFILE_PAGE_LOADED, payload }),
+  onUnfollow: (username) => dispatch({
     type: UNFOLLOW_USER,
-    payload: agent.Profile.unfollow(username)
+    payload: agent.Profile.unfollow(username),
   }),
-  onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED })
+  onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED }),
 });
 
 class Profile extends React.Component {
   componentDidMount() {
     this.props.onLoad(Promise.all([
       agent.Profile.get(this.props.match.params.username),
-      agent.Articles.byAuthor(this.props.match.params.username)
+      agent.Articles.byAuthor(this.props.match.params.username),
     ]));
   }
 
@@ -109,13 +109,13 @@ class Profile extends React.Component {
   }
 
   render() {
-    const profile = this.props.profile;
+    const { profile } = this.props;
     if (!profile) {
       return null;
     }
 
-    const isUser = this.props.currentUser &&
-      this.props.profile.username === this.props.currentUser.username;
+    const isUser = this.props.currentUser
+      && this.props.profile.username === this.props.currentUser.username;
 
     return (
       <div className="profile-page">

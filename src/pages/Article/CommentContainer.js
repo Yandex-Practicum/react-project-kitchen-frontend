@@ -1,9 +1,9 @@
-import CommentInput from './CommentInput';
-import CommentList from './CommentList';
 import { Link } from 'react-router-dom';
 import React from 'react';
+import CommentInput from './CommentInput';
+import CommentList from './CommentList';
 
-const CommentContainer = props => {
+const CommentContainer = (props) => {
   if (props.currentUser) {
     return (
       <div className="col-xs-12 col-md-8 offset-md-2">
@@ -18,8 +18,8 @@ const CommentContainer = props => {
           currentUser={props.currentUser} />
       </div>
     );
-  } else {
-    return (
+  }
+  return (
       <div className="col-xs-12 col-md-8 offset-md-2">
         <p>
           <Link to="/login">Sign in</Link>
@@ -33,8 +33,7 @@ const CommentContainer = props => {
           slug={props.slug}
           currentUser={props.currentUser} />
       </div>
-    );
-  }
+  );
 };
 
 export default CommentContainer;
