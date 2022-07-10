@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import agent from '../../agent';
@@ -18,60 +19,59 @@ const mapDispatchToProps = (dispatch) => ({
   }),
 });
 
-const ArticlePreview = (props) => {
-  const { article } = props;
-  const favoriteButtonClass = article.favorited
-    ? FAVORITED_CLASS
-    : NOT_FAVORITED_CLASS;
+const ArticlePreview = ({ article, favorite, unfavorite }) => {
+  const favoriteButtonClass = article.favorited ? FAVORITED_CLASS : NOT_FAVORITED_CLASS;
 
   const handleClick = (ev) => {
     ev.preventDefault();
     if (article.favorited) {
-      props.unfavorite(article.slug);
+      unfavorite(article.slug);
     } else {
-      props.favorite(article.slug);
+      favorite(article.slug);
     }
   };
 
   return (
-    <div className="article-preview">
-      <div className="article-meta">
+    <div className='article-preview'>
+      <div className='article-meta'>
         <Link to={`/@${article.author.username}`}>
           <img src={article.author.image} alt={article.author.username} />
         </Link>
 
-        <div className="info">
-          <Link className="author" to={`/@${article.author.username}`}>
+        <div className='info'>
+          <Link className='author' to={`/@${article.author.username}`}>
             {article.author.username}
           </Link>
-          <span className="date">
-            {new Date(article.createdAt).toDateString()}
-          </span>
+          <span className='date'>{new Date(article.createdAt).toDateString()}</span>
         </div>
 
-        <div className="pull-xs-right">
+        <div className='pull-xs-right'>
           <button className={favoriteButtonClass} onClick={handleClick}>
-            <i className="ion-heart"></i> {article.favoritesCount}
+            <i className='ion-heart'></i> {article.favoritesCount}
           </button>
         </div>
       </div>
 
-      <Link to={`/article/${article.slug}`} className="preview-link">
+      <Link to={`/article/${article.slug}`} className='preview-link'>
         <h1>{article.title}</h1>
         <p>{article.description}</p>
-        <span>Read more...</span>
-        <ul className="tag-list">
-          {
-            article.tagList.map((tag) => (
-                <li className="tag-default tag-pill tag-outline" key={tag}>
-                  {tag}
-                </li>
-            ))
-          }
+        <span>Читать продолжение...</span>
+        <ul className='tag-list'>
+          {article.tagList.map((tag) => (
+            <li className='tag-default tag-pill tag-outline' key={tag}>
+              {tag}
+            </li>
+          ))}
         </ul>
       </Link>
     </div>
   );
+};
+
+ArticlePreview.propTypes = {
+  article: PropTypes.object,
+  unfavorite: PropTypes.func,
+  favorite: PropTypes.func,
 };
 
 export default connect(() => ({}), mapDispatchToProps)(ArticlePreview);

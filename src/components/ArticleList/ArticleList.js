@@ -1,36 +1,36 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+// import styleArticleList from './ArticleList.module.scss';
 import ArticlePreview from '../ArticlePreview/ArticlePreview';
 import ListPagination from '../ListPagination/ListPagination';
 
-const ArticleList = (props) => {
-  if (!props.articles) {
-    return (
-      <div className="article-preview">Loading...</div>
-    );
+const ArticleList = ({
+  articles, articlesCount, pager, currentPage,
+}) => {
+  if (!articles) {
+    return <div className='article-preview'>Загрузка...</div>;
   }
 
-  if (props.articles.length === 0) {
-    return (
-      <div className="article-preview">
-        No articles are here... yet.
-      </div>
-    );
+  if (articles.length === 0) {
+    return <div className='article-preview'>Нет статей...</div>;
   }
 
   return (
     <div>
-      {
-        props.articles.map((article) => (
-            <ArticlePreview article={article} key={article.slug} />
-        ))
-      }
+      {articles.map((article) => (
+        <ArticlePreview article={article} key={article.slug} />
+      ))}
 
-      <ListPagination
-        pager={props.pager}
-        articlesCount={props.articlesCount}
-        currentPage={props.currentPage} />
+      <ListPagination pager={pager} articlesCount={articlesCount} currentPage={currentPage} />
     </div>
   );
+};
+
+ArticleList.propTypes = {
+  articles: PropTypes.arrayOf(PropTypes.any),
+  articlesCount: PropTypes.number,
+  pager: PropTypes.func,
+  currentPage: PropTypes.number,
 };
 
 export default ArticleList;
