@@ -13,9 +13,7 @@ const {
   profileIconActive,
 } = menuItemStyles;
 
-function MenuItem({
-  text, path, icon, isProfileIcon,
-}) {
+function MenuItem({ text, path, icon, isProfileIcon }) {
   const location = useLocation();
 
   return (

@@ -6,24 +6,24 @@ import LoggedInView from './LoggedInView';
 import headerStyles from './header.module.css';
 import currentUserType from '../../utils/types';
 
-const {
-  container, navLogo, nav,
-} = headerStyles;
+const { container, navLogo, nav, header } = headerStyles;
 
 const Header = ({ appName, currentUser }) => (
-      <nav className={`navbar navbar-light ${container}`}>
-        <div className='container'>
-          <Link to='/' className={navLogo}>
-            {appName}
-          </Link>
+  <nav className={`navbar navbar-light ${container}`}>
+    <div className={`container ${header}`}>
+      <Link to='/' className={navLogo}>
+        {appName}
+      </Link>
 
-          <ul className={`nav navbar-nav pull-xs-right ${nav}`}>
-          {currentUser ? (<LoggedInView currentUser={currentUser} />) : (<LoggedOutView />) }
-          </ul>
-
-        </div>
-      </nav>
-
+      <ul className={`nav navbar-nav pull-xs-right ${nav}`}>
+        {currentUser ? (
+          <LoggedInView currentUser={currentUser} />
+        ) : (
+          <LoggedOutView />
+        )}
+      </ul>
+    </div>
+  </nav>
 );
 
 Header.propTypes = {
