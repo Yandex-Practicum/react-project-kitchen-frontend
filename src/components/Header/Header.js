@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import LoggedOutView from './LoggedOutView';
-import LoggedInView from './LoggedInView';
-import headerStyles from './header.module.css';
 import currentUserType from '../../utils/types';
+import NotLoggedNav from './NotLoggedNav';
+import LoggedNav from './LoggedNav';
+import headerStyles from './header.module.css';
 
-const { container, navLogo, nav, header } = headerStyles;
+const {
+  container, navLogo, nav, header,
+} = headerStyles;
 
 const Header = ({ appName, currentUser }) => (
   <nav className={`navbar navbar-light ${container}`}>
@@ -17,9 +19,9 @@ const Header = ({ appName, currentUser }) => (
 
       <ul className={`nav navbar-nav pull-xs-right ${nav}`}>
         {currentUser ? (
-          <LoggedInView currentUser={currentUser} />
+          <LoggedNav currentUser={currentUser} />
         ) : (
-          <LoggedOutView />
+          <NotLoggedNav />
         )}
       </ul>
     </div>

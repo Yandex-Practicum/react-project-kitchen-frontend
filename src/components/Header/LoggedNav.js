@@ -8,7 +8,7 @@ import avatarTemp from '../../images/avatarTemp.svg';
 
 import currentUserType from '../../utils/types';
 
-function LoggedInView({ currentUser }) {
+function LoggedNav({ currentUser }) {
   return (
     <>
       <MenuItem text='Главная' path='/' icon={homeIcon} />
@@ -26,8 +26,8 @@ function LoggedInView({ currentUser }) {
   );
 }
 
-LoggedInView.propTypes = {
+LoggedNav.propTypes = {
   currentUser: currentUserType.isRequired,
 };
 
-export default LoggedInView;
+export default LoggedNav;

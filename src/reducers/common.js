@@ -18,7 +18,7 @@ import {
 } from '../constants/actionTypes';
 
 const defaultState = {
-  appName: 'Проектная кухня',
+  appName: 'Pepelats-Q',
   token: null,
   viewChangeCounter: 0,
 };

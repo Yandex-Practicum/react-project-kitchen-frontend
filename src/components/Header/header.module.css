@@ -5,6 +5,10 @@
   justify-content: center;
   background-color: #1c1c21;
   border-radius: 0;
+  min-height: 60px;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 .nav {
@@ -28,18 +32,16 @@
   justify-content: space-between;
   max-width: 1140px;
   width: 100%;
-  border: 1px solid purple;
   align-items: center;
 }
 
 .navItem {
   padding: 4px 16px;
   box-sizing: border-box;
-  border: 1px solid blue;
 }
 
 .navItem:last-of-type {
-  padding: 0 0 0 16px;
+  padding: 4px 0 4px 16px;
 }
 
 .navLink:active {
@@ -50,12 +52,12 @@
 .navLink:hover {
   color: #f2f2f3;
   text-decoration: none;
-  transition: color 0.8s ease-in;
+  transition: color 0.4s ease-in;
 }
 
 .navLink:hover>.menuIcon {
   filter: invert(97%) sepia(16%) saturate(8%) hue-rotate(181deg) brightness(99%) contrast(93%);
-  transition: filter 0.8s ease-in;
+  transition: filter 0.4s ease-in;
 }
 
 .navLink:hover>.profileIcon {
