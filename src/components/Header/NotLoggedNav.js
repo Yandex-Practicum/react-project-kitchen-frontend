@@ -9,12 +9,7 @@ function NotLoggedNav() {
     <>
       <MenuItem text='Главная' path='/' icon={homeIcon} />
       <MenuItem text='Войти' path='/login' icon={loginIcon} />
-
-      <MenuItem
-        text='Регистрация'
-        path='/register'
-        icon={registerIcon}
-      />
+      <MenuItem text='Регистрация' path='/register' icon={registerIcon} />
     </>
   );
 }

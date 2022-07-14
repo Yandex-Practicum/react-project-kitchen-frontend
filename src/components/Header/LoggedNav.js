@@ -13,9 +13,7 @@ function LoggedNav({ currentUser }) {
     <>
       <MenuItem text='Главная' path='/' icon={homeIcon} />
       <MenuItem text='Новая запись' path='/editor' icon={newIcon} />
-
       <MenuItem text='Настройки' path='/settings' icon={settingsIcon} />
-
       <MenuItem
         text={currentUser.username}
         path={`/@${currentUser.username}`}
