@@ -18,7 +18,7 @@ import {
 } from '../constants/actionTypes';
 
 const defaultState = {
-  appName: 'Practicum Project Kitchen',
+  appName: 'Pepelats-Q',
   token: null,
   viewChangeCounter: 0,
 };

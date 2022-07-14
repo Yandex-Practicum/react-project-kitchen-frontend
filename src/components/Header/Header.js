@@ -1,90 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import currentUserType from '../../utils/types';
+import NotLoggedNav from './NotLoggedNav';
+import LoggedNav from './LoggedNav';
+import headerStyles from './header.module.css';
 
-const LoggedOutView = (props) => {
-  if (!props.currentUser) {
-    return (
-      <ul className="nav navbar-nav pull-xs-right">
+const {
+  container, navLogo, nav, header,
+} = headerStyles;
 
-        <li className="nav-item">
-          <Link to="/" className="nav-link">
-            Home
-          </Link>
-        </li>
+const Header = ({ appName, currentUser }) => (
+  <nav className={`navbar navbar-light ${container}`}>
+    <div className={`container ${header}`}>
+      <Link to='/' className={navLogo}>
+        {appName}
+      </Link>
 
-        <li className="nav-item">
-          <Link to="/login" className="nav-link">
-            Sign in
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link to="/register" className="nav-link">
-            Sign up
-          </Link>
-        </li>
-
+      <ul className={`nav navbar-nav pull-xs-right ${nav}`}>
+        {currentUser ? (
+          <LoggedNav currentUser={currentUser} />
+        ) : (
+          <NotLoggedNav />
+        )}
       </ul>
-    );
-  }
-  return null;
+    </div>
+  </nav>
+);
+
+Header.propTypes = {
+  appName: PropTypes.string.isRequired,
+  currentUser: currentUserType,
 };
-
-const LoggedInView = (props) => {
-  if (props.currentUser) {
-    return (
-      <ul className="nav navbar-nav pull-xs-right">
-
-        <li className="nav-item">
-          <Link to="/" className="nav-link">
-            Home
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link to="/editor" className="nav-link">
-            <i className="ion-compose"></i>&nbsp;New Post
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link to="/settings" className="nav-link">
-            <i className="ion-gear-a"></i>&nbsp;Settings
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link
-            to={`/@${props.currentUser.username}`}
-            className="nav-link">
-            <span>Hello, {props.currentUser.username}</span>
-          </Link>
-        </li>
-
-      </ul>
-    );
-  }
-
-  return null;
-};
-
-class Header extends React.Component {
-  render() {
-    return (
-      <nav className="navbar navbar-light">
-        <div className="container">
-
-          <Link to="/" className="navbar-brand">
-            {this.props.appName.toLowerCase()}
-          </Link>
-
-          <LoggedOutView currentUser={this.props.currentUser} />
-
-          <LoggedInView currentUser={this.props.currentUser} />
-        </div>
-      </nav>
-    );
-  }
-}
 
 export default Header;

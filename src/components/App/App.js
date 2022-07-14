@@ -43,8 +43,8 @@ class App extends React.Component {
     if (token) {
       agent.setToken(token);
     } else {
-      // ЭТО ТОЛЬКО ДО 3ГО СПРИНТА, ЧТОБЫ СРАЗУ ЗАХОДИТЬ ЗАЛОГИННЫМ ПОЛЬЗОВАТЕЛЕМ!
-      // ВЕСЬ ELSE УДАЛИТЬ В 3М СПРИНТЕ
+    // автологин до подключения регистрации
+    // в 3м спринте удалим весь else
       store.dispatch({
         type: LOGIN,
         payload: agent.Auth.login('test@ya.ru', '1122'),
