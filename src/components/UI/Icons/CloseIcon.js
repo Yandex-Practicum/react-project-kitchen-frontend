@@ -1,19 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getIconParams } from '../ui-utils/transformers';
+import { useIconParams } from '../ui-utils/transformers';
 import IconWrapper from './IconWrapper';
 
 const CloseIcon = ({
   onClick, size = 'default', color = 'primary', className = '',
 }) => {
-  const { color: iconColor } = getIconParams({
+  const icon = useIconParams({
+    onClick,
+    size,
     color,
+    className,
   });
 
   return (
-    <IconWrapper size={size} color={color} className={className} onClick={onClick}>
-      <path d='M18 6L6 18' stroke={iconColor} strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
-      <path d='M6 6L18 18' stroke={iconColor} strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+    <IconWrapper
+      size={icon.size}
+      color={icon.color}
+      className={icon.className}
+      onClick={icon.onClick}
+    >
+      <path d='M18 6L6 18' stroke={icon.color} strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+      <path d='M6 6L18 18' stroke={icon.color} strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
     </IconWrapper>
   );
 };

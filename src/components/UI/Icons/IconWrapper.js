@@ -1,32 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getIconParams } from '../ui-utils/transformers';
 
 const IconWrapper = ({
-  children, onClick, size, color, className,
-}) => {
-  const icon = getIconParams({
-    size,
-    color,
-    className,
-    onClick,
-  });
-
-  return (
+  children, onClick, size, className,
+}) => (
     <svg
       className={className}
-      style={icon.style}
-      height={icon.size}
-      width={icon.size}
+      style={onClick ? { cursor: 'pointer' } : {}}
+      height={size}
+      width={size}
       viewBox='0 0 24 24'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
-      onClick={icon.onClick}
+      onClick={onClick}
     >
       {children}
     </svg>
-  );
-};
+);
 
 IconWrapper.propTypes = {
   children: PropTypes.node,
