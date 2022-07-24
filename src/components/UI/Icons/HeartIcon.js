@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getIconParams } from '../ui-utils/transformers';
+import { useIconParams } from '../ui-utils/hooks';
+import IconWrapper from './IconWrapper';
 
 const HeartIcon = ({
   onClick, size = 'default', color = 'primary', className = '',
 }) => {
-  const icon = getIconParams({
+  const icon = useIconParams({
     size,
     color,
     className,
@@ -13,14 +14,10 @@ const HeartIcon = ({
   });
 
   return (
-    <svg
-      className={className}
-      style={icon.style}
-      height={icon.size}
-      width={icon.size}
-      viewBox='0 0 24 24'
-      fill='none'
-      xmlns='http://www.w3.org/2000/svg'
+    <IconWrapper
+      size={icon.size}
+      color={icon.color}
+      className={icon.className}
       onClick={icon.onClick}
     >
       <path
@@ -29,7 +26,7 @@ const HeartIcon = ({
         strokeWidth='2'
         strokeLinecap='round'
       />
-    </svg>
+    </IconWrapper>
   );
 };
 
