@@ -1,0 +1,69 @@
+$PRIMARY: #f2f2f3;
+$WHITE10: #ffffff1a;
+$SECONDARY: #8585ad;
+$ALERT: #f20d33;
+$DISABLED: #3a3a55;
+$ACCENT: #4c4cff;
+$ACCENT_DARK: #3d3dcc;
+$ACCENT_LIGHT: #7070ff;
+
+.button {
+  font-family: 'JetBrains Mono', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  border: 0;
+  outline: 0;
+  border-radius: 20px;
+  height: 40px;
+  padding: 0px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 8px;
+}
+
+.default {
+  color: $PRIMARY;
+  background-color: $ACCENT;
+  transition: background-color 0.5s, color 0.5s;
+  &:hover {
+    background-color: $ACCENT_DARK;
+    transition: background-color 0.5s, color 0.5s;
+  }
+  &:focus {
+    outline: 2px solid $ACCENT_LIGHT;
+  }
+  &:active {
+    background-color: $ACCENT_LIGHT;
+  }
+  &:disabled {
+    color: $SECONDARY;
+    background-color: $DISABLED;
+  }
+}
+
+.navigation {
+  color: $SECONDARY;
+  background-color: transparent;
+  transition: background-color 0.5s, color 0.5s;
+  &:hover {
+    color: $PRIMARY;
+    background-color: $WHITE10;
+    transition: background-color 0.5s, color 0.5s;
+  }
+  &:focus {
+    outline: 2px solid $WHITE10;
+  }
+  &:active {
+    color: $PRIMARY;
+    background-color: $WHITE10;
+  }
+  &:disabled {
+    color: $SECONDARY;
+    background-color: transparent;
+  }
+  &_active {
+    color: $PRIMARY;
+  }
+}
