@@ -8,9 +8,17 @@ const Button = ({
   children, icon, type = 'default', disabled = false, active = false,
 }) => {
   const types = { default: styleButtons.default, navigation: styleButtons.navigation };
+
   return (
-    <button className={clsx(styleButtons.button, types[type] ? types[type] : '', active ? styleButtons.navigation_active : '')} disabled={disabled}>
-      {icon}
+    <button
+      className={clsx(
+        styleButtons.button,
+        types[type] ? types[type] : '',
+        active ? styleButtons.navigation_active : '',
+      )}
+      disabled={disabled}
+    >
+      <icon.type color='secondary' hoverColor='primary'/>
       <span>{children}</span>
     </button>
   );
