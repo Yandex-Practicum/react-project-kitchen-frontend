@@ -19,8 +19,8 @@ ReactDOM.render(
           <Route path="/" component={App} />
         </Switch>
       </BrowserRouter>
-    </ConnectedRouter >
-  </Provider >
+    </ConnectedRouter>
+  </Provider>
 
   ), document.getElementById('root'),
 );
