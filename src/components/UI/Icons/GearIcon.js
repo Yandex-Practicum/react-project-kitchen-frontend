@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useIconParams } from '../ui-utils/transformers';
+import { useIconParams } from '../ui-utils/hooks';
 import IconWrapper from './IconWrapper';
 
 const GearIcon = ({
