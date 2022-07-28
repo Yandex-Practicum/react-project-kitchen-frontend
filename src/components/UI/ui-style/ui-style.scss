@@ -1,0 +1,26 @@
+$PRIMARY: #f2f2f3;
+$SECONDARY: #8585ad;
+$SUCCESS: #00CCCC;
+$ALERT: #f20d33;
+$WHITE10: #ffffff1a;
+$DISABLED: #3a3a55;
+$ACCENT: #4c4cff;
+$ACCENT_DARK: #3d3dcc;
+$ACCENT_LIGHT: #7070ff;
+$INPUT: #2F2F37;
+$BG_PRIMARY: #131316;
+
+@mixin text-default {
+  font-family: 'JetBrains Mono', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@mixin text-small {
+  font-family: 'JetBrains Mono', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+}
+
