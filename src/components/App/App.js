@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import { push } from 'connected-react-router';
 import agent from '../../agent';
 import Header from '../Header/Header';
-import { APP_LOAD, REDIRECT, LOGIN } from '../../constants/actionTypes';
+import { APP_LOAD, REDIRECT } from '../../constants/actionTypes';
 import Article from '../Pages/Article';
 import Editor from '../Editor/Editor';
 import Home from '../Pages/Home';
@@ -42,18 +42,19 @@ class App extends React.Component {
     const token = window.localStorage.getItem('jwt');
     if (token) {
       agent.setToken(token);
-    } else {
-    // автологин до подключения регистрации
-    // в 3м спринте удалим весь else
-      store.dispatch({
-        type: LOGIN,
-        payload: agent.Auth.login('test@ya.ru', '1122'),
-      });
-      const tokenTemp = window.localStorage.getItem('jwt');
-      if (tokenTemp) {
-        agent.setToken(token);
-      }
     }
+    // else {
+    // // автологин до подключения регистрации
+    // // в 3м спринте удалим весь else
+    //   store.dispatch({
+    //     type: LOGIN,
+    //     payload: agent.Auth.login('test@ya.ru', '1122'),
+    //   });
+    //   const tokenTemp = window.localStorage.getItem('jwt');
+    //   if (tokenTemp) {
+    //     agent.setToken(token);
+    //   }
+    // }
 
     this.props.onLoad(token ? agent.Auth.current() : null, token);
   }

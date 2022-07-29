@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Banner from './Banner';
-import MainView from './MainView';
+import Banner from './Banner/Banner';
+import MainView from './MainView/MainView';
 import Tags from './Tags';
 import agent from '../../../agent';
 import {
@@ -9,9 +9,9 @@ import {
   HOME_PAGE_UNLOADED,
   APPLY_TAG_FILTER,
 } from '../../../constants/actionTypes';
+import styles from './index.module.css'
 
-// YOU WILL DELETE NEXT LINE SOON
-import ToDelete from './ToDelete';
+
 
 const { Promise } = global;
 
@@ -47,17 +47,11 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="home-page">
-
+      <div className={styles.home_page}>
         <Banner token={this.props.token} appName={this.props.appName} />
-        <div className="container page">
-
-          {/* THIS COMPONENT WILL BE DELETED THIS IS WELCOME */}
-          {!this.props.token ? (<ToDelete />)
-
-            : (<div className="row">
+        <div className={styles.container}>
+            <div className="row">
             <MainView />
-
             <div className="col-md-3">
               <div className="sidebar">
 
@@ -66,10 +60,9 @@ class Home extends React.Component {
                 <Tags
                   tags={this.props.tags}
                   onClickTag={this.props.onClickTag} />
-
               </div>
             </div>
-          </div>)}
+          </div>
         </div>
 
       </div>
