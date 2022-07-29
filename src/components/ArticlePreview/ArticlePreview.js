@@ -34,6 +34,11 @@ const ArticlePreview = ({ article, favorite, unfavorite }) => {
 
   return (
     <div className={styles.article_preview}>
+      <div className={styles.row}>
+        <div className={styles.col}>
+      <div className={styles.image}/>
+        </div>
+        <div className={`${styles.col} ${styles.w100}`}>
       <div className='article-meta'>
         <Link to={`/@${article.author.username}`}>
           <img src={article.author.image} alt={article.author.username} />
@@ -65,7 +70,10 @@ const ArticlePreview = ({ article, favorite, unfavorite }) => {
           ))}
         </ul>
       </Link>
+        </div>
+      </div>
     </div>
+
   );
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Banner from './Banner/Banner';
 import MainView from './MainView/MainView';
-import Tags from './Tags';
+import Tags from './Tags/Tags';
 import agent from '../../../agent';
 import {
   HOME_PAGE_LOADED,
@@ -52,10 +52,10 @@ class Home extends React.Component {
         <div className={styles.container}>
             <div className="row">
             <MainView />
-            <div className="col-md-3">
-              <div className="sidebar">
+            <div className={styles.col_md_3}>
+              <div className={styles.sidebar}>
 
-                <p>Popular Tags</p>
+                <p>Популярные теги</p>
 
                 <Tags
                   tags={this.props.tags}

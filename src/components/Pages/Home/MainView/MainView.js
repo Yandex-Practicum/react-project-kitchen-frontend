@@ -5,25 +5,25 @@ import agent from '../../../../agent';
 import { CHANGE_TAB } from '../../../../constants/actionTypes';
 import styles from './style.module.css'
 
-// const YourFeedTab = (props) => {
-//   if (props.token) {
-//     const clickHandler = (ev) => {
-//       ev.preventDefault();
-//       props.onTabClick('feed', agent.Articles.feed, agent.Articles.feed());
-//     };
-//
-//     return (
-//       <li className="nav-item">
-//         <a href=""
-//             className={ props.tab === 'feed' ? 'nav-link active' : 'nav-link' }
-//             onClick={clickHandler}>
-//           Your Feed
-//         </a>
-//       </li>
-//     );
-//   }
-//   return null;
-// };
+const YourFeedTab = (props) => {
+  if (props.token) {
+    const clickHandler = (ev) => {
+      ev.preventDefault();
+      props.onTabClick('feed', agent.Articles.feed, agent.Articles.feed());
+    };
+
+    return (
+      <li className="nav-item">
+        <a href=""
+            className={ props.tab === 'feed' ? styles.active : styles.nav_link }
+            onClick={clickHandler}>
+          Ваши лента
+        </a>
+      </li>
+    );
+  }
+  return null;
+};
 
 const GlobalFeedTab = (props) => {
   const clickHandler = (ev) => {
@@ -37,23 +37,6 @@ const GlobalFeedTab = (props) => {
         className={ props.tab === 'all' ? styles.active : styles.nav_link }
         onClick={clickHandler}>
         Лента
-      </a>
-    </li>
-  );
-};
-
-const Tags = (props) => {
-  const clickHandler = (ev) => {
-      ev.preventDefault();
-      props.onTabClick('feed', agent.Articles.feed, agent.Articles.feed());
-  };
-  return (
-    <li className="nav-item">
-      <a
-        href="src/components/Pages/Home/MainView/MainView"
-        className={ props.tab === 'feed' ? styles.active : styles.nav_link }
-        onClick={clickHandler}>
-        #Tags
       </a>
     </li>
   );
@@ -90,14 +73,13 @@ const MainView = (props) => (
       <div className={styles.feed_toggle}>
         <ul className={`${styles.nav} ${styles.nav_pills}`}>
 
-          {/*<YourFeedTab*/}
-          {/*  token={props.token}*/}
-          {/*  tab={props.tab}*/}
-          {/*  onTabClick={props.onTabClick} />*/}
+          <YourFeedTab
+            token={props.token}
+            tab={props.tab}
+            onTabClick={props.onTabClick} />
 
 
           <GlobalFeedTab tab={props.tab} onTabClick={props.onTabClick} />
-          <Tags tab={props.tab} onTabClick={props.onTabClick} />
 
           <TagFilterTab tag={props.tag} />
 
