@@ -1,4 +1,4 @@
-@import '../../ui-elements/ui-style/ui-style.scss';
+@import '../../ui-library/ui-style/ui-style.scss';
 
 .wrapper {
   display: flex;
@@ -29,12 +29,4 @@
   font-size: 16px;
   margin: 16px 0;
   color: $SECONDARY;
-}
-
-html {
-  height: 100%;
-}
-
-nav {
-  display: none !important;
 }
