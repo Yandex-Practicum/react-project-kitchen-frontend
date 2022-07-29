@@ -1,0 +1,148 @@
+@import '../ui-style/ui-style.scss';
+
+.button {
+  @include text-default;
+  border: 0;
+  outline: 0;
+  border-radius: 20px;
+  height: 40px;
+  padding: 0px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 8px;
+  & > span {
+    flex: 1;
+    white-space: nowrap;
+  }
+}
+
+.primary {
+  border: 2px solid transparent;
+  color: $PRIMARY;
+  background-color: $ACCENT;
+  transition: background-color 0.5s, color 0.5s;
+  & path {
+    stroke: $PRIMARY;
+    transition: stroke 0.5s;
+  }
+  &:hover {
+    background-color: $ACCENT_DARK;
+    transition: background-color 0.5s, color 0.5s;
+  }
+  &:focus {
+    outline: 0px;
+    border: 2px solid $ACCENT_DARK;
+  }
+  &:active {
+    background-color: $ACCENT_LIGHT;
+  }
+  &:disabled {
+    color: $SECONDARY;
+    background-color: $DISABLED;
+  }
+}
+
+.outline_alert {
+  color: $ALERT;
+  background-color: transparent;
+  border: 2px solid $ALERT;
+  transition: background-color 0.5s, color 0.5s, border 0.5s;
+  & path {
+    stroke: $ALERT;
+    transition: stroke 0.5s;
+  }
+  &:focus {
+    outline: 0px;
+    border: 2px solid darken($ALERT, 20%);
+  }
+  &:hover {
+    color: $PRIMARY;
+    background-color: $ALERT;
+    border: 2px solid $ALERT;
+    transition: background-color 0.5s, color 0.5s, border 0.5s;
+    & path {
+      stroke: $PRIMARY;
+      transition: stroke 0.5s;
+    }
+  }
+  &:active {
+    color: $PRIMARY;
+    background-color: darken($ALERT, 20%);
+    transition: background-color 0.5s, color 0.5s, border 0.5s;
+  }
+}
+
+.navigation {
+  color: $SECONDARY;
+  background-color: transparent;
+  transition: background-color 0.5s, color 0.5s;
+  & path {
+    stroke: $SECONDARY;
+    transition: stroke 0.5s;
+  }
+  &:hover {
+    color: $PRIMARY;
+    text-decoration: none;
+    background-color: $WHITE10;
+    transition: background-color 0.5s, color 0.5s;
+    & path {
+      stroke: $PRIMARY;
+      transition: stroke 0.5s;
+    }
+  }
+  &:focus {
+    text-decoration: none;
+  }
+  &:active {
+    color: $PRIMARY;
+    background-color: $WHITE10;
+  }
+  &:disabled {
+    color: $SECONDARY;
+    background-color: transparent;
+  }
+  &_active {
+    color: $PRIMARY;
+    text-decoration: none;
+    cursor: default;
+    & path {
+      stroke: $PRIMARY;
+    }
+    &:hover {
+      background-color: transparent;
+    }
+    &:visited {
+      color: $PRIMARY;
+    }
+  }
+}
+
+.text_button {
+  @include text-default;
+  line-height: 20px;
+  color: $ACCENT;
+  border: 2px solid transparent;
+  border-left: 0;
+  border-right: 0;
+  padding: 0;
+  background-color: transparent;
+  transition: border 0.5s, color 0.5s;
+  &:focus {
+    outline: 0;
+    color: $ACCENT_DARK;
+  }
+  &:hover {
+    color: $ACCENT;
+    border-bottom: 2px solid $ACCENT;
+    transition: border 0.5s;
+  }
+  &:active {
+    color: $ACCENT_LIGHT;
+    border-bottom: 2px solid $ACCENT_LIGHT;
+    transition: border 0.5s, color 0.5s;
+  }
+  &:disabled {
+    color: $SECONDARY;
+  }
+}
