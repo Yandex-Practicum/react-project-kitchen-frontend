@@ -39,8 +39,9 @@ export default (state = defaultState, action) => {
         ...state, redirectTo: '/', token: null, currentUser: null,
       };
     case ARTICLE_SUBMITTED:
-      // const redirectUrl = `/article/${action.payload.article.slug}`;
-      return { ...state, redirectTo: `/article/${action.payload.article.slug}` };
+      // eslint-disable-next-line no-case-declarations
+      const redirectUrl = `/article/${action.payload.article.slug}`;
+      return { ...state, redirectTo: redirectUrl };
     case SETTINGS_SAVED:
       return {
         ...state,

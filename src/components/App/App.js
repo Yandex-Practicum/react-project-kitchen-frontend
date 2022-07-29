@@ -9,7 +9,7 @@ import Article from '../Pages/Article';
 import Editor from '../Editor/Editor';
 import Home from '../Pages/Home';
 import Login from '../Login/Login';
-import { Profile } from '../Profile/Profile';
+import Profile from '../Profile/Profile';
 import ProfileFavorites from '../ProfileFavorites/ProfileFavorites';
 import Register from '../Register/Register';
 import Settings from '../Settings/Settings';
@@ -34,7 +34,7 @@ const mapDispatchToProps = dispatch => ({
 class App extends React.Component {
   UNSAFE_componentWillReceiveProps (nextProps) {
     if (nextProps.redirectTo) {
-      // this.context.router.replace(nextProps.redirectTo);
+      this.context.router.replace(nextProps.redirectTo);
       store.dispatch(push(nextProps.redirectTo));
       this.props.onRedirect();
     }

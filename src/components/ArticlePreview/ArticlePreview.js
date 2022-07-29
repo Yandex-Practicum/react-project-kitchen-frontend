@@ -5,9 +5,10 @@ import { connect } from 'react-redux';
 import agent from '../../agent';
 import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../../constants/actionTypes';
 import styles from './style.module.css'
+import avatar from '../../images/avatarTemp.svg';
 
-const FAVORITED_CLASS = 'btn btn-sm btn-primary';
-const NOT_FAVORITED_CLASS = 'btn btn-sm btn-outline-primary';
+const FAVORITED_CLASS = `${styles.btn} ${styles.btn_sm} ${styles.btn_primary}`;
+const NOT_FAVORITED_CLASS = `${styles.btn} ${styles.btn_sm} ${styles.btn_outline_primary}`;
 
 const mapDispatchToProps = (dispatch) => ({
   favorite: (slug) => dispatch({
@@ -32,6 +33,14 @@ const ArticlePreview = ({ article, favorite, unfavorite }) => {
     }
   };
 
+  const setAvatar = () => {
+    if (article.author.image === "https://static.productionready.io/images/smiley-cyrus.jpg") {
+      return <img src={avatar} alt={article.author.username} />
+    } else {
+      return <img src={article.author.image} alt={article.author.username} />
+    }
+  }
+
   return (
     <div className={styles.article_preview}>
       <div className={styles.row}>
@@ -39,32 +48,33 @@ const ArticlePreview = ({ article, favorite, unfavorite }) => {
       <div className={styles.image}/>
         </div>
         <div className={`${styles.col} ${styles.w100}`}>
-      <div className='article-meta'>
-        <Link to={`/@${article.author.username}`}>
-          <img src={article.author.image} alt={article.author.username} />
+      <div className={styles.article_meta}>
+        <Link to={`/@${article.author.username}`} className={styles.avatar}>
+          {setAvatar()}
         </Link>
 
-        <div className='info'>
-          <Link className='author' to={`/@${article.author.username}`}>
+        <div className={styles.info}>
+          <Link className={styles.author} to={`/@${article.author.username}`}>
             {article.author.username}
           </Link>
-          <span className='date'>{new Date(article.createdAt).toDateString()}</span>
+          <span className={styles.date}>{new Intl.DateTimeFormat("ru", {weekday: "short", day: "2-digit", month: "long", year: "numeric"}).format(new Date(article.createdAt))}</span>
+
         </div>
 
-        <div className='pull-xs-right'>
+        <div className={styles.pull_xs_right}>
           <button className={favoriteButtonClass} onClick={handleClick}>
-            <i className='ion-heart'></i> {article.favoritesCount}
+            {article.favoritesCount}<i className='ion-heart offset-sm-6'></i>
           </button>
         </div>
       </div>
 
       <Link to={`/article/${article.slug}`} className='preview-link'>
-        <h1>{article.title}</h1>
-        <p>{article.description}</p>
-        <span>Читать продолжение...</span>
-        <ul className='tag-list'>
+        <h1 className={styles.title}>{article.title}</h1>
+        <p className={styles.text}>{article.description}</p>
+        <span className={styles.continue}>Читать продолжение...</span>
+        <ul className={styles.tag_list}>
           {article.tagList.map((tag) => (
-            <li className='tag-default tag-pill tag-outline' key={tag}>
+            <li className={styles.tag_default} key={tag}>
               {tag}
             </li>
           ))}
