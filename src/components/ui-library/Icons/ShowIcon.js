@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useIconParams } from '../ui-utils/hooks';
-import IconWrapper from './IconWrapper';
+import useIconParams from './utils/hook';
+import IconWrapper from './utils/IconWrapper';
 
-const HomeIcon = ({
+const ShowIcon = ({
   onClick, size = 'default', color = 'primary', className = '',
 }) => {
   const icon = useIconParams({
@@ -21,22 +21,28 @@ const HomeIcon = ({
       onClick={icon.onClick}
     >
       <path
-        d='M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z'
+        d='M1.31409 12C1.31409 12 5.31409 4 12.3141 4C19.3141 4 23.3141 12 23.3141 12C23.3141 12 19.3141 20 12.3141 20C5.31409 20 1.31409 12 1.31409 12Z'
         stroke={icon.color}
         strokeWidth='2'
         strokeLinecap='round'
         strokeLinejoin='round'
       />
-      <path d='M9 22V12H15V22' stroke={icon.color} strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+      <path
+        d='M12.3141 15C13.9709 15 15.3141 13.6569 15.3141 12C15.3141 10.3431 13.9709 9 12.3141 9C10.6572 9 9.31409 10.3431 9.31409 12C9.31409 13.6569 10.6572 15 12.3141 15Z'
+        stroke={icon.color}
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
     </IconWrapper>
   );
 };
 
-HomeIcon.propTypes = {
+ShowIcon.propTypes = {
   size: PropTypes.string,
   color: PropTypes.string,
   className: PropTypes.string,
   onClick: PropTypes.func,
 };
 
-export default HomeIcon;
+export default ShowIcon;

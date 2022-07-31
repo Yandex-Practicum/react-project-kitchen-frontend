@@ -1,0 +1,26 @@
+$color-primary: #f2f2f3;
+$color-secondary: #8585ad;
+$color-success: #00CCCC;
+$color-alert: #f20d33;
+$color-white10: #ffffff1a;
+$color-disabled: #3a3a55;
+$color-accent: #4c4cff;
+$color-accent-dark: #3d3dcc;
+$color-accent-light: #7070ff;
+$color-input: #2F2F37;
+$color-bg: #131316;
+
+@mixin text-default {
+  font-family: 'JetBrains Mono', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@mixin text-small {
+  font-family: 'JetBrains Mono', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+}
+

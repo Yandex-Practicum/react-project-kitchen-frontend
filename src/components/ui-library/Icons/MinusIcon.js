@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useIconParams } from '../ui-utils/hooks';
-import IconWrapper from './IconWrapper';
+import useIconParams from './utils/hook';
+import IconWrapper from './utils/IconWrapper';
 
-const PlusIcon = ({
+const MinusIcon = ({
   onClick, size = 'default', color = 'primary', className = '',
 }) => {
   const icon = useIconParams({
@@ -20,17 +20,22 @@ const PlusIcon = ({
       className={icon.className}
       onClick={icon.onClick}
     >
-      <path d='M12 5V19' stroke={icon.color} strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
-      <path d='M5 12H19' stroke={icon.color} strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+      <path
+        d='M5 12H19'
+        stroke={icon.color}
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
     </IconWrapper>
   );
 };
 
-PlusIcon.propTypes = {
+MinusIcon.propTypes = {
   size: PropTypes.string,
   color: PropTypes.string,
   className: PropTypes.string,
   onClick: PropTypes.func,
 };
 
-export default PlusIcon;
+export default MinusIcon;

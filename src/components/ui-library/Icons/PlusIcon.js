@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useIconParams } from '../ui-utils/hooks';
-import IconWrapper from './IconWrapper';
+import useIconParams from './utils/hook';
+import IconWrapper from './utils/IconWrapper';
 
-const CloseIcon = ({
+const PlusIcon = ({
   onClick, size = 'default', color = 'primary', className = '',
 }) => {
   const icon = useIconParams({
@@ -20,17 +20,17 @@ const CloseIcon = ({
       className={icon.className}
       onClick={icon.onClick}
     >
-      <path d='M18 6L6 18' stroke={icon.color} strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
-      <path d='M6 6L18 18' stroke={icon.color} strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+      <path d='M12 5V19' stroke={icon.color} strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+      <path d='M5 12H19' stroke={icon.color} strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
     </IconWrapper>
   );
 };
 
-CloseIcon.propTypes = {
+PlusIcon.propTypes = {
   size: PropTypes.string,
   color: PropTypes.string,
   className: PropTypes.string,
   onClick: PropTypes.func,
 };
 
-export default CloseIcon;
+export default PlusIcon;

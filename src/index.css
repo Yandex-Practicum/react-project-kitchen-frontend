@@ -1,5 +1,9 @@
 @import url('./vendor/fonts/fonts.css');
 
 :root {
-    --accent-color: #3333FF;
+  --accent-color: #3333ff;
+}
+
+html {
+  height: 100%;
 }

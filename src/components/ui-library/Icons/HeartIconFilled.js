@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useIconParams } from '../ui-utils/hooks';
-import IconWrapper from './IconWrapper';
+import useIconParams from './utils/hook';
+import IconWrapper from './utils/IconWrapper';
 
 const HeartIconFilled = ({
   onClick, size = 'default', color = 'primary', className = '',
@@ -11,6 +11,7 @@ const HeartIconFilled = ({
     size,
     color,
     className,
+    filled: true,
   });
 
   return (

@@ -14,6 +14,7 @@ import ProfileFavorites from '../ProfileFavorites/ProfileFavorites';
 import Register from '../Register/Register';
 import Settings from '../Settings/Settings';
 import store from '../../store';
+import UI from '../Pages/UI/UI';
 
 const mapStateToProps = (state) => ({
   appLoaded: state.common.appLoaded,
@@ -67,6 +68,7 @@ class App extends React.Component {
             currentUser={this.props.currentUser} />
 
           <Switch>
+            <Route exact path="/ui" component={UI} />
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useIconParams } from '../ui-utils/hooks';
-import IconWrapper from './IconWrapper';
+import useIconParams from './utils/hook';
+import IconWrapper from './utils/IconWrapper';
 
-const ChevronLeftIcon = ({
+const CheckIcon = ({
   onClick, size = 'default', color = 'primary', className = '',
 }) => {
   const icon = useIconParams({
@@ -20,23 +20,22 @@ const ChevronLeftIcon = ({
       className={icon.className}
       onClick={icon.onClick}
     >
-        <path d='M11 17L6 12L11 7' stroke={icon.color} strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
-        <path
-          d='M18 17L13 12L18 7'
-          stroke={icon.color}
-          strokeWidth='2'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-        />
+      <path
+        d='M20 6L9 17L4 12'
+        stroke={icon.color}
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
     </IconWrapper>
   );
 };
 
-ChevronLeftIcon.propTypes = {
+CheckIcon.propTypes = {
   size: PropTypes.string,
   color: PropTypes.string,
   className: PropTypes.string,
   onClick: PropTypes.func,
 };
 
-export default ChevronLeftIcon;
+export default CheckIcon;
