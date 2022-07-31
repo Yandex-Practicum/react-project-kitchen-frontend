@@ -36,6 +36,7 @@ module.exports = {
     'jsx-a11y/no-noninteractive-element-interactions': 'warn',
     'default-param-last': 'warn',
     'prefer-destructuring': 'warn',
+    'linebreak-style': 'off',
 
     // React
     'react/require-default-props': 'warn',

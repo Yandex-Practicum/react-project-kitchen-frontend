@@ -26,7 +26,7 @@ const YourFeedTab = (props) => {
           }
           onClick={clickHandler}
         >
-          Ваши лента
+          Ваша лента
         </a>
       </li>
     );
@@ -46,7 +46,7 @@ const GlobalFeedTab = (props) => {
   return (
     <li className='nav-item'>
       <a
-        href='src/components/Pages/Home/MainView/MainView'
+        href='/'
         className={
           props.tab === 'all'
             ? styles.active

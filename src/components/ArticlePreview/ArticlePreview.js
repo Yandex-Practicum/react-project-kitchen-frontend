@@ -2,10 +2,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import agent from '../../agent';
-import {
-  ARTICLE_FAVORITED,
-  ARTICLE_UNFAVORITED,
-} from '../../constants/actionTypes';
+import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../../constants/actionTypes';
 import styles from './articlePreview.module.scss';
 import avatar from '../../images/avatarTemp.svg';
 
@@ -25,14 +22,8 @@ const mapDispatchToProps = (dispatch) => ({
     }),
 });
 
-const ArticlePreview = ({
-  article,
-  favorite,
-  unfavorite,
-}) => {
-  const favoriteButtonClass = article.favorited
-    ? FAVORITED_CLASS
-    : NOT_FAVORITED_CLASS;
+const ArticlePreview = ({ article, favorite, unfavorite }) => {
+  const favoriteButtonClass = article.favorited ? FAVORITED_CLASS : NOT_FAVORITED_CLASS;
 
   const handleClick = (ev) => {
     ev.preventDefault();
@@ -43,6 +34,8 @@ const ArticlePreview = ({
     }
   };
 
+  const defaultAvatar = 'https://static.productionready.io/images/smiley-cyrus.jpg';
+
   return (
     <div className={styles.article_preview}>
       <div className={styles.row}>
@@ -51,28 +44,16 @@ const ArticlePreview = ({
         </div>
         <div className={`${styles.col} ${styles.w100}`}>
           <div className={styles.article_meta}>
-            <Link
-              to={`/@${article.author.username}`}
-              className={styles.avatar}
-            >
-              {article.author.image ? (
-                <img
-                  src={avatar}
-                  alt={article.author.username}
-                />
+            <Link to={`/@${article.author.username}`} className={styles.avatar}>
+              {article.author.image === defaultAvatar ? (
+                <img src={avatar} alt={article.author.username} />
               ) : (
-                <img
-                  src={article.author.image}
-                  alt={article.author.username}
-                />
+                <img src={article.author.image} alt={article.author.username} />
               )}
             </Link>
 
             <div className={styles.info}>
-              <Link
-                className={styles.author}
-                to={`/@${article.author.username}`}
-              >
+              <Link className={styles.author} to={`/@${article.author.username}`}>
                 {article.author.username}
               </Link>
               <span className={styles.date}>
@@ -86,36 +67,20 @@ const ArticlePreview = ({
             </div>
 
             <div className={styles.pull_xs_right}>
-              <button
-                type='button'
-                className={favoriteButtonClass}
-                onClick={handleClick}
-              >
+              <button type='button' className={favoriteButtonClass} onClick={handleClick}>
                 {article.favoritesCount}
                 <i className='ion-heart offset-sm-6' />
               </button>
             </div>
           </div>
 
-          <Link
-            to={`/article/${article.slug}`}
-            className='preview-link'
-          >
-            <h1 className={styles.title}>
-              {article.title}
-            </h1>
-            <p className={styles.text}>
-              {article.description}
-            </p>
-            <span className={styles.continue}>
-              Читать продолжение...
-            </span>
+          <Link to={`/article/${article.slug}`} className='preview-link'>
+            <h1 className={styles.title}>{article.title}</h1>
+            <p className={styles.text}>{article.description}</p>
+            <span className={styles.continue}>Читать продолжение...</span>
             <ul className={styles.tag_list}>
               {article.tagList.map((tag) => (
-                <li
-                  className={styles.tag_default}
-                  key={tag}
-                >
+                <li className={styles.tag_default} key={tag}>
                   {tag}
                 </li>
               ))}
@@ -133,7 +98,4 @@ ArticlePreview.propTypes = {
   favorite: PropTypes.func,
 };
 
-export default connect(
-  () => ({}),
-  mapDispatchToProps,
-)(ArticlePreview);
+export default connect(() => ({}), mapDispatchToProps)(ArticlePreview);
