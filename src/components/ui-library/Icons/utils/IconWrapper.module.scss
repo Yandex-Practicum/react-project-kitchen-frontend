@@ -1,0 +1,32 @@
+@import '../../ui-style/ui-style.scss';
+
+.onclick {
+  cursor: 'pointer';
+}
+
+.primary {
+  &_stroke > path {
+    stroke: $color-primary;
+  }
+  &_fill > path {
+    fill: $color-primary;
+  }
+}
+
+.secondary {
+  &_stroke > path {
+    stroke: $color-secondary;
+  }
+  &_fill > path {
+    fill: $color-secondary;
+  }
+}
+
+.alert {
+  &_stroke > path {
+    stroke: $color-alert;
+  }
+  &_fill > path {
+    fill: $color-alert;
+  }
+}

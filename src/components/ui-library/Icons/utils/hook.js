@@ -1,14 +1,13 @@
-import COLORS from '../../ui-utils/colors';
-
-const useIconParams = (params) => {
+const useIconParams = ({
+  onClick, size, color, className, filled = false,
+}) => {
   const sizes = { default: '24', small: '16' };
-  const colors = { primary: COLORS.PRIMARY, secondary: COLORS.SECONDARY, alert: COLORS.ALERT };
 
   return {
-    size: sizes[params.size] ? sizes[params.size] : sizes.default,
-    color: colors[params.color] ? colors[params.color] : colors.default,
-    className: params.className ? params.className : '',
-    onClick: params.onClick,
+    size: sizes[size] ? sizes[size] : sizes.default,
+    color: filled ? `${color}_fill` : `${color}_stroke`,
+    className: className || '',
+    onClick,
   };
 };
 

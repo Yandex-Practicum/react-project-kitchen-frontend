@@ -2,12 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
+import styles from './IconWrapper.module.scss';
+
 const IconWrapper = ({
-  children, onClick, size, className,
+  children, color, onClick, size, className,
 }) => (
   <svg
-    className={clsx(className)}
-    style={onClick ? { cursor: 'pointer', minWidth: size } : { minWidth: size }}
+    className={clsx(
+      styles[color] ? styles[color] : 'not_supported_color',
+      onClick ? styles.onclick : '',
+      className,
+    )}
+    style={{ minWidth: size }}
     height={size}
     width={size}
     viewBox='0 0 24 24'

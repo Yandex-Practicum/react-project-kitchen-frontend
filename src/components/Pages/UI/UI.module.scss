@@ -3,8 +3,8 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  padding: 100px;
-  background-color: $BG_PRIMARY;
+  padding: 80px;
+  background-color: $color-bg;
   gap: 24px;
 }
 
@@ -16,11 +16,28 @@
   flex-wrap: nowrap;
 }
 
+.group_layout_icons{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  margin-bottom: 16px;
+  & > div{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: nowrap;
+  }
+}
+
 .h2 {
   font-family: 'JetBrains Mono', sans-serif;
   font-weight: 600;
   margin-bottom: 24px;
-  color: $PRIMARY;
+  color: $color-primary;
+}
+
+.props{
+  color: $color-disabled;
 }
 
 .h4 {
@@ -28,5 +45,5 @@
   font-weight: 400;
   font-size: 16px;
   margin: 16px 0;
-  color: $SECONDARY;
+  color: $color-secondary;
 }

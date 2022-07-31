@@ -19,29 +19,6 @@ import PlusIcon from './PlusIcon';
 import ShowIcon from './ShowIcon';
 import TrashIcon from './TrashIcon';
 
-const IconSet = {
-  AlertIcon,
-  CheckIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  CloseIcon,
-  CopyIcon,
-  DislikeIcon,
-  EditIcon,
-  GearIcon,
-  HeartIcon,
-  HeartIconFilled,
-  HideIcon,
-  HomeIcon,
-  LikeIcon,
-  LoginIcon,
-  MinusIcon,
-  PaperclipIcon,
-  PlusIcon,
-  ShowIcon,
-  TrashIcon,
-};
-
 export {
   AlertIcon,
   CheckIcon,
@@ -64,5 +41,3 @@ export {
   ShowIcon,
   TrashIcon,
 };
-
-export default IconSet;

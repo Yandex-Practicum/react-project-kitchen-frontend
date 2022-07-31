@@ -1,14 +1,14 @@
-$PRIMARY: #f2f2f3;
-$SECONDARY: #8585ad;
-$SUCCESS: #00CCCC;
-$ALERT: #f20d33;
-$WHITE10: #ffffff1a;
-$DISABLED: #3a3a55;
-$ACCENT: #4c4cff;
-$ACCENT_DARK: #3d3dcc;
-$ACCENT_LIGHT: #7070ff;
-$INPUT: #2F2F37;
-$BG_PRIMARY: #131316;
+$color-primary: #f2f2f3;
+$color-secondary: #8585ad;
+$color-success: #00CCCC;
+$color-alert: #f20d33;
+$color-white10: #ffffff1a;
+$color-disabled: #3a3a55;
+$color-accent: #4c4cff;
+$color-accent-dark: #3d3dcc;
+$color-accent-light: #7070ff;
+$color-input: #2F2F37;
+$color-bg: #131316;
 
 @mixin text-default {
   font-family: 'JetBrains Mono', sans-serif;

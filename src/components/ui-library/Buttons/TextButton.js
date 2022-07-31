@@ -12,7 +12,7 @@ const TextButton = ({ onClick, className = '', children = 'Кнопка' }) => (
 
 TextButton.propTypes = {
   children: PropTypes.node,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   className: PropTypes.string,
 };
 

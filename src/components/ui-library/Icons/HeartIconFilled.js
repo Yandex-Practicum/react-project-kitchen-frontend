@@ -11,6 +11,7 @@ const HeartIconFilled = ({
     size,
     color,
     className,
+    filled: true,
   });
 
   return (
