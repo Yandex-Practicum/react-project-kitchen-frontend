@@ -13,10 +13,7 @@ import {
 const EditProfileSettings = (props) => {
   if (props.isUser) {
     return (
-      <Link
-        to='/settings'
-        className='btn btn-sm btn-outline-secondary action-btn'
-      >
+      <Link to='/settings' className='btn btn-sm btn-outline-secondary action-btn'>
         <i className='ion-gear-a' /> Edit Profile Settings
       </Link>
     );
@@ -46,15 +43,10 @@ const FollowUserButton = (props) => {
   };
 
   return (
-    <button
-      type='button'
-      className={classes}
-      onClick={handleClick}
-    >
+    <button type='button' className={classes} onClick={handleClick}>
       <i className='ion-plus-round' />
       &nbsp;
-      {props.user.following ? 'Unfollow' : 'Follow'}{' '}
-      {props.user.username}
+      {props.user.following ? 'Unfollow' : 'Follow'} {props.user.username}
     </button>
   );
 };
@@ -71,8 +63,7 @@ const mapDispatchToProps = (dispatch) => ({
       type: FOLLOW_USER,
       payload: agent.Profile.follow(username),
     }),
-  onLoad: (payload) =>
-    dispatch({ type: PROFILE_PAGE_LOADED, payload }),
+  onLoad: (payload) => dispatch({ type: PROFILE_PAGE_LOADED, payload }),
   onUnfollow: (username) =>
     dispatch({
       type: UNFOLLOW_USER,
@@ -86,9 +77,7 @@ class Profile extends React.Component {
     this.props.onLoad(
       Promise.all([
         agent.Profile.get(this.props.match.params.username),
-        agent.Articles.byAuthor(
-          this.props.match.params.username,
-        ),
+        agent.Articles.byAuthor(this.props.match.params.username),
       ]),
     );
   }
@@ -101,19 +90,13 @@ class Profile extends React.Component {
     return (
       <ul className='nav nav-pills outline-active'>
         <li className='nav-item'>
-          <Link
-            className='nav-link active'
-            to={`/@${this.props.profile.username}`}
-          >
+          <Link className='nav-link active' to={`/@${this.props.profile.username}`}>
             My Articles
           </Link>
         </li>
 
         <li className='nav-item'>
-          <Link
-            className='nav-link'
-            to={`/@${this.props.profile.username}/favorites`}
-          >
+          <Link className='nav-link' to={`/@${this.props.profile.username}/favorites`}>
             Favorited Articles
           </Link>
         </li>
@@ -122,15 +105,13 @@ class Profile extends React.Component {
   }
 
   render() {
-    const { profile } = this.props.profile;
+    const  profile  = this.props.profile;
     if (!profile) {
       return null;
     }
 
     const isUser =
-      this.props.currentUser &&
-      this.props.profile.username ===
-        this.props.currentUser.username;
+      this.props.currentUser && this.props.profile.username === this.props.currentUser.username;
 
     return (
       <div className='profile-page'>
@@ -138,11 +119,7 @@ class Profile extends React.Component {
           <div className='container'>
             <div className='row'>
               <div className='col-xs-12 col-md-10 offset-md-1'>
-                <img
-                  src={profile.image}
-                  className='user-img'
-                  alt={profile.username}
-                />
+                <img src={profile.image} className='user-img' alt={profile.username} />
                 <h4>{profile.username}</h4>
                 <p>{profile.bio}</p>
 
@@ -161,9 +138,7 @@ class Profile extends React.Component {
         <div className='container'>
           <div className='row'>
             <div className='col-xs-12 col-md-10 offset-md-1'>
-              <div className='articles-toggle'>
-                {this.renderTabs()}
-              </div>
+              <div className='articles-toggle'>{this.renderTabs()}</div>
 
               <ArticleList
                 pager={this.props.pager}
@@ -179,8 +154,5 @@ class Profile extends React.Component {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
 export { Profile, mapStateToProps };

@@ -17,13 +17,14 @@ import {
   REGISTER_PAGE_UNLOADED,
 } from '../constants/actionTypes';
 
+
 const defaultState = {
   appName: 'Pepelats-Q',
   token: null,
   viewChangeCounter: 0,
 };
 
-export default (state = defaultState, action) => {
+export default  (state = defaultState, action) => {
   switch (action.type) {
     case APP_LOAD:
       return {

@@ -7,7 +7,7 @@ import {
   UPDATE_FIELD_AUTH,
 } from '../constants/actionTypes';
 
-export default (state = {}, action) => {
+export default  ( state = {}, action) => {
   switch (action.type) {
     case LOGIN:
     case REGISTER:

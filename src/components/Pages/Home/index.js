@@ -59,8 +59,8 @@ class Home extends React.Component {
     return (
       <div className={styles.home_page}>
         <Banner
-          token={this.props.token}
           appName={this.props.appName}
+          token={this.props.token}
         />
         <div className={styles.container}>
           <div className='row'>
@@ -69,8 +69,8 @@ class Home extends React.Component {
               <div className={styles.sidebar}>
                 <p>Популярные теги</p>
                 <Tags
-                  tags={this.props.tags}
                   onClickTag={this.props.onClickTag}
+                  tags={this.props.tags}
                 />
               </div>
             </div>
