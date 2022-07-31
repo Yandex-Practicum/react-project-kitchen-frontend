@@ -97,6 +97,29 @@ const UI = () => (
         </div>
       </div>
       <div className={styleUI.group_layout}>
+        <AlertIcon onClick={true} />
+        <CheckIcon onClick={true} />
+        <ChevronLeftIcon onClick={true} />
+        <ChevronRightIcon onClick={true} />
+        <CloseIcon onClick={true} />
+        <CopyIcon onClick={true} />
+        <DislikeIcon onClick={true} />
+        <EditIcon onClick={true} />
+        <GearIcon onClick={true} />
+        <HeartIcon onClick={true} />
+        <HeartIconFilled onClick={true} />
+        <HideIcon onClick={true} />
+        <HomeIcon onClick={true} />
+        <LikeIcon onClick={true} />
+        <LoginIcon onClick={true} />
+        <MinusIcon onClick={true} />
+        <PaperclipIcon onClick={true} />
+        <PlusIcon onClick={true} />
+        <ShowIcon onClick={true} />
+        <TrashIcon onClick={true} />
+        <h4 className={styleUI.h4}>onClick=&apos;Some function&apos;</h4>
+      </div>
+      <div className={styleUI.group_layout}>
         <AlertIcon color='secondary' />
         <CheckIcon color='secondary' />
         <ChevronLeftIcon color='secondary' />

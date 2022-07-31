@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import styleButtons from './Buttons.module.scss';
 
 const TextButton = ({ onClick, className = '', children = 'Кнопка' }) => (
-  <button className={clsx(className, styleButtons.text_button)} onClick={onClick}>
+  <button type='button' className={clsx(className, styleButtons.text_button)} onClick={onClick}>
     {children}
   </button>
 );

@@ -19,15 +19,12 @@ const Button = ({
 
   return (
     <button
-      className={clsx(
-        className,
-        styleButtons.button,
-        types[type] ? types[type] : '',
-      )}
+      type='button'
+      className={clsx(className, styleButtons.button, types[type] ? types[type] : '')}
       disabled={disabled}
       onClick={onClick}
     >
-      {icon && <icon.type/>}
+      {icon && <icon.type />}
       <span>{children}</span>
     </button>
   );

@@ -17,6 +17,9 @@ $animation_time: 0.5s;
     flex: 1;
     white-space: nowrap;
   }
+  &:focus {
+    outline: 0px;
+  }
 }
 
 .primary {
@@ -32,8 +35,7 @@ $animation_time: 0.5s;
     background-color: $color-accent-dark;
     transition: background-color $animation_time, color $animation_time;
   }
-  &:focus {
-    outline: 0px;
+  &:focus-visible{
     border: 2px solid $color-primary;
   }
   &:active {
@@ -54,8 +56,7 @@ $animation_time: 0.5s;
     stroke: $color-alert;
     transition: stroke $animation_time;
   }
-  &:focus {
-    outline: 0px;
+  &:focus-visible{
     border: 2px solid lighten($color-alert, 20%);
   }
   &:hover {
@@ -70,6 +71,7 @@ $animation_time: 0.5s;
   }
   &:active {
     color: $color-primary;
+    border: 2px solid darken($color-alert, 20%);
     background-color: darken($color-alert, 20%);
     transition: background-color $animation_time, color $animation_time, border $animation_time;
   }
@@ -96,6 +98,8 @@ $animation_time: 0.5s;
   &:focus {
     text-decoration: none;
     color: $color-secondary;
+  }
+  &:focus-visible{
     outline: 2px solid $color-secondary;
   }
   &:active {
@@ -116,9 +120,6 @@ $animation_time: 0.5s;
     &:hover {
       background-color: transparent;
     }
-    &:focus {
-      outline: 0;
-    }
     &:visited {
       color: $color-primary;
     }
@@ -137,6 +138,8 @@ $animation_time: 0.5s;
   transition: border $animation_time, color $animation_time;
   &:focus {
     outline: 0;
+  }
+  &:focus-visible{
     border-bottom: 2px solid $color-accent;
   }
   &:hover {
