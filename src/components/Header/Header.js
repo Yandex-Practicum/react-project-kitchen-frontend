@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import currentUserType from '../../utils/types'
 import NotLoggedNav from './NotLoggedNav'
 import LoggedNav from './LoggedNav'
-import headerStyles from './header.module.css'
+import headerStyles from './header.module.scss'
 
 const { container, navLogo, nav, header } = headerStyles
 

@@ -6,7 +6,7 @@ import {
   ARTICLE_FAVORITED,
   ARTICLE_UNFAVORITED,
 } from '../../constants/actionTypes'
-import styles from './style.module.css'
+import styles from './articlePreview.module.scss'
 import avatar from '../../images/avatarTemp.svg'
 
 const FAVORITED_CLASS = `${styles.btn} ${styles.btn_sm} ${styles.btn_primary}`

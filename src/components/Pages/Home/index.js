@@ -9,7 +9,7 @@ import {
   HOME_PAGE_UNLOADED,
   APPLY_TAG_FILTER,
 } from '../../../constants/actionTypes'
-import styles from './index.module.css'
+import styles from './home.module.scss'
 
 const { Promise } = global
 

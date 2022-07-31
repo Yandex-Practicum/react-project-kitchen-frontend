@@ -1,5 +1,5 @@
 import agent from '../../../../agent'
-import styles from './style.module.css'
+import styles from './tags.module.scss'
 
 const Tags = (props) => {
   const { tags } = props

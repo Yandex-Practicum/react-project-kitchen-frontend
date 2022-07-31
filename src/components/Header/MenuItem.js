@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import menuItemStyles from './header.module.css'
+import menuItemStyles from './header.module.scss'
 
 const {
   navItem,

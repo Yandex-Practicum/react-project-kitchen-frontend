@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import ArticleList from '../../../ArticleList/ArticleList'
 import agent from '../../../../agent'
 import { CHANGE_TAB } from '../../../../constants/actionTypes'
-import styles from './style.module.css'
+import styles from './mainView.module.scss'
 
 const YourFeedTab = (props) => {
   if (props.token) {

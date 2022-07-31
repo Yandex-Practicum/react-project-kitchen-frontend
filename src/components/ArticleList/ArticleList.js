@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import ArticlePreview from '../ArticlePreview/ArticlePreview'
 import ListPagination from '../ListPagination/ListPagination'
-import styles from './style.module.css'
+import styles from './articleList.module.scss'
 
 const ArticleList = ({
   articles,

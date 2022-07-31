@@ -1,4 +1,4 @@
-import style from './style.module.css'
+import style from './banner.module.scss'
 
 const Banner = ({ appName }) => (
   <div className={style.banner}>
