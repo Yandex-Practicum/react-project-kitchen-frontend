@@ -1,15 +1,15 @@
-import { Link } from 'react-router-dom'
-import React from 'react'
-import { connect } from 'react-redux'
-import ListErrors from '../ListErrors/ListErrors'
-import agent from '../../agent'
+import { Link } from 'react-router-dom';
+import React from 'react';
+import { connect } from 'react-redux';
+import ListErrors from '../ListErrors/ListErrors';
+import agent from '../../agent';
 import {
   UPDATE_FIELD_AUTH,
   REGISTER,
   REGISTER_PAGE_UNLOADED,
-} from '../../constants/actionTypes'
+} from '../../constants/actionTypes';
 
-const mapStateToProps = (state) => ({ ...state.auth })
+const mapStateToProps = (state) => ({ ...state.auth });
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeEmail: (value) =>
@@ -35,37 +35,37 @@ const mapDispatchToProps = (dispatch) => ({
       username,
       email,
       password,
-    )
-    dispatch({ type: REGISTER, payload })
+    );
+    dispatch({ type: REGISTER, payload });
   },
   onUnload: () =>
     dispatch({ type: REGISTER_PAGE_UNLOADED }),
-})
+});
 
 class Register extends React.Component {
   constructor() {
-    super()
+    super();
     this.changeEmail = (ev) =>
-      this.props.onChangeEmail(ev.target.value)
+      this.props.onChangeEmail(ev.target.value);
     this.changePassword = (ev) =>
-      this.props.onChangePassword(ev.target.value)
+      this.props.onChangePassword(ev.target.value);
     this.changeUsername = (ev) =>
-      this.props.onChangeUsername(ev.target.value)
+      this.props.onChangeUsername(ev.target.value);
     this.submitForm =
       (username, email, password) => (ev) => {
-        ev.preventDefault()
-        this.props.onSubmit(username, email, password)
-      }
+        ev.preventDefault();
+        this.props.onSubmit(username, email, password);
+      };
   }
 
   componentWillUnmount() {
-    this.props.onUnload()
+    this.props.onUnload();
   }
 
   render() {
-    const { email } = this.props
-    const { password } = this.props
-    const { username } = this.props
+    const { email } = this.props;
+    const { password } = this.props;
+    const { username } = this.props;
 
     return (
       <div className='auth-page'>
@@ -130,11 +130,11 @@ class Register extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Register)
+)(Register);

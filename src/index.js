@@ -1,16 +1,16 @@
-import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import './index.css'
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import './index.css';
 import {
   Route,
   Switch,
   BrowserRouter,
-} from 'react-router-dom'
-import { ConnectedRouter } from 'connected-react-router'
-import store from './store'
-import history from './history'
+} from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import store from './store';
+import history from './history';
 
-import App from './components/App/App'
+import App from './components/App/App';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -24,4 +24,4 @@ ReactDOM.render(
   </Provider>,
 
   document.getElementById('root'),
-)
+);

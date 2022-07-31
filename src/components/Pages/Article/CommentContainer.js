@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'
-import CommentInput from './CommentInput'
-import CommentList from './CommentList'
+import { Link } from 'react-router-dom';
+import CommentInput from './CommentInput';
+import CommentList from './CommentList';
 
 const CommentContainer = (props) => {
   if (props.currentUser) {
@@ -20,7 +20,7 @@ const CommentContainer = (props) => {
           currentUser={props.currentUser}
         />
       </div>
-    )
+    );
   }
   return (
     <div className='col-xs-12 col-md-8 offset-md-2'>
@@ -37,7 +37,7 @@ const CommentContainer = (props) => {
         currentUser={props.currentUser}
       />
     </div>
-  )
-}
+  );
+};
 
-export default CommentContainer
+export default CommentContainer;

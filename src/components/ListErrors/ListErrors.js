@@ -8,9 +8,9 @@ const ListErrors = ({ errors }) => {
           </li>
         ))}
       </ul>
-    )
+    );
   }
-  return null
-}
+  return null;
+};
 
-export default ListErrors
+export default ListErrors;

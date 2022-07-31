@@ -1,12 +1,12 @@
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-import agent from '../../agent'
-import { SET_PAGE } from '../../constants/actionTypes'
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import agent from '../../agent';
+import { SET_PAGE } from '../../constants/actionTypes';
 
 const mapDispatchToProps = (dispatch) => ({
   onSetPage: (page, payload) =>
     dispatch({ type: SET_PAGE, page, payload }),
-})
+});
 
 const ListPagination = ({
   articlesCount,
@@ -15,35 +15,35 @@ const ListPagination = ({
   currentPage,
 }) => {
   if (articlesCount <= 10) {
-    return null
+    return null;
   }
 
-  const range = []
+  const range = [];
   for (
     let i = 0;
     i < Math.ceil(articlesCount / 10);
     i += 1
   ) {
-    range.push(i)
+    range.push(i);
   }
 
   const setPage = (page) => {
     if (pager) {
-      onSetPage(page, pager(page))
+      onSetPage(page, pager(page));
     } else {
-      onSetPage(page, agent.Articles.all(page))
+      onSetPage(page, agent.Articles.all(page));
     }
-  }
+  };
 
   return (
     <nav>
       <ul className='pagination'>
         {range.map((v) => {
-          const isCurrent = v === currentPage
+          const isCurrent = v === currentPage;
           const onClick = (ev) => {
-            ev.preventDefault()
-            setPage(v)
-          }
+            ev.preventDefault();
+            setPage(v);
+          };
           return (
             <li
               className={
@@ -56,21 +56,21 @@ const ListPagination = ({
                 {v + 1}
               </a>
             </li>
-          )
+          );
         })}
       </ul>
     </nav>
-  )
-}
+  );
+};
 
 ListPagination.propTypes = {
   articlesCount: PropTypes.number,
   pager: PropTypes.func,
   onSetPage: PropTypes.func,
   currentPage: PropTypes.number,
-}
+};
 
 export default connect(
   () => ({}),
   mapDispatchToProps,
-)(ListPagination)
+)(ListPagination);

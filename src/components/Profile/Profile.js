@@ -1,14 +1,14 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import agent from '../../agent'
-import ArticleList from '../ArticleList/ArticleList'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import agent from '../../agent';
+import ArticleList from '../ArticleList/ArticleList';
 import {
   FOLLOW_USER,
   UNFOLLOW_USER,
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED,
-} from '../../constants/actionTypes'
+} from '../../constants/actionTypes';
 
 const EditProfileSettings = (props) => {
   if (props.isUser) {
@@ -19,47 +19,51 @@ const EditProfileSettings = (props) => {
       >
         <i className='ion-gear-a' /> Edit Profile Settings
       </Link>
-    )
+    );
   }
-  return null
-}
+  return null;
+};
 
 const FollowUserButton = (props) => {
   if (props.isUser) {
-    return null
+    return null;
   }
 
-  let classes = 'btn btn-sm action-btn'
+  let classes = 'btn btn-sm action-btn';
   if (props.user.following) {
-    classes += ' btn-secondary'
+    classes += ' btn-secondary';
   } else {
-    classes += ' btn-outline-secondary'
+    classes += ' btn-outline-secondary';
   }
 
   const handleClick = (ev) => {
-    ev.preventDefault()
+    ev.preventDefault();
     if (props.user.following) {
-      props.unfollow(props.user.username)
+      props.unfollow(props.user.username);
     } else {
-      props.follow(props.user.username)
+      props.follow(props.user.username);
     }
-  }
+  };
 
   return (
-    <button type='button' className={classes} onClick={handleClick}>
+    <button
+      type='button'
+      className={classes}
+      onClick={handleClick}
+    >
       <i className='ion-plus-round' />
       &nbsp;
       {props.user.following ? 'Unfollow' : 'Follow'}{' '}
       {props.user.username}
     </button>
-  )
-}
+  );
+};
 
 const mapStateToProps = (state) => ({
   ...state.articleList,
   currentUser: state.common.currentUser,
   profile: state.profile,
-})
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onFollow: (username) =>
@@ -75,7 +79,7 @@ const mapDispatchToProps = (dispatch) => ({
       payload: agent.Profile.unfollow(username),
     }),
   onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED }),
-})
+});
 
 class Profile extends React.Component {
   componentDidMount() {
@@ -86,11 +90,11 @@ class Profile extends React.Component {
           this.props.match.params.username,
         ),
       ]),
-    )
+    );
   }
 
   componentWillUnmount() {
-    this.props.onUnload()
+    this.props.onUnload();
   }
 
   renderTabs() {
@@ -114,19 +118,19 @@ class Profile extends React.Component {
           </Link>
         </li>
       </ul>
-    )
+    );
   }
 
   render() {
-    const { profile } = this.props.profile
+    const { profile } = this.props.profile;
     if (!profile) {
-      return null
+      return null;
     }
 
     const isUser =
       this.props.currentUser &&
       this.props.profile.username ===
-        this.props.currentUser.username
+        this.props.currentUser.username;
 
     return (
       <div className='profile-page'>
@@ -171,12 +175,12 @@ class Profile extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Profile)
-export { Profile, mapStateToProps }
+)(Profile);
+export { Profile, mapStateToProps };

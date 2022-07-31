@@ -1,6 +1,6 @@
-import { NavLink, useLocation } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import menuItemStyles from './header.module.scss'
+import { NavLink, useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import menuItemStyles from './header.module.scss';
 
 const {
   navItem,
@@ -10,10 +10,10 @@ const {
   menuIconActive,
   profileIcon,
   profileIconActive,
-} = menuItemStyles
+} = menuItemStyles;
 
 function MenuItem({ text, path, icon, isProfileIcon }) {
-  const location = useLocation()
+  const location = useLocation();
 
   return (
     <div>
@@ -49,13 +49,13 @@ function MenuItem({ text, path, icon, isProfileIcon }) {
         </NavLink>
       </li>
     </div>
-  )
+  );
 }
 MenuItem.propTypes = {
   text: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
   isProfileIcon: PropTypes.bool,
-}
+};
 
-export default MenuItem
+export default MenuItem;

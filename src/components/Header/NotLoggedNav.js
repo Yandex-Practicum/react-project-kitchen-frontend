@@ -1,7 +1,7 @@
-import MenuItem from './MenuItem'
-import homeIcon from '../../images/homeicon.svg'
-import loginIcon from '../../images/login.svg'
-import registerIcon from '../../images/newicon.svg'
+import MenuItem from './MenuItem';
+import homeIcon from '../../images/homeicon.svg';
+import loginIcon from '../../images/login.svg';
+import registerIcon from '../../images/newicon.svg';
 
 function NotLoggedNav() {
   return (
@@ -18,7 +18,7 @@ function NotLoggedNav() {
         icon={registerIcon}
       />
     </>
-  )
+  );
 }
 
-export default NotLoggedNav
+export default NotLoggedNav;

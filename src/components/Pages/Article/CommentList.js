@@ -1,4 +1,4 @@
-import Comment from './Comment'
+import Comment from './Comment';
 
 const CommentList = (props) => (
   <div>
@@ -11,6 +11,6 @@ const CommentList = (props) => (
       />
     ))}
   </div>
-)
+);
 
-export default CommentList
+export default CommentList;

@@ -1,20 +1,20 @@
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import agent from '../../agent'
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import agent from '../../agent';
 import {
   Profile,
   mapStateToProps,
-} from '../Profile/Profile'
+} from '../Profile/Profile';
 import {
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED,
-} from '../../constants/actionTypes'
+} from '../../constants/actionTypes';
 
 const mapDispatchToProps = (dispatch) => ({
   onLoad: (pager, payload) =>
     dispatch({ type: PROFILE_PAGE_LOADED, pager, payload }),
   onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED }),
-})
+});
 
 class ProfileFavorites extends Profile {
   componentDidMount() {
@@ -30,11 +30,11 @@ class ProfileFavorites extends Profile {
           this.props.match.params.username,
         ),
       ]),
-    )
+    );
   }
 
   componentWillUnmount() {
-    this.props.onUnload()
+    this.props.onUnload();
   }
 
   renderTabs() {
@@ -58,11 +58,11 @@ class ProfileFavorites extends Profile {
           </Link>
         </li>
       </ul>
-    )
+    );
   }
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ProfileFavorites)
+)(ProfileFavorites);

@@ -1,16 +1,16 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import ListErrors from '../ListErrors/ListErrors'
-import agent from '../../agent'
+import React from 'react';
+import { connect } from 'react-redux';
+import ListErrors from '../ListErrors/ListErrors';
+import agent from '../../agent';
 import {
   SETTINGS_SAVED,
   SETTINGS_PAGE_UNLOADED,
   LOGOUT,
-} from '../../constants/actionTypes'
+} from '../../constants/actionTypes';
 
 class SettingsForm extends React.Component {
   constructor() {
-    super()
+    super();
 
     this.state = {
       image: '',
@@ -18,27 +18,27 @@ class SettingsForm extends React.Component {
       bio: '',
       email: '',
       password: '',
-    }
+    };
 
     this.updateState = (field) => (ev) => {
-      const { state } = this
+      const { state } = this;
       const newState = {
         ...state,
         [field]: ev.target.value,
-      }
-      this.setState(newState)
-    }
+      };
+      this.setState(newState);
+    };
 
     this.submitForm = (ev) => {
-      ev.preventDefault()
+      ev.preventDefault();
 
-      const user = { ...this.state }
+      const user = { ...this.state };
       if (!user.password) {
-        delete user.password
+        delete user.password;
       }
 
-      this.props.onSubmitForm(user)
-    }
+      this.props.onSubmitForm(user);
+    };
   }
 
   componentDidMount() {
@@ -48,7 +48,7 @@ class SettingsForm extends React.Component {
         username: this.props.currentUser.username,
         bio: this.props.currentUser.bio,
         email: this.props.currentUser.email,
-      })
+      });
     }
   }
 
@@ -61,7 +61,7 @@ class SettingsForm extends React.Component {
         username: nextProps.currentUser.username,
         bio: nextProps.currentUser.bio,
         email: nextProps.currentUser.email,
-      })
+      });
     }
   }
 
@@ -128,14 +128,14 @@ class SettingsForm extends React.Component {
           </button>
         </fieldset>
       </form>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => ({
   ...state.settings,
   currentUser: state.common.currentUser,
-})
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onClickLogout: () => dispatch({ type: LOGOUT }),
@@ -146,7 +146,7 @@ const mapDispatchToProps = (dispatch) => ({
     }),
   onUnload: () =>
     dispatch({ type: SETTINGS_PAGE_UNLOADED }),
-})
+});
 
 const Settings = ({
   errors,
@@ -180,9 +180,9 @@ const Settings = ({
       </div>
     </div>
   </div>
-)
+);
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Settings)
+)(Settings);

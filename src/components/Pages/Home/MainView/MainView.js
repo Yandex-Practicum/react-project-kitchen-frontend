@@ -1,19 +1,19 @@
-import { connect } from 'react-redux'
-import ArticleList from '../../../ArticleList/ArticleList'
-import agent from '../../../../agent'
-import { CHANGE_TAB } from '../../../../constants/actionTypes'
-import styles from './mainView.module.scss'
+import { connect } from 'react-redux';
+import ArticleList from '../../../ArticleList/ArticleList';
+import agent from '../../../../agent';
+import { CHANGE_TAB } from '../../../../constants/actionTypes';
+import styles from './mainView.module.scss';
 
 const YourFeedTab = (props) => {
   if (props.token) {
     const clickHandler = (ev) => {
-      ev.preventDefault()
+      ev.preventDefault();
       props.onTabClick(
         'feed',
         agent.Articles.feed,
         agent.Articles.feed(),
-      )
-    }
+      );
+    };
 
     return (
       <li className='nav-item'>
@@ -29,20 +29,20 @@ const YourFeedTab = (props) => {
           Ваши лента
         </a>
       </li>
-    )
+    );
   }
-  return null
-}
+  return null;
+};
 
 const GlobalFeedTab = (props) => {
   const clickHandler = (ev) => {
-    ev.preventDefault()
+    ev.preventDefault();
     props.onTabClick(
       'all',
       agent.Articles.all,
       agent.Articles.all(),
-    )
-  }
+    );
+  };
   return (
     <li className='nav-item'>
       <a
@@ -57,12 +57,12 @@ const GlobalFeedTab = (props) => {
         Лента
       </a>
     </li>
-  )
-}
+  );
+};
 
 const TagFilterTab = (props) => {
   if (!props.tag) {
-    return null
+    return null;
   }
 
   return (
@@ -74,14 +74,14 @@ const TagFilterTab = (props) => {
         <i className='ion-pound' /> {props.tag}
       </a>
     </li>
-  )
-}
+  );
+};
 
 const mapStateToProps = (state) => ({
   ...state.articleList,
   tags: state.home.tags,
   token: state.common.token,
-})
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onTabClick: (tab, pager, payload) =>
@@ -91,7 +91,7 @@ const mapDispatchToProps = (dispatch) => ({
       pager,
       payload,
     }),
-})
+});
 
 const MainView = (props) => (
   <div className={styles.col_md_9}>
@@ -120,9 +120,9 @@ const MainView = (props) => (
       currentPage={props.currentPage}
     />
   </div>
-)
+);
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(MainView)
+)(MainView);

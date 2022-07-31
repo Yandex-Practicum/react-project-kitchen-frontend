@@ -1,4 +1,4 @@
-import style from './banner.module.scss'
+import style from './banner.module.scss';
 
 const Banner = ({ appName }) => (
   <div className={style.banner}>
@@ -9,6 +9,6 @@ const Banner = ({ appName }) => (
       </p>
     </div>
   </div>
-)
+);
 
-export default Banner
+export default Banner;

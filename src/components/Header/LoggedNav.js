@@ -1,10 +1,10 @@
-import MenuItem from './MenuItem'
-import homeIcon from '../../images/homeicon.svg'
-import newIcon from '../../images/newicon.svg'
-import settingsIcon from '../../images/settings.svg'
-import avatarTemp from '../../images/avatarTemp.svg'
+import MenuItem from './MenuItem';
+import homeIcon from '../../images/homeicon.svg';
+import newIcon from '../../images/newicon.svg';
+import settingsIcon from '../../images/settings.svg';
+import avatarTemp from '../../images/avatarTemp.svg';
 
-import currentUserType from '../../utils/types'
+import currentUserType from '../../utils/types';
 
 function LoggedNav({ currentUser }) {
   return (
@@ -27,11 +27,11 @@ function LoggedNav({ currentUser }) {
         isProfileIcon
       />
     </>
-  )
+  );
 }
 
 LoggedNav.propTypes = {
   currentUser: currentUserType.isRequired,
-}
+};
 
-export default LoggedNav
+export default LoggedNav;

@@ -1,29 +1,29 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { Route, Switch } from 'react-router-dom'
-import { push } from 'connected-react-router'
-import agent from '../../agent'
-import Header from '../Header/Header'
+import React from 'react';
+import { connect } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
+import { push } from 'connected-react-router';
+import agent from '../../agent';
+import Header from '../Header/Header';
 import {
   APP_LOAD,
   REDIRECT,
-} from '../../constants/actionTypes'
-import Article from '../Pages/Article'
-import Editor from '../Editor/Editor'
-import Home from '../Pages/Home'
-import Login from '../Login/Login'
-import Profile from '../Profile/Profile'
-import ProfileFavorites from '../ProfileFavorites/ProfileFavorites'
-import Register from '../Register/Register'
-import Settings from '../Settings/Settings'
-import store from '../../store'
+} from '../../constants/actionTypes';
+import Article from '../Pages/Article';
+import Editor from '../Editor/Editor';
+import Home from '../Pages/Home';
+import Login from '../Login/Login';
+import Profile from '../Profile/Profile';
+import ProfileFavorites from '../ProfileFavorites/ProfileFavorites';
+import Register from '../Register/Register';
+import Settings from '../Settings/Settings';
+import store from '../../store';
 
 const mapStateToProps = (state) => ({
   appLoaded: state.common.appLoaded,
   appName: state.common.appName,
   currentUser: state.common.currentUser,
   redirectTo: state.common.redirectTo,
-})
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onLoad: (payload, token) =>
@@ -34,27 +34,27 @@ const mapDispatchToProps = (dispatch) => ({
       skipTracking: true,
     }),
   onRedirect: () => dispatch({ type: REDIRECT }),
-})
+});
 
 class App extends React.Component {
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.redirectTo) {
-      this.context.router.replace(nextProps.redirectTo)
-      store.dispatch(push(nextProps.redirectTo))
-      this.props.onRedirect()
+      this.context.router.replace(nextProps.redirectTo);
+      store.dispatch(push(nextProps.redirectTo));
+      this.props.onRedirect();
     }
   }
 
   componentDidMount() {
-    const token = window.localStorage.getItem('jwt')
+    const token = window.localStorage.getItem('jwt');
     if (token) {
-      agent.setToken(token)
+      agent.setToken(token);
     }
 
     this.props.onLoad(
       token ? agent.Auth.current() : null,
       token,
-    )
+    );
   }
 
   render() {
@@ -87,7 +87,7 @@ class App extends React.Component {
             <Route path='/@:username' component={Profile} />
           </Switch>
         </div>
-      )
+      );
     }
     return (
       <div>
@@ -96,11 +96,11 @@ class App extends React.Component {
           currentUser={this.props.currentUser}
         />
       </div>
-    )
+    );
   }
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(App)
+)(App);

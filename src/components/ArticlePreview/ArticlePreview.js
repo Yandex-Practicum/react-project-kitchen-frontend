@@ -1,16 +1,16 @@
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import agent from '../../agent'
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import agent from '../../agent';
 import {
   ARTICLE_FAVORITED,
   ARTICLE_UNFAVORITED,
-} from '../../constants/actionTypes'
-import styles from './articlePreview.module.scss'
-import avatar from '../../images/avatarTemp.svg'
+} from '../../constants/actionTypes';
+import styles from './articlePreview.module.scss';
+import avatar from '../../images/avatarTemp.svg';
 
-const FAVORITED_CLASS = `${styles.btn} ${styles.btn_sm} ${styles.btn_primary}`
-const NOT_FAVORITED_CLASS = `${styles.btn} ${styles.btn_sm} ${styles.btn_outline_primary}`
+const FAVORITED_CLASS = `${styles.btn} ${styles.btn_sm} ${styles.btn_primary}`;
+const NOT_FAVORITED_CLASS = `${styles.btn} ${styles.btn_sm} ${styles.btn_outline_primary}`;
 
 const mapDispatchToProps = (dispatch) => ({
   favorite: (slug) =>
@@ -23,7 +23,7 @@ const mapDispatchToProps = (dispatch) => ({
       type: ARTICLE_UNFAVORITED,
       payload: agent.Articles.unfavorite(slug),
     }),
-})
+});
 
 const ArticlePreview = ({
   article,
@@ -32,16 +32,16 @@ const ArticlePreview = ({
 }) => {
   const favoriteButtonClass = article.favorited
     ? FAVORITED_CLASS
-    : NOT_FAVORITED_CLASS
+    : NOT_FAVORITED_CLASS;
 
   const handleClick = (ev) => {
-    ev.preventDefault()
+    ev.preventDefault();
     if (article.favorited) {
-      unfavorite(article.slug)
+      unfavorite(article.slug);
     } else {
-      favorite(article.slug)
+      favorite(article.slug);
     }
-  }
+  };
 
   return (
     <div className={styles.article_preview}>
@@ -124,16 +124,16 @@ const ArticlePreview = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 ArticlePreview.propTypes = {
   article: PropTypes.object,
   unfavorite: PropTypes.func,
   favorite: PropTypes.func,
-}
+};
 
 export default connect(
   () => ({}),
   mapDispatchToProps,
-)(ArticlePreview)
+)(ArticlePreview);

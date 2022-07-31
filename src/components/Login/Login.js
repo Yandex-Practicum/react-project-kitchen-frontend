@@ -1,15 +1,15 @@
-import { Link } from 'react-router-dom'
-import React from 'react'
-import { connect } from 'react-redux'
-import ListErrors from '../ListErrors/ListErrors'
-import agent from '../../agent'
+import { Link } from 'react-router-dom';
+import React from 'react';
+import { connect } from 'react-redux';
+import ListErrors from '../ListErrors/ListErrors';
+import agent from '../../agent';
 import {
   UPDATE_FIELD_AUTH,
   LOGIN,
   LOGIN_PAGE_UNLOADED,
-} from '../../constants/actionTypes'
+} from '../../constants/actionTypes';
 
-const mapStateToProps = (state) => ({ ...state.auth })
+const mapStateToProps = (state) => ({ ...state.auth });
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeEmail: (value) =>
@@ -30,28 +30,28 @@ const mapDispatchToProps = (dispatch) => ({
       payload: agent.Auth.login(email, password),
     }),
   onUnload: () => dispatch({ type: LOGIN_PAGE_UNLOADED }),
-})
+});
 
 class Login extends React.Component {
   constructor() {
-    super()
+    super();
     this.changeEmail = (ev) =>
-      this.props.onChangeEmail(ev.target.value)
+      this.props.onChangeEmail(ev.target.value);
     this.changePassword = (ev) =>
-      this.props.onChangePassword(ev.target.value)
+      this.props.onChangePassword(ev.target.value);
     this.submitForm = (email, password) => (ev) => {
-      ev.preventDefault()
-      this.props.onSubmit(email, password)
-    }
+      ev.preventDefault();
+      this.props.onSubmit(email, password);
+    };
   }
 
   componentWillUnmount() {
-    this.props.onUnload()
+    this.props.onUnload();
   }
 
   render() {
-    const { email } = this.props
-    const { password } = this.props
+    const { email } = this.props;
+    const { password } = this.props;
     return (
       <div className='auth-page'>
         <div className='container page'>
@@ -101,11 +101,11 @@ class Login extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Login)
+)(Login);

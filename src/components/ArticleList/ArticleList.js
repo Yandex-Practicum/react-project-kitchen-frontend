@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types'
-import ArticlePreview from '../ArticlePreview/ArticlePreview'
-import ListPagination from '../ListPagination/ListPagination'
-import styles from './articleList.module.scss'
+import PropTypes from 'prop-types';
+import ArticlePreview from '../ArticlePreview/ArticlePreview';
+import ListPagination from '../ListPagination/ListPagination';
+import styles from './articleList.module.scss';
 
 const ArticleList = ({
   articles,
@@ -14,7 +14,7 @@ const ArticleList = ({
       <div className={styles.article_preview}>
         Загрузка...
       </div>
-    )
+    );
   }
 
   if (articles.length === 0) {
@@ -22,7 +22,7 @@ const ArticleList = ({
       <div className={styles.article_preview}>
         Нет статей...
       </div>
-    )
+    );
   }
 
   return (
@@ -40,14 +40,14 @@ const ArticleList = ({
         currentPage={currentPage}
       />
     </div>
-  )
-}
+  );
+};
 
 ArticleList.propTypes = {
   articles: PropTypes.arrayOf(PropTypes.any),
   articlesCount: PropTypes.number,
   pager: PropTypes.func,
   currentPage: PropTypes.number,
-}
+};
 
-export default ArticleList
+export default ArticleList;
