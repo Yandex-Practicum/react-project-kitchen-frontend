@@ -1,14 +1,11 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import currentUserType from '../../utils/types';
 import NotLoggedNav from './NotLoggedNav';
 import LoggedNav from './LoggedNav';
-import headerStyles from './header.module.css';
+import headerStyles from './header.module.scss';
 
-const {
-  container, navLogo, nav, header,
-} = headerStyles;
+const { container, navLogo, nav, header } = headerStyles;
 
 const Header = ({ appName, currentUser }) => (
   <nav className={`navbar navbar-light ${container}`}>

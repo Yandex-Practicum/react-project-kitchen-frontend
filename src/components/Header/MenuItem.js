@@ -1,7 +1,6 @@
-import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import menuItemStyles from './header.module.css';
+import menuItemStyles from './header.module.scss';
 
 const {
   navItem,
@@ -13,13 +12,11 @@ const {
   profileIconActive,
 } = menuItemStyles;
 
-function MenuItem({
-  text, path, icon, isProfileIcon,
-}) {
+function MenuItem({ text, path, icon, isProfileIcon }) {
   const location = useLocation();
 
   return (
-    <>
+    <div>
       <li className={navItem}>
         <NavLink
           to={path}
@@ -31,21 +28,27 @@ function MenuItem({
             <img
               src={icon}
               className={`${profileIcon}${
-                location.pathname === path ? ` ${profileIconActive}` : ''
+                location.pathname === path
+                  ? ` ${profileIconActive}`
+                  : ''
               }`}
+              alt='img'
             />
           ) : (
             <img
               src={icon}
               className={`${menuIcon}${
-                location.pathname === path ? ` ${menuIconActive}` : ''
+                location.pathname === path
+                  ? ` ${menuIconActive}`
+                  : ''
               }`}
+              alt='img'
             />
           )}
           {text}
         </NavLink>
       </li>
-    </>
+    </div>
   );
 }
 MenuItem.propTypes = {

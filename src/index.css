@@ -1,9 +1,14 @@
 @import url('./vendor/fonts/fonts.css');
 
-:root {
-  --accent-color: #3333ff;
+html {
+    height: 100%;
+    padding-bottom: 0;
 }
 
-html {
-  height: 100%;
+:root {
+    --accent-color: #3333FF;
+    --bg-color: #131316;
+    --text-white: #F2F2F3;
+    --text-gray: #8585AD;
+    --bg-secondary: #1C1C21;
 }

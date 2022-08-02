@@ -1,0 +1,3 @@
+*.json
+/components/UI
+/components/ui-library

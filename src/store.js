@@ -1,8 +1,11 @@
 import { applyMiddleware, createStore } from 'redux';
-import { createLogger } from 'redux-logger';
+// import { createLogger } from 'redux-logger';
 import { composeWithDevToolsDevelopmentOnly } from '@redux-devtools/extension';
 import { routerMiddleware } from 'connected-react-router';
-import { promiseMiddleware, localStorageMiddleware } from './middleware';
+import {
+  promiseMiddleware,
+  localStorageMiddleware,
+} from './middleware';
 import reducer from './reducer';
 
 import history from './history';
@@ -12,16 +15,23 @@ const myRouterMiddleware = routerMiddleware(history);
 
 const getMiddleware = () => {
   if (process.env.NODE_ENV === 'production') {
-    return applyMiddleware(myRouterMiddleware, promiseMiddleware, localStorageMiddleware);
+    return applyMiddleware(
+      myRouterMiddleware,
+      promiseMiddleware,
+      localStorageMiddleware,
+    );
   }
   // Enable additional logging in non-production environments.
   return applyMiddleware(
     myRouterMiddleware,
     promiseMiddleware,
     localStorageMiddleware,
-    createLogger(),
+    // createLogger(),
   );
 };
 
-const store = createStore(reducer, composeWithDevToolsDevelopmentOnly(getMiddleware()));
+const store = createStore(
+  reducer,
+  composeWithDevToolsDevelopmentOnly(getMiddleware()),
+);
 export default store;

@@ -1,0 +1,128 @@
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1c1c21;
+  border-radius: 0;
+  min-height: 60px;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.nav {
+  color: white;
+  display: flex;
+}
+
+.navLink {
+  color: #8585ad;
+  padding-top: 0.425rem;
+  padding-bottom: 0.425rem;
+  display: block;
+  font-family: 'JetBrains Mono', sans-serif;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: color 0.4s ease-in;
+
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1140px;
+  width: 100%;
+  align-items: center;
+}
+
+.navItem {
+  padding: 4px 16px;
+  box-sizing: border-box;
+}
+
+.navItem:last-of-type {
+  padding: 4px 0 4px 16px;
+}
+
+.navLink:active {
+  color: #f2f2f3;
+  text-decoration: none;
+}
+
+.navLink:hover {
+  color: #f2f2f3;
+  text-decoration: none;
+  transition: color 0.4s ease-in;
+
+}
+
+.navLink:hover>.menuIcon {
+  filter: invert(97%) sepia(16%) saturate(8%) hue-rotate(181deg) brightness(99%) contrast(93%);
+  transition: filter 0.4s ease-in;
+
+}
+
+.navLink:hover>.profileIcon {
+  filter: invert(97%) sepia(16%) saturate(8%) hue-rotate(181deg) brightness(99%) contrast(93%);
+}
+
+.navLinkSelected {
+  color: #f2f2f3 !important;
+  text-decoration: none !important;
+}
+
+.navLogo {
+  color: #f2f2f3 !important;
+  text-decoration: none !important;
+  font-size: 24px;
+  font-family: 'Exo 2';
+  font-weight: 700;
+  padding-top: 0;
+  margin-right: 2rem;
+  text-shadow: 0 4px 32px var(--accent-color), 0 0 8px var(--accent-color);
+}
+
+.navLogo:hover {
+  cursor: pointer;
+  color: #f2f2f3 !important;
+  opacity: 0.7;
+  text-decoration: none !important;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.navLogo:active {
+  color: #f2f2f3 !important;
+  text-decoration: none !important;
+}
+
+.menuIconActive,
+.profileIconActive {
+  filter: invert(97%) sepia(16%) saturate(8%) hue-rotate(181deg) brightness(99%) contrast(93%) !important;
+}
+
+.menuIcon {
+  filter: invert(54%) sepia(12%) saturate(778%) hue-rotate(201deg) brightness(97%) contrast(96%);
+  padding: 0;
+  margin: 0 8px 0 0;
+  transition: filter 0.4s ease-in;
+}
+
+.profileIcon {
+  padding: 0;
+  margin: 0 8px 0 0;
+}
+
+@media screen and (max-width: 992px) {
+  .header {
+    max-width: 940px;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .header {
+    max-width: 720px;
+  }
+}
