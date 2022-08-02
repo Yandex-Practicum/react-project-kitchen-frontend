@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useIconParams } from '../ui-utils/hooks';
-import IconWrapper from './IconWrapper';
+import useIconParams from './utils/hook';
+import IconWrapper from './utils/IconWrapper';
 
-const AlertIcon = ({
+const LoginIcon = ({
   onClick, size = 'default', color = 'primary', className = '',
 }) => {
   const icon = useIconParams({
@@ -21,23 +21,28 @@ const AlertIcon = ({
       onClick={icon.onClick}
     >
       <path
-        d='M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z'
+        d='M15 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H15'
         stroke={icon.color}
         strokeWidth='2'
         strokeLinecap='round'
         strokeLinejoin='round'
       />
-      <path d='M12 8V12' stroke={icon.color} strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
-      <path d='M12 16H12.01' stroke={icon.color} strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+      <path
+        d='M10 17L15 12M15 12L10 7M15 12H3'
+        stroke={icon.color}
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
     </IconWrapper>
   );
 };
 
-AlertIcon.propTypes = {
+LoginIcon.propTypes = {
   size: PropTypes.string,
   color: PropTypes.string,
   className: PropTypes.string,
   onClick: PropTypes.func,
 };
 
-export default AlertIcon;
+export default LoginIcon;

@@ -1,6 +1,7 @@
 @import url('./vendor/fonts/fonts.css');
 
 html {
+    height: 100%;
     padding-bottom: 0;
 }
 

@@ -4,10 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import { push } from 'connected-react-router';
 import agent from '../../agent';
 import Header from '../Header/Header';
-import {
-  APP_LOAD,
-  REDIRECT,
-} from '../../constants/actionTypes';
+import { APP_LOAD, REDIRECT } from '../../constants/actionTypes';
 import Article from '../Pages/Article';
 import Editor from '../Editor/Editor';
 import Home from '../Pages/Home';
@@ -26,13 +23,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onLoad: (payload, token) =>
-    dispatch({
-      type: APP_LOAD,
-      payload,
-      token,
-      skipTracking: true,
-    }),
+  onLoad: (payload, token) => dispatch({
+    type: APP_LOAD, payload, token, skipTracking: true,
+  }),
   onRedirect: () => dispatch({ type: REDIRECT }),
 });
 
@@ -51,10 +44,7 @@ class App extends React.Component {
       agent.setToken(token);
     }
 
-    this.props.onLoad(
-      token ? agent.Auth.current() : null,
-      token,
-    );
+    this.props.onLoad(token ? agent.Auth.current() : null, token);
   }
 
   render() {
@@ -67,24 +57,15 @@ class App extends React.Component {
           />
 
           <Switch>
-            <Route exact path='/' component={Home} />
-            <Route path='/login' component={Login} />
-            <Route path='/register' component={Register} />
-            <Route
-              path='/editor/:slug'
-              component={Editor}
-            />
-            <Route path='/editor' component={Editor} />
-            <Route
-              path='/article/:id'
-              component={Article}
-            />
-            <Route path='/settings' component={Settings} />
-            <Route
-              path='/@:username/favorites'
-              component={ProfileFavorites}
-            />
-            <Route path='/@:username' component={Profile} />
+            <Route exact path="/" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="/editor/:slug" component={Editor} />
+            <Route path="/editor" component={Editor} />
+            <Route path="/article/:id" component={Article} />
+            <Route path="/settings" component={Settings} />
+            <Route path="/@:username/favorites" component={ProfileFavorites} />
+            <Route path="/@:username" component={Profile} />
           </Switch>
         </div>
       );
@@ -100,7 +81,4 @@ class App extends React.Component {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
