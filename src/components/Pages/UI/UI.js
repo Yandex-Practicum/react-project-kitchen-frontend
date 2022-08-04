@@ -23,6 +23,7 @@ import {
   PlusIcon,
   ShowIcon,
   TrashIcon,
+  MobileMenuIcon
 } from '../../ui-library/Icons';
 
 import styleUI from './UI.module.scss';
@@ -95,6 +96,11 @@ const UI = () => (
         <div>
           <TrashIcon /> <h4 className={styleUI.h4}>&lt;TrashIcon /&gt;</h4>
         </div>
+        <div>
+          <MobileMenuIcon /> <h4 className={styleUI.h4}>&lt;MobileMenuIcon /&gt;</h4>
+        </div>
+
+        
       </div>
       <div className={styleUI.group_layout}>
         <AlertIcon onClick={true} />
@@ -117,6 +123,8 @@ const UI = () => (
         <PlusIcon onClick={true} />
         <ShowIcon onClick={true} />
         <TrashIcon onClick={true} />
+        <MobileMenuIcon onClick={true} />
+        
         <h4 className={styleUI.h4}>onClick=&apos;Some function&apos;</h4>
       </div>
       <div className={styleUI.group_layout}>
@@ -140,6 +148,7 @@ const UI = () => (
         <PlusIcon color='secondary' />
         <ShowIcon color='secondary' />
         <TrashIcon color='secondary' />
+        <MobileMenuIcon color='secondary' />
         <h4 className={styleUI.h4}>color=&apos;secondary&apos;</h4>
       </div>
       <div className={styleUI.group_layout}>
@@ -163,6 +172,7 @@ const UI = () => (
         <PlusIcon color='alert' />
         <ShowIcon color='alert' />
         <TrashIcon color='alert' />
+        <MobileMenuIcon color='alert' />
         <h4 className={styleUI.h4}>color=&apos;alert&apos;</h4>
       </div>
     </div>

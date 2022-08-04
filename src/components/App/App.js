@@ -8,12 +8,13 @@ import { APP_LOAD, REDIRECT } from '../../constants/actionTypes';
 import Article from '../Pages/Article';
 import Editor from '../Editor/Editor';
 import Home from '../Pages/Home';
-import Login from '../Login/Login';
+import Login from '../Pages/Login/Login';
 import Profile from '../Profile/Profile';
 import ProfileFavorites from '../ProfileFavorites/ProfileFavorites';
-import Register from '../Register/Register';
+import Register from '../Pages/Register/Register';
 import Settings from '../Settings/Settings';
 import store from '../../store';
+import UI from '../Pages/UI/UI';
 
 const mapStateToProps = (state) => ({
   appLoaded: state.common.appLoaded,
@@ -23,16 +24,20 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onLoad: (payload, token) => dispatch({
-    type: APP_LOAD, payload, token, skipTracking: true,
-  }),
+  onLoad: (payload, token) =>
+    dispatch({
+      type: APP_LOAD,
+      payload,
+      token,
+      skipTracking: true,
+    }),
   onRedirect: () => dispatch({ type: REDIRECT }),
 });
 
 class App extends React.Component {
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.redirectTo) {
-      this.context.router.replace(nextProps.redirectTo);
+      this.context?.router?.replace(nextProps.redirectTo);
       store.dispatch(push(nextProps.redirectTo));
       this.props.onRedirect();
     }
@@ -51,31 +56,26 @@ class App extends React.Component {
     if (this.props.appLoaded) {
       return (
         <div>
-          <Header
-            appName={this.props.appName}
-            currentUser={this.props.currentUser}
-          />
+          <Header appName={this.props.appName} currentUser={this.props.currentUser} />
 
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-            <Route path="/editor/:slug" component={Editor} />
-            <Route path="/editor" component={Editor} />
-            <Route path="/article/:id" component={Article} />
-            <Route path="/settings" component={Settings} />
-            <Route path="/@:username/favorites" component={ProfileFavorites} />
-            <Route path="/@:username" component={Profile} />
+            <Route exact path='/' component={Home} />
+            <Route path='/login' component={Login} />
+            <Route path='/register' component={Register} />
+            <Route path='/editor/:slug' component={Editor} />
+            <Route path='/editor' component={Editor} />
+            <Route path='/article/:id' component={Article} />
+            <Route path='/settings' component={Settings} />
+            <Route path='/@:username/favorites' component={ProfileFavorites} />
+            <Route path='/@:username' component={Profile} />
+            <Route path='/ui' component={UI} />
           </Switch>
         </div>
       );
     }
     return (
       <div>
-        <Header
-          appName={this.props.appName}
-          currentUser={this.props.currentUser}
-        />
+        <Header appName={this.props.appName} currentUser={this.props.currentUser} />
       </div>
     );
   }

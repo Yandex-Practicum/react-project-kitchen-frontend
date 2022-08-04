@@ -18,6 +18,7 @@ import PaperclipIcon from './PaperclipIcon';
 import PlusIcon from './PlusIcon';
 import ShowIcon from './ShowIcon';
 import TrashIcon from './TrashIcon';
+import MobileMenuIcon from './MobileMenuIcon';
 
 export {
   AlertIcon,
@@ -40,4 +41,5 @@ export {
   PlusIcon,
   ShowIcon,
   TrashIcon,
+  MobileMenuIcon
 };
