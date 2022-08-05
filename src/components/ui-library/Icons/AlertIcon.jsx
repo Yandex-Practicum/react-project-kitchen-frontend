@@ -1,11 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import useIconParams from './utils/hook';
 import IconWrapper from './utils/IconWrapper';
 
-const ShowIcon = ({
-  onClick, size = 'default', color = 'primary', className = '',
-}) => {
+const AlertIcon = ({ onClick, size = 'default', color = 'primary', className = '' }) => {
   const icon = useIconParams({
     onClick,
     size,
@@ -21,14 +18,21 @@ const ShowIcon = ({
       onClick={icon.onClick}
     >
       <path
-        d='M1.31409 12C1.31409 12 5.31409 4 12.3141 4C19.3141 4 23.3141 12 23.3141 12C23.3141 12 19.3141 20 12.3141 20C5.31409 20 1.31409 12 1.31409 12Z'
+        d='M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z'
         stroke={icon.color}
         strokeWidth='2'
         strokeLinecap='round'
         strokeLinejoin='round'
       />
       <path
-        d='M12.3141 15C13.9709 15 15.3141 13.6569 15.3141 12C15.3141 10.3431 13.9709 9 12.3141 9C10.6572 9 9.31409 10.3431 9.31409 12C9.31409 13.6569 10.6572 15 12.3141 15Z'
+        d='M12 8V12'
+        stroke={icon.color}
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+      <path
+        d='M12 16H12.01'
         stroke={icon.color}
         strokeWidth='2'
         strokeLinecap='round'
@@ -38,11 +42,11 @@ const ShowIcon = ({
   );
 };
 
-ShowIcon.propTypes = {
+AlertIcon.propTypes = {
   size: PropTypes.string,
   color: PropTypes.string,
   className: PropTypes.string,
   onClick: PropTypes.func,
 };
 
-export default ShowIcon;
+export default AlertIcon;

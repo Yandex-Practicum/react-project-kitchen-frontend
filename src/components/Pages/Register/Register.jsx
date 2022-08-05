@@ -1,18 +1,15 @@
-import React from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import agent from '../../../agent';
 import { REGISTER, SET_API_MESSAGE } from '../../../constants/actionTypes';
-import { useFormValidation } from '../../../hooks/useFormValidation';
+import useFormValidation from '../../../hooks/useFormValidation';
 import styles from '../../AuthForm/authForm.module.scss';
-import { useState } from 'react';
 import AuthForm from '../../AuthForm/AuthForm';
 import HideIcon from '../../ui-library/Icons/HideIcon';
 import ShowIcon from '../../ui-library/Icons/ShowIcon';
 import AlertIcon from '../../ui-library/Icons/AlertIcon';
 
-const { error, input, label, inputarea, form__icon, input_invalid } = styles;
-
-function Register(props) {
+const Register = () => {
   const dispatch = useDispatch();
   const [isPassShownLogin, setIsPassShownLogin] = useState(true);
 
@@ -24,18 +21,20 @@ function Register(props) {
 
   const { email, password, name } = values;
 
-  function toggleShowPass(e) {
+  const toggleShowPass = (e) => {
     e.preventDefault();
     setIsPassShownLogin(!isPassShownLogin);
-  }
+  };
 
-  function submitRegister() {
+  const submitRegister = () => {
     if (isValid) {
       dispatch({ type: REGISTER, payload: agent.Auth.register(name, email, password) });
     } else {
       dispatch({ type: SET_API_MESSAGE, payload: ['Заполните все поля формы верно'] });
     }
-  }
+  };
+
+  const showPassIcon = isPassShownLogin ? <ShowIcon /> : <HideIcon />;
 
   return (
     <AuthForm
@@ -47,12 +46,12 @@ function Register(props) {
       isFormValid={isValid}
     >
       <fieldset className='form-group'>
-        <label htmlFor='name' className={label}>
+        <label htmlFor='name' className={styles.label}>
           Имя пользователя
         </label>
-        <div className={inputarea}>
+        <div className={styles.inputarea}>
           <input
-            className={`${input} ${errors.name ? input_invalid : ''}`}
+            className={`${styles.input} ${errors.name ? styles.input_invalid : ''}`}
             type='text'
             placeholder='Имя пользователя'
             name='name'
@@ -62,18 +61,18 @@ function Register(props) {
             minLength='2'
             maxLength='25'
           />
-          <p className={error}>{errors.name}</p>
-          <div className={form__icon}>{errors.name ? <AlertIcon color='alert' /> : <></>}</div>
+          <p className={styles.error}>{errors.name}</p>
+          <div className={styles.form__icon}>{errors.name ? <AlertIcon color='alert' /> : ''}</div>
         </div>
       </fieldset>
 
       <fieldset className='form-group'>
-        <label htmlFor='email' className={label}>
+        <label htmlFor='email' className={styles.label}>
           Email
         </label>
-        <div className={inputarea}>
+        <div className={styles.inputarea}>
           <input
-            className={`${input} ${errors.email ? input_invalid : ''}`}
+            className={`${styles.input} ${errors.email ? styles.input_invalid : ''}`}
             type='email'
             placeholder='Email'
             name='email'
@@ -83,18 +82,18 @@ function Register(props) {
             minLength='2'
             maxLength='30'
           />
-          <p className={error}>{errors.email}</p>
-          <div className={form__icon}>{errors.email ? <AlertIcon color='alert' /> : <></>}</div>
+          <p className={styles.error}>{errors.email}</p>
+          <div className={styles.form__icon}>{errors.email ? <AlertIcon color='alert' /> : ''}</div>
         </div>
       </fieldset>
 
       <fieldset className='form-group'>
-        <label htmlFor='password' className={label}>
+        <label htmlFor='password' className={styles.label}>
           Пароль
         </label>
-        <div className={inputarea}>
+        <div className={styles.inputarea}>
           <input
-            className={`${input} ${errors.password ? input_invalid : ''}`}
+            className={`${styles.input} ${errors.password ? styles.input_invalid : ''}`}
             type={isPassShownLogin ? 'password' : 'text'}
             placeholder='Пароль'
             name='password'
@@ -104,20 +103,14 @@ function Register(props) {
             minLength='2'
             maxLength='25'
           />
-          <div className={form__icon} onClick={(e) => toggleShowPass(e)}>
-            {errors.password ? (
-              <AlertIcon color='alert' />
-            ) : isPassShownLogin ? (
-              <ShowIcon />
-            ) : (
-              <HideIcon />
-            )}
+          <div className={styles.form__icon} onClick={(e) => toggleShowPass(e)}>
+            {errors.password ? <AlertIcon color='alert' /> : showPassIcon}
           </div>
         </div>
-        <p className={error}>{errors.password}</p>
+        <p className={styles.error}>{errors.password}</p>
       </fieldset>
     </AuthForm>
   );
-}
+};
 
 export default Register;

@@ -1,23 +1,12 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import currentUserType from '../../utils/types';
 import NotLoggedNav from './NotLoggedNav';
 import LoggedNav from './LoggedNav';
-import headerStyles from './header.module.scss';
-import MobileMenuIcon from '../ui-library/Icons/MobileMenuIcon';
+import styles from './header.module.scss';
+import MenuIcon from '../ui-library/Icons/MenuIcon';
 import { TOGGLE_MOBILE_MENU } from '../../constants/actionTypes';
-import { useDispatch, useSelector } from 'react-redux';
-
-const {
-  container,
-  navLogo,
-  nav,
-  header,
-  mobileNav,
-  mobileNav_opened,
-  button_type_mobile,
-  header__mobile,
-} = headerStyles;
 
 const Header = ({ appName, currentUser }) => {
   const currentNav = currentUser ? <LoggedNav currentUser={currentUser} /> : <NotLoggedNav />;
@@ -26,27 +15,29 @@ const Header = ({ appName, currentUser }) => {
 
   const isMobileMenuOpen = useSelector((state) => state.header.isMobileMenuOpen);
 
-  function toggleMobileMenu() {
+  const toggleMobileMenu = () => {
     dispatch({ type: TOGGLE_MOBILE_MENU, payload: !isMobileMenuOpen });
-  }
+  };
 
   return (
     <>
-      <nav className={`navbar navbar-light ${container}`}>
-        <div className={`container ${header}`}>
-          <Link to='/' className={navLogo}>
+      <nav className={`navbar navbar-light ${styles.container}`}>
+        <div className={`container ${styles.header}`}>
+          <Link to='/' className={styles.navLogo}>
             {appName}
           </Link>
 
-          <ul className={`nav navbar-nav pull-xs-right ${nav}`}>{currentNav}</ul>
-          <button onClick={toggleMobileMenu} className={button_type_mobile}>
-            <MobileMenuIcon />
+          <ul className={`nav navbar-nav pull-xs-right ${styles.nav}`}>{currentNav}</ul>
+          <button onClick={toggleMobileMenu} className={styles.button_type_mobile} type='button'>
+            <MenuIcon />
           </button>
         </div>
       </nav>
 
-      <div className={`${header__mobile} ${isMobileMenuOpen ? mobileNav_opened : ''}`}>
-        <ul className={mobileNav}>{currentNav}</ul>
+      <div
+        className={`${styles.header__mobile} ${isMobileMenuOpen ? styles.mobileNav_opened : ''}`}
+      >
+        <ul className={styles.mobileNav}>{currentNav}</ul>
       </div>
     </>
   );

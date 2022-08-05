@@ -1,11 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import useIconParams from './utils/hook';
 import IconWrapper from './utils/IconWrapper';
 
-const LikeIcon = ({
-  onClick, size = 'default', color = 'primary', className = '',
-}) => {
+const DislikeIcon = ({ onClick, size = 'default', color = 'primary', className = '' }) => {
   const icon = useIconParams({
     onClick,
     size,
@@ -31,11 +28,11 @@ const LikeIcon = ({
   );
 };
 
-LikeIcon.propTypes = {
+DislikeIcon.propTypes = {
   size: PropTypes.string,
   color: PropTypes.string,
   className: PropTypes.string,
   onClick: PropTypes.func,
 };
 
-export default LikeIcon;
+export default DislikeIcon;

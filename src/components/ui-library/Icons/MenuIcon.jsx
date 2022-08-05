@@ -1,9 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import useIconParams from './utils/hook';
 import IconWrapper from './utils/IconWrapper';
 
-const MobileMenuIcon = ({ onClick, size = 'default', color = 'primary', className = '' }) => {
+const MenuIcon = ({ onClick, size = 'default', color = 'primary', className = '' }) => {
   const icon = useIconParams({
     onClick,
     size,
@@ -28,14 +27,14 @@ const MobileMenuIcon = ({ onClick, size = 'default', color = 'primary', classNam
       <path
         d='M6 6H20M4 12H20M4 18H20'
         stroke={icon.color}
-        strokeWidth='4'
+        strokeWidth='2'
         strokeLinecap='round'
         strokeLinejoin='round'
       />
       <path
         d='M4 6H20M4 12H20M4 18H20'
         stroke='red'
-        strokeWidth='5'
+        strokeWidth='2'
         strokeLinecap='round'
         strokeLinejoin='round'
       />
@@ -43,11 +42,11 @@ const MobileMenuIcon = ({ onClick, size = 'default', color = 'primary', classNam
   );
 };
 
-MobileMenuIcon.propTypes = {
+MenuIcon.propTypes = {
   size: PropTypes.string,
   color: PropTypes.string,
   className: PropTypes.string,
   onClick: PropTypes.func,
 };
 
-export default MobileMenuIcon;
+export default MenuIcon;

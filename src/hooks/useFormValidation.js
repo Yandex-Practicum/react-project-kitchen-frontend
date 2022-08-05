@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { UPDATE_FIELD_AUTH } from '../constants/actionTypes';
 
-export function useFormValidation(initialState) {
+function useFormValidation(initialState) {
   const dispatch = useDispatch();
   const [values, setValues] = useState(initialState);
   const [errors, setErrors] = useState({});
@@ -39,3 +39,5 @@ export function useFormValidation(initialState) {
     setIsValid,
   };
 }
+
+export default useFormValidation;

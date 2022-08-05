@@ -1,11 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import useIconParams from './utils/hook';
 import IconWrapper from './utils/IconWrapper';
 
-const HeartIcon = ({
-  onClick, size = 'default', color = 'primary', className = '',
-}) => {
+const HeartIcon = ({ onClick, size = 'default', color = 'primary', className = '' }) => {
   const icon = useIconParams({
     size,
     color,

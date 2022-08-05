@@ -1,4 +1,3 @@
-import React from 'react';
 import Button from '../../ui-library/Buttons/Button';
 import NavButton from '../../ui-library/Buttons/NavButton';
 import TextButton from '../../ui-library/Buttons/TextButton';
@@ -23,7 +22,7 @@ import {
   PlusIcon,
   ShowIcon,
   TrashIcon,
-  MobileMenuIcon
+  MenuIcon,
 } from '../../ui-library/Icons';
 
 import styleUI from './UI.module.scss';
@@ -97,34 +96,32 @@ const UI = () => (
           <TrashIcon /> <h4 className={styleUI.h4}>&lt;TrashIcon /&gt;</h4>
         </div>
         <div>
-          <MobileMenuIcon /> <h4 className={styleUI.h4}>&lt;MobileMenuIcon /&gt;</h4>
+          <MenuIcon /> <h4 className={styleUI.h4}>&lt;MenuIcon /&gt;</h4>
         </div>
-
-        
       </div>
       <div className={styleUI.group_layout}>
-        <AlertIcon onClick={true} />
-        <CheckIcon onClick={true} />
-        <ChevronLeftIcon onClick={true} />
-        <ChevronRightIcon onClick={true} />
-        <CloseIcon onClick={true} />
-        <CopyIcon onClick={true} />
-        <DislikeIcon onClick={true} />
-        <EditIcon onClick={true} />
-        <GearIcon onClick={true} />
-        <HeartIcon onClick={true} />
-        <HeartIconFilled onClick={true} />
-        <HideIcon onClick={true} />
-        <HomeIcon onClick={true} />
-        <LikeIcon onClick={true} />
-        <LoginIcon onClick={true} />
-        <MinusIcon onClick={true} />
-        <PaperclipIcon onClick={true} />
-        <PlusIcon onClick={true} />
-        <ShowIcon onClick={true} />
-        <TrashIcon onClick={true} />
-        <MobileMenuIcon onClick={true} />
-        
+        <AlertIcon onClick />
+        <CheckIcon onClick />
+        <ChevronLeftIcon onClick />
+        <ChevronRightIcon onClick />
+        <CloseIcon onClick />
+        <CopyIcon onClick />
+        <DislikeIcon onClick />
+        <EditIcon onClick />
+        <GearIcon onClick />
+        <HeartIcon onClick />
+        <HeartIconFilled onClick />
+        <HideIcon onClick />
+        <HomeIcon onClick />
+        <LikeIcon onClick />
+        <LoginIcon onClick />
+        <MinusIcon onClick />
+        <PaperclipIcon onClick />
+        <PlusIcon onClick />
+        <ShowIcon onClick />
+        <TrashIcon onClick />
+        <MenuIcon onClick />
+
         <h4 className={styleUI.h4}>onClick=&apos;Some function&apos;</h4>
       </div>
       <div className={styleUI.group_layout}>
@@ -148,7 +145,7 @@ const UI = () => (
         <PlusIcon color='secondary' />
         <ShowIcon color='secondary' />
         <TrashIcon color='secondary' />
-        <MobileMenuIcon color='secondary' />
+        <MenuIcon color='secondary' />
         <h4 className={styleUI.h4}>color=&apos;secondary&apos;</h4>
       </div>
       <div className={styleUI.group_layout}>
@@ -172,7 +169,7 @@ const UI = () => (
         <PlusIcon color='alert' />
         <ShowIcon color='alert' />
         <TrashIcon color='alert' />
-        <MobileMenuIcon color='alert' />
+        <MenuIcon color='alert' />
         <h4 className={styleUI.h4}>color=&apos;alert&apos;</h4>
       </div>
     </div>
@@ -183,23 +180,23 @@ const UI = () => (
         children = &apos;Кнопка&apos;,
       </p>
       <div className={styleUI.group_layout}>
-        <Button></Button>
+        <Button />
         <h4 className={styleUI.h4}>&lt;Button /&gt;</h4>
       </div>
       <div className={styleUI.group_layout}>
-        <Button type='outline_alert'></Button>
+        <Button type='outline_alert' />
         <h4 className={styleUI.h4}>&lt;Button type=&apos;outline_alert&apos; /&gt;</h4>
       </div>
       <div className={styleUI.group_layout}>
-        <Button disabled></Button>
+        <Button disabled />
         <h4 className={styleUI.h4}>&lt;Button disabled /&gt;</h4>
       </div>
       <div className={styleUI.group_layout}>
-        <Button icon={<CheckIcon />}></Button>
+        <Button icon={<CheckIcon />} />
         <h4 className={styleUI.h4}>&lt;Button icon=&#123;&lt;CheckIcon /&gt;&#125; /&gt;</h4>
       </div>
       <div className={styleUI.group_layout}>
-        <Button type='outline_alert' icon={<TrashIcon />}></Button>
+        <Button icon={<TrashIcon />} type='outline_alert' />
         <h4 className={styleUI.h4}>
           &lt;Button type=&apos;outline_alert&apos; icon=&#123;&lt;TrashIcon /&gt;&#125; /&gt;
         </h4>
@@ -212,21 +209,21 @@ const UI = () => (
         &apos;Кнопка&apos;,
       </p>
       <div className={styleUI.group_layout}>
-        <NavButton></NavButton>
+        <NavButton />
         <h4 className={styleUI.h4}>&lt;NavButton to=&apos;/&apos; /&gt;</h4>
       </div>
       <div className={styleUI.group_layout}>
-        <NavButton to='/ui'></NavButton>
+        <NavButton to='/ui' />
         <h4 className={styleUI.h4}>&lt;NavButton to=&apos;/ui&apos; /&gt;</h4>
       </div>
       <div className={styleUI.group_layout}>
-        <NavButton icon={<HomeIcon />}></NavButton>
+        <NavButton icon={<HomeIcon />} />
         <h4 className={styleUI.h4}>
           &lt;NavButton to=&apos;/&apos; icon=&#123;&lt;HomeIcon /&gt;&#125; /&gt;
         </h4>
       </div>
       <div className={styleUI.group_layout}>
-        <NavButton to='/ui' icon={<HomeIcon />}></NavButton>
+        <NavButton icon={<HomeIcon />} to='/ui' />
         <h4 className={styleUI.h4}>
           &lt;NavButton to=&apos;/ui&apos; icon=&#123;&lt;HomeIcon /&gt;&#125; /&gt;
         </h4>
@@ -238,7 +235,7 @@ const UI = () => (
         onClick, className = &apos;&apos;, children = &apos;Кнопка&apos;
       </p>
       <div className={styleUI.group_layout}>
-        <TextButton></TextButton>
+        <TextButton />
         <h4 className={styleUI.h4}>&lt;TextButton /&gt;</h4>
       </div>
     </div>

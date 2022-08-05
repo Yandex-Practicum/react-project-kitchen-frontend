@@ -1,54 +1,42 @@
 import { NavLink, useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import menuItemStyles from './header.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import styles from './header.module.scss';
 import { TOGGLE_MOBILE_MENU } from '../../constants/actionTypes';
 
-const {
-  navItem,
-  navLink,
-  navLinkSelected,
-  menuIcon,
-  menuIconActive,
-  profileIcon,
-  profileIconActive,
-} = menuItemStyles;
-
-function MenuItem({ text, path, icon, isProfileIcon }) {
+const MenuItem = ({ text, icon: Icon, path, isProfileIcon }) => {
   const location = useLocation();
   const dispatch = useDispatch();
 
   const isMobileMenuOpen = useSelector((state) => state.header.isMobileMenuOpen);
 
-  function closeMobileMenu() {
+  const closeMobileMenu = () => {
     if (isMobileMenuOpen) {
       dispatch({ type: TOGGLE_MOBILE_MENU, payload: !isMobileMenuOpen });
     }
-  }
+  };
 
   return (
     <div>
-      <li className={navItem}>
+      <li className={styles.navItem}>
         <NavLink
-          to={path}
+          activeClassName={styles.navLinkSelected}
+          className={styles.navLink}
           exact={path === '/'}
-          className={navLink}
-          activeClassName={navLinkSelected}
           onClick={closeMobileMenu}
+          to={path}
         >
           {isProfileIcon ? (
-            <img
-              src={icon}
-              className={`${profileIcon}${
-                location.pathname === path ? ` ${profileIconActive}` : ''
+            <Icon
+              className={`${styles.profileIcon}${
+                location.pathname === path ? ` ${styles.profileIconActive}` : ''
               }`}
-              alt='img'
             />
           ) : (
-            <img
-              src={icon}
-              className={`${menuIcon}${location.pathname === path ? ` ${menuIconActive}` : ''}`}
-              alt='img'
+            <Icon
+              className={`${styles.menuIcon}${
+                location.pathname === path ? ` ${styles.menuIconActive}` : ''
+              }`}
             />
           )}
           {text}
@@ -56,11 +44,11 @@ function MenuItem({ text, path, icon, isProfileIcon }) {
       </li>
     </div>
   );
-}
+};
 MenuItem.propTypes = {
   text: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.func.isRequired,
   isProfileIcon: PropTypes.bool,
 };
 

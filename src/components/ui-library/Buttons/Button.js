@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
@@ -36,7 +35,7 @@ Button.propTypes = {
   onClick: PropTypes.func,
   type: PropTypes.string,
   disabled: PropTypes.bool,
-  active: PropTypes.bool,
+  // active: PropTypes.bool, тут надо кнопке дописать active в начальный стейт?
   className: PropTypes.string,
 };
 

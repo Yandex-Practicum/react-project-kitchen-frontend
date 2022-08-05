@@ -1,11 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import useIconParams from './utils/hook';
 import IconWrapper from './utils/IconWrapper';
 
-const CheckIcon = ({
-  onClick, size = 'default', color = 'primary', className = '',
-}) => {
+const MinusIcon = ({ onClick, size = 'default', color = 'primary', className = '' }) => {
   const icon = useIconParams({
     onClick,
     size,
@@ -21,7 +18,7 @@ const CheckIcon = ({
       onClick={icon.onClick}
     >
       <path
-        d='M20 6L9 17L4 12'
+        d='M5 12H19'
         stroke={icon.color}
         strokeWidth='2'
         strokeLinecap='round'
@@ -31,11 +28,11 @@ const CheckIcon = ({
   );
 };
 
-CheckIcon.propTypes = {
+MinusIcon.propTypes = {
   size: PropTypes.string,
   color: PropTypes.string,
   className: PropTypes.string,
   onClick: PropTypes.func,
 };
 
-export default CheckIcon;
+export default MinusIcon;
