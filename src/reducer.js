@@ -8,6 +8,7 @@ import editor from './reducers/editor';
 import home from './reducers/home';
 import profile from './reducers/profile';
 import settings from './reducers/settings';
+import header from './reducers/header';
 import history from './history';
 
 export default combineReducers({
@@ -19,5 +20,6 @@ export default combineReducers({
   home,
   profile,
   settings,
+  header,
   router: connectRouter(history),
 });

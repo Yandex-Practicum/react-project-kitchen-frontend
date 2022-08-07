@@ -1,13 +1,10 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
 import styleButtons from './Buttons.module.scss';
 
-const NavButton = ({
-  icon, to = '/', exact = true, className = '', children = 'Кнопка',
-}) => (
+const NavButton = ({ icon, to = '/', exact = true, className = '', children = 'Кнопка' }) => (
   <NavLink
     to={to}
     exact={exact}
@@ -22,7 +19,7 @@ const NavButton = ({
 NavButton.propTypes = {
   children: PropTypes.node,
   icon: PropTypes.node,
-  onClick: PropTypes.func,
+  // onClick: PropTypes.func, тут надо в начальный стейт дописать будет эту функцию
   to: PropTypes.string,
   exact: PropTypes.bool,
   className: PropTypes.string,
