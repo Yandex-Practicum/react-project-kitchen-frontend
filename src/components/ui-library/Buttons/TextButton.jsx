@@ -1,18 +1,18 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
-import styleButtons from './Buttons.module.scss';
+import styles from './Buttons.module.scss';
 
 const TextButton = ({ onClick, className = '', children = 'Кнопка' }) => (
-  <button type='button' className={clsx(className, styleButtons.text_button)} onClick={onClick}>
+  <button className={clsx(className, styles.text_button)} onClick={onClick} type='button'>
     {children}
   </button>
 );
 
 TextButton.propTypes = {
   children: PropTypes.node,
-  onClick: PropTypes.func,
   className: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default TextButton;

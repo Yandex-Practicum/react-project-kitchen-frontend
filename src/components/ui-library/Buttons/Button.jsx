@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
-import styleButtons from './Buttons.module.scss';
+import styles from './Buttons.module.scss';
 
 const Button = ({
   icon,
@@ -12,16 +12,16 @@ const Button = ({
   children = 'Кнопка',
 }) => {
   const types = {
-    primary: styleButtons.primary,
-    outline_alert: styleButtons.outline_alert,
+    primary: styles.primary,
+    outline_alert: styles.outline_alert,
   };
 
   return (
     <button
-      type='button'
-      className={clsx(className, styleButtons.button, types[type] ? types[type] : '')}
+      className={clsx(className, styles.button, types[type] ? types[type] : '')}
       disabled={disabled}
       onClick={onClick}
+      type='button'
     >
       {icon && <icon.type />}
       <span>{children}</span>
@@ -31,12 +31,11 @@ const Button = ({
 
 Button.propTypes = {
   children: PropTypes.node,
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
   icon: PropTypes.node,
   onClick: PropTypes.func,
   type: PropTypes.string,
-  disabled: PropTypes.bool,
-  // active: PropTypes.bool, тут надо кнопке дописать active в начальный стейт?
-  className: PropTypes.string,
 };
 
 export default Button;
