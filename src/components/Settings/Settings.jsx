@@ -1,12 +1,34 @@
-import { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import clsx from 'clsx';
 import ListErrors from '../ListErrors/ListErrors';
 import agent from '../../agent';
-import { SETTINGS_SAVED, SETTINGS_PAGE_UNLOADED, LOGOUT } from '../../constants/actionTypes';
+import { SETTINGS_SAVED, LOGOUT } from '../../constants/actionTypes';
 import useForm from '../../hooks/useForm';
+import TextField from '../ui-library/TextField/TextField';
+import Button from '../ui-library/Buttons/Button/Button';
+import TextArea from '../ui-library/TextArea/TextArea';
 
-const SettingsForm = ({ currentUser, onSubmitForm }) => {
-  const [values, handleChange, setValues] = useForm({
+import styles from './Settings.module.scss';
+import { HideIcon, ShowIcon } from '../ui-library/Icons';
+import TextButton from '../ui-library/Buttons/TextButton/TextButton';
+
+const Settings = () => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const { currentUser, errors, inProgress } = useSelector((store) => ({
+    currentUser: store.common.currentUser,
+    errors: store.settings.errors,
+    inProgress: store.settings.inProgress,
+  }));
+
+  const dispatch = useDispatch();
+
+  const onClickLogout = () => dispatch({ type: LOGOUT });
+
+  // const onUnload = () => dispatch({ type: SETTINGS_PAGE_UNLOADED });
+
+  const { values, handleChange, setValues } = useForm({
     image: '',
     username: '',
     bio: '',
@@ -17,14 +39,20 @@ const SettingsForm = ({ currentUser, onSubmitForm }) => {
   useEffect(() => {
     if (currentUser) {
       setValues({
-        image: currentUser.image,
-        username: currentUser.username,
-        bio: currentUser.bio,
-        email: currentUser.email,
-        password: currentUser.password,
+        image: currentUser.image || '',
+        username: currentUser.username || '',
+        bio: currentUser.bio || '',
+        email: currentUser.email || '',
       });
     }
   }, [currentUser]);
+
+  const onSubmitForm = (user) => {
+    dispatch({
+      type: SETTINGS_SAVED,
+      payload: agent.Auth.save(user),
+    });
+  };
 
   const submitFormHandler = (e) => {
     e.preventDefault();
@@ -38,105 +66,76 @@ const SettingsForm = ({ currentUser, onSubmitForm }) => {
   };
 
   return (
-    <form onSubmit={submitFormHandler}>
-      <fieldset>
-        <fieldset className='form-group'>
-          <input
-            className='form-control'
+    <div className={styles.wrapper}>
+      <div className={styles.content}>
+        <h1 className={clsx(styles.title, 'header-h2 align-center color-primary')}>
+          Ваши настройки
+        </h1>
+
+        <ListErrors errors={errors} />
+
+        <form className={styles.form} onSubmit={submitFormHandler}>
+          <TextField
+            label='Изображение профиля'
+            name='image'
             onChange={handleChange}
-            placeholder='URL of profile picture'
+            placeholder='URL-адрес изображения профиля'
             type='text'
             value={values.image}
           />
-        </fieldset>
-
-        <fieldset className='form-group'>
-          <input
-            className='form-control form-control-lg'
+          <TextField
+            label='Имя пользователя'
+            name='username'
             onChange={handleChange}
-            placeholder='Username'
+            placeholder='Имя пользователя'
             type='text'
             value={values.username}
           />
-        </fieldset>
-
-        <fieldset className='form-group'>
-          <textarea
-            className='form-control form-control-lg'
+          <TextArea
+            label='Информация о вас'
+            name='bio'
             onChange={handleChange}
-            placeholder='Short bio about you'
-            rows='8'
+            placeholder='Информация о вас'
+            rows={5}
             value={values.bio}
           />
-        </fieldset>
-
-        <fieldset className='form-group'>
-          <input
-            className='form-control form-control-lg'
+          <TextField
+            autocomplete='new-email'
+            label='E-mail'
+            name='email'
             onChange={handleChange}
-            placeholder='Email'
+            placeholder='Ваш email'
             type='email'
             value={values.email}
           />
-        </fieldset>
-
-        <fieldset className='form-group'>
-          <input
-            className='form-control form-control-lg'
+          <TextField
+            autocomplete='new-password'
+            icon={
+              isPasswordVisible ? (
+                <HideIcon onClick={() => setIsPasswordVisible(false)} />
+              ) : (
+                <ShowIcon onClick={() => setIsPasswordVisible(true)} />
+              )
+            }
+            label='Новый пароль'
+            name='password'
             onChange={handleChange}
-            placeholder='New Password'
-            type='password'
+            placeholder='Новый пароль'
+            type={isPasswordVisible ? 'text' : 'password'}
             value={values.password}
           />
-        </fieldset>
+          <Button className={styles.submit_button} disabled={inProgress} isSubmit>
+            Сохранить
+          </Button>
+        </form>
 
-        <button
-          className='btn btn-lg btn-primary pull-xs-right'
-          // disabled={inProgress}
-          type='submit'
-        >
-          Update Settings
-        </button>
-      </fieldset>
-    </form>
+        <hr className={styles.divider} />
+        <TextButton className={styles.exit_button} color='alert' onClick={onClickLogout}>
+          Выйти из аккаунта
+        </TextButton>
+      </div>
+    </div>
   );
 };
 
-const mapStateToProps = (state) => ({
-  ...state.settings,
-  currentUser: state.common.currentUser,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onClickLogout: () => dispatch({ type: LOGOUT }),
-  onSubmitForm: (user) =>
-    dispatch({
-      type: SETTINGS_SAVED,
-      payload: agent.Auth.save(user),
-    }),
-  onUnload: () => dispatch({ type: SETTINGS_PAGE_UNLOADED }),
-});
-
-const Settings = ({ errors, currentUser, onSubmitForm, onClickLogout }) => (
-  <div className='settings-page'>
-    <div className='container page'>
-      <div className='row'>
-        <div className='col-md-6 offset-md-3 col-xs-12'>
-          <h1 className='text-xs-center'>Your Settings</h1>
-
-          <ListErrors errors={errors} />
-
-          <SettingsForm currentUser={currentUser} onSubmitForm={onSubmitForm} />
-
-          <hr />
-
-          <button className='btn btn-outline-danger' onClick={onClickLogout} type='button'>
-            Or click here to logout.
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Settings);
+export default Settings;

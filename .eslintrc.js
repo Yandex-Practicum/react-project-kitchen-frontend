@@ -53,6 +53,7 @@ module.exports = {
     'react/destructuring-assignment': 'warn',
     'react/sort-prop-types': 'warn',
     'react/function-component-definition': ['warn', { namedComponents: 'arrow-function' }], // пишем в виде стрелочных функций
+    'react-hooks/exhaustive-deps': 'off', // На useEffect без зависимостей ругается.
 
     // JSX
     'react/jsx-boolean-value': 'warn', // тут с error на warn

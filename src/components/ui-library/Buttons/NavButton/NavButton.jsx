@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
-import styles from './Buttons.module.scss';
+import styles from './NavButton.module.scss';
 
 const NavButton = ({ icon, to = '/', exact = true, className = '', children = 'Кнопка' }) => (
   <NavLink

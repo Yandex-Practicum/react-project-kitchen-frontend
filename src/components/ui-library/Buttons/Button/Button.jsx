@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
-import styles from './Buttons.module.scss';
+import styles from './Button.module.scss';
 
 const Button = ({
   icon,
   onClick,
   type = 'primary',
+  isSubmit = false,
   disabled = false,
   className = '',
   children = 'Кнопка',
@@ -21,7 +22,7 @@ const Button = ({
       className={clsx(className, styles.button, types[type] ? types[type] : '')}
       disabled={disabled}
       onClick={onClick}
-      type='button'
+      type={isSubmit ? 'submit' : 'button'}
     >
       {icon && <icon.type />}
       <span>{children}</span>
@@ -34,6 +35,7 @@ Button.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   icon: PropTypes.node,
+  isSubmit: PropTypes.bool,
   onClick: PropTypes.func,
   type: PropTypes.string,
 };

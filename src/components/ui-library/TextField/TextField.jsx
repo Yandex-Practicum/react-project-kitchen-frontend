@@ -10,7 +10,6 @@ const TextField = ({
   name,
   onChange,
   ref,
-  value,
   className = '',
   label = 'Название поля',
   maxLength = 128,
@@ -19,6 +18,8 @@ const TextField = ({
   required = false,
   textfieldState = 'default',
   type = 'text',
+  value = '',
+  autocomplete = 'off',
 }) => {
   const [isFocus, setIsFocus] = useState(false);
 
@@ -37,6 +38,7 @@ const TextField = ({
       >
         <input
           ref={ref}
+          autoComplete={autocomplete}
           className={styles.input}
           id={name}
           maxLength={maxLength}
@@ -68,6 +70,7 @@ const TextField = ({
 };
 
 TextField.propTypes = {
+  autocomplete: PropTypes.string,
   className: PropTypes.string,
   icon: PropTypes.node,
   label: PropTypes.string,
@@ -75,7 +78,7 @@ TextField.propTypes = {
   message: PropTypes.string,
   minLength: PropTypes.number,
   name: PropTypes.string.isRequired,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   ref: PropTypes.oneOfType([
     PropTypes.func,
