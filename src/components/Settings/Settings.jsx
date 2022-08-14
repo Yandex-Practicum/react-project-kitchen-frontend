@@ -25,6 +25,7 @@ const Settings = () => {
 
   const onClickLogout = () => dispatch({ type: LOGOUT });
 
+  // TODO: удалить при рефакторинге редакса
   // const onUnload = () => dispatch({ type: SETTINGS_PAGE_UNLOADED });
 
   const { values, handleChange, setValues } = useForm({
