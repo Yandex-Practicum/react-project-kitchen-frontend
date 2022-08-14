@@ -9,6 +9,7 @@ const TextField = ({
   message,
   name,
   onChange,
+  onKeyUp,
   ref,
   className = '',
   label = 'Название поля',
@@ -47,6 +48,7 @@ const TextField = ({
           onBlur={() => setIsFocus(false)}
           onChange={onChange}
           onFocus={() => setIsFocus(true)}
+          onKeyUp={onKeyUp}
           placeholder={placeholder}
           required={required}
           type={type}
@@ -79,6 +81,7 @@ TextField.propTypes = {
   minLength: PropTypes.number,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  onKeyUp: PropTypes.func,
   placeholder: PropTypes.string,
   ref: PropTypes.oneOfType([
     PropTypes.func,

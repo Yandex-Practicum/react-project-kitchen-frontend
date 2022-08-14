@@ -8,7 +8,7 @@
 
 .label {
   color: $color-primary;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   max-width: 100%;
   padding: 0 16px;
 }
@@ -17,6 +17,7 @@
   background-color: $color-input;
   border: 2px solid transparent;
   border-radius: 20px;
+  box-sizing: border-box;
   color: $color-secondary;
   column-gap: 8px;
   padding: 8px 16px;

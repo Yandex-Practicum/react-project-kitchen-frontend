@@ -8,10 +8,9 @@ import useForm from '../../hooks/useForm';
 import TextField from '../ui-library/TextField/TextField';
 import Button from '../ui-library/Buttons/Button/Button';
 import TextArea from '../ui-library/TextArea/TextArea';
-
-import styles from './Settings.module.scss';
 import { HideIcon, ShowIcon } from '../ui-library/Icons';
 import TextButton from '../ui-library/Buttons/TextButton/TextButton';
+import styles from './Settings.module.scss';
 
 const Settings = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
