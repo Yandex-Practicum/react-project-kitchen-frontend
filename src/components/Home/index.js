@@ -6,9 +6,6 @@ import agent from "../../agent"
 import { connect } from "react-redux"
 import { HOME_PAGE_LOADED, HOME_PAGE_UNLOADED, APPLY_TAG_FILTER } from "../../constants/actionTypes"
 
-// YOU WILL DELETE NEXT LINE SOON
-import ToDelete from "./ToDelete"
-
 const Promise = global.Promise
 
 const mapStateToProps = (state) => ({
@@ -40,24 +37,17 @@ class Home extends React.Component {
 			<div className="home-page">
 				<Banner token={this.props.token} appName={this.props.appName} />
 				<div className="container page">
-					{/* THIS COMPONENT WILL BE DELETED THIS IS WELCOME */}
-					<ToDelete />
+					<div className="row">
+						<MainView />
 
-					{/* <div className="row">
-            <MainView />
+						<div className="col-md-3">
+							<div className="sidebar">
+								<p>Popular Tags</p>
 
-            <div className="col-md-3">
-              <div className="sidebar">
-
-                <p>Popular Tags</p>
-
-                <Tags
-                  tags={this.props.tags}
-                  onClickTag={this.props.onClickTag} />
-
-              </div>
-            </div>
-          </div> */}
+								<Tags tags={this.props.tags} onClickTag={this.props.onClickTag} />
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		)
