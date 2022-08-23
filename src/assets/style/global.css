@@ -1,0 +1,14 @@
+:root {
+    --input-color: #2F2F37;
+    --accent-color: #4C4CFF;
+    --divider-color: #2F2F37;
+    --gradient: linear-gradient(63.18deg, #801AB3 0%, #4C4CFF 100%);
+    --text-secondary-color:#8585AD;
+    --text-primary-color:#F2F2F3;
+    --text-alert-color:#F20D33;
+    --text-success-color:#00CCCC;
+    --text-disabled-color:#3A3A55;
+    --bg-primary-color:#131316;
+    --bg-secondary-color:#1C1C21;
+    --bg-grey-color:#F4F5F6;
+}
