@@ -1,4 +1,4 @@
-.block {
+.button {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -6,50 +6,19 @@
   padding: 8px 16px;
   gap: 8px;
   border-radius: 20px;
-
   border: none;
 
   &:focus {
     outline: none;
   }
 
-}
-
-.link {
-  composes: block;
-  color: var(--accent-color);
-  background-color: transparent;
-
-  &:hover {
-    text-decoration: underline;
+  &:disabled {
+    pointer-events: none;
   }
-
-  &:active {
-    text-decoration: underline;
-
-  }
-
-
-}
-
-.light {
-  composes: block;
-  background-color: transparent;
-  color: var(--text-secondary-color);
-
-  &:active {
-    color: var(--text-primary-color);
-  }
-
-  &:hover {
-    background-color: var(--bg-gray-color);
-    color: var(--text-primary-color);
-  }
-
 }
 
 .primary {
-  composes: block;
+  composes: button;
   background-color: var(--accent-color);
   color: var(--text-primary-color);
 
@@ -61,19 +30,38 @@
     background: var(--gradient-light);
   }
 
+  &:disabled {
+    background-color: var(--text-disabled-color);
+    color: var(--text-secondary-color);
+  }
+
 }
 
-.disabled-block {
-  composes: block;
-  background-color: var(--text-disabled-color);
-  color: var(--text-secondary-color);
-  
-}
+.link {
+  composes: button;
+  color: var(--accent-color);
+  background-color: transparent;
 
-.disabled-link {
-  composes: link;
-  color: var(--text-secondary-color);
   &:hover {
-    text-decoration: none;
+    text-decoration: underline;
+  }
+
+  &:disabled {
+    color: var(--text-secondary-color);
+  }
+}
+
+.light {
+  composes: button;
+  background-color: transparent;
+  color: var(--text-secondary-color);
+
+  &:active {
+    color: var(--text-primary-color);
+  }
+
+  &:hover {
+    background-color: var(--bg-gray-color);
+    color: var(--text-primary-color);
   }
 }
