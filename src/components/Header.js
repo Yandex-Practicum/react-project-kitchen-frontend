@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import Like from "components/UI/Like/Like"
 
 const LoggedOutView = (props) => {
 	if (!props.currentUser)
@@ -69,6 +70,7 @@ class Header extends React.Component {
 					<Link to="/" className="navbar-brand">
 						{this.props.appName.toLowerCase()}
 					</Link>
+					<Like/>
 
 					<LoggedOutView currentUser={this.props.currentUser} />
 
