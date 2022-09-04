@@ -3,40 +3,9 @@ import React from "react"
 import agent from "../../agent"
 import { connect } from "react-redux"
 import { CHANGE_TAB } from "../../constants/actionTypes"
+import TabList from "components/UI/TabList/TabList"
 
-const YourFeedTab = (props) => {
-	if (props.token) {
-		const clickHandler = (ev) => {
-			ev.preventDefault()
-			props.onTabClick("feed", agent.Articles.feed, agent.Articles.feed())
-		}
-
-		return (
-			<li className="nav-item">
-				<a href="" className={props.tab === "feed" ? "nav-link active" : "nav-link"} onClick={clickHandler}>
-					Your Feed
-				</a>
-			</li>
-		)
-	}
-	return null
-}
-
-const GlobalFeedTab = (props) => {
-	const clickHandler = (ev) => {
-		ev.preventDefault()
-		props.onTabClick("all", agent.Articles.all, agent.Articles.all())
-	}
-	return (
-		<li className="nav-item">
-			<a href="" className={props.tab === "all" ? "nav-link active" : "nav-link"} onClick={clickHandler}>
-				Global Feed
-			</a>
-		</li>
-	)
-}
-
-const TagFilterTab = (props) => {
+export const TagFilterTab = (props) => {
 	if (!props.tag) return null
 
 	return (
@@ -59,18 +28,18 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const MainView = (props) => {
+	const tabs = [{
+		title: "Your Feed",
+		eventKey: "feed"
+	},
+	{
+		title: "Global Feed",
+		eventKey: "all"
+	},
+	]
 	return (
 		<div className="col-md-9">
-			<div className="feed-toggle">
-				<ul className="nav nav-pills outline-active">
-					<YourFeedTab token={props.token} tab={props.tab} onTabClick={props.onTabClick} />
-
-					<GlobalFeedTab tab={props.tab} onTabClick={props.onTabClick} />
-
-					<TagFilterTab tag={props.tag} />
-				</ul>
-			</div>
-
+			<TabList onTabClick={props.onTabClick} tag={props.tag} tabs={tabs} tab={props.tab} />
 			<ArticleList
 				pager={props.pager}
 				articles={props.articles}

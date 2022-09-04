@@ -1,0 +1,9 @@
+@import '../../../assets/style/global.css';
+
+.list {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    box-shadow: inset 0px -1px 0px var(--divider-color);
+}
