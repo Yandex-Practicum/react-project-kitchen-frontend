@@ -1,9 +1,5 @@
 @import '../../../assets/style/global.css';
 
-.active {
-    background-color: var(--accent-color);
-}
-
 .default {
     border: 1px solid var(--divider-color);
     background-color: var(--bg-primary-color);
@@ -24,9 +20,22 @@
 
 .page__item {
     list-style: none;
+    cursor: pointer;
     width: 64px;
     height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.page__item:hover {
+    background-color: var(--divider-color);
+}
+
+.page__item:active {
+    background-color: var(--accent-color);
+}
+
+.active, .active:hover {
+    background-color: var(--accent-color);
 }
