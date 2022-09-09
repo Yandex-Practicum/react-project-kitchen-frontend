@@ -1,7 +1,11 @@
-import style from './Tag.module.css';
+import style from './Tag.module.scss'
+import { connect } from "react-redux"
 
-export default function Tag({ tag, handleClick, current }) {
-    const className = `${style.tag} ${current === tag ? style.active : {}}`
+const mapStateToProps = (state) => ({ currentTag: state.articleList.tag })
+
+export function Tag({ tag, handleClick, currentTag }) {
+
+    const className = `${style.tag} ${currentTag === tag ? style.active : style.default}`
 
     return (
         <li className={className} onClick={handleClick}>
@@ -9,3 +13,5 @@ export default function Tag({ tag, handleClick, current }) {
         </li>
     );
 }
+
+export default connect(mapStateToProps)(Tag)
