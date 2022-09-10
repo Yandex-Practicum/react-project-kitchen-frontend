@@ -1,6 +1,7 @@
 import style from './TagList.module.scss';
 import Tag from '../Tag/Tag';
 import agent from 'agent';
+import PropTypes from 'prop-types';
 
 export default function TagsList({ tags, onClickTag }) {
 
@@ -22,3 +23,8 @@ export default function TagsList({ tags, onClickTag }) {
         );
     else return <div>Загрузка...</div>
 }
+
+TagsList.propTypes = {
+    tags: PropTypes.arrayOf(PropTypes.string.isRequired),
+    onClickTag: PropTypes.func
+};
