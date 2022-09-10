@@ -1,20 +1,34 @@
-import style from './TabList.module.css';
+import style from './TabList.module.scss';
 import Tab from '../Tab/Tab';
-import { TagFilterTab } from 'components/Home/MainView';
+import { connect } from "react-redux"
+import PropTypes from 'prop-types';
 
-export default function TabList({ onTabClick, tag, tabs, tab }) {
+const mapStateToProps = (state) => ({ tag: state.articleList.tag })
 
+export function TabList({ tag, tabs }) {
     return (
         <ul className={style.list}>
-            {tabs.map(item =>
-                <Tab onTabClick={onTabClick}
+            {tabs.map((item) =>
+                <Tab
                     eventKey={item.eventKey}
                     title={item.title}
-                    key={item.eventKey}
-                    tab={tab}
+                    key={item.title}
+                    route={item.route}
                 />
             )}
-            <TagFilterTab tag={tag} />
+            {
+                tag && <Tab
+                    title={`#${tag}`}
+                    route={"/"}
+                />
+            }
         </ul>
     );
 }
+
+export default connect(mapStateToProps)(TabList)
+
+Tab.propTypes = {
+    tabs: PropTypes.array,
+    tag: PropTypes.string
+};
