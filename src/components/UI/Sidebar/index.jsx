@@ -1,7 +1,7 @@
 import style from './Sidebar.module.scss';
 import PropTypes from 'prop-types';
 
-export default function Sidebar({ children }) {
+export function Sidebar({ children }) {
     return (
         <div className={style.sidebar}>
             <p>Популярные теги</p>

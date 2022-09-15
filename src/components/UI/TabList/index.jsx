@@ -1,5 +1,5 @@
 import style from './TabList.module.scss';
-import Tab from '../Tab/Tab';
+import Tab from '../Tab/';
 import { connect } from "react-redux"
 import PropTypes from 'prop-types';
 

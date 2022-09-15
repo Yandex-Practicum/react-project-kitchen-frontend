@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import agent from "../agent"
 import { connect } from "react-redux"
 import { FOLLOW_USER, UNFOLLOW_USER, PROFILE_PAGE_LOADED, PROFILE_PAGE_UNLOADED } from "../constants/actionTypes"
-import TabList from "./UI/TabList/TabList"
+import {TabList} from "./UI"
 
 const EditProfileSettings = (props) => {
 	if (props.isUser)

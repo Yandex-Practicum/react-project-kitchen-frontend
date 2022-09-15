@@ -1,9 +1,9 @@
 import style from './TagList.module.scss';
-import Tag from '../Tag/Tag';
 import agent from 'agent';
 import PropTypes from 'prop-types';
+import { Tag } from "../Tag";
 
-export default function TagsList({ tags, onClickTag }) {
+export function TagsList({ tags, onClickTag }) {
 
     if (tags)
         return (

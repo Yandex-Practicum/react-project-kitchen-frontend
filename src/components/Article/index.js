@@ -5,7 +5,7 @@ import agent from "../../agent"
 import { connect } from "react-redux"
 import marked from "marked"
 import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from "../../constants/actionTypes"
-import TagsList from "components/UI/TagList/TagList"
+import { TagsList } from "components/UI";
 
 const mapStateToProps = (state) => ({
 	...state.article,

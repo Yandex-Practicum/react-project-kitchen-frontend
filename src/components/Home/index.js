@@ -4,8 +4,7 @@ import React from "react"
 import agent from "../../agent"
 import { connect } from "react-redux"
 import { HOME_PAGE_LOADED, HOME_PAGE_UNLOADED, APPLY_TAG_FILTER } from "../../constants/actionTypes"
-import Sidebar from "components/UI/Sidebar/Sidebar"
-import TagsList from "components/UI/TagList/TagList"
+import {TagsList, Sidebar} from "components/UI"
 
 const Promise = global.Promise
 
