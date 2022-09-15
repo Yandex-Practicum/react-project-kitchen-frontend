@@ -1,3 +1,6 @@
+body {
+    background-color: black;
+}
 :root {
     --input-color: #2F2F37;
     --accent-color: #4C4CFF;
@@ -11,4 +14,7 @@
     --bg-primary-color:#131316;
     --bg-secondary-color:#1C1C21;
     --bg-grey-color:#F4F5F6;
+
+    --gradient-light: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), #4C4CFF;
+    --gradient-dark: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #4C4CFF;
 }

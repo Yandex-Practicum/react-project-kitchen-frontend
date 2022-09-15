@@ -1,4 +1,5 @@
 import React from "react"
+import MainView from "./MainView"
 
 const Banner = ({ appName, token }) => {
 	if (token) return null
