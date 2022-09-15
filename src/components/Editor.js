@@ -36,6 +36,7 @@ class Editor extends React.Component {
 
 		this.watchForEnter = (ev) => {
 			if (ev.keyCode === 13) {
+				console.log('добавление');
 				ev.preventDefault()
 				this.props.onAddTag()
 			}
@@ -47,6 +48,7 @@ class Editor extends React.Component {
 
 		this.submitForm = (ev) => {
 			ev.preventDefault()
+			console.log(this.props.tagList, 'taglist');
 			const article = {
 				title: this.props.title,
 				description: this.props.description,

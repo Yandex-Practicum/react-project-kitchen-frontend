@@ -5,6 +5,7 @@ import agent from "../../agent"
 import { connect } from "react-redux"
 import marked from "marked"
 import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from "../../constants/actionTypes"
+import TagsList from "components/UI/TagList/TagList"
 
 const mapStateToProps = (state) => ({
 	...state.article,
@@ -48,19 +49,9 @@ class Article extends React.Component {
 					<div className="row article-content">
 						<div className="col-xs-12">
 							<div dangerouslySetInnerHTML={markup}></div>
-
-							<ul className="tag-list">
-								{this.props.article.tagList.map((tag) => {
-									return (
-										<li className="tag-default tag-pill tag-outline" key={tag}>
-											{tag}
-										</li>
-									)
-								})}
-							</ul>
+							<TagsList tags={this.props.article.tagList} />
 						</div>
 					</div>
-
 					<hr />
 
 					<div className="article-actions"></div>
