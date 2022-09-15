@@ -14,9 +14,6 @@ import Register from "../components/Register"
 import Settings from "../components/Settings"
 import { store } from "../store"
 import { push } from "react-router-redux"
-import { Button } from "./UI/Button"
-import { Text } from "./UI/Typography/Text"
-import { Title } from "./UI/Typography/Title"
 
 const mapStateToProps = (state) => {
 	return {
@@ -52,7 +49,6 @@ class App extends React.Component {
 		if (this.props.appLoaded)
 			return (
 				<div>
-					<Title type={3}>Text</Title>
 					<Header appName={this.props.appName} currentUser={this.props.currentUser} />
 					<Switch>
 						<Route exact path="/" component={Home} />
