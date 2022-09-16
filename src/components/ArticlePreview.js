@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import agent from "../agent"
 import { connect } from "react-redux"
 import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from "../constants/actionTypes"
+import {TagsList} from "./UI"
 
 const FAVORITED_CLASS = "btn btn-sm btn-primary"
 const NOT_FAVORITED_CLASS = "btn btn-sm btn-outline-primary"
@@ -29,6 +30,7 @@ const ArticlePreview = (props) => {
 		if (article.favorited) props.unfavorite(article.slug)
 		else props.favorite(article.slug)
 	}
+	console.log(article);
 
 	return (
 		<div className="article-preview">
@@ -55,15 +57,7 @@ const ArticlePreview = (props) => {
 				<h1>{article.title}</h1>
 				<p>{article.description}</p>
 				<span>Read more...</span>
-				<ul className="tag-list">
-					{article.tagList.map((tag) => {
-						return (
-							<li className="tag-default tag-pill tag-outline" key={tag}>
-								{tag}
-							</li>
-						)
-					})}
-				</ul>
+				<TagsList tags={article.tagList} />
 			</Link>
 		</div>
 	)

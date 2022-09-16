@@ -1,0 +1,29 @@
+@import '../../../assets/style/global.css';
+
+.tag {
+    display: flex;
+    align-items: center;
+    height: 24px;
+    padding: 0px 8px;
+    width: fit-content;
+    border-radius: 100px;
+    color: var(--text-primary-color);
+    cursor: pointer;
+    font-size: 12px;
+
+    &:hover,
+    &:active,
+    &:visited,
+    &:link {
+        text-decoration: none;
+        color: var(--text-primary-color);
+    }
+}
+
+.default {
+    background-color: var(--input-color);
+}
+
+.active {
+    background-color: var(--accent-color);
+}

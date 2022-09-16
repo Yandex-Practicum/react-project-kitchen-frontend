@@ -1,10 +1,10 @@
 import Banner from "./Banner"
 import MainView from "./MainView"
 import React from "react"
-import Tags from "./Tags"
 import agent from "../../agent"
 import { connect } from "react-redux"
 import { HOME_PAGE_LOADED, HOME_PAGE_UNLOADED, APPLY_TAG_FILTER } from "../../constants/actionTypes"
+import {TagsList, Sidebar} from "components/UI"
 
 const Promise = global.Promise
 
@@ -39,13 +39,10 @@ class Home extends React.Component {
 				<div className="container page">
 					<div className="row">
 						<MainView />
-
 						<div className="col-md-3">
-							<div className="sidebar">
-								<p>Popular Tags</p>
-
-								<Tags tags={this.props.tags} onClickTag={this.props.onClickTag} />
-							</div>
+							<Sidebar>
+								<TagsList tags={this.props.tags} onClickTag={this.props.onClickTag} />
+							</Sidebar>
 						</div>
 					</div>
 				</div>

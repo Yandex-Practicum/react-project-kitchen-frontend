@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import agent from "../agent"
 import { connect } from "react-redux"
 import { FOLLOW_USER, UNFOLLOW_USER, PROFILE_PAGE_LOADED, PROFILE_PAGE_UNLOADED } from "../constants/actionTypes"
+import {TabList} from "./UI"
 
 const EditProfileSettings = (props) => {
 	if (props.isUser)
@@ -73,25 +74,15 @@ class Profile extends React.Component {
 		this.props.onUnload()
 	}
 
-	renderTabs() {
-		return (
-			<ul className="nav nav-pills outline-active">
-				<li className="nav-item">
-					<Link className="nav-link active" to={`/@${this.props.profile.username}`}>
-						My Articles
-					</Link>
-				</li>
-
-				<li className="nav-item">
-					<Link className="nav-link" to={`/@${this.props.profile.username}/favorites`}>
-						Favorited Articles
-					</Link>
-				</li>
-			</ul>
-		)
-	}
-
 	render() {
+		const tabs = [{
+			title: "Ваши посты",
+			route: `/@${this.props.profile.username}`
+		},
+		{
+			title: "Любимые посты",
+			route: `/@${this.props.profile.username}/favorites`
+		}]
 		const profile = this.props.profile
 		if (!profile) return null
 
@@ -122,8 +113,7 @@ class Profile extends React.Component {
 				<div className="container">
 					<div className="row">
 						<div className="col-xs-12 col-md-10 offset-md-1">
-							<div className="articles-toggle">{this.renderTabs()}</div>
-
+							<TabList tabs={tabs} />
 							<ArticleList
 								pager={this.props.pager}
 								articles={this.props.articles}
