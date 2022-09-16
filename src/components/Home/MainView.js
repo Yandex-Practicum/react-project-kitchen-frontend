@@ -1,7 +1,7 @@
 import ArticleList from "../ArticleList"
 import React from "react"
 import { connect } from "react-redux"
-import {TabList} from "components/UI"
+import { TabList } from "components/UI"
 
 const mapStateToProps = (state) => ({
 	...state.articleList,
@@ -10,14 +10,15 @@ const mapStateToProps = (state) => ({
 })
 
 const MainView = (props) => {
-	const tabs = [{
-		title: "Your Feed",
-		eventKey: "feed"
-	},
-	{
-		title: "Global Feed",
-		eventKey: "all"
-	},
+	const tabs = [
+		{
+			title: "Your Feed",
+			eventKey: "feed",
+		},
+		{
+			title: "Global Feed",
+			eventKey: "all",
+		},
 	]
 
 	return (

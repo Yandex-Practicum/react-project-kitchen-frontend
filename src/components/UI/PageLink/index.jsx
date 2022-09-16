@@ -1,7 +1,7 @@
 import style from './PageLink.module.scss'
 import PropTypes from 'prop-types'
 
-export default function PageLink({ isCurrent, onClick, isFirst, isLast, children }) {
+export function PageLink({ isCurrent, onClick, isFirst, isLast, children }) {
     const className = `${style.page__item}
     ${isCurrent ? style.active : style.default}
     ${isFirst ? style.first : isLast ? style.last : style.default}`

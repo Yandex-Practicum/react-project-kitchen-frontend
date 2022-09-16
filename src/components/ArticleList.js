@@ -1,6 +1,6 @@
 import ArticlePreview from "./ArticlePreview"
 import React from "react"
-import Pagination from "./UI/Pagination/Pagination"
+import { Pagination } from "./UI"
 
 const ArticleList = (props) => {
 	if (!props.articles) return <div className="article-preview">Loading...</div>

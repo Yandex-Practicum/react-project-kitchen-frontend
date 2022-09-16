@@ -2,16 +2,16 @@ import React, { useMemo } from "react"
 import agent from "../../../agent"
 import { connect } from "react-redux"
 import { SET_PAGE } from "constants/actionTypes"
-import PageLink from "../PageLink/PageLink"
 import style from './Pagination.module.scss'
 import { ArrowIcon } from 'components/Icons'
 import PropTypes from 'prop-types'
+import { PageLink } from "../PageLink";
 
 const mapDispatchToProps = (dispatch) => ({
     onSetPage: (page, payload) => dispatch({ type: SET_PAGE, page, payload }),
 })
 
-const Pagination = (props) => {
+const PaginationComponent = (props) => {
     if (props.articlesCount <= 10) return null
     const range = []
     for (let i = 0; i < Math.ceil(props.articlesCount / 10); ++i) range.push(i)
@@ -97,9 +97,9 @@ const Pagination = (props) => {
     )
 }
 
-export default connect(() => ({}), mapDispatchToProps)(Pagination)
+export const Pagination = () => connect(() => ({}), mapDispatchToProps)(PaginationComponent)
 
-Pagination.propTypes = {
+PaginationComponent.propTypes = {
     articlesCount: PropTypes.number.isRequired,
     currentPage: PropTypes.number,
     onSetPage: PropTypes.func.isRequired,
