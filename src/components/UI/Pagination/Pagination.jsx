@@ -42,9 +42,6 @@ const Pagination = (props) => {
         ev.preventDefault()
         if (props.currentPage < range.length - 1) setPage(props.currentPage + 1)
     }
-
-    console.log(props, 'props');
-
     return (
         <nav>
             <ul className={style.pagination}>
