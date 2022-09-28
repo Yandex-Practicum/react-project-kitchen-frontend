@@ -1,6 +1,7 @@
 import ArticleActions from "./ArticleActions"
 import { Link } from "react-router-dom"
 import React from "react"
+import { AuthorDate } from "components/UI/AuthorDate"
 
 const ArticleMeta = (props) => {
 	const article = props.article
@@ -10,12 +11,7 @@ const ArticleMeta = (props) => {
 				<img src={article.author.image} alt={article.author.username} />
 			</Link>
 
-			<div className="info">
-				<Link to={`/@${article.author.username}`} className="author">
-					{article.author.username}
-				</Link>
-				<span className="date">{new Date(article.createdAt).toDateString()}</span>
-			</div>
+			<AuthorDate username={article.author.username} createdAt={article.createdAt} />
 
 			<ArticleActions canModify={props.canModify} article={article} />
 		</div>
