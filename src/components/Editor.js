@@ -10,6 +10,7 @@ import {
 	EDITOR_PAGE_UNLOADED,
 	UPDATE_FIELD_EDITOR,
 } from "../constants/actionTypes"
+import { Input } from "./UI/Input"
 
 const mapStateToProps = (state) => ({
 	...state.editor,
@@ -36,7 +37,6 @@ class Editor extends React.Component {
 
 		this.watchForEnter = (ev) => {
 			if (ev.keyCode === 13) {
-				console.log('добавление');
 				ev.preventDefault()
 				this.props.onAddTag()
 			}
@@ -48,7 +48,6 @@ class Editor extends React.Component {
 
 		this.submitForm = (ev) => {
 			ev.preventDefault()
-			console.log(this.props.tagList, 'taglist');
 			const article = {
 				title: this.props.title,
 				description: this.props.description,
@@ -94,68 +93,57 @@ class Editor extends React.Component {
 							<ListErrors errors={this.props.errors}></ListErrors>
 
 							<form>
-								<fieldset>
-									<fieldset className="form-group">
-										<input
-											className="form-control form-control-lg"
-											type="text"
-											placeholder="Article Title"
-											value={this.props.title}
-											onChange={this.changeTitle}
-										/>
-									</fieldset>
+								<Input
+									label="Заголовок"
+									placeholder="Название статьи"
+									value={this.props.title}
+									onChange={this.changeTitle}
+								/>
+								<Input
+									label="Описание"
+									placeholder="О чем статья"
+									value={this.props.description}
+									onChange={this.changeDescription}
+									error='sadsa'
+								/>
+								<Input
+									label="Изображение"
+									type="file"
+									placeholder="Изображение (опционально)"
+								/>
+								<Input
+									label="Содержание"
+									placeholder="Текст статьи"
+									type="textarea"
+									value={this.props.body}
+									onChange={this.changeBody}
+								/>
+								<Input
+									label="Тэги"
+									placeholder="Теги (через запятую)"
+									value={this.props.tagInput}
+									onChange={this.changeTagInput}
+									onKeyUp={this.watchForEnter}
+								/>
 
-									<fieldset className="form-group">
-										<input
-											className="form-control"
-											type="text"
-											placeholder="What's this article about?"
-											value={this.props.description}
-											onChange={this.changeDescription}
-										/>
-									</fieldset>
-
-									<fieldset className="form-group">
-										<textarea
-											className="form-control"
-											rows="8"
-											placeholder="Write your article (in markdown)"
-											value={this.props.body}
-											onChange={this.changeBody}
-										></textarea>
-									</fieldset>
-
-									<fieldset className="form-group">
-										<input
-											className="form-control"
-											type="text"
-											placeholder="Enter tags"
-											value={this.props.tagInput}
-											onChange={this.changeTagInput}
-											onKeyUp={this.watchForEnter}
-										/>
-
-										<div className="tag-list">
-											{(this.props.tagList || []).map((tag) => {
-												return (
-													<span className="tag-default tag-pill" key={tag}>
-														<i className="ion-close-round" onClick={this.removeTagHandler(tag)}></i>
-														{tag}
-													</span>
-												)
-											})}
-										</div>
-									</fieldset>
-
-									<button
-										className="btn btn-lg pull-xs-right btn-primary"
-										type="button"
-										disabled={this.props.inProgress}
-										onClick={this.submitForm}
-									>
-										Publish Article
-									</button>
-								</fieldset>
+								<div className="tag-list">
+									{(this.props.tagList || []).map((tag) => {
+										return (
+											<span className="tag-default tag-pill" key={tag}>
+												<i className="ion-close-round" onClick={this.removeTagHandler(tag)}></i>
+												{tag}
+											</span>
+										)
+									})}
+								</div>
+								<button
+									className="btn btn-lg pull-xs-right btn-primary"
+									type="button"
+									disabled={this.props.inProgress}
+									onClick={this.submitForm}
+								>
+									Publish Article
+								</button>
 							</form>
 						</div>
 					</div>
