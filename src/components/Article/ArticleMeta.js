@@ -10,9 +10,7 @@ const ArticleMeta = (props) => {
 			<Link to={`/@${article.author.username}`}>
 				<img src={article.author.image} alt={article.author.username} />
 			</Link>
-
 			<AuthorDate username={article.author.username} createdAt={article.createdAt} />
-
 			<ArticleActions canModify={props.canModify} article={article} />
 		</div>
 	)

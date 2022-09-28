@@ -10,7 +10,7 @@ export function AuthorDate({ username, createdAt }) {
         weekday: 'short',
         day: '2-digit',
     };
-    const date = new Date(createdAt).toLocaleString("ru", options)
+    const date = new Date(createdAt || Date.now()).toLocaleString("ru", options)
     const finalDate = date.slice(0, date.length - 3)
 
     return (
@@ -25,5 +25,5 @@ export function AuthorDate({ username, createdAt }) {
 
 AuthorDate.propTypes = {
     username: PropTypes.string.isRequired,
-    createdAt: PropTypes.string.isRequired,
+    createdAt: PropTypes.string,
 }
