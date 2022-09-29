@@ -38,12 +38,17 @@
         resize: none;
     }
 
-    .comment {
-        display: flex;
-        margin: 0;
-        border: 0;
-        padding: 0;
-        background: transparent;
+    .comment__wrapper {
+        width: 100%;
+        .comment {
+            display: flex;
+            margin: 0;
+            border: 0;
+            padding: 0;
+            border-radius: 0;
+            background: transparent;
+            width: 100%;
+        }
     }
 
     input[type='file'] {

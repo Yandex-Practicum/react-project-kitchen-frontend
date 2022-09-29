@@ -17,7 +17,8 @@ export function Input({ type = 'text', label = '', placeholder, success, error, 
         e.preventDefault();
         setFileName(fileRef.current?.value.replace(/.*[\/\\]/, ''));
     }
-    const className = `${style.default}
+    const className = `
+    ${type === 'comment' ? style.comment__wrapper : style.default}
     ${error && style.error}
     ${success && style.success}`
     const textAreaClessName = `${style.input} ${style.textarea}`
