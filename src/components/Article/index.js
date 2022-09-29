@@ -1,4 +1,3 @@
-import ArticleMeta from "./ArticleMeta"
 import CommentContainer from "./CommentContainer"
 import React from "react"
 import agent from "../../agent"
@@ -6,6 +5,8 @@ import { connect } from "react-redux"
 import marked from "marked"
 import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from "../../constants/actionTypes"
 import { TagsList } from "components/UI";
+import ArticleActions from "./ArticleActions"
+import { ArticleMeta } from "components/UI/ArticleMeta"
 
 const mapStateToProps = (state) => ({
 	...state.article,
@@ -41,7 +42,13 @@ class Article extends React.Component {
 				<div className="banner">
 					<div className="container">
 						<h1>{this.props.article.title}</h1>
-						<ArticleMeta article={this.props.article} canModify={canModify} />
+						<ArticleMeta
+							image={this.props.article.author.image}
+							username={this.props.article.author.username}
+							createdAt={this.props.article.createdAt}
+						>
+							<ArticleActions canModify={canModify} article={this.props.article} />
+						</ArticleMeta>
 					</div>
 				</div>
 

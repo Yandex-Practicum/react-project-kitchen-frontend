@@ -3,10 +3,12 @@ import agent from "../../agent"
 import { connect } from "react-redux"
 import { ADD_COMMENT } from "../../constants/actionTypes"
 import { Input } from "components/UI/Input"
+import { ArticleMeta } from "components/UI/ArticleMeta"
 
 const mapDispatchToProps = (dispatch) => ({
 	onSubmit: (payload) => dispatch({ type: ADD_COMMENT, payload }),
 })
+
 
 class CommentInput extends React.Component {
 	constructor() {
@@ -37,14 +39,14 @@ class CommentInput extends React.Component {
 					onChange={this.setBody}
 				/>
 				<div className="card-footer">
-					<img
-						src={this.props.currentUser.image}
-						className="comment-author-img"
-						alt={this.props.currentUser.username}
-					/>
-					<button className="btn btn-sm btn-primary" type="submit">
-						Post Comment
-					</button>
+					<ArticleMeta
+						image={this.props.currentUser.image}
+						username={this.props.currentUser.username}
+					>
+						<button className="btn btn-sm btn-primary" type="submit">
+							Post Comment
+						</button>
+					</ArticleMeta>
 				</div>
 			</form>
 		)
