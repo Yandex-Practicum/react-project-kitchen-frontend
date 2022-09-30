@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import agent from "agent"
 import { connect } from "react-redux"
 import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from "constants/actionTypes"
-import { TagsList, Title, Text } from ".."
+import { TagsList, Title, Text, Button } from ".."
 import { ArticleMeta } from "../ArticleMeta"
 import style from './ArticlePreview.module.scss'
 
@@ -52,7 +52,7 @@ const ArticlePreview = (props) => {
                 </div>
                 <div className={style.footer}>
                     <Link to={`/article/${article.slug}`} className={style.link}>
-                        <span>Read more</span>
+                        <Button type="link">Read more</Button>
                     </Link>
                     <TagsList tags={article.tagList} />
                 </div>
