@@ -1,0 +1,35 @@
+.wrapper {
+    display: flex;
+    background-color: black;
+    gap: 16px;
+    padding: 32px 0;
+    width: 808px;
+
+    .img {
+        width: 160px;
+        height: 228px;
+        background-color: var(--input-color);
+        border-radius: 20px;
+        flex-shrink: 0;
+    }
+    .content__wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        flex: 1;
+        .article {
+            display: flex;
+            flex-direction: column;
+            gap:8px;
+        }
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            gap: 64px;
+            .link {
+                text-decoration: none;
+                flex-shrink: 0;
+            }
+        }
+    }
+}

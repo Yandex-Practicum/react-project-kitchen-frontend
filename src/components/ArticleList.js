@@ -1,4 +1,4 @@
-import ArticlePreview from "./ArticlePreview"
+import ArticlePreview from "./UI/ArticlePreview"
 import React from "react"
 import { Pagination } from "./UI"
 
