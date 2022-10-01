@@ -32,7 +32,6 @@ const ArticlePreview = (props) => {
 		if (article.favorited) props.unfavorite(article.slug)
 		else props.favorite(article.slug)
 	}
-	console.log(article);
 
 	return (
 		<div className="article-preview">

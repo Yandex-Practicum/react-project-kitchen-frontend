@@ -3,6 +3,7 @@ import React from "react"
 import agent from "../agent"
 import { connect } from "react-redux"
 import { SETTINGS_SAVED, SETTINGS_PAGE_UNLOADED, LOGOUT } from "../constants/actionTypes"
+import { Input } from "./UI/Input"
 
 class SettingsForm extends React.Component {
 	constructor() {
@@ -58,55 +59,40 @@ class SettingsForm extends React.Component {
 		return (
 			<form onSubmit={this.submitForm}>
 				<fieldset>
-					<fieldset className="form-group">
-						<input
-							className="form-control"
-							type="text"
-							placeholder="URL of profile picture"
-							value={this.state.image}
-							onChange={this.updateState("image")}
-						/>
-					</fieldset>
-
-					<fieldset className="form-group">
-						<input
-							className="form-control form-control-lg"
-							type="text"
-							placeholder="Username"
-							value={this.state.username}
-							onChange={this.updateState("username")}
-						/>
-					</fieldset>
-
-					<fieldset className="form-group">
-						<textarea
-							className="form-control form-control-lg"
-							rows="8"
-							placeholder="Short bio about you"
-							value={this.state.bio}
-							onChange={this.updateState("bio")}
-						></textarea>
-					</fieldset>
-
-					<fieldset className="form-group">
-						<input
-							className="form-control form-control-lg"
-							type="email"
-							placeholder="Email"
-							value={this.state.email}
-							onChange={this.updateState("email")}
-						/>
-					</fieldset>
-
-					<fieldset className="form-group">
-						<input
-							className="form-control form-control-lg"
-							type="password"
-							placeholder="New Password"
-							value={this.state.password}
-							onChange={this.updateState("password")}
-						/>
-					</fieldset>
+					<Input
+						label="Изображение профиля"
+						type="file"
+						placeholder="Изображение (опционально)"
+						value={this.state.image}
+						onChange={this.updateState("image")}
+					/>
+					<Input
+						label="Имя пользователя"
+						placeholder="Имя пользователя"
+						value={this.state.username}
+						onChange={this.updateState("username")}
+					/>
+					<Input
+						label="Информация о вас"
+						placeholder="Информация о вас"
+						type="textarea"
+						value={this.state.bio}
+						onChange={this.updateState("bio")}
+					/>
+					<Input
+						label="E-mail"
+						type="email"
+						placeholder="E-mail"
+						value={this.state.email}
+						onChange={this.updateState("email")}
+					/>
+					<Input
+						label="Новый пароль"
+						type="password"
+						placeholder="Новый пароль"
+						value={this.state.password}
+						onChange={this.updateState("password")}
+					/>
 
 					<button className="btn btn-lg btn-primary pull-xs-right" type="submit" disabled={this.state.inProgress}>
 						Update Settings
