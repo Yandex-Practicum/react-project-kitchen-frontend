@@ -42,7 +42,7 @@ export function Input({ type = 'text', label = '', placeholder, success, error, 
                         rows={type === 'comment' ? 4 : 5}
                     /> :
                     <input
-                        value={fileName || value}
+                        value={value}
                         onChange={onChange}
                         onKeyUp={onKeyUp}
                         className={style.input}
@@ -67,6 +67,7 @@ export function Input({ type = 'text', label = '', placeholder, success, error, 
                             type={type}
                             accept=".png, .jpg, .jpeg"
                             className={style.file}
+                            value={fileName}
                         />
                     </>
                 }

@@ -97,7 +97,7 @@ const PaginationComponent = (props) => {
     )
 }
 
-export const Pagination = () => connect(() => ({}), mapDispatchToProps)(PaginationComponent)
+export const Pagination = connect(() => ({}), mapDispatchToProps)(PaginationComponent)
 
 PaginationComponent.propTypes = {
     articlesCount: PropTypes.number.isRequired,

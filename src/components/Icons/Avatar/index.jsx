@@ -1,4 +1,10 @@
-export const Avatar = ({ type = "smile" }) => {
+export const Avatar = ({ type = "smile", size = 'normal'}) => {
+    const sizes = {
+        small: "24",
+        normal: "40",
+        large: "120"
+
+    }
     let d = ''
     let d2 = ''
 
@@ -35,8 +41,8 @@ export const Avatar = ({ type = "smile" }) => {
     }
 
     return (
-        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="20" cy="20" r="19" fill="#4C4CFF" stroke="#1C1C21" stroke-width="2" />
+        <svg width={sizes[size]} height={sizes[size]} viewBox={"0 0 40 40"}fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="19" fill="#4C4CFF" stroke="#1C1C21" strokeWidth="2" />
             <path d={d} fill="#1C1C21" />
             {d2 && <path d={d2} fill="#1C1C21" />}
         </svg>

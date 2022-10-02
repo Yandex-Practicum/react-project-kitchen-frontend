@@ -9,5 +9,5 @@ export function Text({ type = "text", color = "primary", children }) {
 Text.propTypes = {
 	type: PropTypes.oneOf(["text", "caption", "text_link"]),
 	color: PropTypes.oneOf(["primary", "secondary"]),
-	children: PropTypes.string.isRequired,
+	children: PropTypes.string,
 }
