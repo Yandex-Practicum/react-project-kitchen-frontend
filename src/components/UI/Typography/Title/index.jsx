@@ -2,14 +2,16 @@ import React from "react"
 import PropTypes from "prop-types"
 import style from "../Typography.module.scss"
 
-export function Title({ type = 1, color = "primary", children }) {
+export function Title({ type = 1, color = "primary", shadow = false ,children }) {
 	const textTypes = {
 		1: "header1",
 		2: "header2",
 		3: "headline",
 	}
 
-	return <h1 className={`${style[textTypes[type]]} ${style[color]}`}>{children}</h1>
+	const shadowClassName = shadow ? style.shadow : ''
+
+	return <h1 className={`${style[textTypes[type]]} ${style[color]} ${shadowClassName}`}>{children}</h1>
 }
 
 Title.propTypes = {

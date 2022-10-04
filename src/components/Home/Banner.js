@@ -1,3 +1,4 @@
+import { Text, Title } from "components/UI"
 import React from "react"
 import MainView from "./MainView"
 
@@ -7,8 +8,8 @@ const Banner = ({ appName, token }) => {
 	return (
 		<div className="banner">
 			<div className="container">
-				<h1 className="logo-font">{appName.toLowerCase()}</h1>
-				<p>Your community project starter pack.</p>
+				<Title type={1} shadow>{appName}</Title>
+				<Title type={3}>Место, где готовится новый опыт</Title>
 			</div>
 		</div>
 	)

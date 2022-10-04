@@ -4,7 +4,7 @@ import React from "react"
 import agent from "../../agent"
 import { connect } from "react-redux"
 import { HOME_PAGE_LOADED, HOME_PAGE_UNLOADED, APPLY_TAG_FILTER } from "../../constants/actionTypes"
-import {TagsList, Sidebar} from "components/UI"
+import { TagsList, Sidebar } from "components/UI"
 
 const Promise = global.Promise
 
@@ -34,16 +34,16 @@ class Home extends React.Component {
 
 	render() {
 		return (
-			<div className="home-page">
+			<div >
 				<Banner token={this.props.token} appName={this.props.appName} />
-				<div className="container page">
-					<div className="row">
+				<div style={{ display: "flex", gap: 32}}>
+					<div>
 						<MainView />
-						<div className="col-md-3">
-							<Sidebar>
-								<TagsList tags={this.props.tags} onClickTag={this.props.onClickTag} />
-							</Sidebar>
-						</div>
+					</div>
+					<div>
+						<Sidebar>
+							<TagsList tags={this.props.tags} onClickTag={this.props.onClickTag} />
+						</Sidebar>
 					</div>
 				</div>
 			</div>
