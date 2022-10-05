@@ -7,46 +7,55 @@ import { ArrowIcon } from 'components/Icons'
 import PropTypes from 'prop-types'
 import { PageLink } from "../PageLink";
 
+// pager={props.pager} articlesCount={props.articlesCount} currentPage={props.currentPage} 
+
+const mapStateToProps = (state) => {
+	return {
+		articleList: state.articleList,
+	}
+}
+
 const mapDispatchToProps = (dispatch) => ({
     onSetPage: (page, payload) => dispatch({ type: SET_PAGE, page, payload }),
 })
 
-const PaginationComponent = (props) => {
-    if (props.articlesCount <= 10) return null
+const PaginationComponent = ({articleList, onSetPage}) => {
+    const {pager, currentPage, articlesCount} = articleList
+
+    if (articlesCount <= 10) return null
     const range = []
-    for (let i = 0; i < Math.ceil(props.articlesCount / 10); ++i) range.push(i)
+    for (let i = 0; i < Math.ceil(articlesCount / 10); ++i) range.push(i)
     const startPage = useMemo(() => (
-        range.length < 7 || props.currentPage < 4
+        range.length < 7 || currentPage < 4
     ) ? 1
-        : props.currentPage > range.length - 4 ? range.length - 6
-            : props.currentPage - 2,
-        [props.currentPage, range]);
+        : currentPage > range.length - 4 ? range.length - 6
+            : currentPage - 2,
+        [currentPage, range]);
     const endPage = useMemo(() => (
-        range.length < 7 || props.currentPage > range.length - 4
+        range.length < 7 || currentPage > range.length - 4
     ) ? range.length - 1
-        : props.currentPage < 4 ? 6
-            : props.currentPage + 3,
-        [props.currentPage, range]);
+        : currentPage < 4 ? 6
+            : currentPage + 3,
+        [currentPage, range]);
     const arr = useMemo(() => range.slice(startPage, endPage), [range, startPage, endPage])
     const setPage = (page) => {
-        if (props.pager) props.onSetPage(page, props.pager(page))
-        else props.onSetPage(page, agent.Articles.all(page))
+        if (pager) onSetPage(page, pager(page))
+        else onSetPage(page, agent.Articles.all(page))
     }
 
     const onPrevClick = (ev) => {
         ev.preventDefault()
-        if (props.currentPage > 0) setPage(props.currentPage - 1)
+        if (currentPage > 0) setPage(currentPage - 1)
     }
 
     const onNextClick = (ev) => {
         ev.preventDefault()
-        if (props.currentPage < range.length - 1) setPage(props.currentPage + 1)
+        if (currentPage < range.length - 1) setPage(currentPage + 1)
     }
     return (
-        <nav>
             <ul className={style.pagination}>
                 <PageLink
-                    isCurrent={props.currentPage === 0}
+                    isCurrent={currentPage === 0}
                     onClick={(ev) => {
                         ev.preventDefault()
                         setPage(0)
@@ -64,7 +73,7 @@ const PaginationComponent = (props) => {
                     arr.map((num) => {
                         return (
                             <PageLink
-                                isCurrent={num === props.currentPage}
+                                isCurrent={num === currentPage}
                                 onClick={(ev) => {
                                     ev.preventDefault()
                                     setPage(num)
@@ -83,7 +92,7 @@ const PaginationComponent = (props) => {
                     <ArrowIcon side="right" />
                 </PageLink>
                 <PageLink
-                    isCurrent={props.currentPage === range.length - 1}
+                    isCurrent={currentPage === range.length - 1}
                     onClick={(ev) => {
                         ev.preventDefault()
                         setPage(range.length - 1)
@@ -93,11 +102,10 @@ const PaginationComponent = (props) => {
                     {range.length}
                 </PageLink>
             </ul>
-        </nav>
     )
 }
 
-export const Pagination = connect(() => ({}), mapDispatchToProps)(PaginationComponent)
+export const Pagination = connect(mapStateToProps, mapDispatchToProps)(PaginationComponent)
 
 PaginationComponent.propTypes = {
     articlesCount: PropTypes.number.isRequired,
