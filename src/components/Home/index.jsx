@@ -1,10 +1,10 @@
-import Banner from "./Banner"
 import MainView from "./MainView"
 import React from "react"
 import agent from "../../agent"
 import { connect } from "react-redux"
 import { HOME_PAGE_LOADED, HOME_PAGE_UNLOADED, APPLY_TAG_FILTER } from "../../constants/actionTypes"
-import { TagsList, Sidebar } from "components/UI"
+import { TagsList, Sidebar, Pagination } from "components/UI"
+import { Banner } from "components/Banner"
 
 const Promise = global.Promise
 
@@ -34,9 +34,9 @@ class Home extends React.Component {
 
 	render() {
 		return (
-			<div >
-				<Banner token={this.props.token} appName={this.props.appName} />
-				<div style={{ display: "flex", gap: 32}}>
+			<>
+				<Banner variant="app" />
+				<div style={{ display: "flex", gap: 32, marginTop: 32 }}>
 					<div>
 						<MainView />
 					</div>
@@ -46,7 +46,8 @@ class Home extends React.Component {
 						</Sidebar>
 					</div>
 				</div>
-			</div>
+				<Pagination />
+			</>
 		)
 	}
 }

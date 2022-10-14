@@ -12,7 +12,7 @@ const ArticleList = (props) => {
 			{props.articles.map((article) => {
 				return <ArticlePreview article={article} key={article.slug} />
 			})}
-			<Pagination pager={props.pager} articlesCount={props.articlesCount} currentPage={props.currentPage} />
+			
 		</div>
 	)
 }

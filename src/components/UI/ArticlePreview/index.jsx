@@ -43,7 +43,7 @@ const ArticlePreview = (props) => {
                     createdAt={article.createdAt}
                 >
                     <button className={favoriteButtonClass} onClick={handleClick}>
-                        <i className="ion-heart"></i> {article.favoritesCount}
+                        {article.favoritesCount}
                     </button>
                 </ArticleMeta>
                 <div className={style.article}>

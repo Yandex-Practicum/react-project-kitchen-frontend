@@ -12,7 +12,7 @@ export const Button = ({ type = "primary", onClick, children, disabled = false, 
 }
 
 Button.propTypes = {
-	type: PropTypes.oneOf(['primary', 'light', 'link']),
+	type: PropTypes.oneOf(['primary', 'light', 'link', "delete"]),
 	onClick: PropTypes.func,
 	children: PropTypes.any,
 	disabled: PropTypes.bool,

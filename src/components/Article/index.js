@@ -4,9 +4,10 @@ import agent from "../../agent"
 import { connect } from "react-redux"
 import marked from "marked"
 import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from "../../constants/actionTypes"
-import { TagsList } from "components/UI";
+import { TagsList, Title } from "components/UI"
 import ArticleActions from "./ArticleActions"
 import { ArticleMeta } from "components/UI/ArticleMeta"
+import { Banner } from "components/Banner"
 
 const mapStateToProps = (state) => ({
 	...state.article,
@@ -36,43 +37,24 @@ class Article extends React.Component {
 		if (!this.props.article) return null
 
 		const markup = { __html: marked(this.props.article.body, { sanitize: true }) }
-		const canModify = this.props.currentUser && this.props.currentUser.username === this.props.article.author.username
 		return (
-			<div className="article-page">
-				<div className="banner">
-					<div className="container">
-						<h1>{this.props.article.title}</h1>
-						<ArticleMeta
-							image={this.props.article.author.image}
-							username={this.props.article.author.username}
-							createdAt={this.props.article.createdAt}
-						>
-							<ArticleActions canModify={canModify} article={this.props.article} />
-						</ArticleMeta>
-					</div>
+			<>
+				<Banner variant='article'/>
+				<div>
+					<Title type={2}>{this.props.article.title}</Title>
 				</div>
-
-				<div className="container page">
-					<div className="row article-content">
-						<div className="col-xs-12">
-							<div dangerouslySetInnerHTML={markup}></div>
-							<TagsList tags={this.props.article.tagList} />
-						</div>
-					</div>
-					<hr />
-
-					<div className="article-actions"></div>
-
-					<div className="row">
-						<CommentContainer
-							comments={this.props.comments || []}
-							errors={this.props.commentErrors}
-							slug={this.props.match.params.id}
-							currentUser={this.props.currentUser}
-						/>
-					</div>
+				<div>
+					<TagsList tags={this.props.article.tagList} />
 				</div>
-			</div>
+				<div className="row">
+					<CommentContainer
+						comments={this.props.comments || []}
+						errors={this.props.commentErrors}
+						slug={this.props.match.params.id}
+						currentUser={this.props.currentUser}
+					/>
+				</div>
+			</>
 		)
 	}
 }
