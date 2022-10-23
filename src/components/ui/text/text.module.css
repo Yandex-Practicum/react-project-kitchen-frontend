@@ -1,0 +1,42 @@
+.h1 {
+  font-style: 'Exo 2';
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 64px;
+}
+
+.h2 {
+  font-style: 'Exo 2';
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 40px;
+}
+
+.headline {
+  font-style: 'Exo 2';
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.text {
+  font-style: 'JetBrains Mono';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.textLine {
+  font-style: 'JetBrains Mono';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-decoration: underline;
+}
+
+.caption {
+  font-style: 'JetBrains Mono';
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+}
