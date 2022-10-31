@@ -1,9 +1,9 @@
 import superagentPromise from "superagent-promise"
 import _superagent from "superagent"
 
-const superagent = superagentPromise(_superagent, global.Promise)
+const superagent = superagentPromise(_superagent, Promise)
 
-const API_ROOT = "http://81.177.135.166:3000/api"
+const API_ROOT = "http://194.67.67.50:3000/api"
 
 const encode = encodeURIComponent
 const responseBody = (res) => res.body

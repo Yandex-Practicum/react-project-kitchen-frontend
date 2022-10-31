@@ -14,4 +14,28 @@
 
     --gradient-light: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), #4C4CFF;
     --gradient-dark: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #4C4CFF;
+
+    --layout-width: 1240px;
+}
+
+* {
+    font-family: 'JetBrains Mono';
+}
+
+body {
+    background-color: var(--bg-primary-color);
+}
+
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }

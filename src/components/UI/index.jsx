@@ -4,7 +4,7 @@ import Pagination from "./Pagination/index";
 export { Tab } from "./Tab/index";
 export { TabList } from "./TabList";
 
-export { Tag } from "./Tag";
+export { Tag }from "./Tag";
 export { TagsList } from "./TagList";
 
 export {Button} from "./Button";

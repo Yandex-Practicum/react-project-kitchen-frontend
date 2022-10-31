@@ -1,13 +1,15 @@
 .button {
   display: flex;
-  flex-direction: row;
   justify-content: center;
+  justify-items: center;
   align-items: center;
+  align-content: center;
   padding: 8px 16px;
   gap: 8px;
   border-radius: 20px;
   border: none;
-
+  transition-duration: .2s;
+  width: max-content;
   &:focus {
     outline: none;
   }
@@ -21,11 +23,15 @@
   composes: button;
   background-color: var(--accent-color);
   color: var(--text-primary-color);
-
   &:hover {
     background: var(--gradient-dark);
+
+
   }
 
+  &.active {
+    background: var(--gradient-light);
+  }
   &:active {
     background: var(--gradient-light);
   }
@@ -39,6 +45,8 @@
 
 .link {
   composes: button;
+  padding: 0;
+
   color: var(--accent-color);
   background-color: transparent;
 
@@ -56,6 +64,27 @@
   background-color: transparent;
   color: var(--text-secondary-color);
 
+  &.active {
+    color: var(--text-primary-color);
+  }
+  &:active {
+    color: var(--text-primary-color);
+  }
+
+  &:hover {
+    background-color: var(--bg-gray-color);
+    color: var(--text-primary-color);
+  }
+}
+
+.delete {
+  composes: button;
+  background-color: transparent;
+  color: var(--text-alert-color);
+
+  &.active {
+    color: var(--text-primary-color);
+  }
   &:active {
     color: var(--text-primary-color);
   }

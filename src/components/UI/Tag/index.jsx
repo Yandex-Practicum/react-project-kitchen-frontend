@@ -1,24 +1,25 @@
-import style from './Tag.module.scss'
+import style from "./Tag.module.scss"
 import { connect } from "react-redux"
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types"
+import { Text } from ".."
+import { useEffect } from "react"
 
 const mapStateToProps = (state) => ({ currentTag: state.articleList.tag })
 
-export function Tag({ tag, handleClick, currentTag }) {
+function TagComponent({ tag, handleClick, currentTag }) {
+	let className = currentTag === tag ? style.active : style.default
 
-    const className = `${style.tag} ${currentTag === tag ? style.active : style.default}`
-
-    return (
-        <li className={className} onClick={handleClick}>
-            {tag}
-        </li>
-    );
+	return (
+		<li className={className} onClick={handleClick}>
+			<Text type="caption">{tag}</Text>
+		</li>
+	)
 }
 
-export default connect(mapStateToProps)(Tag)
+export const Tag = connect(mapStateToProps)(TagComponent)
 
 Tag.propTypes = {
-    tag: PropTypes.string.isRequired,
-    handleClick: PropTypes.func,
-    currentTag: PropTypes.string
-};
+	tag: PropTypes.string.isRequired,
+	handleClick: PropTypes.func,
+	currentTag: PropTypes.string,
+}

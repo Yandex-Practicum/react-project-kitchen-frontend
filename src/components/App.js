@@ -1,6 +1,6 @@
 import agent from "../agent"
 import Header from "./Header"
-import React from "react"
+import React, { useEffect } from "react"
 import { connect } from "react-redux"
 import { APP_LOAD, REDIRECT } from "../constants/actionTypes"
 import { Route, Switch } from "react-router-dom"
@@ -14,6 +14,7 @@ import Register from "../components/Register"
 import Settings from "../components/Settings"
 import { store } from "../store"
 import { push } from "react-router-redux"
+import { Loader } from "./UI/Loader"
 
 const mapStateToProps = (state) => {
 	return {
@@ -21,35 +22,37 @@ const mapStateToProps = (state) => {
 		appName: state.common.appName,
 		currentUser: state.common.currentUser,
 		redirectTo: state.common.redirectTo,
+		dispatch: state.dispatch,
 	}
 }
 
 const mapDispatchToProps = (dispatch) => ({
 	onLoad: (payload, token) => dispatch({ type: APP_LOAD, payload, token, skipTracking: true }),
 	onRedirect: () => dispatch({ type: REDIRECT }),
+	pushRedirect: (payload) => dispatch(push(payload)),
 })
 
-class App extends React.Component {
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.redirectTo) {
-			// this.context.router.replace(nextProps.redirectTo);
-			store.dispatch(push(nextProps.redirectTo))
-			this.props.onRedirect()
-		}
-	}
-
-	componentWillMount() {
+const App = ({ onLoad, appLoaded, onRedirect, dispatch, redirectTo, pushRedirect }) => {
+	useEffect(() => {
 		const token = window.localStorage.getItem("jwt")
 		if (token) agent.setToken(token)
 
-		this.props.onLoad(token ? agent.Auth.current() : null, token)
-	}
+		onLoad(token ? agent.Auth.current() : null, token)
+	}, [])
 
-	render() {
-		if (this.props.appLoaded)
-			return (
-				<div>
-					<Header appName={this.props.appName} currentUser={this.props.currentUser} />
+	useEffect(() => {
+		if (redirectTo) {
+			// this.context.router.replace(nextProps.redirectTo);
+			pushRedirect(redirectTo)
+			onRedirect()
+		}
+	}, [redirectTo, dispatch])
+
+	if (appLoaded)
+		return (
+			<>
+				<Header />
+				<div style={{ width: "var(--layout-width)", margin: "0 auto" }}>
 					<Switch>
 						<Route exact path="/" component={Home} />
 						<Route path="/login" component={Login} />
@@ -62,18 +65,10 @@ class App extends React.Component {
 						<Route path="/@:username" component={Profile} />
 					</Switch>
 				</div>
-			)
-
-		return (
-			<div>
-				<Header appName={this.props.appName} currentUser={this.props.currentUser} />
-			</div>
+			</>
 		)
-	}
-}
 
-// App.contextTypes = {
-//   router: PropTypes.object.isRequired
-// };
+	return <Loader />
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

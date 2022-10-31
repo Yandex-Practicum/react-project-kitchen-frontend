@@ -3,9 +3,9 @@ import Tab from '../Tab/';
 import { connect } from "react-redux"
 import PropTypes from 'prop-types';
 
-const mapStateToProps = (state) => ({ tag: state.articleList.tag })
+const mapStateToProps = (state) => ({ tag: state.articleList.tag, state: state })
 
-export function TabList({ tag, tabs }) {
+const TabListComponent = ({ tabs, tag }) => {
     return (
         <ul className={style.list}>
             {tabs.map((item) =>
@@ -16,7 +16,8 @@ export function TabList({ tag, tabs }) {
                     route={item.route}
                 />
             )}
-            {
+            {   
+
                 tag && <Tab
                     title={`#${tag}`}
                     route={"/"}
@@ -26,9 +27,9 @@ export function TabList({ tag, tabs }) {
     );
 }
 
-export default connect(mapStateToProps)(TabList)
+export const TabList = connect(mapStateToProps)(TabListComponent)
 
-Tab.propTypes = {
-    tabs: PropTypes.array,
-    tag: PropTypes.string
-};
+// Tab.propTypes = {
+//     tabs: PropTypes.array,
+//     tag: PropTypes.string
+// };

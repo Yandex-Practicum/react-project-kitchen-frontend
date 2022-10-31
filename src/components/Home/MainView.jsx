@@ -7,23 +7,36 @@ const mapStateToProps = (state) => ({
 	...state.articleList,
 	tags: state.home.tags,
 	token: state.common.token,
+	currentUser: state.common.currentUser,
+	selectedTag: state.articleList.tag || (state.articleList.tags && state.articleList.tags[0]),
 })
 
+//eventKeys : all, feed
+
 const MainView = (props) => {
-	const tabs = [
-		{
-			title: "Your Feed",
-			eventKey: "feed",
-		},
-		{
-			title: "Global Feed",
-			eventKey: "all",
-		},
-	]
+	const getTabs = () => {
+		const userTabs = [
+			{
+				title: "Ваша лента",
+				eventKey: "feed",
+			},
+			{
+				title: "Лента",
+				eventKey: "all",
+			},
+		]
+		const anonymousTabs = [
+			{
+				title: "Лента",
+				eventKey: "all",
+			},
+		]
+		return props.currentUser ? userTabs : anonymousTabs
+	}
 
 	return (
-		<div className="col-md-9">
-			<TabList tabs={tabs} />
+		<div>
+			<TabList tabs={getTabs()} />
 			<ArticleList
 				pager={props.pager}
 				articles={props.articles}

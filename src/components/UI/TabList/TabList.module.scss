@@ -3,6 +3,6 @@
 .list {
     display: flex;
     padding: 0;
-    box-shadow: inset 0px -1px 0px var(--divider-color);
+    border-bottom: 2px solid var(--bg-secondary-color);
     height: 56px;
 }

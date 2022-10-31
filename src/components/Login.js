@@ -4,6 +4,7 @@ import React from "react"
 import agent from "../agent"
 import { connect } from "react-redux"
 import { UPDATE_FIELD_AUTH, LOGIN, LOGIN_PAGE_UNLOADED } from "../constants/actionTypes"
+import { Input } from "./UI/Input"
 
 const mapStateToProps = (state) => ({ ...state.auth })
 
@@ -45,35 +46,28 @@ class Login extends React.Component {
 							<ListErrors errors={this.props.errors} />
 
 							<form onSubmit={this.submitForm(email, password)}>
-								<fieldset>
-									<fieldset className="form-group">
-										<input
-											className="form-control form-control-lg"
-											type="email"
-											placeholder="Email"
-											value={email}
-											onChange={this.changeEmail}
-										/>
-									</fieldset>
+								<Input
+									label="E-mail"
+									type="email"
+									placeholder="E-mail"
+									value={email}
+									onChange={this.changeEmail}
+								/>
+								<Input
+									label="Пароль"
+									type="password"
+									placeholder="Пароль"
+									value={password}
+									onChange={this.changePassword}
+								/>
 
-									<fieldset className="form-group">
-										<input
-											className="form-control form-control-lg"
-											type="password"
-											placeholder="Password"
-											value={password}
-											onChange={this.changePassword}
-										/>
-									</fieldset>
-
-									<button
-										className="btn btn-lg btn-primary pull-xs-right"
-										type="submit"
-										disabled={this.props.inProgress}
-									>
-										Sign in
-									</button>
-								</fieldset>
+								<button
+									className="btn btn-lg btn-primary pull-xs-right"
+									type="submit"
+									disabled={this.props.inProgress}
+								>
+									Sign in
+								</button>
 							</form>
 						</div>
 					</div>

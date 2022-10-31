@@ -4,6 +4,7 @@ import React from "react"
 import agent from "../agent"
 import { connect } from "react-redux"
 import { UPDATE_FIELD_AUTH, REGISTER, REGISTER_PAGE_UNLOADED } from "../constants/actionTypes"
+import { Input } from "./UI/Input"
 
 const mapStateToProps = (state) => ({ ...state.auth })
 
@@ -53,36 +54,27 @@ class Register extends React.Component {
 
 							<form onSubmit={this.submitForm(username, email, password)}>
 								<fieldset>
-									<fieldset className="form-group">
-										<input
-											className="form-control form-control-lg"
-											type="text"
-											placeholder="Username"
-											value={this.props.username}
-											onChange={this.changeUsername}
-										/>
-									</fieldset>
-
-									<fieldset className="form-group">
-										<input
-											className="form-control form-control-lg"
-											type="email"
-											placeholder="Email"
-											value={this.props.email}
-											onChange={this.changeEmail}
-										/>
-									</fieldset>
-
-									<fieldset className="form-group">
-										<input
-											className="form-control form-control-lg"
-											type="password"
-											placeholder="Password"
-											value={this.props.password}
-											onChange={this.changePassword}
-										/>
-									</fieldset>
-
+									<Input
+										label="Имя пользователя"
+										type="text"
+										placeholder="Имя пользователя"
+										value={this.props.username}
+										onChange={this.changeUsername}
+									/>
+									<Input
+										label="E-mail"
+										type="email"
+										placeholder="E-mail"
+										value={this.props.email}
+										onChange={this.changeEmail}
+									/>
+									<Input
+										label="Пароль"
+										type="password"
+										placeholder="Пароль"
+										value={this.props.password}
+										onChange={this.changePassword}
+									/>
 									<button
 										className="btn btn-lg btn-primary pull-xs-right"
 										type="submit"
