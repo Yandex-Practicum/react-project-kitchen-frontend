@@ -8,9 +8,8 @@ const mapStateToProps = (state) => ({
 	tags: state.home.tags,
 	token: state.common.token,
 	currentUser: state.common.currentUser,
-	selectedTag: state.articleList.tag || (state.articleList.tags && state.articleList.tags[0])
+	selectedTag: state.articleList.tag || (state.articleList.tags && state.articleList.tags[0]),
 })
-
 
 //eventKeys : all, feed
 
@@ -19,10 +18,10 @@ const MainView = (props) => {
 		const userTabs = [
 			{
 				title: "Ваша лента",
-				eventKey: "all",
+				eventKey: "feed",
 			},
 			{
-				title: 'Лента',
+				title: "Лента",
 				eventKey: "all",
 			},
 		]
@@ -31,10 +30,6 @@ const MainView = (props) => {
 				title: "Лента",
 				eventKey: "all",
 			},
-			{
-				title: '#' + props.selectedTag,
-				eventKey: 'all',
-			},
 		]
 		return props.currentUser ? userTabs : anonymousTabs
 	}
@@ -42,7 +37,7 @@ const MainView = (props) => {
 	return (
 		<div>
 			<TabList tabs={getTabs()} />
-			<ArticleList 
+			<ArticleList
 				pager={props.pager}
 				articles={props.articles}
 				loading={props.loading}

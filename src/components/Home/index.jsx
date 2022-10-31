@@ -6,8 +6,6 @@ import { HOME_PAGE_LOADED, HOME_PAGE_UNLOADED, APPLY_TAG_FILTER } from "../../co
 import { TagsList, Sidebar, Pagination } from "components/UI"
 import { Banner } from "components/Banner"
 
-const Promise = global.Promise
-
 const mapStateToProps = (state) => ({
 	...state.home,
 	appName: state.common.appName,

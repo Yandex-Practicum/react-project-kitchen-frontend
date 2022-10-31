@@ -4,7 +4,7 @@ import style from "./Input.module.scss"
 import { Text } from "../Typography/Text/"
 import { AlertIcon, CheckIcon, ClipIcon, EyeIcon } from "components/Icons"
 
-export function Input({ type = 'text', label = '', placeholder, success, error, value, onChange, onKeyUp }) {
+export function Input({ type = 'text', label = '', placeholder, success, error, value, onChange, onKeyUp, name }) {
 
     const fileRef = useRef(null)
     const [fileName, setFileName] = useState('')
@@ -34,6 +34,7 @@ export function Input({ type = 'text', label = '', placeholder, success, error, 
             <div className={className}>
                 {type === 'textarea' || type === 'comment' ?
                     <textarea
+                        name={name}
                         value={value}
                         onChange={onChange}
                         className={type === 'comment' ? commentClessName : textAreaClessName}
@@ -42,6 +43,7 @@ export function Input({ type = 'text', label = '', placeholder, success, error, 
                         rows={type === 'comment' ? 4 : 5}
                     /> :
                     <input
+                        name={name}
                         value={value}
                         onChange={onChange}
                         onKeyUp={onKeyUp}
@@ -55,7 +57,7 @@ export function Input({ type = 'text', label = '', placeholder, success, error, 
                         success ? <CheckIcon /> :
                             error ? <AlertIcon /> : ''}
                 </div>
-                {type === 'file' &&
+                {/* {type === 'file' &&
                     <>
                         <label className={style.icon} htmlFor="file">
                             <ClipIcon />
@@ -70,7 +72,7 @@ export function Input({ type = 'text', label = '', placeholder, success, error, 
                             value={fileName}
                         />
                     </>
-                }
+                } */}
                 {type === 'password' &&
                     <button onClick={clickEye} className={style.icon}>
                         <EyeIcon type={isVisible ? 'hide' : 'show'} />

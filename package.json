@@ -4,6 +4,8 @@
   "private": true,
   "devDependencies": {
     "cross-env": "^5.1.4",
+    "eslint": "^8.26.0",
+    "eslint-plugin-react": "^7.31.10",
     "react-scripts": "5.0.1",
     "sass": "^1.54.4"
   },
