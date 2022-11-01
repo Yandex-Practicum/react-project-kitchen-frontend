@@ -52,7 +52,7 @@ const Settings = ({ onSubmitForm, inProgress, currentUser, errors, onClickLogout
 	}
 	return (
 		<div className={styles.wrapper}>
-			<Title type={2}>Your Settings</Title>
+			<Title type={2}>Ваши настройки</Title>
 
 			<ListErrors errors={errors}></ListErrors>
 
@@ -97,7 +97,7 @@ const Settings = ({ onSubmitForm, inProgress, currentUser, errors, onClickLogout
 					onChange={changeHandler}
 				/>
 				<section className={styles.button}>
-					<Button disabled={!inProgress}>Update Settings</Button>
+					<Button disabled={!inProgress}>Сохранить</Button>
 				</section>
 			</form>
 			<Button type="delete" onClick={onClickLogout}>

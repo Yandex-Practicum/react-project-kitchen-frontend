@@ -16,8 +16,7 @@ const TabListComponent = ({ tabs, tag }) => {
                     route={item.route}
                 />
             )}
-            {   
-
+            {
                 tag && <Tab
                     title={`#${tag}`}
                     route={"/"}
