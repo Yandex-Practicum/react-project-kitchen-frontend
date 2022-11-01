@@ -2,10 +2,10 @@ import React from "react"
 import PropTypes from "prop-types"
 import style from "./Button.module.scss"
 
-export const Button = ({ type = "primary", onClick, children, disabled = false, active = false}) => {
+export const Button = ({ type = "primary", htmlType = "button", onClick, children, disabled = false, active = false }) => {
 	const activeClass = active ? style.active : ''
 	return (
-		<button className={`${style[type]} ${activeClass}`} onClick={onClick} disabled={disabled}>
+		<button type={htmlType} className={`${style[type]} ${activeClass}`} onClick={onClick} disabled={disabled}>
 			{children}
 		</button>
 	)

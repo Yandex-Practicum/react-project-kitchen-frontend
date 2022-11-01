@@ -15,7 +15,7 @@ export function Input({ type = 'text', label = '', placeholder, success, error, 
     }
     const handleChange = (e) => {
         e.preventDefault();
-        setFileName(fileRef.current?.value.replace(/.*[\/\\]/, ''));
+        setFileName(fileRef.current?.value.replace(/.*[/\\]/, ''));
     }
     const className = `
     ${type === 'comment' ? style.comment__wrapper : style.default}
