@@ -5,6 +5,7 @@ import { HOME_PAGE_LOADED, HOME_PAGE_UNLOADED, APPLY_TAG_FILTER } from "../../co
 import { TagsList, Sidebar, Pagination } from "components/UI"
 import { Banner } from "components/Banner"
 import MainView from "components/MainView"
+import style from "./Home.module.scss"
 
 const mapStateToProps = (state) => ({
 	...state.home,
@@ -34,15 +35,11 @@ class Home extends React.Component {
 		return (
 			<>
 				<Banner variant="app" />
-				<div style={{ display: "flex", gap: 32, marginTop: 32 }}>
-					<div>
-						<MainView />
-					</div>
-					<div>
-						<Sidebar>
-							<TagsList tags={this.props.tags} onClickTag={this.props.onClickTag} />
-						</Sidebar>
-					</div>
+				<div className={style.main}>
+					<MainView />
+					<Sidebar>
+						<TagsList tags={this.props.tags} onClickTag={this.props.onClickTag} />
+					</Sidebar>
 				</div>
 				<Pagination />
 			</>

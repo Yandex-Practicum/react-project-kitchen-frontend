@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { connect } from "react-redux"
 import { CHANGE_TAB } from 'constants/actionTypes';
 import PropTypes from 'prop-types';
+import { Text } from '..';
 
 const mapStateToProps = (state) => ({ tab: state.articleList.tab })
 
@@ -31,10 +32,14 @@ export function Tab({ onTabClick, eventKey, title, tab, route }) {
         <li className={style.li}>
             {eventKey ?
                 (<button className={className} onClick={clickHandler}>
-                    {title}
+                    <Text>
+                        {title}
+                    </Text>
                 </button>)
                 : <Link className={className} to={route}>
-                    {title}
+                    <Text>
+                        {title}
+                    </Text>
                 </Link>
             }
         </li>
