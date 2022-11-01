@@ -5,6 +5,7 @@ export default (state = {}, action) => {
 		case PROFILE_PAGE_LOADED:
 			return {
 				...action.payload[0].profile,
+				...action.payload[2]
 			}
 		case PROFILE_PAGE_UNLOADED:
 			return {}

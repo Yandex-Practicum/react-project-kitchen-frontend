@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import agent from "../../agent"
 import { connect } from "react-redux"
 import { FOLLOW_USER, UNFOLLOW_USER, PROFILE_PAGE_LOADED, PROFILE_PAGE_UNLOADED } from "../../constants/actionTypes"
-import { TabList } from "../UI"
+import { Sidebar, TabList, TagsList } from "../UI"
 import { Banner } from "../Banner"
 
 const mapStateToProps = (state) => ({
@@ -34,6 +34,7 @@ class Profile extends React.Component {
 			Promise.all([
 				agent.Profile.get(this.props.match.params.username),
 				agent.Articles.byAuthor(this.props.match.params.username),
+				agent.Tags.getAll(),
 			]),
 		)
 	}
@@ -62,12 +63,16 @@ class Profile extends React.Component {
 				<div></div>
 				<div>
 					<TabList tabs={tabs} />
+					<Sidebar>
+						<TagsList tags={this.props.profile.tags} />
+					</Sidebar>
 					<ArticleList
 						pager={this.props.pager}
 						articles={this.props.articles}
 						articlesCount={this.props.articlesCount}
 						currentPage={this.props.currentPage}
 					/>
+
 				</div>
 			</>
 		)
