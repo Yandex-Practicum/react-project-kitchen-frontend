@@ -54,9 +54,9 @@ const EditorComponent = (props) => {
 	}
 
 	const watchTags = (e) => {
-		if (e.key === ",") {
+		if (e.key === "Enter") {
 			e.preventDefault()
-			onAddTag()
+			if (tagInput && !tagList.find(tag => tag === tagInput)) onAddTag()
 		}
 	}
 
@@ -122,7 +122,7 @@ const EditorComponent = (props) => {
 				<Input
 					name="tagInput"
 					label="Тэги"
-					placeholder="Теги (через запятую)"
+					placeholder="Теги (нажимать Enter)"
 					value={tagInput}
 					onChange={changeHandler}
 					onKeyUp={watchTags}
