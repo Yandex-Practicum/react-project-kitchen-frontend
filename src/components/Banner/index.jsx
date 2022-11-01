@@ -55,7 +55,6 @@ const App = connect(mapStateToProps)(({ appName }) => {
 })
 
 const BannerComponent = ({ variant, appName, currentUser }) => {
-	if (!variant || !appName || !currentUser) return null
 
 	const bannerVariants = {
 		app: App,

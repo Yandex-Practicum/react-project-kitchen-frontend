@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom"
 import ListErrors from "./ListErrors"
-import React from "react"
+import React, { useState } from "react"
 import agent from "../agent"
 import { connect } from "react-redux"
 import { UPDATE_FIELD_AUTH, REGISTER, REGISTER_PAGE_UNLOADED } from "../constants/actionTypes"
 import { Input } from "./UI/Input"
+import { Button, Text, Title } from "./UI"
 
 const mapStateToProps = (state) => ({ ...state.auth })
 
@@ -19,77 +20,62 @@ const mapDispatchToProps = (dispatch) => ({
 	onUnload: () => dispatch({ type: REGISTER_PAGE_UNLOADED }),
 })
 
-class Register extends React.Component {
-	constructor() {
-		super()
-		this.changeEmail = (ev) => this.props.onChangeEmail(ev.target.value)
-		this.changePassword = (ev) => this.props.onChangePassword(ev.target.value)
-		this.changeUsername = (ev) => this.props.onChangeUsername(ev.target.value)
-		this.submitForm = (username, email, password) => (ev) => {
-			ev.preventDefault()
-			this.props.onSubmit(username, email, password)
-		}
+const Register = ({ onSubmit, onUnload, errors, inProgress }) => {
+	const [values, setValues] = useState({
+		email: "",
+		password: "",
+		username: "",
+	})
+
+	const onChange = (e) => {
+		setValues({ ...values, [e.currentTarget.name]: e.currentTarget.value })
 	}
 
-	componentWillUnmount() {
-		this.props.onUnload()
+	const submitForm = (username, email, password) => (ev) => {
+		ev.preventDefault()
+		onSubmit(username, email, password)
 	}
 
-	render() {
-		const email = this.props.email
-		const password = this.props.password
-		const username = this.props.username
+	return (
+		<div>
+			<Title>Sign Up</Title>
+				<Link to="/login"><Text>Have an account?</Text></Link>
 
-		return (
-			<div className="auth-page">
-				<div className="container page">
-					<div className="row">
-						<div className="col-md-6 offset-md-3 col-xs-12">
-							<h1 className="text-xs-center">Sign Up</h1>
-							<p className="text-xs-center">
-								<Link to="/login">Have an account?</Link>
-							</p>
+			<ListErrors errors={errors} />
 
-							<ListErrors errors={this.props.errors} />
-
-							<form onSubmit={this.submitForm(username, email, password)}>
-								<fieldset>
-									<Input
-										label="Имя пользователя"
-										type="text"
-										placeholder="Имя пользователя"
-										value={this.props.username}
-										onChange={this.changeUsername}
-									/>
-									<Input
-										label="E-mail"
-										type="email"
-										placeholder="E-mail"
-										value={this.props.email}
-										onChange={this.changeEmail}
-									/>
-									<Input
-										label="Пароль"
-										type="password"
-										placeholder="Пароль"
-										value={this.props.password}
-										onChange={this.changePassword}
-									/>
-									<button
-										className="btn btn-lg btn-primary pull-xs-right"
-										type="submit"
-										disabled={this.props.inProgress}
-									>
-										Sign up
-									</button>
-								</fieldset>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		)
-	}
+			<form onSubmit={submitForm(values.username, values.email, values.password)}>
+				<fieldset>
+					<Input
+						name="username"
+						label="Имя пользователя"
+						type="text"
+						placeholder="Имя пользователя"
+						value={values.username}
+						onChange={onChange}
+					/>
+					<Input
+						name="email"
+						label="E-mail"
+						type="email"
+						placeholder="E-mail"
+						value={values.email}
+						onChange={onChange}
+					/>
+					<Input
+						name="password"
+						label="Пароль"
+						type="password"
+						placeholder="Пароль"
+						value={values.password}
+						onChange={onChange}
+					/>
+					<Button disabled={inProgress}>
+						Sign up
+					</Button>
+				</fieldset>
+			</form>
+		</div>
+	)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register)

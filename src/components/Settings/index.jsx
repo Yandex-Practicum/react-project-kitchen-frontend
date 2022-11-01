@@ -19,13 +19,19 @@ const mapDispatchToProps = (dispatch) => ({
 	onUnload: () => dispatch({ type: SETTINGS_PAGE_UNLOADED }),
 })
 
-const Settings = ({ onSubmitForm, inProgress, currentUser, errors, onClickLogout }) => {
+const Settings = ({ onSubmitForm, inProgress, currentUser, errors, onClickLogout, onUnload }) => {
 	const [values, setValues] = useState({
 		image: "",
 		username: "",
 		bio: "",
 		email: "",
 		password: "",
+	})
+
+	useEffect(() => {
+		return () => {
+			onUnload()
+		}
 	})
 
 	useEffect(() => {
