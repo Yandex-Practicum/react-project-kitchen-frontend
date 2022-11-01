@@ -1,14 +1,16 @@
-@import '../../../assets/style/global.css';
+@import "../../../assets/style/global.css";
 
 .sidebar {
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    background-color: var(--bg-secondary-color);
-    border-radius: 20px;
-    p {
-        color: var(--text-primary-color);
-        margin: 0;
-    }
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	background-color: var(--bg-secondary-color);
+	border-radius: 20px;
+	width: 268px;
+	height: fit-content;
+	p {
+		color: var(--text-primary-color);
+		margin: 0;
+	}
 }
