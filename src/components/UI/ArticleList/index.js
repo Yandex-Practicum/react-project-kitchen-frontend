@@ -1,18 +1,18 @@
-import ArticlePreview from "./UI/ArticlePreview"
+import ArticlePreview from "../ArticlePreview"
 import React from "react"
-import { Pagination } from "./UI"
+import style from "./ArticleList.module.scss"
+import { Text } from ".."
 
 const ArticleList = (props) => {
 	if (!props.articles) return <div className="article-preview">Loading...</div>
 
-	if (props.articles.length === 0) return <div className="article-preview">No articles are here... yet.</div>
+	if (props.articles.length === 0) return <div className={style.main}><Text>Здесь пусто... пока что.</Text></div>
 
 	return (
 		<div>
 			{props.articles.map((article) => {
 				return <ArticlePreview article={article} key={article.slug} />
 			})}
-			
 		</div>
 	)
 }

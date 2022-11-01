@@ -16,7 +16,7 @@ const mapStateToProps = (state) => {
 	}
 }
 
-const Article = connect(mapStateToProps)(({ article, currentUser }) => {
+const Article = connect(mapStateToProps)(({ article }) => {
 	return (
 		<div className={styles.articleWrapper}>
 			<ArticleMeta image={article.author.image} username={article.author.username} createdAt={article.createdAt} />
@@ -26,6 +26,7 @@ const Article = connect(mapStateToProps)(({ article, currentUser }) => {
 })
 
 const User = connect(mapStateToProps)(({ profile }) => {
+	if (!profile?.username) return null
 	return (
 		<div className={styles.userWrapper}>
 			<figure>
@@ -42,6 +43,7 @@ const User = connect(mapStateToProps)(({ profile }) => {
 })
 
 const App = connect(mapStateToProps)(({ appName }) => {
+
 	return (
 		<div className={styles.titleWrapper}>
 			<Title type={1} shadow>
@@ -53,7 +55,7 @@ const App = connect(mapStateToProps)(({ appName }) => {
 })
 
 const BannerComponent = ({ variant, appName, currentUser }) => {
-	if (!variant) return null
+	if (!variant || !appName || !currentUser) return null
 
 	const bannerVariants = {
 		app: App,

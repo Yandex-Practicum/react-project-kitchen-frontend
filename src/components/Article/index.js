@@ -8,6 +8,7 @@ import { TagsList, Title } from "components/UI"
 import ArticleActions from "./ArticleActions"
 import { ArticleMeta } from "components/UI/ArticleMeta"
 import { Banner } from "components/Banner"
+import style from "./Article.module.scss"
 
 const mapStateToProps = (state) => ({
 	...state.article,
@@ -38,23 +39,23 @@ class Article extends React.Component {
 
 		const markup = { __html: marked(this.props.article.body, { sanitize: true }) }
 		return (
-			<>
-				<Banner variant='article'/>
-				<div>
-					<Title type={2}>{this.props.article.title}</Title>
+			<div>
+				<Banner variant='article' />
+				<div className={style.wrapper}>
+					<div className={style.title}>
+						<Title type={2}>{this.props.article.title}</Title>
+					</div>
+					<div>
+						<TagsList tags={this.props.article.tagList} />
+					</div>
 				</div>
-				<div>
-					<TagsList tags={this.props.article.tagList} />
-				</div>
-				<div className="row">
-					<CommentContainer
-						comments={this.props.comments || []}
-						errors={this.props.commentErrors}
-						slug={this.props.match.params.id}
-						currentUser={this.props.currentUser}
-					/>
-				</div>
-			</>
+				<CommentContainer
+					comments={this.props.comments || []}
+					errors={this.props.commentErrors}
+					slug={this.props.match.params.id}
+					currentUser={this.props.currentUser}
+				/>
+			</div>
 		)
 	}
 }

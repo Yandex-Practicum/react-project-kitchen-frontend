@@ -23,6 +23,7 @@ export function Input({ type = 'text', label = '', placeholder, success, error, 
     ${success && style.success}`
     const textAreaClessName = `${style.input} ${style.textarea}`
     const commentClessName = `${textAreaClessName} ${style.comment}`
+    if (typeof value !== "string") return null
 
     return (
         <div className={style.wrapper}>
