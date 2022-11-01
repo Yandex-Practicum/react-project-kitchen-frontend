@@ -2,6 +2,7 @@ import ArticleList from "components/UI/ArticleList"
 import { TabList } from "components/UI"
 import React from "react"
 import { connect } from "react-redux"
+import style from "./MainView.module.scss"
 
 const mapStateToProps = (state) => ({
 	...state.articleList,
@@ -35,7 +36,7 @@ const MainView = (props) => {
 	}
 
 	return (
-		<div>
+		<div className={style.main}>
 			<TabList tabs={getTabs()} />
 			<ArticleList
 				pager={props.pager}

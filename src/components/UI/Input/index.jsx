@@ -13,7 +13,10 @@ export function Input({ type = 'text', label = '', placeholder, success, error, 
         e.preventDefault();
         setVisible(!isVisible);
     }
-
+    const handleChange = (e) => {
+        e.preventDefault();
+        setFileName(fileRef.current?.value.replace(/.*[/\\]/, ''));
+    }
     const className = `
     ${type === 'comment' ? style.comment__wrapper : style.default}
     ${error && style.error}
