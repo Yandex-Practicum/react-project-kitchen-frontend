@@ -1,12 +1,12 @@
-import DeleteButton from "components/Article/DeleteButton"
 import React from "react"
-import { Text } from ".."
+import { Button, Text } from ".."
 import { ArticleMeta } from "../ArticleMeta"
+import DeleteButton from "../DeleteButton"
 import style from "./Comment.module.scss"
 
 const Comment = (props) => {
     const comment = props.comment
-    const show = props.currentUser && props.currentUser.username === comment.author.username
+    const show = props.currentUser?.username === comment.author.username
     return (
         <div className={style.card}>
             <div className={style.top}>
