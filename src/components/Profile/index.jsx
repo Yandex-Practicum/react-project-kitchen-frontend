@@ -72,7 +72,6 @@ class Profile extends React.Component {
 						articlesCount={this.props.articlesCount}
 						currentPage={this.props.currentPage}
 					/>
-
 				</div>
 			</>
 		)
