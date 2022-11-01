@@ -52,7 +52,7 @@ const Settings = ({ onSubmitForm, inProgress, currentUser, errors, onClickLogout
 	}
 	return (
 		<div className={styles.wrapper}>
-			<Title type={2}>Your Settings</Title>
+			<Title type={2}>Ваши настройки</Title>
 
 			<ListErrors errors={errors}></ListErrors>
 
@@ -68,14 +68,14 @@ const Settings = ({ onSubmitForm, inProgress, currentUser, errors, onClickLogout
 				<Input
 					name="username"
 					label="Имя пользователя"
-					placeholder="Имя пользователя"
+					placeholder="Введите ваше имя"
 					value={values.username}
 					onChange={changeHandler}
 				/>
 				<Input
 					name="bio"
 					label="Информация о вас"
-					placeholder="Информация о вас"
+					placeholder="Расскажите немного о себе"
 					type="textarea"
 					value={values.bio}
 					onChange={changeHandler}
@@ -84,7 +84,7 @@ const Settings = ({ onSubmitForm, inProgress, currentUser, errors, onClickLogout
 					name="email"
 					label="E-mail"
 					type="email"
-					placeholder="E-mail"
+					placeholder="Введите почту"
 					value={values.email}
 					onChange={changeHandler}
 				/>
@@ -92,12 +92,12 @@ const Settings = ({ onSubmitForm, inProgress, currentUser, errors, onClickLogout
 					name="password"
 					label="Новый пароль"
 					type="password"
-					placeholder="Новый пароль"
+					placeholder="Введите ваш новый пароль"
 					value={values.password}
 					onChange={changeHandler}
 				/>
 				<section className={styles.button}>
-					<Button disabled={!inProgress}>Update Settings</Button>
+					<Button disabled={!inProgress}>Сохранить</Button>
 				</section>
 			</form>
 			<Button type="delete" onClick={onClickLogout}>

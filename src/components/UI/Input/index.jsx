@@ -7,22 +7,19 @@ import { AlertIcon, CheckIcon, ClipIcon, EyeIcon } from "components/Icons"
 export function Input({ type = 'text', label = '', placeholder, success, error, value, onChange, onKeyUp, name }) {
 
     const fileRef = useRef(null)
-    const [fileName, setFileName] = useState('')
     const [isVisible, setVisible] = useState(false)
     const clickEye = (e) => {
         e.preventDefault();
         setVisible(!isVisible);
     }
-    const handleChange = (e) => {
-        e.preventDefault();
-        setFileName(fileRef.current?.value.replace(/.*[\/\\]/, ''));
-    }
+
     const className = `
     ${type === 'comment' ? style.comment__wrapper : style.default}
     ${error && style.error}
     ${success && style.success}`
     const textAreaClessName = `${style.input} ${style.textarea}`
     const commentClessName = `${textAreaClessName} ${style.comment}`
+    if (typeof value !== "string") return null
 
     return (
         <div className={style.wrapper}>

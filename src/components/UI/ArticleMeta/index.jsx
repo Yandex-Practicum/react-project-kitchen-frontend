@@ -4,7 +4,8 @@ import { Link } from "react-router-dom"
 import { AuthorDate } from '../AuthorDate'
 
 export function ArticleMeta({ image, username, createdAt, children }) {
-
+    // if (!image) return null
+    console.log(image)
     return (
         <div className={style.meta}>
             <div className={style.left}>

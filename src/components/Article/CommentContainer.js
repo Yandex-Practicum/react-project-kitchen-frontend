@@ -9,7 +9,7 @@ const CommentContainer = (props) => {
 			<div className="col-xs-12 col-md-8 offset-md-2">
 				<div>
 					<list-errors errors={props.errors}></list-errors>
-					<CommentInput slug={props.slug} currentUser={props.currentUser} />
+					<CommentInput/>
 				</div>
 
 				<CommentList comments={props.comments} slug={props.slug} currentUser={props.currentUser} />
