@@ -7,6 +7,7 @@ import { AlertIcon, CheckIcon, ClipIcon, EyeIcon } from "components/Icons"
 export function Input({ type = 'text', label = '', placeholder, success, error, value, onChange, onKeyUp, name }) {
 
     const fileRef = useRef(null)
+    const [fileName, setFileName] = useState('')
     const [isVisible, setVisible] = useState(false)
     const clickEye = (e) => {
         e.preventDefault();
