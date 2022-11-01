@@ -6,6 +6,7 @@ import { connect } from "react-redux"
 import { FOLLOW_USER, UNFOLLOW_USER, PROFILE_PAGE_LOADED, PROFILE_PAGE_UNLOADED } from "../../constants/actionTypes"
 import { Sidebar, TabList, TagsList } from "../UI"
 import { Banner } from "../Banner"
+import style from "./Profile.module.scss"
 
 const mapStateToProps = (state) => ({
 	...state.articleList,
@@ -60,18 +61,19 @@ class Profile extends React.Component {
 		return (
 			<>
 				<Banner variant="user" />
-				<div></div>
-				<div>
-					<TabList tabs={tabs} />
+				<div className={style.wrapper}>
+					<div>
+						<TabList tabs={tabs} />
+						<ArticleList
+							pager={this.props.pager}
+							articles={this.props.articles}
+							articlesCount={this.props.articlesCount}
+							currentPage={this.props.currentPage}
+						/>
+					</div>
 					<Sidebar>
 						<TagsList tags={this.props.profile.tags} />
 					</Sidebar>
-					<ArticleList
-						pager={this.props.pager}
-						articles={this.props.articles}
-						articlesCount={this.props.articlesCount}
-						currentPage={this.props.currentPage}
-					/>
 				</div>
 			</>
 		)

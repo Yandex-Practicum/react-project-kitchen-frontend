@@ -1,41 +1,41 @@
 :root {
-    --input-color: #2F2F37;
-    --accent-color: #4C4CFF;
-    --divider-color: #2F2F37;
-    --gradient: linear-gradient(63.18deg, #801AB3 0%, #4C4CFF 100%);
-    --text-secondary-color:#8585AD;
-    --text-primary-color:#F2F2F3;
-    --text-alert-color:#F20D33;
-    --text-success-color:#00CCCC;
-    --text-disabled-color:#3A3A55;
-    --bg-primary-color:#131316;
-    --bg-secondary-color:#1C1C21;
-    --bg-grey-color:#F4F5F6;
+	--input-color: #2f2f37;
+	--accent-color: #4c4cff;
+	--divider-color: #2f2f37;
+	--gradient: linear-gradient(63.18deg, #801ab3 0%, #4c4cff 100%);
+	--text-secondary-color: #8585ad;
+	--text-primary-color: #f2f2f3;
+	--text-alert-color: #f20d33;
+	--text-success-color: #00cccc;
+	--text-disabled-color: #3a3a55;
+	--bg-primary-color: #131316;
+	--bg-secondary-color: #1c1c21;
+	--bg-grey-color: #f4f5f6;
 
-    --gradient-light: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), #4C4CFF;
-    --gradient-dark: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #4C4CFF;
+	--gradient-light: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), #4c4cff;
+	--gradient-dark: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #4c4cff;
 
-    --layout-width: 1240px;
+	--layout-width: 1140px;
 }
 
 * {
-    font-family: 'JetBrains Mono';
+	font-family: "JetBrains Mono";
 }
 
 body {
-    background-color: var(--bg-primary-color);
+	background-color: var(--bg-primary-color);
 }
 
 /* Указываем box sizing */
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 a {
-  text-decoration: none;
-  color: inherit;
+	text-decoration: none;
+	color: inherit;
 }
