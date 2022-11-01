@@ -1,7 +1,7 @@
-import ArticleList from "../ArticleList"
+import ArticleList from "components/ArticleList"
+import { TabList } from "components/UI"
 import React from "react"
 import { connect } from "react-redux"
-import { TabList } from "components/UI"
 
 const mapStateToProps = (state) => ({
 	...state.articleList,

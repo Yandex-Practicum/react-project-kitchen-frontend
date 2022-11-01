@@ -19,6 +19,7 @@
     "rules": {
         "react/prop-types": "off",
         "no-unused-vars": "off",
-        "react/no-deprecated": "warn"
+        "react/no-deprecated": "warn",
+        "react/react-in-jsx-scope": "off"
     }
 }
