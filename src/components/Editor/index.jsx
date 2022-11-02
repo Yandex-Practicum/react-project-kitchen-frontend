@@ -122,7 +122,7 @@ const EditorComponent = (props) => {
 				<Input
 					name="tagInput"
 					label="Тэги"
-					placeholder="Теги (нажимать Enter)"
+					placeholder="Теги (по нажатию Enter)"
 					value={tagInput}
 					onChange={changeHandler}
 					onKeyUp={watchTags}
