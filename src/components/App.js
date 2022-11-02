@@ -15,6 +15,7 @@ import Settings from "../components/Settings"
 import { store } from "../store"
 import { push } from "react-router-redux"
 import { Loader } from "./UI/Loader"
+import NotFound from "./NotFound"
 
 const mapStateToProps = (state) => {
 	return {
@@ -62,6 +63,7 @@ const App = ({ onLoad, appLoaded, onRedirect, dispatch, redirectTo, pushRedirect
 					<Route path="/settings" component={Settings} />
 					<Route path="/@:username/favorites" component={ProfileFavorites} />
 					<Route path="/@:username" component={Profile} />
+					<Route component={NotFound} />
 				</Switch>
 			</>
 		)
