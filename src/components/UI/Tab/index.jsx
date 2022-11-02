@@ -13,9 +13,9 @@ const mapDispatchToProps = (dispatch) => ({
     onTabClick: (tab, pager, payload) => dispatch({ type: CHANGE_TAB, tab, pager, payload }),
 })
 
-export function Tab({ onTabClick, eventKey, title, tab, route }) {
+export function Tab({ onTabClick, eventKey, title, tab, route = "/" }) {
 
-    const [active, setActive] = useState(eventKey === tab || window.location.pathname === route)
+    const [active, setActive] = useState(eventKey === tab)
     const className = `${style.tab} ${active ? style.active : style.inactive}`
 
     useEffect(() => {

@@ -1,18 +1,12 @@
-import ArticleList from "../UI/ArticleList"
 import React, { useCallback, useEffect, useMemo, useState } from "react"
 import { Link } from "react-router-dom"
-import agent from "../../agent"
 import { connect } from "react-redux"
-import {
-	FOLLOW_USER,
-	UNFOLLOW_USER,
-	PROFILE_PAGE_LOADED,
-	PROFILE_PAGE_UNLOADED,
-	APPLY_TAG_FILTER,
-} from "../../constants/actionTypes"
-import { Sidebar, TabList, TagsList } from "../UI"
-import { Banner } from "../Banner"
+import { APPLY_TAG_FILTER, PROFILE_PAGE_LOADED, PROFILE_PAGE_UNLOADED } from "constants/actionTypes"
+import agent from "agent"
+import { Banner } from "components/Banner"
+import { Sidebar, TabList, TagsList } from "components/UI"
 import style from "./Profile.module.scss"
+import ArticleList from "components/UI/ArticleList"
 
 const mapStateToProps = (state) => ({
 	...state.articleList,
@@ -21,40 +15,28 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-	onFollow: (username) =>
-		dispatch({
-			type: FOLLOW_USER,
-			payload: agent.Profile.follow(username),
-		}),
 	onLoad: (payload) => dispatch({ type: PROFILE_PAGE_LOADED, payload }),
-	onUnfollow: (username) =>
-		dispatch({
-			type: UNFOLLOW_USER,
-			payload: agent.Profile.unfollow(username),
-		}),
 	onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED }),
 	onClickTag: (tag, pager, payload) => dispatch({ type: APPLY_TAG_FILTER, tag, pager, payload }),
 })
 
-const Profile = ({
+const ProfileFavorites = ({
 	onLoad,
 	onUnload,
-	profile,
-	currentUser,
+	match,
+	pager,
 	articles,
 	articlesCount,
-	currentPage,
-	match,
-	pagerm,
 	onClickTag,
-	pager,
+	profile,
+	currentPage,
 }) => {
 	const [selectedTag, setSelectedTag] = useState(null)
 	useEffect(() => {
 		onLoad(
 			Promise.all([
 				agent.Profile.get(match.params.username),
-				agent.Articles.byAuthor(match.params.username),
+				agent.Articles.favoritedBy(match.params.username),
 				agent.Tags.getAll(),
 			]),
 		)
@@ -62,21 +44,6 @@ const Profile = ({
 			onUnload()
 		}
 	}, [])
-	const getUserTag = useMemo(() => {
-		if (!profile.tags) return []
-		return profile.tags.filter((t) => {
-			return articles.find((a) => a.tagList.find((at) => at === t))
-		})
-	}, [articles])
-
-	const filteredArticles = useCallback(
-		(selectedTag) => {
-			if (!articles) return []
-			if (!selectedTag) return articles
-			return articles.filter((article) => article.tagList.find((articleTag) => articleTag === selectedTag))
-		},
-		[articles],
-	)
 
 	const clickTagHandler = (tag) => {
 		if (selectedTag === tag) {
@@ -99,7 +66,21 @@ const Profile = ({
 		},
 	]
 
+	const getUserTag = useMemo(() => {
+		if (!profile.tags) return []
+		return profile.tags.filter((t) => {
+			return articles.find((a) => a.tagList.find((at) => at === t))
+		})
+	}, [articles])
 
+	const filteredArticles = useCallback(
+		(selectedTag) => {
+			if (!articles) return []
+			if (!selectedTag) return articles
+			return articles.filter((article) => article.tagList.find((articleTag) => articleTag === selectedTag))
+		},
+		[articles],
+	)
 	return (
 		<>
 			<Banner variant="user" />
@@ -121,4 +102,4 @@ const Profile = ({
 	)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile)
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileFavorites)
