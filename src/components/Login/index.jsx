@@ -41,13 +41,13 @@ const Login = ({ onSubmit, onUnload, errors, inProgress }) => {
 		<div className={style.main}>
 			<div className={style.center}>
 				<Title type={2}>Войти</Title>
-				<Button type="link">Хотите создать аккаунт?</Button>
+				<Button type='link'><Link to='/register'>Хотите создать аккаунт?</Link></Button>
 
 				<ListErrors errors={errors} />
 			</div>
 			<form className={style.form} onSubmit={submitForm(values.email, values.password)}>
 				<Input
-					name={"email"}
+					name="email"
 					label="E-mail"
 					type="email"
 					placeholder="E-mail"
@@ -55,7 +55,7 @@ const Login = ({ onSubmit, onUnload, errors, inProgress }) => {
 					onChange={onChange}
 				/>
 				<Input
-					name={"password"}
+					name="password"
 					label="Пароль"
 					type="password"
 					placeholder="Пароль"
