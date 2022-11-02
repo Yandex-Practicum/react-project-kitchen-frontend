@@ -68,5 +68,5 @@ const BannerComponent = ({ variant, appName, currentUser }) => {
 export const Banner = connect(mapStateToProps)(BannerComponent)
 
 Banner.propTypes = {
-	type: PropTypes.oneOf("app", "user", "article"),
+	type: PropTypes.oneOf(["app", "user", "article"]),
 }
