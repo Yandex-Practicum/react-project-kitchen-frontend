@@ -78,7 +78,7 @@ const Profile = ({ onLoad, onUnload, profile, currentUser, articles, articlesCou
 		<>
 			<Banner variant="user" />
 			<div className={style.wrapper}>
-				<div>
+				<div className={style.articles}>
 					<TabList tabs={tabs} />
 					<ArticleList pager={pager} articles={filteredArticles(selectedTag)} articlesCount={articlesCount} currentPage={currentPage} />
 				</div>
