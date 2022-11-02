@@ -58,7 +58,7 @@ const CommentInput = (props) => {
                     image={props.profile.image}
                     username={props.profile.username}
                 >
-                    <Button>
+                    <Button htmlType="submit">
                         Отправить комментарий
                     </Button>
                 </ArticleMeta>
