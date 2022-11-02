@@ -103,7 +103,7 @@ const Settings = ({ onSubmitForm, inProgress, currentUser, errors, onClickLogout
 					onChange={changeHandler}
 				/>
 				<section className={styles.button}>
-					<Button disabled={!inProgress}>Сохранить</Button>
+					<Button htmlType="submit" disabled={inProgress}>Сохранить</Button>
 				</section>
 			</form>
 			<Button type="delete" onClick={onClickLogout}>

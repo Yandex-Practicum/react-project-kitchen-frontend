@@ -1,10 +1,11 @@
 import style from './Sidebar.module.scss';
 import PropTypes from 'prop-types';
+import { Text } from '..';
 
 export function Sidebar({ children }) {
     return (
         <div className={style.sidebar}>
-            <p>Популярные теги</p>
+            <Text>Популярные теги</Text>
             {children}
         </div>
     );
