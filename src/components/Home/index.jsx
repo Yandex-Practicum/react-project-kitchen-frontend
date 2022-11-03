@@ -25,7 +25,7 @@ const Home = ({ token, onLoad, onUnload, tags, onClickTag }) => {
 		const articlesPromise = token ? agent.Articles.feed : agent.Articles.all
 		onLoad(tab, articlesPromise, Promise.all([agent.Tags.getAll(), articlesPromise()]))
 
-		return onUnload()
+		return () => { onUnload() }
 	}, [])
 
 	return (

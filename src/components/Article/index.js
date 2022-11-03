@@ -26,7 +26,7 @@ export const Article = ({ onLoad, onUnload, article, currentUser, comments, comm
 				agent.Comments.forArticle(match.params.id),
 			]),
 		)
-		return onUnload()
+		return () => { onUnload() }
 	}, [])
 
 	if (!article) return null
