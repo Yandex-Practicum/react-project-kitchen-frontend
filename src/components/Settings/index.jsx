@@ -36,6 +36,7 @@ const Settings = ({ onSubmitForm, inProgress, currentUser, errors, onClickLogout
 	})
 
 	useEffect(() => {
+		if (!currentUser) return
 		const { image = "", username = "", bio = "", email = "", password = "" } = currentUser
 		setValues({
 			image,
@@ -51,7 +52,6 @@ const Settings = ({ onSubmitForm, inProgress, currentUser, errors, onClickLogout
 	}
 	const setAvatar = (avatar) => {
 		setValues({ ...values, image: avatar })
-
 	}
 
 	const submitFormHandler = (e) => {

@@ -7,7 +7,6 @@ import { ArrowIcon } from "components/Icons"
 import PropTypes from "prop-types"
 import { PageLink } from "../PageLink"
 
-// pager={props.pager} articlesCount={props.articlesCount} currentPage={props.currentPage}
 
 const mapStateToProps = (state) => ({
 	articleList: state.articleList,
@@ -35,6 +34,7 @@ const PaginationComponent = ({ articleList, onSetPage }) => {
 	)
 	
 	const setPage = (page) => {
+		console.log(pager)
 		if (pager) onSetPage(page, pager(page))
 		else onSetPage(page, agent.Articles.all(page))
 	}
