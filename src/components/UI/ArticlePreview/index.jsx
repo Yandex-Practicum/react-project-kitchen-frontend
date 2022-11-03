@@ -6,6 +6,7 @@ import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from "constants/actionTypes"
 import { TagsList, Title, Text, Button } from ".."
 import { ArticleMeta } from "../ArticleMeta"
 import style from './ArticlePreview.module.scss'
+import { LikeUnlikeButton } from "../LikeUnlikeButton"
 
 const FAVORITED_CLASS = "btn btn-sm btn-primary"
 const NOT_FAVORITED_CLASS = "btn btn-sm btn-outline-primary"
@@ -25,7 +26,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 const ArticlePreview = (props) => {
     const article = props.article
-    const favoriteButtonClass = article.favorited ? FAVORITED_CLASS : NOT_FAVORITED_CLASS
 
     const handleClick = (ev) => {
         ev.preventDefault()
@@ -42,9 +42,9 @@ const ArticlePreview = (props) => {
                     username={article.author.username}
                     createdAt={article.createdAt}
                 >
-                    <button className={favoriteButtonClass} onClick={handleClick}>
+                    <LikeUnlikeButton favorited={article.favorited} onClick={handleClick}>
                         {article.favoritesCount}
-                    </button>
+                    </LikeUnlikeButton>
                 </ArticleMeta>
                 <div className={style.article}>
                     <Title type={3}>{article.title}</Title>
