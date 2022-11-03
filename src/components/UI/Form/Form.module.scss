@@ -4,7 +4,7 @@
 	align-items: flex-end;
 	padding-bottom: 40px;
 	.btn {
-		margin-top: 28px;
+		margin-top: 4px;
 	}
 	.inputs {
 		display: flex;
@@ -23,5 +23,9 @@
 		&::-webkit-scrollbar-thumb {
 			background-color: var(--text-secondary-color);
 		}
+	}
+	.errors {
+		min-height: 24px;
+		width: 100%;
 	}
 }

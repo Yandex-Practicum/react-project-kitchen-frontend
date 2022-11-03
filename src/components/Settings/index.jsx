@@ -7,7 +7,7 @@ import { Button } from "../UI"
 import styles from "./Settings.module.scss"
 import { FormWrapper } from "components/UI/FormWrapper"
 import { Form } from "components/UI/Form"
-import { AvatarChanger } from "components/UI/AvatarChanger/AvatarChanger"
+import { AvatarChanger } from "components/UI/AvatarChanger"
 
 const mapStateToProps = (state) => ({
 	...state.settings,
@@ -64,9 +64,9 @@ const Settings = ({ onSubmitForm, inProgress, currentUser, errors, onClickLogout
 	return (
 		<div className={styles.wrapper}>
 
-			<FormWrapper title='Ваши настройки' errors={errors}>
-				<Form button='Сохранить' onSubmit={submitFormHandler} disabled={inProgress}>
-					<AvatarChanger avatar={values.image} setAvatar={setAvatar}/>
+			<FormWrapper title='Ваши настройки'>
+				<Form button='Сохранить' onSubmit={submitFormHandler} disabled={inProgress} errors={errors}>
+					<AvatarChanger avatar={values.image} setAvatar={setAvatar} />
 					<Input
 						name="username"
 						label="Имя пользователя"

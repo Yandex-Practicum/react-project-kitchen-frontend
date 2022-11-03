@@ -36,8 +36,8 @@ const Login = ({ onSubmit, onUnload, errors, inProgress }) => {
 		}
 	}, [])
 	return (
-		<FormWrapper title='Войти' errors={errors} link='/register' linkName='Хотите создать аккаунт?'>
-			<Form button='Войти' onSubmit={submitForm(values.email, values.password)} disabled={inProgress}>
+		<FormWrapper title='Войти' link='/register' linkName='Хотите создать аккаунт?'>
+			<Form button='Войти' onSubmit={submitForm(values.email, values.password)} disabled={inProgress} errors={errors}>
 				<Input
 					name="email"
 					label="E-mail"

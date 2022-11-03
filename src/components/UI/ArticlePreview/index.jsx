@@ -40,7 +40,7 @@ const ArticlePreview = (props) => {
                     createdAt={article.createdAt}
                 >
                     <LikeUnlikeButton favorited={article.favorited} onClick={handleClick}>
-                        {article.favoritesCount}
+                        {article.favoritesCount || ""}
                     </LikeUnlikeButton>
                 </ArticleMeta>
                 <div className={style.article}>

@@ -14,7 +14,7 @@ export const AvatarChanger = ({ avatar = "smile", setAvatar }) => {
 	return (
 		<div onClick={clickHandler} className={styles.wrapper}>
 			<Avatar type={avatar} size="large" />
-			<ul className={styles.changer} style={{ display: visible ? "grid" : "none" }}>
+			{visible && <ul className={styles.changer}>
 				{avatars.map((a) => {
 					const clickAvatarHandle = () => {
 						setAvatar(a)
@@ -25,7 +25,7 @@ export const AvatarChanger = ({ avatar = "smile", setAvatar }) => {
 						</span>
 					)
 				})}
-			</ul>
+			</ul>}
 		</div>
 	)
 }

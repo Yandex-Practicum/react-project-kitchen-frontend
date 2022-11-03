@@ -1,4 +1,3 @@
-import ListErrors from "../ListErrors"
 import React, { useEffect } from "react"
 import agent from "../../agent"
 import { connect } from "react-redux"
@@ -11,9 +10,8 @@ import {
 	UPDATE_FIELD_EDITOR,
 } from "../../constants/actionTypes"
 import { Input } from "../UI/Input"
-
 import styles from "./Editor.module.scss"
-import { Button, Tag, Title } from "components/UI"
+import { Tag } from "components/UI"
 import { FormWrapper } from "components/UI/FormWrapper"
 import { Form } from "components/UI/Form"
 
@@ -96,8 +94,8 @@ const EditorComponent = (props) => {
 	}, [match])
 
 	return (
-		<FormWrapper title='Новая запись' errors={errors}>
-			<Form button='Опубликовать' onClick={submitFormHandler} disabled={inProgress}>
+		<FormWrapper title='Новая запись'>
+			<Form button='Опубликовать' onClick={submitFormHandler} disabled={inProgress} errors={errors}>
 				<Input name="title" label="Заголовок" placeholder="Название статьи" value={title} onChange={changeHandler} />
 				<Input
 					name="description"

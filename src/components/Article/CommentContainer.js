@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import React from "react"
 import style from "./Article.module.scss"
 import { Button, Text, Title } from "components/UI"
+import ListErrors from "components/UI/ListErrors"
 
 const CommentContainer = (props) => {
 	if (props.currentUser)
@@ -11,7 +12,7 @@ const CommentContainer = (props) => {
 			<div className={style.comments}>
 				<Title type={3}>Комментарии</Title>
 				<div>
-					<list-errors errors={props.errors}></list-errors>
+					<ListErrors errors={props.errors}></ListErrors>
 					<CommentInput />
 				</div>
 				<CommentList comments={props.comments} slug={props.slug} currentUser={props.currentUser} />
@@ -26,7 +27,6 @@ const CommentContainer = (props) => {
 					<Button type='link'><Link to="/register">зарегистрируйтесь</Link></Button>
 					<Text>, чтобы оставить комментарий.</Text>
 				</div>
-
 				<CommentList comments={props.comments} slug={props.slug} currentUser={props.currentUser} />
 			</div>
 		)

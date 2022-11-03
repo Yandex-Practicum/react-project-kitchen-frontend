@@ -1,5 +1,5 @@
 import React from "react"
-import { Button, Text } from ".."
+import { Text } from ".."
 import { ArticleMeta } from "../ArticleMeta"
 import DeleteButton from "../DeleteButton"
 import style from "./Comment.module.scss"
