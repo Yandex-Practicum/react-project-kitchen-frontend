@@ -1,6 +1,6 @@
 import { Button, Title } from "components/UI"
-import React, { useState } from "react"
-import { Link, matchPath, NavLink, useLocation } from "react-router-dom"
+import React from "react"
+import { Link, NavLink } from "react-router-dom"
 import styles from "./Header.module.scss"
 import { EditIcon, HomeIcon, LoginIcon, SettingsIcon } from "../Icons"
 import { connect } from "react-redux"

@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react"
-import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 import { APPLY_TAG_FILTER, PROFILE_PAGE_LOADED, PROFILE_PAGE_UNLOADED } from "constants/actionTypes"
 import agent from "agent"

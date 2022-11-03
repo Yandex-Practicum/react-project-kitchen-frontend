@@ -5,12 +5,11 @@ import { AuthorDate } from '../AuthorDate'
 import { Avatar } from 'components/Icons/Avatar'
 
 export function ArticleMeta({ image, username, createdAt, children }) {
-    // if (!image) return null
     return (
         <div className={style.meta}>
             <div className={style.left}>
                 <Link className={style.img} to={`/@${username}`}>
-                    <Avatar type={image}/>
+                    <Avatar type={image} />
                 </Link>
                 <AuthorDate username={username} createdAt={createdAt} />
             </div>

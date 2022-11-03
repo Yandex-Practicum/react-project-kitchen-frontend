@@ -36,8 +36,8 @@ const Register = ({ onSubmit, onUnload, errors, inProgress }) => {
 	}
 
 	return (
-		<FormWrapper title='Зарегистрироваться' errors={errors} link='/login' linkName='Уже есть аккаунт?'>
-			<Form button='Зарегистрироваться' onSubmit={submitForm(values.username, values.email, values.password)} disabled={inProgress}>
+		<FormWrapper title='Зарегистрироваться' link='/login' linkName='Уже есть аккаунт?'>
+			<Form button='Зарегистрироваться' onSubmit={submitForm(values.username, values.email, values.password)} disabled={inProgress} errors={errors}>
 				<Input
 					name="username"
 					label="Имя пользователя"

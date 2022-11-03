@@ -1,8 +1,8 @@
-import { FavoritesIcon, LikeIcon } from 'components/Icons'
+import { FavoritesIcon } from 'components/Icons'
 import React from 'react'
 import { Button } from '..'
 
-export const LikeUnlikeButton = ({children, onClick, favorited}) => {
+export const LikeUnlikeButton = ({ children, onClick, favorited }) => {
   const buttonType = favorited ? "delete" : "light"
   const iconType = favorited ? "default" : "active"
   return (
