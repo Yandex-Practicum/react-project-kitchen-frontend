@@ -3,7 +3,7 @@ import CommentList from "./CommentList"
 import { Link } from "react-router-dom"
 import React from "react"
 import style from "./Article.module.scss"
-import { Title } from "components/UI"
+import { Button, Text, Title } from "components/UI"
 
 const CommentContainer = (props) => {
 	if (props.currentUser)
@@ -20,12 +20,12 @@ const CommentContainer = (props) => {
 	else
 		return (
 			<div>
-				<p>
-					<Link to="/login">Sign in</Link>
-					&nbsp;or&nbsp;
-					<Link to="/register">sign up</Link>
-					&nbsp;to add comments on this article.
-				</p>
+				<div className={style.message}>
+					<Button type='link'><Link to="/login">Войдите</Link></Button>
+					<Text>&nbsp;или&nbsp;</Text>
+					<Button type='link'><Link to="/register">зарегистрируйтесь</Link></Button>
+					<Text>, чтобы оставить комментарий.</Text>
+				</div>
 
 				<CommentList comments={props.comments} slug={props.slug} currentUser={props.currentUser} />
 			</div>

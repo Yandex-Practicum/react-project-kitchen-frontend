@@ -8,9 +8,6 @@ import { ArticleMeta } from "../ArticleMeta"
 import style from './ArticlePreview.module.scss'
 import { LikeUnlikeButton } from "../LikeUnlikeButton"
 
-const FAVORITED_CLASS = "btn btn-sm btn-primary"
-const NOT_FAVORITED_CLASS = "btn btn-sm btn-outline-primary"
-
 const mapDispatchToProps = (dispatch) => ({
     favorite: (slug) =>
         dispatch({
