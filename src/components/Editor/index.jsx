@@ -14,6 +14,8 @@ import { Input } from "../UI/Input"
 
 import styles from "./Editor.module.scss"
 import { Button, Tag, Title } from "components/UI"
+import { FormWrapper } from "components/UI/FormWrapper"
+import { Form } from "components/UI/Form"
 
 const mapStateToProps = (state) => ({
 	...state.editor,
@@ -94,10 +96,8 @@ const EditorComponent = (props) => {
 	}, [match])
 
 	return (
-		<div className={styles.wrapper}>
-			<Title type={2}>Новая запись</Title>
-			<ListErrors errors={errors}></ListErrors>
-			<form className={styles.form}>
+		<FormWrapper title='Новая запись' errors={errors}>
+			<Form button='Опубликовать' onClick={submitFormHandler} disabled={inProgress}>
 				<Input name="title" label="Заголовок" placeholder="Название статьи" value={title} onChange={changeHandler} />
 				<Input
 					name="description"
@@ -132,13 +132,8 @@ const EditorComponent = (props) => {
 						return <Tag tag={tag} key={tag} handleClick={() => onRemoveTag(tag)} />
 					})}
 				</div>
-				<div className={styles.button}>
-					<Button disabled={inProgress} onClick={submitFormHandler}>
-						Опубликовать
-					</Button>
-				</div>
-			</form>
-		</div>
+			</Form>
+		</FormWrapper>
 	)
 }
 

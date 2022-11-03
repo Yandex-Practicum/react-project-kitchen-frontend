@@ -1,0 +1,27 @@
+.form {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	padding-bottom: 40px;
+	.btn {
+		margin-top: 28px;
+	}
+	.inputs {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		overflow-y: auto;
+		overflow-x: hidden;
+		max-height: calc(100vh - 420px);
+		padding-right: 8px;
+		&::-webkit-scrollbar {
+			width: 8px;
+		}
+		&::-webkit-scrollbar-track {
+			background: var(--divider-color);
+		}
+		&::-webkit-scrollbar-thumb {
+			background-color: var(--text-secondary-color);
+		}
+	}
+}

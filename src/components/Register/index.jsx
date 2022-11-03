@@ -1,12 +1,10 @@
-import { Link } from "react-router-dom"
-import ListErrors from "../ListErrors"
 import React, { useState } from "react"
 import agent from "../../agent"
 import { connect } from "react-redux"
 import { UPDATE_FIELD_AUTH, REGISTER, REGISTER_PAGE_UNLOADED } from "../../constants/actionTypes"
 import { Input } from "../UI/Input"
-import { Button, Text, Title } from "../UI"
-import style from "./Register.module.scss"
+import { FormWrapper } from "components/UI/FormWrapper"
+import { Form } from "components/UI/Form"
 
 const mapStateToProps = (state) => ({ ...state.auth })
 
@@ -38,14 +36,8 @@ const Register = ({ onSubmit, onUnload, errors, inProgress }) => {
 	}
 
 	return (
-		<div className={style.main}>
-			<div className={style.center}>
-				<Title type={2}>Зарегистрироваться</Title>
-				<Button type='link'><Link to='/login'>Уже есть аккаунт?</Link></Button>
-
-				<ListErrors errors={errors} />
-			</div>
-			<form className={style.form} onSubmit={submitForm(values.username, values.email, values.password)}>
+		<FormWrapper title='Зарегистрироваться' errors={errors} link='/login' linkName='Уже есть аккаунт?'>
+			<Form button='Зарегистрироваться' onSubmit={submitForm(values.username, values.email, values.password)} disabled={inProgress}>
 				<Input
 					name="username"
 					label="Имя пользователя"
@@ -70,13 +62,8 @@ const Register = ({ onSubmit, onUnload, errors, inProgress }) => {
 					value={values.password}
 					onChange={onChange}
 				/>
-				<div className={style.right}>
-					<Button disabled={inProgress}>
-						Зарегистрироваться
-					</Button>
-				</div>
-			</form>
-		</div>
+			</Form>
+		</FormWrapper>
 	)
 }
 

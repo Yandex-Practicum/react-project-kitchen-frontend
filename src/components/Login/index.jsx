@@ -1,12 +1,10 @@
-import { Link } from "react-router-dom"
-import ListErrors from "../ListErrors"
 import React, { useEffect, useState } from "react"
 import agent from "../../agent"
 import { connect } from "react-redux"
 import { UPDATE_FIELD_AUTH, LOGIN, LOGIN_PAGE_UNLOADED } from "../../constants/actionTypes"
 import { Input } from "../UI/Input"
-import style from "./Login.module.scss"
-import { Button, Title } from "components/UI"
+import { FormWrapper } from "components/UI/FormWrapper"
+import { Form } from "components/UI/Form"
 
 const mapStateToProps = (state) => ({ ...state.auth })
 
@@ -38,14 +36,8 @@ const Login = ({ onSubmit, onUnload, errors, inProgress }) => {
 		}
 	}, [])
 	return (
-		<div className={style.main}>
-			<div className={style.center}>
-				<Title type={2}>Войти</Title>
-				<Button type='link'><Link to='/register'>Хотите создать аккаунт?</Link></Button>
-
-				<ListErrors errors={errors} />
-			</div>
-			<form className={style.form} onSubmit={submitForm(values.email, values.password)}>
+		<FormWrapper title='Войти' errors={errors} link='/register' linkName='Хотите создать аккаунт?'>
+			<Form button='Войти' onSubmit={submitForm(values.email, values.password)} disabled={inProgress}>
 				<Input
 					name="email"
 					label="E-mail"
@@ -62,13 +54,8 @@ const Login = ({ onSubmit, onUnload, errors, inProgress }) => {
 					value={values.password}
 					onChange={onChange}
 				/>
-				<div className={style.right}>
-					<Button type="primary" htmlType="submit" disabled={inProgress}>
-						Войти
-					</Button>
-				</div>
-			</form>
-		</div>
+			</Form>
+		</FormWrapper>
 	)
 }
 
