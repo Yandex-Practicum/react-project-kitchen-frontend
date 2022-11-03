@@ -1,42 +1,42 @@
 .li {
-    list-style: none;
+	list-style: none;
 
-    .page__item {
-        color: #fff;
-        list-style: none;
-        cursor: pointer;
-        width: 64px;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        &:focus{
-            outline: none;
-        }
-        &:hover {
-            background-color: var(--divider-color);
-        }
-        &:active {
-            background-color: var(--accent-color);
-        }
-    }
+	.page__item {
+		color: var(--text-primary-color);
+		list-style: none;
+		cursor: pointer;
+		width: 64px;
+		height: 48px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		&:focus {
+			outline: none;
+		}
+		&:hover {
+			background-color: var(--divider-color);
+		}
+		&:active {
+			background-color: var(--accent-color);
+		}
+	}
 
-    .default {
-        border: 1px solid var(--divider-color);
-        background-color: var(--bg-primary-color);
-    }
+	.default {
+		border: 1px solid var(--divider-color);
+		background-color: var(--bg-primary-color);
+	}
 
-    .first {
-        border-radius: 20px 0px 0px 20px;
-    }
+	.first {
+		border-radius: 20px 0px 0px 20px;
+	}
 
-    .last {
-        border-radius: 0px 20px 20px 0px;
-    }
+	.last {
+		border-radius: 0px 20px 20px 0px;
+	}
 
-    .active, .active:hover {
-        background-color: var(--accent-color);
-        border: none;
-    }
-
+	.active,
+	.active:hover {
+		background-color: var(--accent-color);
+		border: none;
+	}
 }

@@ -27,7 +27,7 @@ const CustomLink = connect(mapStateToProps)(({ to, children, icon, pathname }) =
 	)
 })
 
-export const LoggedOutView = connect(mapStateToProps)(({currentUser}) => {
+export const LoggedOutView = connect(mapStateToProps)(({ currentUser }) => {
 	if (!currentUser)
 		return (
 			<>

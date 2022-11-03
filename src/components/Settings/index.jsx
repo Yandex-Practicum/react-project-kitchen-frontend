@@ -1,12 +1,12 @@
-import ListErrors from "../ListErrors"
 import React, { useEffect, useState } from "react"
 import agent from "../../agent"
 import { connect } from "react-redux"
 import { SETTINGS_SAVED, SETTINGS_PAGE_UNLOADED, LOGOUT } from "../../constants/actionTypes"
 import { Input } from "../UI/Input"
-import { Button, Title } from "../UI"
-
+import { Button } from "../UI"
 import styles from "./Settings.module.scss"
+import { FormWrapper } from "components/UI/FormWrapper"
+import { Form } from "components/UI/Form"
 
 const mapStateToProps = (state) => ({
 	...state.settings,
@@ -58,12 +58,9 @@ const Settings = ({ onSubmitForm, inProgress, currentUser, errors, onClickLogout
 	}
 	return (
 		<div className={styles.wrapper}>
-			<Title type={2}>Ваши настройки</Title>
-
-			<ListErrors errors={errors}></ListErrors>
-
-			<form className={styles.form} onSubmit={submitFormHandler}>
-				{/* <Input
+			<FormWrapper title='Ваши настройки' errors={errors}>
+				<Form button='Сохранить' onSubmit={submitFormHandler} disabled={inProgress}>
+					{/* <Input
 					name="image"
 					label="Изображение профиля"
 					type="file"
@@ -71,44 +68,44 @@ const Settings = ({ onSubmitForm, inProgress, currentUser, errors, onClickLogout
 					value={this.state.image}
 					onChange={this.updateState("image")}
 				/> */}
-				<Input
-					name="username"
-					label="Имя пользователя"
-					placeholder="Введите ваше имя"
-					value={values.username}
-					onChange={changeHandler}
-				/>
-				<Input
-					name="bio"
-					label="Информация о вас"
-					placeholder="Расскажите немного о себе"
-					type="textarea"
-					value={values.bio}
-					onChange={changeHandler}
-				/>
-				<Input
-					name="email"
-					label="E-mail"
-					type="email"
-					placeholder="Введите почту"
-					value={values.email}
-					onChange={changeHandler}
-				/>
-				<Input
-					name="password"
-					label="Новый пароль"
-					type="password"
-					placeholder="Введите ваш новый пароль"
-					value={values.password}
-					onChange={changeHandler}
-				/>
-				<section className={styles.button}>
-					<Button htmlType="submit" disabled={inProgress}>Сохранить</Button>
-				</section>
-			</form>
-			<Button type="delete" onClick={onClickLogout}>
-				Выйти из аккаунта
-			</Button>
+					<Input
+						name="username"
+						label="Имя пользователя"
+						placeholder="Введите ваше имя"
+						value={values.username}
+						onChange={changeHandler}
+					/>
+					<Input
+						name="bio"
+						label="Информация о вас"
+						placeholder="Расскажите немного о себе"
+						type="textarea"
+						value={values.bio}
+						onChange={changeHandler}
+					/>
+					<Input
+						name="email"
+						label="E-mail"
+						type="email"
+						placeholder="Введите почту"
+						value={values.email}
+						onChange={changeHandler}
+					/>
+					<Input
+						name="password"
+						label="Новый пароль"
+						type="password"
+						placeholder="Введите ваш новый пароль"
+						value={values.password}
+						onChange={changeHandler}
+					/>
+				</Form>
+			</FormWrapper>
+			<div className={styles.logout}>
+				<Button type="delete" onClick={onClickLogout}>
+					Выйти из аккаунта
+				</Button>
+			</div>
 		</div>
 	)
 }

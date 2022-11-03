@@ -5,8 +5,6 @@ import { connect } from "react-redux"
 import marked from "marked"
 import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from "../../constants/actionTypes"
 import { TagsList, Title } from "components/UI"
-import ArticleActions from "./ArticleActions"
-import { ArticleMeta } from "components/UI/ArticleMeta"
 import { Banner } from "components/Banner"
 import style from "./Article.module.scss"
 
