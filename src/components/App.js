@@ -9,13 +9,13 @@ import Editor from "../components/Editor"
 import Home from "../components/Home"
 import Login from "./Login"
 import Profile from "../components/Profile"
-import ProfileFavorites from "../components/ProfileFavorites"
 import Register from "./Register"
 import Settings from "../components/Settings"
 import { store } from "../store"
 import { push } from "react-router-redux"
 import { Loader } from "./UI/Loader"
 import NotFound from "./NotFound"
+import ProfileFavorites from "./Profile/ProfileFavorites"
 
 const mapStateToProps = (state) => {
 	return {
