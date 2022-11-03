@@ -7,7 +7,6 @@ import { ArrowIcon } from "components/Icons"
 import PropTypes from "prop-types"
 import { PageLink } from "../PageLink"
 
-// pager={props.pager} articlesCount={props.articlesCount} currentPage={props.currentPage}
 
 const mapStateToProps = (state) => ({
 	articleList: state.articleList,
