@@ -59,7 +59,7 @@ const LoggedInView = connect(mapStateToProps)(({ currentUser }) => {
 					Настройки
 				</CustomLink>
 
-				<CustomLink to={`/@${currentUser.username}`} icon={<Avatar type="alien" size="small" />}>
+				<CustomLink to={`/@${currentUser.username}`} icon={<Avatar type={currentUser.image} size="small" />}>
 					{currentUser.username}
 				</CustomLink>
 			</>

@@ -7,6 +7,7 @@ import { Button } from "../UI"
 import styles from "./Settings.module.scss"
 import { FormWrapper } from "components/UI/FormWrapper"
 import { Form } from "components/UI/Form"
+import { AvatarChanger } from "components/UI/AvatarChanger/AvatarChanger"
 
 const mapStateToProps = (state) => ({
 	...state.settings,
@@ -48,6 +49,10 @@ const Settings = ({ onSubmitForm, inProgress, currentUser, errors, onClickLogout
 	const changeHandler = (e) => {
 		setValues({ ...values, [e.currentTarget.name]: e.currentTarget.value })
 	}
+	const setAvatar = (avatar) => {
+		setValues({ ...values, image: avatar })
+
+	}
 
 	const submitFormHandler = (e) => {
 		e.preventDefault()
@@ -58,16 +63,10 @@ const Settings = ({ onSubmitForm, inProgress, currentUser, errors, onClickLogout
 	}
 	return (
 		<div className={styles.wrapper}>
+
 			<FormWrapper title='Ваши настройки' errors={errors}>
 				<Form button='Сохранить' onSubmit={submitFormHandler} disabled={inProgress}>
-					{/* <Input
-					name="image"
-					label="Изображение профиля"
-					type="file"
-					placeholder="Изображение (опционально)"
-					value={this.state.image}
-					onChange={this.updateState("image")}
-				/> */}
+					<AvatarChanger avatar={values.image} setAvatar={setAvatar}/>
 					<Input
 						name="username"
 						label="Имя пользователя"

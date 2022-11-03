@@ -6,6 +6,7 @@ import React from "react"
 import styles from "./Banner.module.scss"
 import { ArticleMeta } from "components/UI/ArticleMeta"
 import ArticleActions from "components/Article/ArticleActions"
+import { Avatar } from "components/Icons/Avatar"
 
 const mapStateToProps = (state) => {
 	return {
@@ -30,7 +31,7 @@ const User = connect(mapStateToProps)(({ profile }) => {
 	return (
 		<div className={styles.userWrapper}>
 			<figure>
-				<img src={profile.image} className="user-img" alt={profile.username} />
+					<Avatar size="large" type={profile.image}/>
 				<figcaption>
 					<Title type={3}>{profile.username}</Title>
 				</figcaption>
