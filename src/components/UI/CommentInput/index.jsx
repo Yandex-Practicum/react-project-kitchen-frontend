@@ -15,8 +15,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
     onSubmit: (payload) => dispatch({ type: ADD_COMMENT, payload }),
-	onLoad: (payload) => dispatch({ type: PROFILE_PAGE_LOADED, payload }),
-	onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED }),
+    onLoad: (payload) => dispatch({ type: PROFILE_PAGE_LOADED, payload }),
+    onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED }),
 
 })
 
