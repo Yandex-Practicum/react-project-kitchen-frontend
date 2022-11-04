@@ -34,6 +34,7 @@ const PaginationComponent = ({ articleList, onSetPage }) => {
 	)
 	
 	const setPage = (page) => {
+		console.log(pager)
 		if (pager) onSetPage(page, pager(page))
 		else onSetPage(page, agent.Articles.all(page))
 	}
